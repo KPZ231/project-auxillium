@@ -9,6 +9,7 @@ import Link from "next/link";
 import { FaArrowRight, FaApple, FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { LoginFormData, loginSchema } from "@/lib/validators";
+import { loginAction } from "@/actions/login";
 
 export default function LoginForm() {
   const [loading, setLoading] = useState(false);
@@ -27,19 +28,16 @@ export default function LoginForm() {
     setLoading(true);
 
     try {
-      const res = await fetch("/api/auth/login", {
-        method: "POST",
-        body: JSON.stringify(data),
-      });
-
-      const result = await res.json();
+      const result = await loginAction(data);
       setLoading(false);
 
-      if (res.ok) {
+      if (result.success) {
         toast.success(`Zalogowano pomyślnie`, {
           description: "Przekierowywanie do panelu użytkownika.",
         });
         reset();
+        // Redirect will happen via session cookie or manual redirect
+        window.location.href = "/dashboard";
       } else {
         toast.error("Wystąpił błąd", {
           description:

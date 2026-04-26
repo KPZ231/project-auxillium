@@ -9,6 +9,7 @@ import Link from "next/link";
 import { FaArrowRight, FaApple, FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { RegisterFormData, registerSchema } from "@/lib/validators";
+import { registerAction } from "@/actions/register";
 
 export default function RegisterForm() {
   const [loading, setLoading] = useState(false);
@@ -27,19 +28,15 @@ export default function RegisterForm() {
     setLoading(true);
 
     try {
-      const res = await fetch("/api/auth/register", {
-        method: "POST",
-        body: JSON.stringify(data),
-      });
-
-      const result = await res.json();
+      const result = await registerAction(data);
       setLoading(false);
 
-      if (res.ok) {
+      if (result.success) {
         toast.success(`Zarejestrowano pomyślnie`, {
           description: "Przekierowywanie do panelu użytkownika.",
         });
         reset();
+        window.location.href = "/dashboard";
       } else {
         toast.error("Wystąpił błąd", {
           description:

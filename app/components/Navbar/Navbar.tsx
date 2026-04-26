@@ -85,7 +85,7 @@ export default function Navbar() {
         {/* Buttons */}
         <div className="flex items-center gap-3">
           <Button content="Log In" variant="secondary" url="/login" />
-          <Button content="Sign Up" variant="primary" url="/signup" />
+          <Button content="Sign Up" variant="primary" url="/register" />
         </div>
       </nav>
     </header>

@@ -3,8 +3,8 @@ import Image from "next/image";
 
 export default function Footer() {
   const navLinks = [
-    { name: "PRYWATNOŚĆ", url: "/privacy" },
-    { name: "REGULAMIN", url: "/regulations" },
+    { name: "PRYWATNOŚĆ", url: "/prywatnosc" },
+    { name: "REGULAMIN", url: "/regulamin" },
     { name: "COOKIES", url: "/cookies" },
   ];
 

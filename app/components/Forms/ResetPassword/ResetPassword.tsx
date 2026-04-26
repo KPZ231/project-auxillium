@@ -8,6 +8,7 @@ import Link from "next/link";
 import { FaArrowRight, FaApple, FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { ResetPasswordFormData, resetPasswordSchema } from "@/lib/validators";
+import { requestPasswordReset } from "@/actions/reset-password";
 
 export default function ResetPasswordForm() {
   const [loading, setLoading] = useState(false);
@@ -26,17 +27,12 @@ export default function ResetPasswordForm() {
     setLoading(true);
 
     try {
-      const res = await fetch("/api/auth/reset-password", {
-        method: "POST",
-        body: JSON.stringify(data),
-      });
-
-      const result = await res.json();
+      const result = await requestPasswordReset(data);
       setLoading(false);
 
-      if (res.ok) {
+      if (result.success) {
         toast.success(`Resetowanie hasła pomyślne!`, {
-          description: "Sprawdź swoją skrzynkę mailową aby kontynuować proces.",
+          description: result.message || "Sprawdź swoją skrzynkę mailową aby kontynuować proces.",
         });
         reset();
       } else {

@@ -1,36 +1,62 @@
 "use client";
 
+import Link from "next/link";
 import { useState } from "react";
 import { motion, Variants } from "motion/react";
+import { toast } from "sonner";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { contactSchema, type ContactFormData } from "@/lib/validators";
+
 
 export default function ContactForm() {
   const [loading, setLoading] = useState(false);
 
-  async function handleSubmit(e: any) {
-    e.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<ContactFormData>({
+    resolver: zodResolver(contactSchema),
+    mode: "onChange",
+  });
 
+  async function onSubmit(data: ContactFormData) {
     setLoading(true);
-    const form = new FormData(e.target);
-    const res = await fetch("/api/contact", {
-      method: "POST",
-      body: JSON.stringify({
-        name: form.get("name"),
-        email: form.get("email"),
-        message: form.get("message"),
-        website: form.get("website"), // honeypot
-      }),
-    });
+    
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        body: JSON.stringify(data),
+      });
 
-    const result = await res.json();
+      const result = await res.json();
+      setLoading(false);
 
-    if (res.ok) {
-      alert("Wiadomość wysłana pomyślnie!");
-      (e.target as HTMLFormElement).reset();
-    } else {
-      alert(result.error || "Wystąpił błąd podczas wysyłania wiadomości.");
+      if (res.ok) {
+        toast.success("Wiadomość została wysłana!", {
+          description: "Dziękujemy za kontakt. Odpowiemy tak szybko, jak to możliwe.",
+        });
+        reset();
+      } else {
+        toast.error("Wystąpił błąd", {
+          description: result.error || "Nie udało się wysłać wiadomości. Spróbuj ponownie później.",
+        });
+      }
+    } catch (error) {
+      setLoading(false);
+      toast.error("Wystąpił błąd połączenia", {
+        description: "Sprawdź swoje połączenie internetowe i spróbuj ponownie.",
+      });
     }
-    setLoading(false);
   }
+
+  const onValidationError = () => {
+    toast.error("Błąd walidacji", {
+      description: "Proszę poprawić błędy w formularzu przed wysłaniem.",
+    });
+  };
 
   const itemVariants: Variants = {
     hidden: { opacity: 0, scale: 0.95, y: 20 },
@@ -64,23 +90,29 @@ export default function ContactForm() {
             Wyślij zapytanie
           </motion.h2>
 
-          <form onSubmit={handleSubmit} className="flex flex-col gap-8">
-            <input type="text" name="website" className="hidden" />
+          <form onSubmit={handleSubmit(onSubmit, onValidationError)} className="flex flex-col gap-8">
+            <input type="text" {...register("website")} className="hidden" />
 
             <motion.div
               variants={itemVariants}
               custom={1}
               className="flex flex-col gap-3"
             >
-              <label className="text-[10px] font-bold tracking-[0.2em] text-(--neutral) uppercase opacity-60">
-                Imię i nazwisko
-              </label>
+              <div className="flex justify-between items-end">
+                <label className="text-[10px] font-bold tracking-[0.2em] text-(--neutral) uppercase opacity-60">
+                  Imię i nazwisko
+                </label>
+                {errors.name && (
+                  <span className="text-[10px] font-bold text-red-500 uppercase tracking-wider animate-pulse">
+                    {errors.name.message}
+                  </span>
+                )}
+              </div>
               <input
-                required
-                name="name"
+                {...register("name")}
                 type="text"
                 placeholder="WPISZ SWOJE DANE"
-                className="w-full p-4 border border-(--tertiary) focus:border-(--primary) outline-none transition-colors uppercase text-sm tracking-wide"
+                className={`w-full p-4 border ${errors.name ? 'border-red-500' : 'border-(--tertiary)'} focus:border-(--primary) outline-none transition-colors uppercase text-sm tracking-wide`}
               />
             </motion.div>
 
@@ -89,15 +121,21 @@ export default function ContactForm() {
               custom={2}
               className="flex flex-col gap-3"
             >
-              <label className="text-[10px] font-bold tracking-[0.2em] text-(--neutral) uppercase opacity-60">
-                Adres e-mail
-              </label>
+              <div className="flex justify-between items-end">
+                <label className="text-[10px] font-bold tracking-[0.2em] text-(--neutral) uppercase opacity-60">
+                  Adres e-mail
+                </label>
+                {errors.email && (
+                  <span className="text-[10px] font-bold text-red-500 uppercase tracking-wider animate-pulse">
+                    {errors.email.message}
+                  </span>
+                )}
+              </div>
               <input
-                required
-                name="email"
+                {...register("email")}
                 type="email"
                 placeholder="NAZWA@DOMENA.PL"
-                className="w-full p-4 border border-(--tertiary) focus:border-(--primary) outline-none transition-colors uppercase text-sm tracking-wide"
+                className={`w-full p-4 border ${errors.email ? 'border-red-500' : 'border-(--tertiary)'} focus:border-(--primary) outline-none transition-colors uppercase text-sm tracking-wide`}
               />
             </motion.div>
 
@@ -106,15 +144,21 @@ export default function ContactForm() {
               custom={3}
               className="flex flex-col gap-3"
             >
-              <label className="text-[10px] font-bold tracking-[0.2em] text-(--neutral) uppercase opacity-60">
-                Wiadomość
-              </label>
+              <div className="flex justify-between items-end">
+                <label className="text-[10px] font-bold tracking-[0.2em] text-(--neutral) uppercase opacity-60">
+                  Wiadomość
+                </label>
+                {errors.message && (
+                  <span className="text-[10px] font-bold text-red-500 uppercase tracking-wider animate-pulse">
+                    {errors.message.message}
+                  </span>
+                )}
+              </div>
               <textarea
-                required
-                name="message"
+                {...register("message")}
                 rows={6}
                 placeholder="W CZYM MOŻEMY POMÓC?"
-                className="w-full p-4 border border-(--tertiary) focus:border-(--primary) outline-none transition-colors uppercase text-sm tracking-wide resize-none"
+                className={`w-full p-4 border ${errors.message ? 'border-red-500' : 'border-(--tertiary)'} focus:border-(--primary) outline-none transition-colors uppercase text-sm tracking-wide resize-none`}
               />
             </motion.div>
 
@@ -123,7 +167,7 @@ export default function ContactForm() {
               custom={4}
               disabled={loading}
               type="submit"
-              className="w-fit px-12 py-5 bg-(--primary) text-(--secondary) font-bold text-sm tracking-[0.1em] uppercase hover:opacity-90 transition-opacity disabled:opacity-30 cursor-pointer"
+              className="w-fit px-12 py-5 bg-(--primary) text-(--secondary) font-bold text-sm tracking-widest uppercase hover:opacity-90 transition-opacity disabled:opacity-30 cursor-pointer"
             >
               {loading ? "Wysyłanie..." : "Wyślij wiadomość"}
             </motion.button>
@@ -132,7 +176,7 @@ export default function ContactForm() {
 
         {/* Right Side: Info */}
         <div className="flex flex-col gap-16 pt-2">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+          <div className="flex flex-row justify-between">
             <motion.div
               variants={itemVariants}
               custom={5}
@@ -142,7 +186,9 @@ export default function ContactForm() {
                 Zadzwoń
               </label>
               <p className="text-xl font-bold tracking-tight text-(--primary)">
-                +48 22 500 00 00
+                <Link href={"tel:" + process.env.NEXT_PUBLIC_PHONE}>
+                  +48 501 740 587
+                </Link>
               </p>
             </motion.div>
             <motion.div
@@ -154,7 +200,9 @@ export default function ContactForm() {
                 Napisz
               </label>
               <p className="text-xl font-bold tracking-tight text-(--primary)">
-                BIURO@AUXILLIUM.PL
+                <Link href={"mailto:" + process.env.NEXT_PUBLIC_EMAIL}>
+                  {process.env.NEXT_PUBLIC_EMAIL}
+                </Link>
               </p>
             </motion.div>
           </div>

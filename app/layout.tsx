@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { Inter, Anonymous_Pro } from "next/font/google";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
+import { Toaster } from "sonner";
 import "./globals.css";
+import CookieBanner from "./components/CookieBanner/CookieBaner";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -27,10 +29,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pl" className={`${inter.className} ${anonymus_pro.variable} h-full antialiased`}>
+    <html
+      lang="pl"
+      className={`${inter.className} ${anonymus_pro.variable} h-full antialiased`}
+      suppressHydrationWarning={true}
+    >
       <body className="min-h-full flex flex-col">
         <Navbar></Navbar>
         {children}
+        <CookieBanner></CookieBanner>
+        <Toaster position="top-right" richColors />
         <Footer></Footer>
       </body>
     </html>

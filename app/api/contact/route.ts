@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server';
 import nodemailer from 'nodemailer';
-import { ratelimit } from '@/lib/rateLimiting';
+import { ratelimit } from '@/lib/mail/rateLimiting';
 import { headers } from 'next/headers';
 
 // Validation Schema
-import { contactSchema } from '@/lib/validate.ts';
+import { contactSchema } from '@/lib/validators';
 
 export async function POST(req: Request) {
   try {
@@ -32,7 +32,7 @@ export async function POST(req: Request) {
     const result = contactSchema.safeParse(body);
     if (!result.success) {
       return NextResponse.json(
-        { error: result.error.errors[0].message },
+        { error: result.error.message },
         { status: 400 }
       );
     }

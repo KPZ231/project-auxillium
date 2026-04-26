@@ -10,7 +10,7 @@ export default function Pricing() {
         header="Cennik"
         description="Sprawdź nasze plany"
         image={{
-          src: "/images/background-image.jpeg",
+          src: "/images/background-image-4.jpeg",
           alt: "Hero Image",
           width: 450,
           height: 450,

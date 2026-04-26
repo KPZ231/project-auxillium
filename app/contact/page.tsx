@@ -8,7 +8,7 @@ export default function Contact() {
         header="Kontakt"
         description="Skontaktuj się z nami"
         image={{
-          src: "/images/background-image.jpeg",
+          src: "/images/background-image-3.jpeg",
           alt: "Hero Image",
           width: 450,
           height: 450,

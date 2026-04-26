@@ -1,0 +1,3 @@
+interface GridProps {
+  count: number;
+}

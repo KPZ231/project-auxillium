@@ -5,7 +5,7 @@ import Button from "../Button/Button";
 import Image from "next/image";
 import gsap from "gsap";
 import SplitType from "split-type";
-import { motion } from "motion/react"
+import { motion } from "motion/react";
 
 interface HeroProps {
   header: string;
@@ -41,22 +41,29 @@ export default function HeroSection({
 
     // Split text into words AND characters for typewriter effect
     // This keeps words together (no breaking in the middle of a word)
-    const splitHeader = new SplitType(headerRef.current, { types: "words,chars" });
-    const splitDesc = new SplitType(descriptionRef.current, { types: "words,chars" });
+    const splitHeader = new SplitType(headerRef.current, {
+      types: "words,chars",
+    });
+    const splitDesc = new SplitType(descriptionRef.current, {
+      types: "words,chars",
+    });
 
     const animate = (
       split: SplitType,
-      animRef: React.MutableRefObject<gsap.core.Timeline | null>
+      animRef: React.MutableRefObject<gsap.core.Timeline | null>,
     ) => {
       if (!split.chars) return;
       if (animRef.current) animRef.current.revert();
-      
+
       const tl = gsap.timeline();
       animRef.current = tl;
 
       // Ensure words don't break across lines
       if (split.words) {
-        gsap.set(split.words, { display: "inline-block", whiteSpace: "nowrap" });
+        gsap.set(split.words, {
+          display: "inline-block",
+          whiteSpace: "nowrap",
+        });
       }
 
       // Hide all chars initially
@@ -95,7 +102,6 @@ export default function HeroSection({
   return (
     <main className="w-full px-6 lg:px-12 pt-10 lg:pt-16 mt-18">
       <div className="max-w-7xl mx-auto flex flex-col-reverse lg:flex-row items-center gap-12">
-        
         <div className="w-full lg:w-1/2 flex flex-col gap-6 text-center lg:text-left">
           <h1
             ref={headerRef}
@@ -113,17 +119,16 @@ export default function HeroSection({
           <div className="pt-4 flex justify-center lg:justify-start">
             <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }}>
               <Button
-              className="w-full sm:w-auto"
-              content={button.content}
-              variant={button.variant}
-              url={button.url}
-              showArrow={true}
-            />
+                className="w-full sm:w-auto"
+                content={button.content}
+                variant={button.variant}
+                url={button.url}
+                showArrow={true}
+              />
             </motion.div>
-            
           </div>
         </div>
-        
+
         <div className="w-full lg:w-1/2 flex justify-center">
           <div className="relative w-full max-w-md sm:max-w-lg lg:max-w-xl aspect-4/3 overflow-hidden">
             <Image

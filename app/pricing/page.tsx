@@ -1,10 +1,26 @@
 import VideoPlayer from "../components/VideoPlayer/VideoPlayer";
 import PricingColumns from "../components/Pricing/PricingColumns";
 import CTA from "../components/CTA/CTA";
+import HeroSection from "../components/HeroSection/HeroSection";
 
 export default function Pricing() {
   return (
     <>
+      <HeroSection
+        header="Cennik"
+        description="Sprawdź nasze plany"
+        image={{
+          src: "/images/background-image.jpeg",
+          alt: "Hero Image",
+          width: 450,
+          height: 450,
+        }}
+        button={{
+          content: "Zacznij teraz",
+          variant: "primary",
+          url: "/signup",
+        }}
+      ></HeroSection>
       <VideoPlayer src="/videos/pricing.mov"></VideoPlayer>
       <PricingColumns
         name="Cennik"

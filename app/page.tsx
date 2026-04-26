@@ -1,10 +1,10 @@
-'use client'
+"use client";
 import HeroSection from "./components/HeroSection/HeroSection";
 import ContentColumns from "./components/ContentColums/ContentColumns";
 import { Zap } from "lucide-react";
 import TemplateAnalitics from "./components/Analistics/TemplateAnalitics";
 import TestimonialQuotation from "./components/Testimonial/TestimonialQuotation";
-import Pricing from "./components/Pricing/Pricing";
+import PricingColumns from "./components/Pricing/PricingColumns";
 import FAQSection from "./components/FAQ/FaqSection";
 import CTA from "./components/CTA/CTA";
 
@@ -50,7 +50,7 @@ export default function Home() {
         name="Filozofia"
         header="Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
       ></TestimonialQuotation>
-      <Pricing
+      <PricingColumns
         name="Cennik"
         header="Sprawdź nasze plany"
         plans={[
@@ -88,7 +88,7 @@ export default function Home() {
             },
           },
         ]}
-      ></Pricing>
+      ></PricingColumns>
       <FAQSection
         header="Często zadawane pytania"
         description="Wszystko co musisz wiedzieć o Auxillium"

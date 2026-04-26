@@ -1,0 +1,59 @@
+import VideoPlayer from "../components/VideoPlayer/VideoPlayer";
+import PricingColumns from "../components/Pricing/PricingColumns";
+import CTA from "../components/CTA/CTA";
+
+export default function Pricing() {
+  return (
+    <>
+      <VideoPlayer src="/videos/pricing.mov"></VideoPlayer>
+      <PricingColumns
+        name="Cennik"
+        header="Sprawdź nasze plany"
+        plans={[
+          {
+            planName: "Free",
+            cost: 0,
+            description: "Darmowy plan",
+            list: ["Darmowy plan", "Lorem", "Lorem"],
+            button: {
+              content: "Zacznij teraz",
+              variant: "primary",
+              url: "/signup",
+            },
+          },
+          {
+            planName: "Pro",
+            cost: 100,
+            description: "Plan Pro",
+            list: ["Plan Pro", "Lorem", "Lorem"],
+            button: {
+              content: "Zacznij teraz",
+              variant: "primary",
+              url: "/signup",
+            },
+          },
+          {
+            planName: "Enterprise",
+            cost: 1000,
+            description: "Plan Enterprise",
+            list: ["Plan Enterprise", "Lorem", "Lorem"],
+            button: {
+              content: "Zacznij teraz",
+              variant: "primary",
+              url: "/signup",
+            },
+          },
+        ]}
+      ></PricingColumns>
+      <CTA
+        content="Gotowy na zmianę?"
+        description="Zacznij korzystać z Auxillium już dziś i przekonaj się, jak łatwe może być zarządzanie Twoim biznesem."
+        button={{
+          content: "Zacznij teraz",
+          variant: "primary",
+          url: "/signup",
+        }}
+      ></CTA>
+    </>
+  );
+}

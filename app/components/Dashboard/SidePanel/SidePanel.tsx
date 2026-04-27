@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -28,82 +28,47 @@ interface NavLink {
 }
 
 const navLinks: NavLink[] = [
-  {
-    name: "DASHBOARD",
-    href: "/dashboard",
-    icon: LayoutDashboard,
-  },
-  {
-    name: "PROJECTS",
-    href: "/dashboard/projects",
-    icon: FolderKanban,
-  },
-  {
-    name: "COSTS & EXPENSES",
-    href: "/dashboard/expenses-costs",
-    icon: Receipt,
-  },
-  {
-    name: "TASKS",
-    href: "/dashboard/tasks",
-    icon: ClipboardList,
-  },
-  {
-    name: "LEAD SEARCH",
-    href: "/dashboard/lead-search",
-    icon: UserSearch,
-  },
-  {
-    name: "LEADS",
-    href: "/dashboard/leads",
-    icon: Users,
-  },
-  {
-    name: "CLIENTS",
-    href: "/dashboard/clients",
-    icon: Contact2,
-  },
-  {
-    name: "AI CHAT",
-    href: "/dashboard/ai",
-    icon: MessageSquareCode,
-  },
+  { name: "DASHBOARD", href: "/dashboard", icon: LayoutDashboard },
+  { name: "PROJECTS", href: "/dashboard/projects", icon: FolderKanban },
+  { name: "COSTS & EXPENSES", href: "/dashboard/expenses-costs", icon: Receipt },
+  { name: "TASKS", href: "/dashboard/tasks", icon: ClipboardList },
+  { name: "LEAD SEARCH", href: "/dashboard/lead-search", icon: UserSearch },
+  { name: "LEADS", href: "/dashboard/leads", icon: Users },
+  { name: "CLIENTS", href: "/dashboard/clients", icon: Contact2 },
+  { name: "AI CHAT", href: "/dashboard/ai", icon: MessageSquareCode },
 ];
 
 export default function SidePanel() {
   const pathname = usePathname();
   const { user } = useUser();
+
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
-  React.useEffect(() => {
-    const handleResize = () => {
+  useEffect(() => {
+    const resize = () => {
       const mobile = window.innerWidth < 768;
       setIsMobile(mobile);
+
       if (!mobile) setIsMobileOpen(false);
     };
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
-  const sidebarVariants = {
-    expanded: { width: "280px", x: 0 },
-    collapsed: { width: "80px", x: 0 },
-    mobileHidden: { x: "-100%" },
-    mobileOpen: { x: 0 },
-  };
+    resize();
+    window.addEventListener("resize", resize);
+    return () => window.removeEventListener("resize", resize);
+  }, []);
 
   return (
     <>
-      {/* Mobile Toggle Button (Floating Hamburger) */}
+      {/* MOBILE BUTTON */}
       <motion.button
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
+        transition={{ duration: 0.25 }}
         onClick={() => setIsMobileOpen(!isMobileOpen)}
-        className="md:hidden fixed bottom-6 right-6 w-14 h-14 bg-black text-white rounded-full flex items-center justify-center shadow-2xl z-70 hover:scale-110 active:scale-95 transition-transform"
+        className="md:hidden fixed bottom-6 right-6 z-70 w-14 h-14 rounded-full bg-black text-white shadow-xl flex items-center justify-center"
       >
         {isMobileOpen ? (
           <ChevronLeft className="w-6 h-6" />
@@ -112,133 +77,126 @@ export default function SidePanel() {
         )}
       </motion.button>
 
-      {/* Backdrop for mobile overlay */}
+      {/* BACKDROP */}
       <AnimatePresence>
         {isMobileOpen && (
           <motion.div
+            onClick={() => setIsMobileOpen(false)}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setIsMobileOpen(false)}
-            className="fixed inset-0 bg-black/40 z-45 md:hidden backdrop-blur-sm"
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 bg-black/40 backdrop-blur-sm z-40 md:hidden"
           />
         )}
       </AnimatePresence>
 
+      {/* SIDEBAR */}
       <motion.aside
-        initial="expanded"
-        animate={
-          isMobile
-            ? isMobileOpen
-              ? "mobileOpen"
-              : "mobileHidden"
-            : isCollapsed
-              ? "collapsed"
-              : "expanded"
-        }
-        variants={sidebarVariants}
-        transition={{
-          duration: 0.4,
-          type: "spring",
-          stiffness: 500,
-          damping: 50,
+        animate={{
+          width: isMobile ? 280 : isCollapsed ? 82 : 280,
+          x: isMobile ? (isMobileOpen ? 0 : -300) : 0,
         }}
-        className={`h-screen bg-white border-r border-gray-200 flex flex-col z-50 shadow-sm transition-[width] ${
-          isMobile ? "fixed left-0 top-0 w-[280px]" : "sticky top-0"
+        transition={{
+          type: "tween",
+          ease: [0.22, 1, 0.36, 1],
+          duration: 0.28,
+        }}
+        className={`h-screen bg-white border-r border-gray-200 flex flex-col z-50 shadow-sm ${
+          isMobile ? "fixed left-0 top-0" : "sticky top-0"
         }`}
       >
-        {/* Header with Logo */}
+        {/* HEADER */}
         <div className="p-6 border-b border-gray-200 relative">
-          <div>
-            <Link
-              href="/"
-              className="flex items-center gap-3 overflow-hidden h-16"
-            >
-              <div className="min-w-[40px] h-10 relative shrink-0">
-                <Image
-                  src="/images/auxillium-logo-3.png"
-                  alt="Auxillium Logo"
-                  fill
-                  className="object-contain"
-                  priority
-                />
-              </div>
-              <AnimatePresence mode="wait">
-                {!isCollapsed && (
-                  <motion.div
-                    initial={{ opacity: 0, x: -10 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    exit={{ opacity: 0, x: -10 }}
-                    transition={{ duration: 0.2 }}
-                    className="flex flex-col"
-                  >
-                    <h1 className="text-xl font-black tracking-tighter text-black uppercase">
-                      Auxillium
-                    </h1>
-                    <span className="text-[10px] text-gray-400 font-medium tracking-widest">
-                      V1.0.4
-                    </span>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </Link>
-          </div>
+          <Link href="/" className="flex items-center gap-3 h-14 overflow-hidden">
+            <div className="relative w-10 h-10 shrink-0">
+              <Image
+                src="/images/auxillium-logo-3.png"
+                alt="Logo"
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
 
-          {/* Desktop Collapse Toggle Button (Hover Trigger) */}
+            <AnimatePresence mode="popLayout">
+              {!isCollapsed && (
+                <motion.div
+                  initial={{ opacity: 0, x: -8 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -8 }}
+                  transition={{ duration: 0.15 }}
+                  className="flex flex-col"
+                >
+                  <h1 className="text-xl font-black tracking-tight uppercase">
+                    Auxillium
+                  </h1>
+                  <span className="text-[10px] tracking-[0.3em] text-gray-400">
+                    V1.0.4
+                  </span>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </Link>
+
+          {/* DESKTOP TOGGLE */}
           <button
             onClick={() => setIsCollapsed(!isCollapsed)}
-            className="hidden md:flex absolute -right-4 top-1/2 -translate-y-1/2 bg-white border border-gray-200 rounded-full w-8 h-8 items-center justify-center shadow-md hover:shadow-lg hover:bg-black hover:text-white transition-all duration-300 z-60 group/toggle"
-            aria-label="Toggle Sidebar"
+            className="hidden md:flex absolute -right-4 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full border border-gray-200 bg-white shadow-md items-center justify-center hover:bg-black hover:text-white transition"
           >
             {isCollapsed ? (
-              <ChevronRight className="w-4 h-4 transition-transform group-hover/toggle:scale-110" />
+              <ChevronRight className="w-4 h-4" />
             ) : (
-              <ChevronLeft className="w-4 h-4 transition-transform group-hover/toggle:scale-110" />
+              <ChevronLeft className="w-4 h-4" />
             )}
           </button>
         </div>
 
-        {/* Navigation Links */}
-        <nav className="flex-1 py-4 overflow-y-auto no-scrollbar">
-          <ul className="space-y-1">
+        {/* NAV */}
+        <nav className="flex-1 py-4 overflow-y-auto">
+          <ul className="space-y-1 px-2">
             {navLinks.map((link) => {
-              const isActive = pathname === link.href;
+              const active = pathname === link.href;
+              const Icon = link.icon;
+
               return (
                 <li key={link.href}>
                   <Link
                     href={link.href}
                     onClick={() => isMobile && setIsMobileOpen(false)}
-                    className={`flex items-center gap-4 px-6 py-4 transition-all duration-200 group relative ${
-                      isActive
+                    className={`relative flex items-center gap-4  px-4 py-3 transition-colors ${
+                      active
                         ? "bg-black text-white"
-                        : "text-gray-500 hover:bg-gray-50 hover:text-black"
+                        : "text-gray-500 hover:bg-gray-100 hover:text-black"
                     }`}
                   >
-                    <link.icon
-                      className={`w-5 h-5 min-w-[20px] transition-transform duration-200 ${
-                        isActive ? "scale-110" : "group-hover:scale-110"
-                      }`}
-                    />
-                    <AnimatePresence>
+                    {active && (
+                      <motion.div
+                        layoutId="nav-pill"
+                        className="absolute inset-0  bg-black -z-10"
+                        transition={{
+                          type: "spring",
+                          stiffness: 500,
+                          damping: 35,
+                        }}
+                      />
+                    )}
+
+                    <Icon className="w-5 h-5 shrink-0" />
+
+                    <AnimatePresence mode="popLayout">
                       {!isCollapsed && (
                         <motion.span
-                          initial={{ opacity: 0, x: -10 }}
+                          initial={{ opacity: 0, x: -6 }}
                           animate={{ opacity: 1, x: 0 }}
-                          exit={{ opacity: 0, x: -10 }}
-                          transition={{ duration: 0.2 }}
-                          className="text-xs font-bold tracking-wider whitespace-nowrap uppercase"
+                          exit={{ opacity: 0, x: -6 }}
+                          transition={{ duration: 0.15 }}
+                          className="text-xs font-bold tracking-wider whitespace-nowrap"
                         >
                           {link.name}
                         </motion.span>
                       )}
                     </AnimatePresence>
-
-                    {isActive && !isCollapsed && (
-                      <motion.div
-                        layoutId="active-nav"
-                        className="absolute left-0 w-1 h-full bg-black"
-                      />
-                    )}
                   </Link>
                 </li>
               );
@@ -246,25 +204,35 @@ export default function SidePanel() {
           </ul>
         </nav>
 
-        {/* Footer / User Profile */}
-        <div className="p-4 border-t border-gray-200 bg-gray-50/50">
+        {/* FOOTER */}
+        <div className="p-4 border-t border-gray-200 bg-gray-50">
           <button
             onClick={() => setIsProfileOpen(true)}
-            className={`flex items-center gap-3 w-full hover:bg-gray-100 p-2 rounded-xl transition-colors ${isCollapsed ? "justify-center" : ""}`}
+            className={`w-full rounded-xl p-2 hover:bg-gray-100 flex items-center gap-3 transition ${
+              isCollapsed ? "justify-center" : ""
+            }`}
           >
-            <div className="w-8 h-8 rounded-full bg-gray-200 border border-gray-300 flex items-center justify-center overflow-hidden shrink-0">
-              <Users className="w-4 h-4 text-gray-400" />
+            <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center shrink-0">
+              <Users className="w-4 h-4 text-gray-500" />
             </div>
-            {!isCollapsed && (
-              <div className="flex flex-col overflow-hidden text-left">
-                <p className="text-xs font-bold text-black truncate uppercase">
-                  {user?.name || user?.username || "Admin"}
-                </p>
-                <p className="text-[10px] text-gray-500 truncate">
-                  {user?.email || "admin@auxillium.com"}
-                </p>
-              </div>
-            )}
+
+            <AnimatePresence>
+              {!isCollapsed && (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="text-left overflow-hidden"
+                >
+                  <p className="text-xs font-bold truncate uppercase">
+                    {user?.name || user?.username || "Admin"}
+                  </p>
+                  <p className="text-[10px] text-gray-500 truncate">
+                    {user?.email || "admin@auxillium.com"}
+                  </p>
+                </motion.div>
+              )}
+            </AnimatePresence>
           </button>
         </div>
 

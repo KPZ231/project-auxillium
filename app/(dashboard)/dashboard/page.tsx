@@ -1,7 +1,9 @@
+import MetricsOverview from "@/app/components/Dashboard/Dashboard/MetricsOverview/MetricsOverview";
+
 export default function Dashboard(){
     return(
         <>
-            <h1 className="text-center text-7xl">Dashboard!</h1>   
+            <MetricsOverview></MetricsOverview>
         </>
     );
 }

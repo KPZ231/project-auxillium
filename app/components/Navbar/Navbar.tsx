@@ -6,10 +6,13 @@ import Button from "../Button/Button";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useLayoutEffect, useRef } from "react";
+import { useUser } from "@/app/context/UserContext";
+import { MdAccountCircle } from "react-icons/md";
 
 export default function Navbar() {
   const headerRef = useRef<HTMLElement>(null);
-  
+  const { user } = useUser();
+
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
     
@@ -84,8 +87,18 @@ export default function Navbar() {
 
         {/* Buttons */}
         <div className="flex items-center gap-3">
-          <Button content="Log In" variant="secondary" url="/login" />
-          <Button content="Sign Up" variant="primary" url="/register" />
+          {
+            user == null ? (
+              <>
+                <Button content="Log In" variant="secondary" url="/login" />
+                <Button content="Sign Up" variant="primary" url="/register" />
+              </>
+            ) : (
+              <div className="flex items-center gap-2">               
+                <Button content="Dashboard" variant="secondary" url="/dashboard" />
+              </div>
+            )
+          }
         </div>
       </nav>
     </header>

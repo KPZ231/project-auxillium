@@ -1,6 +1,6 @@
-import HeroSection from "../components/HeroSection/HeroSection";
-import Grid from "../components/Grid/Grid";
-import BigQuotation from "../components/Testimonial/BigQuotation";
+import HeroSection from "@/app/components/HeroSection/HeroSection";
+import Grid from "@/app/components/Grid/Grid";
+import BigQuotation from "@/app/components/Testimonial/BigQuotation";
 
 const data = {
   header: "O nas",

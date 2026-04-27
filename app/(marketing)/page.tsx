@@ -1,12 +1,12 @@
 "use client";
-import HeroSection from "./components/HeroSection/HeroSection";
-import ContentColumns from "./components/ContentColums/ContentColumns";
+import HeroSection from "../components/HeroSection/HeroSection";
+import ContentColumns from "../components/ContentColums/ContentColumns";
 import { Zap } from "lucide-react";
-import TemplateAnalitics from "./components/Analistics/TemplateAnalitics";
-import TestimonialQuotation from "./components/Testimonial/TestimonialQuotation";
-import PricingColumns from "./components/Pricing/PricingColumns";
-import FAQSection from "./components/FAQ/FaqSection";
-import CTA from "./components/CTA/CTA";
+import TemplateAnalitics from "../components/Analistics/TemplateAnalitics";
+import TestimonialQuotation from "../components/Testimonial/TestimonialQuotation";
+import PricingColumns from "../components/Pricing/PricingColumns";
+import FAQSection from "../components/FAQ/FaqSection";
+import CTA from "../components/CTA/CTA";
 
 export default function Home() {
   const contentColumnsData = [

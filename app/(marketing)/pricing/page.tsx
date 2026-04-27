@@ -1,7 +1,7 @@
-import VideoPlayer from "../components/VideoPlayer/VideoPlayer";
-import PricingColumns from "../components/Pricing/PricingColumns";
-import CTA from "../components/CTA/CTA";
-import HeroSection from "../components/HeroSection/HeroSection";
+import VideoPlayer from "@/app/components/VideoPlayer/VideoPlayer";
+import PricingColumns from "@/app/components/Pricing/PricingColumns";
+import CTA from "@/app/components/CTA/CTA";
+import HeroSection from "@/app/components/HeroSection/HeroSection";
 
 export default function Pricing() {
   return (

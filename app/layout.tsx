@@ -1,10 +1,8 @@
 import type { Metadata } from "next";
 import { Inter, Anonymous_Pro } from "next/font/google";
-import Navbar from "./components/Navbar/Navbar";
-import Footer from "./components/Footer/Footer";
 import { Toaster } from "sonner";
+import { UserProvider } from "./context/UserContext";
 import "./globals.css";
-import CookieBanner from "./components/CookieBanner/CookieBaner";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -35,12 +33,12 @@ export default function RootLayout({
       suppressHydrationWarning={true}
     >
       <body className="min-h-full flex flex-col">
-        <Navbar></Navbar>
-        {children}
-        <CookieBanner></CookieBanner>
+        <UserProvider>
+          {children}
+        </UserProvider>
         <Toaster position="top-right" richColors />
-        <Footer></Footer>
       </body>
     </html>
   );
 }
+

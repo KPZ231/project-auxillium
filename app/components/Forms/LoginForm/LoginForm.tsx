@@ -8,11 +8,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { FaArrowRight, FaApple, FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
+import { useSearchParams } from "next/navigation";
 import { LoginFormData, loginSchema } from "@/lib/validators";
 import { loginAction } from "@/actions/login";
 
 export default function LoginForm() {
   const [loading, setLoading] = useState(false);
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get('callbackUrl') || "/dashboard";
 
   const {
     register,
@@ -36,9 +39,10 @@ export default function LoginForm() {
           description: "Przekierowywanie do panelu użytkownika.",
         });
         reset();
-        // Redirect will happen via session cookie or manual redirect
-        window.location.href = "/dashboard";
+        // Redirect to callbackUrl or dashboard
+        window.location.href = callbackUrl;
       } else {
+
         toast.error("Wystąpił błąd", {
           description:
             result.error || "Nie udało się zalogować. Spróbuj ponownie.",

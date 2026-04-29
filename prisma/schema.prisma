@@ -20,6 +20,7 @@ model User {
   updatedAt     DateTime  @updatedAt
   
   resetTokens   PasswordResetToken[]
+  projects      Project[]
 }
 
 model PasswordResetToken {
@@ -30,4 +31,26 @@ model PasswordResetToken {
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([token])
+}
+
+enum ProjectStatus {
+  DONE
+  IN_PROGRESS
+  CANCELED
+}
+
+model Project {
+  id                 String        @id @default(cuid())
+  projectName        String        @unique
+  projectDescription String
+  projectStatus      ProjectStatus @default(IN_PROGRESS)
+  images             String[]      // Tablica na URL-e do zdjęć
+
+  userId             String
+  user               User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  createdAt          DateTime      @default(now())
+  updatedAt          DateTime      @updatedAt
+
+  @@index([userId])
 }

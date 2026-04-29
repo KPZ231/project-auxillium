@@ -19,7 +19,6 @@ import {
   Menu,
 } from "lucide-react";
 import { useUser } from "@/app/context/UserContext";
-import ProfileModal from "../ProfileModal/ProfileModal";
 
 interface NavLink {
   name: string;
@@ -205,41 +204,7 @@ export default function SidePanel() {
         </nav>
 
         {/* FOOTER */}
-        <div className="p-4 border-t border-gray-200 bg-gray-50">
-          <button
-            onClick={() => setIsProfileOpen(true)}
-            className={`w-full rounded-xl p-2 hover:bg-gray-100 flex items-center gap-3 transition ${
-              isCollapsed ? "justify-center" : ""
-            }`}
-          >
-            <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center shrink-0">
-              <Users className="w-4 h-4 text-gray-500" />
-            </div>
-
-            <AnimatePresence>
-              {!isCollapsed && (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  className="text-left overflow-hidden"
-                >
-                  <p className="text-xs font-bold truncate uppercase">
-                    {user?.name || user?.username || "Admin"}
-                  </p>
-                  <p className="text-[10px] text-gray-500 truncate">
-                    {user?.email || "admin@auxillium.com"}
-                  </p>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </button>
-        </div>
-
-        <ProfileModal
-          isOpen={isProfileOpen}
-          onClose={() => setIsProfileOpen(false)}
-        />
+        {/* Usunięto sekcję profilu użytkownika zgodnie z zaleceniami, przeniesiono do TopBar */}
       </motion.aside>
     </>
   );

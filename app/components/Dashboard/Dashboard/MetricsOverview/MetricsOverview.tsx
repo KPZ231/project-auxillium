@@ -1,6 +1,8 @@
 "use client";
 import { motion, Variants } from "motion/react";
 import Button from "@/app/components/Button/Button";
+import MetricBoxes from "./MetricBoxes";
+import ActivityAndTasks from "./ActivityAndTasks";
 
 export default function MetricsOverview() {
   const containerVariants: Variants = {
@@ -20,7 +22,7 @@ export default function MetricsOverview() {
   return (
     <>
       <motion.div
-        className="flex flex-row justify-between max-w-7xl p-8 items-center"
+        className="flex flex-row justify-between px-4 py-2 w-full items-center"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
@@ -34,7 +36,7 @@ export default function MetricsOverview() {
             Pokaz danych z tego tygodnia
           </h2>
         </div>
-        <div className="flex items-center justify-between">
+        <div>
           <Button
             content="Wygeneruj Raport"
             url="/dashboard/generate/new-report"
@@ -42,6 +44,8 @@ export default function MetricsOverview() {
           ></Button>
         </div>
       </motion.div>
+      <MetricBoxes />
+      <ActivityAndTasks />
     </>
   );
 }

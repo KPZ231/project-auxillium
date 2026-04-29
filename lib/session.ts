@@ -70,3 +70,12 @@ export async function updateSession(request: NextRequest) {
   });
   return res;
 }
+
+export async function getUser() {
+  const session = await getSession();
+  
+  return {
+    isAuthenticatedAndLogedIn: !!session,
+    userId: session?.userId || null,
+  };
+}

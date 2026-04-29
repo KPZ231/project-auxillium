@@ -46,6 +46,22 @@ model Project {
   projectStatus      ProjectStatus @default(IN_PROGRESS)
   images             String[]      // Tablica na URL-e do zdjęć
 
+  // Nowe pola do edycji projektu
+  budget             String?
+  location           String?
+  projectType        String?       // np. Residential, Commercial, Web, Branding
+  priority           String?       // np. Low, Medium, High, Critical
+  context            String?
+  clientInfo         String?
+  assignedUsersInfo  String?
+  clientBrief        String?
+  websiteUrl         String?
+  githubUrl          String?
+  timeline           String?
+  milestones         Json?         // Może przechowywać listę obiektów np. [{ title, date, completed }]
+  
+  order              Int           @default(0) // Kolejność do Drag & Drop
+
   userId             String
   user               User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   

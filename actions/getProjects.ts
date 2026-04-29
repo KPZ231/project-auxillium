@@ -9,7 +9,10 @@ export const getProjects = unstable_cache(
   async () => {
     try {
       const projects = await prisma.project.findMany({
-        orderBy: { createdAt: 'desc' },
+        orderBy: [
+          { order: 'asc' },
+          { createdAt: 'desc' }
+        ],
       })
       return { success: true, data: projects }
     } catch (error) {

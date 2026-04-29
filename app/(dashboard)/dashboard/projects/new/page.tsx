@@ -24,7 +24,7 @@ export default function NewProject() {
     
     if (result.success) {
       toast.success("Project created successfully!");
-      router.push(`/dashboard/projects`);
+      router.push(`/dashboard/projects/${result.projectId}?setup=true`);
     } else {
       toast.error(result.error);
       console.error("Validation errors:", result.details);

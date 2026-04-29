@@ -5,7 +5,7 @@ import { redirect } from "next/navigation"
 import { prisma } from "@/lib/prisma"
 import { z } from "zod"
 import { ProjectStatus } from "@/lib/generated/client/client"
-import { revalidateTag } from "next/cache"
+import { revalidatePath } from "next/cache"
 
 
 // 1. Zod Schema: The most scalable way to validate incoming data.
@@ -98,7 +98,7 @@ export async function addProject(data: AddProjectInput) {
         })
 
         // Revalidate cache for projects grid
-        revalidateTag('projects')
+        revalidatePath('/dashboard/projects', 'page')
 
         return {
             success: true,

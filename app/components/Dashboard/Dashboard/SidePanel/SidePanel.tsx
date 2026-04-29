@@ -18,7 +18,6 @@ import {
   ChevronRight,
   Menu,
 } from "lucide-react";
-import { useUser } from "@/app/context/UserContext";
 
 interface NavLink {
   name: string;
@@ -39,11 +38,8 @@ const navLinks: NavLink[] = [
 
 export default function SidePanel() {
   const pathname = usePathname();
-  const { user } = useUser();
-
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
-  const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {

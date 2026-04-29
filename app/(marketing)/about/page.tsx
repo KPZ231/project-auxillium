@@ -45,7 +45,7 @@ const data = {
     subContent:
       "Łączymy kreatywność z danymi. Tworzymy oprogramowanie, które napędza wzrost, zwiększa wydajność i otwiera nowe możliwości rynkowe dla naszych klientów.",
   },
-};
+} as const;
 
 export default function About() {
   return (

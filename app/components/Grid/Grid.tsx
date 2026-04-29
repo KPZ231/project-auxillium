@@ -5,7 +5,7 @@ interface GridProps {
   title: string;
   subtitle?: string;
 
-  cards: {
+  cards: readonly {
     header: string;
     content: string;
   }[];

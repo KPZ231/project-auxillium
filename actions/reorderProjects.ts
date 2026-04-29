@@ -2,7 +2,7 @@
 
 import { getUser } from "@/lib/session"
 import { prisma } from "@/lib/prisma"
-import { revalidateTag } from "next/cache"
+import { revalidatePath } from "next/cache"
 
 export async function reorderProjects(orderedIds: string[]) {
     const { isAuthenticatedAndLogedIn } = await getUser()
@@ -21,7 +21,7 @@ export async function reorderProjects(orderedIds: string[]) {
 
         await prisma.$transaction(transactions)
 
-        revalidateTag('projects')
+        revalidatePath('/dashboard/projects', 'page')
 
         return {
             success: true,

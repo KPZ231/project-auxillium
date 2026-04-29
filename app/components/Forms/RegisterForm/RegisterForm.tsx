@@ -1,6 +1,5 @@
 'use client'
 
-import Image from "next/image";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
@@ -9,10 +8,12 @@ import Link from "next/link";
 import { FaArrowRight, FaApple, FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { RegisterFormData, registerSchema } from "@/lib/validators";
+import { useRouter } from "next/navigation";
 import { registerAction } from "@/actions/register";
 
 export default function RegisterForm() {
   const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   const {
     register,
@@ -36,14 +37,14 @@ export default function RegisterForm() {
           description: "Przekierowywanie do panelu użytkownika.",
         });
         reset();
-        window.location.href = "/dashboard";
+        router.push("/dashboard");
       } else {
         toast.error("Wystąpił błąd", {
           description:
             result.error || "Nie udało się zarejestrować. Spróbuj ponownie.",
         });
       }
-    } catch (error) {
+    } catch {
       setLoading(false);
       toast.error("Wystąpił błąd połączenia", {
         description: "Sprawdź swoje połączenie internetowe i spróbuj ponownie.",

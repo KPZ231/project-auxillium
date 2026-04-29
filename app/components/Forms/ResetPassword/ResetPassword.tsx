@@ -5,8 +5,7 @@ import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
-import { FaArrowRight, FaApple, FaGithub } from "react-icons/fa";
-import { FcGoogle } from "react-icons/fc";
+import { FaArrowRight } from "react-icons/fa";
 import { ResetPasswordFormData, resetPasswordSchema } from "@/lib/validators";
 import { requestPasswordReset } from "@/actions/reset-password";
 
@@ -41,7 +40,7 @@ export default function ResetPasswordForm() {
             result.error || "Nie udało się zresetować hasła. Spróbuj ponownie.",
         });
       }
-    } catch (error) {
+    } catch {
       setLoading(false);
       toast.error("Wystąpił błąd połączenia", {
         description: "Sprawdź swoje połączenie internetowe i spróbuj ponownie.",

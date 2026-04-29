@@ -125,6 +125,7 @@ export default function ProjectsGrid() {
   };
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchProjects();
   }, []);
 
@@ -231,10 +232,10 @@ export default function ProjectsGrid() {
                 className={`${colSpan} ${rowSpan} bg-white relative`}
                 style={{ minHeight }}
                 draggable
-                onDragStart={(e) => handleDragStart(e, index)}
-                onDragEnter={(e) => handleDragEnter(e, index)}
+                onDragStart={(e: any) => handleDragStart(e, index)}
+                onDragEnter={(e: any) => handleDragEnter(e, index)}
                 onDragEnd={handleDragEnd}
-                onDragOver={(e) => e.preventDefault()}
+                onDragOver={(e: any) => e.preventDefault()}
               >
                 <ProjectCard project={project} />
               </motion.div>

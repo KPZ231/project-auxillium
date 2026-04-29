@@ -2,7 +2,7 @@
 
 import { getUser } from "@/lib/session"
 import { prisma } from "@/lib/prisma"
-import { revalidateTag } from "next/cache"
+import { revalidatePath } from "next/cache"
 import fs from "fs/promises"
 import path from "path"
 import { existsSync } from "fs"
@@ -42,7 +42,7 @@ export async function deleteProject(projectId: string, confirmationName: string)
             where: { id: projectId }
         })
 
-        revalidateTag('projects')
+        revalidatePath('/dashboard/projects', 'page')
 
         return {
             success: true,

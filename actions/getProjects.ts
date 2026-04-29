@@ -2,7 +2,7 @@
 
 import { prisma } from "@/lib/prisma"
 import { unstable_cache } from "next/cache"
-import { revalidateTag } from "next/cache"
+import { revalidatePath } from "next/cache"
 
 // Pobiera projekty używając cache Next.js - revalidacja co 5 minut (300 sekund)
 export const getProjects = unstable_cache(
@@ -26,5 +26,5 @@ export const getProjects = unstable_cache(
 
 // Akcja do wymuszenia odświeżenia cache (np. po kliknięciu przycisku lub dodaniu projektu)
 export async function forceRefreshProjects() {
-  revalidateTag('projects')
+  revalidatePath('/dashboard/projects', 'page')
 }

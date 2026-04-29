@@ -3,7 +3,7 @@ import ResetPasswordConfirm from "@/app/components/Forms/ResetPassword/ResetPass
 
 export default function ResetPasswordPage() {
   return (
-    <Suspense fallback={<div>Ładowanie...</div>}>
+    <Suspense fallback={<div>Loading...</div>}>
       <ResetPasswordConfirm />
     </Suspense>
   );

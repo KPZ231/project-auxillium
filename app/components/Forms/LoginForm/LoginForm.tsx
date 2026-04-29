@@ -1,6 +1,5 @@
 'use client'
 
-import Image from "next/image";
 import { useState } from "react";
 import { toast } from "sonner";
 import { useForm } from "react-hook-form";
@@ -8,13 +7,14 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
 import { FaArrowRight, FaApple, FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import { LoginFormData, loginSchema } from "@/lib/validators";
 import { loginAction } from "@/actions/login";
 
 export default function LoginForm() {
   const [loading, setLoading] = useState(false);
   const searchParams = useSearchParams();
+  const router = useRouter();
   const callbackUrl = searchParams.get('callbackUrl') || "/dashboard";
 
   const {
@@ -40,7 +40,7 @@ export default function LoginForm() {
         });
         reset();
         // Redirect to callbackUrl or dashboard
-        window.location.href = callbackUrl;
+        router.push(callbackUrl);
       } else {
 
         toast.error("Wystąpił błąd", {
@@ -48,7 +48,7 @@ export default function LoginForm() {
             result.error || "Nie udało się zalogować. Spróbuj ponownie.",
         });
       }
-    } catch (error) {
+    } catch {
       setLoading(false);
       toast.error("Wystąpił błąd połączenia", {
         description: "Sprawdź swoje połączenie internetowe i spróbuj ponownie.",

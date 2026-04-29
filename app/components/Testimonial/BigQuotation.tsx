@@ -49,7 +49,7 @@ export default function BigQuotation({
             >
               <div className="w-1.5 bg-(--primary) self-stretch shrink-0" />
               <h3 className="font-bold text-6xl lg:text-8xl tracking-tighter leading-[0.9] text-(--primary)">
-                "{quoteContent}"
+                &quot;{quoteContent}&quot;
               </h3>
             </motion.div>
 

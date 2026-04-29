@@ -4,7 +4,7 @@ import { getUser } from "@/lib/session"
 import { prisma } from "@/lib/prisma"
 import { z } from "zod"
 import { ProjectStatus } from "@/lib/generated/client/client"
-import { revalidateTag } from "next/cache"
+import { revalidatePath } from "next/cache"
 import fs from "fs/promises"
 import path from "path"
 import { existsSync } from "fs"
@@ -92,8 +92,8 @@ export async function updateProject(data: UpdateProjectInput) {
             }
         })
 
-        revalidateTag('projects')
-        revalidateTag(`project-${id}`)
+        revalidatePath('/dashboard/projects', 'page')
+        revalidatePath(`/dashboard/projects/${id}`, 'page')
 
         return {
             success: true,

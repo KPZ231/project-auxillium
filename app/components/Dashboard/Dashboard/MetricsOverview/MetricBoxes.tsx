@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { motion, Variants } from "motion/react";
 import { TrendingUp, Layers, Target } from "lucide-react";
 import { ResponsiveContainer, LineChart, Line } from "recharts";
+import { getProjectCount } from "@/actions/getMetrics";
+import { getCriticalPriotiryCount } from "@/actions/getMetrics";
 
 interface MetricData {
   id: string;
@@ -57,24 +59,29 @@ const mockData: MetricData[] = [
 export default function MetricBoxes() {
   const [data, setData] = useState<MetricData[]>(mockData);
 
-  // ==========================================
-  // KOD DO ZACIĄGANIA DANYCH Z BAZY (ZAKOMENTOWANY)
-  // ==========================================
-  // useEffect(() => {
-  //   const fetchMetricsFromDB = async () => {
-  //     try {
-  //       // Tutaj endpoint Twojego API połączony z bazą danych (np. Prisma)
-  //       const response = await fetch('/api/dashboard/metrics');
-  //       if (response.ok) {
-  //         const dbData = await response.json();
-  //         setData(dbData);
-  //       }
-  //     } catch (error) {
-  //       console.error("Błąd pobierania danych z bazy:", error);
-  //     }
-  //   };
-  //   fetchMetricsFromDB();
-  // }, []);
+  useEffect(() => {
+    const fetchMetrics = async () => {
+      const result = await getProjectCount();
+      if (result.success && result.count !== undefined) {
+        setData(prev => prev.map(item => 
+          item.id === "projects" 
+            ? { ...item, value: result.count!.toString() } 
+            : item
+        ));
+        
+      }
+
+      const Criticalresult = await getCriticalPriotiryCount();
+      if (Criticalresult.success && Criticalresult.count !== undefined) {
+        setData(prev => prev.map(item => 
+          item.id === "projects" 
+            ? { ...item, badgeText: `${Criticalresult.count} Critical` } 
+            : item
+        ));
+      }
+    };
+    fetchMetrics();
+  }, []);
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },

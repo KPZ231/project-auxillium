@@ -72,13 +72,6 @@ export default function ProjectsHeader({ view, setView }: { view?: "grid" | "tim
             variants={itemVariants}
           >
             <Button
-              onClick={FilterButton}
-              content="FILTER"
-              url=""
-              variant="secondary"
-              icon={<ListFilter className="w-4 h-4" strokeWidth={2.5} />}
-            />
-            <Button
               content="NEW PROJECT"
               url="/dashboard/projects/new"
               variant="primary"

@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { jwtVerify } from "jose"
+import { createClient } from '@/utils/supabase/middleware'
 
 const secretKey = process.env.JWT_SECRET || "default-secret-key-change-me";
 const key = new TextEncoder().encode(secretKey);
@@ -17,6 +18,9 @@ const protectedRoutes = ['/dashboard', '/admin']
 const publicRoutes = ['/login', '/register', '/forgot-password', '/reset-password']
 
 export async function proxy(request: NextRequest) {
+  // Integrate Supabase session refreshing
+  const supabaseResponse = createClient(request)
+
   // 2. Check if the current route is protected or public
   const path = request.nextUrl.pathname
   const isProtectedRoute = protectedRoutes.some(route => path.startsWith(route))
@@ -25,9 +29,6 @@ export async function proxy(request: NextRequest) {
   // 3. Decrypt the session from the cookie
   const cookie = request.cookies.get('session')?.value
   const session = cookie ? await decrypt(cookie).catch(() => null) : null
-
-
-
 
   // 4. Redirect to /login if the user is not authenticated
   if (isProtectedRoute && !session) {
@@ -45,10 +46,8 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL('/dashboard', request.nextUrl))
   }
 
-  return NextResponse.next()
+  return supabaseResponse
 }
-
-
 
 // See "Matching Paths" below to learn more
 export const config = {

@@ -8,9 +8,9 @@ import path from "path"
 import { existsSync } from "fs"
 
 export async function deleteProject(projectId: string, confirmationName: string) {
-    const { isAuthenticatedAndLogedIn } = await getUser()
+    const { isAuthenticatedAndLogedIn, userId } = await getUser()
 
-    if (!isAuthenticatedAndLogedIn) {
+    if (!isAuthenticatedAndLogedIn || !userId) {
         return { success: false, error: "Unauthorized" }
     }
 
@@ -21,6 +21,10 @@ export async function deleteProject(projectId: string, confirmationName: string)
 
         if (!project) {
             return { success: false, error: "Project not found" }
+        }
+
+        if (project.userId !== userId) {
+            return { success: false, error: "Unauthorized access to project" }
         }
 
         if (project.projectName !== confirmationName) {

@@ -5,16 +5,16 @@ import { prisma } from "@/lib/prisma"
 import { revalidatePath } from "next/cache"
 
 export async function reorderProjects(orderedIds: string[]) {
-    const { isAuthenticatedAndLogedIn } = await getUser()
+    const { isAuthenticatedAndLogedIn, userId } = await getUser()
 
-    if (!isAuthenticatedAndLogedIn) {
+    if (!isAuthenticatedAndLogedIn || !userId) {
         return { success: false, error: "Unauthorized" }
     }
 
     try {
         const transactions = orderedIds.map((id, index) => {
-            return prisma.project.update({
-                where: { id },
+            return prisma.project.updateMany({
+                where: { id, userId },
                 data: { order: index }
             })
         })

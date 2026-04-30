@@ -33,9 +33,9 @@ const updateProjectSchema = z.object({
 export type UpdateProjectInput = z.infer<typeof updateProjectSchema>
 
 export async function updateProject(data: UpdateProjectInput) {
-    const { isAuthenticatedAndLogedIn } = await getUser()
+    const { isAuthenticatedAndLogedIn, userId } = await getUser()
 
-    if (!isAuthenticatedAndLogedIn) {
+    if (!isAuthenticatedAndLogedIn || !userId) {
         return { success: false, error: "Unauthorized" }
     }
 
@@ -58,6 +58,10 @@ export async function updateProject(data: UpdateProjectInput) {
 
         if (!existingProject) {
             return { success: false, error: "Project not found" }
+        }
+
+        if (existingProject.userId !== userId) {
+            return { success: false, error: "Unauthorized access to project" }
         }
 
         // Move temp images if any new ones were added

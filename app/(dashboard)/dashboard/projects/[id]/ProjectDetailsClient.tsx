@@ -20,7 +20,7 @@ const STEPS = [
   "Milestones & Gallery"
 ];
 
-export default function ProjectDetailsClient({ project }: { project: any }) {
+export default function ProjectDetailsClient({ project, isUnauthorized = false }: { project: any, isUnauthorized?: boolean }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { setCustomLabel } = useBreadcrumb();
@@ -283,6 +283,29 @@ export default function ProjectDetailsClient({ project }: { project: any }) {
   const totalProgress = project.milestones && project.milestones.length > 0 
     ? Math.round(project.milestones.reduce((acc: number, m: any) => acc + (m.progress || (m.completed ? 100 : 0)), 0) / project.milestones.length)
     : 0;
+
+  if (isUnauthorized) {
+    return (
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/80 backdrop-blur-sm p-4">
+        <motion.div 
+          initial={{ opacity: 0, scale: 0.95 }} 
+          animate={{ opacity: 1, scale: 1 }}
+          className="w-full max-w-md bg-white border border-[#E5E5E5] p-8 shadow-2xl text-center"
+        >
+          <h2 className="text-[20px] font-bold text-[#DC2626] uppercase tracking-tight mb-4">Unauthorized Access</h2>
+          <p className="text-[14px] text-[#71717A] mb-8">
+            You do not have permission to view or edit this project. It may belong to another user.
+          </p>
+          <button 
+            onClick={() => router.push("/dashboard/projects")}
+            className="w-full h-12 bg-[#0A0A0A] text-[#FAFAFA] font-medium text-[13px] uppercase tracking-[0.04em] hover:bg-transparent hover:text-[#0A0A0A] border border-[#0A0A0A] transition-colors"
+          >
+            Return to Projects
+          </button>
+        </motion.div>
+      </div>
+    );
+  }
 
   return (
     <>

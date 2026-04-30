@@ -27,6 +27,7 @@ const updateProjectSchema = z.object({
   timeline: z.string().optional().nullable(),
   milestones: z.any().optional(), // Można tu dać dokładniejszą walidację Zod, zależnie od struktury
   images: z.array(z.string()).default([]),
+  dueDate: z.string().optional().nullable(),
 })
 
 export type UpdateProjectInput = z.infer<typeof updateProjectSchema>
@@ -48,7 +49,7 @@ export async function updateProject(data: UpdateProjectInput) {
         }
     }
 
-    const { id, images, websiteUrl, githubUrl, ...rest } = parsedData.data
+    const { id, images, websiteUrl, githubUrl, dueDate, ...rest } = parsedData.data
 
     try {
         const existingProject = await prisma.project.findUnique({
@@ -88,6 +89,7 @@ export async function updateProject(data: UpdateProjectInput) {
                 ...rest,
                 websiteUrl: websiteUrl === "" ? null : websiteUrl,
                 githubUrl: githubUrl === "" ? null : githubUrl,
+                dueDate: dueDate ? new Date(dueDate) : null,
                 images: finalImages,
             }
         })

@@ -17,6 +17,7 @@ const addProjectSchema = z.object({
 
   // Zakładamy, że drag and drop uploader wysyła zdjęcia na serwer/chmurę i zwraca tablicę URL-i (lub lokalnych ścieżek).
   images: z.array(z.string()).default([]),
+  dueDate: z.string().optional().nullable(),
 })
 
 export type AddProjectInput = z.infer<typeof addProjectSchema>
@@ -43,7 +44,7 @@ export async function addProject(data: AddProjectInput) {
         }
     }
 
-    const { projectName, projectDescription, projectStatus, images } = parsedData.data
+    const { projectName, projectDescription, projectStatus, images, dueDate } = parsedData.data
 
     try {
         const existingProject = await prisma.project.findUnique({
@@ -91,6 +92,7 @@ export async function addProject(data: AddProjectInput) {
                 projectDescription,
                 projectStatus,
                 images: finalImages, // Używamy docelowych URL-i
+                dueDate: dueDate ? new Date(dueDate) : null,
                 user: {
                     connect: { id: userId }
                 }

@@ -113,6 +113,7 @@ export const ProjectScalarFieldEnum = {
   githubUrl: 'githubUrl',
   timeline: 'timeline',
   milestones: 'milestones',
+  dueDate: 'dueDate',
   order: 'order',
   userId: 'userId',
   createdAt: 'createdAt',

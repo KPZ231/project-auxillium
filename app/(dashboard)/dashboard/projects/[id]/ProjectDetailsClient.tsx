@@ -10,6 +10,7 @@ import { ProjectStatus } from "@/lib/generated/client/client";
 import { ImageUploader } from "@/app/components/UI/ImageUploader";
 import Link from "next/link";
 import Image from "next/image";
+import { useBreadcrumb } from "@/app/context/BreadcrumbContext";
 
 const STEPS = [
   "Basic Info",
@@ -22,6 +23,16 @@ const STEPS = [
 export default function ProjectDetailsClient({ project }: { project: any }) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const { setCustomLabel } = useBreadcrumb();
+
+  useEffect(() => {
+    setCustomLabel(project.projectName);
+    // Cleanup: reset label when leaving page
+    return () => setCustomLabel(null);
+  }, [project.projectName, setCustomLabel]);
+
+
+
 
   // Modal states
   const [isEditOpen, setIsEditOpen] = useState(false);
@@ -59,6 +70,7 @@ export default function ProjectDetailsClient({ project }: { project: any }) {
     timeline: project.timeline || "",
     images: project.images || [],
     milestones: project.milestones || [],
+    dueDate: project.dueDate ? new Date(project.dueDate).toISOString().split('T')[0] : "",
   });
 
   const nextStep = () => setCurrentStep((prev) => Math.min(prev + 1, STEPS.length - 1));
@@ -104,7 +116,7 @@ export default function ProjectDetailsClient({ project }: { project: any }) {
   const addMilestone = () => {
     setFormData((prev) => ({
       ...prev,
-      milestones: [...prev.milestones, { title: "", date: "", completed: false }],
+      milestones: [...prev.milestones, { title: "", date: "", completed: false, progress: 0 }],
     }));
   };
 
@@ -191,6 +203,10 @@ export default function ProjectDetailsClient({ project }: { project: any }) {
                 <input type="text" value={formData.timeline} onChange={(e) => setFormData({...formData, timeline: e.target.value})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]" placeholder="e.g. Q3 2024" />
               </div>
               <div className="space-y-2">
+                <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Due Date</label>
+                <input type="date" value={formData.dueDate} onChange={(e) => setFormData({...formData, dueDate: e.target.value})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]" />
+              </div>
+              <div className="space-y-2">
                 <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Location</label>
                 <input type="text" value={formData.location} onChange={(e) => setFormData({...formData, location: e.target.value})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]" placeholder="e.g. Copenhagen, DK" />
               </div>
@@ -233,11 +249,21 @@ export default function ProjectDetailsClient({ project }: { project: any }) {
               </div>
               {formData.milestones.length === 0 && <p className="text-[13px] text-[#71717A]">No milestones added yet.</p>}
               {formData.milestones.map((m: any, i: number) => (
-                <div key={i} className="flex items-center gap-4 bg-[#F4F4F5] p-3 border border-[#E5E5E5]">
-                  <input type="checkbox" checked={m.completed} onChange={(e) => updateMilestone(i, 'completed', e.target.checked)} className="w-4 h-4 rounded-none accent-[#0A0A0A]" />
-                  <input type="text" placeholder="Title (e.g. Design Phase)" value={m.title} onChange={(e) => updateMilestone(i, 'title', e.target.value)} className="flex-1 bg-transparent border-b border-[#D4D4D8] focus:border-[#0A0A0A] outline-none text-[13px]" />
-                  <input type="text" placeholder="Date/ETA" value={m.date} onChange={(e) => updateMilestone(i, 'date', e.target.value)} className="w-24 bg-transparent border-b border-[#D4D4D8] focus:border-[#0A0A0A] outline-none text-[13px]" />
-                  <button type="button" onClick={() => removeMilestone(i)} className="text-[#DC2626] font-bold text-[14px] hover:scale-110 transition-transform">✕</button>
+                <div key={i} className="flex flex-col gap-3 bg-[#F4F4F5] p-3 border border-[#E5E5E5]">
+                  <div className="flex items-center gap-4">
+                    <input type="checkbox" checked={m.completed || m.progress === 100} onChange={(e) => {
+                      updateMilestone(i, 'completed', e.target.checked);
+                      if (e.target.checked) updateMilestone(i, 'progress', 100);
+                    }} className="w-4 h-4 rounded-none accent-[#0A0A0A]" />
+                    <input type="text" placeholder="Title (e.g. Design Phase)" value={m.title} onChange={(e) => updateMilestone(i, 'title', e.target.value)} className="flex-1 bg-transparent border-b border-[#D4D4D8] focus:border-[#0A0A0A] outline-none text-[13px]" />
+                    <input type="text" placeholder="Date/ETA" value={m.date} onChange={(e) => updateMilestone(i, 'date', e.target.value)} className="w-24 bg-transparent border-b border-[#D4D4D8] focus:border-[#0A0A0A] outline-none text-[13px]" />
+                    <button type="button" onClick={() => removeMilestone(i)} className="text-[#DC2626] font-bold text-[14px] hover:scale-110 transition-transform">✕</button>
+                  </div>
+                  <div className="flex items-center gap-3 pl-8 pr-2">
+                    <span className="text-[10px] font-bold text-[#71717A] uppercase tracking-wider">Progress</span>
+                    <input type="range" min="0" max="100" value={m.progress || 0} onChange={(e) => updateMilestone(i, 'progress', parseInt(e.target.value))} className="flex-1 h-1 bg-[#D4D4D8] appearance-none cursor-pointer accent-[#0A0A0A]" />
+                    <span className="text-[11px] font-bold text-[#0A0A0A] w-8 text-right">{m.progress || 0}%</span>
+                  </div>
                 </div>
               ))}
             </div>
@@ -253,14 +279,22 @@ export default function ProjectDetailsClient({ project }: { project: any }) {
     }
   };
 
+  // Calculate overall progress
+  const totalProgress = project.milestones && project.milestones.length > 0 
+    ? Math.round(project.milestones.reduce((acc: number, m: any) => acc + (m.progress || (m.completed ? 100 : 0)), 0) / project.milestones.length)
+    : 0;
+
   return (
     <>
       {/* Header */}
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 border-b border-[#E5E5E5] pb-8">
         <div>
-          <div className="flex gap-2 mb-4">
+          <div className="flex gap-2 mb-4 items-center">
             <span className="inline-block px-2 py-1 bg-[#F4F4F5] text-[#0A0A0A] text-[10px] font-bold tracking-[0.08em] uppercase">
-              {project.projectStatus}
+              {project.status}
+            </span>
+            <span className="inline-block px-2 py-1 bg-[#0A0A0A] text-white text-[10px] font-bold tracking-[0.08em] uppercase">
+              {totalProgress}% COMPLETED
             </span>
             {project.priority && (
               <span className={`inline-block px-2 py-1 text-[10px] font-bold tracking-[0.08em] uppercase border ${
@@ -342,15 +376,40 @@ export default function ProjectDetailsClient({ project }: { project: any }) {
 
           {project.milestones && project.milestones.length > 0 && (
             <section>
-              <h2 className="text-[12px] font-bold tracking-[0.08em] uppercase text-[#71717A] mb-4">Milestones</h2>
-              <div className="space-y-4 border-l border-[#E5E5E5] pl-6">
-                {project.milestones.map((m: any, i: number) => (
-                  <div key={i} className="relative group">
-                    <div className={`absolute left-[29px] top-1.5 w-2 h-2 rounded-none border border-[#0A0A0A] transition-colors ${m.completed ? 'bg-[#0A0A0A]' : 'bg-white group-hover:bg-[#E5E5E5]'}`} />
-                    <h3 className={`text-[14px] font-semibold ${m.completed ? 'text-[#71717A] line-through' : 'text-[#0A0A0A]'}`}>{m.title}</h3>
-                    {m.date && <p className="text-[12px] text-[#71717A] mt-1">{m.date}</p>}
-                  </div>
-                ))}
+              <h2 className="text-[12px] font-bold tracking-[0.08em] uppercase text-[#71717A] mb-4">Milestones & Progress</h2>
+              
+              <div className="mb-8">
+                <div className="flex justify-between text-[11px] font-bold text-[#0A0A0A] mb-2 uppercase">
+                  <span>Overall Progress</span>
+                  <span>{totalProgress}%</span>
+                </div>
+                <div className="w-full h-2 bg-[#F4F4F5]">
+                  <motion.div 
+                    initial={{ width: 0 }}
+                    animate={{ width: `${totalProgress}%` }}
+                    className="h-full bg-[#0A0A0A]"
+                  />
+                </div>
+              </div>
+
+              <div className="space-y-6 border-l border-[#E5E5E5] pl-6">
+                {project.milestones.map((m: any, i: number) => {
+                  const isDone = m.completed || m.progress === 100;
+                  return (
+                    <div key={i} className="relative group">
+                      <div className={`absolute left-[-29px] top-1.5 w-2 h-2 rounded-none border border-[#0A0A0A] transition-colors ${isDone ? 'bg-[#0A0A0A]' : 'bg-white group-hover:bg-[#E5E5E5]'}`} />
+                      <div className="flex justify-between items-start">
+                        <h3 className={`text-[14px] font-semibold ${isDone ? 'text-[#71717A] line-through' : 'text-[#0A0A0A]'}`}>{m.title}</h3>
+                        <span className="text-[12px] font-bold text-[#0A0A0A]">{m.progress || 0}%</span>
+                      </div>
+                      {m.date && <p className="text-[12px] text-[#71717A] mt-1 mb-2">{m.date}</p>}
+                      
+                      <div className="w-full max-w-[250px] h-1 bg-[#F4F4F5] mt-1">
+                        <div className={`h-full ${isDone ? 'bg-[#0A0A0A]' : 'bg-[#D4D4D8]'}`} style={{ width: `${m.progress || 0}%` }} />
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
             </section>
           )}
@@ -378,6 +437,12 @@ export default function ProjectDetailsClient({ project }: { project: any }) {
                 <div>
                   <dt className="text-[10px] tracking-[0.06em] uppercase text-[#71717A] mb-1">Timeline</dt>
                   <dd className="text-[14px] font-medium text-[#0A0A0A]">{project.timeline}</dd>
+                </div>
+              )}
+              {project.dueDate && (
+                <div>
+                  <dt className="text-[10px] tracking-[0.06em] uppercase text-[#71717A] mb-1">Due Date</dt>
+                  <dd className="text-[14px] font-medium text-[#0A0A0A]">{new Date(project.dueDate).toLocaleDateString()}</dd>
                 </div>
               )}
               {project.clientInfo && (
@@ -610,6 +675,10 @@ export default function ProjectDetailsClient({ project }: { project: any }) {
                     <input type="text" value={formData.timeline} onChange={(e) => setFormData({...formData, timeline: e.target.value})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]" />
                   </div>
                   <div className="space-y-2">
+                    <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Due Date</label>
+                    <input type="date" value={formData.dueDate} onChange={(e) => setFormData({...formData, dueDate: e.target.value})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]" />
+                  </div>
+                  <div className="space-y-2">
                     <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Location</label>
                     <input type="text" value={formData.location} onChange={(e) => setFormData({...formData, location: e.target.value})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]" />
                   </div>
@@ -638,11 +707,21 @@ export default function ProjectDetailsClient({ project }: { project: any }) {
                     <button type="button" onClick={addMilestone} className="text-[12px] font-medium text-[#0A0A0A] hover:underline">+ Add</button>
                   </div>
                   {formData.milestones.map((m: any, i: number) => (
-                    <div key={i} className="flex items-center gap-4 bg-[#F4F4F5] p-3 border border-[#E5E5E5]">
-                      <input type="checkbox" checked={m.completed} onChange={(e) => updateMilestone(i, 'completed', e.target.checked)} className="w-4 h-4 rounded-none accent-[#0A0A0A]" />
-                      <input type="text" placeholder="Title" value={m.title} onChange={(e) => updateMilestone(i, 'title', e.target.value)} className="flex-1 bg-transparent border-b border-[#D4D4D8] focus:border-[#0A0A0A] outline-none text-[13px]" />
-                      <input type="text" placeholder="Date/ETA" value={m.date} onChange={(e) => updateMilestone(i, 'date', e.target.value)} className="w-24 bg-transparent border-b border-[#D4D4D8] focus:border-[#0A0A0A] outline-none text-[13px]" />
-                      <button type="button" onClick={() => removeMilestone(i)} className="text-[#DC2626] font-bold text-[14px]">✕</button>
+                    <div key={i} className="flex flex-col gap-3 bg-[#F4F4F5] p-3 border border-[#E5E5E5]">
+                      <div className="flex items-center gap-4">
+                        <input type="checkbox" checked={m.completed || m.progress === 100} onChange={(e) => {
+                          updateMilestone(i, 'completed', e.target.checked);
+                          if (e.target.checked) updateMilestone(i, 'progress', 100);
+                        }} className="w-4 h-4 rounded-none accent-[#0A0A0A]" />
+                        <input type="text" placeholder="Title" value={m.title} onChange={(e) => updateMilestone(i, 'title', e.target.value)} className="flex-1 bg-transparent border-b border-[#D4D4D8] focus:border-[#0A0A0A] outline-none text-[13px]" />
+                        <input type="text" placeholder="Date/ETA" value={m.date} onChange={(e) => updateMilestone(i, 'date', e.target.value)} className="w-24 bg-transparent border-b border-[#D4D4D8] focus:border-[#0A0A0A] outline-none text-[13px]" />
+                        <button type="button" onClick={() => removeMilestone(i)} className="text-[#DC2626] font-bold text-[14px]">✕</button>
+                      </div>
+                      <div className="flex items-center gap-3 pl-8 pr-2">
+                        <span className="text-[10px] font-bold text-[#71717A] uppercase tracking-wider">Progress</span>
+                        <input type="range" min="0" max="100" value={m.progress || 0} onChange={(e) => updateMilestone(i, 'progress', parseInt(e.target.value))} className="flex-1 h-1 bg-[#D4D4D8] appearance-none cursor-pointer accent-[#0A0A0A]" />
+                        <span className="text-[11px] font-bold text-[#0A0A0A] w-8 text-right">{m.progress || 0}%</span>
+                      </div>
                     </div>
                   ))}
                 </div>

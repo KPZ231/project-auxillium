@@ -5,6 +5,8 @@ import { toast } from "sonner";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { ImageUploader } from "@/app/components/UI/ImageUploader";
+import { useBreadcrumb } from "@/app/context/BreadcrumbContext";
+import { useEffect } from "react";
 
 export default function NewProject() {
   const router = useRouter();
@@ -14,7 +16,15 @@ export default function NewProject() {
     projectDescription: "",
     projectStatus: "IN_PROGRESS" as "IN_PROGRESS" | "DONE" | "CANCELED",
     images: [] as string[],
+    dueDate: "",
   });
+
+  const { setCustomLabel } = useBreadcrumb();
+
+  useEffect(() => {
+    setCustomLabel("New Project");
+    return () => setCustomLabel(null);
+  }, [setCustomLabel]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -98,6 +108,19 @@ export default function NewProject() {
               onChange={(e) => setFormData({ ...formData, projectDescription: e.target.value })}
               className="w-full p-3 bg-white text-[#0A0A0A] text-[14px] border border-[#D4D4D8] rounded-none outline-none focus:border-[#0A0A0A] focus:border-2 transition-all duration-200 resize-none"
               placeholder="Describe the objective and outcome..."
+            />
+          </div>
+
+          <div className="space-y-2">
+            <label htmlFor="dueDate" className="block text-[14px] font-medium text-[#0A0A0A]">
+              Due Date
+            </label>
+            <input
+              id="dueDate"
+              type="date"
+              value={formData.dueDate}
+              onChange={(e) => setFormData({ ...formData, dueDate: e.target.value })}
+              className="w-full h-[40px] px-3 bg-white text-[#0A0A0A] text-[14px] border border-[#D4D4D8] rounded-none outline-none focus:border-[#0A0A0A] focus:border-2 transition-all duration-200"
             />
           </div>
 

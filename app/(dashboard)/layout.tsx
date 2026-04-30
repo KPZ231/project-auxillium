@@ -1,5 +1,6 @@
 import SidePanel from "../components/Dashboard/Dashboard/SidePanel/SidePanel";
 import TopBar from "../components/Dashboard/Dashboard/TopBar/TopBar";
+import { BreadcrumbProvider } from "../context/BreadcrumbContext";
 
 export default function DashboardLayout({
   children,
@@ -7,7 +8,8 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="flex min-h-screen bg-gray-50">
+    <BreadcrumbProvider>
+      <div className="flex min-h-screen bg-gray-50">
       {/* Sidebar - fixed width will be handled by the component's internal motion */}
       <SidePanel />
       
@@ -18,7 +20,8 @@ export default function DashboardLayout({
           {children}
         </div>
       </main>
-    </div>
+      </div>
+    </BreadcrumbProvider>
   );
 }
 

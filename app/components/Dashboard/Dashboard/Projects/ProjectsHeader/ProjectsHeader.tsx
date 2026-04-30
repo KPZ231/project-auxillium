@@ -4,7 +4,7 @@ import Button from "@/app/components/Button/Button";
 import { toast } from "sonner";
 import { ListFilter, Plus } from "lucide-react";
 
-export default function ProjectsHeader() {
+export default function ProjectsHeader({ view, setView }: { view?: "grid" | "timeline", setView?: (v: "grid" | "timeline") => void }) {
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -28,7 +28,7 @@ export default function ProjectsHeader() {
     <>
       <section className="w-full">
         <motion.div
-          className="flex flex-row justify-between items-center py-6 px-4"
+          className="flex flex-row justify-between items-center py-6 px-4 flex-wrap gap-4"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
@@ -43,6 +43,28 @@ export default function ProjectsHeader() {
               Managing 12 ongoing architectural and design initiatives.
             </p>
           </motion.div>
+
+          {/* Center: Tabs */}
+          {setView && (
+            <motion.div className="flex bg-[#F4F4F5] p-1 border border-[#E5E5E5] mx-auto" variants={itemVariants}>
+              <button
+                onClick={() => setView("grid")}
+                className={`px-6 py-2 text-[12px] font-bold tracking-wider uppercase transition-colors ${
+                  view === "grid" ? "bg-white text-black shadow-sm" : "text-gray-500 hover:text-black"
+                }`}
+              >
+                Grid
+              </button>
+              <button
+                onClick={() => setView("timeline")}
+                className={`px-6 py-2 text-[12px] font-bold tracking-wider uppercase transition-colors ${
+                  view === "timeline" ? "bg-white text-black shadow-sm" : "text-gray-500 hover:text-black"
+                }`}
+              >
+                Calendar
+              </button>
+            </motion.div>
+          )}
 
           {/* Right Side: Buttons */}
           <motion.div

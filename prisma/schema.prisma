@@ -59,6 +59,7 @@ model Project {
   githubUrl          String?
   timeline           String?
   milestones         Json?         // Może przechowywać listę obiektów np. [{ title, date, completed }]
+  dueDate            DateTime?     // Pole daty końcowej projektu
   
   order              Int           @default(0) // Kolejność do Drag & Drop
 

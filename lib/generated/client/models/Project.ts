@@ -50,6 +50,7 @@ export type ProjectMinAggregateOutputType = {
   websiteUrl: string | null
   githubUrl: string | null
   timeline: string | null
+  dueDate: Date | null
   order: number | null
   userId: string | null
   createdAt: Date | null
@@ -72,6 +73,7 @@ export type ProjectMaxAggregateOutputType = {
   websiteUrl: string | null
   githubUrl: string | null
   timeline: string | null
+  dueDate: Date | null
   order: number | null
   userId: string | null
   createdAt: Date | null
@@ -96,6 +98,7 @@ export type ProjectCountAggregateOutputType = {
   githubUrl: number
   timeline: number
   milestones: number
+  dueDate: number
   order: number
   userId: number
   createdAt: number
@@ -128,6 +131,7 @@ export type ProjectMinAggregateInputType = {
   websiteUrl?: true
   githubUrl?: true
   timeline?: true
+  dueDate?: true
   order?: true
   userId?: true
   createdAt?: true
@@ -150,6 +154,7 @@ export type ProjectMaxAggregateInputType = {
   websiteUrl?: true
   githubUrl?: true
   timeline?: true
+  dueDate?: true
   order?: true
   userId?: true
   createdAt?: true
@@ -174,6 +179,7 @@ export type ProjectCountAggregateInputType = {
   githubUrl?: true
   timeline?: true
   milestones?: true
+  dueDate?: true
   order?: true
   userId?: true
   createdAt?: true
@@ -285,6 +291,7 @@ export type ProjectGroupByOutputType = {
   githubUrl: string | null
   timeline: string | null
   milestones: runtime.JsonValue | null
+  dueDate: Date | null
   order: number
   userId: string
   createdAt: Date
@@ -332,6 +339,7 @@ export type ProjectWhereInput = {
   githubUrl?: Prisma.StringNullableFilter<"Project"> | string | null
   timeline?: Prisma.StringNullableFilter<"Project"> | string | null
   milestones?: Prisma.JsonNullableFilter<"Project">
+  dueDate?: Prisma.DateTimeNullableFilter<"Project"> | Date | string | null
   order?: Prisma.IntFilter<"Project"> | number
   userId?: Prisma.StringFilter<"Project"> | string
   createdAt?: Prisma.DateTimeFilter<"Project"> | Date | string
@@ -357,6 +365,7 @@ export type ProjectOrderByWithRelationInput = {
   githubUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   timeline?: Prisma.SortOrderInput | Prisma.SortOrder
   milestones?: Prisma.SortOrderInput | Prisma.SortOrder
+  dueDate?: Prisma.SortOrderInput | Prisma.SortOrder
   order?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -385,6 +394,7 @@ export type ProjectWhereUniqueInput = Prisma.AtLeast<{
   githubUrl?: Prisma.StringNullableFilter<"Project"> | string | null
   timeline?: Prisma.StringNullableFilter<"Project"> | string | null
   milestones?: Prisma.JsonNullableFilter<"Project">
+  dueDate?: Prisma.DateTimeNullableFilter<"Project"> | Date | string | null
   order?: Prisma.IntFilter<"Project"> | number
   userId?: Prisma.StringFilter<"Project"> | string
   createdAt?: Prisma.DateTimeFilter<"Project"> | Date | string
@@ -410,6 +420,7 @@ export type ProjectOrderByWithAggregationInput = {
   githubUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   timeline?: Prisma.SortOrderInput | Prisma.SortOrder
   milestones?: Prisma.SortOrderInput | Prisma.SortOrder
+  dueDate?: Prisma.SortOrderInput | Prisma.SortOrder
   order?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -442,6 +453,7 @@ export type ProjectScalarWhereWithAggregatesInput = {
   githubUrl?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
   timeline?: Prisma.StringNullableWithAggregatesFilter<"Project"> | string | null
   milestones?: Prisma.JsonNullableWithAggregatesFilter<"Project">
+  dueDate?: Prisma.DateTimeNullableWithAggregatesFilter<"Project"> | Date | string | null
   order?: Prisma.IntWithAggregatesFilter<"Project"> | number
   userId?: Prisma.StringWithAggregatesFilter<"Project"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Project"> | Date | string
@@ -466,6 +478,7 @@ export type ProjectCreateInput = {
   githubUrl?: string | null
   timeline?: string | null
   milestones?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  dueDate?: Date | string | null
   order?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -490,6 +503,7 @@ export type ProjectUncheckedCreateInput = {
   githubUrl?: string | null
   timeline?: string | null
   milestones?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  dueDate?: Date | string | null
   order?: number
   userId: string
   createdAt?: Date | string
@@ -514,6 +528,7 @@ export type ProjectUpdateInput = {
   githubUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   milestones?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -538,6 +553,7 @@ export type ProjectUncheckedUpdateInput = {
   githubUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   milestones?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -562,6 +578,7 @@ export type ProjectCreateManyInput = {
   githubUrl?: string | null
   timeline?: string | null
   milestones?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  dueDate?: Date | string | null
   order?: number
   userId: string
   createdAt?: Date | string
@@ -586,6 +603,7 @@ export type ProjectUpdateManyMutationInput = {
   githubUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   milestones?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -609,6 +627,7 @@ export type ProjectUncheckedUpdateManyInput = {
   githubUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   milestones?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -651,6 +670,7 @@ export type ProjectCountOrderByAggregateInput = {
   githubUrl?: Prisma.SortOrder
   timeline?: Prisma.SortOrder
   milestones?: Prisma.SortOrder
+  dueDate?: Prisma.SortOrder
   order?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -677,6 +697,7 @@ export type ProjectMaxOrderByAggregateInput = {
   websiteUrl?: Prisma.SortOrder
   githubUrl?: Prisma.SortOrder
   timeline?: Prisma.SortOrder
+  dueDate?: Prisma.SortOrder
   order?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -699,6 +720,7 @@ export type ProjectMinOrderByAggregateInput = {
   websiteUrl?: Prisma.SortOrder
   githubUrl?: Prisma.SortOrder
   timeline?: Prisma.SortOrder
+  dueDate?: Prisma.SortOrder
   order?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -764,6 +786,10 @@ export type ProjectUpdateimagesInput = {
   push?: string | string[]
 }
 
+export type NullableDateTimeFieldUpdateOperationsInput = {
+  set?: Date | string | null
+}
+
 export type IntFieldUpdateOperationsInput = {
   set?: number
   increment?: number
@@ -790,6 +816,7 @@ export type ProjectCreateWithoutUserInput = {
   githubUrl?: string | null
   timeline?: string | null
   milestones?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  dueDate?: Date | string | null
   order?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -813,6 +840,7 @@ export type ProjectUncheckedCreateWithoutUserInput = {
   githubUrl?: string | null
   timeline?: string | null
   milestones?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  dueDate?: Date | string | null
   order?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -865,6 +893,7 @@ export type ProjectScalarWhereInput = {
   githubUrl?: Prisma.StringNullableFilter<"Project"> | string | null
   timeline?: Prisma.StringNullableFilter<"Project"> | string | null
   milestones?: Prisma.JsonNullableFilter<"Project">
+  dueDate?: Prisma.DateTimeNullableFilter<"Project"> | Date | string | null
   order?: Prisma.IntFilter<"Project"> | number
   userId?: Prisma.StringFilter<"Project"> | string
   createdAt?: Prisma.DateTimeFilter<"Project"> | Date | string
@@ -889,6 +918,7 @@ export type ProjectCreateManyUserInput = {
   githubUrl?: string | null
   timeline?: string | null
   milestones?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  dueDate?: Date | string | null
   order?: number
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -912,6 +942,7 @@ export type ProjectUpdateWithoutUserInput = {
   githubUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   milestones?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -935,6 +966,7 @@ export type ProjectUncheckedUpdateWithoutUserInput = {
   githubUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   milestones?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -958,6 +990,7 @@ export type ProjectUncheckedUpdateManyWithoutUserInput = {
   githubUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   timeline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   milestones?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  dueDate?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   order?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -983,6 +1016,7 @@ export type ProjectSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   githubUrl?: boolean
   timeline?: boolean
   milestones?: boolean
+  dueDate?: boolean
   order?: boolean
   userId?: boolean
   createdAt?: boolean
@@ -1008,6 +1042,7 @@ export type ProjectSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exten
   githubUrl?: boolean
   timeline?: boolean
   milestones?: boolean
+  dueDate?: boolean
   order?: boolean
   userId?: boolean
   createdAt?: boolean
@@ -1033,6 +1068,7 @@ export type ProjectSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exten
   githubUrl?: boolean
   timeline?: boolean
   milestones?: boolean
+  dueDate?: boolean
   order?: boolean
   userId?: boolean
   createdAt?: boolean
@@ -1058,13 +1094,14 @@ export type ProjectSelectScalar = {
   githubUrl?: boolean
   timeline?: boolean
   milestones?: boolean
+  dueDate?: boolean
   order?: boolean
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type ProjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "projectName" | "projectDescription" | "projectStatus" | "images" | "budget" | "location" | "projectType" | "priority" | "context" | "clientInfo" | "assignedUsersInfo" | "clientBrief" | "websiteUrl" | "githubUrl" | "timeline" | "milestones" | "order" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["project"]>
+export type ProjectOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "projectName" | "projectDescription" | "projectStatus" | "images" | "budget" | "location" | "projectType" | "priority" | "context" | "clientInfo" | "assignedUsersInfo" | "clientBrief" | "websiteUrl" | "githubUrl" | "timeline" | "milestones" | "dueDate" | "order" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["project"]>
 export type ProjectInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
@@ -1098,6 +1135,7 @@ export type $ProjectPayload<ExtArgs extends runtime.Types.Extensions.InternalArg
     githubUrl: string | null
     timeline: string | null
     milestones: runtime.JsonValue | null
+    dueDate: Date | null
     order: number
     userId: string
     createdAt: Date
@@ -1543,6 +1581,7 @@ export interface ProjectFieldRefs {
   readonly githubUrl: Prisma.FieldRef<"Project", 'String'>
   readonly timeline: Prisma.FieldRef<"Project", 'String'>
   readonly milestones: Prisma.FieldRef<"Project", 'Json'>
+  readonly dueDate: Prisma.FieldRef<"Project", 'DateTime'>
   readonly order: Prisma.FieldRef<"Project", 'Int'>
   readonly userId: Prisma.FieldRef<"Project", 'String'>
   readonly createdAt: Prisma.FieldRef<"Project", 'DateTime'>

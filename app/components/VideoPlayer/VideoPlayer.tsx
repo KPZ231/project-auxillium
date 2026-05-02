@@ -90,8 +90,10 @@ export default function VideoPlayer({ src }: VideoPlayerProps) {
     if (video) {
       const onLoadedMetadata = () => setDuration(video.duration);
       video.addEventListener("loadedmetadata", onLoadedMetadata);
-      return () =>
+      return () => {
         video.removeEventListener("loadedmetadata", onLoadedMetadata);
+        if (controlsTimeoutRef.current) clearTimeout(controlsTimeoutRef.current);
+      };
     }
   }, []);
 

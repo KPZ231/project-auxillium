@@ -40,6 +40,7 @@ export default function Navbar() {
 
     return () => {
       trigger.kill();
+      showAnim.kill();
     };
   }, []);
 

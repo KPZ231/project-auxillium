@@ -77,15 +77,16 @@ Auxilium świetnie sprawdzi się w przypadku:
 ## Struktura Projektu
 
 ```bash
-src/
+/
+├── actions/
 ├── app/
 ├── components/
-├── features/
+├── config/
 ├── lib/
-├── hooks/
-├── services/
-├── store/
-└── types/
+├── prisma/
+├── public/
+├── types/
+└── utils/
 ```
 
 ## Jak Zacząć

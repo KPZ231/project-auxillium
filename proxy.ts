@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
 import { jwtVerify } from "jose"
-import { createClient } from '@/utils/supabase/middleware'
+import { createClient } from '@/utils/supabase/proxy'
 
 const secretKey = process.env.JWT_SECRET || "default-secret-key-change-me";
 const key = new TextEncoder().encode(secretKey);
@@ -17,7 +17,7 @@ async function decrypt(input: string): Promise<any> {
 const protectedRoutes = ['/dashboard', '/admin']
 const publicRoutes = ['/login', '/register', '/forgot-password', '/reset-password']
 
-export async function proxy(request: NextRequest) {
+export default async function proxy(request: NextRequest) {
   // Integrate Supabase session refreshing
   const supabaseResponse = createClient(request)
 

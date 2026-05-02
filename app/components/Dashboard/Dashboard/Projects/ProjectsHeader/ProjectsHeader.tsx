@@ -2,7 +2,8 @@
 import { motion, Variants } from "motion/react";
 import Button from "@/app/components/Button/Button";
 import { toast } from "sonner";
-import { ListFilter, Plus } from "lucide-react";
+import { Plus } from "lucide-react";
+
 
 export default function ProjectsHeader({ view, setView }: { view?: "grid" | "timeline", setView?: (v: "grid" | "timeline") => void }) {
   const containerVariants: Variants = {

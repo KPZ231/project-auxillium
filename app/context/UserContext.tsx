@@ -40,8 +40,17 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   };
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    fetchUser();
+    let isMounted = true;
+    const abortController = new AbortController();
+
+    fetchUser().then(() => {
+      if (!isMounted) return;
+    });
+
+    return () => {
+      isMounted = false;
+      abortController.abort();
+    };
   }, []);
 
   return (

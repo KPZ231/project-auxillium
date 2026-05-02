@@ -4,6 +4,16 @@ const nextConfig: NextConfig = {
   /* config options here */
   
   reactCompiler: true,
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '*.supabase.co',
+        port: '',
+        pathname: '/storage/v1/object/public/**',
+      },
+    ],
+  },
   experimental: {
     serverActions: {
       bodySizeLimit: '5mb',

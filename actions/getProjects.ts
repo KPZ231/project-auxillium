@@ -3,7 +3,6 @@
 import { prisma } from "@/lib/prisma"
 import { unstable_cache } from "next/cache"
 import { revalidatePath } from "next/cache"
-
 import { getUser } from "@/lib/session"
 
 export const getProjects = async () => {

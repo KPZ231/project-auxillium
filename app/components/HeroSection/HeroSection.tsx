@@ -92,6 +92,14 @@ export default function HeroSection({
     d.addEventListener("click", handleDescClick);
 
     return () => {
+      if (headerAnimRef.current) {
+        headerAnimRef.current.kill();
+        headerAnimRef.current = null;
+      }
+      if (descAnimRef.current) {
+        descAnimRef.current.kill();
+        descAnimRef.current = null;
+      }
       splitHeader.revert();
       splitDesc.revert();
       h.removeEventListener("click", handleHeaderClick);

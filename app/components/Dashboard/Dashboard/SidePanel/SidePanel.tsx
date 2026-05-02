@@ -17,6 +17,7 @@ import {
   ChevronLeft,
   ChevronRight,
   Menu,
+  FileText
 } from "lucide-react";
 
 interface NavLink {
@@ -34,6 +35,7 @@ const navLinks: NavLink[] = [
   { name: "LEADS", href: "/dashboard/leads", icon: Users },
   { name: "CLIENTS", href: "/dashboard/clients", icon: Contact2 },
   { name: "AI CHAT", href: "/dashboard/ai", icon: MessageSquareCode },
+  { name: "DOCUMENT GENERATOR", href: "/dashboard/documents", icon: FileText },
 ];
 
 export default function SidePanel() {

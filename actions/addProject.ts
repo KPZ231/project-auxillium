@@ -55,43 +55,13 @@ export async function addProject(data: AddProjectInput) {
             return { success: false, error: "Project with this name already exists" }
         }
 
-        // 4. Przenoszenie zdjęć z katalogu tymczasowego do docelowego
-        const fs = await import("fs/promises")
-        const path = await import("path")
-        const { existsSync } = await import("fs")
-
-        const finalImages: string[] = []
-        const uploadsDir = path.join(process.cwd(), "public", "uploads")
-
-        if (!existsSync(uploadsDir)) {
-            await fs.mkdir(uploadsDir, { recursive: true })
-        }
-
-        for (const tempUrl of images) {
-            // tempUrl wygląda np. tak: "/temp_uploads/1234-abcd.png"
-            if (tempUrl.startsWith("/temp_uploads/")) {
-                const filename = tempUrl.replace("/temp_uploads/", "")
-                const tempPath = path.join(process.cwd(), "public", "temp_uploads", filename)
-                const finalPath = path.join(uploadsDir, filename)
-
-                if (existsSync(tempPath)) {
-                    // Przenieś plik (zamiast kopiować, by oszczędzać miejsce)
-                    await fs.rename(tempPath, finalPath)
-                    finalImages.push(`/uploads/${filename}`)
-                }
-            } else if (tempUrl.startsWith("/uploads/")) {
-                // Jeśli edytujesz projekt i obraz już tam jest
-                finalImages.push(tempUrl)
-            }
-        }
-
         // 5. Utworzenie projektu
         const newProject = await prisma.project.create({
             data: {
                 projectName,
                 projectDescription,
                 projectStatus,
-                images: finalImages, // Używamy docelowych URL-i
+                images: images, // Używamy URL-i z Supabase
                 dueDate: dueDate ? new Date(dueDate) : null,
                 user: {
                     connect: { id: userId }

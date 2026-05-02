@@ -3,9 +3,6 @@
 import { getUser } from "@/lib/session"
 import { prisma } from "@/lib/prisma"
 import { revalidatePath } from "next/cache"
-import fs from "fs/promises"
-import path from "path"
-import { existsSync } from "fs"
 
 export async function deleteProject(projectId: string, confirmationName: string) {
     const { isAuthenticatedAndLogedIn, userId } = await getUser()
@@ -31,13 +28,21 @@ export async function deleteProject(projectId: string, confirmationName: string)
             return { success: false, error: "Project name does not match" }
         }
 
-        // Usuń powiązane zdjęcia z dysku
+        // Usuń powiązane zdjęcia z Supabase Storage
+        const { supabase } = await import("@/lib/supabase")
+        
         for (const imageUrl of project.images) {
-            if (imageUrl.startsWith("/uploads/")) {
-                const filename = imageUrl.replace("/uploads/", "")
-                const filePath = path.join(process.cwd(), "public", "uploads", filename)
-                if (existsSync(filePath)) {
-                    await fs.unlink(filePath)
+            // Przykładowy URL: https://xyz.supabase.co/storage/v1/object/public/project-images/filename.png
+            if (imageUrl.includes("/project-images/")) {
+                const filename = imageUrl.split("/project-images/").pop()
+                if (filename) {
+                    const { error } = await supabase.storage
+                        .from('project-images')
+                        .remove([filename])
+                    
+                    if (error) {
+                        console.error("[STORAGE_DELETE_ERROR]", error)
+                    }
                 }
             }
         }

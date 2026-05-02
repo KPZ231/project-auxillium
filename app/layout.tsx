@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Anonymous_Pro } from "next/font/google";
 import { Toaster } from "sonner";
 import { UserProvider } from "./context/UserContext";
+import Navbar from "./components/Navbar/Navbar";
 import "./globals.css";
 
 const inter = Inter({

@@ -56,3 +56,8 @@ export type PasswordResetToken = Prisma.PasswordResetTokenModel
  * 
  */
 export type Project = Prisma.ProjectModel
+/**
+ * Model Lead
+ * 
+ */
+export type Lead = Prisma.LeadModel

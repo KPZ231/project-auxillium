@@ -5,9 +5,6 @@ import { prisma } from "@/lib/prisma"
 import { z } from "zod"
 import { ProjectStatus } from "@/lib/generated/client/client"
 import { revalidatePath } from "next/cache"
-import fs from "fs/promises"
-import path from "path"
-import { existsSync } from "fs"
 
 const updateProjectSchema = z.object({
   id: z.string(),
@@ -64,29 +61,6 @@ export async function updateProject(data: UpdateProjectInput) {
             return { success: false, error: "Unauthorized access to project" }
         }
 
-        // Move temp images if any new ones were added
-        const finalImages: string[] = []
-        const uploadsDir = path.join(process.cwd(), "public", "uploads")
-
-        if (!existsSync(uploadsDir)) {
-            await fs.mkdir(uploadsDir, { recursive: true })
-        }
-
-        for (const tempUrl of images) {
-            if (tempUrl.startsWith("/temp_uploads/")) {
-                const filename = tempUrl.replace("/temp_uploads/", "")
-                const tempPath = path.join(process.cwd(), "public", "temp_uploads", filename)
-                const finalPath = path.join(uploadsDir, filename)
-
-                if (existsSync(tempPath)) {
-                    await fs.rename(tempPath, finalPath)
-                    finalImages.push(`/uploads/${filename}`)
-                }
-            } else {
-                finalImages.push(tempUrl)
-            }
-        }
-
         const updatedProject = await prisma.project.update({
             where: { id },
             data: {
@@ -94,7 +68,7 @@ export async function updateProject(data: UpdateProjectInput) {
                 websiteUrl: websiteUrl === "" ? null : websiteUrl,
                 githubUrl: githubUrl === "" ? null : githubUrl,
                 dueDate: dueDate ? new Date(dueDate) : null,
-                images: finalImages,
+                images: images,
             }
         })
 

@@ -21,6 +21,7 @@ model User {
   
   resetTokens   PasswordResetToken[]
   projects      Project[]
+  leads         Lead[]
 }
 
 model PasswordResetToken {
@@ -68,6 +69,24 @@ model Project {
   
   createdAt          DateTime      @default(now())
   updatedAt          DateTime      @updatedAt
+
+  @@index([userId])
+}
+
+model Lead{
+  id String @id @default(cuid())
+  projectType String?
+  leadName String @unique
+  email String?
+  phone String?
+  turnedIntoClient Boolean? @default(false)
+  leadInfo String?
+
+  userId String
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([userId])
 }

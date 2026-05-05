@@ -6,7 +6,7 @@ import { useState, useEffect, useRef } from "react";
 import { getProjects, forceRefreshProjects } from "@/actions/getProjects";
 import { reorderProjects } from "@/actions/reorderProjects";
 import { toast } from "sonner";
-import { Project } from "@/lib/generated/client/client";
+import { Project } from "@/lib/generated/client/browser";
 import { useRouter } from "next/navigation";
 
 const getStatusStyle = (status: string): { label: string; className: string } => {

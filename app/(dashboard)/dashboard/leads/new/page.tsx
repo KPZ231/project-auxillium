@@ -7,12 +7,14 @@ import { useRouter } from "next/navigation";
 import { useBreadcrumb } from "@/app/context/BreadcrumbContext";
 import { useEffect } from "react";
 
+import { LeadStatus, type LeadStatus as LeadStatusType } from "@/lib/generated/client/browser";
+
 export default function NewLead() {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     leadName: "",
-    leadInfo: "",   
+    leadInfo: "",
   });
 
   const { setCustomLabel } = useBreadcrumb();
@@ -26,11 +28,11 @@ export default function NewLead() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const result = await addLead(formData);
+    const result = await addLead(formData as any);
     
     if (result.success) {
       toast.success("Lead created successfully!");
-      router.push(`/dashboard/leads/${result.leadId}`);
+      router.push(`/dashboard/leads/${result.leadId}?setup=true`);
     } else {
       toast.error(result.error);
       console.error("Validation errors:", result.details);
@@ -64,10 +66,10 @@ export default function NewLead() {
       >
         <motion.div variants={itemVariants}>
           <h1 className="text-[40px] leading-[1.1] font-bold text-[#0A0A0A] tracking-tight">
-            Nowy potencialny klient
+            New Lead
           </h1>
           <p className="mt-4 text-[#71717A] text-[16px] font-light leading-[1.65]">
-            Dodaj nowego potencialnego klienta
+            Add a new business opportunity. Keep it minimal.
           </p>
         </motion.div>
 
@@ -75,7 +77,7 @@ export default function NewLead() {
           
           <div className="space-y-2">
             <label htmlFor="leadName" className="block text-[14px] font-medium text-[#0A0A0A]">
-              Imie i nazwisko*
+              Lead / Company Name
             </label>
             <input
               id="leadName"
@@ -84,13 +86,13 @@ export default function NewLead() {
               value={formData.leadName}
               onChange={(e) => setFormData({ ...formData, leadName: e.target.value })}
               className="w-full h-[40px] px-3 bg-white text-[#0A0A0A] text-[14px] border border-[#D4D4D8] rounded-none outline-none focus:border-[#0A0A0A] focus:border-2 transition-all duration-200"
-              placeholder="e.g. Minimalist Workspace"
+              placeholder="e.g. Acme Corp"
             />
           </div>
 
           <div className="space-y-2">
             <label htmlFor="leadInfo" className="block text-[14px] font-medium text-[#0A0A0A]">
-              Opis potencialnego klienta (czego oczekuje itp.)
+              Description / Notes
             </label>
             <textarea
               id="leadInfo"
@@ -99,10 +101,10 @@ export default function NewLead() {
               value={formData.leadInfo}
               onChange={(e) => setFormData({ ...formData, leadInfo: e.target.value })}
               className="w-full p-3 bg-white text-[#0A0A0A] text-[14px] border border-[#D4D4D8] rounded-none outline-none focus:border-[#0A0A0A] focus:border-2 transition-all duration-200 resize-none"
-              placeholder="Describe the objective and outcome..."
+              placeholder="Describe the opportunity..."
             />
           </div>
-          
+
           <div className="pt-8 border-t border-[#F4F4F5]">
             <button
               type="submit"
@@ -118,3 +120,4 @@ export default function NewLead() {
     </div>
   );
 }
+

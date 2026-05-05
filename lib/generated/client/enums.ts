@@ -16,3 +16,12 @@ export const ProjectStatus = {
 } as const
 
 export type ProjectStatus = (typeof ProjectStatus)[keyof typeof ProjectStatus]
+
+
+export const LeadStatus = {
+  QUALIFIED: 'QUALIFIED',
+  NEGOTIATION: 'NEGOTIATION',
+  COLD: 'COLD'
+} as const
+
+export type LeadStatus = (typeof LeadStatus)[keyof typeof LeadStatus]

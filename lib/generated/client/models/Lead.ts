@@ -20,18 +20,33 @@ export type LeadModel = runtime.Types.Result.DefaultSelection<Prisma.$LeadPayloa
 
 export type AggregateLead = {
   _count: LeadCountAggregateOutputType | null
+  _avg: LeadAvgAggregateOutputType | null
+  _sum: LeadSumAggregateOutputType | null
   _min: LeadMinAggregateOutputType | null
   _max: LeadMaxAggregateOutputType | null
+}
+
+export type LeadAvgAggregateOutputType = {
+  order: number | null
+}
+
+export type LeadSumAggregateOutputType = {
+  order: number | null
 }
 
 export type LeadMinAggregateOutputType = {
   id: string | null
   projectType: string | null
   leadName: string | null
+  contactName: string | null
+  role: string | null
   email: string | null
   phone: string | null
+  status: $Enums.LeadStatus | null
+  stage: string | null
   turnedIntoClient: boolean | null
   leadInfo: string | null
+  order: number | null
   userId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -41,10 +56,15 @@ export type LeadMaxAggregateOutputType = {
   id: string | null
   projectType: string | null
   leadName: string | null
+  contactName: string | null
+  role: string | null
   email: string | null
   phone: string | null
+  status: $Enums.LeadStatus | null
+  stage: string | null
   turnedIntoClient: boolean | null
   leadInfo: string | null
+  order: number | null
   userId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -54,10 +74,15 @@ export type LeadCountAggregateOutputType = {
   id: number
   projectType: number
   leadName: number
+  contactName: number
+  role: number
   email: number
   phone: number
+  status: number
+  stage: number
   turnedIntoClient: number
   leadInfo: number
+  order: number
   userId: number
   createdAt: number
   updatedAt: number
@@ -65,14 +90,27 @@ export type LeadCountAggregateOutputType = {
 }
 
 
+export type LeadAvgAggregateInputType = {
+  order?: true
+}
+
+export type LeadSumAggregateInputType = {
+  order?: true
+}
+
 export type LeadMinAggregateInputType = {
   id?: true
   projectType?: true
   leadName?: true
+  contactName?: true
+  role?: true
   email?: true
   phone?: true
+  status?: true
+  stage?: true
   turnedIntoClient?: true
   leadInfo?: true
+  order?: true
   userId?: true
   createdAt?: true
   updatedAt?: true
@@ -82,10 +120,15 @@ export type LeadMaxAggregateInputType = {
   id?: true
   projectType?: true
   leadName?: true
+  contactName?: true
+  role?: true
   email?: true
   phone?: true
+  status?: true
+  stage?: true
   turnedIntoClient?: true
   leadInfo?: true
+  order?: true
   userId?: true
   createdAt?: true
   updatedAt?: true
@@ -95,10 +138,15 @@ export type LeadCountAggregateInputType = {
   id?: true
   projectType?: true
   leadName?: true
+  contactName?: true
+  role?: true
   email?: true
   phone?: true
+  status?: true
+  stage?: true
   turnedIntoClient?: true
   leadInfo?: true
+  order?: true
   userId?: true
   createdAt?: true
   updatedAt?: true
@@ -143,6 +191,18 @@ export type LeadAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: LeadAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: LeadSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: LeadMinAggregateInputType
@@ -173,6 +233,8 @@ export type LeadGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
   take?: number
   skip?: number
   _count?: LeadCountAggregateInputType | true
+  _avg?: LeadAvgAggregateInputType
+  _sum?: LeadSumAggregateInputType
   _min?: LeadMinAggregateInputType
   _max?: LeadMaxAggregateInputType
 }
@@ -181,14 +243,21 @@ export type LeadGroupByOutputType = {
   id: string
   projectType: string | null
   leadName: string
+  contactName: string | null
+  role: string | null
   email: string | null
   phone: string | null
+  status: $Enums.LeadStatus
+  stage: string | null
   turnedIntoClient: boolean | null
   leadInfo: string | null
+  order: number
   userId: string
   createdAt: Date
   updatedAt: Date
   _count: LeadCountAggregateOutputType | null
+  _avg: LeadAvgAggregateOutputType | null
+  _sum: LeadSumAggregateOutputType | null
   _min: LeadMinAggregateOutputType | null
   _max: LeadMaxAggregateOutputType | null
 }
@@ -215,10 +284,15 @@ export type LeadWhereInput = {
   id?: Prisma.StringFilter<"Lead"> | string
   projectType?: Prisma.StringNullableFilter<"Lead"> | string | null
   leadName?: Prisma.StringFilter<"Lead"> | string
+  contactName?: Prisma.StringNullableFilter<"Lead"> | string | null
+  role?: Prisma.StringNullableFilter<"Lead"> | string | null
   email?: Prisma.StringNullableFilter<"Lead"> | string | null
   phone?: Prisma.StringNullableFilter<"Lead"> | string | null
+  status?: Prisma.EnumLeadStatusFilter<"Lead"> | $Enums.LeadStatus
+  stage?: Prisma.StringNullableFilter<"Lead"> | string | null
   turnedIntoClient?: Prisma.BoolNullableFilter<"Lead"> | boolean | null
   leadInfo?: Prisma.StringNullableFilter<"Lead"> | string | null
+  order?: Prisma.IntFilter<"Lead"> | number
   userId?: Prisma.StringFilter<"Lead"> | string
   createdAt?: Prisma.DateTimeFilter<"Lead"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Lead"> | Date | string
@@ -229,10 +303,15 @@ export type LeadOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   projectType?: Prisma.SortOrderInput | Prisma.SortOrder
   leadName?: Prisma.SortOrder
+  contactName?: Prisma.SortOrderInput | Prisma.SortOrder
+  role?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
+  status?: Prisma.SortOrder
+  stage?: Prisma.SortOrderInput | Prisma.SortOrder
   turnedIntoClient?: Prisma.SortOrderInput | Prisma.SortOrder
   leadInfo?: Prisma.SortOrderInput | Prisma.SortOrder
+  order?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -246,10 +325,15 @@ export type LeadWhereUniqueInput = Prisma.AtLeast<{
   OR?: Prisma.LeadWhereInput[]
   NOT?: Prisma.LeadWhereInput | Prisma.LeadWhereInput[]
   projectType?: Prisma.StringNullableFilter<"Lead"> | string | null
+  contactName?: Prisma.StringNullableFilter<"Lead"> | string | null
+  role?: Prisma.StringNullableFilter<"Lead"> | string | null
   email?: Prisma.StringNullableFilter<"Lead"> | string | null
   phone?: Prisma.StringNullableFilter<"Lead"> | string | null
+  status?: Prisma.EnumLeadStatusFilter<"Lead"> | $Enums.LeadStatus
+  stage?: Prisma.StringNullableFilter<"Lead"> | string | null
   turnedIntoClient?: Prisma.BoolNullableFilter<"Lead"> | boolean | null
   leadInfo?: Prisma.StringNullableFilter<"Lead"> | string | null
+  order?: Prisma.IntFilter<"Lead"> | number
   userId?: Prisma.StringFilter<"Lead"> | string
   createdAt?: Prisma.DateTimeFilter<"Lead"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Lead"> | Date | string
@@ -260,16 +344,23 @@ export type LeadOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   projectType?: Prisma.SortOrderInput | Prisma.SortOrder
   leadName?: Prisma.SortOrder
+  contactName?: Prisma.SortOrderInput | Prisma.SortOrder
+  role?: Prisma.SortOrderInput | Prisma.SortOrder
   email?: Prisma.SortOrderInput | Prisma.SortOrder
   phone?: Prisma.SortOrderInput | Prisma.SortOrder
+  status?: Prisma.SortOrder
+  stage?: Prisma.SortOrderInput | Prisma.SortOrder
   turnedIntoClient?: Prisma.SortOrderInput | Prisma.SortOrder
   leadInfo?: Prisma.SortOrderInput | Prisma.SortOrder
+  order?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.LeadCountOrderByAggregateInput
+  _avg?: Prisma.LeadAvgOrderByAggregateInput
   _max?: Prisma.LeadMaxOrderByAggregateInput
   _min?: Prisma.LeadMinOrderByAggregateInput
+  _sum?: Prisma.LeadSumOrderByAggregateInput
 }
 
 export type LeadScalarWhereWithAggregatesInput = {
@@ -279,10 +370,15 @@ export type LeadScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"Lead"> | string
   projectType?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
   leadName?: Prisma.StringWithAggregatesFilter<"Lead"> | string
+  contactName?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
+  role?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
   email?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
   phone?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
+  status?: Prisma.EnumLeadStatusWithAggregatesFilter<"Lead"> | $Enums.LeadStatus
+  stage?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
   turnedIntoClient?: Prisma.BoolNullableWithAggregatesFilter<"Lead"> | boolean | null
   leadInfo?: Prisma.StringNullableWithAggregatesFilter<"Lead"> | string | null
+  order?: Prisma.IntWithAggregatesFilter<"Lead"> | number
   userId?: Prisma.StringWithAggregatesFilter<"Lead"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Lead"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Lead"> | Date | string
@@ -292,10 +388,15 @@ export type LeadCreateInput = {
   id?: string
   projectType?: string | null
   leadName: string
+  contactName?: string | null
+  role?: string | null
   email?: string | null
   phone?: string | null
+  status?: $Enums.LeadStatus
+  stage?: string | null
   turnedIntoClient?: boolean | null
   leadInfo?: string | null
+  order?: number
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutLeadsInput
@@ -305,10 +406,15 @@ export type LeadUncheckedCreateInput = {
   id?: string
   projectType?: string | null
   leadName: string
+  contactName?: string | null
+  role?: string | null
   email?: string | null
   phone?: string | null
+  status?: $Enums.LeadStatus
+  stage?: string | null
   turnedIntoClient?: boolean | null
   leadInfo?: string | null
+  order?: number
   userId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -318,10 +424,15 @@ export type LeadUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   projectType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leadName?: Prisma.StringFieldUpdateOperationsInput | string
+  contactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   turnedIntoClient?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   leadInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutLeadsNestedInput
@@ -331,10 +442,15 @@ export type LeadUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   projectType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leadName?: Prisma.StringFieldUpdateOperationsInput | string
+  contactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   turnedIntoClient?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   leadInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -344,10 +460,15 @@ export type LeadCreateManyInput = {
   id?: string
   projectType?: string | null
   leadName: string
+  contactName?: string | null
+  role?: string | null
   email?: string | null
   phone?: string | null
+  status?: $Enums.LeadStatus
+  stage?: string | null
   turnedIntoClient?: boolean | null
   leadInfo?: string | null
+  order?: number
   userId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -357,10 +478,15 @@ export type LeadUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   projectType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leadName?: Prisma.StringFieldUpdateOperationsInput | string
+  contactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   turnedIntoClient?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   leadInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -369,10 +495,15 @@ export type LeadUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   projectType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leadName?: Prisma.StringFieldUpdateOperationsInput | string
+  contactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   turnedIntoClient?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   leadInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order?: Prisma.IntFieldUpdateOperationsInput | number
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -392,23 +523,37 @@ export type LeadCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   projectType?: Prisma.SortOrder
   leadName?: Prisma.SortOrder
+  contactName?: Prisma.SortOrder
+  role?: Prisma.SortOrder
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  stage?: Prisma.SortOrder
   turnedIntoClient?: Prisma.SortOrder
   leadInfo?: Prisma.SortOrder
+  order?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type LeadAvgOrderByAggregateInput = {
+  order?: Prisma.SortOrder
 }
 
 export type LeadMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   projectType?: Prisma.SortOrder
   leadName?: Prisma.SortOrder
+  contactName?: Prisma.SortOrder
+  role?: Prisma.SortOrder
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  stage?: Prisma.SortOrder
   turnedIntoClient?: Prisma.SortOrder
   leadInfo?: Prisma.SortOrder
+  order?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -418,13 +563,22 @@ export type LeadMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   projectType?: Prisma.SortOrder
   leadName?: Prisma.SortOrder
+  contactName?: Prisma.SortOrder
+  role?: Prisma.SortOrder
   email?: Prisma.SortOrder
   phone?: Prisma.SortOrder
+  status?: Prisma.SortOrder
+  stage?: Prisma.SortOrder
   turnedIntoClient?: Prisma.SortOrder
   leadInfo?: Prisma.SortOrder
+  order?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type LeadSumOrderByAggregateInput = {
+  order?: Prisma.SortOrder
 }
 
 export type LeadCreateNestedManyWithoutUserInput = {
@@ -469,6 +623,10 @@ export type LeadUncheckedUpdateManyWithoutUserNestedInput = {
   deleteMany?: Prisma.LeadScalarWhereInput | Prisma.LeadScalarWhereInput[]
 }
 
+export type EnumLeadStatusFieldUpdateOperationsInput = {
+  set?: $Enums.LeadStatus
+}
+
 export type NullableBoolFieldUpdateOperationsInput = {
   set?: boolean | null
 }
@@ -477,10 +635,15 @@ export type LeadCreateWithoutUserInput = {
   id?: string
   projectType?: string | null
   leadName: string
+  contactName?: string | null
+  role?: string | null
   email?: string | null
   phone?: string | null
+  status?: $Enums.LeadStatus
+  stage?: string | null
   turnedIntoClient?: boolean | null
   leadInfo?: string | null
+  order?: number
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -489,10 +652,15 @@ export type LeadUncheckedCreateWithoutUserInput = {
   id?: string
   projectType?: string | null
   leadName: string
+  contactName?: string | null
+  role?: string | null
   email?: string | null
   phone?: string | null
+  status?: $Enums.LeadStatus
+  stage?: string | null
   turnedIntoClient?: boolean | null
   leadInfo?: string | null
+  order?: number
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -530,10 +698,15 @@ export type LeadScalarWhereInput = {
   id?: Prisma.StringFilter<"Lead"> | string
   projectType?: Prisma.StringNullableFilter<"Lead"> | string | null
   leadName?: Prisma.StringFilter<"Lead"> | string
+  contactName?: Prisma.StringNullableFilter<"Lead"> | string | null
+  role?: Prisma.StringNullableFilter<"Lead"> | string | null
   email?: Prisma.StringNullableFilter<"Lead"> | string | null
   phone?: Prisma.StringNullableFilter<"Lead"> | string | null
+  status?: Prisma.EnumLeadStatusFilter<"Lead"> | $Enums.LeadStatus
+  stage?: Prisma.StringNullableFilter<"Lead"> | string | null
   turnedIntoClient?: Prisma.BoolNullableFilter<"Lead"> | boolean | null
   leadInfo?: Prisma.StringNullableFilter<"Lead"> | string | null
+  order?: Prisma.IntFilter<"Lead"> | number
   userId?: Prisma.StringFilter<"Lead"> | string
   createdAt?: Prisma.DateTimeFilter<"Lead"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Lead"> | Date | string
@@ -543,10 +716,15 @@ export type LeadCreateManyUserInput = {
   id?: string
   projectType?: string | null
   leadName: string
+  contactName?: string | null
+  role?: string | null
   email?: string | null
   phone?: string | null
+  status?: $Enums.LeadStatus
+  stage?: string | null
   turnedIntoClient?: boolean | null
   leadInfo?: string | null
+  order?: number
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -555,10 +733,15 @@ export type LeadUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   projectType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leadName?: Prisma.StringFieldUpdateOperationsInput | string
+  contactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   turnedIntoClient?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   leadInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -567,10 +750,15 @@ export type LeadUncheckedUpdateWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   projectType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leadName?: Prisma.StringFieldUpdateOperationsInput | string
+  contactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   turnedIntoClient?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   leadInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -579,10 +767,15 @@ export type LeadUncheckedUpdateManyWithoutUserInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   projectType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   leadName?: Prisma.StringFieldUpdateOperationsInput | string
+  contactName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.EnumLeadStatusFieldUpdateOperationsInput | $Enums.LeadStatus
+  stage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   turnedIntoClient?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
   leadInfo?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  order?: Prisma.IntFieldUpdateOperationsInput | number
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -593,10 +786,15 @@ export type LeadSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   id?: boolean
   projectType?: boolean
   leadName?: boolean
+  contactName?: boolean
+  role?: boolean
   email?: boolean
   phone?: boolean
+  status?: boolean
+  stage?: boolean
   turnedIntoClient?: boolean
   leadInfo?: boolean
+  order?: boolean
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -607,10 +805,15 @@ export type LeadSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   id?: boolean
   projectType?: boolean
   leadName?: boolean
+  contactName?: boolean
+  role?: boolean
   email?: boolean
   phone?: boolean
+  status?: boolean
+  stage?: boolean
   turnedIntoClient?: boolean
   leadInfo?: boolean
+  order?: boolean
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -621,10 +824,15 @@ export type LeadSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   id?: boolean
   projectType?: boolean
   leadName?: boolean
+  contactName?: boolean
+  role?: boolean
   email?: boolean
   phone?: boolean
+  status?: boolean
+  stage?: boolean
   turnedIntoClient?: boolean
   leadInfo?: boolean
+  order?: boolean
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -635,16 +843,21 @@ export type LeadSelectScalar = {
   id?: boolean
   projectType?: boolean
   leadName?: boolean
+  contactName?: boolean
+  role?: boolean
   email?: boolean
   phone?: boolean
+  status?: boolean
+  stage?: boolean
   turnedIntoClient?: boolean
   leadInfo?: boolean
+  order?: boolean
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type LeadOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "projectType" | "leadName" | "email" | "phone" | "turnedIntoClient" | "leadInfo" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["lead"]>
+export type LeadOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "projectType" | "leadName" | "contactName" | "role" | "email" | "phone" | "status" | "stage" | "turnedIntoClient" | "leadInfo" | "order" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["lead"]>
 export type LeadInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }
@@ -664,10 +877,15 @@ export type $LeadPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     id: string
     projectType: string | null
     leadName: string
+    contactName: string | null
+    role: string | null
     email: string | null
     phone: string | null
+    status: $Enums.LeadStatus
+    stage: string | null
     turnedIntoClient: boolean | null
     leadInfo: string | null
+    order: number
     userId: string
     createdAt: Date
     updatedAt: Date
@@ -1098,10 +1316,15 @@ export interface LeadFieldRefs {
   readonly id: Prisma.FieldRef<"Lead", 'String'>
   readonly projectType: Prisma.FieldRef<"Lead", 'String'>
   readonly leadName: Prisma.FieldRef<"Lead", 'String'>
+  readonly contactName: Prisma.FieldRef<"Lead", 'String'>
+  readonly role: Prisma.FieldRef<"Lead", 'String'>
   readonly email: Prisma.FieldRef<"Lead", 'String'>
   readonly phone: Prisma.FieldRef<"Lead", 'String'>
+  readonly status: Prisma.FieldRef<"Lead", 'LeadStatus'>
+  readonly stage: Prisma.FieldRef<"Lead", 'String'>
   readonly turnedIntoClient: Prisma.FieldRef<"Lead", 'Boolean'>
   readonly leadInfo: Prisma.FieldRef<"Lead", 'String'>
+  readonly order: Prisma.FieldRef<"Lead", 'Int'>
   readonly userId: Prisma.FieldRef<"Lead", 'String'>
   readonly createdAt: Prisma.FieldRef<"Lead", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Lead", 'DateTime'>

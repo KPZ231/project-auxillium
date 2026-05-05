@@ -40,6 +40,12 @@ enum ProjectStatus {
   CANCELED
 }
 
+enum LeadStatus {
+  QUALIFIED
+  NEGOTIATION
+  COLD
+}
+
 model Project {
   id                 String        @id @default(cuid())
   projectName        String        @unique
@@ -77,10 +83,15 @@ model Lead{
   id String @id @default(cuid())
   projectType String?
   leadName String @unique
+  contactName String?
+  role String?
   email String?
   phone String?
+  status LeadStatus @default(COLD)
+  stage String?
   turnedIntoClient Boolean? @default(false)
   leadInfo String?
+  order Int @default(0)
 
   userId String
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)

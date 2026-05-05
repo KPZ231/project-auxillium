@@ -4,31 +4,35 @@ import { getUser } from "@/lib/session"
 import { redirect } from "next/navigation"
 import { prisma } from "@/lib/prisma"
 import { z } from "zod"
-import { Lead } from "@/lib/generated/client/client"
+import { Lead, LeadStatus } from "@/lib/generated/client/client"
 import { revalidatePath } from "next/cache"
+import { invalidateCache } from "@/lib/redis"
 
 
-// 1. Zod Schema: The most scalable way to validate incoming data.
-// It allows you to easily add new fields (e.g. tags, deadlines) in the future.
+// 1. Zod Schema
 const addLeadShema = z.object({
   leadName: z.string().min(3, "Nazwa potencialnego klienta musi miec conajmniej 3 znaki"),
-  leadInfo: z.string(),
+  contactName: z.string().optional(),
+  role: z.string().optional(),
+  email: z.string().email("Niepoprawny format email").optional().or(z.literal("")),
+  phone: z.string().optional(),
+  status: z.nativeEnum(LeadStatus).default(LeadStatus.COLD),
+  stage: z.string().optional(),
+  leadInfo: z.string().optional(),
 })
 
 export type AddLeadInput = z.infer<typeof addLeadShema>
 
 export async function addLead(data: AddLeadInput) {
-    // 2. Bezpieczeństwo i autoryzacja
     const { isAuthenticatedAndLogedIn, userId } = await getUser()
 
     if (!isAuthenticatedAndLogedIn || !userId) {
         return {
             success: false,
-            error: "Unauthorized: You must be logged in to create a project.",
+            error: "Unauthorized: You must be logged in to create a lead.",
         }
     }
 
-    // 3. Walidacja wejścia za pomocą Zod
     const parsedData = addLeadShema.safeParse(data)
 
     if (!parsedData.success) {
@@ -39,7 +43,7 @@ export async function addLead(data: AddLeadInput) {
         }
     }
 
-    const { leadName, leadInfo } = parsedData.data
+    const { leadName, contactName, role, email, phone, status, stage, leadInfo } = parsedData.data
 
     try {
         const existingLead = await prisma.lead.findUnique({
@@ -50,17 +54,32 @@ export async function addLead(data: AddLeadInput) {
             return { success: false, error: "Lead with this name already exists" }
         }
 
-        // 5. Utworzenie leadu
+        // Get the current max order
+        const lastLead = await prisma.lead.findFirst({
+            where: { userId },
+            orderBy: { order: 'desc' },
+        })
+        const nextOrder = lastLead ? lastLead.order + 1 : 0
+
         const newLead = await prisma.lead.create({
             data: {
                 leadName,
+                contactName,
+                role,
+                email,
+                phone,
+                status,
+                stage,
                 leadInfo,
+                order: nextOrder,
                 user: {
                     connect: { id: userId }
                 }
             }
         })
 
+        // Invalidate cache
+        await invalidateCache(`leads:${userId}`)
         revalidatePath('/dashboard/leads', 'page')
 
         return {

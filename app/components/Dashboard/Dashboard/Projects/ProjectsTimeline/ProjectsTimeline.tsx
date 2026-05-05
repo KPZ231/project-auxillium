@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { motion, Variants } from "motion/react";
 import { getProjects, forceRefreshProjects } from "@/actions/getProjects";
-import { Project } from "@/lib/generated/client/client";
+import { Project } from "@/lib/generated/client/browser";
 import { toast } from "sonner";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useRouter } from "next/navigation";

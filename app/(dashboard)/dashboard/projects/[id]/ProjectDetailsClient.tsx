@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "motion/react";
 import { toast } from "sonner";
 import { deleteProject } from "@/actions/deleteProject";
 import { updateProject } from "@/actions/updateProject";
-import { ProjectStatus } from "@/lib/generated/client/client";
+import { ProjectStatus } from "@/lib/generated/client/browser";
 import { ImageUploader } from "@/app/components/UI/ImageUploader";
 import Link from "next/link";
 import Image from "next/image";

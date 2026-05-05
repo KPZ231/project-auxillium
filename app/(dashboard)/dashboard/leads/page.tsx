@@ -1,8 +1,16 @@
 "use client";
+import { useState } from "react";
 import PageHeader from "@/app/components/Dashboard/Dashboard/Shared/PageHeader/PageHeader";
+import LeadsFilter from "@/app/components/Dashboard/Dashboard/Leads/LeadsFilter/LeadsFilters";
+import LeadsGrid from "@/app/components/Dashboard/Dashboard/Leads/LeadsGrid/LeadsGrid";
 import { Plus } from "lucide-react";
 
 export default function LeadsPage() {
+    const [selectedFilter, setSelectedFilter] = useState("ALL ACTIVE");
+    const [view, setView] = useState<"grid" | "list">("grid");
+    const [sortBy, setSortBy] = useState("Last Activity");
+    const [searchQuery, setSearchQuery] = useState("");
+
     return (
         <div className="flex flex-col w-full">
             <PageHeader 
@@ -14,9 +22,26 @@ export default function LeadsPage() {
                     icon: <Plus className="w-4 h-4" strokeWidth={2.5} />
                 }}
             />
+
+            <LeadsFilter
+                selectedFilter={selectedFilter}
+                onFilterChange={setSelectedFilter}
+                view={view}
+                onViewChange={setView}
+                sortBy={sortBy}
+                onSortChange={setSortBy}
+                searchQuery={searchQuery}
+                onSearchChange={setSearchQuery}
+            />
+
+
             <div className="p-8">
-                {/* Treść strony Leads */}
-                <p className="text-gray-500 italic">No leads found at the moment. Start by adding a new lead.</p>
+                <LeadsGrid 
+                    selectedFilter={selectedFilter}
+                    view={view}
+                    sortBy={sortBy}
+                    searchQuery={searchQuery}
+                />
             </div>
         </div>
     )

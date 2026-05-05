@@ -18,7 +18,9 @@
 import * as runtime from "@prisma/client/runtime/index-browser"
 
 export type * from '../models'
-export type * from './prismaNamespace'
+// Removed: export type * from './prismaNamespace'
+// This would pull in Node.js-specific code from prismaNamespace.ts
+// Instead, we define the types we need directly
 
 export const Decimal = runtime.Decimal
 
@@ -128,10 +130,15 @@ export const LeadScalarFieldEnum = {
   id: 'id',
   projectType: 'projectType',
   leadName: 'leadName',
+  contactName: 'contactName',
+  role: 'role',
   email: 'email',
   phone: 'phone',
+  status: 'status',
+  stage: 'stage',
   turnedIntoClient: 'turnedIntoClient',
   leadInfo: 'leadInfo',
+  order: 'order',
   userId: 'userId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'

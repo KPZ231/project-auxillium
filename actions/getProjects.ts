@@ -13,8 +13,14 @@ export const getProjects = async () => {
       return { success: false, error: "Unauthorized", data: [] }
     }
 
+    const { getActiveSpaceId } = await import("./space");
+    const spaceId = await getActiveSpaceId();
+
     const projects = await prisma.project.findMany({
-      where: { userId },
+      where: { 
+        userId,
+        ...(spaceId ? { spaceId } : {})
+      },
       orderBy: [
         { order: 'asc' },
         { createdAt: 'desc' }

@@ -22,10 +22,10 @@ export async function decrypt(input: string): Promise<any> {
   return payload;
 }
 
-export async function login(userId: string) {
+export async function login(userId: string, hasSpace: boolean = false) {
   // Create the session
   const expires = new Date(Date.now() + SESSION_DURATION);
-  const session = await encrypt({ userId, expires });
+  const session = await encrypt({ userId, hasSpace, expires });
 
   // Save the session in a cookie
   const cookieStore = await cookies();

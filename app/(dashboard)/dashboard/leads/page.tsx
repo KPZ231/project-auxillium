@@ -8,7 +8,7 @@ import { Plus } from "lucide-react";
 export default function LeadsPage() {
     const [selectedFilter, setSelectedFilter] = useState("ALL ACTIVE");
     const [view, setView] = useState<"grid" | "list">("grid");
-    const [sortBy, setSortBy] = useState("Last Activity");
+    const [sortBy, setSortBy] = useState("Manual Order");
     const [searchQuery, setSearchQuery] = useState("");
 
     return (

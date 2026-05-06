@@ -55,6 +55,9 @@ export async function addProject(data: AddProjectInput) {
             return { success: false, error: "Project with this name already exists" }
         }
 
+        const { getActiveSpaceId } = await import("./space");
+        const spaceId = await getActiveSpaceId();
+
         // 5. Utworzenie projektu
         const newProject = await prisma.project.create({
             data: {
@@ -65,7 +68,8 @@ export async function addProject(data: AddProjectInput) {
                 dueDate: dueDate ? new Date(dueDate) : null,
                 user: {
                     connect: { id: userId }
-                }
+                },
+                ...(spaceId ? { space: { connect: { id: spaceId } } } : {})
             }
         })
 

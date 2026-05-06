@@ -47,8 +47,17 @@ export async function loginAction(formData: LoginFormData) {
       return { error: "Nieprawidłowy e-mail/login lub hasło." };
     }
 
-    // 5. Create session
-    await login(user.id);
+    // 5. Check if user has at least one space
+    const userSpace = await prisma.space.findFirst({
+      where: {
+        members: {
+          some: { id: user.id }
+        }
+      }
+    });
+
+    // 6. Create session
+    await login(user.id, !!userSpace);
 
     return { success: true };
   } catch (error) {

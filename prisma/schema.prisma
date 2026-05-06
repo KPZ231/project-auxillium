@@ -22,6 +22,9 @@ model User {
   resetTokens   PasswordResetToken[]
   projects      Project[]
   leads         Lead[]
+  
+  ownedSpaces   Space[]   @relation("SpaceOwner")
+  memberSpaces  Space[]   @relation("SpaceMembers")
 }
 
 model PasswordResetToken {
@@ -73,31 +76,109 @@ model Project {
   userId             String
   user               User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   
+  spaceId            String?
+  space              Space?        @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+  
+  tasks              Task[]
+  assignedEmployees  Employee[]    @relation("AssignedProjects")
+
   createdAt          DateTime      @default(now())
   updatedAt          DateTime      @updatedAt
 
   @@index([userId])
+  @@index([spaceId])
 }
 
-model Lead{
-  id String @id @default(cuid())
-  projectType String?
-  leadName String @unique
-  contactName String?
-  role String?
-  email String?
-  phone String?
-  status LeadStatus @default(COLD)
-  stage String?
-  turnedIntoClient Boolean? @default(false)
-  leadInfo String?
-  order Int @default(0)
+model Lead {
+  id               String      @id @default(cuid())
+  projectType      String?
+  leadName         String      @unique
+  contactName      String?
+  role             String?
+  email            String?
+  phone            String?
+  status           LeadStatus  @default(COLD)
+  stage            String?
+  turnedIntoClient Boolean?    @default(false)
+  leadInfo         String?
+  order            Int         @default(0)
 
-  userId String
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId           String
+  user             User        @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  spaceId          String?
+  space            Space?      @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
 
   @@index([userId])
+  @@index([spaceId])
+}
+
+model Space {
+  id               String     @id @default(cuid())
+  spaceName        String     @unique
+  spaceDescription String?
+  icon             String?
+  
+  ownerId          String
+  owner            User       @relation("SpaceOwner", fields: [ownerId], references: [id])
+  
+  members          User[]     @relation("SpaceMembers")
+  
+  projects         Project[]
+  leads            Lead[]
+  employees        Employee[]
+  tasks            Task[]
+
+  createdAt        DateTime   @default(now())
+  updatedAt        DateTime   @updatedAt
+
+  @@index([ownerId])
+}
+
+model Employee {
+  id            String    @id @default(cuid())
+  name          String
+  email         String?
+  phone         String?
+  role          String?   // Position title
+  permissions   Json?     // Roles/Permissions details
+  
+  spaceId       String
+  space         Space     @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+  
+  assignedProjects Project[] @relation("AssignedProjects")
+  assignedTasks    Task[]    @relation("AssignedEmployee")
+  
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([spaceId])
+}
+
+model Task {
+  id            String    @id @default(cuid())
+  title         String
+  description   String?
+  status        String    @default("TODO") // TODO, IN_PROGRESS, DONE
+  priority      String    @default("MEDIUM") // LOW, MEDIUM, HIGH
+  
+  spaceId       String
+  space         Space     @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+  
+  employeeId    String?
+  employee      Employee? @relation("AssignedEmployee", fields: [employeeId], references: [id])
+  
+  projectId     String?
+  project       Project?  @relation(fields: [projectId], references: [id])
+  
+  dueDate       DateTime?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([spaceId])
+  @@index([employeeId])
+  @@index([projectId])
 }

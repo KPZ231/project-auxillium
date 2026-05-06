@@ -17,7 +17,8 @@ import {
   ChevronLeft,
   ChevronRight,
   Menu,
-  FileText
+  FileText,
+  Settings,
 } from "lucide-react";
 
 interface NavLink {
@@ -29,13 +30,16 @@ interface NavLink {
 const navLinks: NavLink[] = [
   { name: "DASHBOARD", href: "/dashboard", icon: LayoutDashboard },
   { name: "PROJECTS", href: "/dashboard/projects", icon: FolderKanban },
-  { name: "COSTS & EXPENSES", href: "/dashboard/expenses-costs", icon: Receipt },
+  {
+    name: "COSTS & EXPENSES",
+    href: "/dashboard/expenses-costs",
+    icon: Receipt,
+  },
   { name: "TASKS", href: "/dashboard/tasks", icon: ClipboardList },
   { name: "LEAD SEARCH", href: "/dashboard/lead-search", icon: UserSearch },
   { name: "LEADS", href: "/dashboard/leads", icon: Users },
   { name: "CLIENTS", href: "/dashboard/clients", icon: Contact2 },
   { name: "AI CHAT", href: "/dashboard/ai", icon: MessageSquareCode },
-  { name: "DOCUMENT GENERATOR", href: "/dashboard/documents", icon: FileText },
 ];
 
 export default function SidePanel() {
@@ -105,17 +109,10 @@ export default function SidePanel() {
       >
         {/* HEADER */}
         <div className="p-6 border-b border-gray-200 relative">
-          <Link href="/" className="flex items-center gap-3 h-14 overflow-hidden">
-            <div className="relative w-10 h-10 shrink-0">
-              <Image
-                src="/images/auxillium-logo-3.png"
-                alt="Logo"
-                fill
-                className="object-contain"
-                priority
-              />
-            </div>
-
+          <Link
+            href="/"
+            className="flex items-center gap-3 h-14 overflow-hidden"
+          >         
             <AnimatePresence mode="popLayout">
               {!isCollapsed && (
                 <motion.div
@@ -201,8 +198,34 @@ export default function SidePanel() {
           </ul>
         </nav>
 
-        {/* FOOTER */}
-        {/* Usunięto sekcję profilu użytkownika zgodnie z zaleceniami, przeniesiono do TopBar */}
+        <footer className="p-2 mb-4">
+          <div className="border-t border-[var(--neutral, #e5e5e5)] pt-2">
+            <Link
+              href="/dashboard/space/settings"
+              onClick={() => isMobile && setIsMobileOpen(false)}
+              className={`relative flex items-center gap-4 px-4 py-3 transition-colors ${
+                pathname === "/dashboard/space/settings"
+                  ? "bg-black text-white"
+                  : "text-gray-500 hover:bg-gray-100 hover:text-black"
+              }`}
+            >
+              <Settings className="w-5 h-5 shrink-0" />
+              <AnimatePresence mode="popLayout">
+                {!isCollapsed && (
+                  <motion.span
+                    initial={{ opacity: 0, x: -6 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -6 }}
+                    transition={{ duration: 0.15 }}
+                    className="text-xs font-bold tracking-wider whitespace-nowrap uppercase"
+                  >
+                    Manage Space
+                  </motion.span>
+                )}
+              </AnimatePresence>
+            </Link>
+          </div>
+        </footer>
       </motion.aside>
     </>
   );

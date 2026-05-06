@@ -31,18 +31,31 @@ export default async function proxy(request: NextRequest) {
   const session = cookie ? await decrypt(cookie).catch(() => null) : null
 
   // 4. Redirect to /login if the user is not authenticated
-  if (isProtectedRoute && !session) {
+  const isOnboardingRoute = path.startsWith('/onboarding')
+
+  if ((isProtectedRoute || isOnboardingRoute) && !session) {
     const url = new URL('/login', request.nextUrl)
     url.searchParams.set('callbackUrl', path)
     return NextResponse.redirect(url)
   }
 
-  // 5. Redirect to /dashboard if the user is authenticated
+  // 5. Enforce space creation (onboarding)
+  if (isProtectedRoute && session && !session.hasSpace && !isOnboardingRoute) {
+    return NextResponse.redirect(new URL('/onboarding', request.nextUrl))
+  }
+
+  // 6. Redirect to /dashboard if the user is authenticated and has a space
   if (
-    isPublicRoute &&
+    (isPublicRoute || isOnboardingRoute) &&
     session &&
+    session.hasSpace &&
     !path.startsWith('/dashboard')
   ) {
+    return NextResponse.redirect(new URL('/dashboard', request.nextUrl))
+  }
+
+  // Special case: if on onboarding but has space, go to dashboard
+  if (isOnboardingRoute && session && session.hasSpace) {
     return NextResponse.redirect(new URL('/dashboard', request.nextUrl))
   }
 

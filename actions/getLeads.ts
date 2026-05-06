@@ -12,7 +12,10 @@ export const getLeads = async (forceRefresh: boolean = false) => {
       return { success: false, error: "Unauthorized", data: [] }
     }
 
-    const cacheKey = `leads:${userId}`
+    const { getActiveSpaceId } = await import("./space");
+    const spaceId = await getActiveSpaceId();
+    
+    const cacheKey = `leads:${userId}${spaceId ? `:${spaceId}` : ""}`
 
     if (!forceRefresh) {
       const cachedLeads = await getCachedData<any[]>(cacheKey)
@@ -22,7 +25,10 @@ export const getLeads = async (forceRefresh: boolean = false) => {
     }
 
     const leads = await prisma.lead.findMany({
-      where: { userId },
+      where: { 
+        userId,
+        ...(spaceId ? { spaceId } : {})
+      },
       orderBy: [
         { order: 'asc' },
         { createdAt: 'desc' }
@@ -39,9 +45,11 @@ export const getLeads = async (forceRefresh: boolean = false) => {
   }
 }
 
-export async function forceRefreshLeads() {
-  const { userId } = await getUser()
+export const refreshLeads = async () => {
+  const { userId } = await getUser();
+  const { getActiveSpaceId } = await import("./space");
+  const spaceId = await getActiveSpaceId();
   if (userId) {
-    await invalidateCache(`leads:${userId}`)
+    await invalidateCache(`leads:${userId}${spaceId ? `:${spaceId}` : ""}`)
   }
 }

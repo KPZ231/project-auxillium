@@ -79,6 +79,7 @@ export default function LeadsFilter({
             onChange={(e) => onSortChange(e.target.value)}
             className="text-xs font-bold text-gray-800 bg-transparent cursor-pointer focus:outline-none"
           >
+            <option value="Manual Order">Manual Order</option>
             <option value="Last Activity">Last Activity</option>
             <option value="Newest">Newest</option>
             <option value="Oldest">Oldest</option>

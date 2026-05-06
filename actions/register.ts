@@ -60,7 +60,7 @@ export async function registerAction(formData: RegisterFormData) {
     });
 
     // 6. Create session
-    await login(user.id);
+    await login(user.id, false);
 
     return { success: true };
   } catch (error) {

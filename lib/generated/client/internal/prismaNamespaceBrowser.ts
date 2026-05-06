@@ -18,9 +18,7 @@
 import * as runtime from "@prisma/client/runtime/index-browser"
 
 export type * from '../models'
-// Removed: export type * from './prismaNamespace'
-// This would pull in Node.js-specific code from prismaNamespace.ts
-// Instead, we define the types we need directly
+export type * from './prismaNamespace'
 
 export const Decimal = runtime.Decimal
 
@@ -56,7 +54,10 @@ export const ModelName = {
   User: 'User',
   PasswordResetToken: 'PasswordResetToken',
   Project: 'Project',
-  Lead: 'Lead'
+  Lead: 'Lead',
+  Space: 'Space',
+  Employee: 'Employee',
+  Task: 'Task'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -119,6 +120,7 @@ export const ProjectScalarFieldEnum = {
   dueDate: 'dueDate',
   order: 'order',
   userId: 'userId',
+  spaceId: 'spaceId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -140,11 +142,57 @@ export const LeadScalarFieldEnum = {
   leadInfo: 'leadInfo',
   order: 'order',
   userId: 'userId',
+  spaceId: 'spaceId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
 
 export type LeadScalarFieldEnum = (typeof LeadScalarFieldEnum)[keyof typeof LeadScalarFieldEnum]
+
+
+export const SpaceScalarFieldEnum = {
+  id: 'id',
+  spaceName: 'spaceName',
+  spaceDescription: 'spaceDescription',
+  icon: 'icon',
+  ownerId: 'ownerId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type SpaceScalarFieldEnum = (typeof SpaceScalarFieldEnum)[keyof typeof SpaceScalarFieldEnum]
+
+
+export const EmployeeScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  phone: 'phone',
+  role: 'role',
+  permissions: 'permissions',
+  spaceId: 'spaceId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type EmployeeScalarFieldEnum = (typeof EmployeeScalarFieldEnum)[keyof typeof EmployeeScalarFieldEnum]
+
+
+export const TaskScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  description: 'description',
+  status: 'status',
+  priority: 'priority',
+  spaceId: 'spaceId',
+  employeeId: 'employeeId',
+  projectId: 'projectId',
+  dueDate: 'dueDate',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type TaskScalarFieldEnum = (typeof TaskScalarFieldEnum)[keyof typeof TaskScalarFieldEnum]
 
 
 export const SortOrder = {

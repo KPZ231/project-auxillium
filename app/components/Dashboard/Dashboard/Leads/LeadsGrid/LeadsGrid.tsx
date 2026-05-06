@@ -172,68 +172,88 @@ export default function LeadsGrid({ selectedFilter, view, sortBy, searchQuery }:
     }
 
     // Sort
-    result.sort((a, b) => {
-      if (sortBy === "Newest") return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-      if (sortBy === "Oldest") return new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime();
-      // "Last Activity" - for now using updatedAt
-      return new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime();
-    });
+    if (sortBy === "Newest") {
+      result.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+    } else if (sortBy === "Oldest") {
+      result.sort((a, b) => new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime());
+    } else if (sortBy === "Last Activity") {
+      result.sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime());
+    }
+    // If sortBy is anything else (like "Manual Order"), we don't sort, 
+    // respecting the order in the 'leads' state.
 
     return result;
   }, [leads, selectedFilter, sortBy, searchQuery]);
 
   // Drag and Drop Handlers
-  const handleDragStart = (e: React.DragEvent, position: number) => {
+  const handleDragStart = (e: any, position: number) => {
     dragItem.current = position;
   };
 
-  const handleDragEnter = (e: React.DragEvent, position: number) => {
+  const handleDragEnter = (e: any, position: number) => {
     dragOverItem.current = position;
   };
 
   const handleDragEnd = async () => {
     if (dragItem.current !== null && dragOverItem.current !== null && dragItem.current !== dragOverItem.current) {
-      const copyLeads = [...filteredLeads];
-      const dragItemContent = copyLeads[dragItem.current];
-      copyLeads.splice(dragItem.current, 1);
-      copyLeads.splice(dragOverItem.current, 0, dragItemContent);
-      
-      // Update local state (optimistic)
-      // Note: This only updates the local filtered list, might need to update the main leads list too
-      // for consistency if filters change right after.
-      const updatedMainLeads = [...leads];
-      // Find original indices and swap
-      // Simple approach: replace the main leads with the reordered filtered list if no filters are active,
-      // but if filters are active, it's complex.
-      // Usually, DND is allowed only when no filters are active or we update based on IDs.
-      
+      const copyFilteredLeads = [...filteredLeads];
+      const draggedItem = copyFilteredLeads[dragItem.current];
+      const overItem = copyFilteredLeads[dragOverItem.current];
+
+      if (!draggedItem || !overItem) {
+        dragItem.current = null;
+        dragOverItem.current = null;
+        return;
+      }
+
+      // 1. Update local state (optimistic)
+      // Find where they are in the main leads list
       setLeads(prev => {
         const newList = [...prev];
-        const item = newList.find(l => l.id === dragItemContent.id);
-        if (item) {
-          // This is a simplified DND update for the full list
-          // In a real app, we'd handle the indices carefully
-          const oldIndex = newList.indexOf(item);
-          newList.splice(oldIndex, 1);
-          // Insert at the new relative position
-          const targetItem = copyLeads[dragOverItem.current!];
-          const targetIndexInMain = prev.findIndex(l => l.id === targetItem.id);
-          newList.splice(targetIndexInMain, 0, item);
-          return newList;
+        const draggedIdx = newList.findIndex(l => l.id === draggedItem.id);
+        const overIdxInMain = newList.findIndex(l => l.id === overItem.id);
+
+        if (draggedIdx !== -1 && overIdxInMain !== -1) {
+          const [removed] = newList.splice(draggedIdx, 1);
+          const newOverIdx = newList.findIndex(l => l.id === overItem.id);
+          const insertIdx = dragItem.current! < dragOverItem.current! ? newOverIdx + 1 : newOverIdx;
+          newList.splice(insertIdx, 0, removed);
         }
-        return prev;
+        return newList;
       });
+
+      // Prepare IDs for backend from the *next* state of leads
+      // Since we can't wait for state, we calculate the order manually
+      const currentLeads = [...leads];
+      const dIdx = currentLeads.findIndex(l => l.id === draggedItem.id);
+      const oIdx = currentLeads.findIndex(l => l.id === overItem.id);
+      if (dIdx !== -1 && oIdx !== -1) {
+        const [removed] = currentLeads.splice(dIdx, 1);
+        const newOIdx = currentLeads.findIndex(l => l.id === overItem.id);
+        const insIdx = dragItem.current! < dragOverItem.current! ? newOIdx + 1 : newOIdx;
+        currentLeads.splice(insIdx, 0, removed);
+      }
+      
+      const orderedIds = currentLeads.map(l => l.id);
 
       dragItem.current = null;
       dragOverItem.current = null;
 
       // Save to backend
-      const orderedIds = copyLeads.map(l => l.id);
-      const result = await reorderLeads(orderedIds);
-      if (!result.success) {
-        toast.error("Failed to save lead order");
-        fetchLeadsData(true); // Revert on failure
+      try {
+        const result = await reorderLeads(orderedIds);
+        if (!result.success) {
+          toast.error("Failed to save lead order");
+          fetchLeadsData(true);
+        }
+      } catch (error) {
+        console.error(error);
+        toast.error("An error occurred while saving order");
+        fetchLeadsData(true);
       }
+    } else {
+      dragItem.current = null;
+      dragOverItem.current = null;
     }
   };
 
@@ -286,8 +306,8 @@ export default function LeadsGrid({ selectedFilter, view, sortBy, searchQuery }:
         initial="hidden"
         animate="visible"
         className={view === "grid" 
-          ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6" 
-          : "flex flex-col gap-3"
+          ? "grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 relative" 
+          : "flex flex-col gap-3 relative"
         }
       >
         {filteredLeads.map((lead, index) => (
@@ -299,7 +319,7 @@ export default function LeadsGrid({ selectedFilter, view, sortBy, searchQuery }:
             onDragEnter={(e: any) => handleDragEnter(e, index)}
             onDragEnd={handleDragEnd}
             onDragOver={(e: any) => e.preventDefault()}
-            className="h-full"
+            className="h-full relative"
           >
             <LeadCard lead={lead} />
           </motion.div>

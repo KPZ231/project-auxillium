@@ -54,9 +54,12 @@ export async function addLead(data: AddLeadInput) {
             return { success: false, error: "Lead with this name already exists" }
         }
 
+        const { getActiveSpaceId } = await import("./space");
+        const spaceId = await getActiveSpaceId();
+
         // Get the current max order
         const lastLead = await prisma.lead.findFirst({
-            where: { userId },
+            where: { userId, ...(spaceId ? { spaceId } : {}) },
             orderBy: { order: 'desc' },
         })
         const nextOrder = lastLead ? lastLead.order + 1 : 0
@@ -74,12 +77,13 @@ export async function addLead(data: AddLeadInput) {
                 order: nextOrder,
                 user: {
                     connect: { id: userId }
-                }
+                },
+                ...(spaceId ? { space: { connect: { id: spaceId } } } : {})
             }
         })
 
         // Invalidate cache
-        await invalidateCache(`leads:${userId}`)
+        await invalidateCache(`leads:${userId}${spaceId ? `:${spaceId}` : ""}`)
         revalidatePath('/dashboard/leads', 'page')
 
         return {

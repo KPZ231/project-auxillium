@@ -61,3 +61,18 @@ export type Project = Prisma.ProjectModel
  * 
  */
 export type Lead = Prisma.LeadModel
+/**
+ * Model Space
+ * 
+ */
+export type Space = Prisma.SpaceModel
+/**
+ * Model Employee
+ * 
+ */
+export type Employee = Prisma.EmployeeModel
+/**
+ * Model Task
+ * 
+ */
+export type Task = Prisma.TaskModel

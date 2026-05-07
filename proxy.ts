@@ -6,11 +6,11 @@ import { createClient } from '@/utils/supabase/proxy'
 const secretKey = process.env.JWT_SECRET || "default-secret-key-change-me";
 const key = new TextEncoder().encode(secretKey);
 
-async function decrypt(input: string): Promise<any> {
+async function decrypt<T = object>(input: string): Promise<T> {
   const { payload } = await jwtVerify(input, key, {
     algorithms: ["HS256"],
   });
-  return payload;
+  return payload as T;
 }
 
 // 1. Specify protected and public routes

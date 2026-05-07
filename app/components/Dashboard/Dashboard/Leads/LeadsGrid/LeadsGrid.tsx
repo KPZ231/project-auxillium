@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence, Variants } from "motion/react";
 import { useState, useEffect, useRef, useMemo } from "react";
-import { getLeads, forceRefreshLeads } from "@/actions/getLeads";
+import { getLeads } from "@/actions/getLeads";
 import { reorderLeads } from "@/actions/reorderLeads";
 import { toast } from "sonner";
 import { Lead, LeadStatus } from "@/lib/generated/client/browser";

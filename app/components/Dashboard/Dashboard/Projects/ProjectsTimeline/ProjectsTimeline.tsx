@@ -22,7 +22,7 @@ export default function ProjectsTimeline() {
     try {
       const result = await getProjects();
       if (result.success && result.data) {
-        setProjects(result.data as any);
+        setProjects(result.data as Project[]);
       } else {
         toast.error("Failed to load projects");
       }

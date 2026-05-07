@@ -42,3 +42,10 @@ next-env.d.ts
 
 /lib/generated/prisma
 /public/uploads/
+/.agents
+/.claude
+AGENTS.md
+AUXILIUM_CONTEXT.md
+CLAUDE.md
+eslint.txt
+studioblank-design-system-DESIGN.md

@@ -155,6 +155,5 @@ export default async function EmployeeProfilePage({ params }: PageProps) {
         </div>
       </div>
     </div>
-    </div>
   );
 }

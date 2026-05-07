@@ -14,7 +14,7 @@ interface MetricData {
   badgeType: "dark" | "outline";
   subText: string;
   icon: "trending" | "layers" | "target";
-  chartData?: any[];
+  chartData?: Array<{ value: number }>;
 }
 
 const mockData: MetricData[] = [

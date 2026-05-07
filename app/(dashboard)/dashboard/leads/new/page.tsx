@@ -7,12 +7,12 @@ import { useRouter } from "next/navigation";
 import { useBreadcrumb } from "@/app/context/BreadcrumbContext";
 import { useEffect } from "react";
 
-import { LeadStatus, type LeadStatus as LeadStatusType } from "@/lib/generated/client/browser";
+import { AddLeadInput } from "@/actions/addLead";
 
 export default function NewLead() {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<Partial<AddLeadInput>>({
     leadName: "",
     leadInfo: "",
   });
@@ -28,7 +28,7 @@ export default function NewLead() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const result = await addLead(formData as any);
+    const result = await addLead(formData);
     
     if (result.success) {
       toast.success("Lead created successfully!");

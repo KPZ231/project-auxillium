@@ -12,7 +12,7 @@ export async function getEmployees() {
   if (!spaceId) return [];
 
   const cacheKey = `employees:${spaceId}`;
-  const cached = await getCachedData<any[]>(cacheKey);
+  const cached = await getCachedData<ReturnType<typeof prisma.employee.findMany>[0][]>(cacheKey);
   if (cached) return cached;
 
   const employees = await prisma.employee.findMany({
@@ -37,7 +37,7 @@ export async function addEmployee(data: {
   email?: string;
   phone?: string;
   role?: string;
-  permissions?: any;
+  permissions?: Record<string, boolean>;
 }) {
   const spaceId = await getActiveSpaceId();
   if (!spaceId) throw new Error("No active space selected");
@@ -54,7 +54,7 @@ export async function addEmployee(data: {
   return { success: true, employee };
 }
 
-export async function updateEmployee(id: string, data: any) {
+export async function updateEmployee(id: string, data: Partial<Record<string, unknown>>) {
   const spaceId = await getActiveSpaceId();
   if (!spaceId) throw new Error("No active space selected");
 
@@ -75,7 +75,7 @@ export async function getEmployeeById(id: string) {
   if (!spaceId) return null;
 
   const cacheKey = `employee:${id}`;
-  const cached = await getCachedData<any>(cacheKey);
+  const cached = await getCachedData<ReturnType<typeof prisma.employee.findFirst>[0]>(cacheKey);
   if (cached) return cached;
 
   const employee = await prisma.employee.findFirst({
@@ -124,8 +124,8 @@ export async function getEmployeeWorkload(id: string) {
   const employee = await getEmployeeById(id);
   if (!employee) return null;
 
-  const activeProjectsCount = employee.assignedProjects.filter((p: any) => p.projectStatus === "IN_PROGRESS").length;
-  const activeTasksCount = employee.assignedTasks.filter((t: any) => t.status !== "DONE").length;
+  const activeProjectsCount = employee.assignedProjects.filter((p: { projectStatus: string }) => p.projectStatus === "IN_PROGRESS").length;
+  const activeTasksCount = employee.assignedTasks.filter((t: { status: string }) => t.status !== "DONE").length;
 
   return {
     activeProjectsCount,

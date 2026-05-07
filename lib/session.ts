@@ -7,7 +7,7 @@ const key = new TextEncoder().encode(secretKey);
 
 export const SESSION_DURATION = 24 * 60 * 60 * 1000; // 24 hours
 
-export async function encrypt(payload: any) {
+export async function encrypt<T extends object>(payload: T) {
   return await new SignJWT(payload)
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
@@ -15,11 +15,11 @@ export async function encrypt(payload: any) {
     .sign(key);
 }
 
-export async function decrypt(input: string): Promise<any> {
+export async function decrypt<T = object>(input: string): Promise<T> {
   const { payload } = await jwtVerify(input, key, {
     algorithms: ["HS256"],
   });
-  return payload;
+  return payload as T;
 }
 
 export async function login(userId: string, hasSpace: boolean = false) {

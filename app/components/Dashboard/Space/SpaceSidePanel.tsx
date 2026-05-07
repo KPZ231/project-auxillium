@@ -14,6 +14,7 @@ import {
   Menu,
   ArrowLeft,
 } from "lucide-react";
+import { getActiveSpace } from "@/actions/space";
 
 interface NavLink {
   name: string;
@@ -28,11 +29,36 @@ const spaceNavLinks: NavLink[] = [
   { name: "Settings", href: "/dashboard/space/settings", icon: Settings },
 ];
 
+interface SpaceData {
+  id: string;
+  spaceName: string;
+  spaceDescription?: string;
+  ownerId: string;
+  createdAt: string;
+  updatedAt: string;
+  _count?: {
+    members: number;
+    projects: number;
+    employees: number;
+  };
+}
+
 export default function SpaceSidePanel() {
   const pathname = usePathname();
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [space, setSpace] = useState<SpaceData | null>(null);
+
+  useEffect(() => {
+    const loadSpace = async () => {
+      const data = await getActiveSpace();
+      if (data) {
+        setSpace(data);
+      }
+    };
+    loadSpace();
+  }, []);
 
   useEffect(() => {
     const resize = () => {
@@ -158,11 +184,11 @@ export default function SpaceSidePanel() {
               <div className="grid grid-cols-2 gap-4">
                  <div className="flex flex-col">
                     <span className="text-[8px] font-bold text-black/30 uppercase tracking-widest">Members</span>
-                    <span className="text-sm font-black">{space._count?.members || 0}</span>
+                    <span className="text-sm font-black">{space?._count?.members || 0}</span>
                  </div>
                  <div className="flex flex-col">
                     <span className="text-[8px] font-bold text-black/30 uppercase tracking-widest">Projects</span>
-                    <span className="text-sm font-black">{space._count?.projects || 0}</span>
+                    <span className="text-sm font-black">{space?._count?.projects || 0}</span>
                  </div>
               </div>
            ) : (

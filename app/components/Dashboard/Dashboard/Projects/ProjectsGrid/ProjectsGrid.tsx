@@ -111,7 +111,7 @@ export default function ProjectsGrid() {
     try {
       const result = await getProjects();
       if (result.success && result.data) {
-        setProjects(result.data as any);
+        setProjects(result.data as Project[]);
       } else {
         toast.error("Failed to load projects");
       }
@@ -232,10 +232,10 @@ export default function ProjectsGrid() {
                 className={`${colSpan} ${rowSpan} bg-white relative`}
                 style={{ minHeight }}
                 draggable
-                onDragStart={(e: any) => handleDragStart(e, index)}
-                onDragEnter={(e: any) => handleDragEnter(e, index)}
+                onDragStart={(e: React.DragEvent<HTMLDivElement>) => handleDragStart(e, index)}
+                onDragEnter={(e: React.DragEvent<HTMLDivElement>) => handleDragEnter(e, index)}
                 onDragEnd={handleDragEnd}
-                onDragOver={(e: any) => e.preventDefault()}
+                onDragOver={(e: React.DragEvent<HTMLDivElement>) => e.preventDefault()}
               >
                 <ProjectCard project={project} />
               </motion.div>

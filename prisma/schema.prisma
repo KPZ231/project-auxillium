@@ -25,6 +25,10 @@ model User {
   
   ownedSpaces   Space[]   @relation("SpaceOwner")
   memberSpaces  Space[]   @relation("SpaceMembers")
+
+  expenses      Expense[]
+  incomes       Income[]
+  revenueGoals  RevenueGoal[]
 }
 
 model PasswordResetToken {
@@ -131,6 +135,10 @@ model Space {
   leads            Lead[]
   employees        Employee[]
   tasks            Task[]
+  expenses         Expense[]
+  incomes          Income[]
+  revenueGoals     RevenueGoal[]
+  financialLabels  FinancialLabel[]
 
   createdAt        DateTime   @default(now())
   updatedAt        DateTime   @updatedAt
@@ -181,4 +189,85 @@ model Task {
   @@index([spaceId])
   @@index([employeeId])
   @@index([projectId])
+}
+
+model Expense {
+  id          String   @id @default(cuid())
+  amount      Float
+  description String?
+  date        DateTime @default(now())
+  category    String?  // e.g. "subscription", "tax", "payment"
+  isRecurring Boolean  @default(false)
+  cycle       String?  // e.g. "monthly", "yearly"
+  
+  spaceId     String
+  space       Space    @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+  
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  labels      FinancialLabel[] @relation("ExpenseLabels")
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([spaceId])
+  @@index([userId])
+}
+
+model Income {
+  id          String   @id @default(cuid())
+  amount      Float
+  description String?
+  date        DateTime @default(now())
+  source      String?  // e.g. "project", "service"
+  
+  spaceId     String
+  space       Space    @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+  
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  labels      FinancialLabel[] @relation("IncomeLabels")
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([spaceId])
+  @@index([userId])
+}
+
+model RevenueGoal {
+  id          String   @id @default(cuid())
+  amount      Float
+  month       Int      // 1-12
+  year        Int
+  
+  spaceId     String
+  space       Space    @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+  
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([spaceId, month, year])
+  @@index([spaceId])
+  @@index([userId])
+}
+
+model FinancialLabel {
+  id        String   @id @default(cuid())
+  name      String
+  color     String?
+  type      String   // "EXPENSE" or "INCOME"
+  
+  spaceId   String
+  space     Space    @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+  
+  expenses  Expense[] @relation("ExpenseLabels")
+  incomes   Income[]  @relation("IncomeLabels")
+
+  @@unique([spaceId, name, type])
 }

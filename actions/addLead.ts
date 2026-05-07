@@ -21,7 +21,7 @@ const addLeadShema = z.object({
   leadInfo: z.string().optional(),
 })
 
-export type AddLeadInput = z.infer<typeof addLeadShema>
+export type AddLeadInput = z.input<typeof addLeadShema>
 
 export async function addLead(data: AddLeadInput) {
     const { isAuthenticatedAndLogedIn, userId } = await getUser()

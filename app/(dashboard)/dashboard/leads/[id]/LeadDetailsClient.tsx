@@ -9,6 +9,7 @@ import { updateLead } from "@/actions/updateLead";
 import { LeadStatus } from "@/lib/generated/client/browser";
 import Link from "next/link";
 import { useBreadcrumb } from "@/app/context/BreadcrumbContext";
+import { PremiumInput, PremiumTextarea, PremiumSelect } from "@/app/components/UI/FormElements";
 
 const STEPS = [
   "Contact Info",
@@ -100,64 +101,97 @@ export default function LeadDetailsClient({ lead, isUnauthorized = false }: { le
     switch (currentStep) {
       case 0:
         return (
-          <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-6">
-            <h3 className="text-[18px] font-bold text-[#0A0A0A] mb-4">1. Contact Information</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Contact Name</label>
-                <input type="text" value={formData.contactName} onChange={(e) => setFormData({...formData, contactName: e.target.value})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]" placeholder="e.g. John Doe" />
-              </div>
-              <div className="space-y-2">
-                <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Role / Position</label>
-                <input type="text" value={formData.role} onChange={(e) => setFormData({...formData, role: e.target.value})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]" placeholder="e.g. CEO" />
-              </div>
-              <div className="space-y-2">
-                <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Email</label>
-                <input type="email" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]" placeholder="john@example.com" />
-              </div>
-              <div className="space-y-2">
-                <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Phone</label>
-                <input type="text" value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]" placeholder="+1 234 567 890" />
-              </div>
+          <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-12">
+            <div className="border-l-4 border-[#0A0A0A] pl-6 py-2">
+              <h3 className="text-[24px] font-black text-[#0A0A0A] uppercase tracking-tight">1. Contact Information</h3>
+              <p className="text-[13px] text-[#71717A] uppercase tracking-wider font-medium">Who are we talking to?</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <PremiumInput 
+                label="Contact Name" 
+                value={formData.contactName} 
+                onChange={(e) => setFormData({...formData, contactName: e.target.value})} 
+                placeholder="e.g. John Doe" 
+              />
+              <PremiumInput 
+                label="Role / Position" 
+                value={formData.role} 
+                onChange={(e) => setFormData({...formData, role: e.target.value})} 
+                placeholder="e.g. CEO" 
+              />
+              <PremiumInput 
+                label="Email" 
+                type="email" 
+                value={formData.email} 
+                onChange={(e) => setFormData({...formData, email: e.target.value})} 
+                placeholder="john@example.com" 
+              />
+              <PremiumInput 
+                label="Phone" 
+                value={formData.phone} 
+                onChange={(e) => setFormData({...formData, phone: e.target.value})} 
+                placeholder="+1 234 567 890" 
+              />
             </div>
           </motion.div>
         );
       case 1:
         return (
-          <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-6">
-            <h3 className="text-[18px] font-bold text-[#0A0A0A] mb-4">2. Business Details</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Project Type</label>
-                <input type="text" value={formData.projectType} onChange={(e) => setFormData({...formData, projectType: e.target.value})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]" placeholder="e.g. Web Development" />
-              </div>
-              <div className="space-y-2">
-                <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Status</label>
-                <select value={formData.status} onChange={(e) => setFormData({...formData, status: e.target.value as any})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]">
-                  <option value="COLD">Cold</option>
-                  <option value="NEGOTIATION">Negotiation</option>
-                  <option value="QUALIFIED">Qualified</option>
-                </select>
-              </div>
-              <div className="space-y-2">
-                <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Current Stage</label>
-                <input type="text" value={formData.stage} onChange={(e) => setFormData({...formData, stage: e.target.value})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]" placeholder="e.g. Discovery" />
-              </div>
-              <div className="flex items-center gap-3 pt-6">
-                <input type="checkbox" id="turnedIntoClient" checked={formData.turnedIntoClient} onChange={(e) => setFormData({...formData, turnedIntoClient: e.target.checked})} className="w-5 h-5 accent-[#0A0A0A] border-[#D4D4D8] rounded-none" />
-                <label htmlFor="turnedIntoClient" className="text-[14px] font-medium text-[#0A0A0A]">Turned into client</label>
+          <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-12">
+            <div className="border-l-4 border-[#0A0A0A] pl-6 py-2">
+              <h3 className="text-[24px] font-black text-[#0A0A0A] uppercase tracking-tight">2. Business Details</h3>
+              <p className="text-[13px] text-[#71717A] uppercase tracking-wider font-medium">What is the opportunity?</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <PremiumInput 
+                label="Project Type" 
+                value={formData.projectType} 
+                onChange={(e) => setFormData({...formData, projectType: e.target.value})} 
+                placeholder="e.g. Web Development" 
+              />
+              <PremiumSelect 
+                label="Status" 
+                value={formData.status} 
+                onChange={(e) => setFormData({...formData, status: e.target.value as any})}
+                options={[
+                  { value: "COLD", label: "Cold" },
+                  { value: "NEGOTIATION", label: "Negotiation" },
+                  { value: "QUALIFIED", label: "Qualified" }
+                ]}
+              />
+              <PremiumInput 
+                label="Current Stage" 
+                value={formData.stage} 
+                onChange={(e) => setFormData({...formData, stage: e.target.value})} 
+                placeholder="e.g. Discovery" 
+              />
+              <div className="flex items-center gap-4 pt-4">
+                <input 
+                  type="checkbox" 
+                  id="turnedIntoClient" 
+                  checked={formData.turnedIntoClient} 
+                  onChange={(e) => setFormData({...formData, turnedIntoClient: e.target.checked})} 
+                  className="w-6 h-6 accent-[#0A0A0A] border-2 border-[#D4D4D8] rounded-none cursor-pointer" 
+                />
+                <label htmlFor="turnedIntoClient" className="text-[12px] font-black uppercase tracking-widest text-[#0A0A0A] cursor-pointer">Turned into client</label>
               </div>
             </div>
           </motion.div>
         );
       case 2:
         return (
-          <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-6">
-            <h3 className="text-[18px] font-bold text-[#0A0A0A] mb-4">3. Lead Description</h3>
-            <div className="space-y-2">
-              <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Main Description</label>
-              <textarea rows={6} value={formData.leadInfo} onChange={(e) => setFormData({...formData, leadInfo: e.target.value})} className="w-full p-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px] resize-none" placeholder="Additional background information or notes..." />
+          <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-12">
+            <div className="border-l-4 border-[#0A0A0A] pl-6 py-2">
+              <h3 className="text-[24px] font-black text-[#0A0A0A] uppercase tracking-tight">3. Lead Description</h3>
+              <p className="text-[13px] text-[#71717A] uppercase tracking-wider font-medium">Capture the narrative.</p>
             </div>
+            <PremiumTextarea 
+              label="Main Description" 
+              rows={8} 
+              value={formData.leadInfo} 
+              onChange={(e) => setFormData({...formData, leadInfo: e.target.value})} 
+              placeholder="Additional background information or notes..." 
+            />
           </motion.div>
         );
       default:
@@ -319,64 +353,67 @@ export default function LeadDetailsClient({ lead, isUnauthorized = false }: { le
               <button onClick={() => setIsEditOpen(false)} className="text-[#71717A] hover:text-[#0A0A0A]">✕</button>
             </div>
             <form onSubmit={handleEditSubmit} className="space-y-12">
-              <section className="space-y-6">
-                <h3 className="text-[12px] font-bold uppercase tracking-[0.08em] text-[#0A0A0A] border-b border-[#E5E5E5] pb-2">Basic Information</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Lead Name</label>
-                    <input type="text" required value={formData.leadName} onChange={(e) => setFormData({...formData, leadName: e.target.value})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Status</label>
-                    <select value={formData.status} onChange={(e) => setFormData({...formData, status: e.target.value as any})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]">
-                      <option value="COLD">Cold</option>
-                      <option value="NEGOTIATION">Negotiation</option>
-                      <option value="QUALIFIED">Qualified</option>
-                    </select>
-                  </div>
-                  <div className="space-y-2">
-                    <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Project Type</label>
-                    <input type="text" value={formData.projectType} onChange={(e) => setFormData({...formData, projectType: e.target.value})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Current Stage</label>
-                    <input type="text" value={formData.stage} onChange={(e) => setFormData({...formData, stage: e.target.value})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]" />
-                  </div>
+              <section className="space-y-8">
+                <div className="border-l-4 border-[#0A0A0A] pl-6 py-1">
+                  <h3 className="text-[14px] font-black uppercase tracking-[0.15em] text-[#0A0A0A]">Basic Information</h3>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <PremiumInput 
+                    label="Lead Name" 
+                    required 
+                    value={formData.leadName} 
+                    onChange={(e) => setFormData({...formData, leadName: e.target.value})} 
+                  />
+                  <PremiumSelect 
+                    label="Status" 
+                    value={formData.status} 
+                    onChange={(e) => setFormData({...formData, status: e.target.value as any})}
+                    options={[
+                      { value: "COLD", label: "Cold" },
+                      { value: "NEGOTIATION", label: "Negotiation" },
+                      { value: "QUALIFIED", label: "Qualified" }
+                    ]}
+                  />
+                  <PremiumInput 
+                    label="Project Type" 
+                    value={formData.projectType} 
+                    onChange={(e) => setFormData({...formData, projectType: e.target.value})} 
+                  />
+                  <PremiumInput 
+                    label="Current Stage" 
+                    value={formData.stage} 
+                    onChange={(e) => setFormData({...formData, stage: e.target.value})} 
+                  />
                 </div>
               </section>
 
-              <section className="space-y-6">
-                <h3 className="text-[12px] font-bold uppercase tracking-[0.08em] text-[#0A0A0A] border-b border-[#E5E5E5] pb-2">Contact Details</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Contact Name</label>
-                    <input type="text" value={formData.contactName} onChange={(e) => setFormData({...formData, contactName: e.target.value})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Role</label>
-                    <input type="text" value={formData.role} onChange={(e) => setFormData({...formData, role: e.target.value})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Email</label>
-                    <input type="email" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Phone</label>
-                    <input type="text" value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]" />
-                  </div>
+              <section className="space-y-8">
+                <div className="border-l-4 border-[#0A0A0A] pl-6 py-1">
+                  <h3 className="text-[14px] font-black uppercase tracking-[0.15em] text-[#0A0A0A]">Contact Details</h3>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <PremiumInput label="Contact Name" value={formData.contactName} onChange={(e) => setFormData({...formData, contactName: e.target.value})} />
+                  <PremiumInput label="Role" value={formData.role} onChange={(e) => setFormData({...formData, role: e.target.value})} />
+                  <PremiumInput label="Email" type="email" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} />
+                  <PremiumInput label="Phone" value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})} />
                 </div>
               </section>
 
-              <section className="space-y-6">
-                <h3 className="text-[12px] font-bold uppercase tracking-[0.08em] text-[#0A0A0A] border-b border-[#E5E5E5] pb-2">Additional Info</h3>
-                <div className="space-y-4">
-                  <div className="space-y-2">
-                    <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Lead Notes</label>
-                    <textarea rows={4} value={formData.leadInfo} onChange={(e) => setFormData({...formData, leadInfo: e.target.value})} className="w-full p-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px] resize-none" />
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <input type="checkbox" id="editTurnedIntoClient" checked={formData.turnedIntoClient} onChange={(e) => setFormData({...formData, turnedIntoClient: e.target.checked})} className="w-5 h-5 accent-[#0A0A0A] border-[#D4D4D8] rounded-none" />
-                    <label htmlFor="editTurnedIntoClient" className="text-[14px] font-medium text-[#0A0A0A]">Turned into client</label>
+              <section className="space-y-8">
+                <div className="border-l-4 border-[#0A0A0A] pl-6 py-1">
+                  <h3 className="text-[14px] font-black uppercase tracking-[0.15em] text-[#0A0A0A]">Additional Info</h3>
+                </div>
+                <div className="space-y-8">
+                  <PremiumTextarea label="Lead Notes" rows={6} value={formData.leadInfo} onChange={(e) => setFormData({...formData, leadInfo: e.target.value})} />
+                  <div className="flex items-center gap-4">
+                    <input 
+                      type="checkbox" 
+                      id="editTurnedIntoClient" 
+                      checked={formData.turnedIntoClient} 
+                      onChange={(e) => setFormData({...formData, turnedIntoClient: e.target.checked})} 
+                      className="w-6 h-6 accent-[#0A0A0A] border-2 border-[#D4D4D8] rounded-none cursor-pointer" 
+                    />
+                    <label htmlFor="editTurnedIntoClient" className="text-[12px] font-black uppercase tracking-widest text-[#0A0A0A] cursor-pointer">Turned into client</label>
                   </div>
                 </div>
               </section>
@@ -396,10 +433,28 @@ export default function LeadDetailsClient({ lead, isUnauthorized = false }: { le
           <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="w-full max-w-md bg-white border border-[#E5E5E5] p-8 shadow-2xl">
             <h2 className="text-[20px] font-bold text-[#DC2626] uppercase tracking-tight mb-2">Delete Lead</h2>
             <p className="text-[14px] text-[#71717A] mb-6">This action cannot be undone. To verify, type <span className="font-bold text-[#0A0A0A]">{lead.leadName}</span> below.</p>
-            <input type="text" value={deleteConfirmation} onChange={(e) => setDeleteConfirmation(e.target.value)} placeholder="Type lead name..." className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#DC2626] focus:border-2 outline-none mb-6 text-[14px]" />
+            <PremiumInput 
+              label="Lead Name Verification"
+              value={deleteConfirmation}
+              onChange={(e) => setDeleteConfirmation(e.target.value)}
+              placeholder="Type lead name..."
+              className="mb-6"
+              error={deleteConfirmation && deleteConfirmation !== lead.leadName ? "Name mismatch" : ""}
+            />
             <div className="flex gap-4">
-              <button onClick={handleDelete} disabled={deleteConfirmation !== lead.leadName || isSubmitting} className="flex-1 h-10 bg-[#DC2626] text-white font-medium text-[13px] uppercase tracking-[0.04em] disabled:opacity-30 disabled:cursor-not-allowed hover:bg-red-700 transition-colors">{isSubmitting ? "Deleting..." : "Delete Permanently"}</button>
-              <button onClick={() => { setIsDeleteOpen(false); setDeleteConfirmation(""); }} className="flex-1 h-10 bg-transparent border border-[#E5E5E5] text-[#0A0A0A] font-medium text-[13px] uppercase tracking-[0.04em] hover:bg-[#F4F4F5] transition-colors">Cancel</button>
+              <button 
+                onClick={handleDelete} 
+                disabled={deleteConfirmation !== lead.leadName || isSubmitting} 
+                className="flex-1 h-12 bg-[#DC2626] text-white font-bold text-[11px] uppercase tracking-widest disabled:opacity-30 disabled:cursor-not-allowed hover:bg-red-700 transition-colors"
+              >
+                {isSubmitting ? "Deleting..." : "Delete Permanently"}
+              </button>
+              <button 
+                onClick={() => { setIsDeleteOpen(false); setDeleteConfirmation(""); }} 
+                className="flex-1 h-12 bg-transparent border border-[#E5E5E5] text-[#0A0A0A] font-bold text-[11px] uppercase tracking-widest hover:bg-[#F4F4F5] transition-colors"
+              >
+                Cancel
+              </button>
             </div>
           </motion.div>
         </div>

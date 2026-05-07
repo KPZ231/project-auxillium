@@ -57,7 +57,11 @@ export const ModelName = {
   Lead: 'Lead',
   Space: 'Space',
   Employee: 'Employee',
-  Task: 'Task'
+  Task: 'Task',
+  Expense: 'Expense',
+  Income: 'Income',
+  RevenueGoal: 'RevenueGoal',
+  FinancialLabel: 'FinancialLabel'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -193,6 +197,63 @@ export const TaskScalarFieldEnum = {
 } as const
 
 export type TaskScalarFieldEnum = (typeof TaskScalarFieldEnum)[keyof typeof TaskScalarFieldEnum]
+
+
+export const ExpenseScalarFieldEnum = {
+  id: 'id',
+  amount: 'amount',
+  description: 'description',
+  date: 'date',
+  category: 'category',
+  isRecurring: 'isRecurring',
+  cycle: 'cycle',
+  spaceId: 'spaceId',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ExpenseScalarFieldEnum = (typeof ExpenseScalarFieldEnum)[keyof typeof ExpenseScalarFieldEnum]
+
+
+export const IncomeScalarFieldEnum = {
+  id: 'id',
+  amount: 'amount',
+  description: 'description',
+  date: 'date',
+  source: 'source',
+  spaceId: 'spaceId',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type IncomeScalarFieldEnum = (typeof IncomeScalarFieldEnum)[keyof typeof IncomeScalarFieldEnum]
+
+
+export const RevenueGoalScalarFieldEnum = {
+  id: 'id',
+  amount: 'amount',
+  month: 'month',
+  year: 'year',
+  spaceId: 'spaceId',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type RevenueGoalScalarFieldEnum = (typeof RevenueGoalScalarFieldEnum)[keyof typeof RevenueGoalScalarFieldEnum]
+
+
+export const FinancialLabelScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  color: 'color',
+  type: 'type',
+  spaceId: 'spaceId'
+} as const
+
+export type FinancialLabelScalarFieldEnum = (typeof FinancialLabelScalarFieldEnum)[keyof typeof FinancialLabelScalarFieldEnum]
 
 
 export const SortOrder = {

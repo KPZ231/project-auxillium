@@ -4,9 +4,10 @@ import { addProject } from "@/actions/addProject";
 import { toast } from "sonner";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { ImageUploader } from "@/app/components/UI/ImageUploader";
 import { useBreadcrumb } from "@/app/context/BreadcrumbContext";
-import { useEffect } from "react";
+import { PremiumInput, PremiumTextarea } from "@/app/components/UI/FormElements";
 
 export default function NewProject() {
   const router = useRouter();
@@ -81,66 +82,51 @@ export default function NewProject() {
 
         <motion.form variants={itemVariants} onSubmit={handleSubmit} className="space-y-8">
           
-          <div className="space-y-2">
-            <label htmlFor="projectName" className="block text-[14px] font-medium text-[#0A0A0A]">
-              Project Name
-            </label>
-            <input
-              id="projectName"
-              type="text"
-              required
-              value={formData.projectName}
-              onChange={(e) => setFormData({ ...formData, projectName: e.target.value })}
-              className="w-full h-[40px] px-3 bg-white text-[#0A0A0A] text-[14px] border border-[#D4D4D8] rounded-none outline-none focus:border-[#0A0A0A] focus:border-2 transition-all duration-200"
-              placeholder="e.g. Minimalist Workspace"
-            />
-          </div>
+          <PremiumInput 
+            label="Project Name" 
+            required 
+            value={formData.projectName} 
+            onChange={(e) => setFormData({ ...formData, projectName: e.target.value })} 
+            placeholder="e.g. Minimalist Workspace"
+            helperText="A clear, memorable name for your project."
+          />
 
-          <div className="space-y-2">
-            <label htmlFor="projectDescription" className="block text-[14px] font-medium text-[#0A0A0A]">
-              Description
-            </label>
-            <textarea
-              id="projectDescription"
-              required
-              rows={5}
-              value={formData.projectDescription}
-              onChange={(e) => setFormData({ ...formData, projectDescription: e.target.value })}
-              className="w-full p-3 bg-white text-[#0A0A0A] text-[14px] border border-[#D4D4D8] rounded-none outline-none focus:border-[#0A0A0A] focus:border-2 transition-all duration-200 resize-none"
-              placeholder="Describe the objective and outcome..."
-            />
-          </div>
+          <PremiumTextarea 
+            label="Description" 
+            required 
+            rows={5} 
+            value={formData.projectDescription} 
+            onChange={(e) => setFormData({ ...formData, projectDescription: e.target.value })} 
+            placeholder="Describe the objective and outcome..."
+            helperText="Provide a high-level overview."
+          />
 
-          <div className="space-y-2">
-            <label htmlFor="dueDate" className="block text-[14px] font-medium text-[#0A0A0A]">
-              Due Date
-            </label>
-            <input
-              id="dueDate"
-              type="date"
-              value={formData.dueDate}
-              onChange={(e) => setFormData({ ...formData, dueDate: e.target.value })}
-              className="w-full h-[40px] px-3 bg-white text-[#0A0A0A] text-[14px] border border-[#D4D4D8] rounded-none outline-none focus:border-[#0A0A0A] focus:border-2 transition-all duration-200"
-            />
-          </div>
+          <PremiumInput 
+            label="Due Date" 
+            type="date" 
+            value={formData.dueDate} 
+            onChange={(e) => setFormData({ ...formData, dueDate: e.target.value })} 
+          />
 
-          <div className="space-y-2">
-            <label className="block text-[14px] font-medium text-[#0A0A0A]">
+          <div className="space-y-4 pt-4">
+            <label className="block text-[11px] font-bold uppercase tracking-widest text-[#71717A]">
               Project Images
             </label>
-            <ImageUploader 
-              images={formData.images} 
-              onChange={handleImagesChange} 
-            />
+            <div className="bg-white border border-[#E5E5E5] p-6">
+              <ImageUploader 
+                images={formData.images} 
+                onChange={handleImagesChange} 
+              />
+            </div>
           </div>
 
-          <div className="pt-8 border-t border-[#F4F4F5]">
+          <div className="pt-12 border-t border-[#F4F4F5]">
             <button
               type="submit"
               disabled={isSubmitting}
-              className="h-[48px] px-8 bg-[#0A0A0A] text-[#FAFAFA] text-[16px] font-medium rounded-none hover:bg-[#FAFAFA] hover:text-[#0A0A0A] border border-[#0A0A0A] transition-colors duration-200 disabled:opacity-30 disabled:cursor-not-allowed"
+              className="h-[56px] px-12 bg-[#0A0A0A] text-[#FAFAFA] text-[14px] font-bold uppercase tracking-widest rounded-none hover:bg-[#FAFAFA] hover:text-[#0A0A0A] border border-[#0A0A0A] transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed shadow-sm hover:shadow-xl"
             >
-              {isSubmitting ? "Saving..." : "Create Project"}
+              {isSubmitting ? "Creating..." : "Initialize Project"}
             </button>
           </div>
           

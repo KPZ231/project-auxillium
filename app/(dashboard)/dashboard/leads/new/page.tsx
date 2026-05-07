@@ -6,13 +6,13 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useBreadcrumb } from "@/app/context/BreadcrumbContext";
 import { useEffect } from "react";
-
+import { PremiumInput, PremiumTextarea } from "@/app/components/UI/FormElements";
 import { AddLeadInput } from "@/actions/addLead";
 
 export default function NewLead() {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [formData, setFormData] = useState<Partial<AddLeadInput>>({
+  const [formData, setFormData] = useState<AddLeadInput>({
     leadName: "",
     leadInfo: "",
   });
@@ -75,43 +75,32 @@ export default function NewLead() {
 
         <motion.form variants={itemVariants} onSubmit={handleSubmit} className="space-y-8">
           
-          <div className="space-y-2">
-            <label htmlFor="leadName" className="block text-[14px] font-medium text-[#0A0A0A]">
-              Lead / Company Name
-            </label>
-            <input
-              id="leadName"
-              type="text"
-              required
-              value={formData.leadName}
-              onChange={(e) => setFormData({ ...formData, leadName: e.target.value })}
-              className="w-full h-[40px] px-3 bg-white text-[#0A0A0A] text-[14px] border border-[#D4D4D8] rounded-none outline-none focus:border-[#0A0A0A] focus:border-2 transition-all duration-200"
-              placeholder="e.g. Acme Corp"
-            />
-          </div>
+          <PremiumInput 
+            label="Lead / Company Name" 
+            required 
+            value={formData.leadName} 
+            onChange={(e) => setFormData({ ...formData, leadName: e.target.value })} 
+            placeholder="e.g. Acme Corp"
+            helperText="The name of the company or individual."
+          />
 
-          <div className="space-y-2">
-            <label htmlFor="leadInfo" className="block text-[14px] font-medium text-[#0A0A0A]">
-              Description / Notes
-            </label>
-            <textarea
-              id="leadInfo"
-              required
-              rows={5}
-              value={formData.leadInfo}
-              onChange={(e) => setFormData({ ...formData, leadInfo: e.target.value })}
-              className="w-full p-3 bg-white text-[#0A0A0A] text-[14px] border border-[#D4D4D8] rounded-none outline-none focus:border-[#0A0A0A] focus:border-2 transition-all duration-200 resize-none"
-              placeholder="Describe the opportunity..."
-            />
-          </div>
+          <PremiumTextarea 
+            label="Description / Notes" 
+            required 
+            rows={5} 
+            value={formData.leadInfo} 
+            onChange={(e) => setFormData({ ...formData, leadInfo: e.target.value })} 
+            placeholder="Describe the opportunity..."
+            helperText="Brief summary of why this lead is important."
+          />
 
-          <div className="pt-8 border-t border-[#F4F4F5]">
+          <div className="pt-12 border-t border-[#F4F4F5]">
             <button
               type="submit"
               disabled={isSubmitting}
-              className="h-[48px] px-8 bg-[#0A0A0A] text-[#FAFAFA] text-[16px] font-medium rounded-none hover:bg-[#FAFAFA] hover:text-[#0A0A0A] border border-[#0A0A0A] transition-colors duration-200 disabled:opacity-30 disabled:cursor-not-allowed"
+              className="h-[56px] px-12 bg-[#0A0A0A] text-[#FAFAFA] text-[14px] font-bold uppercase tracking-widest rounded-none hover:bg-[#FAFAFA] hover:text-[#0A0A0A] border border-[#0A0A0A] transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed shadow-sm hover:shadow-xl"
             >
-              {isSubmitting ? "Saving..." : "Create Lead"}
+              {isSubmitting ? "Creating..." : "Initialize Lead"}
             </button>
           </div>
           

@@ -32,7 +32,7 @@ const navLinks: NavLink[] = [
   { name: "PROJECTS", href: "/dashboard/projects", icon: FolderKanban },
   {
     name: "COSTS & EXPENSES",
-    href: "/dashboard/expenses-costs",
+    href: "/dashboard/costs-expenses",
     icon: Receipt,
   },
   { name: "TASKS", href: "/dashboard/tasks", icon: ClipboardList },

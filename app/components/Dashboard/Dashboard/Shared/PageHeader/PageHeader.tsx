@@ -13,7 +13,8 @@ interface PageHeaderProps {
   subtitle?: string;
   primaryAction?: {
     label: string;
-    href: string;
+    href?: string;
+    onClick?: () => void;
     icon?: ReactNode;
   };
   tabs?: Tab[];
@@ -90,7 +91,8 @@ export default function PageHeader({
           >
             <Button
               content={primaryAction.label}
-              url={primaryAction.href}
+              url={primaryAction.href || "#"}
+              onClick={primaryAction.onClick}
               variant="primary"
               icon={primaryAction.icon}
             />

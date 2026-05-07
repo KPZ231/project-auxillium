@@ -11,6 +11,8 @@ import { ImageUploader } from "@/app/components/UI/ImageUploader";
 import Link from "next/link";
 import Image from "next/image";
 import { useBreadcrumb } from "@/app/context/BreadcrumbContext";
+import { AssignmentManager } from "@/app/components/assignments/assignment-manager";
+import { PremiumInput, PremiumTextarea, PremiumSelect } from "@/app/components/UI/FormElements";
 
 const STEPS = [
   "Basic Info",
@@ -137,140 +139,270 @@ export default function ProjectDetailsClient({ project, isUnauthorized = false }
     switch (currentStep) {
       case 0:
         return (
-          <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-6">
-            <h3 className="text-[18px] font-bold text-[#0A0A0A] mb-4">1. Basic Information</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Project Name</label>
-                <input type="text" required value={formData.projectName} onChange={(e) => setFormData({...formData, projectName: e.target.value})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]" />
-              </div>
-              <div className="space-y-2">
-                <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Status</label>
-                <select value={formData.projectStatus} onChange={(e) => setFormData({...formData, projectStatus: e.target.value as any})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]">
-                  <option value="IN_PROGRESS">In Progress</option>
-                  <option value="DONE">Done</option>
-                  <option value="CANCELED">Canceled</option>
-                </select>
-              </div>
-              <div className="space-y-2">
-                <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Project Type</label>
-                <input type="text" placeholder="e.g. Residential, Web App, UI/UX" value={formData.projectType} onChange={(e) => setFormData({...formData, projectType: e.target.value})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]" />
-              </div>
-              <div className="space-y-2">
-                <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Priority</label>
-                <select value={formData.priority} onChange={(e) => setFormData({...formData, priority: e.target.value})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]">
-                  <option value="">Select priority...</option>
-                  <option value="Low">Low</option>
-                  <option value="Medium">Medium</option>
-                  <option value="High">High</option>
-                  <option value="Critical">Critical</option>
-                </select>
-              </div>
+          <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-8">
+            <div className="border-l-4 border-[#0A0A0A] pl-6 py-2">
+              <h3 className="text-[24px] font-black text-[#0A0A0A] uppercase tracking-tight">1. Basic Information</h3>
+              <p className="text-[13px] text-[#71717A] uppercase tracking-wider font-medium">The foundation of your project record.</p>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
+              <PremiumInput 
+                label="Project Name" 
+                required 
+                value={formData.projectName} 
+                onChange={(e) => setFormData({...formData, projectName: e.target.value})} 
+                placeholder="e.g. Urban Minimalist Retreat"
+                helperText="Use a descriptive but concise title."
+              />
+              <PremiumSelect 
+                label="Status" 
+                value={formData.projectStatus} 
+                onChange={(e) => setFormData({...formData, projectStatus: e.target.value as any})}
+                options={[
+                  { value: "IN_PROGRESS", label: "In Progress" },
+                  { value: "DONE", label: "Done" },
+                  { value: "CANCELED", label: "Canceled" }
+                ]}
+              />
+              <PremiumInput 
+                label="Project Type" 
+                placeholder="e.g. Architecture, Web Dev, UI Design" 
+                value={formData.projectType} 
+                onChange={(e) => setFormData({...formData, projectType: e.target.value})}
+                helperText="Helps in filtering and categorization."
+              />
+              <PremiumSelect 
+                label="Priority Level" 
+                value={formData.priority} 
+                onChange={(e) => setFormData({...formData, priority: e.target.value})}
+                options={[
+                  { value: "", label: "Select priority..." },
+                  { value: "Low", label: "Low" },
+                  { value: "Medium", label: "Medium" },
+                  { value: "High", label: "High" },
+                  { value: "Critical", label: "Critical" }
+                ]}
+              />
             </div>
           </motion.div>
         );
       case 1:
         return (
-          <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-6">
-            <h3 className="text-[18px] font-bold text-[#0A0A0A] mb-4">2. Context & Descriptions</h3>
-            <div className="space-y-6">
-              <div className="space-y-2">
-                <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Main Description <span className="text-[#DC2626]">*</span></label>
-                <textarea required rows={4} value={formData.projectDescription} onChange={(e) => setFormData({...formData, projectDescription: e.target.value})} className="w-full p-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px] resize-none" placeholder="Primary overview of the project..." />
-              </div>
-              <div className="space-y-2">
-                <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Project Context</label>
-                <textarea rows={3} value={formData.context} onChange={(e) => setFormData({...formData, context: e.target.value})} className="w-full p-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px] resize-none" placeholder="Background story, why we are doing this..." />
-              </div>
-              <div className="space-y-2">
-                <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Client Brief Notes</label>
-                <textarea rows={3} value={formData.clientBrief} onChange={(e) => setFormData({...formData, clientBrief: e.target.value})} className="w-full p-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px] resize-none" placeholder="Raw notes, requirements from the client..." />
-              </div>
+          <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-10">
+            <div className="border-l-4 border-[#0A0A0A] pl-6 py-2">
+              <h3 className="text-[24px] font-black text-[#0A0A0A] uppercase tracking-tight">2. Narrative & Context</h3>
+              <p className="text-[13px] text-[#71717A] uppercase tracking-wider font-medium">Define the "why" and "how" of the project.</p>
+            </div>
+            
+            <div className="space-y-10">
+              <PremiumTextarea 
+                label="Main Description" 
+                required 
+                rows={4} 
+                value={formData.projectDescription} 
+                onChange={(e) => setFormData({...formData, projectDescription: e.target.value})} 
+                placeholder="High-level summary of the goals and expected outcomes..."
+                helperText="This will be the primary text shown on the project page."
+              />
+              <PremiumTextarea 
+                label="Project Context" 
+                rows={3} 
+                value={formData.context} 
+                onChange={(e) => setFormData({...formData, context: e.target.value})} 
+                placeholder="Background, constraints, and specific challenges..."
+              />
+              <PremiumTextarea 
+                label="Client Brief Notes" 
+                rows={3} 
+                value={formData.clientBrief} 
+                onChange={(e) => setFormData({...formData, clientBrief: e.target.value})} 
+                placeholder="Specific requirements or direct feedback from the client..."
+              />
             </div>
           </motion.div>
         );
       case 2:
         return (
-          <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-6">
-            <h3 className="text-[18px] font-bold text-[#0A0A0A] mb-4">3. Logistics & Team</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Budget</label>
-                <input type="text" value={formData.budget} onChange={(e) => setFormData({...formData, budget: e.target.value})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]" placeholder="e.g. €4.2M or 15000 PLN" />
-              </div>
-              <div className="space-y-2">
-                <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Timeline / ETA</label>
-                <input type="text" value={formData.timeline} onChange={(e) => setFormData({...formData, timeline: e.target.value})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]" placeholder="e.g. Q3 2024" />
-              </div>
-              <div className="space-y-2">
-                <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Due Date</label>
-                <input type="date" value={formData.dueDate} onChange={(e) => setFormData({...formData, dueDate: e.target.value})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]" />
-              </div>
-              <div className="space-y-2">
-                <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Location</label>
-                <input type="text" value={formData.location} onChange={(e) => setFormData({...formData, location: e.target.value})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]" placeholder="e.g. Copenhagen, DK" />
-              </div>
-              <div className="space-y-2">
-                <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Client Name</label>
-                <input type="text" value={formData.clientInfo} onChange={(e) => setFormData({...formData, clientInfo: e.target.value})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]" placeholder="e.g. Acme Corp" />
-              </div>
-              <div className="space-y-2 md:col-span-2">
-                <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Assigned Team</label>
-                <input type="text" value={formData.assignedUsersInfo} onChange={(e) => setFormData({...formData, assignedUsersInfo: e.target.value})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]" placeholder="e.g. John Doe (Lead), Anna Smith (Design)" />
+          <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-10">
+            <div className="border-l-4 border-[#0A0A0A] pl-6 py-2">
+              <h3 className="text-[24px] font-black text-[#0A0A0A] uppercase tracking-tight">3. Logistics & Resources</h3>
+              <p className="text-[13px] text-[#71717A] uppercase tracking-wider font-medium">Numbers and people that drive the project.</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
+              <PremiumInput 
+                label="Budget" 
+                value={formData.budget} 
+                onChange={(e) => setFormData({...formData, budget: e.target.value})} 
+                placeholder="e.g. €45,000" 
+              />
+              <PremiumInput 
+                label="Timeline / ETA" 
+                value={formData.timeline} 
+                onChange={(e) => setFormData({...formData, timeline: e.target.value})} 
+                placeholder="e.g. 6 Months" 
+              />
+              <PremiumInput 
+                label="Due Date" 
+                type="date" 
+                value={formData.dueDate} 
+                onChange={(e) => setFormData({...formData, dueDate: e.target.value})} 
+              />
+              <PremiumInput 
+                label="Location" 
+                value={formData.location} 
+                onChange={(e) => setFormData({...formData, location: e.target.value})} 
+                placeholder="e.g. Remote / London, UK" 
+              />
+              <PremiumInput 
+                label="Client Name" 
+                value={formData.clientInfo} 
+                onChange={(e) => setFormData({...formData, clientInfo: e.target.value})} 
+                placeholder="Name of the company or individual" 
+              />
+              
+              <div className="md:col-span-2 pt-10 border-t border-[#E5E5E5]">
+                <label className="block text-[11px] font-bold uppercase tracking-widest text-[#71717A] mb-6">Assign Team Members</label>
+                <div className="bg-white border border-[#E5E5E5] p-6 shadow-sm">
+                  <AssignmentManager 
+                    entityId={project.id} 
+                    entityType="project" 
+                    initialMembers={project.assignedEmployees || []} 
+                  />
+                </div>
               </div>
             </div>
           </motion.div>
         );
       case 3:
         return (
-          <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-6">
-            <h3 className="text-[18px] font-bold text-[#0A0A0A] mb-4">4. External Links</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Website URL</label>
-                <input type="url" value={formData.websiteUrl} onChange={(e) => setFormData({...formData, websiteUrl: e.target.value})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]" placeholder="https://..." />
-              </div>
-              <div className="space-y-2">
-                <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">GitHub URL</label>
-                <input type="url" value={formData.githubUrl} onChange={(e) => setFormData({...formData, githubUrl: e.target.value})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]" placeholder="https://github.com/..." />
-              </div>
+          <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-10">
+            <div className="border-l-4 border-[#0A0A0A] pl-6 py-2">
+              <h3 className="text-[24px] font-black text-[#0A0A0A] uppercase tracking-tight">4. External Connections</h3>
+              <p className="text-[13px] text-[#71717A] uppercase tracking-wider font-medium">Link this project to the digital world.</p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
+              <PremiumInput 
+                label="Website URL" 
+                type="url" 
+                value={formData.websiteUrl} 
+                onChange={(e) => setFormData({...formData, websiteUrl: e.target.value})} 
+                placeholder="https://project-live-link.com" 
+              />
+              <PremiumInput 
+                label="GitHub URL" 
+                type="url" 
+                value={formData.githubUrl} 
+                onChange={(e) => setFormData({...formData, githubUrl: e.target.value})} 
+                placeholder="https://github.com/org/repo" 
+              />
             </div>
           </motion.div>
         );
       case 4:
         return (
-          <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-8">
-            <h3 className="text-[18px] font-bold text-[#0A0A0A] mb-4">5. Milestones & Gallery</h3>
+          <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-12">
+            <div className="border-l-4 border-[#0A0A0A] pl-6 py-2">
+              <h3 className="text-[24px] font-black text-[#0A0A0A] uppercase tracking-tight">5. Milestones & Assets</h3>
+              <p className="text-[13px] text-[#71717A] uppercase tracking-wider font-medium">Finalize the roadmap and visual identity.</p>
+            </div>
             
-            <div className="space-y-4">
-              <div className="flex justify-between items-center border-b border-[#E5E5E5] pb-2">
-                <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#0A0A0A]">Milestones Roadmap</label>
-                <button type="button" onClick={addMilestone} className="text-[12px] font-medium text-[#71717A] hover:text-[#0A0A0A]">+ Add Milestone</button>
+            <div className="space-y-8">
+              <div className="flex justify-between items-center border-b-2 border-[#0A0A0A] pb-4">
+                <label className="block text-[12px] font-black uppercase tracking-[0.15em] text-[#0A0A0A]">Roadmap Milestones</label>
+                <button 
+                  type="button" 
+                  onClick={addMilestone} 
+                  className="px-4 py-2 bg-[#0A0A0A] text-white text-[10px] font-bold uppercase tracking-widest hover:bg-[#FAFAFA] hover:text-[#0A0A0A] border border-[#0A0A0A] transition-all"
+                >
+                  + Add Milestone
+                </button>
               </div>
-              {formData.milestones.length === 0 && <p className="text-[13px] text-[#71717A]">No milestones added yet.</p>}
-              {formData.milestones.map((m: any, i: number) => (
-                <div key={i} className="flex flex-col gap-3 bg-[#F4F4F5] p-3 border border-[#E5E5E5]">
-                  <div className="flex items-center gap-4">
-                    <input type="checkbox" checked={m.completed || m.progress === 100} onChange={(e) => {
-                      updateMilestone(i, 'completed', e.target.checked);
-                      if (e.target.checked) updateMilestone(i, 'progress', 100);
-                    }} className="w-4 h-4 rounded-none accent-[#0A0A0A]" />
-                    <input type="text" placeholder="Title (e.g. Design Phase)" value={m.title} onChange={(e) => updateMilestone(i, 'title', e.target.value)} className="flex-1 bg-transparent border-b border-[#D4D4D8] focus:border-[#0A0A0A] outline-none text-[13px]" />
-                    <input type="text" placeholder="Date/ETA" value={m.date} onChange={(e) => updateMilestone(i, 'date', e.target.value)} className="w-24 bg-transparent border-b border-[#D4D4D8] focus:border-[#0A0A0A] outline-none text-[13px]" />
-                    <button type="button" onClick={() => removeMilestone(i)} className="text-[#DC2626] font-bold text-[14px] hover:scale-110 transition-transform">✕</button>
-                  </div>
-                  <div className="flex items-center gap-3 pl-8 pr-2">
-                    <span className="text-[10px] font-bold text-[#71717A] uppercase tracking-wider">Progress</span>
-                    <input type="range" min="0" max="100" value={m.progress || 0} onChange={(e) => updateMilestone(i, 'progress', parseInt(e.target.value))} className="flex-1 h-1 bg-[#D4D4D8] appearance-none cursor-pointer accent-[#0A0A0A]" />
-                    <span className="text-[11px] font-bold text-[#0A0A0A] w-8 text-right">{m.progress || 0}%</span>
-                  </div>
+              
+              {formData.milestones.length === 0 && (
+                <div className="py-12 text-center border border-dashed border-[#D4D4D8]">
+                  <p className="text-[12px] text-[#71717A] uppercase tracking-widest">No milestones defined yet.</p>
                 </div>
-              ))}
+              )}
+              
+              <div className="space-y-4">
+                {formData.milestones.map((m: any, i: number) => (
+                  <motion.div 
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    key={i} 
+                    className="group relative bg-white p-6 border border-[#E5E5E5] transition-all hover:border-[#0A0A0A]"
+                  >
+                    <div className="flex items-start gap-6">
+                      <div className="pt-2">
+                        <input 
+                          type="checkbox" 
+                          checked={m.completed || m.progress === 100} 
+                          onChange={(e) => {
+                            updateMilestone(i, 'completed', e.target.checked);
+                            if (e.target.checked) updateMilestone(i, 'progress', 100);
+                          }} 
+                          className="w-5 h-5 rounded-none accent-[#0A0A0A] border-2 border-[#D4D4D8] cursor-pointer" 
+                        />
+                      </div>
+                      <div className="flex-1 grid grid-cols-1 md:grid-cols-4 gap-4">
+                        <div className="md:col-span-2">
+                          <PremiumInput 
+                            label="Title"
+                            placeholder="e.g. Design Handover" 
+                            value={m.title} 
+                            onChange={(e) => updateMilestone(i, 'title', e.target.value)} 
+                            className="h-9"
+                          />
+                        </div>
+                        <div className="md:col-span-1">
+                          <PremiumInput 
+                            label="Target Date"
+                            placeholder="Q4 2024" 
+                            value={m.date} 
+                            onChange={(e) => updateMilestone(i, 'date', e.target.value)} 
+                            className="h-9"
+                          />
+                        </div>
+                        <div className="md:col-span-1 flex items-center justify-end pt-4">
+                          <button 
+                            type="button" 
+                            onClick={() => removeMilestone(i)} 
+                            className="text-[10px] font-bold text-[#DC2626] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity hover:underline"
+                          >
+                            Remove
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className="mt-8 flex items-center gap-6 pl-11">
+                      <div className="flex-1">
+                        <div className="flex justify-between mb-2">
+                          <span className="text-[10px] font-bold text-[#71717A] uppercase tracking-wider">Completion Progress</span>
+                          <span className="text-[11px] font-black text-[#0A0A0A]">{m.progress || 0}%</span>
+                        </div>
+                        <input 
+                          type="range" 
+                          min="0" 
+                          max="100" 
+                          value={m.progress || 0} 
+                          onChange={(e) => updateMilestone(i, 'progress', parseInt(e.target.value))} 
+                          className="w-full h-1 bg-[#F4F4F5] appearance-none cursor-pointer accent-[#0A0A0A]" 
+                        />
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
             </div>
 
-            <div className="space-y-2 pt-4">
-              <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#0A0A0A]">Project Gallery</label>
-              <ImageUploader images={formData.images} onChange={(imgs) => setFormData({...formData, images: imgs})} />
+            <div className="space-y-6 pt-8 border-t border-[#0A0A0A]">
+              <label className="block text-[12px] font-black uppercase tracking-[0.15em] text-[#0A0A0A]">Project Gallery</label>
+              <div className="bg-white border border-[#E5E5E5] p-8">
+                <ImageUploader images={formData.images} onChange={(imgs) => setFormData({...formData, images: imgs})} />
+              </div>
             </div>
           </motion.div>
         );
@@ -474,12 +606,13 @@ export default function ProjectDetailsClient({ project, isUnauthorized = false }
                   <dd className="text-[14px] font-medium text-[#0A0A0A]">{project.clientInfo}</dd>
                 </div>
               )}
-              {project.assignedUsersInfo && (
-                <div>
-                  <dt className="text-[10px] tracking-[0.06em] uppercase text-[#71717A] mb-1">Team</dt>
-                  <dd className="text-[14px] font-medium text-[#0A0A0A]">{project.assignedUsersInfo}</dd>
-                </div>
-              )}
+              <div className="pt-4 border-t border-[#E5E5E5]">
+                <AssignmentManager 
+                  entityId={project.id} 
+                  entityType="project" 
+                  initialMembers={project.assignedEmployees || []} 
+                />
+              </div>
             </dl>
           </div>
 
@@ -515,24 +648,25 @@ export default function ProjectDetailsClient({ project, isUnauthorized = false }
             <p className="text-[14px] text-[#71717A] mb-6">
               This action cannot be undone. To verify, type <span className="font-bold text-[#0A0A0A]">{project.projectName}</span> below.
             </p>
-            <input 
-              type="text" 
+            <PremiumInput 
+              label="Project Name Verification"
               value={deleteConfirmation}
               onChange={(e) => setDeleteConfirmation(e.target.value)}
               placeholder="Type project name..."
-              className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#DC2626] focus:border-2 outline-none mb-6 text-[14px]"
+              className="mb-6"
+              error={deleteConfirmation && deleteConfirmation !== project.projectName ? "Name mismatch" : ""}
             />
             <div className="flex gap-4">
               <button 
                 onClick={handleDelete}
                 disabled={deleteConfirmation !== project.projectName || isSubmitting}
-                className="flex-1 h-10 bg-[#DC2626] text-white font-medium text-[13px] uppercase tracking-[0.04em] disabled:opacity-30 disabled:cursor-not-allowed hover:bg-red-700 transition-colors"
+                className="flex-1 h-12 bg-[#DC2626] text-white font-bold text-[11px] uppercase tracking-widest disabled:opacity-30 disabled:cursor-not-allowed hover:bg-red-700 transition-colors"
               >
                 {isSubmitting ? "Deleting..." : "Delete Permanently"}
               </button>
               <button 
                 onClick={() => { setIsDeleteOpen(false); setDeleteConfirmation(""); }}
-                className="flex-1 h-10 bg-transparent border border-[#E5E5E5] text-[#0A0A0A] font-medium text-[13px] uppercase tracking-[0.04em] hover:bg-[#F4F4F5] transition-colors"
+                className="flex-1 h-12 bg-transparent border border-[#E5E5E5] text-[#0A0A0A] font-bold text-[11px] uppercase tracking-widest hover:bg-[#F4F4F5] transition-colors"
               >
                 Cancel
               </button>
@@ -634,88 +768,81 @@ export default function ProjectDetailsClient({ project, isUnauthorized = false }
             <form onSubmit={handleEditSubmit} className="space-y-12">
               
               {/* Section 1 */}
-              <section className="space-y-6">
-                <h3 className="text-[12px] font-bold uppercase tracking-[0.08em] text-[#0A0A0A] border-b border-[#E5E5E5] pb-2">Basic Information</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Project Name</label>
-                    <input type="text" required value={formData.projectName} onChange={(e) => setFormData({...formData, projectName: e.target.value})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Status</label>
-                    <select value={formData.projectStatus} onChange={(e) => setFormData({...formData, projectStatus: e.target.value as any})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]">
-                      <option value="IN_PROGRESS">In Progress</option>
-                      <option value="DONE">Done</option>
-                      <option value="CANCELED">Canceled</option>
-                    </select>
-                  </div>
-                  <div className="space-y-2">
-                    <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Project Type</label>
-                    <input type="text" value={formData.projectType} onChange={(e) => setFormData({...formData, projectType: e.target.value})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Priority</label>
-                    <select value={formData.priority} onChange={(e) => setFormData({...formData, priority: e.target.value})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]">
-                      <option value="">Select priority...</option>
-                      <option value="Low">Low</option>
-                      <option value="Medium">Medium</option>
-                      <option value="High">High</option>
-                      <option value="Critical">Critical</option>
-                    </select>
-                  </div>
+              <section className="space-y-8">
+                <div className="border-l-4 border-[#0A0A0A] pl-6 py-1">
+                  <h3 className="text-[14px] font-black uppercase tracking-[0.15em] text-[#0A0A0A]">Basic Information</h3>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <PremiumInput 
+                    label="Project Name" 
+                    required 
+                    value={formData.projectName} 
+                    onChange={(e) => setFormData({...formData, projectName: e.target.value})} 
+                  />
+                  <PremiumSelect 
+                    label="Status" 
+                    value={formData.projectStatus} 
+                    onChange={(e) => setFormData({...formData, projectStatus: e.target.value as any})}
+                    options={[
+                      { value: "IN_PROGRESS", label: "In Progress" },
+                      { value: "DONE", label: "Done" },
+                      { value: "CANCELED", label: "Canceled" }
+                    ]}
+                  />
+                  <PremiumInput 
+                    label="Project Type" 
+                    value={formData.projectType} 
+                    onChange={(e) => setFormData({...formData, projectType: e.target.value})} 
+                  />
+                  <PremiumSelect 
+                    label="Priority" 
+                    value={formData.priority} 
+                    onChange={(e) => setFormData({...formData, priority: e.target.value})}
+                    options={[
+                      { value: "", label: "Select priority..." },
+                      { value: "Low", label: "Low" },
+                      { value: "Medium", label: "Medium" },
+                      { value: "High", label: "High" },
+                      { value: "Critical", label: "Critical" }
+                    ]}
+                  />
                 </div>
               </section>
 
               {/* Section 2 */}
-              <section className="space-y-6">
-                <h3 className="text-[12px] font-bold uppercase tracking-[0.08em] text-[#0A0A0A] border-b border-[#E5E5E5] pb-2">Descriptions</h3>
-                <div className="space-y-4">
-                  <div className="space-y-2">
-                    <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Description</label>
-                    <textarea required rows={4} value={formData.projectDescription} onChange={(e) => setFormData({...formData, projectDescription: e.target.value})} className="w-full p-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px] resize-none" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Context</label>
-                    <textarea rows={3} value={formData.context} onChange={(e) => setFormData({...formData, context: e.target.value})} className="w-full p-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px] resize-none" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Client Brief Notes</label>
-                    <textarea rows={3} value={formData.clientBrief} onChange={(e) => setFormData({...formData, clientBrief: e.target.value})} className="w-full p-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px] resize-none" />
-                  </div>
+              <section className="space-y-8">
+                <div className="border-l-4 border-[#0A0A0A] pl-6 py-1">
+                  <h3 className="text-[14px] font-black uppercase tracking-[0.15em] text-[#0A0A0A]">Descriptions</h3>
+                </div>
+                <div className="space-y-8">
+                  <PremiumTextarea label="Description" required rows={4} value={formData.projectDescription} onChange={(e) => setFormData({...formData, projectDescription: e.target.value})} />
+                  <PremiumTextarea label="Context" rows={3} value={formData.context} onChange={(e) => setFormData({...formData, context: e.target.value})} />
+                  <PremiumTextarea label="Client Brief Notes" rows={3} value={formData.clientBrief} onChange={(e) => setFormData({...formData, clientBrief: e.target.value})} />
                 </div>
               </section>
 
               {/* Section 3 */}
-              <section className="space-y-6">
-                <h3 className="text-[12px] font-bold uppercase tracking-[0.08em] text-[#0A0A0A] border-b border-[#E5E5E5] pb-2">Logistics & Links</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Budget</label>
-                    <input type="text" value={formData.budget} onChange={(e) => setFormData({...formData, budget: e.target.value})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Timeline / ETA</label>
-                    <input type="text" value={formData.timeline} onChange={(e) => setFormData({...formData, timeline: e.target.value})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Due Date</label>
-                    <input type="date" value={formData.dueDate} onChange={(e) => setFormData({...formData, dueDate: e.target.value})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Location</label>
-                    <input type="text" value={formData.location} onChange={(e) => setFormData({...formData, location: e.target.value})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Client Info</label>
-                    <input type="text" value={formData.clientInfo} onChange={(e) => setFormData({...formData, clientInfo: e.target.value})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Website URL</label>
-                    <input type="url" value={formData.websiteUrl} onChange={(e) => setFormData({...formData, websiteUrl: e.target.value})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]" />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">GitHub URL</label>
-                    <input type="url" value={formData.githubUrl} onChange={(e) => setFormData({...formData, githubUrl: e.target.value})} className="w-full h-10 px-3 bg-[#FAFAFA] border border-[#D4D4D8] rounded-none focus:border-[#0A0A0A] outline-none text-[14px]" />
+              <section className="space-y-8">
+                <div className="border-l-4 border-[#0A0A0A] pl-6 py-1">
+                  <h3 className="text-[14px] font-black uppercase tracking-[0.15em] text-[#0A0A0A]">Logistics & Links</h3>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <PremiumInput label="Budget" value={formData.budget} onChange={(e) => setFormData({...formData, budget: e.target.value})} />
+                  <PremiumInput label="Timeline / ETA" value={formData.timeline} onChange={(e) => setFormData({...formData, timeline: e.target.value})} />
+                  <PremiumInput label="Due Date" type="date" value={formData.dueDate} onChange={(e) => setFormData({...formData, dueDate: e.target.value})} />
+                  <PremiumInput label="Location" value={formData.location} onChange={(e) => setFormData({...formData, location: e.target.value})} />
+                  <PremiumInput label="Client Info" value={formData.clientInfo} onChange={(e) => setFormData({...formData, clientInfo: e.target.value})} />
+                  <PremiumInput label="Website URL" type="url" value={formData.websiteUrl} onChange={(e) => setFormData({...formData, websiteUrl: e.target.value})} />
+                  <PremiumInput label="GitHub URL" type="url" value={formData.githubUrl} onChange={(e) => setFormData({...formData, githubUrl: e.target.value})} />
+                  <div className="md:col-span-2 pt-6">
+                    <label className="block text-[11px] font-bold uppercase tracking-widest text-[#71717A] mb-4">Assign Team Members</label>
+                    <div className="bg-[#FAFAFA] border border-[#E5E5E5] p-6 shadow-sm">
+                      <AssignmentManager 
+                        entityId={project.id} 
+                        entityType="project" 
+                        initialMembers={project.assignedEmployees || []} 
+                      />
+                    </div>
                   </div>
                 </div>
               </section>

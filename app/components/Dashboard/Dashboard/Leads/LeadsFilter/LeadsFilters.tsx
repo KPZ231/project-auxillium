@@ -58,11 +58,11 @@ export default function LeadsFilter({
           <button
             key={filter}
             onClick={() => onFilterChange(filter)}
-            className={`px-6 py-2 text-xs font-bold tracking-widest transition-all duration-200 ${
+            className={`px-6 py-2 text-[11px] font-bold tracking-widest uppercase transition-all duration-300 border ${
               selectedFilter === filter
-                ? "bg-black text-white"
-                : "bg-transparent text-gray-400 border border-gray-200 hover:border-gray-400"
-            }`}
+                ? "bg-[#0A0A0A] text-white border-[#0A0A0A]"
+                : "bg-transparent text-[#71717A] border-[#E5E5E5] hover:border-[#0A0A0A] hover:text-[#0A0A0A]"
+            } rounded-none`}
           >
             {filter}
           </button>
@@ -131,28 +131,28 @@ export default function LeadsFilter({
               className="fixed inset-0 bg-black/20 backdrop-blur-sm z-50 flex items-start justify-center pt-[10vh]"
             >
               <motion.div
-                initial={{ opacity: 0, scale: 0.95, y: -20 }}
+                initial={{ opacity: 0, scale: 0.98, y: -10 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
-                exit={{ opacity: 0, scale: 0.95, y: -20 }}
+                exit={{ opacity: 0, scale: 0.98, y: -10 }}
                 onClick={(e) => e.stopPropagation()}
-                className="w-full max-w-2xl bg-white shadow-2xl rounded-xl overflow-hidden border border-gray-100"
+                className="w-full max-w-2xl bg-white shadow-[0_32px_64px_-16px_rgba(0,0,0,0.15)] rounded-none overflow-hidden border border-[#0A0A0A]"
               >
-                <div className="flex items-center px-6 py-4 border-b border-gray-100">
-                  <Search className="text-gray-400 mr-4" size={20} />
+                <div className="flex items-center px-8 py-6 border-b border-[#F4F4F5]">
+                  <Search className="text-[#0A0A0A] mr-6" size={24} strokeWidth={1.5} />
                   <input
                     autoFocus
                     type="text"
                     placeholder="Search leads..."
                     value={searchQuery}
                     onChange={(e) => onSearchChange(e.target.value)}
-                    className="flex-1 text-lg outline-none bg-transparent placeholder:text-gray-300"
+                    className="flex-1 text-[18px] outline-none bg-transparent placeholder:text-[#D4D4D8] font-light text-[#0A0A0A]"
                   />
                   <button
                     onClick={() => {
                       onSearchChange("");
                       setIsSearchOpen(false);
                     }}
-                    className="text-[10px] px-1.5 py-0.5 rounded border border-gray-200 font-bold text-gray-400 hover:text-black transition-colors"
+                    className="text-[10px] px-2 py-1 border border-[#E5E5E5] font-bold text-[#71717A] hover:text-[#0A0A0A] hover:border-[#0A0A0A] transition-all rounded-none uppercase tracking-widest"
                   >
                     ESC
                   </button>
@@ -160,30 +160,30 @@ export default function LeadsFilter({
                 
                 <div className="max-h-[60vh] overflow-y-auto">
                   {!searchQuery ? (
-                    <div className="p-6">
-                      <h3 className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mb-4">
-                        Suggested Results
+                    <div className="p-8">
+                      <h3 className="text-[11px] font-bold text-[#71717A] uppercase tracking-[0.2em] mb-6">
+                        Quick Suggestions
                       </h3>
-                      <div className="space-y-2">
+                      <div className="space-y-3">
                         {SUGGESTIONS.map((item) => (
                           <div
                             key={item.id}
-                            className="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50 cursor-pointer transition-colors border border-transparent hover:border-gray-100"
+                            className="flex items-center justify-between p-4 rounded-none hover:bg-[#F4F4F5] cursor-pointer transition-all border border-transparent hover:border-[#E5E5E5]"
                             onClick={() => {
                               onSearchChange(item.title);
                               setIsSearchOpen(false);
                             }}
                           >
-                            <div className="flex items-center gap-3">
-                              <div className="w-8 h-8 rounded bg-gray-100 flex items-center justify-center text-xs font-bold text-gray-500">
+                            <div className="flex items-center gap-4">
+                              <div className="w-10 h-10 rounded-none bg-[#0A0A0A] flex items-center justify-center text-[13px] font-bold text-white uppercase">
                                 {item.title[0]}
                               </div>
                               <div>
-                                <p className="text-sm font-bold text-gray-800">{item.title}</p>
-                                <p className="text-[10px] text-gray-400">{item.type}</p>
+                                <p className="text-[14px] font-bold text-[#0A0A0A] uppercase tracking-tight">{item.title}</p>
+                                <p className="text-[10px] text-[#71717A] uppercase tracking-widest">{item.type}</p>
                               </div>
                             </div>
-                            <span className="text-[10px] font-bold px-2 py-1 bg-gray-100 rounded text-gray-500">
+                            <span className="text-[10px] font-bold px-3 py-1 bg-[#FAFAFA] border border-[#E5E5E5] text-[#71717A] uppercase tracking-wider">
                               {item.status}
                             </span>
                           </div>
@@ -202,22 +202,22 @@ export default function LeadsFilter({
                   )}
                 </div>
 
-                <div className="px-6 py-3 bg-gray-50 border-t border-gray-100 flex items-center justify-between">
-                  <div className="flex items-center gap-4">
-                    <div className="flex items-center gap-1.5">
-                      <kbd className="px-1.5 py-0.5 rounded bg-white border border-gray-200 text-[10px] font-bold shadow-sm">
+                <div className="px-8 py-4 bg-[#FAFAFA] border-t border-[#F4F4F5] flex items-center justify-between">
+                  <div className="flex items-center gap-6">
+                    <div className="flex items-center gap-2">
+                      <kbd className="px-2 py-1 rounded-none bg-white border border-[#D4D4D8] text-[10px] font-bold shadow-sm text-[#0A0A0A]">
                         ↵
                       </kbd>
-                      <span className="text-[10px] text-gray-400 font-medium">to select</span>
+                      <span className="text-[10px] text-[#71717A] font-bold uppercase tracking-widest">Select</span>
                     </div>
-                    <div className="flex items-center gap-1.5">
-                      <kbd className="px-1.5 py-0.5 rounded bg-white border border-gray-200 text-[10px] font-bold shadow-sm">
+                    <div className="flex items-center gap-2">
+                      <kbd className="px-2 py-1 rounded-none bg-white border border-[#D4D4D8] text-[10px] font-bold shadow-sm text-[#0A0A0A]">
                         ↑↓
                       </kbd>
-                      <span className="text-[10px] text-gray-400 font-medium">to navigate</span>
+                      <span className="text-[10px] text-[#71717A] font-bold uppercase tracking-widest">Navigate</span>
                     </div>
                   </div>
-                  <span className="text-[10px] text-gray-300 italic">Project Auxillium Search</span>
+                  <span className="text-[10px] text-[#D4D4D8] uppercase tracking-[0.3em] font-black">Auxilium Engine</span>
                 </div>
               </motion.div>
             </motion.div>

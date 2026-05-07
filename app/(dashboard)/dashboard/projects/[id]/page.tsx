@@ -12,7 +12,10 @@ export default async function ProjectDetailsPage({ params }: { params: Promise<{
   const { isAuthenticatedAndLogedIn, userId } = await getUser()
 
   const project = await prisma.project.findUnique({
-    where: { id }
+    where: { id },
+    include: {
+      assignedEmployees: true
+    }
   })
 
   if (!project) {

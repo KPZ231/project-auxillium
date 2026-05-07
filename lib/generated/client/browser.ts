@@ -52,3 +52,23 @@ export type Employee = Prisma.EmployeeModel
  * 
  */
 export type Task = Prisma.TaskModel
+/**
+ * Model Expense
+ * 
+ */
+export type Expense = Prisma.ExpenseModel
+/**
+ * Model Income
+ * 
+ */
+export type Income = Prisma.IncomeModel
+/**
+ * Model RevenueGoal
+ * 
+ */
+export type RevenueGoal = Prisma.RevenueGoalModel
+/**
+ * Model FinancialLabel
+ * 
+ */
+export type FinancialLabel = Prisma.FinancialLabelModel

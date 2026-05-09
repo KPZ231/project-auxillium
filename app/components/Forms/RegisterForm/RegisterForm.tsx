@@ -10,10 +10,12 @@ import { FcGoogle } from "react-icons/fc";
 import { RegisterFormData, registerSchema } from "@/lib/validators";
 import { useRouter } from "next/navigation";
 import { registerAction } from "@/actions/register";
+import { useTranslation } from "@/app/context/TranslationContext";
 
 export default function RegisterForm() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const { t, language } = useTranslation();
 
   const {
     register,
@@ -33,15 +35,15 @@ export default function RegisterForm() {
       setLoading(false);
 
       if (result.success) {
-        toast.success(`Zarejestrowano pomyślnie`, {
-          description: "Przekierowywanie do panelu użytkownika.",
+        toast.success(t("forms:success.registration_success"), {
+          description: t("forms:success.redirecting_dashboard", { defaultValue: "Przekierowywanie do panelu użytkownika." }),
         });
         reset();
-        router.push("/dashboard");
+        router.push(`/${language}/dashboard`);
       } else {
-        toast.error("Wystąpił błąd", {
+        toast.error(t("common:messages.error"), {
           description:
-            result.error || "Nie udało się zarejestrować. Spróbuj ponownie.",
+            result.error || t("forms:errors.registration_failed", { defaultValue: "Nie udało się zarejestrować. Spróbuj ponownie." }),
         });
       }
     } catch {
@@ -53,8 +55,8 @@ export default function RegisterForm() {
   }
 
   const onValidationError = () => {
-    toast.error("Błąd walidacji", {
-      description: "Proszę poprawić błędy w polach formularza",
+    toast.error(t("forms:labels.validation_error"), {
+      description: t("forms:labels.validation_error_desc"),
     });
   };
 
@@ -64,10 +66,10 @@ export default function RegisterForm() {
         {/* Header */}
         <div className="text-center flex flex-col gap-3">
           <h1 className="text-4xl lg:text-5xl font-bold text-(--primary) tracking-tight uppercase">
-            Rejestracja
+            {t("forms:labels.registration_title", { defaultValue: "Rejestracja" })}
           </h1>
           <p className="text-sm text-(--neutral) opacity-60 tracking-tight">
-            Witaj w systemie Auxillium.
+            {t("forms:labels.registration_subtitle", { defaultValue: "Witaj w systemie Auxillium." })}
           </p>
         </div>
 
@@ -79,12 +81,12 @@ export default function RegisterForm() {
           {/* Email/Username Field */}
           <div className="flex flex-col gap-3">
             <label className="text-[10px] font-bold tracking-[0.2em] text-(--neutral) uppercase opacity-60">
-              Adres e-mail lub login *
+              {t("forms:form.email_or_login")} *
             </label>
             <input
               {...register("username")}
               type="text"
-              placeholder="Wprowadź e-mail lub login"
+              placeholder={t("forms:placeholders.email_or_login")}
               className={`w-full py-4 border-b ${errors.username ? 'border-red-500' : 'border-(--tertiary)'} focus:border-(--primary) outline-none transition-colors text-sm tracking-wide bg-transparent`}
             />
             {errors.username && (
@@ -97,18 +99,18 @@ export default function RegisterForm() {
           {/* Password Field */}
           <div className="flex flex-col gap-3">
             <label className="text-[10px] font-bold tracking-[0.2em] text-(--neutral) uppercase opacity-60">
-              Hasło *
+              {t("forms:form.password")} *
             </label>
             <input
               {...register("password")}
               type="password"
-              placeholder="••••••••"
+              placeholder={t("forms:placeholders.password")}
               className={`w-full py-4 border-b ${errors.password ? 'border-red-500' : 'border-(--tertiary)'} focus:border-(--primary) outline-none transition-colors text-sm tracking-wide bg-transparent`}
             />
             <input
               {...register("confirmPassword")}
               type="password"
-              placeholder="Potwierdź hasło"
+              placeholder={t("forms:form.confirm_password")}
               className={`w-full py-4 border-b ${errors.confirmPassword ? 'border-red-500' : 'border-(--tertiary)'} focus:border-(--primary) outline-none transition-colors text-sm tracking-wide bg-transparent`}
             />
             {errors.password && (
@@ -129,9 +131,9 @@ export default function RegisterForm() {
             type="submit"
             className="w-full py-5 bg-(--primary) text-(--secondary) font-bold text-sm tracking-widest uppercase flex items-center justify-center gap-3 hover:opacity-90 transition-opacity disabled:opacity-30 mt-4"
           >
-            {loading ? "Rejestracja..." : (
+            {loading ? t("forms:labels.registering", { defaultValue: "Rejestracja..." }) : (
               <>
-                Zarejestruj się <FaArrowRight className="w-4 h-4" />
+                {t("forms:buttons.sign_up", { ns: "common" })} <FaArrowRight className="w-4 h-4" />
               </>
             )}
           </button>
@@ -141,7 +143,7 @@ export default function RegisterForm() {
         <div className="w-full flex items-center gap-4 opacity-30">
           <div className="flex-1 h-px bg-(--neutral)"></div>
           <span className="text-[10px] font-bold tracking-[0.2em] uppercase whitespace-nowrap">
-            lub kontynuuj przez
+            {t("forms:labels.or_continue_with")}
           </span>
           <div className="flex-1 h-px bg-(--neutral)"></div>
         </div>
@@ -166,9 +168,9 @@ export default function RegisterForm() {
 
         {/* Footer */}
         <div className="text-center text-sm tracking-tight">
-          <span className="opacity-60">Nie masz konta? </span>
-          <Link href="/register" className="font-bold hover:underline">
-            Zarejestruj się
+          <span className="opacity-60">{t("forms:labels.have_account")} </span>
+          <Link href={`/${language}/login`} className="font-bold hover:underline">
+            {t("forms:buttons.log_in", { ns: "common" })}
           </Link>
         </div>
       </div>

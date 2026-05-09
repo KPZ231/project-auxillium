@@ -39,12 +39,11 @@ export default function ProjectDetailsClient({ project, isUnauthorized = false }
   // Modal states
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
-  const [isSetupOpen, setIsSetupOpen] = useState(false);
+  const [isSetupOpen, setIsSetupOpen] = useState(searchParams.get("setup") === "true");
   const [currentStep, setCurrentStep] = useState(0);
 
   useEffect(() => {
     if (searchParams.get("setup") === "true") {
-      setIsSetupOpen(true);
       // Remove setup=true from URL without refreshing the page
       window.history.replaceState(null, '', `/dashboard/projects/${project.id}`);
     }

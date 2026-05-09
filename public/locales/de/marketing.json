@@ -1,0 +1,44 @@
+{
+  "hero": {
+    "title": "AUXILLIUM <br/> neue Definition des Managements",
+    "subtitle": "Minimalismus, der Ihr Geschäft voranbringt",
+    "cta": "Jetzt starten",
+    "subtitle_alternative": "Minimalismus, der Ihr Geschäft voranbringt"
+  },
+  "features": {
+    "title": "SParen Sie bis zu 30%",
+    "description": "Durch Prozessautomatisierung sparen Sie Zeit und Geld",
+    "subtitle": "Effizienz steigern",
+    "subtitle_alternative": "Durch Prozessautomatisierung sparen Sie Zeit und Geld"
+  },
+  "pricing": {
+    "title": "Überprüfen Sie unsere Pläne",
+    "subtitle": "Wählen Sie den richtigen Plan für Ihre Bedürfnisse",
+    "free": "Kostenlos",
+    "pro": "Pro",
+    "enterprise": "Enterprise",
+    "free_desc": "Kostenloser Plan",
+    "pro_desc": "Pro-Plan",
+    "enterprise_desc": "Enterprise-Plan",
+    "cta": "Jetzt starten"
+  },
+  "testimonials": {
+    "title": "Philosophie",
+    "subtitle": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+  },
+  "faq": {
+    "title": "Häufig gestellte Fragen",
+    "subtitle": "Alles was Sie über Auxillium wissen müssen",
+    "q1": "Wie beginne ich mit der Nutzung des Systems?",
+    "a1": "Registrieren Sie sich einfach auf unserer Plattform und wählen Sie den kostenlosen Plan, um die grundlegenden Funktionen zu testen.",
+    "q2": "Kann ich meinen Plan jederzeit ändern?",
+    "a2": "Ja, Sie können jederzeit auf einen höheren oder niedrigeren Plan umsteigen. Änderungen werden ab der nächsten Abrechnungsperiode wirksam.",
+    "q3": "Welche Zahlungsmethoden werden akzeptiert?",
+    "a3": "Wir akzeptieren Kartenzahlungen, Sofortüberweisungen und wiederkehrende Zahlungen (Abo-Modelle)."
+  },
+  "cta": {
+    "title": "Bereit für eine Veränderung?",
+    "subtitle": "Starten Sie noch heute mit Auxillium und überzeugen Sie sich, wie einfach Ihr Geschäftsmanagement sein kann.",
+    "cta": "Jetzt starten"
+  }
+}

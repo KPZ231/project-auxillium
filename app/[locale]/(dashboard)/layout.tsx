@@ -1,6 +1,6 @@
-import SidePanelWrapper from "../components/Dashboard/SidePanelWrapper";
-import TopBar from "../components/Dashboard/Dashboard/TopBar/TopBar";
-import { BreadcrumbProvider } from "../context/BreadcrumbContext";
+import SidePanelWrapper from "@/app/components/Dashboard/SidePanelWrapper";
+import TopBar from "@/app/components/Dashboard/Dashboard/TopBar/TopBar";
+import { BreadcrumbProvider } from "@/app/context/BreadcrumbContext";
 
 export default function DashboardLayout({
   children,

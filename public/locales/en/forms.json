@@ -1,0 +1,63 @@
+{
+  "form": {
+    "email_or_login": "Email or login",
+    "password": "Password",
+    "confirm_password": "Confirm password",
+    "username": "Username",
+    "full_name": "Full name",
+    "phone": "Phone",
+    "description": "Description",
+    "notes": "Notes",
+    "location": "Location",
+    "website": "Website",
+    "company": "Company",
+    "role": "Role",
+    "lead_name": "Lead name",
+    "contact_name": "Contact name",
+    "project_type": "Project type",
+    "email": "Email",
+    "first_name": "First name",
+    "last_name": "Last name",
+    "message": "Message",
+    "subject": "Subject"
+  },
+  "placeholders": {
+    "email_or_login": "Enter your email or login",
+    "password": "••••••••",
+    "confirm_password": "••••••••",
+    "full_name": "John Doe",
+    "phone": "+1 234 567 890",
+    "description": "Describe your need...",
+    "lead_name": "Company or individual name",
+    "contact_name": "Jane Smith",
+    "email": "john@example.com",
+    "company": "Company name",
+    "website": "https://www.example.com"
+  },
+  "labels": {
+    "or_continue_with": "or continue with",
+    "forgot_password": "Forgot password?",
+    "no_account": "Don't have an account?",
+    "have_account": "Already have an account?",
+    "password_requirements": "Password must be at least 8 characters, one uppercase, one lowercase, and one digit",
+    "required_field": "This field is required"
+  },
+  "errors": {
+    "invalid_email": "Invalid email format",
+    "invalid_login": "Invalid login format",
+    "password_too_short": "Password must be at least 8 characters",
+    "password_no_uppercase": "Password must contain at least one uppercase letter",
+    "password_no_lowercase": "Password must contain at least one lowercase letter",
+    "password_no_digit": "Password must contain at least one digit",
+    "passwords_do_not_match": "Passwords do not match",
+    "field_required": "This field is required",
+    "minimum_characters": "Min. {{count}} characters",
+    "invalid_input": "Invalid input"
+  },
+  "success": {
+    "login_success": "Login successful",
+    "registration_success": "Registration successful",
+    "password_reset_email_sent": "Password reset link has been sent",
+    "message_sent": "Message sent!"
+  }
+}

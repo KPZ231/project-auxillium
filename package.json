@@ -11,6 +11,7 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
+    "@hello-pangea/dnd": "^18.0.1",
     "@hookform/resolvers": "^5.2.2",
     "@mui/material": "^9.0.0",
     "@mui/x-charts": "^9.0.2",
@@ -22,7 +23,11 @@
     "@upstash/redis": "^1.37.0",
     "argon2": "^0.44.0",
     "cookies-next": "^6.1.1",
+    "date-fns": "^4.1.0",
     "gsap": "^3.15.0",
+    "i18next": "^26.0.10",
+    "i18next-browser-languagedetector": "^8.2.1",
+    "i18next-http-backend": "^4.0.0",
     "jose": "^6.2.2",
     "lucide-react": "^1.11.0",
     "motion": "^12.38.0",
@@ -32,6 +37,7 @@
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-hook-form": "^7.74.0",
+    "react-i18next": "^17.0.7",
     "react-icons": "^5.6.0",
     "react-player": "^3.4.0",
     "recharts": "^3.8.1",
@@ -41,6 +47,7 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@types/i18next": "^12.1.0",
     "@types/node": "^20",
     "@types/nodemailer": "^8.0.0",
     "@types/pg": "^8.20.0",
@@ -49,6 +56,7 @@
     "babel-plugin-react-compiler": "1.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
+    "i18next-resources-to-backend": "^1.2.1",
     "prisma": "^7.8.0",
     "tailwindcss": "^4",
     "typescript": "^5"

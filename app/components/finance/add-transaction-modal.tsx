@@ -28,16 +28,16 @@ export const AddTransactionModal = ({ isOpen, onClose, spaceId, userId }: AddTra
   const [labels, setLabels] = useState<{ id: string; name: string }[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  const fetchLabels = async () => {
+    const fetched = await getLabels(spaceId, type);
+    setLabels(fetched);
+  };
+
   useEffect(() => {
     if (isOpen) {
       fetchLabels();
     }
   }, [isOpen, type]);
-
-  const fetchLabels = async () => {
-    const fetched = await getLabels(spaceId, type);
-    setLabels(fetched);
-  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

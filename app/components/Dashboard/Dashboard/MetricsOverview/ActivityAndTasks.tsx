@@ -10,6 +10,8 @@ import {
 } from "recharts";
 import { Square, CheckSquare, Plus } from "lucide-react";
 
+import { useTranslation } from "@/app/context/TranslationContext";
+
 interface ChartData {
   name: string;
   value: number;
@@ -66,29 +68,9 @@ const mockActionItems: ActionItem[] = [
 ];
 
 export default function ActivityAndTasks() {
+  const { t } = useTranslation();
   const [chartData, setChartData] = useState<ChartData[]>(mockChartData);
   const [actionItems, setActionItems] = useState<ActionItem[]>(mockActionItems);
-
-  // ==========================================
-  // KOD DO ZACIĄGANIA DANYCH Z BAZY (ZAKOMENTOWANY)
-  // ==========================================
-  // useEffect(() => {
-  //   const fetchDashboardData = async () => {
-  //     try {
-  //       const [chartRes, tasksRes] = await Promise.all([
-  //         fetch('/api/dashboard/chart'),
-  //         fetch('/api/dashboard/tasks')
-  //       ]);
-  //       if (chartRes.ok && tasksRes.ok) {
-  //         setChartData(await chartRes.json());
-  //         setActionItems(await tasksRes.json());
-  //       }
-  //     } catch (error) {
-  //       console.error("Błąd pobierania danych:", error);
-  //     }
-  //   };
-  //   fetchDashboardData();
-  // }, []);
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -136,7 +118,7 @@ export default function ActivityAndTasks() {
         >
           <div className="flex justify-between items-center mb-10 z-10">
             <h3 className="text-sm font-bold text-black tracking-widest uppercase">
-              Activity Trajectory
+              {t("dashboard:metrics.activity_trajectory", "Activity Trajectory")}
             </h3>
             <div className="flex border border-gray-300 bg-white">
               <button className="px-4 py-1 text-xs font-bold bg-black text-white">
@@ -184,7 +166,7 @@ export default function ActivityAndTasks() {
           {/* Header */}
           <div className="bg-[#e5e5e5] p-6 flex justify-between items-center border-b border-gray-300">
             <h3 className="text-sm font-bold text-black tracking-widest uppercase">
-              Action Items
+              {t("dashboard:metrics.action_items", "Action Items")}
             </h3>
             <Plus className="w-5 h-5 text-black cursor-pointer" />
           </div>
@@ -229,7 +211,7 @@ export default function ActivityAndTasks() {
                             : "border-gray-400 text-gray-600 bg-gray-100"
                         }`}
                       >
-                        {item.badge.text}
+                        {t(`dashboard:status.${item.badge.type}`, item.badge.text)}
                       </span>
                     )}
                   </div>
@@ -242,7 +224,7 @@ export default function ActivityAndTasks() {
           {/* Footer */}
           <div className="p-6 mt-auto">
             <button className="w-full py-4 border border-gray-300 text-xs font-bold tracking-widest uppercase hover:bg-gray-50 transition-colors">
-              View All Tasks
+              {t("dashboard:metrics.view_all_tasks", "View All Tasks")}
             </button>
           </div>
         </motion.div>

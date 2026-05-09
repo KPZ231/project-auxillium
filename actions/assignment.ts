@@ -59,6 +59,54 @@ export async function unassignEmployeeFromProject(projectId: string, employeeId:
   }
 }
 
+export async function assignEmployeeToClient(clientId: string, employeeId: string) {
+  const spaceId = await getActiveSpaceId();
+  if (!spaceId) throw new Error("No active space selected");
+
+  try {
+    await prisma.client.update({
+      where: { id: clientId, spaceId },
+      data: {
+        assignedEmployees: {
+          connect: { id: employeeId },
+        },
+      },
+    });
+
+    await invalidateCache(`client:${clientId}`);
+    await invalidateCache(`employee:${employeeId}`);
+    revalidatePath(`/dashboard/clients/${clientId}`);
+    return { success: true };
+  } catch (error) {
+    console.error("[ASSIGN_CLIENT_EMPLOYEE_ERROR]", error);
+    return { success: false, error: "Failed to assign employee to client" };
+  }
+}
+
+export async function unassignEmployeeFromClient(clientId: string, employeeId: string) {
+  const spaceId = await getActiveSpaceId();
+  if (!spaceId) throw new Error("No active space selected");
+
+  try {
+    await prisma.client.update({
+      where: { id: clientId, spaceId },
+      data: {
+        assignedEmployees: {
+          disconnect: { id: employeeId },
+        },
+      },
+    });
+
+    await invalidateCache(`client:${clientId}`);
+    await invalidateCache(`employee:${employeeId}`);
+    revalidatePath(`/dashboard/clients/${clientId}`);
+    return { success: true };
+  } catch (error) {
+    console.error("[UNASSIGN_CLIENT_EMPLOYEE_ERROR]", error);
+    return { success: false, error: "Failed to unassign employee from client" };
+  }
+}
+
 /**
  * Gets all employees assigned to a project.
  */

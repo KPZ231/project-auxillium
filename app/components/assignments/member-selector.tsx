@@ -52,7 +52,7 @@ export function MemberSelector({ onSelect, assignedIds, isOpen, onClose }: Membe
           <h3 className="text-[14px] font-bold uppercase tracking-[0.08em] text-[#0A0A0A]">
             Assign Team Member
           </h3>
-          <button onClick={onClose} className="text-[#71717A] hover:text-[#0A0A0A]">
+          <button type="button" onClick={onClose} className="text-[#71717A] hover:text-[#0A0A0A]">
             ✕
           </button>
         </div>
@@ -83,6 +83,7 @@ export function MemberSelector({ onSelect, assignedIds, isOpen, onClose }: Membe
                 const isAssigned = assignedIds.includes(emp.id);
                 return (
                   <button
+                    type="button"
                     key={emp.id}
                     onClick={() => {
                       if (!isAssigned) {
@@ -118,6 +119,7 @@ export function MemberSelector({ onSelect, assignedIds, isOpen, onClose }: Membe
 
         <div className="p-4 bg-[#FAFAFA] border-t border-[#E5E5E5] flex justify-end">
           <button
+            type="button"
             onClick={onClose}
             className="px-4 py-2 bg-transparent text-[#0A0A0A] text-[12px] font-medium uppercase tracking-[0.04em] border border-[#0A0A0A] hover:bg-[#0A0A0A] hover:text-[#FAFAFA] transition-colors"
           >

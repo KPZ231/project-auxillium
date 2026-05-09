@@ -17,16 +17,16 @@ export const ExpenseEstimation = ({ spaceId }: ExpenseEstimationProps) => {
   } | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  useEffect(() => {
-    fetchEstimation();
-  }, [spaceId, months]);
-
   const fetchEstimation = async () => {
     setIsLoading(true);
     const res = await estimateFutureExpenses(spaceId, parseInt(months));
     setEstimation(res);
     setIsLoading(false);
   };
+
+  useEffect(() => {
+    fetchEstimation();
+  }, [spaceId, months]);
 
   return (
     <div className="bg-white border border-[#E5E5E5] p-8 h-full">

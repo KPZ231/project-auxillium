@@ -1,0 +1,44 @@
+{
+  "hero": {
+    "title": "AUXILLIUM <br/> nowa definicja zarządzania",
+    "subtitle": "Minimalizm, który napędza twój biznes",
+    "cta": "Zacznij teraz",
+    "subtitle_alternative": "Minimalism that drives your business"
+  },
+  "features": {
+    "title": "Zaoszczędź do 30%",
+    "description": "Dzięki automatyzacji procesów oszczędzasz czas i pieniądze",
+    "subtitle": "Increase efficiency",
+    "subtitle_alternative": "Through process automation you save time and money"
+  },
+  "pricing": {
+    "title": "Sprawdź nasze plany",
+    "subtitle": "Choose the right plan for your needs",
+    "free": "Free",
+    "pro": "Pro",
+    "enterprise": "Enterprise",
+    "free_desc": "Darmowy plan",
+    "pro_desc": "Plan Pro",
+    "enterprise_desc": "Plan Enterprise",
+    "cta": "Zacznij teraz"
+  },
+  "testimonials": {
+    "title": "Filozofia",
+    "subtitle": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+  },
+  "faq": {
+    "title": "Często zadawane pytania",
+    "subtitle": "Wszystko co musisz wiedzieć o Auxillium",
+    "q1": "Jak zacząć korzystać z systemu?",
+    "a1": "Wystarczy zarejestrować się na naszej platformie i wybrać plan darmowy, aby przetestować podstawowe funkcjonalności.",
+    "q2": "Czy mogę zmienić plan w dowolnym momencie?",
+    "a2": "Tak, możesz przejść na wyższy lub niższy plan w dowolnym momencie. Zmiany wejdą w życie od kolejnego okresu rozliczeniowego.",
+    "q3": "Jakie metody płatności są obsługiwane?",
+    "a3": "Obsługujemy płatności kartą, przelewy błyskawiczne oraz płatności cykliczne (subskrypcje)."
+  },
+  "cta": {
+    "title": "Gotowy na zmianę?",
+    "subtitle": "Zacznij korzystać z Auxillium już dziś i przekonaj się, jak łatwe może być zarządzanie Twoim biznesem.",
+    "cta": "Zacznij teraz"
+  }
+}

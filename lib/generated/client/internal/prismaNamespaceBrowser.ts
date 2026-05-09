@@ -61,7 +61,8 @@ export const ModelName = {
   Expense: 'Expense',
   Income: 'Income',
   RevenueGoal: 'RevenueGoal',
-  FinancialLabel: 'FinancialLabel'
+  FinancialLabel: 'FinancialLabel',
+  Client: 'Client'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -122,6 +123,7 @@ export const ProjectScalarFieldEnum = {
   timeline: 'timeline',
   milestones: 'milestones',
   dueDate: 'dueDate',
+  clientId: 'clientId',
   order: 'order',
   userId: 'userId',
   spaceId: 'spaceId',
@@ -192,6 +194,9 @@ export const TaskScalarFieldEnum = {
   employeeId: 'employeeId',
   projectId: 'projectId',
   dueDate: 'dueDate',
+  order: 'order',
+  workload: 'workload',
+  subtasks: 'subtasks',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -209,6 +214,7 @@ export const ExpenseScalarFieldEnum = {
   cycle: 'cycle',
   spaceId: 'spaceId',
   userId: 'userId',
+  clientId: 'clientId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -224,6 +230,7 @@ export const IncomeScalarFieldEnum = {
   source: 'source',
   spaceId: 'spaceId',
   userId: 'userId',
+  clientId: 'clientId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -254,6 +261,27 @@ export const FinancialLabelScalarFieldEnum = {
 } as const
 
 export type FinancialLabelScalarFieldEnum = (typeof FinancialLabelScalarFieldEnum)[keyof typeof FinancialLabelScalarFieldEnum]
+
+
+export const ClientScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  email: 'email',
+  phone: 'phone',
+  description: 'description',
+  notes: 'notes',
+  location: 'location',
+  photoUrl: 'photoUrl',
+  timeline: 'timeline',
+  milestones: 'milestones',
+  schedule: 'schedule',
+  userId: 'userId',
+  spaceId: 'spaceId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ClientScalarFieldEnum = (typeof ClientScalarFieldEnum)[keyof typeof ClientScalarFieldEnum]
 
 
 export const SortOrder = {

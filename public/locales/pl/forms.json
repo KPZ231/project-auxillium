@@ -1,0 +1,63 @@
+{
+  "form": {
+    "email_or_login": "Adres e-mail lub login",
+    "password": "Hasło",
+    "confirm_password": "Potwierdź hasło",
+    "username": "Nazwa użytkownika",
+    "full_name": "Imię i nazwisko",
+    "phone": "Telefon",
+    "description": "Opis",
+    "notes": "Notatki",
+    "location": "Lokalizacja",
+    "website": "Strona www",
+    "company": "Firma",
+    "role": "Rola",
+    "lead_name": "Nazwa potencjalnego klienta",
+    "contact_name": "Nazwa kontaktu",
+    "project_type": "Typ projektu",
+    "email": "Adres e-mail",
+    "first_name": "Imię",
+    "last_name": "Nazwisko",
+    "message": "Wiadomość",
+    "subject": "Temat"
+  },
+  "placeholders": {
+    "email_or_login": "Wprowadź e-mail lub login",
+    "password": "••••••••",
+    "confirm_password": "••••••••",
+    "full_name": "Jan Kowalski",
+    "phone": "+48 123 456 789",
+    "description": "Opisz swoją potrzebę...",
+    "lead_name": "Nazwa firmy lub osoby",
+    "contact_name": "Jan Nowak",
+    "email": "jan@example.com",
+    "company": "Nazwa firmy",
+    "website": "https://www.example.com"
+  },
+  "labels": {
+    "or_continue_with": "lub kontynuuj przez",
+    "forgot_password": "Zapomniałeś hasła?",
+    "no_account": "Nie masz konta?",
+    "have_account": "Masz już konto?",
+    "password_requirements": "Hasło musi mieć co najmniej 8 znaków, dużą literę, małą literę i cyfrę",
+    "required_field": "To pole jest wymagane"
+  },
+  "errors": {
+    "invalid_email": "Niepoprawny format adresu e-mail",
+    "invalid_login": "Niepoprawny format loginu",
+    "password_too_short": "Hasło musi mieć co najmniej 8 znaków",
+    "password_no_uppercase": "Hasło musi zawierać co najmniej jedną wielką literę",
+    "password_no_lowercase": "Hasło musi zawierać co najmniej jedną małą literę",
+    "password_no_digit": "Hasło musi zawierać co najmniej jedną cyfrę",
+    "passwords_do_not_match": "Hasła są różne",
+    "field_required": "To pole jest wymagane",
+    "minimum_characters": "Min. {{count}} znaki",
+    "invalid_input": "Nieprawidłowe dane"
+  },
+  "success": {
+    "login_success": "Zalogowano pomyślnie",
+    "registration_success": "Zarejestrowano pomyślnie",
+    "password_reset_email_sent": "Wiadomość z linkiem do resetowania hasła została wysłana",
+    "message_sent": "Wiadomość została wysłana!"
+  }
+}

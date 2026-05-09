@@ -1,6 +1,6 @@
-import Navbar from "../components/Navbar/Navbar";
-import Footer from "../components/Footer/Footer";
-import CookieBanner from "../components/CookieBanner/CookieBaner";
+import Navbar from "@/app/components/Navbar/Navbar";
+import Footer from "@/app/components/Footer/Footer";
+import CookieBanner from "@/app/components/CookieBanner/CookieBanner";
 
 export default function MarketingLayout({
   children,

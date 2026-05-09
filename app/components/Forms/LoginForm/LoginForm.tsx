@@ -10,12 +10,14 @@ import { FcGoogle } from "react-icons/fc";
 import { useSearchParams, useRouter } from "next/navigation";
 import { LoginFormData, loginSchema } from "@/lib/validators";
 import { loginAction } from "@/actions/login";
+import { useTranslation } from "@/app/context/TranslationContext";
 
 export default function LoginForm() {
   const [loading, setLoading] = useState(false);
   const searchParams = useSearchParams();
   const router = useRouter();
-  const callbackUrl = searchParams.get('callbackUrl') || "/dashboard";
+  const { t, language } = useTranslation();
+  const callbackUrl = searchParams.get('callbackUrl') || `/${language}/dashboard`;
 
   const {
     register,
@@ -35,8 +37,8 @@ export default function LoginForm() {
       setLoading(false);
 
       if (result.success) {
-        toast.success(`Zalogowano pomyślnie`, {
-          description: "Przekierowywanie do panelu użytkownika.",
+        toast.success(t("forms:success.login_success"), {
+          description: t("forms:success.redirecting"), // Note: I might need to add this key or use a fallback
         });
         reset();
         // Redirect to callbackUrl or dashboard
@@ -57,8 +59,8 @@ export default function LoginForm() {
   }
 
   const onValidationError = () => {
-    toast.error("Błąd walidacji", {
-      description: "Proszę poprawić błędy w polach formularza",
+    toast.error(t("forms:labels.validation_error"), {
+      description: t("forms:labels.validation_error_desc"),
     });
   };
 
@@ -68,10 +70,10 @@ export default function LoginForm() {
         {/* Header */}
         <div className="text-center flex flex-col gap-3">
           <h1 className="text-4xl lg:text-5xl font-bold text-(--primary) tracking-tight uppercase">
-            Logowanie
+            {t("forms:labels.login_title", { defaultValue: "Logowanie" })}
           </h1>
           <p className="text-sm text-(--neutral) opacity-60 tracking-tight">
-            Witaj ponownie w systemie Auxillium.
+            {t("forms:labels.login_subtitle", { defaultValue: "Witaj ponownie w systemie Auxillium." })}
           </p>
         </div>
 
@@ -102,24 +104,24 @@ export default function LoginForm() {
           <div className="flex flex-col gap-3">
             <div className="flex justify-between items-end">
               <label className="text-[10px] font-bold tracking-[0.2em] text-(--neutral) uppercase opacity-60">
-                Hasło
+                {t("forms:form.password")}
               </label>
               <Link 
-                href="/forgot-password" 
+                href={`/${language}/forgot-password`} 
                 className="text-[10px] font-bold text-(--neutral) uppercase opacity-60 hover:opacity-100 transition-opacity"
               >
-                Zapomniałeś hasła?
+                {t("forms:labels.forgot_password")}
               </Link>
             </div>
             <input
               {...register("password")}
               type="password"
-              placeholder="••••••••"
+              placeholder={t("forms:placeholders.password")}
               className={`w-full py-4 border-b ${errors.password ? 'border-red-500' : 'border-(--tertiary)'} focus:border-(--primary) outline-none transition-colors text-sm tracking-wide bg-transparent`}
             />
             {errors.password && (
               <span className="text-[10px] font-bold text-red-500 uppercase tracking-wider">
-                {errors.password.message}
+                {t(`forms:errors.${errors.password.message}` as any, { defaultValue: errors.password.message })}
               </span>
             )}
           </div>
@@ -130,9 +132,9 @@ export default function LoginForm() {
             type="submit"
             className="w-full py-5 bg-(--primary) text-(--secondary) font-bold text-sm tracking-widest uppercase flex items-center justify-center gap-3 hover:opacity-90 transition-opacity disabled:opacity-30 mt-4"
           >
-            {loading ? "Logowanie..." : (
+            {loading ? t("forms:labels.logging_in", { defaultValue: "Logowanie..." }) : (
               <>
-                Zaloguj się <FaArrowRight className="w-4 h-4" />
+                {t("forms:labels.login_button", { defaultValue: "Zaloguj się" })} <FaArrowRight className="w-4 h-4" />
               </>
             )}
           </button>
@@ -142,7 +144,7 @@ export default function LoginForm() {
         <div className="w-full flex items-center gap-4 opacity-30">
           <div className="flex-1 h-px bg-(--neutral)"></div>
           <span className="text-[10px] font-bold tracking-[0.2em] uppercase whitespace-nowrap">
-            lub kontynuuj przez
+            {t("forms:labels.or_continue_with")}
           </span>
           <div className="flex-1 h-px bg-(--neutral)"></div>
         </div>
@@ -167,9 +169,9 @@ export default function LoginForm() {
 
         {/* Footer */}
         <div className="text-center text-sm tracking-tight">
-          <span className="opacity-60">Nie masz konta? </span>
-          <Link href="/register" className="font-bold hover:underline">
-            Zarejestruj się
+          <span className="opacity-60">{t("forms:labels.no_account")} </span>
+          <Link href={`/${language}/register`} className="font-bold hover:underline">
+            {t("forms:buttons.sign_up", { ns: "common" })}
           </Link>
         </div>
       </div>

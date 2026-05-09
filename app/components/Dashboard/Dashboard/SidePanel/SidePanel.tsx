@@ -21,29 +21,45 @@ import {
   Settings,
 } from "lucide-react";
 
+import { useTranslation } from "@/app/context/TranslationContext";
+
 interface NavLink {
-  name: string;
+  key: string;
   href: string;
   icon: React.ElementType;
 }
 
 const navLinks: NavLink[] = [
-  { name: "DASHBOARD", href: "/dashboard", icon: LayoutDashboard },
-  { name: "PROJECTS", href: "/dashboard/projects", icon: FolderKanban },
+  { key: "dashboard.title", href: "/dashboard", icon: LayoutDashboard },
+  { key: "project.projects", href: "/dashboard/projects", icon: FolderKanban },
   {
-    name: "COSTS & EXPENSES",
+    key: "finance.title",
     href: "/dashboard/costs-expenses",
     icon: Receipt,
   },
-  { name: "TASKS", href: "/dashboard/tasks", icon: ClipboardList },
-  { name: "LEAD SEARCH", href: "/dashboard/lead-search", icon: UserSearch },
-  { name: "LEADS", href: "/dashboard/leads", icon: Users },
-  { name: "CLIENTS", href: "/dashboard/clients", icon: Contact2 },
-  { name: "AI CHAT", href: "/dashboard/ai", icon: MessageSquareCode },
+  { key: "task.tasks", href: "/dashboard/tasks", icon: ClipboardList },
+  { key: "lead.lead_search", href: "/dashboard/lead-search", icon: UserSearch },
+  { key: "lead.leads", href: "/dashboard/leads", icon: Users },
+  { key: "client.clients", href: "/dashboard/clients", icon: Contact2 },
+  { key: "ai.chat", href: "/dashboard/ai", icon: MessageSquareCode },
+  { key: "documents.title", href: "/dashboard/documents", icon: FileText },
 ];
 
 export default function SidePanel() {
+  const { t, language } = useTranslation();
   const pathname = usePathname();
+  
+  // Helper to get path without locale for comparison and building localized links
+  const getPathWithoutLocale = (path: string) => {
+    const segments = path.split("/").filter(Boolean);
+    if (segments.length > 0 && ["pl", "en", "de"].includes(segments[0])) {
+      return "/" + segments.slice(1).join("/");
+    }
+    return path;
+  };
+
+  const currentPathWithoutLocale = getPathWithoutLocale(pathname);
+
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -112,7 +128,7 @@ export default function SidePanel() {
           <Link
             href="/"
             className="flex items-center gap-3 h-14 overflow-hidden"
-          >         
+          >
             <AnimatePresence mode="popLayout">
               {!isCollapsed && (
                 <motion.div
@@ -150,13 +166,14 @@ export default function SidePanel() {
         <nav className="flex-1 py-4 overflow-y-auto">
           <ul className="space-y-1 px-2">
             {navLinks.map((link) => {
-              const active = pathname === link.href;
+              const active = currentPathWithoutLocale === link.href;
               const Icon = link.icon;
+              const localizedHref = `/${language}${link.href}`;
 
               return (
                 <li key={link.href}>
                   <Link
-                    href={link.href}
+                    href={localizedHref}
                     onClick={() => isMobile && setIsMobileOpen(false)}
                     className={`relative flex items-center gap-4  px-4 py-3 transition-colors ${
                       active
@@ -187,7 +204,7 @@ export default function SidePanel() {
                           transition={{ duration: 0.15 }}
                           className="text-xs font-bold tracking-wider whitespace-nowrap"
                         >
-                          {link.name}
+                          {t(`dashboard:${link.key}`)}
                         </motion.span>
                       )}
                     </AnimatePresence>
@@ -201,10 +218,10 @@ export default function SidePanel() {
         <footer className="p-2 mb-4">
           <div className="border-t border-[var(--neutral, #e5e5e5)] pt-2">
             <Link
-              href="/dashboard/space/settings"
+              href={`/${language}/dashboard/space/settings`}
               onClick={() => isMobile && setIsMobileOpen(false)}
               className={`relative flex items-center gap-4 px-4 py-3 transition-colors ${
-                pathname === "/dashboard/space/settings"
+                currentPathWithoutLocale === "/dashboard/space/settings"
                   ? "bg-black text-white"
                   : "text-gray-500 hover:bg-gray-100 hover:text-black"
               }`}
@@ -219,7 +236,7 @@ export default function SidePanel() {
                     transition={{ duration: 0.15 }}
                     className="text-xs font-bold tracking-wider whitespace-nowrap uppercase"
                   >
-                    Manage Space
+                    {t("dashboard:space.settings")}
                   </motion.span>
                 )}
               </AnimatePresence>

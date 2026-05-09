@@ -3,13 +3,13 @@
 import { useState } from "react";
 import { MemberBadge } from "./member-badge";
 import { MemberSelector } from "./member-selector";
-import { assignEmployeeToProject, unassignEmployeeFromProject } from "@/actions/assignment";
+import { assignEmployeeToProject, unassignEmployeeFromProject, assignEmployeeToClient, unassignEmployeeFromClient } from "@/actions/assignment";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
 interface AssignmentManagerProps {
   entityId: string;
-  entityType: "project" | "task";
+  entityType: "project" | "task" | "client";
   initialMembers: any[];
   title?: string;
 }
@@ -30,6 +30,8 @@ export function AssignmentManager({
       let result;
       if (entityType === "project") {
         result = await assignEmployeeToProject(entityId, employeeId);
+      } else if (entityType === "client") {
+        result = await assignEmployeeToClient(entityId, employeeId);
       } else {
         toast.error("Task assignments not implemented yet");
         return;
@@ -54,6 +56,8 @@ export function AssignmentManager({
       let result;
       if (entityType === "project") {
         result = await unassignEmployeeFromProject(entityId, employeeId);
+      } else if (entityType === "client") {
+        result = await unassignEmployeeFromClient(entityId, employeeId);
       } else {
         toast.error("Task assignments not implemented yet");
         return;
@@ -81,6 +85,7 @@ export function AssignmentManager({
           {title}
         </h3>
         <button
+          type="button"
           onClick={() => setIsSelectorOpen(true)}
           className="text-[11px] font-bold text-[#0A0A0A] uppercase tracking-wider hover:underline"
         >

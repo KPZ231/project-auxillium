@@ -212,6 +212,7 @@ export type EmployeeWhereInput = {
   updatedAt?: Prisma.DateTimeFilter<"Employee"> | Date | string
   space?: Prisma.XOR<Prisma.SpaceScalarRelationFilter, Prisma.SpaceWhereInput>
   assignedProjects?: Prisma.ProjectListRelationFilter
+  assignedClients?: Prisma.ClientListRelationFilter
   assignedTasks?: Prisma.TaskListRelationFilter
 }
 
@@ -227,6 +228,7 @@ export type EmployeeOrderByWithRelationInput = {
   updatedAt?: Prisma.SortOrder
   space?: Prisma.SpaceOrderByWithRelationInput
   assignedProjects?: Prisma.ProjectOrderByRelationAggregateInput
+  assignedClients?: Prisma.ClientOrderByRelationAggregateInput
   assignedTasks?: Prisma.TaskOrderByRelationAggregateInput
 }
 
@@ -245,6 +247,7 @@ export type EmployeeWhereUniqueInput = Prisma.AtLeast<{
   updatedAt?: Prisma.DateTimeFilter<"Employee"> | Date | string
   space?: Prisma.XOR<Prisma.SpaceScalarRelationFilter, Prisma.SpaceWhereInput>
   assignedProjects?: Prisma.ProjectListRelationFilter
+  assignedClients?: Prisma.ClientListRelationFilter
   assignedTasks?: Prisma.TaskListRelationFilter
 }, "id">
 
@@ -289,6 +292,7 @@ export type EmployeeCreateInput = {
   updatedAt?: Date | string
   space: Prisma.SpaceCreateNestedOneWithoutEmployeesInput
   assignedProjects?: Prisma.ProjectCreateNestedManyWithoutAssignedEmployeesInput
+  assignedClients?: Prisma.ClientCreateNestedManyWithoutAssignedEmployeesInput
   assignedTasks?: Prisma.TaskCreateNestedManyWithoutEmployeeInput
 }
 
@@ -303,6 +307,7 @@ export type EmployeeUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   assignedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutAssignedEmployeesInput
+  assignedClients?: Prisma.ClientUncheckedCreateNestedManyWithoutAssignedEmployeesInput
   assignedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutEmployeeInput
 }
 
@@ -317,6 +322,7 @@ export type EmployeeUpdateInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   space?: Prisma.SpaceUpdateOneRequiredWithoutEmployeesNestedInput
   assignedProjects?: Prisma.ProjectUpdateManyWithoutAssignedEmployeesNestedInput
+  assignedClients?: Prisma.ClientUpdateManyWithoutAssignedEmployeesNestedInput
   assignedTasks?: Prisma.TaskUpdateManyWithoutEmployeeNestedInput
 }
 
@@ -331,6 +337,7 @@ export type EmployeeUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutAssignedEmployeesNestedInput
+  assignedClients?: Prisma.ClientUncheckedUpdateManyWithoutAssignedEmployeesNestedInput
   assignedTasks?: Prisma.TaskUncheckedUpdateManyWithoutEmployeeNestedInput
 }
 
@@ -514,6 +521,44 @@ export type EmployeeUpdateOneWithoutAssignedTasksNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.EmployeeUpdateToOneWithWhereWithoutAssignedTasksInput, Prisma.EmployeeUpdateWithoutAssignedTasksInput>, Prisma.EmployeeUncheckedUpdateWithoutAssignedTasksInput>
 }
 
+export type EmployeeCreateNestedManyWithoutAssignedClientsInput = {
+  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutAssignedClientsInput, Prisma.EmployeeUncheckedCreateWithoutAssignedClientsInput> | Prisma.EmployeeCreateWithoutAssignedClientsInput[] | Prisma.EmployeeUncheckedCreateWithoutAssignedClientsInput[]
+  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutAssignedClientsInput | Prisma.EmployeeCreateOrConnectWithoutAssignedClientsInput[]
+  connect?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+}
+
+export type EmployeeUncheckedCreateNestedManyWithoutAssignedClientsInput = {
+  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutAssignedClientsInput, Prisma.EmployeeUncheckedCreateWithoutAssignedClientsInput> | Prisma.EmployeeCreateWithoutAssignedClientsInput[] | Prisma.EmployeeUncheckedCreateWithoutAssignedClientsInput[]
+  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutAssignedClientsInput | Prisma.EmployeeCreateOrConnectWithoutAssignedClientsInput[]
+  connect?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+}
+
+export type EmployeeUpdateManyWithoutAssignedClientsNestedInput = {
+  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutAssignedClientsInput, Prisma.EmployeeUncheckedCreateWithoutAssignedClientsInput> | Prisma.EmployeeCreateWithoutAssignedClientsInput[] | Prisma.EmployeeUncheckedCreateWithoutAssignedClientsInput[]
+  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutAssignedClientsInput | Prisma.EmployeeCreateOrConnectWithoutAssignedClientsInput[]
+  upsert?: Prisma.EmployeeUpsertWithWhereUniqueWithoutAssignedClientsInput | Prisma.EmployeeUpsertWithWhereUniqueWithoutAssignedClientsInput[]
+  set?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  disconnect?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  delete?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  connect?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  update?: Prisma.EmployeeUpdateWithWhereUniqueWithoutAssignedClientsInput | Prisma.EmployeeUpdateWithWhereUniqueWithoutAssignedClientsInput[]
+  updateMany?: Prisma.EmployeeUpdateManyWithWhereWithoutAssignedClientsInput | Prisma.EmployeeUpdateManyWithWhereWithoutAssignedClientsInput[]
+  deleteMany?: Prisma.EmployeeScalarWhereInput | Prisma.EmployeeScalarWhereInput[]
+}
+
+export type EmployeeUncheckedUpdateManyWithoutAssignedClientsNestedInput = {
+  create?: Prisma.XOR<Prisma.EmployeeCreateWithoutAssignedClientsInput, Prisma.EmployeeUncheckedCreateWithoutAssignedClientsInput> | Prisma.EmployeeCreateWithoutAssignedClientsInput[] | Prisma.EmployeeUncheckedCreateWithoutAssignedClientsInput[]
+  connectOrCreate?: Prisma.EmployeeCreateOrConnectWithoutAssignedClientsInput | Prisma.EmployeeCreateOrConnectWithoutAssignedClientsInput[]
+  upsert?: Prisma.EmployeeUpsertWithWhereUniqueWithoutAssignedClientsInput | Prisma.EmployeeUpsertWithWhereUniqueWithoutAssignedClientsInput[]
+  set?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  disconnect?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  delete?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  connect?: Prisma.EmployeeWhereUniqueInput | Prisma.EmployeeWhereUniqueInput[]
+  update?: Prisma.EmployeeUpdateWithWhereUniqueWithoutAssignedClientsInput | Prisma.EmployeeUpdateWithWhereUniqueWithoutAssignedClientsInput[]
+  updateMany?: Prisma.EmployeeUpdateManyWithWhereWithoutAssignedClientsInput | Prisma.EmployeeUpdateManyWithWhereWithoutAssignedClientsInput[]
+  deleteMany?: Prisma.EmployeeScalarWhereInput | Prisma.EmployeeScalarWhereInput[]
+}
+
 export type EmployeeCreateWithoutAssignedProjectsInput = {
   id?: string
   name: string
@@ -524,6 +569,7 @@ export type EmployeeCreateWithoutAssignedProjectsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   space: Prisma.SpaceCreateNestedOneWithoutEmployeesInput
+  assignedClients?: Prisma.ClientCreateNestedManyWithoutAssignedEmployeesInput
   assignedTasks?: Prisma.TaskCreateNestedManyWithoutEmployeeInput
 }
 
@@ -537,6 +583,7 @@ export type EmployeeUncheckedCreateWithoutAssignedProjectsInput = {
   spaceId: string
   createdAt?: Date | string
   updatedAt?: Date | string
+  assignedClients?: Prisma.ClientUncheckedCreateNestedManyWithoutAssignedEmployeesInput
   assignedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutEmployeeInput
 }
 
@@ -586,6 +633,7 @@ export type EmployeeCreateWithoutSpaceInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   assignedProjects?: Prisma.ProjectCreateNestedManyWithoutAssignedEmployeesInput
+  assignedClients?: Prisma.ClientCreateNestedManyWithoutAssignedEmployeesInput
   assignedTasks?: Prisma.TaskCreateNestedManyWithoutEmployeeInput
 }
 
@@ -599,6 +647,7 @@ export type EmployeeUncheckedCreateWithoutSpaceInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   assignedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutAssignedEmployeesInput
+  assignedClients?: Prisma.ClientUncheckedCreateNestedManyWithoutAssignedEmployeesInput
   assignedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutEmployeeInput
 }
 
@@ -639,6 +688,7 @@ export type EmployeeCreateWithoutAssignedTasksInput = {
   updatedAt?: Date | string
   space: Prisma.SpaceCreateNestedOneWithoutEmployeesInput
   assignedProjects?: Prisma.ProjectCreateNestedManyWithoutAssignedEmployeesInput
+  assignedClients?: Prisma.ClientCreateNestedManyWithoutAssignedEmployeesInput
 }
 
 export type EmployeeUncheckedCreateWithoutAssignedTasksInput = {
@@ -652,6 +702,7 @@ export type EmployeeUncheckedCreateWithoutAssignedTasksInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   assignedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutAssignedEmployeesInput
+  assignedClients?: Prisma.ClientUncheckedCreateNestedManyWithoutAssignedEmployeesInput
 }
 
 export type EmployeeCreateOrConnectWithoutAssignedTasksInput = {
@@ -681,6 +732,7 @@ export type EmployeeUpdateWithoutAssignedTasksInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   space?: Prisma.SpaceUpdateOneRequiredWithoutEmployeesNestedInput
   assignedProjects?: Prisma.ProjectUpdateManyWithoutAssignedEmployeesNestedInput
+  assignedClients?: Prisma.ClientUpdateManyWithoutAssignedEmployeesNestedInput
 }
 
 export type EmployeeUncheckedUpdateWithoutAssignedTasksInput = {
@@ -694,6 +746,56 @@ export type EmployeeUncheckedUpdateWithoutAssignedTasksInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutAssignedEmployeesNestedInput
+  assignedClients?: Prisma.ClientUncheckedUpdateManyWithoutAssignedEmployeesNestedInput
+}
+
+export type EmployeeCreateWithoutAssignedClientsInput = {
+  id?: string
+  name: string
+  email?: string | null
+  phone?: string | null
+  role?: string | null
+  permissions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  space: Prisma.SpaceCreateNestedOneWithoutEmployeesInput
+  assignedProjects?: Prisma.ProjectCreateNestedManyWithoutAssignedEmployeesInput
+  assignedTasks?: Prisma.TaskCreateNestedManyWithoutEmployeeInput
+}
+
+export type EmployeeUncheckedCreateWithoutAssignedClientsInput = {
+  id?: string
+  name: string
+  email?: string | null
+  phone?: string | null
+  role?: string | null
+  permissions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  spaceId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  assignedProjects?: Prisma.ProjectUncheckedCreateNestedManyWithoutAssignedEmployeesInput
+  assignedTasks?: Prisma.TaskUncheckedCreateNestedManyWithoutEmployeeInput
+}
+
+export type EmployeeCreateOrConnectWithoutAssignedClientsInput = {
+  where: Prisma.EmployeeWhereUniqueInput
+  create: Prisma.XOR<Prisma.EmployeeCreateWithoutAssignedClientsInput, Prisma.EmployeeUncheckedCreateWithoutAssignedClientsInput>
+}
+
+export type EmployeeUpsertWithWhereUniqueWithoutAssignedClientsInput = {
+  where: Prisma.EmployeeWhereUniqueInput
+  update: Prisma.XOR<Prisma.EmployeeUpdateWithoutAssignedClientsInput, Prisma.EmployeeUncheckedUpdateWithoutAssignedClientsInput>
+  create: Prisma.XOR<Prisma.EmployeeCreateWithoutAssignedClientsInput, Prisma.EmployeeUncheckedCreateWithoutAssignedClientsInput>
+}
+
+export type EmployeeUpdateWithWhereUniqueWithoutAssignedClientsInput = {
+  where: Prisma.EmployeeWhereUniqueInput
+  data: Prisma.XOR<Prisma.EmployeeUpdateWithoutAssignedClientsInput, Prisma.EmployeeUncheckedUpdateWithoutAssignedClientsInput>
+}
+
+export type EmployeeUpdateManyWithWhereWithoutAssignedClientsInput = {
+  where: Prisma.EmployeeScalarWhereInput
+  data: Prisma.XOR<Prisma.EmployeeUpdateManyMutationInput, Prisma.EmployeeUncheckedUpdateManyWithoutAssignedClientsInput>
 }
 
 export type EmployeeUpdateWithoutAssignedProjectsInput = {
@@ -706,6 +808,7 @@ export type EmployeeUpdateWithoutAssignedProjectsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   space?: Prisma.SpaceUpdateOneRequiredWithoutEmployeesNestedInput
+  assignedClients?: Prisma.ClientUpdateManyWithoutAssignedEmployeesNestedInput
   assignedTasks?: Prisma.TaskUpdateManyWithoutEmployeeNestedInput
 }
 
@@ -719,6 +822,7 @@ export type EmployeeUncheckedUpdateWithoutAssignedProjectsInput = {
   spaceId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  assignedClients?: Prisma.ClientUncheckedUpdateManyWithoutAssignedEmployeesNestedInput
   assignedTasks?: Prisma.TaskUncheckedUpdateManyWithoutEmployeeNestedInput
 }
 
@@ -755,6 +859,7 @@ export type EmployeeUpdateWithoutSpaceInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignedProjects?: Prisma.ProjectUpdateManyWithoutAssignedEmployeesNestedInput
+  assignedClients?: Prisma.ClientUpdateManyWithoutAssignedEmployeesNestedInput
   assignedTasks?: Prisma.TaskUpdateManyWithoutEmployeeNestedInput
 }
 
@@ -768,6 +873,7 @@ export type EmployeeUncheckedUpdateWithoutSpaceInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   assignedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutAssignedEmployeesNestedInput
+  assignedClients?: Prisma.ClientUncheckedUpdateManyWithoutAssignedEmployeesNestedInput
   assignedTasks?: Prisma.TaskUncheckedUpdateManyWithoutEmployeeNestedInput
 }
 
@@ -782,6 +888,46 @@ export type EmployeeUncheckedUpdateManyWithoutSpaceInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
+export type EmployeeUpdateWithoutAssignedClientsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  permissions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  space?: Prisma.SpaceUpdateOneRequiredWithoutEmployeesNestedInput
+  assignedProjects?: Prisma.ProjectUpdateManyWithoutAssignedEmployeesNestedInput
+  assignedTasks?: Prisma.TaskUpdateManyWithoutEmployeeNestedInput
+}
+
+export type EmployeeUncheckedUpdateWithoutAssignedClientsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  permissions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  spaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  assignedProjects?: Prisma.ProjectUncheckedUpdateManyWithoutAssignedEmployeesNestedInput
+  assignedTasks?: Prisma.TaskUncheckedUpdateManyWithoutEmployeeNestedInput
+}
+
+export type EmployeeUncheckedUpdateManyWithoutAssignedClientsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  role?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  permissions?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  spaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
 
 /**
  * Count Type EmployeeCountOutputType
@@ -789,11 +935,13 @@ export type EmployeeUncheckedUpdateManyWithoutSpaceInput = {
 
 export type EmployeeCountOutputType = {
   assignedProjects: number
+  assignedClients: number
   assignedTasks: number
 }
 
 export type EmployeeCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   assignedProjects?: boolean | EmployeeCountOutputTypeCountAssignedProjectsArgs
+  assignedClients?: boolean | EmployeeCountOutputTypeCountAssignedClientsArgs
   assignedTasks?: boolean | EmployeeCountOutputTypeCountAssignedTasksArgs
 }
 
@@ -817,6 +965,13 @@ export type EmployeeCountOutputTypeCountAssignedProjectsArgs<ExtArgs extends run
 /**
  * EmployeeCountOutputType without action
  */
+export type EmployeeCountOutputTypeCountAssignedClientsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ClientWhereInput
+}
+
+/**
+ * EmployeeCountOutputType without action
+ */
 export type EmployeeCountOutputTypeCountAssignedTasksArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.TaskWhereInput
 }
@@ -834,6 +989,7 @@ export type EmployeeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   updatedAt?: boolean
   space?: boolean | Prisma.SpaceDefaultArgs<ExtArgs>
   assignedProjects?: boolean | Prisma.Employee$assignedProjectsArgs<ExtArgs>
+  assignedClients?: boolean | Prisma.Employee$assignedClientsArgs<ExtArgs>
   assignedTasks?: boolean | Prisma.Employee$assignedTasksArgs<ExtArgs>
   _count?: boolean | Prisma.EmployeeCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["employee"]>
@@ -880,6 +1036,7 @@ export type EmployeeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs =
 export type EmployeeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   space?: boolean | Prisma.SpaceDefaultArgs<ExtArgs>
   assignedProjects?: boolean | Prisma.Employee$assignedProjectsArgs<ExtArgs>
+  assignedClients?: boolean | Prisma.Employee$assignedClientsArgs<ExtArgs>
   assignedTasks?: boolean | Prisma.Employee$assignedTasksArgs<ExtArgs>
   _count?: boolean | Prisma.EmployeeCountOutputTypeDefaultArgs<ExtArgs>
 }
@@ -895,6 +1052,7 @@ export type $EmployeePayload<ExtArgs extends runtime.Types.Extensions.InternalAr
   objects: {
     space: Prisma.$SpacePayload<ExtArgs>
     assignedProjects: Prisma.$ProjectPayload<ExtArgs>[]
+    assignedClients: Prisma.$ClientPayload<ExtArgs>[]
     assignedTasks: Prisma.$TaskPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
@@ -1303,6 +1461,7 @@ export interface Prisma__EmployeeClient<T, Null = never, ExtArgs extends runtime
   readonly [Symbol.toStringTag]: "PrismaPromise"
   space<T extends Prisma.SpaceDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SpaceDefaultArgs<ExtArgs>>): Prisma.Prisma__SpaceClient<runtime.Types.Result.GetResult<Prisma.$SpacePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   assignedProjects<T extends Prisma.Employee$assignedProjectsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$assignedProjectsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  assignedClients<T extends Prisma.Employee$assignedClientsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$assignedClientsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   assignedTasks<T extends Prisma.Employee$assignedTasksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Employee$assignedTasksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TaskPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -1764,6 +1923,30 @@ export type Employee$assignedProjectsArgs<ExtArgs extends runtime.Types.Extensio
   take?: number
   skip?: number
   distinct?: Prisma.ProjectScalarFieldEnum | Prisma.ProjectScalarFieldEnum[]
+}
+
+/**
+ * Employee.assignedClients
+ */
+export type Employee$assignedClientsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Client
+   */
+  select?: Prisma.ClientSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Client
+   */
+  omit?: Prisma.ClientOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ClientInclude<ExtArgs> | null
+  where?: Prisma.ClientWhereInput
+  orderBy?: Prisma.ClientOrderByWithRelationInput | Prisma.ClientOrderByWithRelationInput[]
+  cursor?: Prisma.ClientWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ClientScalarFieldEnum | Prisma.ClientScalarFieldEnum[]
 }
 
 /**

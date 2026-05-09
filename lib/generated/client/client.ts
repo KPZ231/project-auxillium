@@ -96,3 +96,8 @@ export type RevenueGoal = Prisma.RevenueGoalModel
  * 
  */
 export type FinancialLabel = Prisma.FinancialLabelModel
+/**
+ * Model Client
+ * 
+ */
+export type Client = Prisma.ClientModel

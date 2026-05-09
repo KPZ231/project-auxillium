@@ -30,12 +30,11 @@ export default function LeadDetailsClient({ lead, isUnauthorized = false }: { le
   // Modal states
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
-  const [isSetupOpen, setIsSetupOpen] = useState(false);
+  const [isSetupOpen, setIsSetupOpen] = useState(searchParams.get("setup") === "true");
   const [currentStep, setCurrentStep] = useState(0);
 
   useEffect(() => {
     if (searchParams.get("setup") === "true") {
-      setIsSetupOpen(true);
       window.history.replaceState(null, '', `/dashboard/leads/${lead.id}`);
     }
   }, [searchParams, lead.id]);

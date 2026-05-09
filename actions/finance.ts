@@ -16,6 +16,7 @@ const expenseSchema = z.object({
   spaceId: z.string(),
   userId: z.string(),
   labelIds: z.array(z.string()).optional(),
+  clientId: z.string().optional(),
 });
 
 const incomeSchema = z.object({
@@ -26,6 +27,7 @@ const incomeSchema = z.object({
   spaceId: z.string(),
   userId: z.string(),
   labelIds: z.array(z.string()).optional(),
+  clientId: z.string().optional(),
 });
 
 const revenueGoalSchema = z.object({
@@ -56,6 +58,7 @@ export async function addExpense(data: z.infer<typeof expenseSchema>) {
         labels: {
           connect: validated.labelIds?.map(id => ({ id })) || [],
         },
+        ...(validated.clientId ? { clientId: validated.clientId } : {}),
       },
     });
 
@@ -83,6 +86,7 @@ export async function addIncome(data: z.infer<typeof incomeSchema>) {
         labels: {
           connect: validated.labelIds?.map(id => ({ id })) || [],
         },
+        ...(validated.clientId ? { clientId: validated.clientId } : {}),
       },
     });
 

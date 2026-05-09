@@ -7,7 +7,14 @@ const key = new TextEncoder().encode(secretKey);
 
 export const SESSION_DURATION = 24 * 60 * 60 * 1000; // 24 hours
 
-export async function encrypt(payload: any) {
+export interface SessionPayload {
+  userId: string;
+  hasSpace?: boolean;
+  expires: string | number | Date;
+  [key: string]: any; // Allow for other fields if necessary
+}
+
+export async function encrypt(payload: SessionPayload) {
   return await new SignJWT(payload)
     .setProtectedHeader({ alg: "HS256" })
     .setIssuedAt()
@@ -15,7 +22,7 @@ export async function encrypt(payload: any) {
     .sign(key);
 }
 
-export async function decrypt<T>(input: string): Promise<T | null> {
+export async function decrypt<T = SessionPayload>(input: string): Promise<T | null> {
   try {
     const { payload } = await jwtVerify(input, key, {
       algorithms: ["HS256"],
@@ -53,7 +60,7 @@ export async function getSession() {
   const cookieStore = await cookies();
   const session = cookieStore.get("session")?.value;
   if (!session) return null;
-  return await decrypt(session);
+  return await decrypt<SessionPayload>(session);
 }
 
 export async function updateSession(request: NextRequest) {
@@ -61,7 +68,7 @@ export async function updateSession(request: NextRequest) {
   if (!session) return;
 
   // Refresh the session so it doesn't expire
-  const parsed = await decrypt<any>(session);
+  const parsed = await decrypt<SessionPayload>(session);
   if (!parsed) return;
   
   parsed.expires = new Date(Date.now() + SESSION_DURATION);
@@ -70,7 +77,7 @@ export async function updateSession(request: NextRequest) {
     name: "session",
     value: await encrypt(parsed),
     httpOnly: true,
-    expires: parsed.expires,
+    expires: parsed.expires as Date,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
     path: "/"
@@ -83,6 +90,6 @@ export async function getUser() {
   
   return {
     isAuthenticatedAndLogedIn: !!session,
-    userId: (session as any)?.userId || null,
+    userId: session?.userId || null,
   };
 }

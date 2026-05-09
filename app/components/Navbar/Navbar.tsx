@@ -1,17 +1,22 @@
 "use client";
 
+import { useRef, useLayoutEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "../Button/Button";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useLayoutEffect, useRef } from "react";
+import { MdAccountCircle, MdLanguage } from "react-icons/md";
+import { useTranslation } from "@/app/context/TranslationContext";
 import { useUser } from "@/app/context/UserContext";
-import { MdAccountCircle } from "react-icons/md";
+import { usePathname } from "next/navigation";
+import { supportedLanguages, Language } from "@/lib/i18n-config";
 
 export default function Navbar() {
   const headerRef = useRef<HTMLElement>(null);
   const { user } = useUser();
+  const { t, language, setLanguage } = useTranslation();
+  const pathname = usePathname();
 
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -44,10 +49,20 @@ export default function Navbar() {
     };
   }, []);
 
+  const getPathWithoutLocale = (path: string) => {
+    const segments = path.split("/").filter(Boolean);
+    if (segments.length > 0 && supportedLanguages.includes(segments[0] as Language)) {
+      return "/" + segments.slice(1).join("/");
+    }
+    return path;
+  };
+
+  const currentPathWithoutLocale = getPathWithoutLocale(pathname);
+
   const navLinks = [
-    { name: "About", url: "/about" },
-    { name: "Pricing", url: "/pricing" },
-    { name: "Contact", url: "/contact" },
+    { name: t("common:buttons.about"), url: "/about" },
+    { name: t("common:buttons.pricing"), url: "/pricing" },
+    { name: t("common:buttons.contact"), url: "/contact" },
   ];
 
   return (
@@ -77,7 +92,7 @@ export default function Navbar() {
           {navLinks.map((link, index) => (
             <Link
               key={index}
-              href={link.url}
+              href={`/${language}${link.url}`}
               className="text-sm uppercase tracking-[0.15em] text-zinc-700 hover:text-black transition-colors duration-200 relative group"
             >
               {link.name}
@@ -86,20 +101,52 @@ export default function Navbar() {
           ))}
         </div>
 
-        {/* Buttons */}
-        <div className="flex items-center gap-3">
-          {
-            user == null ? (
+        {/* Buttons & Language */}
+        <div className="flex items-center gap-6">
+          {/* Language Switcher */}
+          <div className="flex items-center gap-2 border-r border-zinc-200 pr-4">
+            <MdLanguage className="text-zinc-500 w-5 h-5" />
+            <select
+              value={language}
+              onChange={(e) => {
+                const newLang = e.target.value as Language;
+                setLanguage(newLang);
+                window.location.pathname = `/${newLang}${currentPathWithoutLocale}`;
+              }}
+              className="bg-transparent text-xs font-bold tracking-widest uppercase cursor-pointer focus:outline-none"
+            >
+              {supportedLanguages.map((lang) => (
+                <option key={lang} value={lang}>
+                  {lang}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="flex items-center gap-3">
+            {user == null ? (
               <>
-                <Button content="Log In" variant="secondary" url="/login" />
-                <Button content="Sign Up" variant="primary" url="/register" />
+                <Button 
+                  content={t("common:buttons.log_in")} 
+                  variant="secondary" 
+                  url={`/${language}/login`} 
+                />
+                <Button 
+                  content={t("common:buttons.sign_up")} 
+                  variant="primary" 
+                  url={`/${language}/register`} 
+                />
               </>
             ) : (
-              <div className="flex items-center gap-2">               
-                <Button content="Dashboard" variant="secondary" url="/dashboard" />
+              <div className="flex items-center gap-2">
+                <Button 
+                  content={t("common:buttons.dashboard")} 
+                  variant="secondary" 
+                  url={`/${language}/dashboard`} 
+                />
               </div>
-            )
-          }
+            )}
+          </div>
         </div>
       </nav>
     </header>

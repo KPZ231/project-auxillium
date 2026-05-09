@@ -56,7 +56,10 @@ const mockData: MetricData[] = [
   },
 ];
 
+import { useTranslation } from "@/app/context/TranslationContext";
+
 export default function MetricBoxes() {
+  const { t } = useTranslation();
   const [data, setData] = useState<MetricData[]>(mockData);
 
   useEffect(() => {
@@ -68,20 +71,19 @@ export default function MetricBoxes() {
             ? { ...item, value: result.count!.toString() } 
             : item
         ));
-        
       }
 
       const Criticalresult = await getCriticalPriotiryCount();
       if (Criticalresult.success && Criticalresult.count !== undefined) {
         setData(prev => prev.map(item => 
           item.id === "projects" 
-            ? { ...item, badgeText: `${Criticalresult.count} Critical` } 
+            ? { ...item, badgeText: `${Criticalresult.count} ${t("dashboard:status.critical", "Krytyczne")}` } 
             : item
         ));
       }
     };
     fetchMetrics();
-  }, []);
+  }, [t]);
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -136,7 +138,7 @@ export default function MetricBoxes() {
             {/* Top row */}
             <div className="flex justify-between items-start z-10">
               <h3 className="text-xs font-semibold text-gray-400 tracking-widest uppercase w-1/2">
-                {item.title}
+                {t(`dashboard:metrics.${item.id}`)}
               </h3>
               {getIcon(item.icon)}
             </div>
@@ -176,10 +178,10 @@ export default function MetricBoxes() {
                     : "border border-gray-400 bg-gray-100 text-black"
                 }`}
               >
-                {item.badgeText}
+                {item.id === "projects" ? item.badgeText : t(`dashboard:metrics.${item.id}_badge`, item.badgeText)}
               </span>
               <span className="text-xs text-gray-400 font-medium leading-tight max-w-[80px]">
-                {item.subText}
+                {t(`dashboard:metrics.${item.id}_subtext`, item.subText)}
               </span>
             </div>
           </motion.div>

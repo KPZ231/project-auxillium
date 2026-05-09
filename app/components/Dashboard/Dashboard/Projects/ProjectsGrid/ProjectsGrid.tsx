@@ -78,6 +78,16 @@ function ProjectCard({ project }: { project: Project }) {
                     >
                       Edit
                     </button>
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        router.push(`/dashboard/tasks?projectId=${project.id}`);
+                      }}
+                      className="w-full text-left px-4 py-2 text-[12px] text-[#0A0A0A] hover:bg-[#F4F4F5] transition-colors font-medium border-t border-[#E5E5E5]"
+                    >
+                      Kanban Board
+                    </button>
                   </div>
                 </>
               )}

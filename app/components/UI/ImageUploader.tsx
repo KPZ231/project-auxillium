@@ -8,9 +8,10 @@ import Image from "next/image";
 interface ImageUploaderProps {
   images: string[];
   onChange: (images: string[]) => void;
+  maxImages?: number;
 }
 
-export function ImageUploader({ images, onChange }: ImageUploaderProps) {
+export function ImageUploader({ images, onChange, maxImages }: ImageUploaderProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -23,6 +24,11 @@ export function ImageUploader({ images, onChange }: ImageUploaderProps) {
 
     try {
       for (let i = 0; i < files.length; i++) {
+        if (maxImages && newImages.length >= maxImages) {
+           toast.error(`Maximum of ${maxImages} image(s) allowed.`);
+           break;
+        }
+
         const file = files[i];
         
         // Basic validation

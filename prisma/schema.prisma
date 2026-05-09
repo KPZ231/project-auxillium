@@ -22,6 +22,7 @@ model User {
   resetTokens   PasswordResetToken[]
   projects      Project[]
   leads         Lead[]
+  clients       Client[]
   
   ownedSpaces   Space[]   @relation("SpaceOwner")
   memberSpaces  Space[]   @relation("SpaceMembers")
@@ -74,6 +75,9 @@ model Project {
   timeline           String?
   milestones         Json?         // Może przechowywać listę obiektów np. [{ title, date, completed }]
   dueDate            DateTime?     // Pole daty końcowej projektu
+  
+  clientId           String?
+  client             Client?       @relation(fields: [clientId], references: [id], onDelete: SetNull)
   
   order              Int           @default(0) // Kolejność do Drag & Drop
 
@@ -133,6 +137,7 @@ model Space {
   
   projects         Project[]
   leads            Lead[]
+  clients          Client[]
   employees        Employee[]
   tasks            Task[]
   expenses         Expense[]
@@ -158,6 +163,7 @@ model Employee {
   space         Space     @relation(fields: [spaceId], references: [id], onDelete: Cascade)
   
   assignedProjects Project[] @relation("AssignedProjects")
+  assignedClients  Client[]  @relation("AssignedClients")
   assignedTasks    Task[]    @relation("AssignedEmployee")
   
   createdAt     DateTime  @default(now())
@@ -183,6 +189,10 @@ model Task {
   project       Project?  @relation(fields: [projectId], references: [id])
   
   dueDate       DateTime?
+  order         Int       @default(0)
+  workload      Int?
+  subtasks      Json?
+  
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
@@ -208,6 +218,9 @@ model Expense {
 
   labels      FinancialLabel[] @relation("ExpenseLabels")
 
+  clientId    String?
+  client      Client?          @relation(fields: [clientId], references: [id], onDelete: SetNull)
+
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
@@ -229,6 +242,9 @@ model Income {
   user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   labels      FinancialLabel[] @relation("IncomeLabels")
+
+  clientId    String?
+  client      Client?          @relation(fields: [clientId], references: [id], onDelete: SetNull)
 
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
@@ -270,4 +286,35 @@ model FinancialLabel {
   incomes   Income[]  @relation("IncomeLabels")
 
   @@unique([spaceId, name, type])
+}
+
+model Client {
+  id               String      @id @default(cuid())
+  name             String
+  email            String?
+  phone            String?
+  description      String?
+  notes            String?
+  location         String?
+  photoUrl         String?
+  timeline         String?
+  milestones       Json?
+  schedule         Json?
+  
+  projects         Project[] 
+  incomes          Income[] 
+  expenses         Expense[]
+  assignedEmployees Employee[] @relation("AssignedClients")
+  
+  userId           String
+  user             User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  spaceId          String?
+  space            Space?      @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+  
+  createdAt        DateTime    @default(now())
+  updatedAt        DateTime    @updatedAt
+
+  @@index([userId])
+  @@index([spaceId])
 }

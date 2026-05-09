@@ -42,6 +42,7 @@ export type IncomeMinAggregateOutputType = {
   source: string | null
   spaceId: string | null
   userId: string | null
+  clientId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -54,6 +55,7 @@ export type IncomeMaxAggregateOutputType = {
   source: string | null
   spaceId: string | null
   userId: string | null
+  clientId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -66,6 +68,7 @@ export type IncomeCountAggregateOutputType = {
   source: number
   spaceId: number
   userId: number
+  clientId: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -88,6 +91,7 @@ export type IncomeMinAggregateInputType = {
   source?: true
   spaceId?: true
   userId?: true
+  clientId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -100,6 +104,7 @@ export type IncomeMaxAggregateInputType = {
   source?: true
   spaceId?: true
   userId?: true
+  clientId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -112,6 +117,7 @@ export type IncomeCountAggregateInputType = {
   source?: true
   spaceId?: true
   userId?: true
+  clientId?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -211,6 +217,7 @@ export type IncomeGroupByOutputType = {
   source: string | null
   spaceId: string
   userId: string
+  clientId: string | null
   createdAt: Date
   updatedAt: Date
   _count: IncomeCountAggregateOutputType | null
@@ -246,11 +253,13 @@ export type IncomeWhereInput = {
   source?: Prisma.StringNullableFilter<"Income"> | string | null
   spaceId?: Prisma.StringFilter<"Income"> | string
   userId?: Prisma.StringFilter<"Income"> | string
+  clientId?: Prisma.StringNullableFilter<"Income"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Income"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Income"> | Date | string
   space?: Prisma.XOR<Prisma.SpaceScalarRelationFilter, Prisma.SpaceWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   labels?: Prisma.FinancialLabelListRelationFilter
+  client?: Prisma.XOR<Prisma.ClientNullableScalarRelationFilter, Prisma.ClientWhereInput> | null
 }
 
 export type IncomeOrderByWithRelationInput = {
@@ -261,11 +270,13 @@ export type IncomeOrderByWithRelationInput = {
   source?: Prisma.SortOrderInput | Prisma.SortOrder
   spaceId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  clientId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   space?: Prisma.SpaceOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
   labels?: Prisma.FinancialLabelOrderByRelationAggregateInput
+  client?: Prisma.ClientOrderByWithRelationInput
 }
 
 export type IncomeWhereUniqueInput = Prisma.AtLeast<{
@@ -279,11 +290,13 @@ export type IncomeWhereUniqueInput = Prisma.AtLeast<{
   source?: Prisma.StringNullableFilter<"Income"> | string | null
   spaceId?: Prisma.StringFilter<"Income"> | string
   userId?: Prisma.StringFilter<"Income"> | string
+  clientId?: Prisma.StringNullableFilter<"Income"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Income"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Income"> | Date | string
   space?: Prisma.XOR<Prisma.SpaceScalarRelationFilter, Prisma.SpaceWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   labels?: Prisma.FinancialLabelListRelationFilter
+  client?: Prisma.XOR<Prisma.ClientNullableScalarRelationFilter, Prisma.ClientWhereInput> | null
 }, "id">
 
 export type IncomeOrderByWithAggregationInput = {
@@ -294,6 +307,7 @@ export type IncomeOrderByWithAggregationInput = {
   source?: Prisma.SortOrderInput | Prisma.SortOrder
   spaceId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  clientId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.IncomeCountOrderByAggregateInput
@@ -314,6 +328,7 @@ export type IncomeScalarWhereWithAggregatesInput = {
   source?: Prisma.StringNullableWithAggregatesFilter<"Income"> | string | null
   spaceId?: Prisma.StringWithAggregatesFilter<"Income"> | string
   userId?: Prisma.StringWithAggregatesFilter<"Income"> | string
+  clientId?: Prisma.StringNullableWithAggregatesFilter<"Income"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Income"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Income"> | Date | string
 }
@@ -329,6 +344,7 @@ export type IncomeCreateInput = {
   space: Prisma.SpaceCreateNestedOneWithoutIncomesInput
   user: Prisma.UserCreateNestedOneWithoutIncomesInput
   labels?: Prisma.FinancialLabelCreateNestedManyWithoutIncomesInput
+  client?: Prisma.ClientCreateNestedOneWithoutIncomesInput
 }
 
 export type IncomeUncheckedCreateInput = {
@@ -339,6 +355,7 @@ export type IncomeUncheckedCreateInput = {
   source?: string | null
   spaceId: string
   userId: string
+  clientId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   labels?: Prisma.FinancialLabelUncheckedCreateNestedManyWithoutIncomesInput
@@ -355,6 +372,7 @@ export type IncomeUpdateInput = {
   space?: Prisma.SpaceUpdateOneRequiredWithoutIncomesNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutIncomesNestedInput
   labels?: Prisma.FinancialLabelUpdateManyWithoutIncomesNestedInput
+  client?: Prisma.ClientUpdateOneWithoutIncomesNestedInput
 }
 
 export type IncomeUncheckedUpdateInput = {
@@ -365,6 +383,7 @@ export type IncomeUncheckedUpdateInput = {
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   spaceId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   labels?: Prisma.FinancialLabelUncheckedUpdateManyWithoutIncomesNestedInput
@@ -378,6 +397,7 @@ export type IncomeCreateManyInput = {
   source?: string | null
   spaceId: string
   userId: string
+  clientId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -400,6 +420,7 @@ export type IncomeUncheckedUpdateManyInput = {
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   spaceId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -422,6 +443,7 @@ export type IncomeCountOrderByAggregateInput = {
   source?: Prisma.SortOrder
   spaceId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  clientId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -438,6 +460,7 @@ export type IncomeMaxOrderByAggregateInput = {
   source?: Prisma.SortOrder
   spaceId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  clientId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -450,6 +473,7 @@ export type IncomeMinOrderByAggregateInput = {
   source?: Prisma.SortOrder
   spaceId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
+  clientId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -580,6 +604,48 @@ export type IncomeUncheckedUpdateManyWithoutLabelsNestedInput = {
   deleteMany?: Prisma.IncomeScalarWhereInput | Prisma.IncomeScalarWhereInput[]
 }
 
+export type IncomeCreateNestedManyWithoutClientInput = {
+  create?: Prisma.XOR<Prisma.IncomeCreateWithoutClientInput, Prisma.IncomeUncheckedCreateWithoutClientInput> | Prisma.IncomeCreateWithoutClientInput[] | Prisma.IncomeUncheckedCreateWithoutClientInput[]
+  connectOrCreate?: Prisma.IncomeCreateOrConnectWithoutClientInput | Prisma.IncomeCreateOrConnectWithoutClientInput[]
+  createMany?: Prisma.IncomeCreateManyClientInputEnvelope
+  connect?: Prisma.IncomeWhereUniqueInput | Prisma.IncomeWhereUniqueInput[]
+}
+
+export type IncomeUncheckedCreateNestedManyWithoutClientInput = {
+  create?: Prisma.XOR<Prisma.IncomeCreateWithoutClientInput, Prisma.IncomeUncheckedCreateWithoutClientInput> | Prisma.IncomeCreateWithoutClientInput[] | Prisma.IncomeUncheckedCreateWithoutClientInput[]
+  connectOrCreate?: Prisma.IncomeCreateOrConnectWithoutClientInput | Prisma.IncomeCreateOrConnectWithoutClientInput[]
+  createMany?: Prisma.IncomeCreateManyClientInputEnvelope
+  connect?: Prisma.IncomeWhereUniqueInput | Prisma.IncomeWhereUniqueInput[]
+}
+
+export type IncomeUpdateManyWithoutClientNestedInput = {
+  create?: Prisma.XOR<Prisma.IncomeCreateWithoutClientInput, Prisma.IncomeUncheckedCreateWithoutClientInput> | Prisma.IncomeCreateWithoutClientInput[] | Prisma.IncomeUncheckedCreateWithoutClientInput[]
+  connectOrCreate?: Prisma.IncomeCreateOrConnectWithoutClientInput | Prisma.IncomeCreateOrConnectWithoutClientInput[]
+  upsert?: Prisma.IncomeUpsertWithWhereUniqueWithoutClientInput | Prisma.IncomeUpsertWithWhereUniqueWithoutClientInput[]
+  createMany?: Prisma.IncomeCreateManyClientInputEnvelope
+  set?: Prisma.IncomeWhereUniqueInput | Prisma.IncomeWhereUniqueInput[]
+  disconnect?: Prisma.IncomeWhereUniqueInput | Prisma.IncomeWhereUniqueInput[]
+  delete?: Prisma.IncomeWhereUniqueInput | Prisma.IncomeWhereUniqueInput[]
+  connect?: Prisma.IncomeWhereUniqueInput | Prisma.IncomeWhereUniqueInput[]
+  update?: Prisma.IncomeUpdateWithWhereUniqueWithoutClientInput | Prisma.IncomeUpdateWithWhereUniqueWithoutClientInput[]
+  updateMany?: Prisma.IncomeUpdateManyWithWhereWithoutClientInput | Prisma.IncomeUpdateManyWithWhereWithoutClientInput[]
+  deleteMany?: Prisma.IncomeScalarWhereInput | Prisma.IncomeScalarWhereInput[]
+}
+
+export type IncomeUncheckedUpdateManyWithoutClientNestedInput = {
+  create?: Prisma.XOR<Prisma.IncomeCreateWithoutClientInput, Prisma.IncomeUncheckedCreateWithoutClientInput> | Prisma.IncomeCreateWithoutClientInput[] | Prisma.IncomeUncheckedCreateWithoutClientInput[]
+  connectOrCreate?: Prisma.IncomeCreateOrConnectWithoutClientInput | Prisma.IncomeCreateOrConnectWithoutClientInput[]
+  upsert?: Prisma.IncomeUpsertWithWhereUniqueWithoutClientInput | Prisma.IncomeUpsertWithWhereUniqueWithoutClientInput[]
+  createMany?: Prisma.IncomeCreateManyClientInputEnvelope
+  set?: Prisma.IncomeWhereUniqueInput | Prisma.IncomeWhereUniqueInput[]
+  disconnect?: Prisma.IncomeWhereUniqueInput | Prisma.IncomeWhereUniqueInput[]
+  delete?: Prisma.IncomeWhereUniqueInput | Prisma.IncomeWhereUniqueInput[]
+  connect?: Prisma.IncomeWhereUniqueInput | Prisma.IncomeWhereUniqueInput[]
+  update?: Prisma.IncomeUpdateWithWhereUniqueWithoutClientInput | Prisma.IncomeUpdateWithWhereUniqueWithoutClientInput[]
+  updateMany?: Prisma.IncomeUpdateManyWithWhereWithoutClientInput | Prisma.IncomeUpdateManyWithWhereWithoutClientInput[]
+  deleteMany?: Prisma.IncomeScalarWhereInput | Prisma.IncomeScalarWhereInput[]
+}
+
 export type IncomeCreateWithoutUserInput = {
   id?: string
   amount: number
@@ -590,6 +656,7 @@ export type IncomeCreateWithoutUserInput = {
   updatedAt?: Date | string
   space: Prisma.SpaceCreateNestedOneWithoutIncomesInput
   labels?: Prisma.FinancialLabelCreateNestedManyWithoutIncomesInput
+  client?: Prisma.ClientCreateNestedOneWithoutIncomesInput
 }
 
 export type IncomeUncheckedCreateWithoutUserInput = {
@@ -599,6 +666,7 @@ export type IncomeUncheckedCreateWithoutUserInput = {
   date?: Date | string
   source?: string | null
   spaceId: string
+  clientId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   labels?: Prisma.FinancialLabelUncheckedCreateNestedManyWithoutIncomesInput
@@ -641,6 +709,7 @@ export type IncomeScalarWhereInput = {
   source?: Prisma.StringNullableFilter<"Income"> | string | null
   spaceId?: Prisma.StringFilter<"Income"> | string
   userId?: Prisma.StringFilter<"Income"> | string
+  clientId?: Prisma.StringNullableFilter<"Income"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Income"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Income"> | Date | string
 }
@@ -655,6 +724,7 @@ export type IncomeCreateWithoutSpaceInput = {
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutIncomesInput
   labels?: Prisma.FinancialLabelCreateNestedManyWithoutIncomesInput
+  client?: Prisma.ClientCreateNestedOneWithoutIncomesInput
 }
 
 export type IncomeUncheckedCreateWithoutSpaceInput = {
@@ -664,6 +734,7 @@ export type IncomeUncheckedCreateWithoutSpaceInput = {
   date?: Date | string
   source?: string | null
   userId: string
+  clientId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   labels?: Prisma.FinancialLabelUncheckedCreateNestedManyWithoutIncomesInput
@@ -705,6 +776,7 @@ export type IncomeCreateWithoutLabelsInput = {
   updatedAt?: Date | string
   space: Prisma.SpaceCreateNestedOneWithoutIncomesInput
   user: Prisma.UserCreateNestedOneWithoutIncomesInput
+  client?: Prisma.ClientCreateNestedOneWithoutIncomesInput
 }
 
 export type IncomeUncheckedCreateWithoutLabelsInput = {
@@ -715,6 +787,7 @@ export type IncomeUncheckedCreateWithoutLabelsInput = {
   source?: string | null
   spaceId: string
   userId: string
+  clientId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -740,6 +813,58 @@ export type IncomeUpdateManyWithWhereWithoutLabelsInput = {
   data: Prisma.XOR<Prisma.IncomeUpdateManyMutationInput, Prisma.IncomeUncheckedUpdateManyWithoutLabelsInput>
 }
 
+export type IncomeCreateWithoutClientInput = {
+  id?: string
+  amount: number
+  description?: string | null
+  date?: Date | string
+  source?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  space: Prisma.SpaceCreateNestedOneWithoutIncomesInput
+  user: Prisma.UserCreateNestedOneWithoutIncomesInput
+  labels?: Prisma.FinancialLabelCreateNestedManyWithoutIncomesInput
+}
+
+export type IncomeUncheckedCreateWithoutClientInput = {
+  id?: string
+  amount: number
+  description?: string | null
+  date?: Date | string
+  source?: string | null
+  spaceId: string
+  userId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  labels?: Prisma.FinancialLabelUncheckedCreateNestedManyWithoutIncomesInput
+}
+
+export type IncomeCreateOrConnectWithoutClientInput = {
+  where: Prisma.IncomeWhereUniqueInput
+  create: Prisma.XOR<Prisma.IncomeCreateWithoutClientInput, Prisma.IncomeUncheckedCreateWithoutClientInput>
+}
+
+export type IncomeCreateManyClientInputEnvelope = {
+  data: Prisma.IncomeCreateManyClientInput | Prisma.IncomeCreateManyClientInput[]
+  skipDuplicates?: boolean
+}
+
+export type IncomeUpsertWithWhereUniqueWithoutClientInput = {
+  where: Prisma.IncomeWhereUniqueInput
+  update: Prisma.XOR<Prisma.IncomeUpdateWithoutClientInput, Prisma.IncomeUncheckedUpdateWithoutClientInput>
+  create: Prisma.XOR<Prisma.IncomeCreateWithoutClientInput, Prisma.IncomeUncheckedCreateWithoutClientInput>
+}
+
+export type IncomeUpdateWithWhereUniqueWithoutClientInput = {
+  where: Prisma.IncomeWhereUniqueInput
+  data: Prisma.XOR<Prisma.IncomeUpdateWithoutClientInput, Prisma.IncomeUncheckedUpdateWithoutClientInput>
+}
+
+export type IncomeUpdateManyWithWhereWithoutClientInput = {
+  where: Prisma.IncomeScalarWhereInput
+  data: Prisma.XOR<Prisma.IncomeUpdateManyMutationInput, Prisma.IncomeUncheckedUpdateManyWithoutClientInput>
+}
+
 export type IncomeCreateManyUserInput = {
   id?: string
   amount: number
@@ -747,6 +872,7 @@ export type IncomeCreateManyUserInput = {
   date?: Date | string
   source?: string | null
   spaceId: string
+  clientId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -761,6 +887,7 @@ export type IncomeUpdateWithoutUserInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   space?: Prisma.SpaceUpdateOneRequiredWithoutIncomesNestedInput
   labels?: Prisma.FinancialLabelUpdateManyWithoutIncomesNestedInput
+  client?: Prisma.ClientUpdateOneWithoutIncomesNestedInput
 }
 
 export type IncomeUncheckedUpdateWithoutUserInput = {
@@ -770,6 +897,7 @@ export type IncomeUncheckedUpdateWithoutUserInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   spaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   labels?: Prisma.FinancialLabelUncheckedUpdateManyWithoutIncomesNestedInput
@@ -782,6 +910,7 @@ export type IncomeUncheckedUpdateManyWithoutUserInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   spaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -793,6 +922,7 @@ export type IncomeCreateManySpaceInput = {
   date?: Date | string
   source?: string | null
   userId: string
+  clientId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -807,6 +937,7 @@ export type IncomeUpdateWithoutSpaceInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutIncomesNestedInput
   labels?: Prisma.FinancialLabelUpdateManyWithoutIncomesNestedInput
+  client?: Prisma.ClientUpdateOneWithoutIncomesNestedInput
 }
 
 export type IncomeUncheckedUpdateWithoutSpaceInput = {
@@ -816,6 +947,7 @@ export type IncomeUncheckedUpdateWithoutSpaceInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   labels?: Prisma.FinancialLabelUncheckedUpdateManyWithoutIncomesNestedInput
@@ -828,6 +960,7 @@ export type IncomeUncheckedUpdateManyWithoutSpaceInput = {
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -842,6 +975,7 @@ export type IncomeUpdateWithoutLabelsInput = {
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   space?: Prisma.SpaceUpdateOneRequiredWithoutIncomesNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutIncomesNestedInput
+  client?: Prisma.ClientUpdateOneWithoutIncomesNestedInput
 }
 
 export type IncomeUncheckedUpdateWithoutLabelsInput = {
@@ -852,11 +986,63 @@ export type IncomeUncheckedUpdateWithoutLabelsInput = {
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   spaceId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
 
 export type IncomeUncheckedUpdateManyWithoutLabelsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  spaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type IncomeCreateManyClientInput = {
+  id?: string
+  amount: number
+  description?: string | null
+  date?: Date | string
+  source?: string | null
+  spaceId: string
+  userId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type IncomeUpdateWithoutClientInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  space?: Prisma.SpaceUpdateOneRequiredWithoutIncomesNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutIncomesNestedInput
+  labels?: Prisma.FinancialLabelUpdateManyWithoutIncomesNestedInput
+}
+
+export type IncomeUncheckedUpdateWithoutClientInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  spaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  labels?: Prisma.FinancialLabelUncheckedUpdateManyWithoutIncomesNestedInput
+}
+
+export type IncomeUncheckedUpdateManyWithoutClientInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   amount?: Prisma.FloatFieldUpdateOperationsInput | number
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -907,11 +1093,13 @@ export type IncomeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   source?: boolean
   spaceId?: boolean
   userId?: boolean
+  clientId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   space?: boolean | Prisma.SpaceDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   labels?: boolean | Prisma.Income$labelsArgs<ExtArgs>
+  client?: boolean | Prisma.Income$clientArgs<ExtArgs>
   _count?: boolean | Prisma.IncomeCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["income"]>
 
@@ -923,10 +1111,12 @@ export type IncomeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   source?: boolean
   spaceId?: boolean
   userId?: boolean
+  clientId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   space?: boolean | Prisma.SpaceDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  client?: boolean | Prisma.Income$clientArgs<ExtArgs>
 }, ExtArgs["result"]["income"]>
 
 export type IncomeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -937,10 +1127,12 @@ export type IncomeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   source?: boolean
   spaceId?: boolean
   userId?: boolean
+  clientId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   space?: boolean | Prisma.SpaceDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  client?: boolean | Prisma.Income$clientArgs<ExtArgs>
 }, ExtArgs["result"]["income"]>
 
 export type IncomeSelectScalar = {
@@ -951,24 +1143,28 @@ export type IncomeSelectScalar = {
   source?: boolean
   spaceId?: boolean
   userId?: boolean
+  clientId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type IncomeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "amount" | "description" | "date" | "source" | "spaceId" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["income"]>
+export type IncomeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "amount" | "description" | "date" | "source" | "spaceId" | "userId" | "clientId" | "createdAt" | "updatedAt", ExtArgs["result"]["income"]>
 export type IncomeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   space?: boolean | Prisma.SpaceDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   labels?: boolean | Prisma.Income$labelsArgs<ExtArgs>
+  client?: boolean | Prisma.Income$clientArgs<ExtArgs>
   _count?: boolean | Prisma.IncomeCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type IncomeIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   space?: boolean | Prisma.SpaceDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  client?: boolean | Prisma.Income$clientArgs<ExtArgs>
 }
 export type IncomeIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   space?: boolean | Prisma.SpaceDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  client?: boolean | Prisma.Income$clientArgs<ExtArgs>
 }
 
 export type $IncomePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -977,6 +1173,7 @@ export type $IncomePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     space: Prisma.$SpacePayload<ExtArgs>
     user: Prisma.$UserPayload<ExtArgs>
     labels: Prisma.$FinancialLabelPayload<ExtArgs>[]
+    client: Prisma.$ClientPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -986,6 +1183,7 @@ export type $IncomePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     source: string | null
     spaceId: string
     userId: string
+    clientId: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["income"]>
@@ -1385,6 +1583,7 @@ export interface Prisma__IncomeClient<T, Null = never, ExtArgs extends runtime.T
   space<T extends Prisma.SpaceDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.SpaceDefaultArgs<ExtArgs>>): Prisma.Prisma__SpaceClient<runtime.Types.Result.GetResult<Prisma.$SpacePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   labels<T extends Prisma.Income$labelsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Income$labelsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FinancialLabelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  client<T extends Prisma.Income$clientArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Income$clientArgs<ExtArgs>>): Prisma.Prisma__ClientClient<runtime.Types.Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1421,6 +1620,7 @@ export interface IncomeFieldRefs {
   readonly source: Prisma.FieldRef<"Income", 'String'>
   readonly spaceId: Prisma.FieldRef<"Income", 'String'>
   readonly userId: Prisma.FieldRef<"Income", 'String'>
+  readonly clientId: Prisma.FieldRef<"Income", 'String'>
   readonly createdAt: Prisma.FieldRef<"Income", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Income", 'DateTime'>
 }
@@ -1845,6 +2045,25 @@ export type Income$labelsArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   take?: number
   skip?: number
   distinct?: Prisma.FinancialLabelScalarFieldEnum | Prisma.FinancialLabelScalarFieldEnum[]
+}
+
+/**
+ * Income.client
+ */
+export type Income$clientArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Client
+   */
+  select?: Prisma.ClientSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Client
+   */
+  omit?: Prisma.ClientOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ClientInclude<ExtArgs> | null
+  where?: Prisma.ClientWhereInput
 }
 
 /**

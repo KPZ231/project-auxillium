@@ -5,7 +5,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
 import {
-  LayoutDashboard,
   Users,
   BarChart3,
   Settings,
@@ -24,7 +23,6 @@ interface NavLink {
 }
 
 const spaceNavLinks: NavLink[] = [
-  { name: "Dashboard", href: "/dashboard/space", icon: LayoutDashboard },
   { name: "Employees", href: "/dashboard/space/employees", icon: Users },
   { name: "Workload", href: "/dashboard/space/workload", icon: BarChart3 },
   { name: "Settings", href: "/dashboard/space/settings", icon: Settings },

@@ -5,6 +5,7 @@ import { prisma } from "@/lib/prisma"
 import { z } from "zod"
 import { ProjectStatus } from "@/lib/generated/client/client"
 import { revalidatePath } from "next/cache"
+import { invalidateWorkloadCache } from "./workload"
 
 const updateProjectSchema = z.object({
   id: z.string(),
@@ -74,6 +75,11 @@ export async function updateProject(data: UpdateProjectInput) {
 
         revalidatePath('/dashboard/projects', 'page')
         revalidatePath(`/dashboard/projects/${id}`, 'page')
+
+        // Invalidate workload cache
+        if (existingProject.spaceId) {
+          await invalidateWorkloadCache(existingProject.spaceId);
+        }
 
         return {
             success: true,

@@ -3,6 +3,7 @@
 import { getUser } from "@/lib/session"
 import { prisma } from "@/lib/prisma"
 import { revalidatePath } from "next/cache"
+import { invalidateWorkloadCache } from "./workload"
 
 export async function deleteProject(projectId: string, confirmationName: string) {
     const { isAuthenticatedAndLogedIn, userId } = await getUser()
@@ -52,6 +53,11 @@ export async function deleteProject(projectId: string, confirmationName: string)
         })
 
         revalidatePath('/dashboard/projects', 'page')
+
+        // Invalidate workload cache
+        if (project.spaceId) {
+          await invalidateWorkloadCache(project.spaceId);
+        }
 
         return {
             success: true,

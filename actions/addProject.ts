@@ -6,6 +6,7 @@ import { prisma } from "@/lib/prisma"
 import { z } from "zod"
 import { ProjectStatus } from "@/lib/generated/client/client"
 import { revalidatePath } from "next/cache"
+import { invalidateWorkloadCache } from "./workload"
 
 
 // 1. Zod Schema: The most scalable way to validate incoming data.
@@ -75,6 +76,11 @@ export async function addProject(data: AddProjectInput) {
 
         // Revalidate cache for projects grid
         revalidatePath('/dashboard/projects', 'page')
+
+        // Invalidate workload cache
+        if (spaceId) {
+          await invalidateWorkloadCache(spaceId);
+        }
 
         return {
             success: true,

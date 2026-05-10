@@ -43,13 +43,13 @@ export default function RegisterForm() {
       } else {
         toast.error(t("common:messages.error"), {
           description:
-            result.error || t("forms:errors.registration_failed", { defaultValue: "Nie udało się zarejestrować. Spróbuj ponownie." }),
+            result.error || t("forms:labels.registration_failed", { defaultValue: "Nie udało się zarejestrować. Spróbuj ponownie." }),
         });
       }
     } catch {
       setLoading(false);
-      toast.error("Wystąpił błąd połączenia", {
-        description: "Sprawdź swoje połączenie internetowe i spróbuj ponownie.",
+      toast.error(t("common:messages.network_error"), {
+        description: t("common:messages.please_try_again"),
       });
     }
   }

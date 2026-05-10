@@ -7,10 +7,12 @@ import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { contactSchema, type ContactFormData } from "@/lib/validators";
+import { useTranslation } from "@/app/context/TranslationContext";
 
 
 export default function ContactForm() {
   const [loading, setLoading] = useState(false);
+  const { t } = useTranslation();
 
   const {
     register,
@@ -24,7 +26,7 @@ export default function ContactForm() {
 
   async function onSubmit(data: ContactFormData) {
     setLoading(true);
-    
+
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
@@ -35,26 +37,26 @@ export default function ContactForm() {
       setLoading(false);
 
       if (res.ok) {
-        toast.success("Wiadomość została wysłana!", {
-          description: "Dziękujemy za kontakt. Odpowiemy tak szybko, jak to możliwe.",
+        toast.success(t("forms:success.message_sent"), {
+          description: t("forms:success.contact_thanks", { defaultValue: "Dziękujemy za kontakt. Odpowiemy tak szybko, jak to możliwe." }),
         });
         reset();
       } else {
-        toast.error("Wystąpił błąd", {
-          description: result.error || "Nie udało się wysłać wiadomości. Spróbuj ponownie później.",
+        toast.error(t("common:messages.error"), {
+          description: result.error || t("forms:errors.contact_failed", { defaultValue: "Nie udało się wysłać wiadomości. Spróbuj ponownie później." }),
         });
       }
     } catch (error) {
       setLoading(false);
-      toast.error("Wystąpił błąd połączenia", {
-        description: "Sprawdź swoje połączenie internetowe i spróbuj ponownie.",
+      toast.error(t("common:messages.network_error"), {
+        description: t("common:messages.please_try_again"),
       });
     }
   }
 
   const onValidationError = () => {
-    toast.error("Błąd walidacji", {
-      description: "Proszę poprawić błędy w formularzu przed wysłaniem.",
+    toast.error(t("forms:labels.validation_error"), {
+      description: t("forms:labels.validation_error_desc"),
     });
   };
 
@@ -87,7 +89,7 @@ export default function ContactForm() {
             custom={0}
             className="text-3xl lg:text-4xl font-bold tracking-tight text-(--primary) uppercase"
           >
-            Wyślij zapytanie
+            {t("forms:contact_title", { defaultValue: "Wyślij zapytanie" })}
           </motion.h2>
 
           <form onSubmit={handleSubmit(onSubmit, onValidationError)} className="flex flex-col gap-8">
@@ -100,7 +102,7 @@ export default function ContactForm() {
             >
               <div className="flex justify-between items-end">
                 <label className="text-[10px] font-bold tracking-[0.2em] text-(--neutral) uppercase opacity-60">
-                  Imię i nazwisko
+                  {t("forms:form.full_name")}
                 </label>
                 {errors.name && (
                   <span className="text-[10px] font-bold text-red-500 uppercase tracking-wider animate-pulse">
@@ -111,7 +113,7 @@ export default function ContactForm() {
               <input
                 {...register("name")}
                 type="text"
-                placeholder="WPISZ SWOJE DANE"
+                placeholder={t("forms:placeholders.full_name")}
                 className={`w-full p-4 border ${errors.name ? 'border-red-500' : 'border-(--tertiary)'} focus:border-(--primary) outline-none transition-colors uppercase text-sm tracking-wide`}
               />
             </motion.div>
@@ -123,7 +125,7 @@ export default function ContactForm() {
             >
               <div className="flex justify-between items-end">
                 <label className="text-[10px] font-bold tracking-[0.2em] text-(--neutral) uppercase opacity-60">
-                  Adres e-mail
+                  {t("forms:form.email")}
                 </label>
                 {errors.email && (
                   <span className="text-[10px] font-bold text-red-500 uppercase tracking-wider animate-pulse">
@@ -134,7 +136,7 @@ export default function ContactForm() {
               <input
                 {...register("email")}
                 type="email"
-                placeholder="NAZWA@DOMENA.PL"
+                placeholder={t("forms:placeholders.email")}
                 className={`w-full p-4 border ${errors.email ? 'border-red-500' : 'border-(--tertiary)'} focus:border-(--primary) outline-none transition-colors uppercase text-sm tracking-wide`}
               />
             </motion.div>
@@ -146,7 +148,7 @@ export default function ContactForm() {
             >
               <div className="flex justify-between items-end">
                 <label className="text-[10px] font-bold tracking-[0.2em] text-(--neutral) uppercase opacity-60">
-                  Wiadomość
+                  {t("forms:form.message")}
                 </label>
                 {errors.message && (
                   <span className="text-[10px] font-bold text-red-500 uppercase tracking-wider animate-pulse">
@@ -157,7 +159,7 @@ export default function ContactForm() {
               <textarea
                 {...register("message")}
                 rows={6}
-                placeholder="W CZYM MOŻEMY POMÓC?"
+                placeholder={t("forms:placeholders.description")}
                 className={`w-full p-4 border ${errors.message ? 'border-red-500' : 'border-(--tertiary)'} focus:border-(--primary) outline-none transition-colors uppercase text-sm tracking-wide resize-none`}
               />
             </motion.div>
@@ -169,7 +171,7 @@ export default function ContactForm() {
               type="submit"
               className="w-fit px-12 py-5 bg-(--primary) text-(--secondary) font-bold text-sm tracking-widest uppercase hover:opacity-90 transition-opacity disabled:opacity-30 cursor-pointer"
             >
-              {loading ? "Wysyłanie..." : "Wyślij wiadomość"}
+              {loading ? t("forms:labels.registering") : t("forms:buttons.submit", { defaultValue: "Wyślij wiadomość" })}
             </motion.button>
           </form>
         </div>
@@ -183,7 +185,7 @@ export default function ContactForm() {
               className="flex flex-col gap-4"
             >
               <label className="text-[10px] font-bold tracking-[0.2em] text-(--neutral) uppercase opacity-60">
-                Zadzwoń
+                {t("forms:labels.phone", { defaultValue: "Zadzwoń" })}
               </label>
               <p className="text-xl font-bold tracking-tight text-(--primary)">
                 <Link href={"tel:" + process.env.NEXT_PUBLIC_PHONE}>
@@ -197,7 +199,7 @@ export default function ContactForm() {
               className="flex flex-col gap-4"
             >
               <label className="text-[10px] font-bold tracking-[0.2em] text-(--neutral) uppercase opacity-60">
-                Napisz
+                {t("forms:labels.email", { defaultValue: "Napisz" })}
               </label>
               <p className="text-xl font-bold tracking-tight text-(--primary)">
                 <Link href={"mailto:" + process.env.NEXT_PUBLIC_EMAIL}>
@@ -213,13 +215,13 @@ export default function ContactForm() {
               custom={7}
               className="text-[10px] font-bold tracking-[0.2em] text-(--neutral) uppercase opacity-60"
             >
-              Dostępność
+              {t("forms:labels.available", { defaultValue: "Dostępność" })}
             </motion.label>
             <div className="flex flex-col border-t border-(--tertiary)">
               {[
-                { day: "PON - PT", time: "09:00 - 17:00" },
-                { day: "SOBOTA", time: "ZAMKNIĘTE" },
-                { day: "NIEDZIELA", time: "ZAMKNIĘTE" },
+                { day: t("forms:days.mon_fri", { defaultValue: "PON - PT" }), time: "09:00 - 17:00" },
+                { day: t("forms:days.sat", { defaultValue: "SOBOTA" }), time: t("forms:days.closed", { defaultValue: "ZAMKNIĘTE" }) },
+                { day: t("forms:days.sun", { defaultValue: "NIEDZIELA" }), time: t("forms:days.closed", { defaultValue: "ZAMKNIĘTE" }) },
               ].map((item, i) => (
                 <motion.div
                   key={i}

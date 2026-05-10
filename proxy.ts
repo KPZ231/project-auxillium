@@ -50,79 +50,77 @@ function getLocale(request: NextRequest): string {
   return defaultLanguage;
 }
 
+// 0. Skip paths that don't need proxying (API, static files, etc.)
+const skipPaths = [
+  '/api',
+  '/_next',
+  '/favicon.ico',
+  '/images',
+  '/videos',
+  '/robots.txt',
+  '/sitemap.xml',
+]
+
 // 1. Specify protected and public routes
 const protectedRoutes = ['/dashboard', '/admin']
 const publicRoutes = ['/login', '/register', '/forgot-password', '/reset-password']
 
-export default async function proxy(request: NextRequest) {
+/**
+ * Main proxy handler for authentication and i18n routing
+ */
+export async function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl
   
-  // 0. Skip middleware for static assets and API
-  const skipPaths = [
-    '/api',
-    '/_next',
-    '/favicon.ico',
-    '/images',
-    '/videos',
-    '/robots.txt',
-    '/sitemap.xml',
-  ]
-
+  // 1. Skip paths that don't need proxying (API, static files, etc.)
   if (skipPaths.some((path) => pathname.startsWith(path))) {
     return NextResponse.next()
   }
 
-  // 1. Get current locale
-  const currentLocale = getLocale(request)
-  const segments = pathname.split('/').filter(Boolean)
-  const hasLocalePrefix = segments.length > 0 && supportedLanguages.includes(segments[0] as Language)
-
-  // Integrate Supabase session refreshing
+  // 2. Initial response for Supabase session management
   const supabaseResponse = createClient(request)
 
-  // 2. Check if the current route is protected or public
+  // 3. Extract locale and normalized path
+  const segments = pathname.split('/').filter(Boolean)
+  const firstSegment = segments[0] as Language | undefined
+  const hasLocalePrefix = firstSegment && supportedLanguages.includes(firstSegment)
+  
+  const currentLocale = getLocale(request)
   const path = hasLocalePrefix ? `/${segments.slice(1).join('/')}` : pathname
+  
+  // 4. Route classification
   const isProtectedRoute = protectedRoutes.some(route => path.startsWith(route))
   const isPublicRoute = publicRoutes.some(route => path.startsWith(route))
+  const isOnboardingRoute = path.startsWith('/onboarding')
 
-  // 3. Decrypt the session from the cookie
+  // 5. Authentication check
   const cookie = request.cookies.get('session')?.value
   const session = cookie ? await decrypt<SessionPayload>(cookie).catch(() => null) : null
 
-  // 4. Redirect to /login if the user is not authenticated
-  const isOnboardingRoute = path.startsWith('/onboarding')
-
-  if ((isProtectedRoute || isOnboardingRoute) && !session) {
-    const url = new URL(`/${currentLocale}/login`, request.nextUrl)
-    url.searchParams.set('callbackUrl', path)
-    return NextResponse.redirect(url)
+  // 6. Access Control Logic
+  
+  // A. Redirect unauthenticated users from protected routes
+  if (isProtectedRoute && !session) {
+    const loginUrl = new URL(`/${currentLocale}/login`, request.nextUrl)
+    // Use the full pathname for callback to preserve locale
+    loginUrl.searchParams.set('callbackUrl', pathname)
+    return NextResponse.redirect(loginUrl)
   }
 
-  // 5. Enforce space creation (onboarding)
+  // B. Redirect authenticated users with a space to dashboard if they are at public routes or root
+  if (session && session.hasSpace && (isPublicRoute || path === '/')) {
+    return NextResponse.redirect(new URL(`/${currentLocale}/dashboard`, request.nextUrl))
+  }
+
+  // C. Redirect authenticated users without a space to onboarding (unless already there)
   if (isProtectedRoute && session && !session.hasSpace && !isOnboardingRoute) {
     return NextResponse.redirect(new URL(`/${currentLocale}/onboarding`, request.nextUrl))
   }
 
-  // 6. Redirect to /dashboard if the user is authenticated and has a space
-  if (
-    (isPublicRoute || isOnboardingRoute) &&
-    session &&
-    session.hasSpace &&
-    !path.startsWith('/dashboard')
-  ) {
-    return NextResponse.redirect(new URL(`/${currentLocale}/dashboard`, request.nextUrl))
-  }
-
-  // Special case: if on onboarding but has space, go to dashboard
-  if (isOnboardingRoute && session && session.hasSpace) {
-    return NextResponse.redirect(new URL(`/${currentLocale}/dashboard`, request.nextUrl))
-  }
-
-  // 7. Finally, check for i18n redirection if no locale prefix is present
+  // 7. Final check for i18n redirection
+  // If the path doesn't have a locale prefix, redirect to the version with the locale
   if (!hasLocalePrefix) {
-    const newUrl = request.nextUrl.clone()
-    newUrl.pathname = `/${currentLocale}${pathname}`
-    return NextResponse.redirect(newUrl)
+    const localizedUrl = new URL(`/${currentLocale}${pathname}`, request.nextUrl)
+    return NextResponse.redirect(localizedUrl)
   }
 
   return supabaseResponse

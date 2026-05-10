@@ -35,12 +35,43 @@
     "website": "https://www.beispiel.de"
   },
   "labels": {
+    "phone": "Anrufen",
+    "email": "Schreiben",
+    "available": "Verfügbarkeit",
+    "days": {
+      "mon_fri": "MON - FRE",
+      "sat": "SAMSTAG",
+      "sun": "SONNTAG",
+      "closed": "GESCHLOSSEN"
+    },
+    "login_title": "Einloggen",
+    "login_subtitle": "Willkommen zurück im Auxillium-System.",
+    "login_button": "Einloggen",
+    "logging_in": "Einloggen...",
+    "registration_title": "Registrieren",
+    "registration_subtitle": "Willkommen im Auxillium-System.",
+    "registering": "Registrieren...",
     "or_continue_with": "oder fahren Sie fort mit",
     "forgot_password": "Passwort vergessen?",
     "no_account": "Kein Konto?",
     "have_account": "Bereits ein Konto?",
-    "password_requirements": "Passwort muss mindestens 8 Zeichen, einen Großbuchstaben, einen Kleinbuchstaben und eine Zahl enthalten",
-    "required_field": "Dieses Feld ist erforderlich"
+    "validation_error": "Validierungsfehler",
+    "validation_error_desc": "Bitte korrigieren Sie die Fehler im Formular vor dem Absenden.",
+    "contact_failed": "Nachricht nicht gesendet",
+    "login_failed": "Login fehlgeschlagen"
+  },
+  "buttons": {
+    "submit": "Senden",
+    "sign_up": "Registrieren",
+    "log_in": "Einloggen"
+  },
+  "success": {
+    "contact_thanks": "Danke für Ihre Kontaktaufnahme. Wir werden so schnell wie möglich antworten.",
+    "login_success": "Erfolgreich eingeloggt",
+    "registration_success": "Erfolgreich registriert",
+    "password_reset_email_sent": "Link zum Zurücksetzen des Passworts wurde gesendet",
+    "message_sent": "Nachricht gesendet!",
+    "redirecting_dashboard": "Weiterleitung zum Benutzer-Dashboard..."
   },
   "errors": {
     "invalid_email": "Ungültiges E-Mail-Format",
@@ -52,12 +83,7 @@
     "passwords_do_not_match": "Passwörter stimmen nicht überein",
     "field_required": "Dieses Feld ist erforderlich",
     "minimum_characters": "Min. {{count}} Zeichen",
-    "invalid_input": "Ungültige Eingabe"
-  },
-  "success": {
-    "login_success": "Erfolgreich eingeloggt",
-    "registration_success": "Erfolgreich registriert",
-    "password_reset_email_sent": "Link zum Zurücksetzen des Passworts wurde gesendet",
-    "message_sent": "Nachricht gesendet!"
+    "invalid_input": "Ungültige Eingabe",
+    "contact_failed": "Nachricht nicht gesendet"
   }
 }

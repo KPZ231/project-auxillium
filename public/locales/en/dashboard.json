@@ -147,5 +147,27 @@
   },
   "documents": {
     "title": "Documents"
+  },
+  "workload": {
+    "title": "Workload",
+    "subtitle": "Space workload analysis and task distribution",
+    "total_projects": "Total Projects",
+    "total_tasks": "Total Tasks",
+    "completion_rate": "Completion Rate",
+    "overdue_tasks": "Overdue Tasks",
+    "chart_bar": "Bar Chart",
+    "chart_pie": "Pie Chart",
+    "filter_all": "All",
+    "filter_overdue": "Overdue",
+    "filter_due_soon": "Due Soon",
+    "filter_no_due": "No Due Date",
+    "score": "Score",
+    "project_breakdown": "Project Breakdown",
+    "done": "Done",
+    "in_progress": "In Progress",
+    "todo": "To Do",
+    "search_projects": "Search projects...",
+    "reset_filters": "Reset Filters",
+    "no_data": "No workload data available"
   }
 }

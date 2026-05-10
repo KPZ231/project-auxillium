@@ -35,12 +35,43 @@
     "website": "https://www.example.com"
   },
   "labels": {
+    "phone": "Call",
+    "email": "Write",
+    "available": "Availability",
+    "days": {
+      "mon_fri": "MON - FRI",
+      "sat": "SATURDAY",
+      "sun": "SUNDAY",
+      "closed": "CLOSED"
+    },
+    "login_title": "Log In",
+    "login_subtitle": "Welcome back to Auxillium system.",
+    "login_button": "Log In",
+    "logging_in": "Logging in...",
+    "registration_title": "Registration",
+    "registration_subtitle": "Welcome to Auxillium system.",
+    "registering": "Registering...",
     "or_continue_with": "or continue with",
     "forgot_password": "Forgot password?",
     "no_account": "Don't have an account?",
     "have_account": "Already have an account?",
-    "password_requirements": "Password must be at least 8 characters, one uppercase, one lowercase, and one digit",
-    "required_field": "This field is required"
+    "validation_error": "Validation error",
+    "validation_error_desc": "Please correct the errors in the form before submitting.",
+    "contact_failed": "Failed to send message",
+    "login_failed": "Login failed"
+  },
+  "buttons": {
+    "submit": "Submit",
+    "sign_up": "Sign Up",
+    "log_in": "Log In"
+  },
+  "success": {
+    "contact_thanks": "Thank you for contacting us. We will reply as soon as possible.",
+    "login_success": "Login successful",
+    "registration_success": "Registration successful",
+    "password_reset_email_sent": "Password reset link has been sent",
+    "message_sent": "Message sent!",
+    "redirecting_dashboard": "Redirecting to user dashboard..."
   },
   "errors": {
     "invalid_email": "Invalid email format",
@@ -52,12 +83,7 @@
     "passwords_do_not_match": "Passwords do not match",
     "field_required": "This field is required",
     "minimum_characters": "Min. {{count}} characters",
-    "invalid_input": "Invalid input"
-  },
-  "success": {
-    "login_success": "Login successful",
-    "registration_success": "Registration successful",
-    "password_reset_email_sent": "Password reset link has been sent",
-    "message_sent": "Message sent!"
+    "invalid_input": "Invalid input",
+    "contact_failed": "Failed to send message"
   }
 }

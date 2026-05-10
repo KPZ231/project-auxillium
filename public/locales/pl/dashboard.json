@@ -147,5 +147,27 @@
   },
   "documents": {
     "title": "Dokumenty"
+  },
+  "workload": {
+    "title": "Obciążenie",
+    "subtitle": "Analiza obciążenia przestrzeni i dystrybucja zadań",
+    "total_projects": "Łącznie projektów",
+    "total_tasks": "Łącznie zadań",
+    "completion_rate": "Wskaźnik ukończenia",
+    "overdue_tasks": "Zaległe zadania",
+    "chart_bar": "Wykres słupkowy",
+    "chart_pie": "Wykres kołowy",
+    "filter_all": "Wszystko",
+    "filter_overdue": "Zaległe",
+    "filter_due_soon": "Wkrótce termin",
+    "filter_no_due": "Bez terminu",
+    "score": "Wynik",
+    "project_breakdown": "Rozbicie projektów",
+    "done": "Wykonane",
+    "in_progress": "W trakcie",
+    "todo": "Do zrobienia",
+    "search_projects": "Szukaj projektów...",
+    "reset_filters": "Resetuj filtry",
+    "no_data": "Brak danych o obciążeniu"
   }
 }

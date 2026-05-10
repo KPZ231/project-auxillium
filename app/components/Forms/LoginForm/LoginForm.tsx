@@ -44,16 +44,15 @@ export default function LoginForm() {
         // Redirect to callbackUrl or dashboard
         router.push(callbackUrl);
       } else {
-
-        toast.error("Wystąpił błąd", {
+        toast.error(t("common:messages.error"), {
           description:
-            result.error || "Nie udało się zalogować. Spróbuj ponownie.",
+            result.error || t("forms:labels.login_failed", { defaultValue: "Nie udało się zalogować. Spróbuj ponownie." }),
         });
       }
     } catch {
       setLoading(false);
-      toast.error("Wystąpił błąd połączenia", {
-        description: "Sprawdź swoje połączenie internetowe i spróbuj ponownie.",
+      toast.error(t("common:messages.network_error"), {
+        description: t("common:messages.please_try_again"),
       });
     }
   }
@@ -85,12 +84,12 @@ export default function LoginForm() {
           {/* Email/Username Field */}
           <div className="flex flex-col gap-3">
             <label className="text-[10px] font-bold tracking-[0.2em] text-(--neutral) uppercase opacity-60">
-              Adres e-mail lub login
+              {t("forms:form.email_or_login")}
             </label>
             <input
               {...register("username")}
               type="text"
-              placeholder="Wprowadź e-mail lub login"
+              placeholder={t("forms:placeholders.email_or_login")}
               className={`w-full py-4 border-b ${errors.username ? 'border-red-500' : 'border-(--tertiary)'} focus:border-(--primary) outline-none transition-colors text-sm tracking-wide bg-transparent`}
             />
             {errors.username && (

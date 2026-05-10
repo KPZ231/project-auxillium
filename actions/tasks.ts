@@ -1,9 +1,10 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { Prisma } from "@prisma/client";
+import { Prisma } from "@/lib/generated/client/client";
 import { getCachedData, setCachedData, invalidateCache } from "@/lib/redis";
 import { revalidatePath } from "next/cache";
+import { invalidateWorkloadCache } from "./workload";
 
 export type Subtask = {
   id: string;
@@ -99,6 +100,7 @@ export async function createTask(data: TaskInput) {
   });
 
   await invalidateAllTaskCaches(spaceId, projectId);
+  await invalidateWorkloadCache(spaceId);
   revalidatePath('/dashboard/tasks');
 
   return newTask;
@@ -131,6 +133,7 @@ export async function updateTask(taskId: string, data: Partial<TaskInput>) {
   if (updatedTask.projectId !== existingTask.projectId) {
     await invalidateAllTaskCaches(updatedTask.spaceId, updatedTask.projectId);
   }
+  await invalidateWorkloadCache(existingTask.spaceId);
   
   revalidatePath('/dashboard/tasks');
   return updatedTask;
@@ -145,6 +148,7 @@ export async function deleteTask(taskId: string) {
   });
 
   await invalidateAllTaskCaches(existingTask.spaceId, existingTask.projectId);
+  await invalidateWorkloadCache(existingTask.spaceId);
   revalidatePath('/dashboard/tasks');
 
   return true;
@@ -172,6 +176,7 @@ export async function updateTaskStatusAndOrder(
   await prisma.$transaction(updates);
 
   await invalidateAllTaskCaches(existingTask.spaceId, existingTask.projectId);
+  await invalidateWorkloadCache(existingTask.spaceId);
   revalidatePath('/dashboard/tasks');
 
   return true;

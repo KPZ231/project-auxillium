@@ -12,7 +12,7 @@ export async function getEmployees() {
   if (!spaceId) return [];
 
   const cacheKey = `employees:${spaceId}`;
-  const cached = await getCachedData<ReturnType<typeof prisma.employee.findMany>[0][]>(cacheKey);
+  const cached = await getCachedData<any[]>(cacheKey);
   if (cached) return cached;
 
   const employees = await prisma.employee.findMany({
@@ -75,7 +75,7 @@ export async function getEmployeeById(id: string) {
   if (!spaceId) return null;
 
   const cacheKey = `employee:${id}`;
-  const cached = await getCachedData<ReturnType<typeof prisma.employee.findFirst>[0]>(cacheKey);
+  const cached = await getCachedData<any>(cacheKey);
   if (cached) return cached;
 
   const employee = await prisma.employee.findFirst({

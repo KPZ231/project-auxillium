@@ -15,6 +15,7 @@ import {
   ArrowLeft,
 } from "lucide-react";
 import { getActiveSpace } from "@/actions/space";
+import { useTranslation } from "@/app/context/TranslationContext";
 
 interface NavLink {
   name: string;
@@ -44,7 +45,20 @@ interface SpaceData {
 }
 
 export default function SpaceSidePanel() {
+  const { language } = useTranslation();
   const pathname = usePathname();
+  
+  // Helper to get path without locale for comparison
+  const getPathWithoutLocale = (path: string) => {
+    const segments = path.split("/").filter(Boolean);
+    if (segments.length > 0 && ["pl", "en", "de"].includes(segments[0])) {
+      return "/" + segments.slice(1).join("/");
+    }
+    return path;
+  };
+
+  const currentPathWithoutLocale = getPathWithoutLocale(pathname);
+
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isMobileOpen, setIsMobileOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
@@ -110,7 +124,7 @@ export default function SpaceSidePanel() {
       >
         {/* HEADER */}
         <div className="p-6 border-b border-slate-200 relative">
-          <Link href="/dashboard" className="flex items-center gap-3 h-14 overflow-hidden group">
+          <Link href={`/${language}/dashboard`} className="flex items-center gap-3 h-14 overflow-hidden group">
             <div className="w-10 h-10 rounded-none bg-black flex items-center justify-center text-white shrink-0">
               <ArrowLeft className="w-5 h-5" />
             </div>
@@ -143,13 +157,14 @@ export default function SpaceSidePanel() {
           </div>
           <ul className="space-y-0 px-0">
             {spaceNavLinks.map((link) => {
-              const active = pathname === link.href || (link.href !== "/dashboard/space" && pathname.startsWith(link.href));
+              const active = currentPathWithoutLocale === link.href || (link.href !== "/dashboard/space" && currentPathWithoutLocale.startsWith(link.href));
               const Icon = link.icon;
+              const localizedHref = `/${language}${link.href}`;
 
               return (
                 <li key={link.href}>
                   <Link
-                    href={link.href}
+                    href={localizedHref}
                     onClick={() => isMobile && setIsMobileOpen(false)}
                     className={`relative flex items-center gap-4 px-6 py-4 transition-all duration-200 group ${
                       active

@@ -30,6 +30,11 @@ export function KanbanBoard({ initialTasks, spaceId, projectId }: KanbanBoardPro
   const [searchQuery, setSearchQuery] = useState("");
   const [priorityFilter, setPriorityFilter] = useState<string>("ALL");
 
+  // Sync state with props
+  useEffect(() => {
+    setTasks(initialTasks);
+  }, [initialTasks]);
+
   // Filtering Logic
   const filteredTasks = tasks.filter(task => {
     const matchesSearch = task.title.toLowerCase().includes(searchQuery.toLowerCase());
@@ -102,11 +107,11 @@ export function KanbanBoard({ initialTasks, spaceId, projectId }: KanbanBoardPro
       if (selectedTask) {
         const updated = await updateTask(selectedTask.id, data);
         // Use the server-returned data to ensure all relations and IDs are correct
-        setTasks(tasks.map(t => t.id === updated.id ? updated : t));
+        setTasks(prev => prev.map(t => t.id === updated.id ? updated : t));
         toast.success("Task updated");
       } else {
         const created = await createTask(data);
-        setTasks([...tasks, created]);
+        setTasks(prev => [...prev, created]);
         toast.success("Task created");
       }
     } catch (error) {

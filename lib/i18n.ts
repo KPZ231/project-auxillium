@@ -1,7 +1,6 @@
 import i18next, { InitOptions } from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
-import HttpBackend from 'i18next-http-backend';
 
 import { supportedLanguages, defaultLanguage, Language } from './i18n-config';
 
@@ -10,44 +9,33 @@ export type { Language };
 
 const isClient = typeof window !== 'undefined';
 
-const config: InitOptions = {
+export const getI18nConfig = (): InitOptions => ({
   fallbackLng: defaultLanguage,
   supportedLngs: supportedLanguages,
-  lng: defaultLanguage,
-  debug: process.env.NODE_ENV !== 'production',
+  ns: ['common', 'dashboard', 'forms', 'marketing'],
+  defaultNS: 'common',
+  debug: false,
   interpolation: {
     escapeValue: false,
   },
   react: {
     useSuspense: false,
   },
-};
-
-if (isClient) {
-  config.backend = {
-    loadPath: '/locales/{{lng}}/{{ns}}.json',
-  };
-  config.detection = {
+  detection: isClient ? {
     order: ['cookie', 'localStorage', 'navigator', 'path', 'subdomain'],
     caches: ['cookie'],
     cookieOptions: {
       path: '/',
       sameSite: 'lax',
     },
-  };
-  config.use = [HttpBackend, LanguageDetector, initReactI18next];
-} else {
-  // Server-side initialization
-  if (process.env.NEXT_RUNTIME !== 'edge') {
-    config.backend = {
-      loadPath: `${process.cwd()}/public/locales/{{lng}}/{{ns}}.json`,
-    };
-  }
-  config.use = [initReactI18next];
-}
+  } : undefined,
+});
 
-if (!i18next.isInitialized) {
-  i18next.init(config);
+if (isClient && !i18next.isInitialized) {
+  i18next
+    .use(LanguageDetector)
+    .use(initReactI18next)
+    .init(getI18nConfig());
 }
 
 export default i18next;

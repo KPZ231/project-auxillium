@@ -1,9 +1,10 @@
 import { Metadata } from "next";
 import { Inter, Anonymous_Pro } from "next/font/google";
 import { Toaster } from "sonner";
+import { promises as fs } from 'fs';
+import path from 'path';
 import { UserProvider } from "@/app/context/UserContext";
 import { TranslationProvider } from "@/app/context/TranslationContext";
-import Navbar from "@/app/components/Navbar/Navbar";
 import "@/app/globals.css";
 
 const inter = Inter({
@@ -23,6 +24,25 @@ export const metadata: Metadata = {
   description: "Business management platform",
 };
 
+const getResources = async (locale: string) => {
+  const namespaces = ['common', 'dashboard', 'forms', 'marketing'];
+  const resources: Record<string, any> = {};
+  
+  for (const ns of namespaces) {
+    try {
+      const filePath = path.join(process.cwd(), 'public', 'locales', locale, `${ns}.json`);
+      const fileContents = await fs.readFile(filePath, 'utf8');
+      resources[ns] = JSON.parse(fileContents);
+    } catch (e) {
+      // console.error(`Failed to load namespace ${ns} for locale ${locale}`);
+    }
+  }
+  
+  return {
+    [locale]: resources
+  };
+};
+
 export default async function LocaleLayout({
   children,
   params,
@@ -31,6 +51,8 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
+  const resources = await getResources(locale);
+  
   return (
     <html
       lang={locale}
@@ -38,9 +60,8 @@ export default async function LocaleLayout({
       suppressHydrationWarning={true}
     >
       <body className="min-h-full flex flex-col">
-        <TranslationProvider initialLanguage={locale as any}>
+        <TranslationProvider initialLanguage={locale as any} resources={resources}>
           <UserProvider>
-            <Navbar />
             <main className="flex-1">{children}</main>
           </UserProvider>
         </TranslationProvider>

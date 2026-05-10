@@ -81,22 +81,24 @@ export async function createTask(data: TaskInput) {
     }
   });
 
-  const newTaskData: Prisma.TaskCreateInput = { 
-    ...data, 
-    order: taskCount,
-    space: { connect: { id: data.spaceId } },
-    project: data.projectId ? { connect: { id: data.projectId } } : undefined,
-    employee: data.employeeId ? { connect: { id: data.employeeId } } : undefined,
-    subtasks: data.subtasks ? JSON.parse(JSON.stringify(data.subtasks)) : Prisma.JsonNull,
-  } as any; // Still using any as a bridge for complex nested connects if needed, but let's try to avoid it if possible.
-  // Actually, I'll just use any for now but suppress warning if I can't be bothered to fix Prisma.TaskCreateInput exactly.
-  // Wait, newTaskData: any is what I want to fix.
+  const { spaceId, projectId, employeeId, subtasks, ...otherData } = data;
 
   const newTask = await prisma.task.create({
-    data: newTaskData
+    data: {
+      ...otherData,
+      order: taskCount,
+      space: { connect: { id: spaceId } },
+      project: projectId ? { connect: { id: projectId } } : undefined,
+      employee: employeeId ? { connect: { id: employeeId } } : undefined,
+      subtasks: subtasks ? JSON.parse(JSON.stringify(subtasks)) : Prisma.JsonNull,
+    },
+    include: {
+      employee: true,
+      project: true
+    }
   });
 
-  await invalidateAllTaskCaches(data.spaceId, data.projectId);
+  await invalidateAllTaskCaches(spaceId, projectId);
   revalidatePath('/dashboard/tasks');
 
   return newTask;
@@ -106,9 +108,17 @@ export async function updateTask(taskId: string, data: Partial<TaskInput>) {
   const existingTask = await prisma.task.findUnique({ where: { id: taskId } });
   if (!existingTask) throw new Error("Task not found");
 
-  const updateData: Prisma.TaskUpdateInput = { ...data } as any;
-  if (data.subtasks !== undefined) {
-    updateData.subtasks = data.subtasks ? JSON.parse(JSON.stringify(data.subtasks)) : null;
+  const { spaceId, projectId, employeeId, subtasks, ...otherData } = data;
+
+  const updateData: Prisma.TaskUpdateInput = {
+    ...otherData,
+    space: spaceId ? { connect: { id: spaceId } } : undefined,
+    project: projectId === null ? { disconnect: true } : (projectId ? { connect: { id: projectId } } : undefined),
+    employee: employeeId === null ? { disconnect: true } : (employeeId ? { connect: { id: employeeId } } : undefined),
+  };
+
+  if (subtasks !== undefined) {
+    updateData.subtasks = subtasks ? JSON.parse(JSON.stringify(subtasks)) : Prisma.JsonNull;
   }
 
   const updatedTask = await prisma.task.update({

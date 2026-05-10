@@ -7,7 +7,10 @@ import SpaceSidePanel from "./Space/SpaceSidePanel";
 export default function SidePanelWrapper() {
   const pathname = usePathname();
   
-  if (pathname.startsWith("/dashboard/space")) {
+  // Account for locale prefix (e.g. /en/dashboard/space)
+  const isSpaceRoute = pathname.includes("/dashboard/space");
+  
+  if (isSpaceRoute) {
     return <SpaceSidePanel />;
   }
   

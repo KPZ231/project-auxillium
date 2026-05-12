@@ -3,9 +3,9 @@
 import { verify } from "argon2";
 import { prisma } from "@/lib/prisma";
 import { loginSchema, LoginFormData } from "@/lib/validators";
-import { login } from "@/lib/session";
+import { login, SESSION_DURATION } from "@/lib/session";
 import { checkRateLimit } from "@/lib/rate-limit";
-import { headers } from "next/headers";
+import { headers, cookies } from "next/headers";
 
 export async function loginAction(formData: LoginFormData) {
   // 1. Rate limiting
@@ -58,6 +58,22 @@ export async function loginAction(formData: LoginFormData) {
 
     // 6. Create session
     await login(user.id, !!userSpace);
+
+    // 7. Auto-activate space if user has one
+    if (userSpace) {
+      const activeSpaceId = user.lastActiveSpaceId || userSpace.id;
+      const cookieStore = await cookies();
+      const expires = new Date(Date.now() + SESSION_DURATION);
+      cookieStore.set("active_space_id", activeSpaceId, { path: "/", expires });
+
+      // Update lastActiveSpaceId if not set
+      if (!user.lastActiveSpaceId) {
+        await prisma.user.update({
+          where: { id: user.id },
+          data: { lastActiveSpaceId: userSpace.id }
+        });
+      }
+    }
 
     return { success: true };
   } catch (error) {

@@ -32,6 +32,7 @@ export type UserMinAggregateOutputType = {
   name: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  lastActiveSpaceId: string | null
 }
 
 export type UserMaxAggregateOutputType = {
@@ -42,6 +43,7 @@ export type UserMaxAggregateOutputType = {
   name: string | null
   createdAt: Date | null
   updatedAt: Date | null
+  lastActiveSpaceId: string | null
 }
 
 export type UserCountAggregateOutputType = {
@@ -52,6 +54,7 @@ export type UserCountAggregateOutputType = {
   name: number
   createdAt: number
   updatedAt: number
+  lastActiveSpaceId: number
   _all: number
 }
 
@@ -64,6 +67,7 @@ export type UserMinAggregateInputType = {
   name?: true
   createdAt?: true
   updatedAt?: true
+  lastActiveSpaceId?: true
 }
 
 export type UserMaxAggregateInputType = {
@@ -74,6 +78,7 @@ export type UserMaxAggregateInputType = {
   name?: true
   createdAt?: true
   updatedAt?: true
+  lastActiveSpaceId?: true
 }
 
 export type UserCountAggregateInputType = {
@@ -84,6 +89,7 @@ export type UserCountAggregateInputType = {
   name?: true
   createdAt?: true
   updatedAt?: true
+  lastActiveSpaceId?: true
   _all?: true
 }
 
@@ -167,6 +173,7 @@ export type UserGroupByOutputType = {
   name: string | null
   createdAt: Date
   updatedAt: Date
+  lastActiveSpaceId: string | null
   _count: UserCountAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
@@ -198,6 +205,7 @@ export type UserWhereInput = {
   name?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  lastActiveSpaceId?: Prisma.StringNullableFilter<"User"> | string | null
   resetTokens?: Prisma.PasswordResetTokenListRelationFilter
   projects?: Prisma.ProjectListRelationFilter
   leads?: Prisma.LeadListRelationFilter
@@ -217,6 +225,7 @@ export type UserOrderByWithRelationInput = {
   name?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  lastActiveSpaceId?: Prisma.SortOrderInput | Prisma.SortOrder
   resetTokens?: Prisma.PasswordResetTokenOrderByRelationAggregateInput
   projects?: Prisma.ProjectOrderByRelationAggregateInput
   leads?: Prisma.LeadOrderByRelationAggregateInput
@@ -239,6 +248,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  lastActiveSpaceId?: Prisma.StringNullableFilter<"User"> | string | null
   resetTokens?: Prisma.PasswordResetTokenListRelationFilter
   projects?: Prisma.ProjectListRelationFilter
   leads?: Prisma.LeadListRelationFilter
@@ -258,6 +268,7 @@ export type UserOrderByWithAggregationInput = {
   name?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  lastActiveSpaceId?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
@@ -274,6 +285,7 @@ export type UserScalarWhereWithAggregatesInput = {
   name?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
+  lastActiveSpaceId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
 }
 
 export type UserCreateInput = {
@@ -284,6 +296,7 @@ export type UserCreateInput = {
   name?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  lastActiveSpaceId?: string | null
   resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadCreateNestedManyWithoutUserInput
@@ -303,6 +316,7 @@ export type UserUncheckedCreateInput = {
   name?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  lastActiveSpaceId?: string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
@@ -322,6 +336,7 @@ export type UserUpdateInput = {
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
@@ -341,6 +356,7 @@ export type UserUncheckedUpdateInput = {
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
@@ -360,6 +376,7 @@ export type UserCreateManyInput = {
   name?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  lastActiveSpaceId?: string | null
 }
 
 export type UserUpdateManyMutationInput = {
@@ -370,6 +387,7 @@ export type UserUpdateManyMutationInput = {
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UserUncheckedUpdateManyInput = {
@@ -380,6 +398,7 @@ export type UserUncheckedUpdateManyInput = {
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 export type UserCountOrderByAggregateInput = {
@@ -390,6 +409,7 @@ export type UserCountOrderByAggregateInput = {
   name?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  lastActiveSpaceId?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -400,6 +420,7 @@ export type UserMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  lastActiveSpaceId?: Prisma.SortOrder
 }
 
 export type UserMinOrderByAggregateInput = {
@@ -410,6 +431,7 @@ export type UserMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+  lastActiveSpaceId?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
@@ -597,6 +619,7 @@ export type UserCreateWithoutResetTokensInput = {
   name?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  lastActiveSpaceId?: string | null
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientCreateNestedManyWithoutUserInput
@@ -615,6 +638,7 @@ export type UserUncheckedCreateWithoutResetTokensInput = {
   name?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  lastActiveSpaceId?: string | null
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutUserInput
@@ -649,6 +673,7 @@ export type UserUpdateWithoutResetTokensInput = {
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUpdateManyWithoutUserNestedInput
@@ -667,6 +692,7 @@ export type UserUncheckedUpdateWithoutResetTokensInput = {
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutUserNestedInput
@@ -685,6 +711,7 @@ export type UserCreateWithoutProjectsInput = {
   name?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  lastActiveSpaceId?: string | null
   resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientCreateNestedManyWithoutUserInput
@@ -703,6 +730,7 @@ export type UserUncheckedCreateWithoutProjectsInput = {
   name?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  lastActiveSpaceId?: string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutUserInput
@@ -737,6 +765,7 @@ export type UserUpdateWithoutProjectsInput = {
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUpdateManyWithoutUserNestedInput
@@ -755,6 +784,7 @@ export type UserUncheckedUpdateWithoutProjectsInput = {
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutUserNestedInput
@@ -773,6 +803,7 @@ export type UserCreateWithoutLeadsInput = {
   name?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  lastActiveSpaceId?: string | null
   resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientCreateNestedManyWithoutUserInput
@@ -791,6 +822,7 @@ export type UserUncheckedCreateWithoutLeadsInput = {
   name?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  lastActiveSpaceId?: string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutUserInput
@@ -825,6 +857,7 @@ export type UserUpdateWithoutLeadsInput = {
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUpdateManyWithoutUserNestedInput
@@ -843,6 +876,7 @@ export type UserUncheckedUpdateWithoutLeadsInput = {
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutUserNestedInput
@@ -861,6 +895,7 @@ export type UserCreateWithoutOwnedSpacesInput = {
   name?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  lastActiveSpaceId?: string | null
   resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadCreateNestedManyWithoutUserInput
@@ -879,6 +914,7 @@ export type UserUncheckedCreateWithoutOwnedSpacesInput = {
   name?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  lastActiveSpaceId?: string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
@@ -902,6 +938,7 @@ export type UserCreateWithoutMemberSpacesInput = {
   name?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  lastActiveSpaceId?: string | null
   resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadCreateNestedManyWithoutUserInput
@@ -920,6 +957,7 @@ export type UserUncheckedCreateWithoutMemberSpacesInput = {
   name?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  lastActiveSpaceId?: string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
@@ -954,6 +992,7 @@ export type UserUpdateWithoutOwnedSpacesInput = {
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
@@ -972,6 +1011,7 @@ export type UserUncheckedUpdateWithoutOwnedSpacesInput = {
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
@@ -1009,6 +1049,7 @@ export type UserScalarWhereInput = {
   name?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
+  lastActiveSpaceId?: Prisma.StringNullableFilter<"User"> | string | null
 }
 
 export type UserCreateWithoutExpensesInput = {
@@ -1019,6 +1060,7 @@ export type UserCreateWithoutExpensesInput = {
   name?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  lastActiveSpaceId?: string | null
   resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadCreateNestedManyWithoutUserInput
@@ -1037,6 +1079,7 @@ export type UserUncheckedCreateWithoutExpensesInput = {
   name?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  lastActiveSpaceId?: string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
@@ -1071,6 +1114,7 @@ export type UserUpdateWithoutExpensesInput = {
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
@@ -1089,6 +1133,7 @@ export type UserUncheckedUpdateWithoutExpensesInput = {
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
@@ -1107,6 +1152,7 @@ export type UserCreateWithoutIncomesInput = {
   name?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  lastActiveSpaceId?: string | null
   resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadCreateNestedManyWithoutUserInput
@@ -1125,6 +1171,7 @@ export type UserUncheckedCreateWithoutIncomesInput = {
   name?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  lastActiveSpaceId?: string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
@@ -1159,6 +1206,7 @@ export type UserUpdateWithoutIncomesInput = {
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
@@ -1177,6 +1225,7 @@ export type UserUncheckedUpdateWithoutIncomesInput = {
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
@@ -1195,6 +1244,7 @@ export type UserCreateWithoutRevenueGoalsInput = {
   name?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  lastActiveSpaceId?: string | null
   resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadCreateNestedManyWithoutUserInput
@@ -1213,6 +1263,7 @@ export type UserUncheckedCreateWithoutRevenueGoalsInput = {
   name?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  lastActiveSpaceId?: string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
@@ -1247,6 +1298,7 @@ export type UserUpdateWithoutRevenueGoalsInput = {
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
@@ -1265,6 +1317,7 @@ export type UserUncheckedUpdateWithoutRevenueGoalsInput = {
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
@@ -1283,6 +1336,7 @@ export type UserCreateWithoutClientsInput = {
   name?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  lastActiveSpaceId?: string | null
   resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadCreateNestedManyWithoutUserInput
@@ -1301,6 +1355,7 @@ export type UserUncheckedCreateWithoutClientsInput = {
   name?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
+  lastActiveSpaceId?: string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
@@ -1335,6 +1390,7 @@ export type UserUpdateWithoutClientsInput = {
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
@@ -1353,6 +1409,7 @@ export type UserUncheckedUpdateWithoutClientsInput = {
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
@@ -1371,6 +1428,7 @@ export type UserUpdateWithoutMemberSpacesInput = {
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
@@ -1389,6 +1447,7 @@ export type UserUncheckedUpdateWithoutMemberSpacesInput = {
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
@@ -1407,6 +1466,7 @@ export type UserUncheckedUpdateManyWithoutMemberSpacesInput = {
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
 }
 
 
@@ -1520,6 +1580,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   name?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  lastActiveSpaceId?: boolean
   resetTokens?: boolean | Prisma.User$resetTokensArgs<ExtArgs>
   projects?: boolean | Prisma.User$projectsArgs<ExtArgs>
   leads?: boolean | Prisma.User$leadsArgs<ExtArgs>
@@ -1540,6 +1601,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   name?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  lastActiveSpaceId?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1550,6 +1612,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   name?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  lastActiveSpaceId?: boolean
 }, ExtArgs["result"]["user"]>
 
 export type UserSelectScalar = {
@@ -1560,9 +1623,10 @@ export type UserSelectScalar = {
   name?: boolean
   createdAt?: boolean
   updatedAt?: boolean
+  lastActiveSpaceId?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "username" | "passwordHash" | "name" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "username" | "passwordHash" | "name" | "createdAt" | "updatedAt" | "lastActiveSpaceId", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   resetTokens?: boolean | Prisma.User$resetTokensArgs<ExtArgs>
   projects?: boolean | Prisma.User$projectsArgs<ExtArgs>
@@ -1599,6 +1663,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     name: string | null
     createdAt: Date
     updatedAt: Date
+    lastActiveSpaceId: string | null
   }, ExtArgs["result"]["user"]>
   composites: {}
 }
@@ -2038,6 +2103,7 @@ export interface UserFieldRefs {
   readonly name: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
+  readonly lastActiveSpaceId: Prisma.FieldRef<"User", 'String'>
 }
     
 

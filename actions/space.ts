@@ -1,7 +1,7 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { getUser, login } from "@/lib/session";
+import { getUser, login, SESSION_DURATION } from "@/lib/session";
 import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
 
@@ -27,7 +27,14 @@ export async function createSpace(formData: FormData) {
 
   // Set as active space
   const cookieStore = await cookies();
-  cookieStore.set("active_space_id", space.id, { path: "/" });
+  const expires = new Date(Date.now() + SESSION_DURATION);
+  cookieStore.set("active_space_id", space.id, { path: "/", expires });
+
+  // Update user's last active space
+  await prisma.user.update({
+    where: { id: userId },
+    data: { lastActiveSpaceId: space.id }
+  });
 
   // Update session to reflect that user now has a space
   await login(userId, true);
@@ -75,7 +82,14 @@ export async function switchSpace(spaceId: string) {
   if (!space) throw new Error("Space not found or access denied");
 
   const cookieStore = await cookies();
-  cookieStore.set("active_space_id", spaceId, { path: "/" });
+  const expires = new Date(Date.now() + SESSION_DURATION);
+  cookieStore.set("active_space_id", spaceId, { path: "/", expires });
+
+  // Update user's last active space
+  await prisma.user.update({
+    where: { id: userId },
+    data: { lastActiveSpaceId: spaceId }
+  });
 
   revalidatePath("/dashboard");
   return { success: true };

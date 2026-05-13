@@ -30,6 +30,7 @@ export type UserMinAggregateOutputType = {
   username: string | null
   passwordHash: string | null
   name: string | null
+  avatarUrl: string | null
   createdAt: Date | null
   updatedAt: Date | null
   lastActiveSpaceId: string | null
@@ -41,6 +42,7 @@ export type UserMaxAggregateOutputType = {
   username: string | null
   passwordHash: string | null
   name: string | null
+  avatarUrl: string | null
   createdAt: Date | null
   updatedAt: Date | null
   lastActiveSpaceId: string | null
@@ -52,6 +54,7 @@ export type UserCountAggregateOutputType = {
   username: number
   passwordHash: number
   name: number
+  avatarUrl: number
   createdAt: number
   updatedAt: number
   lastActiveSpaceId: number
@@ -65,6 +68,7 @@ export type UserMinAggregateInputType = {
   username?: true
   passwordHash?: true
   name?: true
+  avatarUrl?: true
   createdAt?: true
   updatedAt?: true
   lastActiveSpaceId?: true
@@ -76,6 +80,7 @@ export type UserMaxAggregateInputType = {
   username?: true
   passwordHash?: true
   name?: true
+  avatarUrl?: true
   createdAt?: true
   updatedAt?: true
   lastActiveSpaceId?: true
@@ -87,6 +92,7 @@ export type UserCountAggregateInputType = {
   username?: true
   passwordHash?: true
   name?: true
+  avatarUrl?: true
   createdAt?: true
   updatedAt?: true
   lastActiveSpaceId?: true
@@ -171,6 +177,7 @@ export type UserGroupByOutputType = {
   username: string
   passwordHash: string
   name: string | null
+  avatarUrl: string | null
   createdAt: Date
   updatedAt: Date
   lastActiveSpaceId: string | null
@@ -203,6 +210,7 @@ export type UserWhereInput = {
   username?: Prisma.StringFilter<"User"> | string
   passwordHash?: Prisma.StringFilter<"User"> | string
   name?: Prisma.StringNullableFilter<"User"> | string | null
+  avatarUrl?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   lastActiveSpaceId?: Prisma.StringNullableFilter<"User"> | string | null
@@ -223,6 +231,7 @@ export type UserOrderByWithRelationInput = {
   username?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
   name?: Prisma.SortOrderInput | Prisma.SortOrder
+  avatarUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   lastActiveSpaceId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -246,6 +255,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   passwordHash?: Prisma.StringFilter<"User"> | string
   name?: Prisma.StringNullableFilter<"User"> | string | null
+  avatarUrl?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   lastActiveSpaceId?: Prisma.StringNullableFilter<"User"> | string | null
@@ -266,6 +276,7 @@ export type UserOrderByWithAggregationInput = {
   username?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
   name?: Prisma.SortOrderInput | Prisma.SortOrder
+  avatarUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   lastActiveSpaceId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -283,6 +294,7 @@ export type UserScalarWhereWithAggregatesInput = {
   username?: Prisma.StringWithAggregatesFilter<"User"> | string
   passwordHash?: Prisma.StringWithAggregatesFilter<"User"> | string
   name?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  avatarUrl?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   lastActiveSpaceId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
@@ -294,6 +306,7 @@ export type UserCreateInput = {
   username: string
   passwordHash: string
   name?: string | null
+  avatarUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
@@ -314,6 +327,7 @@ export type UserUncheckedCreateInput = {
   username: string
   passwordHash: string
   name?: string | null
+  avatarUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
@@ -334,6 +348,7 @@ export type UserUpdateInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -354,6 +369,7 @@ export type UserUncheckedUpdateInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -374,6 +390,7 @@ export type UserCreateManyInput = {
   username: string
   passwordHash: string
   name?: string | null
+  avatarUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
@@ -385,6 +402,7 @@ export type UserUpdateManyMutationInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -396,6 +414,7 @@ export type UserUncheckedUpdateManyInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -407,6 +426,7 @@ export type UserCountOrderByAggregateInput = {
   username?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  avatarUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   lastActiveSpaceId?: Prisma.SortOrder
@@ -418,6 +438,7 @@ export type UserMaxOrderByAggregateInput = {
   username?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  avatarUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   lastActiveSpaceId?: Prisma.SortOrder
@@ -429,6 +450,7 @@ export type UserMinOrderByAggregateInput = {
   username?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
   name?: Prisma.SortOrder
+  avatarUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   lastActiveSpaceId?: Prisma.SortOrder
@@ -617,6 +639,7 @@ export type UserCreateWithoutResetTokensInput = {
   username: string
   passwordHash: string
   name?: string | null
+  avatarUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
@@ -636,6 +659,7 @@ export type UserUncheckedCreateWithoutResetTokensInput = {
   username: string
   passwordHash: string
   name?: string | null
+  avatarUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
@@ -671,6 +695,7 @@ export type UserUpdateWithoutResetTokensInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -690,6 +715,7 @@ export type UserUncheckedUpdateWithoutResetTokensInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -709,6 +735,7 @@ export type UserCreateWithoutProjectsInput = {
   username: string
   passwordHash: string
   name?: string | null
+  avatarUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
@@ -728,6 +755,7 @@ export type UserUncheckedCreateWithoutProjectsInput = {
   username: string
   passwordHash: string
   name?: string | null
+  avatarUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
@@ -763,6 +791,7 @@ export type UserUpdateWithoutProjectsInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -782,6 +811,7 @@ export type UserUncheckedUpdateWithoutProjectsInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -801,6 +831,7 @@ export type UserCreateWithoutLeadsInput = {
   username: string
   passwordHash: string
   name?: string | null
+  avatarUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
@@ -820,6 +851,7 @@ export type UserUncheckedCreateWithoutLeadsInput = {
   username: string
   passwordHash: string
   name?: string | null
+  avatarUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
@@ -855,6 +887,7 @@ export type UserUpdateWithoutLeadsInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -874,6 +907,7 @@ export type UserUncheckedUpdateWithoutLeadsInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -893,6 +927,7 @@ export type UserCreateWithoutOwnedSpacesInput = {
   username: string
   passwordHash: string
   name?: string | null
+  avatarUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
@@ -912,6 +947,7 @@ export type UserUncheckedCreateWithoutOwnedSpacesInput = {
   username: string
   passwordHash: string
   name?: string | null
+  avatarUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
@@ -936,6 +972,7 @@ export type UserCreateWithoutMemberSpacesInput = {
   username: string
   passwordHash: string
   name?: string | null
+  avatarUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
@@ -955,6 +992,7 @@ export type UserUncheckedCreateWithoutMemberSpacesInput = {
   username: string
   passwordHash: string
   name?: string | null
+  avatarUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
@@ -990,6 +1028,7 @@ export type UserUpdateWithoutOwnedSpacesInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1009,6 +1048,7 @@ export type UserUncheckedUpdateWithoutOwnedSpacesInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1047,6 +1087,7 @@ export type UserScalarWhereInput = {
   username?: Prisma.StringFilter<"User"> | string
   passwordHash?: Prisma.StringFilter<"User"> | string
   name?: Prisma.StringNullableFilter<"User"> | string | null
+  avatarUrl?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   lastActiveSpaceId?: Prisma.StringNullableFilter<"User"> | string | null
@@ -1058,6 +1099,7 @@ export type UserCreateWithoutExpensesInput = {
   username: string
   passwordHash: string
   name?: string | null
+  avatarUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
@@ -1077,6 +1119,7 @@ export type UserUncheckedCreateWithoutExpensesInput = {
   username: string
   passwordHash: string
   name?: string | null
+  avatarUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
@@ -1112,6 +1155,7 @@ export type UserUpdateWithoutExpensesInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1131,6 +1175,7 @@ export type UserUncheckedUpdateWithoutExpensesInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1150,6 +1195,7 @@ export type UserCreateWithoutIncomesInput = {
   username: string
   passwordHash: string
   name?: string | null
+  avatarUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
@@ -1169,6 +1215,7 @@ export type UserUncheckedCreateWithoutIncomesInput = {
   username: string
   passwordHash: string
   name?: string | null
+  avatarUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
@@ -1204,6 +1251,7 @@ export type UserUpdateWithoutIncomesInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1223,6 +1271,7 @@ export type UserUncheckedUpdateWithoutIncomesInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1242,6 +1291,7 @@ export type UserCreateWithoutRevenueGoalsInput = {
   username: string
   passwordHash: string
   name?: string | null
+  avatarUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
@@ -1261,6 +1311,7 @@ export type UserUncheckedCreateWithoutRevenueGoalsInput = {
   username: string
   passwordHash: string
   name?: string | null
+  avatarUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
@@ -1296,6 +1347,7 @@ export type UserUpdateWithoutRevenueGoalsInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1315,6 +1367,7 @@ export type UserUncheckedUpdateWithoutRevenueGoalsInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1334,6 +1387,7 @@ export type UserCreateWithoutClientsInput = {
   username: string
   passwordHash: string
   name?: string | null
+  avatarUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
@@ -1353,6 +1407,7 @@ export type UserUncheckedCreateWithoutClientsInput = {
   username: string
   passwordHash: string
   name?: string | null
+  avatarUrl?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
@@ -1388,6 +1443,7 @@ export type UserUpdateWithoutClientsInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1407,6 +1463,7 @@ export type UserUncheckedUpdateWithoutClientsInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1426,6 +1483,7 @@ export type UserUpdateWithoutMemberSpacesInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1445,6 +1503,7 @@ export type UserUncheckedUpdateWithoutMemberSpacesInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1464,6 +1523,7 @@ export type UserUncheckedUpdateManyWithoutMemberSpacesInput = {
   username?: Prisma.StringFieldUpdateOperationsInput | string
   passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1578,6 +1638,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   username?: boolean
   passwordHash?: boolean
   name?: boolean
+  avatarUrl?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   lastActiveSpaceId?: boolean
@@ -1599,6 +1660,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   username?: boolean
   passwordHash?: boolean
   name?: boolean
+  avatarUrl?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   lastActiveSpaceId?: boolean
@@ -1610,6 +1672,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   username?: boolean
   passwordHash?: boolean
   name?: boolean
+  avatarUrl?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   lastActiveSpaceId?: boolean
@@ -1621,12 +1684,13 @@ export type UserSelectScalar = {
   username?: boolean
   passwordHash?: boolean
   name?: boolean
+  avatarUrl?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   lastActiveSpaceId?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "username" | "passwordHash" | "name" | "createdAt" | "updatedAt" | "lastActiveSpaceId", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "username" | "passwordHash" | "name" | "avatarUrl" | "createdAt" | "updatedAt" | "lastActiveSpaceId", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   resetTokens?: boolean | Prisma.User$resetTokensArgs<ExtArgs>
   projects?: boolean | Prisma.User$projectsArgs<ExtArgs>
@@ -1661,6 +1725,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     username: string
     passwordHash: string
     name: string | null
+    avatarUrl: string | null
     createdAt: Date
     updatedAt: Date
     lastActiveSpaceId: string | null
@@ -2101,6 +2166,7 @@ export interface UserFieldRefs {
   readonly username: Prisma.FieldRef<"User", 'String'>
   readonly passwordHash: Prisma.FieldRef<"User", 'String'>
   readonly name: Prisma.FieldRef<"User", 'String'>
+  readonly avatarUrl: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly lastActiveSpaceId: Prisma.FieldRef<"User", 'String'>

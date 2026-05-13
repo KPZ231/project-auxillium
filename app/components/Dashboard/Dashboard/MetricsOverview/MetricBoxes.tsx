@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { motion, Variants } from "motion/react";
 import { TrendingUp, Layers, Target } from "lucide-react";
 import { ResponsiveContainer, LineChart, Line } from "recharts";
-import { getProjectCount } from "@/actions/getMetrics";
-import { getCriticalPriotiryCount } from "@/actions/getMetrics";
+import { getProjectCount, getDashboardMetrics } from "@/actions/getMetrics";
+import { getActiveSpaceId } from "@/actions/space";
 
 interface MetricData {
   id: string;
@@ -64,22 +64,51 @@ export default function MetricBoxes() {
 
   useEffect(() => {
     const fetchMetrics = async () => {
-      const result = await getProjectCount();
-      if (result.success && result.count !== undefined) {
-        setData(prev => prev.map(item => 
-          item.id === "projects" 
-            ? { ...item, value: result.count!.toString() } 
-            : item
-        ));
-      }
+      const spaceId = await getActiveSpaceId();
+      if (!spaceId) return;
 
-      const Criticalresult = await getCriticalPriotiryCount();
-      if (Criticalresult.success && Criticalresult.count !== undefined) {
-        setData(prev => prev.map(item => 
-          item.id === "projects" 
-            ? { ...item, badgeText: `${Criticalresult.count} ${t("dashboard:status.critical", "Krytyczne")}` } 
-            : item
-        ));
+      const result = await getDashboardMetrics(spaceId);
+      
+      if (result.success && result.metrics) {
+        const { totalRevenue, activeProjectsCount, newLeadsCount, criticalProjectsCount } = result.metrics;
+        
+        setData([
+          {
+            id: "revenue",
+            title: "REVENUE",
+            value: `$${(totalRevenue / 1000).toFixed(1)}k`,
+            badgeText: "Real-time",
+            badgeType: "dark",
+            subText: "total generated",
+            icon: "trending",
+            chartData: [
+              { value: totalRevenue * 0.4 },
+              { value: totalRevenue * 0.6 },
+              { value: totalRevenue * 0.5 },
+              { value: totalRevenue * 0.8 },
+              { value: totalRevenue * 0.9 },
+              { value: totalRevenue },
+            ],
+          },
+          {
+            id: "projects",
+            title: "ACTIVE PROJECTS",
+            value: activeProjectsCount.toString(),
+            badgeText: `${criticalProjectsCount} ${t("dashboard:status.critical", "Critical")}`,
+            badgeType: "outline",
+            subText: "in progress",
+            icon: "layers",
+          },
+          {
+            id: "leads",
+            title: "NEW LEADS",
+            value: newLeadsCount.toString(),
+            badgeText: "Last 30d",
+            badgeType: "dark",
+            subText: "potential clients",
+            icon: "target",
+          },
+        ]);
       }
     };
     fetchMetrics();

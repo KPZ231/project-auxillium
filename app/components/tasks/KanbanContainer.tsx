@@ -55,7 +55,7 @@ export function KanbanContainer({ projects, spaceId }: KanbanContainerProps) {
   };
 
   const handleProjectChange = (projectId: string) => {
-    router.push(`/dashboard/tasks?projectId=${projectId}`, { scroll: false });
+    router.push(`?projectId=${projectId}`, { scroll: false });
   };
 
   const handleRefresh = async () => {

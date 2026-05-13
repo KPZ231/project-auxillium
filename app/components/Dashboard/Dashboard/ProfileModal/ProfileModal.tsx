@@ -2,8 +2,10 @@
 
 import React from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { X, User, Mail, ShieldCheck } from "lucide-react";
+import { X, User, Mail, ShieldCheck, Settings, LogOut } from "lucide-react";
 import { useUser } from "@/app/context/UserContext";
+import { useRouter } from "next/navigation";
+import { logoutAction } from "@/actions/logout";
 
 interface ProfileModalProps {
   isOpen: boolean;
@@ -12,6 +14,18 @@ interface ProfileModalProps {
 
 export default function ProfileModal({ isOpen, onClose }: ProfileModalProps) {
   const { user } = useUser();
+  const router = useRouter();
+
+  const handleSettingsClick = () => {
+    onClose();
+    const locale = window.location.pathname.split("/")[1] || "en";
+    router.push(`/${locale}/settings`);
+  };
+
+  const handleLogoutClick = async () => {
+    onClose();
+    await logoutAction();
+  };
 
   if (!user) return null;
 
@@ -35,7 +49,7 @@ export default function ProfileModal({ isOpen, onClose }: ProfileModalProps) {
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
               transition={{ type: "spring", damping: 25, stiffness: 300 }}
-              className="bg-white w-full max-w-md  shadow-2xl overflow-hidden pointer-events-auto border border-gray-100"
+              className="bg-white w-full max-w-md shadow-2xl overflow-hidden pointer-events-auto border border-gray-100"
             >
               {/* Header */}
               <div className="bg-black p-8 text-white relative">
@@ -61,7 +75,7 @@ export default function ProfileModal({ isOpen, onClose }: ProfileModalProps) {
               </div>
 
               {/* Body */}
-              <div className="p-8 space-y-6">
+              <div className="p-8 space-y-4">
                 <div className="space-y-4">
                   {/* Name Field */}
                   <div className="flex items-center gap-4 p-4 bg-gray-50  border border-gray-100 group transition-all hover:bg-gray-100">
@@ -105,12 +119,22 @@ export default function ProfileModal({ isOpen, onClose }: ProfileModalProps) {
                   </div>
                 </div>
 
-                <button
-                  onClick={onClose}
-                  className="w-full py-4 bg-black text-white  font-bold text-xs uppercase tracking-[0.2em] shadow-lg hover:bg-zinc-800 transition-all active:scale-[0.98]"
-                >
-                  Zamknij Panel
-                </button>
+                <div className="pt-4 border-t border-gray-100 space-y-3">
+                  <button
+                    onClick={handleSettingsClick}
+                    className="w-full flex items-center justify-center gap-2 py-3 bg-white border border-gray-200 text-black font-bold uppercase tracking-widest text-xs hover:bg-gray-50 transition-all"
+                  >
+                    <Settings className="w-4 h-4" />
+                    Ustawienia
+                  </button>
+                  <button
+                    onClick={handleLogoutClick}
+                    className="w-full flex items-center justify-center gap-2 py-3 bg-[#FFF1F2] border border-[#EF4444] text-[#EF4444] font-bold uppercase tracking-widest text-xs hover:bg-[#FEE2E2] transition-all"
+                  >
+                    <LogOut className="w-4 h-4" />
+                    Wyloguj
+                  </button>
+                </div>
               </div>
             </motion.div>
           </div>

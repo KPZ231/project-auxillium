@@ -181,3 +181,26 @@ export async function updateTaskStatusAndOrder(
 
   return true;
 }
+
+export async function getRecentTasks(spaceId: string, limit?: number) {
+  try {
+    const tasks = await prisma.task.findMany({
+      where: { 
+        spaceId,
+        status: { not: "DONE" }
+      },
+      include: {
+        employee: true,
+        project: true
+      },
+      orderBy: {
+        createdAt: 'desc'
+      },
+      ...(limit ? { take: limit } : {})
+    });
+    return { success: true, tasks };
+  } catch (error) {
+    console.error("Failed to fetch recent tasks:", error);
+    return { success: false, error: "Failed to fetch recent tasks" };
+  }
+}

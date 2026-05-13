@@ -9,12 +9,17 @@ import {
   CartesianGrid,
 } from "recharts";
 import { Square, CheckSquare, Plus } from "lucide-react";
+import { getFinancialSummary } from "@/actions/finance";
+import { getRecentTasks } from "@/actions/tasks";
+import { getActiveSpaceId } from "@/actions/space";
+import Link from "next/link";
 
 import { useTranslation } from "@/app/context/TranslationContext";
 
 interface ChartData {
   name: string;
-  value: number;
+  income: number;
+  expenses: number;
 }
 
 interface ActionItem {
@@ -68,9 +73,39 @@ const mockActionItems: ActionItem[] = [
 ];
 
 export default function ActivityAndTasks() {
-  const { t } = useTranslation();
-  const [chartData, setChartData] = useState<ChartData[]>(mockChartData);
-  const [actionItems, setActionItems] = useState<ActionItem[]>(mockActionItems);
+  const { t, language } = useTranslation();
+  const [chartData, setChartData] = useState<ChartData[]>([]);
+  const [actionItems, setActionItems] = useState<ActionItem[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const spaceId = await getActiveSpaceId();
+      if (!spaceId) return;
+
+      // Fetch Financial Summary
+      const financeResult = await getFinancialSummary(spaceId);
+      if (financeResult && financeResult.months) {
+        setChartData(financeResult.months.map((m: any) => ({
+          name: m.name,
+          income: m.income,
+          expenses: m.expenses
+        })));
+      }
+
+      // Fetch All Active Tasks
+      const tasksResult = await getRecentTasks(spaceId);
+      if (tasksResult.success && tasksResult.tasks) {
+        setActionItems(tasksResult.tasks.map((task: any) => ({
+          id: task.id,
+          title: task.title,
+          assignee: task.employee ? `Assigned to: ${task.employee.name}` : (task.project ? `Project: ${task.project.projectName}` : "Unassigned"),
+          badge: task.priority === "HIGH" ? { text: "URGENT", type: "urgent" } : (task.dueDate ? { text: "TODAY", type: "today" } : undefined),
+          completed: task.status === "DONE"
+        })));
+      }
+    };
+    fetchData();
+  }, []);
 
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
@@ -118,18 +153,19 @@ export default function ActivityAndTasks() {
         >
           <div className="flex justify-between items-center mb-10 z-10">
             <h3 className="text-sm font-bold text-black tracking-widest uppercase">
-              {t("dashboard:metrics.activity_trajectory", "Activity Trajectory")}
+              {t("dashboard:metrics.revenue_expenses", "Revenue & Expenses")}
             </h3>
             <div className="flex border border-gray-300 bg-white">
-              <button className="px-4 py-1 text-xs font-bold bg-black text-white">
-                30D
-              </button>
-              <button className="px-4 py-1 text-xs font-bold text-gray-500 hover:bg-gray-50">
-                90D
-              </button>
-              <button className="px-4 py-1 text-xs font-bold text-gray-500 hover:bg-gray-50 border-l border-gray-300">
-                1Y
-              </button>
+              <div className="flex items-center gap-4 px-4 py-1">
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 bg-black"></div>
+                  <span className="text-[10px] font-bold uppercase tracking-wider">{t("dashboard:finance.income", "Income")}</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-3 h-3 bg-gray-300"></div>
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-gray-500">{t("dashboard:finance.expenses", "Expenses")}</span>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -145,10 +181,20 @@ export default function ActivityAndTasks() {
                   dy={15}
                 />
                 <Line
-                  type="linear"
-                  dataKey="value"
+                  type="monotone"
+                  dataKey="income"
                   stroke="#000"
+                  strokeWidth={3}
+                  dot={{ r: 4, fill: "#000" }}
+                  isAnimationActive={true}
+                  animationDuration={1500}
+                />
+                <Line
+                  type="monotone"
+                  dataKey="expenses"
+                  stroke="#d1d5db"
                   strokeWidth={2}
+                  strokeDasharray="5 5"
                   dot={false}
                   isAnimationActive={true}
                   animationDuration={1500}
@@ -172,17 +218,12 @@ export default function ActivityAndTasks() {
           </div>
 
           {/* List */}
-          <motion.div
-            className="grow flex flex-col"
-            variants={listContainerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
+          <div
+            className="grow flex flex-col max-h-[400px] overflow-y-auto"
           >
             {actionItems.map((item, idx) => (
-              <motion.div
+              <div
                 key={item.id}
-                variants={listItemVariants}
                 className={`flex gap-4 p-6 border-b border-gray-200 last:border-b-0 ${
                   item.completed ? "opacity-50" : ""
                 }`}
@@ -217,15 +258,15 @@ export default function ActivityAndTasks() {
                   </div>
                   <p className="text-xs text-gray-500 font-medium">{item.assignee}</p>
                 </div>
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
 
           {/* Footer */}
           <div className="p-6 mt-auto">
-            <button className="w-full py-4 border border-gray-300 text-xs font-bold tracking-widest uppercase hover:bg-gray-50 transition-colors">
+            <Link href={`/${language}/dashboard/tasks`} className="block w-full py-4 border border-gray-300 text-center text-xs font-bold tracking-widest uppercase hover:bg-gray-50 transition-colors">
               {t("dashboard:metrics.view_all_tasks", "View All Tasks")}
-            </button>
+            </Link>
           </div>
         </motion.div>
       </motion.div>

@@ -7,6 +7,7 @@ interface UserData {
   email: string;
   username: string;
   name: string | null;
+  avatarUrl: string | null;
 }
 
 interface UserContextType {
@@ -21,40 +22,48 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<UserData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
-  const fetchUser = async () => {
+  const fetchUser = async (signal?: AbortSignal) => {
     try {
       setIsLoading(true);
-      const response = await fetch("/api/user/me");
+      const response = await fetch("/api/user/me", { signal });
       if (response.ok) {
         const data = await response.json();
         setUser(data);
       } else {
         setUser(null);
       }
-    } catch (error) {
-      console.error("Failed to fetch user:", error);
+    } catch (error: any) {
+      if (error.name === "AbortError") return;
+      console.error("UserContext: Error fetching user:", error);
       setUser(null);
     } finally {
       setIsLoading(false);
     }
   };
 
+  /** Re-fetches user data without showing a loading spinner — used after mutations */
+  const refreshUser = async () => {
+    try {
+      const response = await fetch("/api/user/me");
+      if (response.ok) {
+        const data = await response.json();
+        setUser(data);
+      }
+    } catch (error) {
+      console.error("UserContext: Error refreshing user:", error);
+    }
+  };
+
   useEffect(() => {
-    let isMounted = true;
     const abortController = new AbortController();
-
-    fetchUser().then(() => {
-      if (!isMounted) return;
-    });
-
+    fetchUser(abortController.signal);
     return () => {
-      isMounted = false;
       abortController.abort();
     };
   }, []);
 
   return (
-    <UserContext.Provider value={{ user, isLoading, refreshUser: fetchUser }}>
+    <UserContext.Provider value={{ user, isLoading, refreshUser }}>
       {children}
     </UserContext.Provider>
   );

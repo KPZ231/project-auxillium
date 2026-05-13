@@ -22,8 +22,19 @@ export const emailRateLimit = new Ratelimit({
   prefix: "ratelimit:email",
 });
 
-export async function checkRateLimit(identifier: string, type: "auth" | "email" = "auth") {
-  const limiter = type === "auth" ? authRateLimit : emailRateLimit;
+// Rate limiter for lead search API
+export const leadSearchRateLimit = new Ratelimit({
+  redis,
+  limiter: Ratelimit.slidingWindow(5, "1 h"), // 5 searches per hour
+  analytics: true,
+  prefix: "ratelimit:leadsearch",
+});
+
+export async function checkRateLimit(identifier: string, type: "auth" | "email" | "leadsearch" = "auth") {
+  let limiter = authRateLimit;
+  if (type === "email") limiter = emailRateLimit;
+  if (type === "leadsearch") limiter = leadSearchRateLimit;
+  
   const { success, limit, remaining, reset } = await limiter.limit(identifier);
   
   return {

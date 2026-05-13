@@ -147,5 +147,25 @@
   },
   "documents": {
     "title": "Dokumente"
+  },
+  "lead_search_ui": {
+    "title": "Lead-Suche",
+    "subtitle": "Entdecken Sie neue Leads durch Google Maps Extraktion.",
+    "gdpr_title": "Datenschutz & Nutzungsbedingungen",
+    "gdpr_text": "Durch die Nutzung des Lead-Suche-Tools stimmen Sie unserer Datenschutzerklärung zu und erkennen an, dass gescrapte Daten gemäß der DSGVO behandelt werden müssen.",
+    "gdpr_accept": "Ich verstehe und stimme zu",
+    "query_label": "Suchanfrage",
+    "query_placeholder": "z.B. Automechaniker Rybnik",
+    "limit_label": "Max Ergebnisse",
+    "scan_button": "Leads scannen",
+    "scanning": "Scannen...",
+    "results_title": "Suchergebnisse",
+    "status": "Status",
+    "progress": "Fortschritt",
+    "leads_found": "Gefundene Leads",
+    "download_csv": "CSV herunterladen",
+    "delete_job": "Job löschen",
+    "rate_limit_error": "Sie haben Ihr Suchlimit erreicht. Bitte versuchen Sie es später erneut.",
+    "no_jobs": "Keine aktiven oder aktuellen Suchanfragen."
   }
 }

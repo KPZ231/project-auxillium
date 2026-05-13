@@ -169,5 +169,25 @@
     "search_projects": "Szukaj projektów...",
     "reset_filters": "Resetuj filtry",
     "no_data": "Brak danych o obciążeniu"
+  },
+  "lead_search_ui": {
+    "title": "Wyszukiwarka Leadów",
+    "subtitle": "Odkrywaj nowe leady poprzez ekstrakcję danych z Google Maps.",
+    "gdpr_title": "Prywatność Danych i Regulamin",
+    "gdpr_text": "Korzystając z narzędzia Lead Search, akceptujesz naszą Politykę Prywatności i przyjmujesz do wiadomości, że pozyskane dane muszą być przetwarzane zgodnie z RODO.",
+    "gdpr_accept": "Rozumiem i akceptuję",
+    "query_label": "Fraza Wyszukiwania",
+    "query_placeholder": "np. mechanik samochodowy Rybnik",
+    "limit_label": "Limit Wyników",
+    "scan_button": "Skanuj Leady",
+    "scanning": "Skanowanie...",
+    "results_title": "Wyniki Wyszukiwania",
+    "status": "Status",
+    "progress": "Postęp",
+    "leads_found": "Znaleziono Leadów",
+    "download_csv": "Pobierz CSV",
+    "delete_job": "Usuń Zadanie",
+    "rate_limit_error": "Osiągnąłeś limit wyszukiwań. Spróbuj ponownie później.",
+    "no_jobs": "Brak aktywnych lub ostatnich wyszukiwań."
   }
 }

@@ -169,5 +169,25 @@
     "search_projects": "Search projects...",
     "reset_filters": "Reset Filters",
     "no_data": "No workload data available"
+  },
+  "lead_search_ui": {
+    "title": "Lead Search",
+    "subtitle": "Discover new leads through Google Maps extraction.",
+    "gdpr_title": "Data Privacy & Terms of Service",
+    "gdpr_text": "By using the Lead Search tool, you agree to our Privacy Policy and acknowledge that scraped data must be handled according to GDPR regulations.",
+    "gdpr_accept": "I understand and accept",
+    "query_label": "Search Query",
+    "query_placeholder": "e.g., mechanik samochodowy Rybnik",
+    "limit_label": "Max Results",
+    "scan_button": "Scan Leads",
+    "scanning": "Scanning...",
+    "results_title": "Search Results",
+    "status": "Status",
+    "progress": "Progress",
+    "leads_found": "Leads Found",
+    "download_csv": "Download CSV",
+    "delete_job": "Delete Job",
+    "rate_limit_error": "You have reached your search limit. Please try again later.",
+    "no_jobs": "No active or recent searches."
   }
 }

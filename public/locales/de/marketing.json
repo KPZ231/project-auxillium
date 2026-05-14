@@ -40,5 +40,77 @@
     "title": "Bereit für eine Veränderung?",
     "subtitle": "Starten Sie noch heute mit Auxillium und überzeugen Sie sich, wie einfach Ihr Geschäftsmanagement sein kann.",
     "cta": "Jetzt starten"
+  },
+  "about": {
+    "title": "Über uns",
+    "description": "Erfahren Sie mehr über unser Unternehmen",
+    "offer_title": "Was wir anbieten",
+    "offer_subtitle": "Als KPZ's Productions bieten wir ein breites Spektrum von Dienstleistungen im Bereich Softwareentwicklung an. Unser Team besteht aus erfahrenen Programmierern und Designern, die auch die anspruchsvollsten Aufgaben meistern können.",
+    "offer_item1": "Neue Technologien",
+    "offer_item1_desc": "Neue Technologien",
+    "offer_item2": "Neue Technologien",
+    "offer_item2_desc": "Neue Technologien",
+    "offer_item3": "Neue Technologien",
+    "offer_item3_desc": "Neue Technologien",
+    "offer_item4": "Neue Technologien",
+    "offer_item4_desc": "Neue Technologien",
+    "why_choose_us": "Was uns auszeichnet",
+    "quote_content": "Wir helfen Unternehmen, sich digital zu transformieren und ihr Geschäft zu skalieren",
+    "sub_content": "Wir verbinden Kreativität mit Daten. Wir erstellen Software, die Wachstum fördert, Effizienz steigert und neue Marktchancen für unsere Kunden eröffnet."
+  },
+  "contact": {
+    "title": "Kontakt",
+    "description": "Nehmen Sie Kontakt mit uns auf"
+  },
+  "cookies": {
+    "title": "Cookie-Richtlinie",
+    "description": "Website Cookie-Richtlinie",
+    "publication_date": "Veröffentlicht am: 26.04.2026",
+    "section1": {
+      "title": "1. Definitionen",
+      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+    },
+    "section2": {
+      "title": "2. Definitionen",
+      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+    },
+    "section3": {
+      "title": "3. Definitionen",
+      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+    }
+  },
+  "privacy": {
+    "title": "Datenschutzrichtlinie",
+    "description": "Website Datenschutzrichtlinie",
+    "publication_date": "Veröffentlicht am: 26.04.2026",
+    "section1": {
+      "title": "1. Definitionen",
+      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+    },
+    "section2": {
+      "title": "2. Definitionen",
+      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+    },
+    "section3": {
+      "title": "3. Definitionen",
+      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+    }
+  },
+  "terms": {
+    "title": "Nutzungsbedingungen",
+    "description": "Website Nutzungsbedingungen",
+    "publication_date": "Veröffentlicht am: 26.04.2026",
+    "section1": {
+      "title": "1. Definitionen",
+      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+    },
+    "section2": {
+      "title": "2. Definitionen",
+      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+    },
+    "section3": {
+      "title": "3. Definitionen",
+      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+    }
   }
 }

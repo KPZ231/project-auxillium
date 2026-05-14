@@ -40,5 +40,77 @@
     "title": "Gotowy na zmianę?",
     "subtitle": "Zacznij korzystać z Auxillium już dziś i przekonaj się, jak łatwe może być zarządzanie Twoim biznesem.",
     "cta": "Zacznij teraz"
+  },
+  "about": {
+    "title": "O nas",
+    "description": "Dowiedz się więcej o naszej firmie",
+    "offer_title": "Co oferujemy",
+    "offer_subtitle": "Jako KPZ's Productions oferujemy szeroki zakres usług związanych z tworzeniem oprogramowania. Nasz zespół składa się z doświadczonych programistów i projektantów, którzy są w stanie sprostać nawet najbardziej wymagającym zadaniom.",
+    "offer_item1": "Nowe technologie",
+    "offer_item1_desc": "Nowe technologie",
+    "offer_item2": "Nowe technologie",
+    "offer_item2_desc": "Nowe technologie",
+    "offer_item3": "Nowe technologie",
+    "offer_item3_desc": "Nowe technologie",
+    "offer_item4": "Nowe technologie",
+    "offer_item4_desc": "Nowe technologie",
+    "why_choose_us": "Co nas wyróżnia",
+    "quote_content": "Pomagamy firmom transformować cyfrowo i skalować biznes",
+    "sub_content": "Łączymy kreatywność z danymi. Tworzymy oprogramowanie, które napędza wzrost, zwiększa wydajność i otwiera nowe możliwości rynkowe dla naszych klientów."
+  },
+  "contact": {
+    "title": "Kontakt",
+    "description": "Skontaktuj się z nami"
+  },
+  "cookies": {
+    "title": "Polityka Cookies",
+    "description": "Poityka Cookies strony internetowej",
+    "publication_date": "Data publikacji: 26.04.2026",
+    "section1": {
+      "title": "1. Definicje",
+      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+    },
+    "section2": {
+      "title": "2. Definicje",
+      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+    },
+    "section3": {
+      "title": "3. Definicje",
+      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+    }
+  },
+  "privacy": {
+    "title": "Polityka Prywatności",
+    "description": "Polityka prywatności strony internetowej",
+    "publication_date": "Data publikacji: 26.04.2026",
+    "section1": {
+      "title": "1. Definicje",
+      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+    },
+    "section2": {
+      "title": "2. Definicje",
+      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+    },
+    "section3": {
+      "title": "3. Definicje",
+      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+    }
+  },
+  "terms": {
+    "title": "Regulamin",
+    "description": "Regulamin strony internetowej",
+    "publication_date": "Data publikacji: 26.04.2026",
+    "section1": {
+      "title": "1. Definicje",
+      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+    },
+    "section2": {
+      "title": "2. Definicje",
+      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+    },
+    "section3": {
+      "title": "3. Definicje",
+      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+    }
   }
 }

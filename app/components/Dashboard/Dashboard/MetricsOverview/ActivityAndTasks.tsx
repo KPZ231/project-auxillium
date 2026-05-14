@@ -33,45 +33,6 @@ interface ActionItem {
   completed: boolean;
 }
 
-const mockChartData: ChartData[] = [
-  { name: "JAN", value: 200 },
-  { name: "FEB", value: 400 },
-  { name: "MAR", value: 150 },
-  { name: "APR", value: 600 },
-  { name: "MAY", value: 400 },
-  { name: "JUN", value: 800 },
-  { name: "JUL", value: 650 },
-];
-
-const mockActionItems: ActionItem[] = [
-  {
-    id: "1",
-    title: "Review Q3 Financial Disclosures",
-    assignee: "Assigned to: Legal Team",
-    badge: { text: "URGENT", type: "urgent" },
-    completed: false,
-  },
-  {
-    id: "2",
-    title: "Approve 'Project Zenith' Wireframes",
-    assignee: "Assigned to: Design Dept",
-    badge: { text: "TODAY", type: "today" },
-    completed: false,
-  },
-  {
-    id: "3",
-    title: "Client Onboarding: Nexus Corp",
-    assignee: "Assigned to: Account Mgmt",
-    completed: false,
-  },
-  {
-    id: "4",
-    title: "Initial Server Provisioning",
-    assignee: "Completed 2 hrs ago",
-    completed: true,
-  },
-];
-
 export default function ActivityAndTasks() {
   const { t, language } = useTranslation();
   const [chartData, setChartData] = useState<ChartData[]>([]);
@@ -83,7 +44,7 @@ export default function ActivityAndTasks() {
       if (!spaceId) return;
 
       // Fetch Financial Summary
-      const financeResult = await getFinancialSummary(spaceId);
+      const financeResult = await getFinancialSummary(spaceId) as any;
       if (financeResult && financeResult.months) {
         setChartData(financeResult.months.map((m: any) => ({
           name: m.name,

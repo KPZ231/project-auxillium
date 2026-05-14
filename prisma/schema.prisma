@@ -33,6 +33,7 @@ model User {
   expenses      Expense[]
   incomes       Income[]
   revenueGoals  RevenueGoal[]
+  financialAuditLogs FinancialAuditLog[]
 }
 
 model PasswordResetToken {
@@ -92,6 +93,8 @@ model Project {
   
   tasks              Task[]
   assignedEmployees  Employee[]    @relation("AssignedProjects")
+  incomes            Income[]
+  expenses           Expense[]
 
   createdAt          DateTime      @default(now())
   updatedAt          DateTime      @updatedAt
@@ -132,6 +135,7 @@ model Space {
   spaceName        String     @unique
   spaceDescription String?
   icon             String?
+  baseCurrency     String     @default("USD")
   
   ownerId          String
   owner            User       @relation("SpaceOwner", fields: [ownerId], references: [id])
@@ -147,6 +151,7 @@ model Space {
   incomes          Income[]
   revenueGoals     RevenueGoal[]
   financialLabels  FinancialLabel[]
+  financialAuditLogs FinancialAuditLog[]
 
   createdAt        DateTime   @default(now())
   updatedAt        DateTime   @updatedAt
@@ -204,14 +209,26 @@ model Task {
   @@index([projectId])
 }
 
+enum TransactionCategory {
+  Marketing
+  SaaS
+  Taxes
+  Salary
+  Revenue
+  Other
+}
+
 model Expense {
-  id          String   @id @default(cuid())
-  amount      Float
-  description String?
-  date        DateTime @default(now())
-  category    String?  // e.g. "subscription", "tax", "payment"
-  isRecurring Boolean  @default(false)
-  cycle       String?  // e.g. "monthly", "yearly"
+  id           String   @id @default(cuid())
+  amount       Float
+  description  String?
+  date         DateTime @default(now())
+  category     TransactionCategory?
+  currency     String   @default("USD")
+  receiptUrl   String?
+  isRecurring  Boolean  @default(false)
+  cycle        String?  // e.g. "monthly", "yearly"
+  recurringDay Int?
   
   spaceId     String
   space       Space    @relation(fields: [spaceId], references: [id], onDelete: Cascade)
@@ -224,19 +241,29 @@ model Expense {
   clientId    String?
   client      Client?          @relation(fields: [clientId], references: [id], onDelete: SetNull)
 
+  projectId   String?
+  project     Project?         @relation(fields: [projectId], references: [id], onDelete: SetNull)
+
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
   @@index([spaceId])
   @@index([userId])
+  @@index([projectId])
 }
 
 model Income {
-  id          String   @id @default(cuid())
-  amount      Float
-  description String?
-  date        DateTime @default(now())
-  source      String?  // e.g. "project", "service"
+  id           String   @id @default(cuid())
+  amount       Float
+  description  String?
+  date         DateTime @default(now())
+  source       String?  // e.g. "project", "service"
+  category     TransactionCategory?
+  currency     String   @default("USD")
+  receiptUrl   String?
+  isRecurring  Boolean  @default(false)
+  cycle        String?
+  recurringDay Int?
   
   spaceId     String
   space       Space    @relation(fields: [spaceId], references: [id], onDelete: Cascade)
@@ -249,11 +276,15 @@ model Income {
   clientId    String?
   client      Client?          @relation(fields: [clientId], references: [id], onDelete: SetNull)
 
+  projectId   String?
+  project     Project?         @relation(fields: [projectId], references: [id], onDelete: SetNull)
+
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 
   @@index([spaceId])
   @@index([userId])
+  @@index([projectId])
 }
 
 model RevenueGoal {
@@ -320,4 +351,21 @@ model Client {
 
   @@index([userId])
   @@index([spaceId])
+}
+
+model FinancialAuditLog {
+  id            String   @id @default(cuid())
+  userId        String
+  action        String   // CREATE, UPDATE, DELETE
+  transactionId String
+  type          String   // EXPENSE, INCOME
+  timestamp     DateTime @default(now())
+  diff          Json?    
+  spaceId       String
+  
+  space         Space    @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([spaceId])
+  @@index([userId])
 }

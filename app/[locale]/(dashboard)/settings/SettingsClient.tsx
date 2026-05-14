@@ -149,7 +149,7 @@ export default function SettingsClient({
           {/* Avatar row */}
           <div className="flex items-start gap-8 mb-10">
             <div className="relative group shrink-0">
-              <div className="w-20 h-20 bg-[#F4F4F5] flex items-center justify-center overflow-hidden border border-[#D4D4D8] group-hover:border-[#0A0A0A] transition-colors duration-[150ms]">
+              <div className="w-20 h-20 bg-[#F4F4F5] flex items-center justify-center overflow-hidden border border-[#D4D4D8] group-hover:border-[#0A0A0A] transition-colors duration-150">
                 {avatarUrl ? (
                   <img src={avatarUrl} alt="Avatar" className="w-full h-full object-cover" />
                 ) : (
@@ -157,7 +157,7 @@ export default function SettingsClient({
                 )}
               </div>
               {/* Upload trigger — square, not rounded */}
-              <label className="absolute -bottom-2 -right-2 w-8 h-8 bg-[#0A0A0A] text-white flex items-center justify-center cursor-pointer hover:bg-[#333333] transition-colors duration-[150ms]">
+              <label className="absolute -bottom-2 -right-2 w-8 h-8 bg-[#0A0A0A] text-white flex items-center justify-center cursor-pointer hover:bg-[#333333] transition-colors duration-150">
                 <Upload className="w-3.5 h-3.5" />
                 <input
                   type="file"
@@ -188,7 +188,7 @@ export default function SettingsClient({
                 type="text"
                 value={displayName}
                 onChange={(e) => setDisplayName(e.target.value)}
-                className="w-full h-10 px-3 bg-white border border-[#D4D4D8] text-sm text-[#0A0A0A] placeholder-[#A1A1AA] focus:outline-none focus:border-[#0A0A0A] hover:border-[#A1A1AA] transition-colors duration-[150ms]"
+                className="w-full h-10 px-3 bg-white border border-[#D4D4D8] text-sm text-[#0A0A0A] placeholder-[#A1A1AA] focus:outline-none focus:border-[#0A0A0A] hover:border-[#A1A1AA] transition-colors duration-150"
                 placeholder="Enter your display name"
               />
             </div>
@@ -196,7 +196,7 @@ export default function SettingsClient({
               <button
                 type="submit"
                 disabled={isSaving}
-                className="h-10 px-6 bg-[#0A0A0A] text-white text-xs font-bold uppercase tracking-[0.1em] hover:bg-[#333333] transition-colors duration-[150ms] disabled:opacity-30 disabled:cursor-not-allowed flex items-center gap-2"
+                className="h-10 px-6 bg-[#0A0A0A] text-white text-xs font-bold uppercase tracking-widest hover:bg-[#333333] transition-colors duration-150 disabled:opacity-30 disabled:cursor-not-allowed flex items-center gap-2"
               >
                 {isSaving ? (
                   <>
@@ -262,7 +262,7 @@ export default function SettingsClient({
             <button
               onClick={handleExportData}
               disabled={isExporting}
-              className="h-10 px-6 border border-[#0A0A0A] text-[#0A0A0A] text-xs font-bold uppercase tracking-[0.1em] hover:bg-[#0A0A0A] hover:text-white transition-colors duration-[150ms] disabled:opacity-30 disabled:cursor-not-allowed flex items-center gap-2"
+              className="h-10 px-6 border border-[#0A0A0A] text-[#0A0A0A] text-xs font-bold uppercase tracking-widest hover:bg-[#0A0A0A] hover:text-white transition-colors duration-150 disabled:opacity-30 disabled:cursor-not-allowed flex items-center gap-2"
             >
               <Download className="w-3.5 h-3.5" />
               {isExporting ? "Exporting..." : "Download CSV"}
@@ -286,7 +286,7 @@ export default function SettingsClient({
             </div>
             <button
               onClick={handleLogout}
-              className="h-10 px-6 border border-[#D4D4D8] text-[#0A0A0A] text-xs font-bold uppercase tracking-[0.1em] hover:border-[#0A0A0A] transition-colors duration-[150ms] flex items-center gap-2"
+              className="h-10 px-6 border border-[#D4D4D8] text-[#0A0A0A] text-xs font-bold uppercase tracking-widest hover:border-[#0A0A0A] transition-colors duration-150 flex items-center gap-2"
             >
               <LogOut className="w-3.5 h-3.5" />
               Sign Out
@@ -311,7 +311,7 @@ export default function SettingsClient({
             <button
               onClick={handleDeleteAccount}
               disabled={isDeleting}
-              className="h-10 px-6 bg-[#DC2626] text-white text-xs font-bold uppercase tracking-[0.1em] hover:bg-[#b91c1c] transition-colors duration-[150ms] disabled:opacity-30 disabled:cursor-not-allowed flex items-center gap-2"
+              className="h-10 px-6 bg-[#DC2626] text-white text-xs font-bold uppercase tracking-widest hover:bg-[#b91c1c] transition-colors duration-150 disabled:opacity-30 disabled:cursor-not-allowed flex items-center gap-2"
             >
               <Trash2 className="w-3.5 h-3.5" />
               {isDeleting ? "Deleting..." : "Delete Account"}

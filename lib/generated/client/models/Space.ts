@@ -29,6 +29,7 @@ export type SpaceMinAggregateOutputType = {
   spaceName: string | null
   spaceDescription: string | null
   icon: string | null
+  baseCurrency: string | null
   ownerId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -39,6 +40,7 @@ export type SpaceMaxAggregateOutputType = {
   spaceName: string | null
   spaceDescription: string | null
   icon: string | null
+  baseCurrency: string | null
   ownerId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -49,6 +51,7 @@ export type SpaceCountAggregateOutputType = {
   spaceName: number
   spaceDescription: number
   icon: number
+  baseCurrency: number
   ownerId: number
   createdAt: number
   updatedAt: number
@@ -61,6 +64,7 @@ export type SpaceMinAggregateInputType = {
   spaceName?: true
   spaceDescription?: true
   icon?: true
+  baseCurrency?: true
   ownerId?: true
   createdAt?: true
   updatedAt?: true
@@ -71,6 +75,7 @@ export type SpaceMaxAggregateInputType = {
   spaceName?: true
   spaceDescription?: true
   icon?: true
+  baseCurrency?: true
   ownerId?: true
   createdAt?: true
   updatedAt?: true
@@ -81,6 +86,7 @@ export type SpaceCountAggregateInputType = {
   spaceName?: true
   spaceDescription?: true
   icon?: true
+  baseCurrency?: true
   ownerId?: true
   createdAt?: true
   updatedAt?: true
@@ -164,6 +170,7 @@ export type SpaceGroupByOutputType = {
   spaceName: string
   spaceDescription: string | null
   icon: string | null
+  baseCurrency: string
   ownerId: string
   createdAt: Date
   updatedAt: Date
@@ -195,6 +202,7 @@ export type SpaceWhereInput = {
   spaceName?: Prisma.StringFilter<"Space"> | string
   spaceDescription?: Prisma.StringNullableFilter<"Space"> | string | null
   icon?: Prisma.StringNullableFilter<"Space"> | string | null
+  baseCurrency?: Prisma.StringFilter<"Space"> | string
   ownerId?: Prisma.StringFilter<"Space"> | string
   createdAt?: Prisma.DateTimeFilter<"Space"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Space"> | Date | string
@@ -209,6 +217,7 @@ export type SpaceWhereInput = {
   incomes?: Prisma.IncomeListRelationFilter
   revenueGoals?: Prisma.RevenueGoalListRelationFilter
   financialLabels?: Prisma.FinancialLabelListRelationFilter
+  financialAuditLogs?: Prisma.FinancialAuditLogListRelationFilter
 }
 
 export type SpaceOrderByWithRelationInput = {
@@ -216,6 +225,7 @@ export type SpaceOrderByWithRelationInput = {
   spaceName?: Prisma.SortOrder
   spaceDescription?: Prisma.SortOrderInput | Prisma.SortOrder
   icon?: Prisma.SortOrderInput | Prisma.SortOrder
+  baseCurrency?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -230,6 +240,7 @@ export type SpaceOrderByWithRelationInput = {
   incomes?: Prisma.IncomeOrderByRelationAggregateInput
   revenueGoals?: Prisma.RevenueGoalOrderByRelationAggregateInput
   financialLabels?: Prisma.FinancialLabelOrderByRelationAggregateInput
+  financialAuditLogs?: Prisma.FinancialAuditLogOrderByRelationAggregateInput
 }
 
 export type SpaceWhereUniqueInput = Prisma.AtLeast<{
@@ -240,6 +251,7 @@ export type SpaceWhereUniqueInput = Prisma.AtLeast<{
   NOT?: Prisma.SpaceWhereInput | Prisma.SpaceWhereInput[]
   spaceDescription?: Prisma.StringNullableFilter<"Space"> | string | null
   icon?: Prisma.StringNullableFilter<"Space"> | string | null
+  baseCurrency?: Prisma.StringFilter<"Space"> | string
   ownerId?: Prisma.StringFilter<"Space"> | string
   createdAt?: Prisma.DateTimeFilter<"Space"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Space"> | Date | string
@@ -254,6 +266,7 @@ export type SpaceWhereUniqueInput = Prisma.AtLeast<{
   incomes?: Prisma.IncomeListRelationFilter
   revenueGoals?: Prisma.RevenueGoalListRelationFilter
   financialLabels?: Prisma.FinancialLabelListRelationFilter
+  financialAuditLogs?: Prisma.FinancialAuditLogListRelationFilter
 }, "id" | "spaceName">
 
 export type SpaceOrderByWithAggregationInput = {
@@ -261,6 +274,7 @@ export type SpaceOrderByWithAggregationInput = {
   spaceName?: Prisma.SortOrder
   spaceDescription?: Prisma.SortOrderInput | Prisma.SortOrder
   icon?: Prisma.SortOrderInput | Prisma.SortOrder
+  baseCurrency?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -277,6 +291,7 @@ export type SpaceScalarWhereWithAggregatesInput = {
   spaceName?: Prisma.StringWithAggregatesFilter<"Space"> | string
   spaceDescription?: Prisma.StringNullableWithAggregatesFilter<"Space"> | string | null
   icon?: Prisma.StringNullableWithAggregatesFilter<"Space"> | string | null
+  baseCurrency?: Prisma.StringWithAggregatesFilter<"Space"> | string
   ownerId?: Prisma.StringWithAggregatesFilter<"Space"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Space"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Space"> | Date | string
@@ -287,6 +302,7 @@ export type SpaceCreateInput = {
   spaceName: string
   spaceDescription?: string | null
   icon?: string | null
+  baseCurrency?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   owner: Prisma.UserCreateNestedOneWithoutOwnedSpacesInput
@@ -300,6 +316,7 @@ export type SpaceCreateInput = {
   incomes?: Prisma.IncomeCreateNestedManyWithoutSpaceInput
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelCreateNestedManyWithoutSpaceInput
+  financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceUncheckedCreateInput = {
@@ -307,6 +324,7 @@ export type SpaceUncheckedCreateInput = {
   spaceName: string
   spaceDescription?: string | null
   icon?: string | null
+  baseCurrency?: string
   ownerId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -320,6 +338,7 @@ export type SpaceUncheckedCreateInput = {
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutSpaceInput
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelUncheckedCreateNestedManyWithoutSpaceInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceUpdateInput = {
@@ -327,6 +346,7 @@ export type SpaceUpdateInput = {
   spaceName?: Prisma.StringFieldUpdateOperationsInput | string
   spaceDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  baseCurrency?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.UserUpdateOneRequiredWithoutOwnedSpacesNestedInput
@@ -340,6 +360,7 @@ export type SpaceUpdateInput = {
   incomes?: Prisma.IncomeUpdateManyWithoutSpaceNestedInput
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUpdateManyWithoutSpaceNestedInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceUncheckedUpdateInput = {
@@ -347,6 +368,7 @@ export type SpaceUncheckedUpdateInput = {
   spaceName?: Prisma.StringFieldUpdateOperationsInput | string
   spaceDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  baseCurrency?: Prisma.StringFieldUpdateOperationsInput | string
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -360,6 +382,7 @@ export type SpaceUncheckedUpdateInput = {
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutSpaceNestedInput
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUncheckedUpdateManyWithoutSpaceNestedInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceCreateManyInput = {
@@ -367,6 +390,7 @@ export type SpaceCreateManyInput = {
   spaceName: string
   spaceDescription?: string | null
   icon?: string | null
+  baseCurrency?: string
   ownerId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -377,6 +401,7 @@ export type SpaceUpdateManyMutationInput = {
   spaceName?: Prisma.StringFieldUpdateOperationsInput | string
   spaceDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  baseCurrency?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -386,6 +411,7 @@ export type SpaceUncheckedUpdateManyInput = {
   spaceName?: Prisma.StringFieldUpdateOperationsInput | string
   spaceDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  baseCurrency?: Prisma.StringFieldUpdateOperationsInput | string
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -411,6 +437,7 @@ export type SpaceCountOrderByAggregateInput = {
   spaceName?: Prisma.SortOrder
   spaceDescription?: Prisma.SortOrder
   icon?: Prisma.SortOrder
+  baseCurrency?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -421,6 +448,7 @@ export type SpaceMaxOrderByAggregateInput = {
   spaceName?: Prisma.SortOrder
   spaceDescription?: Prisma.SortOrder
   icon?: Prisma.SortOrder
+  baseCurrency?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -431,6 +459,7 @@ export type SpaceMinOrderByAggregateInput = {
   spaceName?: Prisma.SortOrder
   spaceDescription?: Prisma.SortOrder
   icon?: Prisma.SortOrder
+  baseCurrency?: Prisma.SortOrder
   ownerId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -653,11 +682,26 @@ export type SpaceUpdateOneWithoutClientsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.SpaceUpdateToOneWithWhereWithoutClientsInput, Prisma.SpaceUpdateWithoutClientsInput>, Prisma.SpaceUncheckedUpdateWithoutClientsInput>
 }
 
+export type SpaceCreateNestedOneWithoutFinancialAuditLogsInput = {
+  create?: Prisma.XOR<Prisma.SpaceCreateWithoutFinancialAuditLogsInput, Prisma.SpaceUncheckedCreateWithoutFinancialAuditLogsInput>
+  connectOrCreate?: Prisma.SpaceCreateOrConnectWithoutFinancialAuditLogsInput
+  connect?: Prisma.SpaceWhereUniqueInput
+}
+
+export type SpaceUpdateOneRequiredWithoutFinancialAuditLogsNestedInput = {
+  create?: Prisma.XOR<Prisma.SpaceCreateWithoutFinancialAuditLogsInput, Prisma.SpaceUncheckedCreateWithoutFinancialAuditLogsInput>
+  connectOrCreate?: Prisma.SpaceCreateOrConnectWithoutFinancialAuditLogsInput
+  upsert?: Prisma.SpaceUpsertWithoutFinancialAuditLogsInput
+  connect?: Prisma.SpaceWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SpaceUpdateToOneWithWhereWithoutFinancialAuditLogsInput, Prisma.SpaceUpdateWithoutFinancialAuditLogsInput>, Prisma.SpaceUncheckedUpdateWithoutFinancialAuditLogsInput>
+}
+
 export type SpaceCreateWithoutOwnerInput = {
   id?: string
   spaceName: string
   spaceDescription?: string | null
   icon?: string | null
+  baseCurrency?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   members?: Prisma.UserCreateNestedManyWithoutMemberSpacesInput
@@ -670,6 +714,7 @@ export type SpaceCreateWithoutOwnerInput = {
   incomes?: Prisma.IncomeCreateNestedManyWithoutSpaceInput
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelCreateNestedManyWithoutSpaceInput
+  financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceUncheckedCreateWithoutOwnerInput = {
@@ -677,6 +722,7 @@ export type SpaceUncheckedCreateWithoutOwnerInput = {
   spaceName: string
   spaceDescription?: string | null
   icon?: string | null
+  baseCurrency?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   members?: Prisma.UserUncheckedCreateNestedManyWithoutMemberSpacesInput
@@ -689,6 +735,7 @@ export type SpaceUncheckedCreateWithoutOwnerInput = {
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutSpaceInput
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelUncheckedCreateNestedManyWithoutSpaceInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceCreateOrConnectWithoutOwnerInput = {
@@ -706,6 +753,7 @@ export type SpaceCreateWithoutMembersInput = {
   spaceName: string
   spaceDescription?: string | null
   icon?: string | null
+  baseCurrency?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   owner: Prisma.UserCreateNestedOneWithoutOwnedSpacesInput
@@ -718,6 +766,7 @@ export type SpaceCreateWithoutMembersInput = {
   incomes?: Prisma.IncomeCreateNestedManyWithoutSpaceInput
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelCreateNestedManyWithoutSpaceInput
+  financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceUncheckedCreateWithoutMembersInput = {
@@ -725,6 +774,7 @@ export type SpaceUncheckedCreateWithoutMembersInput = {
   spaceName: string
   spaceDescription?: string | null
   icon?: string | null
+  baseCurrency?: string
   ownerId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -737,6 +787,7 @@ export type SpaceUncheckedCreateWithoutMembersInput = {
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutSpaceInput
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelUncheckedCreateNestedManyWithoutSpaceInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceCreateOrConnectWithoutMembersInput = {
@@ -768,6 +819,7 @@ export type SpaceScalarWhereInput = {
   spaceName?: Prisma.StringFilter<"Space"> | string
   spaceDescription?: Prisma.StringNullableFilter<"Space"> | string | null
   icon?: Prisma.StringNullableFilter<"Space"> | string | null
+  baseCurrency?: Prisma.StringFilter<"Space"> | string
   ownerId?: Prisma.StringFilter<"Space"> | string
   createdAt?: Prisma.DateTimeFilter<"Space"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Space"> | Date | string
@@ -794,6 +846,7 @@ export type SpaceCreateWithoutProjectsInput = {
   spaceName: string
   spaceDescription?: string | null
   icon?: string | null
+  baseCurrency?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   owner: Prisma.UserCreateNestedOneWithoutOwnedSpacesInput
@@ -806,6 +859,7 @@ export type SpaceCreateWithoutProjectsInput = {
   incomes?: Prisma.IncomeCreateNestedManyWithoutSpaceInput
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelCreateNestedManyWithoutSpaceInput
+  financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceUncheckedCreateWithoutProjectsInput = {
@@ -813,6 +867,7 @@ export type SpaceUncheckedCreateWithoutProjectsInput = {
   spaceName: string
   spaceDescription?: string | null
   icon?: string | null
+  baseCurrency?: string
   ownerId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -825,6 +880,7 @@ export type SpaceUncheckedCreateWithoutProjectsInput = {
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutSpaceInput
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelUncheckedCreateNestedManyWithoutSpaceInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceCreateOrConnectWithoutProjectsInput = {
@@ -848,6 +904,7 @@ export type SpaceUpdateWithoutProjectsInput = {
   spaceName?: Prisma.StringFieldUpdateOperationsInput | string
   spaceDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  baseCurrency?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.UserUpdateOneRequiredWithoutOwnedSpacesNestedInput
@@ -860,6 +917,7 @@ export type SpaceUpdateWithoutProjectsInput = {
   incomes?: Prisma.IncomeUpdateManyWithoutSpaceNestedInput
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUpdateManyWithoutSpaceNestedInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceUncheckedUpdateWithoutProjectsInput = {
@@ -867,6 +925,7 @@ export type SpaceUncheckedUpdateWithoutProjectsInput = {
   spaceName?: Prisma.StringFieldUpdateOperationsInput | string
   spaceDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  baseCurrency?: Prisma.StringFieldUpdateOperationsInput | string
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -879,6 +938,7 @@ export type SpaceUncheckedUpdateWithoutProjectsInput = {
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutSpaceNestedInput
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUncheckedUpdateManyWithoutSpaceNestedInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceCreateWithoutLeadsInput = {
@@ -886,6 +946,7 @@ export type SpaceCreateWithoutLeadsInput = {
   spaceName: string
   spaceDescription?: string | null
   icon?: string | null
+  baseCurrency?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   owner: Prisma.UserCreateNestedOneWithoutOwnedSpacesInput
@@ -898,6 +959,7 @@ export type SpaceCreateWithoutLeadsInput = {
   incomes?: Prisma.IncomeCreateNestedManyWithoutSpaceInput
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelCreateNestedManyWithoutSpaceInput
+  financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceUncheckedCreateWithoutLeadsInput = {
@@ -905,6 +967,7 @@ export type SpaceUncheckedCreateWithoutLeadsInput = {
   spaceName: string
   spaceDescription?: string | null
   icon?: string | null
+  baseCurrency?: string
   ownerId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -917,6 +980,7 @@ export type SpaceUncheckedCreateWithoutLeadsInput = {
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutSpaceInput
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelUncheckedCreateNestedManyWithoutSpaceInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceCreateOrConnectWithoutLeadsInput = {
@@ -940,6 +1004,7 @@ export type SpaceUpdateWithoutLeadsInput = {
   spaceName?: Prisma.StringFieldUpdateOperationsInput | string
   spaceDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  baseCurrency?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.UserUpdateOneRequiredWithoutOwnedSpacesNestedInput
@@ -952,6 +1017,7 @@ export type SpaceUpdateWithoutLeadsInput = {
   incomes?: Prisma.IncomeUpdateManyWithoutSpaceNestedInput
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUpdateManyWithoutSpaceNestedInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceUncheckedUpdateWithoutLeadsInput = {
@@ -959,6 +1025,7 @@ export type SpaceUncheckedUpdateWithoutLeadsInput = {
   spaceName?: Prisma.StringFieldUpdateOperationsInput | string
   spaceDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  baseCurrency?: Prisma.StringFieldUpdateOperationsInput | string
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -971,6 +1038,7 @@ export type SpaceUncheckedUpdateWithoutLeadsInput = {
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutSpaceNestedInput
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUncheckedUpdateManyWithoutSpaceNestedInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceCreateWithoutEmployeesInput = {
@@ -978,6 +1046,7 @@ export type SpaceCreateWithoutEmployeesInput = {
   spaceName: string
   spaceDescription?: string | null
   icon?: string | null
+  baseCurrency?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   owner: Prisma.UserCreateNestedOneWithoutOwnedSpacesInput
@@ -990,6 +1059,7 @@ export type SpaceCreateWithoutEmployeesInput = {
   incomes?: Prisma.IncomeCreateNestedManyWithoutSpaceInput
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelCreateNestedManyWithoutSpaceInput
+  financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceUncheckedCreateWithoutEmployeesInput = {
@@ -997,6 +1067,7 @@ export type SpaceUncheckedCreateWithoutEmployeesInput = {
   spaceName: string
   spaceDescription?: string | null
   icon?: string | null
+  baseCurrency?: string
   ownerId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1009,6 +1080,7 @@ export type SpaceUncheckedCreateWithoutEmployeesInput = {
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutSpaceInput
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelUncheckedCreateNestedManyWithoutSpaceInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceCreateOrConnectWithoutEmployeesInput = {
@@ -1032,6 +1104,7 @@ export type SpaceUpdateWithoutEmployeesInput = {
   spaceName?: Prisma.StringFieldUpdateOperationsInput | string
   spaceDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  baseCurrency?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.UserUpdateOneRequiredWithoutOwnedSpacesNestedInput
@@ -1044,6 +1117,7 @@ export type SpaceUpdateWithoutEmployeesInput = {
   incomes?: Prisma.IncomeUpdateManyWithoutSpaceNestedInput
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUpdateManyWithoutSpaceNestedInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceUncheckedUpdateWithoutEmployeesInput = {
@@ -1051,6 +1125,7 @@ export type SpaceUncheckedUpdateWithoutEmployeesInput = {
   spaceName?: Prisma.StringFieldUpdateOperationsInput | string
   spaceDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  baseCurrency?: Prisma.StringFieldUpdateOperationsInput | string
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1063,6 +1138,7 @@ export type SpaceUncheckedUpdateWithoutEmployeesInput = {
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutSpaceNestedInput
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUncheckedUpdateManyWithoutSpaceNestedInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceCreateWithoutTasksInput = {
@@ -1070,6 +1146,7 @@ export type SpaceCreateWithoutTasksInput = {
   spaceName: string
   spaceDescription?: string | null
   icon?: string | null
+  baseCurrency?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   owner: Prisma.UserCreateNestedOneWithoutOwnedSpacesInput
@@ -1082,6 +1159,7 @@ export type SpaceCreateWithoutTasksInput = {
   incomes?: Prisma.IncomeCreateNestedManyWithoutSpaceInput
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelCreateNestedManyWithoutSpaceInput
+  financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceUncheckedCreateWithoutTasksInput = {
@@ -1089,6 +1167,7 @@ export type SpaceUncheckedCreateWithoutTasksInput = {
   spaceName: string
   spaceDescription?: string | null
   icon?: string | null
+  baseCurrency?: string
   ownerId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1101,6 +1180,7 @@ export type SpaceUncheckedCreateWithoutTasksInput = {
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutSpaceInput
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelUncheckedCreateNestedManyWithoutSpaceInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceCreateOrConnectWithoutTasksInput = {
@@ -1124,6 +1204,7 @@ export type SpaceUpdateWithoutTasksInput = {
   spaceName?: Prisma.StringFieldUpdateOperationsInput | string
   spaceDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  baseCurrency?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.UserUpdateOneRequiredWithoutOwnedSpacesNestedInput
@@ -1136,6 +1217,7 @@ export type SpaceUpdateWithoutTasksInput = {
   incomes?: Prisma.IncomeUpdateManyWithoutSpaceNestedInput
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUpdateManyWithoutSpaceNestedInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceUncheckedUpdateWithoutTasksInput = {
@@ -1143,6 +1225,7 @@ export type SpaceUncheckedUpdateWithoutTasksInput = {
   spaceName?: Prisma.StringFieldUpdateOperationsInput | string
   spaceDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  baseCurrency?: Prisma.StringFieldUpdateOperationsInput | string
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1155,6 +1238,7 @@ export type SpaceUncheckedUpdateWithoutTasksInput = {
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutSpaceNestedInput
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUncheckedUpdateManyWithoutSpaceNestedInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceCreateWithoutExpensesInput = {
@@ -1162,6 +1246,7 @@ export type SpaceCreateWithoutExpensesInput = {
   spaceName: string
   spaceDescription?: string | null
   icon?: string | null
+  baseCurrency?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   owner: Prisma.UserCreateNestedOneWithoutOwnedSpacesInput
@@ -1174,6 +1259,7 @@ export type SpaceCreateWithoutExpensesInput = {
   incomes?: Prisma.IncomeCreateNestedManyWithoutSpaceInput
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelCreateNestedManyWithoutSpaceInput
+  financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceUncheckedCreateWithoutExpensesInput = {
@@ -1181,6 +1267,7 @@ export type SpaceUncheckedCreateWithoutExpensesInput = {
   spaceName: string
   spaceDescription?: string | null
   icon?: string | null
+  baseCurrency?: string
   ownerId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1193,6 +1280,7 @@ export type SpaceUncheckedCreateWithoutExpensesInput = {
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutSpaceInput
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelUncheckedCreateNestedManyWithoutSpaceInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceCreateOrConnectWithoutExpensesInput = {
@@ -1216,6 +1304,7 @@ export type SpaceUpdateWithoutExpensesInput = {
   spaceName?: Prisma.StringFieldUpdateOperationsInput | string
   spaceDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  baseCurrency?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.UserUpdateOneRequiredWithoutOwnedSpacesNestedInput
@@ -1228,6 +1317,7 @@ export type SpaceUpdateWithoutExpensesInput = {
   incomes?: Prisma.IncomeUpdateManyWithoutSpaceNestedInput
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUpdateManyWithoutSpaceNestedInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceUncheckedUpdateWithoutExpensesInput = {
@@ -1235,6 +1325,7 @@ export type SpaceUncheckedUpdateWithoutExpensesInput = {
   spaceName?: Prisma.StringFieldUpdateOperationsInput | string
   spaceDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  baseCurrency?: Prisma.StringFieldUpdateOperationsInput | string
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1247,6 +1338,7 @@ export type SpaceUncheckedUpdateWithoutExpensesInput = {
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutSpaceNestedInput
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUncheckedUpdateManyWithoutSpaceNestedInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceCreateWithoutIncomesInput = {
@@ -1254,6 +1346,7 @@ export type SpaceCreateWithoutIncomesInput = {
   spaceName: string
   spaceDescription?: string | null
   icon?: string | null
+  baseCurrency?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   owner: Prisma.UserCreateNestedOneWithoutOwnedSpacesInput
@@ -1266,6 +1359,7 @@ export type SpaceCreateWithoutIncomesInput = {
   expenses?: Prisma.ExpenseCreateNestedManyWithoutSpaceInput
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelCreateNestedManyWithoutSpaceInput
+  financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceUncheckedCreateWithoutIncomesInput = {
@@ -1273,6 +1367,7 @@ export type SpaceUncheckedCreateWithoutIncomesInput = {
   spaceName: string
   spaceDescription?: string | null
   icon?: string | null
+  baseCurrency?: string
   ownerId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1285,6 +1380,7 @@ export type SpaceUncheckedCreateWithoutIncomesInput = {
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutSpaceInput
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelUncheckedCreateNestedManyWithoutSpaceInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceCreateOrConnectWithoutIncomesInput = {
@@ -1308,6 +1404,7 @@ export type SpaceUpdateWithoutIncomesInput = {
   spaceName?: Prisma.StringFieldUpdateOperationsInput | string
   spaceDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  baseCurrency?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.UserUpdateOneRequiredWithoutOwnedSpacesNestedInput
@@ -1320,6 +1417,7 @@ export type SpaceUpdateWithoutIncomesInput = {
   expenses?: Prisma.ExpenseUpdateManyWithoutSpaceNestedInput
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUpdateManyWithoutSpaceNestedInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceUncheckedUpdateWithoutIncomesInput = {
@@ -1327,6 +1425,7 @@ export type SpaceUncheckedUpdateWithoutIncomesInput = {
   spaceName?: Prisma.StringFieldUpdateOperationsInput | string
   spaceDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  baseCurrency?: Prisma.StringFieldUpdateOperationsInput | string
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1339,6 +1438,7 @@ export type SpaceUncheckedUpdateWithoutIncomesInput = {
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutSpaceNestedInput
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUncheckedUpdateManyWithoutSpaceNestedInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceCreateWithoutRevenueGoalsInput = {
@@ -1346,6 +1446,7 @@ export type SpaceCreateWithoutRevenueGoalsInput = {
   spaceName: string
   spaceDescription?: string | null
   icon?: string | null
+  baseCurrency?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   owner: Prisma.UserCreateNestedOneWithoutOwnedSpacesInput
@@ -1358,6 +1459,7 @@ export type SpaceCreateWithoutRevenueGoalsInput = {
   expenses?: Prisma.ExpenseCreateNestedManyWithoutSpaceInput
   incomes?: Prisma.IncomeCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelCreateNestedManyWithoutSpaceInput
+  financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceUncheckedCreateWithoutRevenueGoalsInput = {
@@ -1365,6 +1467,7 @@ export type SpaceUncheckedCreateWithoutRevenueGoalsInput = {
   spaceName: string
   spaceDescription?: string | null
   icon?: string | null
+  baseCurrency?: string
   ownerId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1377,6 +1480,7 @@ export type SpaceUncheckedCreateWithoutRevenueGoalsInput = {
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutSpaceInput
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelUncheckedCreateNestedManyWithoutSpaceInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceCreateOrConnectWithoutRevenueGoalsInput = {
@@ -1400,6 +1504,7 @@ export type SpaceUpdateWithoutRevenueGoalsInput = {
   spaceName?: Prisma.StringFieldUpdateOperationsInput | string
   spaceDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  baseCurrency?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.UserUpdateOneRequiredWithoutOwnedSpacesNestedInput
@@ -1412,6 +1517,7 @@ export type SpaceUpdateWithoutRevenueGoalsInput = {
   expenses?: Prisma.ExpenseUpdateManyWithoutSpaceNestedInput
   incomes?: Prisma.IncomeUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUpdateManyWithoutSpaceNestedInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceUncheckedUpdateWithoutRevenueGoalsInput = {
@@ -1419,6 +1525,7 @@ export type SpaceUncheckedUpdateWithoutRevenueGoalsInput = {
   spaceName?: Prisma.StringFieldUpdateOperationsInput | string
   spaceDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  baseCurrency?: Prisma.StringFieldUpdateOperationsInput | string
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1431,6 +1538,7 @@ export type SpaceUncheckedUpdateWithoutRevenueGoalsInput = {
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutSpaceNestedInput
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUncheckedUpdateManyWithoutSpaceNestedInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceCreateWithoutFinancialLabelsInput = {
@@ -1438,6 +1546,7 @@ export type SpaceCreateWithoutFinancialLabelsInput = {
   spaceName: string
   spaceDescription?: string | null
   icon?: string | null
+  baseCurrency?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   owner: Prisma.UserCreateNestedOneWithoutOwnedSpacesInput
@@ -1450,6 +1559,7 @@ export type SpaceCreateWithoutFinancialLabelsInput = {
   expenses?: Prisma.ExpenseCreateNestedManyWithoutSpaceInput
   incomes?: Prisma.IncomeCreateNestedManyWithoutSpaceInput
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutSpaceInput
+  financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceUncheckedCreateWithoutFinancialLabelsInput = {
@@ -1457,6 +1567,7 @@ export type SpaceUncheckedCreateWithoutFinancialLabelsInput = {
   spaceName: string
   spaceDescription?: string | null
   icon?: string | null
+  baseCurrency?: string
   ownerId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1469,6 +1580,7 @@ export type SpaceUncheckedCreateWithoutFinancialLabelsInput = {
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutSpaceInput
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutSpaceInput
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutSpaceInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceCreateOrConnectWithoutFinancialLabelsInput = {
@@ -1492,6 +1604,7 @@ export type SpaceUpdateWithoutFinancialLabelsInput = {
   spaceName?: Prisma.StringFieldUpdateOperationsInput | string
   spaceDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  baseCurrency?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.UserUpdateOneRequiredWithoutOwnedSpacesNestedInput
@@ -1504,6 +1617,7 @@ export type SpaceUpdateWithoutFinancialLabelsInput = {
   expenses?: Prisma.ExpenseUpdateManyWithoutSpaceNestedInput
   incomes?: Prisma.IncomeUpdateManyWithoutSpaceNestedInput
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutSpaceNestedInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceUncheckedUpdateWithoutFinancialLabelsInput = {
@@ -1511,6 +1625,7 @@ export type SpaceUncheckedUpdateWithoutFinancialLabelsInput = {
   spaceName?: Prisma.StringFieldUpdateOperationsInput | string
   spaceDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  baseCurrency?: Prisma.StringFieldUpdateOperationsInput | string
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1523,6 +1638,7 @@ export type SpaceUncheckedUpdateWithoutFinancialLabelsInput = {
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutSpaceNestedInput
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutSpaceNestedInput
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutSpaceNestedInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceCreateWithoutClientsInput = {
@@ -1530,6 +1646,7 @@ export type SpaceCreateWithoutClientsInput = {
   spaceName: string
   spaceDescription?: string | null
   icon?: string | null
+  baseCurrency?: string
   createdAt?: Date | string
   updatedAt?: Date | string
   owner: Prisma.UserCreateNestedOneWithoutOwnedSpacesInput
@@ -1542,6 +1659,7 @@ export type SpaceCreateWithoutClientsInput = {
   incomes?: Prisma.IncomeCreateNestedManyWithoutSpaceInput
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelCreateNestedManyWithoutSpaceInput
+  financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceUncheckedCreateWithoutClientsInput = {
@@ -1549,6 +1667,7 @@ export type SpaceUncheckedCreateWithoutClientsInput = {
   spaceName: string
   spaceDescription?: string | null
   icon?: string | null
+  baseCurrency?: string
   ownerId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1561,6 +1680,7 @@ export type SpaceUncheckedCreateWithoutClientsInput = {
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutSpaceInput
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelUncheckedCreateNestedManyWithoutSpaceInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceCreateOrConnectWithoutClientsInput = {
@@ -1584,6 +1704,7 @@ export type SpaceUpdateWithoutClientsInput = {
   spaceName?: Prisma.StringFieldUpdateOperationsInput | string
   spaceDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  baseCurrency?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.UserUpdateOneRequiredWithoutOwnedSpacesNestedInput
@@ -1596,6 +1717,7 @@ export type SpaceUpdateWithoutClientsInput = {
   incomes?: Prisma.IncomeUpdateManyWithoutSpaceNestedInput
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUpdateManyWithoutSpaceNestedInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceUncheckedUpdateWithoutClientsInput = {
@@ -1603,12 +1725,114 @@ export type SpaceUncheckedUpdateWithoutClientsInput = {
   spaceName?: Prisma.StringFieldUpdateOperationsInput | string
   spaceDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  baseCurrency?: Prisma.StringFieldUpdateOperationsInput | string
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   members?: Prisma.UserUncheckedUpdateManyWithoutMemberSpacesNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutSpaceNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutSpaceNestedInput
+  employees?: Prisma.EmployeeUncheckedUpdateManyWithoutSpaceNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutSpaceNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutSpaceNestedInput
+  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutSpaceNestedInput
+  revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutSpaceNestedInput
+  financialLabels?: Prisma.FinancialLabelUncheckedUpdateManyWithoutSpaceNestedInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutSpaceNestedInput
+}
+
+export type SpaceCreateWithoutFinancialAuditLogsInput = {
+  id?: string
+  spaceName: string
+  spaceDescription?: string | null
+  icon?: string | null
+  baseCurrency?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  owner: Prisma.UserCreateNestedOneWithoutOwnedSpacesInput
+  members?: Prisma.UserCreateNestedManyWithoutMemberSpacesInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutSpaceInput
+  leads?: Prisma.LeadCreateNestedManyWithoutSpaceInput
+  clients?: Prisma.ClientCreateNestedManyWithoutSpaceInput
+  employees?: Prisma.EmployeeCreateNestedManyWithoutSpaceInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutSpaceInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutSpaceInput
+  incomes?: Prisma.IncomeCreateNestedManyWithoutSpaceInput
+  revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutSpaceInput
+  financialLabels?: Prisma.FinancialLabelCreateNestedManyWithoutSpaceInput
+}
+
+export type SpaceUncheckedCreateWithoutFinancialAuditLogsInput = {
+  id?: string
+  spaceName: string
+  spaceDescription?: string | null
+  icon?: string | null
+  baseCurrency?: string
+  ownerId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  members?: Prisma.UserUncheckedCreateNestedManyWithoutMemberSpacesInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutSpaceInput
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutSpaceInput
+  clients?: Prisma.ClientUncheckedCreateNestedManyWithoutSpaceInput
+  employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutSpaceInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutSpaceInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutSpaceInput
+  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutSpaceInput
+  revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutSpaceInput
+  financialLabels?: Prisma.FinancialLabelUncheckedCreateNestedManyWithoutSpaceInput
+}
+
+export type SpaceCreateOrConnectWithoutFinancialAuditLogsInput = {
+  where: Prisma.SpaceWhereUniqueInput
+  create: Prisma.XOR<Prisma.SpaceCreateWithoutFinancialAuditLogsInput, Prisma.SpaceUncheckedCreateWithoutFinancialAuditLogsInput>
+}
+
+export type SpaceUpsertWithoutFinancialAuditLogsInput = {
+  update: Prisma.XOR<Prisma.SpaceUpdateWithoutFinancialAuditLogsInput, Prisma.SpaceUncheckedUpdateWithoutFinancialAuditLogsInput>
+  create: Prisma.XOR<Prisma.SpaceCreateWithoutFinancialAuditLogsInput, Prisma.SpaceUncheckedCreateWithoutFinancialAuditLogsInput>
+  where?: Prisma.SpaceWhereInput
+}
+
+export type SpaceUpdateToOneWithWhereWithoutFinancialAuditLogsInput = {
+  where?: Prisma.SpaceWhereInput
+  data: Prisma.XOR<Prisma.SpaceUpdateWithoutFinancialAuditLogsInput, Prisma.SpaceUncheckedUpdateWithoutFinancialAuditLogsInput>
+}
+
+export type SpaceUpdateWithoutFinancialAuditLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  spaceName?: Prisma.StringFieldUpdateOperationsInput | string
+  spaceDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  baseCurrency?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  owner?: Prisma.UserUpdateOneRequiredWithoutOwnedSpacesNestedInput
+  members?: Prisma.UserUpdateManyWithoutMemberSpacesNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutSpaceNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutSpaceNestedInput
+  clients?: Prisma.ClientUpdateManyWithoutSpaceNestedInput
+  employees?: Prisma.EmployeeUpdateManyWithoutSpaceNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutSpaceNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutSpaceNestedInput
+  incomes?: Prisma.IncomeUpdateManyWithoutSpaceNestedInput
+  revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutSpaceNestedInput
+  financialLabels?: Prisma.FinancialLabelUpdateManyWithoutSpaceNestedInput
+}
+
+export type SpaceUncheckedUpdateWithoutFinancialAuditLogsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  spaceName?: Prisma.StringFieldUpdateOperationsInput | string
+  spaceDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  baseCurrency?: Prisma.StringFieldUpdateOperationsInput | string
+  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  members?: Prisma.UserUncheckedUpdateManyWithoutMemberSpacesNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutSpaceNestedInput
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutSpaceNestedInput
+  clients?: Prisma.ClientUncheckedUpdateManyWithoutSpaceNestedInput
   employees?: Prisma.EmployeeUncheckedUpdateManyWithoutSpaceNestedInput
   tasks?: Prisma.TaskUncheckedUpdateManyWithoutSpaceNestedInput
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutSpaceNestedInput
@@ -1622,6 +1846,7 @@ export type SpaceCreateManyOwnerInput = {
   spaceName: string
   spaceDescription?: string | null
   icon?: string | null
+  baseCurrency?: string
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1631,6 +1856,7 @@ export type SpaceUpdateWithoutOwnerInput = {
   spaceName?: Prisma.StringFieldUpdateOperationsInput | string
   spaceDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  baseCurrency?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   members?: Prisma.UserUpdateManyWithoutMemberSpacesNestedInput
@@ -1643,6 +1869,7 @@ export type SpaceUpdateWithoutOwnerInput = {
   incomes?: Prisma.IncomeUpdateManyWithoutSpaceNestedInput
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUpdateManyWithoutSpaceNestedInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceUncheckedUpdateWithoutOwnerInput = {
@@ -1650,6 +1877,7 @@ export type SpaceUncheckedUpdateWithoutOwnerInput = {
   spaceName?: Prisma.StringFieldUpdateOperationsInput | string
   spaceDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  baseCurrency?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   members?: Prisma.UserUncheckedUpdateManyWithoutMemberSpacesNestedInput
@@ -1662,6 +1890,7 @@ export type SpaceUncheckedUpdateWithoutOwnerInput = {
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutSpaceNestedInput
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUncheckedUpdateManyWithoutSpaceNestedInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceUncheckedUpdateManyWithoutOwnerInput = {
@@ -1669,6 +1898,7 @@ export type SpaceUncheckedUpdateManyWithoutOwnerInput = {
   spaceName?: Prisma.StringFieldUpdateOperationsInput | string
   spaceDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  baseCurrency?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1678,6 +1908,7 @@ export type SpaceUpdateWithoutMembersInput = {
   spaceName?: Prisma.StringFieldUpdateOperationsInput | string
   spaceDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  baseCurrency?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   owner?: Prisma.UserUpdateOneRequiredWithoutOwnedSpacesNestedInput
@@ -1690,6 +1921,7 @@ export type SpaceUpdateWithoutMembersInput = {
   incomes?: Prisma.IncomeUpdateManyWithoutSpaceNestedInput
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUpdateManyWithoutSpaceNestedInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceUncheckedUpdateWithoutMembersInput = {
@@ -1697,6 +1929,7 @@ export type SpaceUncheckedUpdateWithoutMembersInput = {
   spaceName?: Prisma.StringFieldUpdateOperationsInput | string
   spaceDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  baseCurrency?: Prisma.StringFieldUpdateOperationsInput | string
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1709,6 +1942,7 @@ export type SpaceUncheckedUpdateWithoutMembersInput = {
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutSpaceNestedInput
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUncheckedUpdateManyWithoutSpaceNestedInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceUncheckedUpdateManyWithoutMembersInput = {
@@ -1716,6 +1950,7 @@ export type SpaceUncheckedUpdateManyWithoutMembersInput = {
   spaceName?: Prisma.StringFieldUpdateOperationsInput | string
   spaceDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  baseCurrency?: Prisma.StringFieldUpdateOperationsInput | string
   ownerId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1737,6 +1972,7 @@ export type SpaceCountOutputType = {
   incomes: number
   revenueGoals: number
   financialLabels: number
+  financialAuditLogs: number
 }
 
 export type SpaceCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1750,6 +1986,7 @@ export type SpaceCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.
   incomes?: boolean | SpaceCountOutputTypeCountIncomesArgs
   revenueGoals?: boolean | SpaceCountOutputTypeCountRevenueGoalsArgs
   financialLabels?: boolean | SpaceCountOutputTypeCountFinancialLabelsArgs
+  financialAuditLogs?: boolean | SpaceCountOutputTypeCountFinancialAuditLogsArgs
 }
 
 /**
@@ -1832,12 +2069,20 @@ export type SpaceCountOutputTypeCountFinancialLabelsArgs<ExtArgs extends runtime
   where?: Prisma.FinancialLabelWhereInput
 }
 
+/**
+ * SpaceCountOutputType without action
+ */
+export type SpaceCountOutputTypeCountFinancialAuditLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.FinancialAuditLogWhereInput
+}
+
 
 export type SpaceSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   spaceName?: boolean
   spaceDescription?: boolean
   icon?: boolean
+  baseCurrency?: boolean
   ownerId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1852,6 +2097,7 @@ export type SpaceSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   incomes?: boolean | Prisma.Space$incomesArgs<ExtArgs>
   revenueGoals?: boolean | Prisma.Space$revenueGoalsArgs<ExtArgs>
   financialLabels?: boolean | Prisma.Space$financialLabelsArgs<ExtArgs>
+  financialAuditLogs?: boolean | Prisma.Space$financialAuditLogsArgs<ExtArgs>
   _count?: boolean | Prisma.SpaceCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["space"]>
 
@@ -1860,6 +2106,7 @@ export type SpaceSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   spaceName?: boolean
   spaceDescription?: boolean
   icon?: boolean
+  baseCurrency?: boolean
   ownerId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1871,6 +2118,7 @@ export type SpaceSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensi
   spaceName?: boolean
   spaceDescription?: boolean
   icon?: boolean
+  baseCurrency?: boolean
   ownerId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -1882,12 +2130,13 @@ export type SpaceSelectScalar = {
   spaceName?: boolean
   spaceDescription?: boolean
   icon?: boolean
+  baseCurrency?: boolean
   ownerId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type SpaceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "spaceName" | "spaceDescription" | "icon" | "ownerId" | "createdAt" | "updatedAt", ExtArgs["result"]["space"]>
+export type SpaceOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "spaceName" | "spaceDescription" | "icon" | "baseCurrency" | "ownerId" | "createdAt" | "updatedAt", ExtArgs["result"]["space"]>
 export type SpaceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   owner?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   members?: boolean | Prisma.Space$membersArgs<ExtArgs>
@@ -1900,6 +2149,7 @@ export type SpaceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   incomes?: boolean | Prisma.Space$incomesArgs<ExtArgs>
   revenueGoals?: boolean | Prisma.Space$revenueGoalsArgs<ExtArgs>
   financialLabels?: boolean | Prisma.Space$financialLabelsArgs<ExtArgs>
+  financialAuditLogs?: boolean | Prisma.Space$financialAuditLogsArgs<ExtArgs>
   _count?: boolean | Prisma.SpaceCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type SpaceIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1923,12 +2173,14 @@ export type $SpacePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     incomes: Prisma.$IncomePayload<ExtArgs>[]
     revenueGoals: Prisma.$RevenueGoalPayload<ExtArgs>[]
     financialLabels: Prisma.$FinancialLabelPayload<ExtArgs>[]
+    financialAuditLogs: Prisma.$FinancialAuditLogPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     spaceName: string
     spaceDescription: string | null
     icon: string | null
+    baseCurrency: string
     ownerId: string
     createdAt: Date
     updatedAt: Date
@@ -2337,6 +2589,7 @@ export interface Prisma__SpaceClient<T, Null = never, ExtArgs extends runtime.Ty
   incomes<T extends Prisma.Space$incomesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Space$incomesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IncomePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   revenueGoals<T extends Prisma.Space$revenueGoalsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Space$revenueGoalsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RevenueGoalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   financialLabels<T extends Prisma.Space$financialLabelsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Space$financialLabelsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FinancialLabelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  financialAuditLogs<T extends Prisma.Space$financialAuditLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Space$financialAuditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FinancialAuditLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2370,6 +2623,7 @@ export interface SpaceFieldRefs {
   readonly spaceName: Prisma.FieldRef<"Space", 'String'>
   readonly spaceDescription: Prisma.FieldRef<"Space", 'String'>
   readonly icon: Prisma.FieldRef<"Space", 'String'>
+  readonly baseCurrency: Prisma.FieldRef<"Space", 'String'>
   readonly ownerId: Prisma.FieldRef<"Space", 'String'>
   readonly createdAt: Prisma.FieldRef<"Space", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Space", 'DateTime'>
@@ -3011,6 +3265,30 @@ export type Space$financialLabelsArgs<ExtArgs extends runtime.Types.Extensions.I
   take?: number
   skip?: number
   distinct?: Prisma.FinancialLabelScalarFieldEnum | Prisma.FinancialLabelScalarFieldEnum[]
+}
+
+/**
+ * Space.financialAuditLogs
+ */
+export type Space$financialAuditLogsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the FinancialAuditLog
+   */
+  select?: Prisma.FinancialAuditLogSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the FinancialAuditLog
+   */
+  omit?: Prisma.FinancialAuditLogOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.FinancialAuditLogInclude<ExtArgs> | null
+  where?: Prisma.FinancialAuditLogWhereInput
+  orderBy?: Prisma.FinancialAuditLogOrderByWithRelationInput | Prisma.FinancialAuditLogOrderByWithRelationInput[]
+  cursor?: Prisma.FinancialAuditLogWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.FinancialAuditLogScalarFieldEnum | Prisma.FinancialAuditLogScalarFieldEnum[]
 }
 
 /**

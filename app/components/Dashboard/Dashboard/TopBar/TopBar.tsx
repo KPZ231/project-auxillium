@@ -72,7 +72,7 @@ export default function TopBar({ initialUser }: TopBarProps) {
               <div
                 onMouseEnter={() => setIsDropdownOpen(true)}
                 onMouseLeave={() => setIsDropdownOpen(false)}
-                className="absolute right-0 top-full w-52 bg-white border border-black z-[9999]"
+                className="absolute right-0 top-full w-52 bg-white border border-black z-9999"
               >
                 {/* User info header */}
                 {displayName && (
@@ -86,7 +86,7 @@ export default function TopBar({ initialUser }: TopBarProps) {
                     setIsProfileOpen(true);
                     setIsDropdownOpen(false);
                   }}
-                  className="w-full flex items-center gap-3 px-4 py-3 text-black hover:bg-black hover:text-white transition-colors duration-[150ms] text-left"
+                  className="w-full flex items-center gap-3 px-4 py-3 text-black hover:bg-black hover:text-white transition-colors duration-150 text-left"
                 >
                   <User className="w-4 h-4 shrink-0" />
                   <span className="text-sm font-medium">Zobacz profil</span>
@@ -97,7 +97,7 @@ export default function TopBar({ initialUser }: TopBarProps) {
                     handleSettingsClick();
                     setIsDropdownOpen(false);
                   }}
-                  className="w-full flex items-center gap-3 px-4 py-3 text-black hover:bg-black hover:text-white transition-colors duration-[150ms] text-left"
+                  className="w-full flex items-center gap-3 px-4 py-3 text-black hover:bg-black hover:text-white transition-colors duration-150 text-left"
                 >
                   <Settings className="w-4 h-4 shrink-0" />
                   <span className="text-sm font-medium">Ustawienia</span>
@@ -107,7 +107,7 @@ export default function TopBar({ initialUser }: TopBarProps) {
 
                 <button
                   onClick={handleLogout}
-                  className="w-full flex items-center gap-3 px-4 py-3 text-black hover:bg-red-600 hover:text-white transition-colors duration-[150ms] text-left"
+                  className="w-full flex items-center gap-3 px-4 py-3 text-black hover:bg-red-600 hover:text-white transition-colors duration-150 text-left"
                 >
                   <LogOut className="w-4 h-4 shrink-0" />
                   <span className="text-sm font-medium">Wyloguj</span>

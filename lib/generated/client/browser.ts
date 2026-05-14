@@ -77,3 +77,8 @@ export type FinancialLabel = Prisma.FinancialLabelModel
  * 
  */
 export type Client = Prisma.ClientModel
+/**
+ * Model FinancialAuditLog
+ * 
+ */
+export type FinancialAuditLog = Prisma.FinancialAuditLogModel

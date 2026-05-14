@@ -1,14 +1,18 @@
+"use client";
 import VideoPlayer from "@/app/components/VideoPlayer/VideoPlayer";
 import PricingColumns from "@/app/components/Pricing/PricingColumns";
 import CTA from "@/app/components/CTA/CTA";
 import HeroSection from "@/app/components/HeroSection/HeroSection";
+import { useTranslation } from "@/app/context/TranslationContext";
 
 export default function Pricing() {
+  const { t, language } = useTranslation();
+
   return (
     <>
       <HeroSection
-        header="Cennik"
-        description="Sprawdź nasze plany"
+        header={t("marketing:pricing.title")}
+        description={t("marketing:pricing.subtitle")}
         image={{
           src: "/images/background-image-4.jpeg",
           alt: "Hero Image",
@@ -16,58 +20,58 @@ export default function Pricing() {
           height: 450,
         }}
         button={{
-          content: "Zacznij teraz",
+          content: t("marketing:pricing.cta"),
           variant: "primary",
-          url: "/signup",
+          url: `/${language}/signup`,
         }}
       ></HeroSection>
       <VideoPlayer src="/videos/pricing.mov"></VideoPlayer>
       <PricingColumns
-        name="Cennik"
-        header="Sprawdź nasze plany"
+        name={t("marketing:pricing.title")}
+        header={t("marketing:pricing.subtitle")}
         plans={[
           {
-            planName: "Free",
+            planName: t("marketing:pricing.free"),
             cost: 0,
-            description: "Darmowy plan",
-            list: ["Darmowy plan", "Lorem", "Lorem"],
+            description: t("marketing:pricing.free_desc"),
+            list: [t("marketing:pricing.free_desc"), "Lorem", "Lorem"],
             button: {
-              content: "Zacznij teraz",
+              content: t("marketing:pricing.cta"),
               variant: "primary",
-              url: "/signup",
+              url: `/${language}/signup`,
             },
           },
           {
-            planName: "Pro",
+            planName: t("marketing:pricing.pro"),
             cost: 100,
-            description: "Plan Pro",
-            list: ["Plan Pro", "Lorem", "Lorem"],
+            description: t("marketing:pricing.pro_desc"),
+            list: [t("marketing:pricing.pro_desc"), "Lorem", "Lorem"],
             button: {
-              content: "Zacznij teraz",
+              content: t("marketing:pricing.cta"),
               variant: "primary",
-              url: "/signup",
+              url: `/${language}/signup`,
             },
           },
           {
-            planName: "Enterprise",
+            planName: t("marketing:pricing.enterprise"),
             cost: 1000,
-            description: "Plan Enterprise",
-            list: ["Plan Enterprise", "Lorem", "Lorem"],
+            description: t("marketing:pricing.enterprise_desc"),
+            list: [t("marketing:pricing.enterprise_desc"), "Lorem", "Lorem"],
             button: {
-              content: "Zacznij teraz",
+              content: t("marketing:pricing.cta"),
               variant: "primary",
-              url: "/signup",
+              url: `/${language}/signup`,
             },
           },
         ]}
       ></PricingColumns>
       <CTA
-        content="Gotowy na zmianę?"
-        description="Zacznij korzystać z Auxillium już dziś i przekonaj się, jak łatwe może być zarządzanie Twoim biznesem."
+        content={t("marketing:cta.title")}
+        description={t("marketing:cta.subtitle")}
         button={{
-          content: "Zacznij teraz",
+          content: t("marketing:cta.cta"),
           variant: "primary",
-          url: "/signup",
+          url: `/${language}/signup`,
         }}
       ></CTA>
     </>

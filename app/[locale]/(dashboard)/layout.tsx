@@ -6,6 +6,7 @@ import { getUser } from "@/lib/session";
 import { prisma } from "@/lib/prisma";
 import { redirect } from "next/navigation";
 import SpaceSelectionModal from "@/app/components/Dashboard/Space/SpaceSelectionModal";
+import FloatingAIChat from "@/app/components/Dashboard/AI/FloatingAIChat";
 
 export default async function DashboardLayout({
   children,
@@ -37,17 +38,20 @@ export default async function DashboardLayout({
 
   return (
     <BreadcrumbProvider>
-      <div className="flex min-h-screen bg-gray-50">
-      {/* Sidebar - dynamically chosen based on route */}
-      <SidePanelWrapper />
-      
-      {/* Main Content Area */}
-      <main className="flex-1 transition-all duration-400 flex flex-col">
-        <TopBar initialUser={userData} />
-        <div className="p-4 md:p-8 flex-1">
-          {children}
-        </div>
-      </main>
+      <div className="flex min-h-screen bg-gray-50 relative">
+        {/* Sidebar - dynamically chosen based on route */}
+        <SidePanelWrapper />
+        
+        {/* Main Content Area */}
+        <main className="flex-1 transition-all duration-400 flex flex-col">
+          <TopBar initialUser={userData} />
+          <div className="p-4 md:p-8 flex-1">
+            {children}
+          </div>
+        </main>
+
+        {/* Global AI Chat */}
+        <FloatingAIChat spaceId={activeSpaceId} />
       </div>
       {showSelector && <SpaceSelectionModal spaces={spaces} />}
     </BreadcrumbProvider>

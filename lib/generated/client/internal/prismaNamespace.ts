@@ -395,7 +395,8 @@ export const ModelName = {
   Income: 'Income',
   RevenueGoal: 'RevenueGoal',
   FinancialLabel: 'FinancialLabel',
-  Client: 'Client'
+  Client: 'Client',
+  FinancialAuditLog: 'FinancialAuditLog'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -411,7 +412,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "passwordResetToken" | "project" | "lead" | "space" | "employee" | "task" | "expense" | "income" | "revenueGoal" | "financialLabel" | "client"
+    modelProps: "user" | "passwordResetToken" | "project" | "lead" | "space" | "employee" | "task" | "expense" | "income" | "revenueGoal" | "financialLabel" | "client" | "financialAuditLog"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1303,6 +1304,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    FinancialAuditLog: {
+      payload: Prisma.$FinancialAuditLogPayload<ExtArgs>
+      fields: Prisma.FinancialAuditLogFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.FinancialAuditLogFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinancialAuditLogPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.FinancialAuditLogFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinancialAuditLogPayload>
+        }
+        findFirst: {
+          args: Prisma.FinancialAuditLogFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinancialAuditLogPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.FinancialAuditLogFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinancialAuditLogPayload>
+        }
+        findMany: {
+          args: Prisma.FinancialAuditLogFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinancialAuditLogPayload>[]
+        }
+        create: {
+          args: Prisma.FinancialAuditLogCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinancialAuditLogPayload>
+        }
+        createMany: {
+          args: Prisma.FinancialAuditLogCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.FinancialAuditLogCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinancialAuditLogPayload>[]
+        }
+        delete: {
+          args: Prisma.FinancialAuditLogDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinancialAuditLogPayload>
+        }
+        update: {
+          args: Prisma.FinancialAuditLogUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinancialAuditLogPayload>
+        }
+        deleteMany: {
+          args: Prisma.FinancialAuditLogDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.FinancialAuditLogUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.FinancialAuditLogUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinancialAuditLogPayload>[]
+        }
+        upsert: {
+          args: Prisma.FinancialAuditLogUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$FinancialAuditLogPayload>
+        }
+        aggregate: {
+          args: Prisma.FinancialAuditLogAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateFinancialAuditLog>
+        }
+        groupBy: {
+          args: Prisma.FinancialAuditLogGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FinancialAuditLogGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.FinancialAuditLogCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.FinancialAuditLogCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1424,6 +1499,7 @@ export const SpaceScalarFieldEnum = {
   spaceName: 'spaceName',
   spaceDescription: 'spaceDescription',
   icon: 'icon',
+  baseCurrency: 'baseCurrency',
   ownerId: 'ownerId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -1473,11 +1549,15 @@ export const ExpenseScalarFieldEnum = {
   description: 'description',
   date: 'date',
   category: 'category',
+  currency: 'currency',
+  receiptUrl: 'receiptUrl',
   isRecurring: 'isRecurring',
   cycle: 'cycle',
+  recurringDay: 'recurringDay',
   spaceId: 'spaceId',
   userId: 'userId',
   clientId: 'clientId',
+  projectId: 'projectId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -1491,9 +1571,16 @@ export const IncomeScalarFieldEnum = {
   description: 'description',
   date: 'date',
   source: 'source',
+  category: 'category',
+  currency: 'currency',
+  receiptUrl: 'receiptUrl',
+  isRecurring: 'isRecurring',
+  cycle: 'cycle',
+  recurringDay: 'recurringDay',
   spaceId: 'spaceId',
   userId: 'userId',
   clientId: 'clientId',
+  projectId: 'projectId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -1545,6 +1632,20 @@ export const ClientScalarFieldEnum = {
 } as const
 
 export type ClientScalarFieldEnum = (typeof ClientScalarFieldEnum)[keyof typeof ClientScalarFieldEnum]
+
+
+export const FinancialAuditLogScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  action: 'action',
+  transactionId: 'transactionId',
+  type: 'type',
+  timestamp: 'timestamp',
+  diff: 'diff',
+  spaceId: 'spaceId'
+} as const
+
+export type FinancialAuditLogScalarFieldEnum = (typeof FinancialAuditLogScalarFieldEnum)[keyof typeof FinancialAuditLogScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1698,6 +1799,20 @@ export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, '
 export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
     
 
+
+/**
+ * Reference to a field of type 'TransactionCategory'
+ */
+export type EnumTransactionCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TransactionCategory'>
+    
+
+
+/**
+ * Reference to a field of type 'TransactionCategory[]'
+ */
+export type ListEnumTransactionCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TransactionCategory[]'>
+    
+
 /**
  * Batch Payload for updateMany & deleteMany & createMany
  */
@@ -1820,6 +1935,7 @@ export type GlobalOmitConfig = {
   revenueGoal?: Prisma.RevenueGoalOmit
   financialLabel?: Prisma.FinancialLabelOmit
   client?: Prisma.ClientOmit
+  financialAuditLog?: Prisma.FinancialAuditLogOmit
 }
 
 /* Types for Logging */

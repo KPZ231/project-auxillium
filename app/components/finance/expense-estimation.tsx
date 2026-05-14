@@ -14,6 +14,7 @@ export const ExpenseEstimation = ({ spaceId }: ExpenseEstimationProps) => {
     estimatedPerMonth: number;
     totalForPeriod: number;
     recurringTotal: number;
+    recurringExpenses?: any[];
   } | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -97,6 +98,34 @@ export const ExpenseEstimation = ({ spaceId }: ExpenseEstimationProps) => {
           <p className="text-[10px] text-[#71717A] italic leading-relaxed">
             * Estimation is based on current recurring cycles and historical one-time averages. Actual costs may vary.
           </p>
+
+          {estimation.recurringExpenses && estimation.recurringExpenses.length > 0 && (
+            <div className="pt-8 border-t border-[#E5E5E5]">
+              <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#0A0A0A] mb-4">
+                Upcoming Recurring (Next 7 Days)
+              </p>
+              <ul className="space-y-3">
+                {estimation.recurringExpenses
+                  .filter(e => {
+                    if (!e.recurringDay) return false;
+                    const today = new Date().getDate();
+                    const diff = e.recurringDay - today;
+                    // if diff is between 0 and 7, it's upcoming this week
+                    // simplistic check, doesn't perfectly wrap around months yet, but good for MVP
+                    return diff >= 0 && diff <= 7;
+                  })
+                  .map((exp, idx) => (
+                    <li key={idx} className="flex justify-between items-center text-[12px] bg-[#FAFAFA] p-3 border border-[#E5E5E5]">
+                      <div>
+                        <span className="font-bold text-[#0A0A0A]">{exp.category || 'Expense'}</span>
+                        <span className="text-[#71717A] ml-2">Day {exp.recurringDay}</span>
+                      </div>
+                      <span className="font-mono text-[#DC2626]">-${exp.amount.toFixed(2)}</span>
+                    </li>
+                  ))}
+              </ul>
+            </div>
+          )}
         </div>
       ) : (
         <div className="h-40 flex items-center justify-center text-[#71717A] text-[11px] uppercase tracking-widest border border-dashed">

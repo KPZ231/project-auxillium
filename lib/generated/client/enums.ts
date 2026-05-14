@@ -25,3 +25,15 @@ export const LeadStatus = {
 } as const
 
 export type LeadStatus = (typeof LeadStatus)[keyof typeof LeadStatus]
+
+
+export const TransactionCategory = {
+  Marketing: 'Marketing',
+  SaaS: 'SaaS',
+  Taxes: 'Taxes',
+  Salary: 'Salary',
+  Revenue: 'Revenue',
+  Other: 'Other'
+} as const
+
+export type TransactionCategory = (typeof TransactionCategory)[keyof typeof TransactionCategory]

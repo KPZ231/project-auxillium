@@ -40,5 +40,77 @@
     "title": "Ready for a change?",
     "subtitle": "Start using Auxillium today and see how easy managing your business can be.",
     "cta": "Start now"
+  },
+  "about": {
+    "title": "About Us",
+    "description": "Learn more about our company",
+    "offer_title": "What We Offer",
+    "offer_subtitle": "As KPZ's Productions, we offer a wide range of services related to software development. Our team consists of experienced programmers and designers who are able to handle even the most demanding tasks.",
+    "offer_item1": "New Technologies",
+    "offer_item1_desc": "New Technologies",
+    "offer_item2": "New Technologies",
+    "offer_item2_desc": "New Technologies",
+    "offer_item3": "New Technologies",
+    "offer_item3_desc": "New Technologies",
+    "offer_item4": "New Technologies",
+    "offer_item4_desc": "New Technologies",
+    "why_choose_us": "What Makes Us Special",
+    "quote_content": "We help companies transform digitally and scale their business",
+    "sub_content": "We combine creativity with data. We create software that drives growth, increases efficiency, and opens up new market opportunities for our clients."
+  },
+  "contact": {
+    "title": "Contact",
+    "description": "Get in touch with us"
+  },
+  "cookies": {
+    "title": "Cookie Policy",
+    "description": "Website Cookie Policy",
+    "publication_date": "Published on: 26.04.2026",
+    "section1": {
+      "title": "1. Definitions",
+      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+    },
+    "section2": {
+      "title": "2. Definitions",
+      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+    },
+    "section3": {
+      "title": "3. Definitions",
+      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+    }
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "description": "Website Privacy Policy",
+    "publication_date": "Published on: 26.04.2026",
+    "section1": {
+      "title": "1. Definitions",
+      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+    },
+    "section2": {
+      "title": "2. Definitions",
+      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+    },
+    "section3": {
+      "title": "3. Definitions",
+      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+    }
+  },
+  "terms": {
+    "title": "Terms of Service",
+    "description": "Website Terms of Service",
+    "publication_date": "Published on: 26.04.2026",
+    "section1": {
+      "title": "1. Definitions",
+      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+    },
+    "section2": {
+      "title": "2. Definitions",
+      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+    },
+    "section3": {
+      "title": "3. Definitions",
+      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+    }
   }
 }

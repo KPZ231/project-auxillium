@@ -298,6 +298,13 @@ export type FloatFilter<$PrismaModel = never> = {
   not?: Prisma.NestedFloatFilter<$PrismaModel> | number
 }
 
+export type EnumTransactionCategoryNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.TransactionCategory | Prisma.EnumTransactionCategoryFieldRefInput<$PrismaModel> | null
+  in?: $Enums.TransactionCategory[] | Prisma.ListEnumTransactionCategoryFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.TransactionCategory[] | Prisma.ListEnumTransactionCategoryFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumTransactionCategoryNullableFilter<$PrismaModel> | $Enums.TransactionCategory | null
+}
+
 export type BoolFilter<$PrismaModel = never> = {
   equals?: boolean | Prisma.BooleanFieldRefInput<$PrismaModel>
   not?: Prisma.NestedBoolFilter<$PrismaModel> | boolean
@@ -317,6 +324,16 @@ export type FloatWithAggregatesFilter<$PrismaModel = never> = {
   _sum?: Prisma.NestedFloatFilter<$PrismaModel>
   _min?: Prisma.NestedFloatFilter<$PrismaModel>
   _max?: Prisma.NestedFloatFilter<$PrismaModel>
+}
+
+export type EnumTransactionCategoryNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TransactionCategory | Prisma.EnumTransactionCategoryFieldRefInput<$PrismaModel> | null
+  in?: $Enums.TransactionCategory[] | Prisma.ListEnumTransactionCategoryFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.TransactionCategory[] | Prisma.ListEnumTransactionCategoryFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumTransactionCategoryNullableWithAggregatesFilter<$PrismaModel> | $Enums.TransactionCategory | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTransactionCategoryNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTransactionCategoryNullableFilter<$PrismaModel>
 }
 
 export type BoolWithAggregatesFilter<$PrismaModel = never> = {
@@ -586,6 +603,13 @@ export type NestedFloatNullableFilter<$PrismaModel = never> = {
   not?: Prisma.NestedFloatNullableFilter<$PrismaModel> | number | null
 }
 
+export type NestedEnumTransactionCategoryNullableFilter<$PrismaModel = never> = {
+  equals?: $Enums.TransactionCategory | Prisma.EnumTransactionCategoryFieldRefInput<$PrismaModel> | null
+  in?: $Enums.TransactionCategory[] | Prisma.ListEnumTransactionCategoryFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.TransactionCategory[] | Prisma.ListEnumTransactionCategoryFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumTransactionCategoryNullableFilter<$PrismaModel> | $Enums.TransactionCategory | null
+}
+
 export type NestedBoolFilter<$PrismaModel = never> = {
   equals?: boolean | Prisma.BooleanFieldRefInput<$PrismaModel>
   not?: Prisma.NestedBoolFilter<$PrismaModel> | boolean
@@ -605,6 +629,16 @@ export type NestedFloatWithAggregatesFilter<$PrismaModel = never> = {
   _sum?: Prisma.NestedFloatFilter<$PrismaModel>
   _min?: Prisma.NestedFloatFilter<$PrismaModel>
   _max?: Prisma.NestedFloatFilter<$PrismaModel>
+}
+
+export type NestedEnumTransactionCategoryNullableWithAggregatesFilter<$PrismaModel = never> = {
+  equals?: $Enums.TransactionCategory | Prisma.EnumTransactionCategoryFieldRefInput<$PrismaModel> | null
+  in?: $Enums.TransactionCategory[] | Prisma.ListEnumTransactionCategoryFieldRefInput<$PrismaModel> | null
+  notIn?: $Enums.TransactionCategory[] | Prisma.ListEnumTransactionCategoryFieldRefInput<$PrismaModel> | null
+  not?: Prisma.NestedEnumTransactionCategoryNullableWithAggregatesFilter<$PrismaModel> | $Enums.TransactionCategory | null
+  _count?: Prisma.NestedIntNullableFilter<$PrismaModel>
+  _min?: Prisma.NestedEnumTransactionCategoryNullableFilter<$PrismaModel>
+  _max?: Prisma.NestedEnumTransactionCategoryNullableFilter<$PrismaModel>
 }
 
 export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {

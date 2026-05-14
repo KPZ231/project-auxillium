@@ -28,10 +28,12 @@ export type AggregateIncome = {
 
 export type IncomeAvgAggregateOutputType = {
   amount: number | null
+  recurringDay: number | null
 }
 
 export type IncomeSumAggregateOutputType = {
   amount: number | null
+  recurringDay: number | null
 }
 
 export type IncomeMinAggregateOutputType = {
@@ -40,9 +42,16 @@ export type IncomeMinAggregateOutputType = {
   description: string | null
   date: Date | null
   source: string | null
+  category: $Enums.TransactionCategory | null
+  currency: string | null
+  receiptUrl: string | null
+  isRecurring: boolean | null
+  cycle: string | null
+  recurringDay: number | null
   spaceId: string | null
   userId: string | null
   clientId: string | null
+  projectId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -53,9 +62,16 @@ export type IncomeMaxAggregateOutputType = {
   description: string | null
   date: Date | null
   source: string | null
+  category: $Enums.TransactionCategory | null
+  currency: string | null
+  receiptUrl: string | null
+  isRecurring: boolean | null
+  cycle: string | null
+  recurringDay: number | null
   spaceId: string | null
   userId: string | null
   clientId: string | null
+  projectId: string | null
   createdAt: Date | null
   updatedAt: Date | null
 }
@@ -66,9 +82,16 @@ export type IncomeCountAggregateOutputType = {
   description: number
   date: number
   source: number
+  category: number
+  currency: number
+  receiptUrl: number
+  isRecurring: number
+  cycle: number
+  recurringDay: number
   spaceId: number
   userId: number
   clientId: number
+  projectId: number
   createdAt: number
   updatedAt: number
   _all: number
@@ -77,10 +100,12 @@ export type IncomeCountAggregateOutputType = {
 
 export type IncomeAvgAggregateInputType = {
   amount?: true
+  recurringDay?: true
 }
 
 export type IncomeSumAggregateInputType = {
   amount?: true
+  recurringDay?: true
 }
 
 export type IncomeMinAggregateInputType = {
@@ -89,9 +114,16 @@ export type IncomeMinAggregateInputType = {
   description?: true
   date?: true
   source?: true
+  category?: true
+  currency?: true
+  receiptUrl?: true
+  isRecurring?: true
+  cycle?: true
+  recurringDay?: true
   spaceId?: true
   userId?: true
   clientId?: true
+  projectId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -102,9 +134,16 @@ export type IncomeMaxAggregateInputType = {
   description?: true
   date?: true
   source?: true
+  category?: true
+  currency?: true
+  receiptUrl?: true
+  isRecurring?: true
+  cycle?: true
+  recurringDay?: true
   spaceId?: true
   userId?: true
   clientId?: true
+  projectId?: true
   createdAt?: true
   updatedAt?: true
 }
@@ -115,9 +154,16 @@ export type IncomeCountAggregateInputType = {
   description?: true
   date?: true
   source?: true
+  category?: true
+  currency?: true
+  receiptUrl?: true
+  isRecurring?: true
+  cycle?: true
+  recurringDay?: true
   spaceId?: true
   userId?: true
   clientId?: true
+  projectId?: true
   createdAt?: true
   updatedAt?: true
   _all?: true
@@ -215,9 +261,16 @@ export type IncomeGroupByOutputType = {
   description: string | null
   date: Date
   source: string | null
+  category: $Enums.TransactionCategory | null
+  currency: string
+  receiptUrl: string | null
+  isRecurring: boolean
+  cycle: string | null
+  recurringDay: number | null
   spaceId: string
   userId: string
   clientId: string | null
+  projectId: string | null
   createdAt: Date
   updatedAt: Date
   _count: IncomeCountAggregateOutputType | null
@@ -251,15 +304,23 @@ export type IncomeWhereInput = {
   description?: Prisma.StringNullableFilter<"Income"> | string | null
   date?: Prisma.DateTimeFilter<"Income"> | Date | string
   source?: Prisma.StringNullableFilter<"Income"> | string | null
+  category?: Prisma.EnumTransactionCategoryNullableFilter<"Income"> | $Enums.TransactionCategory | null
+  currency?: Prisma.StringFilter<"Income"> | string
+  receiptUrl?: Prisma.StringNullableFilter<"Income"> | string | null
+  isRecurring?: Prisma.BoolFilter<"Income"> | boolean
+  cycle?: Prisma.StringNullableFilter<"Income"> | string | null
+  recurringDay?: Prisma.IntNullableFilter<"Income"> | number | null
   spaceId?: Prisma.StringFilter<"Income"> | string
   userId?: Prisma.StringFilter<"Income"> | string
   clientId?: Prisma.StringNullableFilter<"Income"> | string | null
+  projectId?: Prisma.StringNullableFilter<"Income"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Income"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Income"> | Date | string
   space?: Prisma.XOR<Prisma.SpaceScalarRelationFilter, Prisma.SpaceWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   labels?: Prisma.FinancialLabelListRelationFilter
   client?: Prisma.XOR<Prisma.ClientNullableScalarRelationFilter, Prisma.ClientWhereInput> | null
+  project?: Prisma.XOR<Prisma.ProjectNullableScalarRelationFilter, Prisma.ProjectWhereInput> | null
 }
 
 export type IncomeOrderByWithRelationInput = {
@@ -268,15 +329,23 @@ export type IncomeOrderByWithRelationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   date?: Prisma.SortOrder
   source?: Prisma.SortOrderInput | Prisma.SortOrder
+  category?: Prisma.SortOrderInput | Prisma.SortOrder
+  currency?: Prisma.SortOrder
+  receiptUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  isRecurring?: Prisma.SortOrder
+  cycle?: Prisma.SortOrderInput | Prisma.SortOrder
+  recurringDay?: Prisma.SortOrderInput | Prisma.SortOrder
   spaceId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   clientId?: Prisma.SortOrderInput | Prisma.SortOrder
+  projectId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   space?: Prisma.SpaceOrderByWithRelationInput
   user?: Prisma.UserOrderByWithRelationInput
   labels?: Prisma.FinancialLabelOrderByRelationAggregateInput
   client?: Prisma.ClientOrderByWithRelationInput
+  project?: Prisma.ProjectOrderByWithRelationInput
 }
 
 export type IncomeWhereUniqueInput = Prisma.AtLeast<{
@@ -288,15 +357,23 @@ export type IncomeWhereUniqueInput = Prisma.AtLeast<{
   description?: Prisma.StringNullableFilter<"Income"> | string | null
   date?: Prisma.DateTimeFilter<"Income"> | Date | string
   source?: Prisma.StringNullableFilter<"Income"> | string | null
+  category?: Prisma.EnumTransactionCategoryNullableFilter<"Income"> | $Enums.TransactionCategory | null
+  currency?: Prisma.StringFilter<"Income"> | string
+  receiptUrl?: Prisma.StringNullableFilter<"Income"> | string | null
+  isRecurring?: Prisma.BoolFilter<"Income"> | boolean
+  cycle?: Prisma.StringNullableFilter<"Income"> | string | null
+  recurringDay?: Prisma.IntNullableFilter<"Income"> | number | null
   spaceId?: Prisma.StringFilter<"Income"> | string
   userId?: Prisma.StringFilter<"Income"> | string
   clientId?: Prisma.StringNullableFilter<"Income"> | string | null
+  projectId?: Prisma.StringNullableFilter<"Income"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Income"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Income"> | Date | string
   space?: Prisma.XOR<Prisma.SpaceScalarRelationFilter, Prisma.SpaceWhereInput>
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   labels?: Prisma.FinancialLabelListRelationFilter
   client?: Prisma.XOR<Prisma.ClientNullableScalarRelationFilter, Prisma.ClientWhereInput> | null
+  project?: Prisma.XOR<Prisma.ProjectNullableScalarRelationFilter, Prisma.ProjectWhereInput> | null
 }, "id">
 
 export type IncomeOrderByWithAggregationInput = {
@@ -305,9 +382,16 @@ export type IncomeOrderByWithAggregationInput = {
   description?: Prisma.SortOrderInput | Prisma.SortOrder
   date?: Prisma.SortOrder
   source?: Prisma.SortOrderInput | Prisma.SortOrder
+  category?: Prisma.SortOrderInput | Prisma.SortOrder
+  currency?: Prisma.SortOrder
+  receiptUrl?: Prisma.SortOrderInput | Prisma.SortOrder
+  isRecurring?: Prisma.SortOrder
+  cycle?: Prisma.SortOrderInput | Prisma.SortOrder
+  recurringDay?: Prisma.SortOrderInput | Prisma.SortOrder
   spaceId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   clientId?: Prisma.SortOrderInput | Prisma.SortOrder
+  projectId?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.IncomeCountOrderByAggregateInput
@@ -326,9 +410,16 @@ export type IncomeScalarWhereWithAggregatesInput = {
   description?: Prisma.StringNullableWithAggregatesFilter<"Income"> | string | null
   date?: Prisma.DateTimeWithAggregatesFilter<"Income"> | Date | string
   source?: Prisma.StringNullableWithAggregatesFilter<"Income"> | string | null
+  category?: Prisma.EnumTransactionCategoryNullableWithAggregatesFilter<"Income"> | $Enums.TransactionCategory | null
+  currency?: Prisma.StringWithAggregatesFilter<"Income"> | string
+  receiptUrl?: Prisma.StringNullableWithAggregatesFilter<"Income"> | string | null
+  isRecurring?: Prisma.BoolWithAggregatesFilter<"Income"> | boolean
+  cycle?: Prisma.StringNullableWithAggregatesFilter<"Income"> | string | null
+  recurringDay?: Prisma.IntNullableWithAggregatesFilter<"Income"> | number | null
   spaceId?: Prisma.StringWithAggregatesFilter<"Income"> | string
   userId?: Prisma.StringWithAggregatesFilter<"Income"> | string
   clientId?: Prisma.StringNullableWithAggregatesFilter<"Income"> | string | null
+  projectId?: Prisma.StringNullableWithAggregatesFilter<"Income"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Income"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Income"> | Date | string
 }
@@ -339,12 +430,19 @@ export type IncomeCreateInput = {
   description?: string | null
   date?: Date | string
   source?: string | null
+  category?: $Enums.TransactionCategory | null
+  currency?: string
+  receiptUrl?: string | null
+  isRecurring?: boolean
+  cycle?: string | null
+  recurringDay?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   space: Prisma.SpaceCreateNestedOneWithoutIncomesInput
   user: Prisma.UserCreateNestedOneWithoutIncomesInput
   labels?: Prisma.FinancialLabelCreateNestedManyWithoutIncomesInput
   client?: Prisma.ClientCreateNestedOneWithoutIncomesInput
+  project?: Prisma.ProjectCreateNestedOneWithoutIncomesInput
 }
 
 export type IncomeUncheckedCreateInput = {
@@ -353,9 +451,16 @@ export type IncomeUncheckedCreateInput = {
   description?: string | null
   date?: Date | string
   source?: string | null
+  category?: $Enums.TransactionCategory | null
+  currency?: string
+  receiptUrl?: string | null
+  isRecurring?: boolean
+  cycle?: string | null
+  recurringDay?: number | null
   spaceId: string
   userId: string
   clientId?: string | null
+  projectId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   labels?: Prisma.FinancialLabelUncheckedCreateNestedManyWithoutIncomesInput
@@ -367,12 +472,19 @@ export type IncomeUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableEnumTransactionCategoryFieldUpdateOperationsInput | $Enums.TransactionCategory | null
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  receiptUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isRecurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cycle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recurringDay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   space?: Prisma.SpaceUpdateOneRequiredWithoutIncomesNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutIncomesNestedInput
   labels?: Prisma.FinancialLabelUpdateManyWithoutIncomesNestedInput
   client?: Prisma.ClientUpdateOneWithoutIncomesNestedInput
+  project?: Prisma.ProjectUpdateOneWithoutIncomesNestedInput
 }
 
 export type IncomeUncheckedUpdateInput = {
@@ -381,9 +493,16 @@ export type IncomeUncheckedUpdateInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableEnumTransactionCategoryFieldUpdateOperationsInput | $Enums.TransactionCategory | null
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  receiptUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isRecurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cycle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recurringDay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   spaceId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  projectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   labels?: Prisma.FinancialLabelUncheckedUpdateManyWithoutIncomesNestedInput
@@ -395,9 +514,16 @@ export type IncomeCreateManyInput = {
   description?: string | null
   date?: Date | string
   source?: string | null
+  category?: $Enums.TransactionCategory | null
+  currency?: string
+  receiptUrl?: string | null
+  isRecurring?: boolean
+  cycle?: string | null
+  recurringDay?: number | null
   spaceId: string
   userId: string
   clientId?: string | null
+  projectId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -408,6 +534,12 @@ export type IncomeUpdateManyMutationInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableEnumTransactionCategoryFieldUpdateOperationsInput | $Enums.TransactionCategory | null
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  receiptUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isRecurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cycle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recurringDay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -418,9 +550,16 @@ export type IncomeUncheckedUpdateManyInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableEnumTransactionCategoryFieldUpdateOperationsInput | $Enums.TransactionCategory | null
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  receiptUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isRecurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cycle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recurringDay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   spaceId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  projectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -441,15 +580,23 @@ export type IncomeCountOrderByAggregateInput = {
   description?: Prisma.SortOrder
   date?: Prisma.SortOrder
   source?: Prisma.SortOrder
+  category?: Prisma.SortOrder
+  currency?: Prisma.SortOrder
+  receiptUrl?: Prisma.SortOrder
+  isRecurring?: Prisma.SortOrder
+  cycle?: Prisma.SortOrder
+  recurringDay?: Prisma.SortOrder
   spaceId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   clientId?: Prisma.SortOrder
+  projectId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type IncomeAvgOrderByAggregateInput = {
   amount?: Prisma.SortOrder
+  recurringDay?: Prisma.SortOrder
 }
 
 export type IncomeMaxOrderByAggregateInput = {
@@ -458,9 +605,16 @@ export type IncomeMaxOrderByAggregateInput = {
   description?: Prisma.SortOrder
   date?: Prisma.SortOrder
   source?: Prisma.SortOrder
+  category?: Prisma.SortOrder
+  currency?: Prisma.SortOrder
+  receiptUrl?: Prisma.SortOrder
+  isRecurring?: Prisma.SortOrder
+  cycle?: Prisma.SortOrder
+  recurringDay?: Prisma.SortOrder
   spaceId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   clientId?: Prisma.SortOrder
+  projectId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
@@ -471,15 +625,23 @@ export type IncomeMinOrderByAggregateInput = {
   description?: Prisma.SortOrder
   date?: Prisma.SortOrder
   source?: Prisma.SortOrder
+  category?: Prisma.SortOrder
+  currency?: Prisma.SortOrder
+  receiptUrl?: Prisma.SortOrder
+  isRecurring?: Prisma.SortOrder
+  cycle?: Prisma.SortOrder
+  recurringDay?: Prisma.SortOrder
   spaceId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   clientId?: Prisma.SortOrder
+  projectId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
 }
 
 export type IncomeSumOrderByAggregateInput = {
   amount?: Prisma.SortOrder
+  recurringDay?: Prisma.SortOrder
 }
 
 export type IncomeCreateNestedManyWithoutUserInput = {
@@ -521,6 +683,48 @@ export type IncomeUncheckedUpdateManyWithoutUserNestedInput = {
   connect?: Prisma.IncomeWhereUniqueInput | Prisma.IncomeWhereUniqueInput[]
   update?: Prisma.IncomeUpdateWithWhereUniqueWithoutUserInput | Prisma.IncomeUpdateWithWhereUniqueWithoutUserInput[]
   updateMany?: Prisma.IncomeUpdateManyWithWhereWithoutUserInput | Prisma.IncomeUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.IncomeScalarWhereInput | Prisma.IncomeScalarWhereInput[]
+}
+
+export type IncomeCreateNestedManyWithoutProjectInput = {
+  create?: Prisma.XOR<Prisma.IncomeCreateWithoutProjectInput, Prisma.IncomeUncheckedCreateWithoutProjectInput> | Prisma.IncomeCreateWithoutProjectInput[] | Prisma.IncomeUncheckedCreateWithoutProjectInput[]
+  connectOrCreate?: Prisma.IncomeCreateOrConnectWithoutProjectInput | Prisma.IncomeCreateOrConnectWithoutProjectInput[]
+  createMany?: Prisma.IncomeCreateManyProjectInputEnvelope
+  connect?: Prisma.IncomeWhereUniqueInput | Prisma.IncomeWhereUniqueInput[]
+}
+
+export type IncomeUncheckedCreateNestedManyWithoutProjectInput = {
+  create?: Prisma.XOR<Prisma.IncomeCreateWithoutProjectInput, Prisma.IncomeUncheckedCreateWithoutProjectInput> | Prisma.IncomeCreateWithoutProjectInput[] | Prisma.IncomeUncheckedCreateWithoutProjectInput[]
+  connectOrCreate?: Prisma.IncomeCreateOrConnectWithoutProjectInput | Prisma.IncomeCreateOrConnectWithoutProjectInput[]
+  createMany?: Prisma.IncomeCreateManyProjectInputEnvelope
+  connect?: Prisma.IncomeWhereUniqueInput | Prisma.IncomeWhereUniqueInput[]
+}
+
+export type IncomeUpdateManyWithoutProjectNestedInput = {
+  create?: Prisma.XOR<Prisma.IncomeCreateWithoutProjectInput, Prisma.IncomeUncheckedCreateWithoutProjectInput> | Prisma.IncomeCreateWithoutProjectInput[] | Prisma.IncomeUncheckedCreateWithoutProjectInput[]
+  connectOrCreate?: Prisma.IncomeCreateOrConnectWithoutProjectInput | Prisma.IncomeCreateOrConnectWithoutProjectInput[]
+  upsert?: Prisma.IncomeUpsertWithWhereUniqueWithoutProjectInput | Prisma.IncomeUpsertWithWhereUniqueWithoutProjectInput[]
+  createMany?: Prisma.IncomeCreateManyProjectInputEnvelope
+  set?: Prisma.IncomeWhereUniqueInput | Prisma.IncomeWhereUniqueInput[]
+  disconnect?: Prisma.IncomeWhereUniqueInput | Prisma.IncomeWhereUniqueInput[]
+  delete?: Prisma.IncomeWhereUniqueInput | Prisma.IncomeWhereUniqueInput[]
+  connect?: Prisma.IncomeWhereUniqueInput | Prisma.IncomeWhereUniqueInput[]
+  update?: Prisma.IncomeUpdateWithWhereUniqueWithoutProjectInput | Prisma.IncomeUpdateWithWhereUniqueWithoutProjectInput[]
+  updateMany?: Prisma.IncomeUpdateManyWithWhereWithoutProjectInput | Prisma.IncomeUpdateManyWithWhereWithoutProjectInput[]
+  deleteMany?: Prisma.IncomeScalarWhereInput | Prisma.IncomeScalarWhereInput[]
+}
+
+export type IncomeUncheckedUpdateManyWithoutProjectNestedInput = {
+  create?: Prisma.XOR<Prisma.IncomeCreateWithoutProjectInput, Prisma.IncomeUncheckedCreateWithoutProjectInput> | Prisma.IncomeCreateWithoutProjectInput[] | Prisma.IncomeUncheckedCreateWithoutProjectInput[]
+  connectOrCreate?: Prisma.IncomeCreateOrConnectWithoutProjectInput | Prisma.IncomeCreateOrConnectWithoutProjectInput[]
+  upsert?: Prisma.IncomeUpsertWithWhereUniqueWithoutProjectInput | Prisma.IncomeUpsertWithWhereUniqueWithoutProjectInput[]
+  createMany?: Prisma.IncomeCreateManyProjectInputEnvelope
+  set?: Prisma.IncomeWhereUniqueInput | Prisma.IncomeWhereUniqueInput[]
+  disconnect?: Prisma.IncomeWhereUniqueInput | Prisma.IncomeWhereUniqueInput[]
+  delete?: Prisma.IncomeWhereUniqueInput | Prisma.IncomeWhereUniqueInput[]
+  connect?: Prisma.IncomeWhereUniqueInput | Prisma.IncomeWhereUniqueInput[]
+  update?: Prisma.IncomeUpdateWithWhereUniqueWithoutProjectInput | Prisma.IncomeUpdateWithWhereUniqueWithoutProjectInput[]
+  updateMany?: Prisma.IncomeUpdateManyWithWhereWithoutProjectInput | Prisma.IncomeUpdateManyWithWhereWithoutProjectInput[]
   deleteMany?: Prisma.IncomeScalarWhereInput | Prisma.IncomeScalarWhereInput[]
 }
 
@@ -652,11 +856,18 @@ export type IncomeCreateWithoutUserInput = {
   description?: string | null
   date?: Date | string
   source?: string | null
+  category?: $Enums.TransactionCategory | null
+  currency?: string
+  receiptUrl?: string | null
+  isRecurring?: boolean
+  cycle?: string | null
+  recurringDay?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   space: Prisma.SpaceCreateNestedOneWithoutIncomesInput
   labels?: Prisma.FinancialLabelCreateNestedManyWithoutIncomesInput
   client?: Prisma.ClientCreateNestedOneWithoutIncomesInput
+  project?: Prisma.ProjectCreateNestedOneWithoutIncomesInput
 }
 
 export type IncomeUncheckedCreateWithoutUserInput = {
@@ -665,8 +876,15 @@ export type IncomeUncheckedCreateWithoutUserInput = {
   description?: string | null
   date?: Date | string
   source?: string | null
+  category?: $Enums.TransactionCategory | null
+  currency?: string
+  receiptUrl?: string | null
+  isRecurring?: boolean
+  cycle?: string | null
+  recurringDay?: number | null
   spaceId: string
   clientId?: string | null
+  projectId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   labels?: Prisma.FinancialLabelUncheckedCreateNestedManyWithoutIncomesInput
@@ -707,11 +925,84 @@ export type IncomeScalarWhereInput = {
   description?: Prisma.StringNullableFilter<"Income"> | string | null
   date?: Prisma.DateTimeFilter<"Income"> | Date | string
   source?: Prisma.StringNullableFilter<"Income"> | string | null
+  category?: Prisma.EnumTransactionCategoryNullableFilter<"Income"> | $Enums.TransactionCategory | null
+  currency?: Prisma.StringFilter<"Income"> | string
+  receiptUrl?: Prisma.StringNullableFilter<"Income"> | string | null
+  isRecurring?: Prisma.BoolFilter<"Income"> | boolean
+  cycle?: Prisma.StringNullableFilter<"Income"> | string | null
+  recurringDay?: Prisma.IntNullableFilter<"Income"> | number | null
   spaceId?: Prisma.StringFilter<"Income"> | string
   userId?: Prisma.StringFilter<"Income"> | string
   clientId?: Prisma.StringNullableFilter<"Income"> | string | null
+  projectId?: Prisma.StringNullableFilter<"Income"> | string | null
   createdAt?: Prisma.DateTimeFilter<"Income"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Income"> | Date | string
+}
+
+export type IncomeCreateWithoutProjectInput = {
+  id?: string
+  amount: number
+  description?: string | null
+  date?: Date | string
+  source?: string | null
+  category?: $Enums.TransactionCategory | null
+  currency?: string
+  receiptUrl?: string | null
+  isRecurring?: boolean
+  cycle?: string | null
+  recurringDay?: number | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  space: Prisma.SpaceCreateNestedOneWithoutIncomesInput
+  user: Prisma.UserCreateNestedOneWithoutIncomesInput
+  labels?: Prisma.FinancialLabelCreateNestedManyWithoutIncomesInput
+  client?: Prisma.ClientCreateNestedOneWithoutIncomesInput
+}
+
+export type IncomeUncheckedCreateWithoutProjectInput = {
+  id?: string
+  amount: number
+  description?: string | null
+  date?: Date | string
+  source?: string | null
+  category?: $Enums.TransactionCategory | null
+  currency?: string
+  receiptUrl?: string | null
+  isRecurring?: boolean
+  cycle?: string | null
+  recurringDay?: number | null
+  spaceId: string
+  userId: string
+  clientId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  labels?: Prisma.FinancialLabelUncheckedCreateNestedManyWithoutIncomesInput
+}
+
+export type IncomeCreateOrConnectWithoutProjectInput = {
+  where: Prisma.IncomeWhereUniqueInput
+  create: Prisma.XOR<Prisma.IncomeCreateWithoutProjectInput, Prisma.IncomeUncheckedCreateWithoutProjectInput>
+}
+
+export type IncomeCreateManyProjectInputEnvelope = {
+  data: Prisma.IncomeCreateManyProjectInput | Prisma.IncomeCreateManyProjectInput[]
+  skipDuplicates?: boolean
+}
+
+export type IncomeUpsertWithWhereUniqueWithoutProjectInput = {
+  where: Prisma.IncomeWhereUniqueInput
+  update: Prisma.XOR<Prisma.IncomeUpdateWithoutProjectInput, Prisma.IncomeUncheckedUpdateWithoutProjectInput>
+  create: Prisma.XOR<Prisma.IncomeCreateWithoutProjectInput, Prisma.IncomeUncheckedCreateWithoutProjectInput>
+}
+
+export type IncomeUpdateWithWhereUniqueWithoutProjectInput = {
+  where: Prisma.IncomeWhereUniqueInput
+  data: Prisma.XOR<Prisma.IncomeUpdateWithoutProjectInput, Prisma.IncomeUncheckedUpdateWithoutProjectInput>
+}
+
+export type IncomeUpdateManyWithWhereWithoutProjectInput = {
+  where: Prisma.IncomeScalarWhereInput
+  data: Prisma.XOR<Prisma.IncomeUpdateManyMutationInput, Prisma.IncomeUncheckedUpdateManyWithoutProjectInput>
 }
 
 export type IncomeCreateWithoutSpaceInput = {
@@ -720,11 +1011,18 @@ export type IncomeCreateWithoutSpaceInput = {
   description?: string | null
   date?: Date | string
   source?: string | null
+  category?: $Enums.TransactionCategory | null
+  currency?: string
+  receiptUrl?: string | null
+  isRecurring?: boolean
+  cycle?: string | null
+  recurringDay?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutIncomesInput
   labels?: Prisma.FinancialLabelCreateNestedManyWithoutIncomesInput
   client?: Prisma.ClientCreateNestedOneWithoutIncomesInput
+  project?: Prisma.ProjectCreateNestedOneWithoutIncomesInput
 }
 
 export type IncomeUncheckedCreateWithoutSpaceInput = {
@@ -733,8 +1031,15 @@ export type IncomeUncheckedCreateWithoutSpaceInput = {
   description?: string | null
   date?: Date | string
   source?: string | null
+  category?: $Enums.TransactionCategory | null
+  currency?: string
+  receiptUrl?: string | null
+  isRecurring?: boolean
+  cycle?: string | null
+  recurringDay?: number | null
   userId: string
   clientId?: string | null
+  projectId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   labels?: Prisma.FinancialLabelUncheckedCreateNestedManyWithoutIncomesInput
@@ -772,11 +1077,18 @@ export type IncomeCreateWithoutLabelsInput = {
   description?: string | null
   date?: Date | string
   source?: string | null
+  category?: $Enums.TransactionCategory | null
+  currency?: string
+  receiptUrl?: string | null
+  isRecurring?: boolean
+  cycle?: string | null
+  recurringDay?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   space: Prisma.SpaceCreateNestedOneWithoutIncomesInput
   user: Prisma.UserCreateNestedOneWithoutIncomesInput
   client?: Prisma.ClientCreateNestedOneWithoutIncomesInput
+  project?: Prisma.ProjectCreateNestedOneWithoutIncomesInput
 }
 
 export type IncomeUncheckedCreateWithoutLabelsInput = {
@@ -785,9 +1097,16 @@ export type IncomeUncheckedCreateWithoutLabelsInput = {
   description?: string | null
   date?: Date | string
   source?: string | null
+  category?: $Enums.TransactionCategory | null
+  currency?: string
+  receiptUrl?: string | null
+  isRecurring?: boolean
+  cycle?: string | null
+  recurringDay?: number | null
   spaceId: string
   userId: string
   clientId?: string | null
+  projectId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -819,11 +1138,18 @@ export type IncomeCreateWithoutClientInput = {
   description?: string | null
   date?: Date | string
   source?: string | null
+  category?: $Enums.TransactionCategory | null
+  currency?: string
+  receiptUrl?: string | null
+  isRecurring?: boolean
+  cycle?: string | null
+  recurringDay?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   space: Prisma.SpaceCreateNestedOneWithoutIncomesInput
   user: Prisma.UserCreateNestedOneWithoutIncomesInput
   labels?: Prisma.FinancialLabelCreateNestedManyWithoutIncomesInput
+  project?: Prisma.ProjectCreateNestedOneWithoutIncomesInput
 }
 
 export type IncomeUncheckedCreateWithoutClientInput = {
@@ -832,8 +1158,15 @@ export type IncomeUncheckedCreateWithoutClientInput = {
   description?: string | null
   date?: Date | string
   source?: string | null
+  category?: $Enums.TransactionCategory | null
+  currency?: string
+  receiptUrl?: string | null
+  isRecurring?: boolean
+  cycle?: string | null
+  recurringDay?: number | null
   spaceId: string
   userId: string
+  projectId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
   labels?: Prisma.FinancialLabelUncheckedCreateNestedManyWithoutIncomesInput
@@ -871,8 +1204,15 @@ export type IncomeCreateManyUserInput = {
   description?: string | null
   date?: Date | string
   source?: string | null
+  category?: $Enums.TransactionCategory | null
+  currency?: string
+  receiptUrl?: string | null
+  isRecurring?: boolean
+  cycle?: string | null
+  recurringDay?: number | null
   spaceId: string
   clientId?: string | null
+  projectId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -883,11 +1223,18 @@ export type IncomeUpdateWithoutUserInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableEnumTransactionCategoryFieldUpdateOperationsInput | $Enums.TransactionCategory | null
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  receiptUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isRecurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cycle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recurringDay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   space?: Prisma.SpaceUpdateOneRequiredWithoutIncomesNestedInput
   labels?: Prisma.FinancialLabelUpdateManyWithoutIncomesNestedInput
   client?: Prisma.ClientUpdateOneWithoutIncomesNestedInput
+  project?: Prisma.ProjectUpdateOneWithoutIncomesNestedInput
 }
 
 export type IncomeUncheckedUpdateWithoutUserInput = {
@@ -896,8 +1243,15 @@ export type IncomeUncheckedUpdateWithoutUserInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableEnumTransactionCategoryFieldUpdateOperationsInput | $Enums.TransactionCategory | null
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  receiptUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isRecurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cycle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recurringDay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   spaceId?: Prisma.StringFieldUpdateOperationsInput | string
   clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  projectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   labels?: Prisma.FinancialLabelUncheckedUpdateManyWithoutIncomesNestedInput
@@ -909,7 +1263,92 @@ export type IncomeUncheckedUpdateManyWithoutUserInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableEnumTransactionCategoryFieldUpdateOperationsInput | $Enums.TransactionCategory | null
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  receiptUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isRecurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cycle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recurringDay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   spaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  projectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+}
+
+export type IncomeCreateManyProjectInput = {
+  id?: string
+  amount: number
+  description?: string | null
+  date?: Date | string
+  source?: string | null
+  category?: $Enums.TransactionCategory | null
+  currency?: string
+  receiptUrl?: string | null
+  isRecurring?: boolean
+  cycle?: string | null
+  recurringDay?: number | null
+  spaceId: string
+  userId: string
+  clientId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+}
+
+export type IncomeUpdateWithoutProjectInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableEnumTransactionCategoryFieldUpdateOperationsInput | $Enums.TransactionCategory | null
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  receiptUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isRecurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cycle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recurringDay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  space?: Prisma.SpaceUpdateOneRequiredWithoutIncomesNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutIncomesNestedInput
+  labels?: Prisma.FinancialLabelUpdateManyWithoutIncomesNestedInput
+  client?: Prisma.ClientUpdateOneWithoutIncomesNestedInput
+}
+
+export type IncomeUncheckedUpdateWithoutProjectInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableEnumTransactionCategoryFieldUpdateOperationsInput | $Enums.TransactionCategory | null
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  receiptUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isRecurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cycle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recurringDay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  spaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  labels?: Prisma.FinancialLabelUncheckedUpdateManyWithoutIncomesNestedInput
+}
+
+export type IncomeUncheckedUpdateManyWithoutProjectInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  amount?: Prisma.FloatFieldUpdateOperationsInput | number
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableEnumTransactionCategoryFieldUpdateOperationsInput | $Enums.TransactionCategory | null
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  receiptUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isRecurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cycle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recurringDay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  spaceId?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
   clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -921,8 +1360,15 @@ export type IncomeCreateManySpaceInput = {
   description?: string | null
   date?: Date | string
   source?: string | null
+  category?: $Enums.TransactionCategory | null
+  currency?: string
+  receiptUrl?: string | null
+  isRecurring?: boolean
+  cycle?: string | null
+  recurringDay?: number | null
   userId: string
   clientId?: string | null
+  projectId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -933,11 +1379,18 @@ export type IncomeUpdateWithoutSpaceInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableEnumTransactionCategoryFieldUpdateOperationsInput | $Enums.TransactionCategory | null
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  receiptUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isRecurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cycle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recurringDay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutIncomesNestedInput
   labels?: Prisma.FinancialLabelUpdateManyWithoutIncomesNestedInput
   client?: Prisma.ClientUpdateOneWithoutIncomesNestedInput
+  project?: Prisma.ProjectUpdateOneWithoutIncomesNestedInput
 }
 
 export type IncomeUncheckedUpdateWithoutSpaceInput = {
@@ -946,8 +1399,15 @@ export type IncomeUncheckedUpdateWithoutSpaceInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableEnumTransactionCategoryFieldUpdateOperationsInput | $Enums.TransactionCategory | null
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  receiptUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isRecurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cycle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recurringDay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  projectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   labels?: Prisma.FinancialLabelUncheckedUpdateManyWithoutIncomesNestedInput
@@ -959,8 +1419,15 @@ export type IncomeUncheckedUpdateManyWithoutSpaceInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableEnumTransactionCategoryFieldUpdateOperationsInput | $Enums.TransactionCategory | null
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  receiptUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isRecurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cycle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recurringDay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  projectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -971,11 +1438,18 @@ export type IncomeUpdateWithoutLabelsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableEnumTransactionCategoryFieldUpdateOperationsInput | $Enums.TransactionCategory | null
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  receiptUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isRecurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cycle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recurringDay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   space?: Prisma.SpaceUpdateOneRequiredWithoutIncomesNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutIncomesNestedInput
   client?: Prisma.ClientUpdateOneWithoutIncomesNestedInput
+  project?: Prisma.ProjectUpdateOneWithoutIncomesNestedInput
 }
 
 export type IncomeUncheckedUpdateWithoutLabelsInput = {
@@ -984,9 +1458,16 @@ export type IncomeUncheckedUpdateWithoutLabelsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableEnumTransactionCategoryFieldUpdateOperationsInput | $Enums.TransactionCategory | null
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  receiptUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isRecurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cycle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recurringDay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   spaceId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  projectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -997,9 +1478,16 @@ export type IncomeUncheckedUpdateManyWithoutLabelsInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableEnumTransactionCategoryFieldUpdateOperationsInput | $Enums.TransactionCategory | null
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  receiptUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isRecurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cycle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recurringDay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   spaceId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   clientId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  projectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1010,8 +1498,15 @@ export type IncomeCreateManyClientInput = {
   description?: string | null
   date?: Date | string
   source?: string | null
+  category?: $Enums.TransactionCategory | null
+  currency?: string
+  receiptUrl?: string | null
+  isRecurring?: boolean
+  cycle?: string | null
+  recurringDay?: number | null
   spaceId: string
   userId: string
+  projectId?: string | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -1022,11 +1517,18 @@ export type IncomeUpdateWithoutClientInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableEnumTransactionCategoryFieldUpdateOperationsInput | $Enums.TransactionCategory | null
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  receiptUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isRecurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cycle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recurringDay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   space?: Prisma.SpaceUpdateOneRequiredWithoutIncomesNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutIncomesNestedInput
   labels?: Prisma.FinancialLabelUpdateManyWithoutIncomesNestedInput
+  project?: Prisma.ProjectUpdateOneWithoutIncomesNestedInput
 }
 
 export type IncomeUncheckedUpdateWithoutClientInput = {
@@ -1035,8 +1537,15 @@ export type IncomeUncheckedUpdateWithoutClientInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableEnumTransactionCategoryFieldUpdateOperationsInput | $Enums.TransactionCategory | null
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  receiptUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isRecurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cycle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recurringDay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   spaceId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  projectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   labels?: Prisma.FinancialLabelUncheckedUpdateManyWithoutIncomesNestedInput
@@ -1048,8 +1557,15 @@ export type IncomeUncheckedUpdateManyWithoutClientInput = {
   description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   date?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   source?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  category?: Prisma.NullableEnumTransactionCategoryFieldUpdateOperationsInput | $Enums.TransactionCategory | null
+  currency?: Prisma.StringFieldUpdateOperationsInput | string
+  receiptUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  isRecurring?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  cycle?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  recurringDay?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   spaceId?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
+  projectId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -1091,15 +1607,23 @@ export type IncomeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   description?: boolean
   date?: boolean
   source?: boolean
+  category?: boolean
+  currency?: boolean
+  receiptUrl?: boolean
+  isRecurring?: boolean
+  cycle?: boolean
+  recurringDay?: boolean
   spaceId?: boolean
   userId?: boolean
   clientId?: boolean
+  projectId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   space?: boolean | Prisma.SpaceDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   labels?: boolean | Prisma.Income$labelsArgs<ExtArgs>
   client?: boolean | Prisma.Income$clientArgs<ExtArgs>
+  project?: boolean | Prisma.Income$projectArgs<ExtArgs>
   _count?: boolean | Prisma.IncomeCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["income"]>
 
@@ -1109,14 +1633,22 @@ export type IncomeSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extens
   description?: boolean
   date?: boolean
   source?: boolean
+  category?: boolean
+  currency?: boolean
+  receiptUrl?: boolean
+  isRecurring?: boolean
+  cycle?: boolean
+  recurringDay?: boolean
   spaceId?: boolean
   userId?: boolean
   clientId?: boolean
+  projectId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   space?: boolean | Prisma.SpaceDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   client?: boolean | Prisma.Income$clientArgs<ExtArgs>
+  project?: boolean | Prisma.Income$projectArgs<ExtArgs>
 }, ExtArgs["result"]["income"]>
 
 export type IncomeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
@@ -1125,14 +1657,22 @@ export type IncomeSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extens
   description?: boolean
   date?: boolean
   source?: boolean
+  category?: boolean
+  currency?: boolean
+  receiptUrl?: boolean
+  isRecurring?: boolean
+  cycle?: boolean
+  recurringDay?: boolean
   spaceId?: boolean
   userId?: boolean
   clientId?: boolean
+  projectId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
   space?: boolean | Prisma.SpaceDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   client?: boolean | Prisma.Income$clientArgs<ExtArgs>
+  project?: boolean | Prisma.Income$projectArgs<ExtArgs>
 }, ExtArgs["result"]["income"]>
 
 export type IncomeSelectScalar = {
@@ -1141,30 +1681,40 @@ export type IncomeSelectScalar = {
   description?: boolean
   date?: boolean
   source?: boolean
+  category?: boolean
+  currency?: boolean
+  receiptUrl?: boolean
+  isRecurring?: boolean
+  cycle?: boolean
+  recurringDay?: boolean
   spaceId?: boolean
   userId?: boolean
   clientId?: boolean
+  projectId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type IncomeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "amount" | "description" | "date" | "source" | "spaceId" | "userId" | "clientId" | "createdAt" | "updatedAt", ExtArgs["result"]["income"]>
+export type IncomeOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "amount" | "description" | "date" | "source" | "category" | "currency" | "receiptUrl" | "isRecurring" | "cycle" | "recurringDay" | "spaceId" | "userId" | "clientId" | "projectId" | "createdAt" | "updatedAt", ExtArgs["result"]["income"]>
 export type IncomeInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   space?: boolean | Prisma.SpaceDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   labels?: boolean | Prisma.Income$labelsArgs<ExtArgs>
   client?: boolean | Prisma.Income$clientArgs<ExtArgs>
+  project?: boolean | Prisma.Income$projectArgs<ExtArgs>
   _count?: boolean | Prisma.IncomeCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type IncomeIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   space?: boolean | Prisma.SpaceDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   client?: boolean | Prisma.Income$clientArgs<ExtArgs>
+  project?: boolean | Prisma.Income$projectArgs<ExtArgs>
 }
 export type IncomeIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   space?: boolean | Prisma.SpaceDefaultArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   client?: boolean | Prisma.Income$clientArgs<ExtArgs>
+  project?: boolean | Prisma.Income$projectArgs<ExtArgs>
 }
 
 export type $IncomePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1174,6 +1724,7 @@ export type $IncomePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     user: Prisma.$UserPayload<ExtArgs>
     labels: Prisma.$FinancialLabelPayload<ExtArgs>[]
     client: Prisma.$ClientPayload<ExtArgs> | null
+    project: Prisma.$ProjectPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1181,9 +1732,16 @@ export type $IncomePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     description: string | null
     date: Date
     source: string | null
+    category: $Enums.TransactionCategory | null
+    currency: string
+    receiptUrl: string | null
+    isRecurring: boolean
+    cycle: string | null
+    recurringDay: number | null
     spaceId: string
     userId: string
     clientId: string | null
+    projectId: string | null
     createdAt: Date
     updatedAt: Date
   }, ExtArgs["result"]["income"]>
@@ -1584,6 +2142,7 @@ export interface Prisma__IncomeClient<T, Null = never, ExtArgs extends runtime.T
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   labels<T extends Prisma.Income$labelsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Income$labelsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FinancialLabelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   client<T extends Prisma.Income$clientArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Income$clientArgs<ExtArgs>>): Prisma.Prisma__ClientClient<runtime.Types.Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  project<T extends Prisma.Income$projectArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Income$projectArgs<ExtArgs>>): Prisma.Prisma__ProjectClient<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1618,9 +2177,16 @@ export interface IncomeFieldRefs {
   readonly description: Prisma.FieldRef<"Income", 'String'>
   readonly date: Prisma.FieldRef<"Income", 'DateTime'>
   readonly source: Prisma.FieldRef<"Income", 'String'>
+  readonly category: Prisma.FieldRef<"Income", 'TransactionCategory'>
+  readonly currency: Prisma.FieldRef<"Income", 'String'>
+  readonly receiptUrl: Prisma.FieldRef<"Income", 'String'>
+  readonly isRecurring: Prisma.FieldRef<"Income", 'Boolean'>
+  readonly cycle: Prisma.FieldRef<"Income", 'String'>
+  readonly recurringDay: Prisma.FieldRef<"Income", 'Int'>
   readonly spaceId: Prisma.FieldRef<"Income", 'String'>
   readonly userId: Prisma.FieldRef<"Income", 'String'>
   readonly clientId: Prisma.FieldRef<"Income", 'String'>
+  readonly projectId: Prisma.FieldRef<"Income", 'String'>
   readonly createdAt: Prisma.FieldRef<"Income", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Income", 'DateTime'>
 }
@@ -2064,6 +2630,25 @@ export type Income$clientArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    */
   include?: Prisma.ClientInclude<ExtArgs> | null
   where?: Prisma.ClientWhereInput
+}
+
+/**
+ * Income.project
+ */
+export type Income$projectArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Project
+   */
+  select?: Prisma.ProjectSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Project
+   */
+  omit?: Prisma.ProjectOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProjectInclude<ExtArgs> | null
+  where?: Prisma.ProjectWhereInput
 }
 
 /**

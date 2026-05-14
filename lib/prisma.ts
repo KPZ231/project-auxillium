@@ -1,3 +1,4 @@
+// Prisma Client initializer - updated to trigger reload
 import { PrismaClient } from "./generated/client/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { Pool } from "pg";

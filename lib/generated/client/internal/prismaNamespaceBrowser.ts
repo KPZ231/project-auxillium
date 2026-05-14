@@ -62,7 +62,8 @@ export const ModelName = {
   Income: 'Income',
   RevenueGoal: 'RevenueGoal',
   FinancialLabel: 'FinancialLabel',
-  Client: 'Client'
+  Client: 'Client',
+  FinancialAuditLog: 'FinancialAuditLog'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -163,6 +164,7 @@ export const SpaceScalarFieldEnum = {
   spaceName: 'spaceName',
   spaceDescription: 'spaceDescription',
   icon: 'icon',
+  baseCurrency: 'baseCurrency',
   ownerId: 'ownerId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -212,11 +214,15 @@ export const ExpenseScalarFieldEnum = {
   description: 'description',
   date: 'date',
   category: 'category',
+  currency: 'currency',
+  receiptUrl: 'receiptUrl',
   isRecurring: 'isRecurring',
   cycle: 'cycle',
+  recurringDay: 'recurringDay',
   spaceId: 'spaceId',
   userId: 'userId',
   clientId: 'clientId',
+  projectId: 'projectId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -230,9 +236,16 @@ export const IncomeScalarFieldEnum = {
   description: 'description',
   date: 'date',
   source: 'source',
+  category: 'category',
+  currency: 'currency',
+  receiptUrl: 'receiptUrl',
+  isRecurring: 'isRecurring',
+  cycle: 'cycle',
+  recurringDay: 'recurringDay',
   spaceId: 'spaceId',
   userId: 'userId',
   clientId: 'clientId',
+  projectId: 'projectId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 } as const
@@ -284,6 +297,20 @@ export const ClientScalarFieldEnum = {
 } as const
 
 export type ClientScalarFieldEnum = (typeof ClientScalarFieldEnum)[keyof typeof ClientScalarFieldEnum]
+
+
+export const FinancialAuditLogScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  action: 'action',
+  transactionId: 'transactionId',
+  type: 'type',
+  timestamp: 'timestamp',
+  diff: 'diff',
+  spaceId: 'spaceId'
+} as const
+
+export type FinancialAuditLogScalarFieldEnum = (typeof FinancialAuditLogScalarFieldEnum)[keyof typeof FinancialAuditLogScalarFieldEnum]
 
 
 export const SortOrder = {

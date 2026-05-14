@@ -4,19 +4,23 @@ import { prisma } from "@/lib/prisma";
 import redis, { setCachedData, getCachedData, invalidateCache } from "@/lib/redis";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-import { Expense, Income, RevenueGoal } from "@/lib/generated/client/client";
+import { Expense, Income, RevenueGoal, TransactionCategory } from "@/lib/generated/client/client";
 
 const expenseSchema = z.object({
   amount: z.number().positive(),
   description: z.string().optional(),
   date: z.date().default(() => new Date()),
-  category: z.string().optional(),
+  category: z.nativeEnum(TransactionCategory).optional(),
+  currency: z.string().default("USD"),
+  receiptUrl: z.string().optional(),
   isRecurring: z.boolean().default(false),
   cycle: z.string().optional(), // "monthly", "yearly"
+  recurringDay: z.number().min(1).max(31).optional(),
   spaceId: z.string(),
   userId: z.string(),
   labelIds: z.array(z.string()).optional(),
   clientId: z.string().optional(),
+  projectId: z.string().optional(),
 });
 
 const incomeSchema = z.object({
@@ -24,10 +28,17 @@ const incomeSchema = z.object({
   description: z.string().optional(),
   date: z.date().default(() => new Date()),
   source: z.string().optional(),
+  category: z.nativeEnum(TransactionCategory).optional(),
+  currency: z.string().default("USD"),
+  receiptUrl: z.string().optional(),
+  isRecurring: z.boolean().default(false),
+  cycle: z.string().optional(),
+  recurringDay: z.number().min(1).max(31).optional(),
   spaceId: z.string(),
   userId: z.string(),
   labelIds: z.array(z.string()).optional(),
   clientId: z.string().optional(),
+  projectId: z.string().optional(),
 });
 
 const revenueGoalSchema = z.object({
@@ -51,15 +62,30 @@ export async function addExpense(data: z.infer<typeof expenseSchema>) {
         description: validated.description,
         date: validated.date,
         category: validated.category,
+        currency: validated.currency,
+        receiptUrl: validated.receiptUrl,
         isRecurring: validated.isRecurring,
         cycle: validated.cycle,
+        recurringDay: validated.recurringDay,
         spaceId: validated.spaceId,
         userId: validated.userId,
         labels: {
           connect: validated.labelIds?.map(id => ({ id })) || [],
         },
         ...(validated.clientId ? { clientId: validated.clientId } : {}),
+        ...(validated.projectId ? { projectId: validated.projectId } : {}),
       },
+    });
+
+    await prisma.financialAuditLog.create({
+      data: {
+        userId: validated.userId,
+        action: "CREATE",
+        transactionId: expense.id,
+        type: "EXPENSE",
+        spaceId: validated.spaceId,
+        diff: JSON.parse(JSON.stringify(expense))
+      }
     });
 
     await invalidateCache(getFinanceCacheKey(validated.spaceId));
@@ -81,13 +107,31 @@ export async function addIncome(data: z.infer<typeof incomeSchema>) {
         description: validated.description,
         date: validated.date,
         source: validated.source,
+        category: validated.category,
+        currency: validated.currency,
+        receiptUrl: validated.receiptUrl,
+        isRecurring: validated.isRecurring,
+        cycle: validated.cycle,
+        recurringDay: validated.recurringDay,
         spaceId: validated.spaceId,
         userId: validated.userId,
         labels: {
           connect: validated.labelIds?.map(id => ({ id })) || [],
         },
         ...(validated.clientId ? { clientId: validated.clientId } : {}),
+        ...(validated.projectId ? { projectId: validated.projectId } : {}),
       },
+    });
+
+    await prisma.financialAuditLog.create({
+      data: {
+        userId: validated.userId,
+        action: "CREATE",
+        transactionId: income.id,
+        type: "INCOME",
+        spaceId: validated.spaceId,
+        diff: JSON.parse(JSON.stringify(income))
+      }
     });
 
     await invalidateCache(getFinanceCacheKey(validated.spaceId));
@@ -127,7 +171,7 @@ export async function setRevenueGoal(data: z.infer<typeof revenueGoalSchema>) {
 export async function getFinancialSummary(spaceId: string) {
   try {
     const cacheKey = getFinanceCacheKey(spaceId);
-    const cached = await getCachedData(cacheKey);
+    const cached = await getCachedData<{ months: any[] }>(cacheKey);
     if (cached) return cached;
 
     // Fetch last 6 months of data
@@ -150,8 +194,22 @@ export async function getFinancialSummary(spaceId: string) {
       }),
     ]);
 
+    // Simple currency converter function (mocked rates for MVP)
+    const getRate = (currency: string) => {
+      if (currency === "PLN") return 0.25; // 1 PLN = 0.25 USD
+      if (currency === "EUR") return 1.08; // 1 EUR = 1.08 USD
+      return 1; // default USD
+    };
+
+    const convertAmount = (amount: number, currency: string) => {
+      return amount * getRate(currency);
+    };
+
     // Aggregate by month
-    const months = [];
+    const months: any[] = [];
+    const pnlData: Record<string, { income: number, expense: number }> = {};
+    const waterfallData: any[] = [];
+
     for (let i = 0; i < 6; i++) {
       const d = new Date(sixMonthsAgo);
       d.setMonth(sixMonthsAgo.getMonth() + i);
@@ -159,33 +217,77 @@ export async function getFinancialSummary(spaceId: string) {
       const monthIndex = d.getMonth() + 1;
       const year = d.getFullYear();
 
-      const monthExpenses = expenses.filter((e: Expense) => 
+      const monthExpensesList = expenses.filter((e) => 
         new Date(e.date).getMonth() + 1 === monthIndex && 
         new Date(e.date).getFullYear() === year
-      ).reduce((acc: number, curr: Expense) => acc + curr.amount, 0);
+      );
+      
+      const monthExpenses = monthExpensesList.reduce((acc, curr) => acc + convertAmount(curr.amount, curr.currency), 0);
 
-      const monthIncomes = incomes.filter((i: Income) => 
+      const monthIncomesList = incomes.filter((i) => 
         new Date(i.date).getMonth() + 1 === monthIndex && 
         new Date(i.date).getFullYear() === year
-      ).reduce((acc: number, curr: Income) => acc + curr.amount, 0);
+      );
 
-      const goal = goals.find((g: RevenueGoal) => g.month === monthIndex && g.year === year)?.amount || 0;
+      const monthIncomes = monthIncomesList.reduce((acc, curr) => acc + convertAmount(curr.amount, curr.currency), 0);
 
+      const goal = goals.find((g) => g.month === monthIndex && g.year === year)?.amount || 0;
+
+      // Calculate MoM for the latest month later
       months.push({
         name: monthName,
         expenses: monthExpenses,
         income: monthIncomes,
         goal,
       });
+
+      // Populate P&L data for the last month (index 5 is the current/latest month in loop)
+      if (i === 5) {
+        monthIncomesList.forEach(inc => {
+          const cat = inc.category || "Revenue";
+          if (!pnlData[cat]) pnlData[cat] = { income: 0, expense: 0 };
+          pnlData[cat].income += convertAmount(inc.amount, inc.currency);
+        });
+        monthExpensesList.forEach(exp => {
+          const cat = exp.category || "Other";
+          if (!pnlData[cat]) pnlData[cat] = { income: 0, expense: 0 };
+          pnlData[cat].expense += convertAmount(exp.amount, exp.currency);
+        });
+
+        // Populate Waterfall Data (simplified: Initial -> +Incomes -> -Expenses -> Final)
+        waterfallData.push({ name: "Starting", amount: 0, isTotal: true }); // Mock starting balance
+        monthIncomesList.forEach(inc => waterfallData.push({ name: inc.category || "Revenue", amount: convertAmount(inc.amount, inc.currency) }));
+        monthExpensesList.forEach(exp => waterfallData.push({ name: exp.category || "Expense", amount: -convertAmount(exp.amount, exp.currency) }));
+        waterfallData.push({ name: "Ending", amount: monthIncomes - monthExpenses, isTotal: true });
+      }
     }
 
-    const summary = { months };
+    const currentMonth = months[months.length - 1];
+    const prevMonth = months[months.length - 2];
+    
+    let incomeMom = 0;
+    let expenseMom = 0;
+    
+    if (prevMonth) {
+      incomeMom = prevMonth.income ? ((currentMonth.income - prevMonth.income) / prevMonth.income) * 100 : 0;
+      expenseMom = prevMonth.expenses ? ((currentMonth.expenses - prevMonth.expenses) / prevMonth.expenses) * 100 : 0;
+    }
+
+    const profitMargin = currentMonth.income ? ((currentMonth.income - currentMonth.expenses) / currentMonth.income) * 100 : 0;
+
+    const summary = { 
+      months, 
+      pnlData, 
+      waterfallData,
+      mom: { income: incomeMom, expenses: expenseMom },
+      profitMargin
+    };
     await setCachedData(cacheKey, summary, 3600); // Cache for 1 hour
 
     return summary;
   } catch (error) {
     console.error("[GET_FINANCE_SUMMARY_ERROR]", error);
-    return { months: [] };
+    return { months: [], pnlData: {}, waterfallData: [], mom: { income: 0, expenses: 0 }, profitMargin: 0 };
   }
 }
 
@@ -235,9 +337,66 @@ export async function estimateFutureExpenses(spaceId: string, monthsCount: numbe
       estimatedPerMonth,
       totalForPeriod: estimatedPerMonth * monthsCount,
       recurringTotal: recurringMonthly * monthsCount,
+      recurringExpenses: expenses.filter((e: Expense) => e.isRecurring)
     };
   } catch (error) {
     console.error("[ESTIMATE_EXPENSES_ERROR]", error);
     return null;
+  }
+}
+
+export async function checkAnomaly(spaceId: string, category: TransactionCategory, amount: number, currency: string) {
+  try {
+    const threeMonthsAgo = new Date();
+    threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);
+
+    const expenses = await prisma.expense.findMany({
+      where: {
+        spaceId,
+        category,
+        date: { gte: threeMonthsAgo }
+      }
+    });
+
+    if (expenses.length === 0) return false;
+
+    // A simple average without complex currency conversion for the warning
+    const avg = expenses.reduce((acc, curr) => acc + curr.amount, 0) / expenses.length;
+    
+    return amount > (avg * 2);
+  } catch (error) {
+    console.error("[CHECK_ANOMALY_ERROR]", error);
+    return false;
+  }
+}
+
+export async function getAuditLogs(spaceId: string) {
+  try {
+    return await prisma.financialAuditLog.findMany({
+      where: { spaceId },
+      orderBy: { timestamp: 'desc' },
+      take: 10,
+      include: {
+        user: { select: { name: true, email: true, avatarUrl: true } }
+      }
+    });
+  } catch (error) {
+    console.error("[GET_AUDIT_LOGS_ERROR]", error);
+    return [];
+  }
+}
+export async function getFinanceEntities(spaceId: string) {
+  try {
+    const [clients, projects] = await Promise.all([
+      prisma.client.findMany({ where: { spaceId }, select: { id: true, name: true } }),
+      prisma.project.findMany({ where: { spaceId }, select: { id: true, projectName: true } })
+    ]);
+    return {
+      clients: clients.map(c => ({ id: c.id, name: c.name, type: 'CLIENT' })),
+      projects: projects.map(p => ({ id: p.id, name: p.projectName, type: 'PROJECT' }))
+    };
+  } catch (error) {
+    console.error("[GET_FINANCE_ENTITIES_ERROR]", error);
+    return { clients: [], projects: [] };
   }
 }

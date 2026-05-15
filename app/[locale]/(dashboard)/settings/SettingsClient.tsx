@@ -1,10 +1,12 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { Upload, Download, Trash2, LogOut, Mail, ShieldCheck, Save, Image as ImageIcon } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Upload, Download, Trash2, LogOut, Mail, ShieldCheck, Save, Image as ImageIcon, Link, TableProperties, HardDrive, FileText, CheckCircle2 } from "lucide-react";
 import { toast } from "sonner";
 import { uploadAvatar } from "@/actions/uploadAvatar";
+import { ConnectorModal } from "@/app/components/settings/ConnectorModal";
+import { ConnectorType, getConnectedServices } from "@/actions/connectors";
 import { updateProfile } from "@/actions/updateProfile";
 import { exportUserData } from "@/actions/exportUserData";
 import { deleteAccountAction } from "@/actions/updateProfile";
@@ -29,6 +31,7 @@ export default function SettingsClient({
   initialUser: UserData;
 }) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { refreshUser } = useUser();
   const [user, setUser] = useState<UserData>(initialUser);
   const [isSaving, setIsSaving] = useState(false);
@@ -37,10 +40,48 @@ export default function SettingsClient({
   const [displayName, setDisplayName] = useState(initialUser.name || "");
   const [avatarUrl, setAvatarUrl] = useState(initialUser.avatarUrl || "");
 
+  // Connector state
+  const [isConnectorModalOpen, setIsConnectorModalOpen] = useState(false);
+  const [activeConnector, setActiveConnector] = useState<{ name: string; type: ConnectorType } | null>(null);
+  const [connectedServices, setConnectedServices] = useState<Record<ConnectorType, boolean>>({
+    google_sheets: false,
+    google_drive: false,
+    google_docs: false,
+  });
+
+  const openConnectorModal = (name: string, type: ConnectorType) => {
+    setActiveConnector({ name, type });
+    setIsConnectorModalOpen(true);
+  };
+
   useEffect(() => {
     setDisplayName(user.name || "");
     setAvatarUrl(user.avatarUrl || "");
   }, [user]);
+
+  // Handle OAuth redirects and fetch initial state
+  useEffect(() => {
+    const fetchServices = async () => {
+      const res = await getConnectedServices();
+      if (res.success && res.data) {
+        setConnectedServices(res.data);
+      }
+    };
+    fetchServices();
+
+    const error = searchParams.get("error");
+    const success = searchParams.get("success");
+
+    if (error) {
+      toast.error(`Integration failed: ${error.replace(/_/g, " ")}`);
+      // Clean up URL
+      router.replace(`/${locale}/settings`);
+    } else if (success) {
+      toast.success("Integration connected successfully!");
+      // Clean up URL
+      router.replace(`/${locale}/settings`);
+    }
+  }, [searchParams, locale, router]);
 
   const handleDisplayNameChange = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -246,6 +287,101 @@ export default function SettingsClient({
         </div>
       </section>
 
+      {/* ── Connectors ── */}
+      <section className="border-t border-[#D4D4D8]">
+        <div className="py-10">
+          <p className="text-[10px] font-bold text-[#71717A] uppercase tracking-[0.4em] mb-6">
+            Integrations & Connectors
+          </p>
+          
+          <div className="space-y-4">
+            {/* Google Sheets */}
+            <div className="flex items-center justify-between p-4 border border-[#E5E5E5] bg-white hover:border-[#A1A1AA] transition-colors">
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 bg-[#F4F4F5] flex items-center justify-center shrink-0">
+                  <TableProperties className="w-5 h-5 text-[#0A0A0A]" />
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-[#0A0A0A] flex items-center gap-2">
+                    Google Sheets
+                    {connectedServices.google_sheets && <CheckCircle2 className="w-3.5 h-3.5 text-[#16A34A]" />}
+                  </p>
+                  <p className="text-xs font-light text-[#71717A] mt-0.5">
+                    Sync financial data and reports directly to sheets
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={() => openConnectorModal("Google Sheets", "google_sheets")}
+                className={`px-4 py-2 text-[10px] font-bold uppercase tracking-widest transition-colors ${
+                  connectedServices.google_sheets
+                    ? "bg-[#F4F4F5] text-[#0A0A0A] hover:bg-[#E5E5E5]"
+                    : "bg-[#0A0A0A] text-white hover:bg-[#333333]"
+                }`}
+              >
+                {connectedServices.google_sheets ? "Manage" : "Connect"}
+              </button>
+            </div>
+
+            {/* Google Drive */}
+            <div className="flex items-center justify-between p-4 border border-[#E5E5E5] bg-white hover:border-[#A1A1AA] transition-colors">
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 bg-[#F4F4F5] flex items-center justify-center shrink-0">
+                  <HardDrive className="w-5 h-5 text-[#0A0A0A]" />
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-[#0A0A0A] flex items-center gap-2">
+                    Google Drive
+                    {connectedServices.google_drive && <CheckCircle2 className="w-3.5 h-3.5 text-[#16A34A]" />}
+                  </p>
+                  <p className="text-xs font-light text-[#71717A] mt-0.5">
+                    Store and organize project receipts and attachments
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={() => openConnectorModal("Google Drive", "google_drive")}
+                className={`px-4 py-2 text-[10px] font-bold uppercase tracking-widest transition-colors ${
+                  connectedServices.google_drive
+                    ? "bg-[#F4F4F5] text-[#0A0A0A] hover:bg-[#E5E5E5]"
+                    : "bg-[#0A0A0A] text-white hover:bg-[#333333]"
+                }`}
+              >
+                {connectedServices.google_drive ? "Manage" : "Connect"}
+              </button>
+            </div>
+
+            {/* Google Docs */}
+            <div className="flex items-center justify-between p-4 border border-[#E5E5E5] bg-white hover:border-[#A1A1AA] transition-colors">
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 bg-[#F4F4F5] flex items-center justify-center shrink-0">
+                  <FileText className="w-5 h-5 text-[#0A0A0A]" />
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-[#0A0A0A] flex items-center gap-2">
+                    Google Docs
+                    {connectedServices.google_docs && <CheckCircle2 className="w-3.5 h-3.5 text-[#16A34A]" />}
+                  </p>
+                  <p className="text-xs font-light text-[#71717A] mt-0.5">
+                    Generate and export proposals and invoices
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={() => openConnectorModal("Google Docs", "google_docs")}
+                className={`px-4 py-2 text-[10px] font-bold uppercase tracking-widest transition-colors ${
+                  connectedServices.google_docs
+                    ? "bg-[#F4F4F5] text-[#0A0A0A] hover:bg-[#E5E5E5]"
+                    : "bg-[#0A0A0A] text-white hover:bg-[#333333]"
+                }`}
+              >
+                {connectedServices.google_docs ? "Manage" : "Connect"}
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* ── Data Management ── */}
       <section className="border-t border-[#D4D4D8]">
         <div className="py-10">
@@ -320,6 +456,19 @@ export default function SettingsClient({
         </div>
       </section>
 
+      {/* Modals */}
+      {activeConnector && (
+        <ConnectorModal
+          isOpen={isConnectorModalOpen}
+          onClose={() => setIsConnectorModalOpen(false)}
+          connectorName={activeConnector.name}
+          connectorType={activeConnector.type}
+          isConnected={connectedServices[activeConnector.type]}
+          onSuccess={(isConnected) => 
+            setConnectedServices(prev => ({ ...prev, [activeConnector.type]: isConnected }))
+          }
+        />
+      )}
     </div>
   );
 }

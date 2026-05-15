@@ -224,6 +224,7 @@ export type UserWhereInput = {
   incomes?: Prisma.IncomeListRelationFilter
   revenueGoals?: Prisma.RevenueGoalListRelationFilter
   financialAuditLogs?: Prisma.FinancialAuditLogListRelationFilter
+  integrations?: Prisma.IntegrationListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -246,6 +247,7 @@ export type UserOrderByWithRelationInput = {
   incomes?: Prisma.IncomeOrderByRelationAggregateInput
   revenueGoals?: Prisma.RevenueGoalOrderByRelationAggregateInput
   financialAuditLogs?: Prisma.FinancialAuditLogOrderByRelationAggregateInput
+  integrations?: Prisma.IntegrationOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -271,6 +273,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   incomes?: Prisma.IncomeListRelationFilter
   revenueGoals?: Prisma.RevenueGoalListRelationFilter
   financialAuditLogs?: Prisma.FinancialAuditLogListRelationFilter
+  integrations?: Prisma.IntegrationListRelationFilter
 }, "id" | "email" | "username">
 
 export type UserOrderByWithAggregationInput = {
@@ -323,6 +326,7 @@ export type UserCreateInput = {
   incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutUserInput
   financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -345,6 +349,7 @@ export type UserUncheckedCreateInput = {
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutUserInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -367,6 +372,7 @@ export type UserUpdateInput = {
   incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutUserNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -389,6 +395,7 @@ export type UserUncheckedUpdateInput = {
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutUserNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -654,6 +661,20 @@ export type UserUpdateOneRequiredWithoutFinancialAuditLogsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutFinancialAuditLogsInput, Prisma.UserUpdateWithoutFinancialAuditLogsInput>, Prisma.UserUncheckedUpdateWithoutFinancialAuditLogsInput>
 }
 
+export type UserCreateNestedOneWithoutIntegrationsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutIntegrationsInput, Prisma.UserUncheckedCreateWithoutIntegrationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutIntegrationsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutIntegrationsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutIntegrationsInput, Prisma.UserUncheckedCreateWithoutIntegrationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutIntegrationsInput
+  upsert?: Prisma.UserUpsertWithoutIntegrationsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutIntegrationsInput, Prisma.UserUpdateWithoutIntegrationsInput>, Prisma.UserUncheckedUpdateWithoutIntegrationsInput>
+}
+
 export type UserCreateWithoutResetTokensInput = {
   id?: string
   email: string
@@ -673,6 +694,7 @@ export type UserCreateWithoutResetTokensInput = {
   incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutUserInput
   financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutResetTokensInput = {
@@ -694,6 +716,7 @@ export type UserUncheckedCreateWithoutResetTokensInput = {
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutUserInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutResetTokensInput = {
@@ -731,6 +754,7 @@ export type UserUpdateWithoutResetTokensInput = {
   incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutUserNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutResetTokensInput = {
@@ -752,6 +776,7 @@ export type UserUncheckedUpdateWithoutResetTokensInput = {
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutUserNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutProjectsInput = {
@@ -773,6 +798,7 @@ export type UserCreateWithoutProjectsInput = {
   incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutUserInput
   financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutProjectsInput = {
@@ -794,6 +820,7 @@ export type UserUncheckedCreateWithoutProjectsInput = {
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutUserInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutProjectsInput = {
@@ -831,6 +858,7 @@ export type UserUpdateWithoutProjectsInput = {
   incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutUserNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProjectsInput = {
@@ -852,6 +880,7 @@ export type UserUncheckedUpdateWithoutProjectsInput = {
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutUserNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutLeadsInput = {
@@ -873,6 +902,7 @@ export type UserCreateWithoutLeadsInput = {
   incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutUserInput
   financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutLeadsInput = {
@@ -894,6 +924,7 @@ export type UserUncheckedCreateWithoutLeadsInput = {
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutUserInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutLeadsInput = {
@@ -931,6 +962,7 @@ export type UserUpdateWithoutLeadsInput = {
   incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutUserNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutLeadsInput = {
@@ -952,6 +984,7 @@ export type UserUncheckedUpdateWithoutLeadsInput = {
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutUserNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutOwnedSpacesInput = {
@@ -973,6 +1006,7 @@ export type UserCreateWithoutOwnedSpacesInput = {
   incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutUserInput
   financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutOwnedSpacesInput = {
@@ -994,6 +1028,7 @@ export type UserUncheckedCreateWithoutOwnedSpacesInput = {
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutUserInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutOwnedSpacesInput = {
@@ -1020,6 +1055,7 @@ export type UserCreateWithoutMemberSpacesInput = {
   incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutUserInput
   financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutMemberSpacesInput = {
@@ -1041,6 +1077,7 @@ export type UserUncheckedCreateWithoutMemberSpacesInput = {
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutUserInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutMemberSpacesInput = {
@@ -1078,6 +1115,7 @@ export type UserUpdateWithoutOwnedSpacesInput = {
   incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutUserNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOwnedSpacesInput = {
@@ -1099,6 +1137,7 @@ export type UserUncheckedUpdateWithoutOwnedSpacesInput = {
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutUserNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpsertWithWhereUniqueWithoutMemberSpacesInput = {
@@ -1151,6 +1190,7 @@ export type UserCreateWithoutExpensesInput = {
   incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutUserInput
   financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutExpensesInput = {
@@ -1172,6 +1212,7 @@ export type UserUncheckedCreateWithoutExpensesInput = {
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutUserInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutExpensesInput = {
@@ -1209,6 +1250,7 @@ export type UserUpdateWithoutExpensesInput = {
   incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutUserNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutExpensesInput = {
@@ -1230,6 +1272,7 @@ export type UserUncheckedUpdateWithoutExpensesInput = {
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutUserNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutIncomesInput = {
@@ -1251,6 +1294,7 @@ export type UserCreateWithoutIncomesInput = {
   expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutUserInput
   financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutIncomesInput = {
@@ -1272,6 +1316,7 @@ export type UserUncheckedCreateWithoutIncomesInput = {
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutUserInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutIncomesInput = {
@@ -1309,6 +1354,7 @@ export type UserUpdateWithoutIncomesInput = {
   expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutUserNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutIncomesInput = {
@@ -1330,6 +1376,7 @@ export type UserUncheckedUpdateWithoutIncomesInput = {
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutUserNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutRevenueGoalsInput = {
@@ -1351,6 +1398,7 @@ export type UserCreateWithoutRevenueGoalsInput = {
   expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
   financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutRevenueGoalsInput = {
@@ -1372,6 +1420,7 @@ export type UserUncheckedCreateWithoutRevenueGoalsInput = {
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutRevenueGoalsInput = {
@@ -1409,6 +1458,7 @@ export type UserUpdateWithoutRevenueGoalsInput = {
   expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRevenueGoalsInput = {
@@ -1430,6 +1480,7 @@ export type UserUncheckedUpdateWithoutRevenueGoalsInput = {
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutClientsInput = {
@@ -1451,6 +1502,7 @@ export type UserCreateWithoutClientsInput = {
   incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutUserInput
   financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutClientsInput = {
@@ -1472,6 +1524,7 @@ export type UserUncheckedCreateWithoutClientsInput = {
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutUserInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutClientsInput = {
@@ -1509,6 +1562,7 @@ export type UserUpdateWithoutClientsInput = {
   incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutUserNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutClientsInput = {
@@ -1530,6 +1584,7 @@ export type UserUncheckedUpdateWithoutClientsInput = {
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutUserNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutFinancialAuditLogsInput = {
@@ -1551,6 +1606,7 @@ export type UserCreateWithoutFinancialAuditLogsInput = {
   expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutFinancialAuditLogsInput = {
@@ -1572,6 +1628,7 @@ export type UserUncheckedCreateWithoutFinancialAuditLogsInput = {
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutFinancialAuditLogsInput = {
@@ -1609,6 +1666,7 @@ export type UserUpdateWithoutFinancialAuditLogsInput = {
   expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFinancialAuditLogsInput = {
@@ -1630,6 +1688,111 @@ export type UserUncheckedUpdateWithoutFinancialAuditLogsInput = {
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutIntegrationsInput = {
+  id?: string
+  email: string
+  username: string
+  passwordHash: string
+  name?: string | null
+  avatarUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  lastActiveSpaceId?: string | null
+  resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  leads?: Prisma.LeadCreateNestedManyWithoutUserInput
+  clients?: Prisma.ClientCreateNestedManyWithoutUserInput
+  ownedSpaces?: Prisma.SpaceCreateNestedManyWithoutOwnerInput
+  memberSpaces?: Prisma.SpaceCreateNestedManyWithoutMembersInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
+  incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
+  revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutUserInput
+  financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutIntegrationsInput = {
+  id?: string
+  email: string
+  username: string
+  passwordHash: string
+  name?: string | null
+  avatarUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  lastActiveSpaceId?: string | null
+  resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
+  clients?: Prisma.ClientUncheckedCreateNestedManyWithoutUserInput
+  ownedSpaces?: Prisma.SpaceUncheckedCreateNestedManyWithoutOwnerInput
+  memberSpaces?: Prisma.SpaceUncheckedCreateNestedManyWithoutMembersInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
+  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
+  revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutUserInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutIntegrationsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutIntegrationsInput, Prisma.UserUncheckedCreateWithoutIntegrationsInput>
+}
+
+export type UserUpsertWithoutIntegrationsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutIntegrationsInput, Prisma.UserUncheckedUpdateWithoutIntegrationsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutIntegrationsInput, Prisma.UserUncheckedCreateWithoutIntegrationsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutIntegrationsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutIntegrationsInput, Prisma.UserUncheckedUpdateWithoutIntegrationsInput>
+}
+
+export type UserUpdateWithoutIntegrationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
+  clients?: Prisma.ClientUpdateManyWithoutUserNestedInput
+  ownedSpaces?: Prisma.SpaceUpdateManyWithoutOwnerNestedInput
+  memberSpaces?: Prisma.SpaceUpdateManyWithoutMembersNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
+  incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
+  revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutUserNestedInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutIntegrationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
+  clients?: Prisma.ClientUncheckedUpdateManyWithoutUserNestedInput
+  ownedSpaces?: Prisma.SpaceUncheckedUpdateManyWithoutOwnerNestedInput
+  memberSpaces?: Prisma.SpaceUncheckedUpdateManyWithoutMembersNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
+  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
+  revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutUserNestedInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUpdateWithoutMemberSpacesInput = {
@@ -1651,6 +1814,7 @@ export type UserUpdateWithoutMemberSpacesInput = {
   incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutUserNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutMemberSpacesInput = {
@@ -1672,6 +1836,7 @@ export type UserUncheckedUpdateWithoutMemberSpacesInput = {
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutUserNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateManyWithoutMemberSpacesInput = {
@@ -1702,6 +1867,7 @@ export type UserCountOutputType = {
   incomes: number
   revenueGoals: number
   financialAuditLogs: number
+  integrations: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1715,6 +1881,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   incomes?: boolean | UserCountOutputTypeCountIncomesArgs
   revenueGoals?: boolean | UserCountOutputTypeCountRevenueGoalsArgs
   financialAuditLogs?: boolean | UserCountOutputTypeCountFinancialAuditLogsArgs
+  integrations?: boolean | UserCountOutputTypeCountIntegrationsArgs
 }
 
 /**
@@ -1797,6 +1964,13 @@ export type UserCountOutputTypeCountFinancialAuditLogsArgs<ExtArgs extends runti
   where?: Prisma.FinancialAuditLogWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountIntegrationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.IntegrationWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1818,6 +1992,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   incomes?: boolean | Prisma.User$incomesArgs<ExtArgs>
   revenueGoals?: boolean | Prisma.User$revenueGoalsArgs<ExtArgs>
   financialAuditLogs?: boolean | Prisma.User$financialAuditLogsArgs<ExtArgs>
+  integrations?: boolean | Prisma.User$integrationsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1869,6 +2044,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   incomes?: boolean | Prisma.User$incomesArgs<ExtArgs>
   revenueGoals?: boolean | Prisma.User$revenueGoalsArgs<ExtArgs>
   financialAuditLogs?: boolean | Prisma.User$financialAuditLogsArgs<ExtArgs>
+  integrations?: boolean | Prisma.User$integrationsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1887,6 +2063,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     incomes: Prisma.$IncomePayload<ExtArgs>[]
     revenueGoals: Prisma.$RevenueGoalPayload<ExtArgs>[]
     financialAuditLogs: Prisma.$FinancialAuditLogPayload<ExtArgs>[]
+    integrations: Prisma.$IntegrationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2302,6 +2479,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   incomes<T extends Prisma.User$incomesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$incomesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IncomePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   revenueGoals<T extends Prisma.User$revenueGoalsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$revenueGoalsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RevenueGoalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   financialAuditLogs<T extends Prisma.User$financialAuditLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$financialAuditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FinancialAuditLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  integrations<T extends Prisma.User$integrationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$integrationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IntegrationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2970,6 +3148,30 @@ export type User$financialAuditLogsArgs<ExtArgs extends runtime.Types.Extensions
   take?: number
   skip?: number
   distinct?: Prisma.FinancialAuditLogScalarFieldEnum | Prisma.FinancialAuditLogScalarFieldEnum[]
+}
+
+/**
+ * User.integrations
+ */
+export type User$integrationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Integration
+   */
+  select?: Prisma.IntegrationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Integration
+   */
+  omit?: Prisma.IntegrationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.IntegrationInclude<ExtArgs> | null
+  where?: Prisma.IntegrationWhereInput
+  orderBy?: Prisma.IntegrationOrderByWithRelationInput | Prisma.IntegrationOrderByWithRelationInput[]
+  cursor?: Prisma.IntegrationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.IntegrationScalarFieldEnum | Prisma.IntegrationScalarFieldEnum[]
 }
 
 /**

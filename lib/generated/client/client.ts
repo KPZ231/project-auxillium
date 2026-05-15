@@ -106,3 +106,8 @@ export type Client = Prisma.ClientModel
  * 
  */
 export type FinancialAuditLog = Prisma.FinancialAuditLogModel
+/**
+ * Model Integration
+ * 
+ */
+export type Integration = Prisma.IntegrationModel

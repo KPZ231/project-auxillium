@@ -63,7 +63,8 @@ export const ModelName = {
   RevenueGoal: 'RevenueGoal',
   FinancialLabel: 'FinancialLabel',
   Client: 'Client',
-  FinancialAuditLog: 'FinancialAuditLog'
+  FinancialAuditLog: 'FinancialAuditLog',
+  Integration: 'Integration'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -311,6 +312,20 @@ export const FinancialAuditLogScalarFieldEnum = {
 } as const
 
 export type FinancialAuditLogScalarFieldEnum = (typeof FinancialAuditLogScalarFieldEnum)[keyof typeof FinancialAuditLogScalarFieldEnum]
+
+
+export const IntegrationScalarFieldEnum = {
+  id: 'id',
+  provider: 'provider',
+  accessToken: 'accessToken',
+  refreshToken: 'refreshToken',
+  expiresAt: 'expiresAt',
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type IntegrationScalarFieldEnum = (typeof IntegrationScalarFieldEnum)[keyof typeof IntegrationScalarFieldEnum]
 
 
 export const SortOrder = {

@@ -2,14 +2,16 @@
 
 import React from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Cell } from "recharts";
+import { useTranslation } from "@/app/context/TranslationContext";
 
 interface WaterfallChartProps {
   data: { name: string; amount: number; isTotal?: boolean }[];
 }
 
 export function WaterfallChart({ data }: WaterfallChartProps) {
+  const { t } = useTranslation();
+
   // Convert data for the waterfall logic
-  // We need to keep a running total to know where the bar starts
   let runningTotal = 0;
   const processedData = data.map((item) => {
     if (item.isTotal) {
@@ -37,24 +39,52 @@ export function WaterfallChart({ data }: WaterfallChartProps) {
   });
 
   return (
-    <div className="bg-white border border-[#E5E5E5] p-6 w-full h-[400px]">
-      <h3 className="text-[12px] font-black uppercase tracking-[0.2em] text-[#0A0A0A] mb-6">Cashflow Waterfall</h3>
-      <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={processedData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
-          <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#E5E5E5" />
-          <XAxis dataKey="name" tick={{ fontSize: 12, fill: "#71717A" }} axisLine={false} tickLine={false} />
-          <YAxis tickFormatter={(val) => `$${val}`} tick={{ fontSize: 12, fill: "#71717A" }} axisLine={false} tickLine={false} />
+    <div className="bg-white border border-[#0A0A0A] p-8 w-full h-[500px]">
+      <div className="mb-8">
+        <h3 className="text-[14px] font-black uppercase tracking-[0.25em] text-[#0A0A0A]">
+          {t("dashboard:finance.cash_flow_analysis")}
+        </h3>
+        <p className="text-[10px] text-[#71717A] uppercase tracking-widest mt-2">
+          {t("dashboard:finance.cash_flow_analysis_desc")}
+        </p>
+      </div>
+
+      <ResponsiveContainer width="100%" height="80%">
+        <BarChart data={processedData} margin={{ top: 20, right: 0, left: -20, bottom: 0 }}>
+          <CartesianGrid strokeDasharray="0" vertical={false} stroke="#F4F4F5" />
+          <XAxis 
+            dataKey="name" 
+            tick={{ fontSize: 10, fill: "#71717A", fontWeight: 700 }} 
+            axisLine={false} 
+            tickLine={false} 
+            dy={15}
+          />
+          <YAxis 
+            tickFormatter={(val) => `$${val}`} 
+            tick={{ fontSize: 10, fill: "#71717A", fontWeight: 700 }} 
+            axisLine={false} 
+            tickLine={false} 
+          />
           <Tooltip 
             formatter={(val: any, name: any, props: any) => [`$${props.payload.amount}`, "Amount"]}
-            cursor={{ fill: "transparent" }}
-            contentStyle={{ borderRadius: 0, border: "1px solid #E5E5E5", boxShadow: "none" }}
+            cursor={{ fill: "#FAFAFA" }}
+            contentStyle={{ 
+              borderRadius: "0px", 
+              border: "2px solid #0A0A0A", 
+              fontSize: "11px",
+              fontWeight: 900,
+              textTransform: "uppercase",
+              padding: "12px",
+              backgroundColor: "#FFF"
+            }}
           />
           <Bar dataKey="end" stackId="a" fill="transparent" />
-          <Bar dataKey="start" stackId="a">
+          <Bar dataKey="start" stackId="a" barSize={40}>
             {processedData.map((entry, index) => {
-              let fill = "#0A0A0A"; // Total or positive
-              if (!entry.isTotal && entry.amount < 0) fill = "#DC2626"; // Red for negative
-              if (!entry.isTotal && entry.amount > 0) fill = "#16A34A"; // Green for positive
+              let fill = "#0A0A0A"; 
+              if (!entry.isTotal && entry.amount < 0) fill = "#D4D4D8"; 
+              if (!entry.isTotal && entry.amount > 0) fill = "#0A0A0A"; 
+              if (entry.isTotal) fill = "#0A0A0A";
               return <Cell key={`cell-${index}`} fill={fill} />;
             })}
           </Bar>

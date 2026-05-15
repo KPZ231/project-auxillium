@@ -29,6 +29,7 @@
     "argon2": "^0.44.0",
     "cookies-next": "^6.1.1",
     "date-fns": "^4.1.0",
+    "googleapis": "^171.4.0",
     "gsap": "^3.15.0",
     "i18next": "^26.0.10",
     "i18next-browser-languagedetector": "^8.2.1",

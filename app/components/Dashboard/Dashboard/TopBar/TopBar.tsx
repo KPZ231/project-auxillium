@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import Image from "next/image";
 import { Bell, Settings, User, LogOut } from "lucide-react";
 import { Breadcrumbs } from "@/app/components/UI/Breadcrumbs";
 import ProfileModal from "../ProfileModal/ProfileModal";
@@ -58,11 +59,14 @@ export default function TopBar({ initialUser }: TopBarProps) {
               title={displayName ?? "Profile"}
             >
               {avatarUrl ? (
-                <img
-                  src={avatarUrl}
-                  alt={displayName ?? "User avatar"}
-                  className="w-full h-full object-cover"
-                />
+                <div className="relative w-full h-full">
+                  <Image
+                    src={avatarUrl}
+                    alt={displayName ?? "User avatar"}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
               ) : (
                 <User className="w-4 h-4 text-white shrink-0" />
               )}

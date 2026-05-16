@@ -7,10 +7,16 @@ import { assignEmployeeToProject, unassignEmployeeFromProject, assignEmployeeToC
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
+interface Member {
+  id: string;
+  name: string;
+  role?: string | null;
+}
+
 interface AssignmentManagerProps {
   entityId: string;
   entityType: "project" | "task" | "client";
-  initialMembers: any[];
+  initialMembers: Member[];
   title?: string;
 }
 

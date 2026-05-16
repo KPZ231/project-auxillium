@@ -1,0 +1,136 @@
+"use client";
+
+import React from 'react';
+import Image from 'next/image';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
+import { BrandingSettings } from '@/types/templates';
+import { getVariableExample } from '@/lib/templates/variables';
+
+interface PreviewPanelProps {
+  content: string;
+  branding: BrandingSettings;
+  contextData?: Record<string, unknown>; // Optional context for variable replacement
+}
+
+export const PreviewPanel: React.FC<PreviewPanelProps> = ({ content, branding, contextData }) => {
+  // Replace variables with examples for preview, or with real contextData if provided
+  const processedContent = content.replace(/\{\{(.*?)\}\}/g, (match, key) => {
+    const trimmedKey = key.trim();
+    if (contextData) {
+      // Resolve nested keys e.g. "deal.title"
+      const keys = trimmedKey.split('.');
+      let value: unknown = contextData;
+      for (const k of keys) {
+        if (value && typeof value === 'object') {
+          value = (value as Record<string, unknown>)[k];
+        } else {
+          value = undefined;
+        }
+      }
+      return value !== undefined ? String(value) : match;
+    }
+    return getVariableExample(trimmedKey);
+  });
+
+  const pageStyle: React.CSSProperties = {
+    backgroundColor: branding.backgroundColor,
+    color: branding.textColor,
+    fontFamily: branding.fontFamily,
+    fontSize: `${branding.fontSize}px`,
+    lineHeight: branding.lineHeight,
+    paddingTop: `${branding.margins.top}mm`,
+    paddingBottom: `${branding.margins.bottom}mm`,
+    paddingLeft: `${branding.margins.left}mm`,
+    paddingRight: `${branding.margins.right}mm`,
+    minHeight: '297mm', // A4 Height
+    width: '210mm', // A4 Width
+    boxShadow: '0 0 0 1px #E5E5E5',
+    margin: '0 auto',
+    transition: 'all 0.2s ease-in-out',
+    position: 'relative',
+    display: 'flex',
+    flexDirection: 'column'
+  };
+
+  return (
+    <div className="flex-1 bg-[#F4F4F5] p-8 overflow-y-auto flex justify-center scrollbar-hide">
+      <div style={pageStyle} className="bg-white document-preview">
+        {/* Header */}
+        {branding.showHeader && (
+          <header 
+            style={{ 
+              marginBottom: '20px', 
+              textAlign: branding.headerAlignment,
+              minHeight: `${branding.headerHeight}px`,
+              borderBottom: `1px solid ${branding.primaryColor}20`
+            }}
+          >
+            {branding.logo && (
+              <Image
+                src={branding.logo}
+                alt="Logo"
+                width={120}
+                height={60}
+                style={{ maxHeight: '60px', marginBottom: '10px', display: 'inline-block', width: 'auto' }}
+              />
+            )}
+            {branding.headerText && (
+              <div className="text-xs text-[#71717A] whitespace-pre-wrap">
+                {branding.headerText}
+              </div>
+            )}
+          </header>
+        )}
+
+        {/* Content */}
+        <div className="flex-1">
+          <ReactMarkdown 
+            remarkPlugins={[remarkGfm]}
+            components={{
+              h1: ({...props}) => <h1 style={{ color: branding.primaryColor }} className="text-3xl font-bold mb-6 mt-8" {...props} />,
+              h2: ({...props}) => <h2 style={{ color: branding.primaryColor }} className="text-xl font-bold mb-4 mt-6 border-b border-[#F4F4F5] pb-2" {...props} />,
+              h3: ({...props}) => <h3 className="text-lg font-bold mb-3 mt-4" {...props} />,
+              p: ({...props}) => <p className="mb-4 text-justify" {...props} />,
+              ul: ({...props}) => <ul className="list-disc pl-5 mb-4 space-y-1" {...props} />,
+              ol: ({...props}) => <ol className="list-decimal pl-5 mb-4 space-y-1" {...props} />,
+              table: ({...props}) => (
+                <div className="overflow-x-auto mb-6">
+                  <table className="w-full border-collapse border border-[#E5E5E5]" {...props} />
+                </div>
+              ),
+              th: ({...props}) => <th className="border border-[#E5E5E5] bg-[#FAFAFA] p-2 text-left font-bold text-xs" {...props} />,
+              td: ({...props}) => <td className="border border-[#E5E5E5] p-2 text-sm" {...props} />,
+              hr: ({...props}) => <hr style={{ borderColor: branding.primaryColor }} className="my-8 opacity-20" {...props} />,
+              blockquote: ({...props}) => <blockquote className="border-l-4 border-[#0A0A0A] pl-4 italic mb-4" {...props} />,
+            }}
+          >
+            {processedContent}
+          </ReactMarkdown>
+        </div>
+
+        {/* Footer */}
+        {branding.showFooter && (
+          <footer 
+            style={{ 
+              marginTop: '40px', 
+              textAlign: branding.footerAlignment,
+              paddingTop: '10px',
+              borderTop: `1px solid ${branding.primaryColor}20`
+            }}
+            className="text-[10px] text-[#A1A1AA] uppercase tracking-wider"
+          >
+            {branding.footerText || 'Generated by Auxilium'}
+            <div className="mt-1">Strona 1 z 1</div>
+          </footer>
+        )}
+      </div>
+
+      <style jsx global>{`
+        .document-preview table thead th {
+           background-color: ${branding.primaryColor}05;
+        }
+      `}</style>
+    </div>
+  );
+};

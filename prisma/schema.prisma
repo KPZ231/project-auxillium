@@ -35,6 +35,8 @@ model User {
   revenueGoals  RevenueGoal[]
   financialAuditLogs FinancialAuditLog[]
   integrations  Integration[]
+  documentTemplates DocumentTemplate[]
+  generatedDocuments GeneratedDocument[]
 }
 
 model PasswordResetToken {
@@ -96,6 +98,7 @@ model Project {
   assignedEmployees  Employee[]    @relation("AssignedProjects")
   incomes            Income[]
   expenses           Expense[]
+  generatedDocuments GeneratedDocument[]
 
   createdAt          DateTime      @default(now())
   updatedAt          DateTime      @updatedAt
@@ -153,6 +156,8 @@ model Space {
   revenueGoals     RevenueGoal[]
   financialLabels  FinancialLabel[]
   financialAuditLogs FinancialAuditLog[]
+  documentTemplates  DocumentTemplate[]
+  generatedDocuments GeneratedDocument[]
 
   createdAt        DateTime   @default(now())
   updatedAt        DateTime   @updatedAt
@@ -340,6 +345,7 @@ model Client {
   incomes          Income[] 
   expenses         Expense[]
   assignedEmployees Employee[] @relation("AssignedClients")
+  generatedDocuments GeneratedDocument[]
   
   userId           String
   user             User        @relation(fields: [userId], references: [id], onDelete: Cascade)
@@ -386,4 +392,59 @@ model Integration {
 
   @@unique([userId, provider])
   @@index([userId])
+}
+
+model DocumentTemplate {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  
+  spaceId     String?
+  space       Space?    @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+
+  name        String
+  type        String   // 'offer' | 'contract' | 'invoice' | 'receipt' | 'nda' | 'brief' | 'reminder' | 'custom'
+  content     String   @db.Text // Markdown content z tagami {{variable}}
+  blocks      Json?    // JSON struktura bloków drag&drop
+  
+  branding    Json     // { logo, headerText, footerText, primaryColor, font, margins, ... }
+  
+  usageCount  Int      @default(0)
+  isDefault   Boolean  @default(false)
+  
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  
+  documents   GeneratedDocument[]
+
+  @@index([userId])
+  @@index([spaceId])
+}
+
+model GeneratedDocument {
+  id          String   @id @default(cuid())
+  templateId  String
+  template    DocumentTemplate @relation(fields: [templateId], references: [id], onDelete: Cascade)
+  
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  spaceId     String?
+  space       Space?    @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+
+  clientId    String?
+  client      Client?  @relation(fields: [clientId], references: [id], onDelete: SetNull)
+  
+  dealId      String?
+  project     Project? @relation(fields: [dealId], references: [id], onDelete: SetNull)
+  
+  name        String?
+  filePath    String   // Ścieżka do wygenerowanego PDF
+  contextData Json     // Snapshot danych w momencie generowania
+  
+  createdAt   DateTime @default(now())
+
+  @@index([templateId])
+  @@index([userId])
+  @@index([spaceId])
 }

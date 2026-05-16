@@ -193,7 +193,7 @@ export default function LeadsFilter({
                   ) : (
                     <div className="p-12 text-center">
                       <p className="text-sm text-gray-500">
-                        Searching for <span className="font-bold text-black">"{searchQuery}"</span>...
+                        Searching for <span className="font-bold text-black">&quot;{searchQuery}&quot;</span>...
                       </p>
                       <p className="text-[10px] text-gray-400 mt-2 uppercase tracking-widest">
                         Press Enter to see all results

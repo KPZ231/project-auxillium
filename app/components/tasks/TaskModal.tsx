@@ -2,8 +2,12 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
-import { X, Plus, Trash2, Calendar } from "lucide-react";
+import { X, Plus, Trash2 } from "lucide-react";
 import { MemberSelector } from "../assignments/member-selector";
+import { getConnectedServices, ConnectorType } from "@/actions/connectors";
+import { syncTaskToGoogleTasks, syncTaskToGoogleCalendar } from "@/actions/googleSync";
+import { toast } from "sonner";
+import { SiGoogletasks, SiGooglecalendar } from "react-icons/si";
 
 export interface Subtask {
   id: string;
@@ -14,9 +18,9 @@ export interface Subtask {
 export interface TaskModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSave: (data: any) => Promise<void>;
+  onSave: (data: Record<string, unknown>) => Promise<void>;
   onDelete?: () => Promise<void>;
-  initialData?: any;
+  initialData?: Record<string, unknown> | null;
   defaultColumnId?: string;
   projectId?: string;
   spaceId: string;
@@ -34,18 +38,40 @@ export function TaskModal({ isOpen, onClose, onSave, onDelete, initialData, defa
   
   const [isMemberSelectorOpen, setIsMemberSelectorOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [syncingTasks, setSyncingTasks] = useState(false);
+  const [syncingCalendar, setSyncingCalendar] = useState(false);
+  const [connectedServices, setConnectedServices] = useState<Record<ConnectorType, boolean>>({
+    google_sheets: false,
+    google_drive: false,
+    google_docs: false,
+    google_calendar: false,
+    google_tasks: false,
+  });
+
+  useEffect(() => {
+    const fetchServices = async () => {
+      const res = await getConnectedServices();
+      if (res.success && res.data) {
+        setConnectedServices(res.data);
+      }
+    };
+    if (isOpen) {
+      fetchServices();
+    }
+  }, [isOpen]);
 
   useEffect(() => {
     if (isOpen) {
       if (initialData) {
-        setTitle(initialData.title || "");
-        setDescription(initialData.description || "");
-        setStatus(initialData.status || "TODO");
-        setPriority(initialData.priority || "MEDIUM");
-        setWorkload(initialData.workload || "");
-        setDueDate(initialData.dueDate ? new Date(initialData.dueDate).toISOString().split('T')[0] : "");
-        setEmployeeId(initialData.employeeId || null);
-        setSubtasks(initialData.subtasks || []);
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setTitle(initialData.title as string || "");
+        setDescription(initialData.description as string || "");
+        setStatus(initialData.status as string || "TODO");
+        setPriority(initialData.priority as string || "MEDIUM");
+        setWorkload(initialData.workload as number || "");
+        setDueDate(initialData.dueDate ? new Date(initialData.dueDate as string).toISOString().split('T')[0] : "");
+        setEmployeeId(initialData.employeeId as string || null);
+        setSubtasks(initialData.subtasks as Subtask[] || []);
       } else {
         setTitle("");
         setDescription("");
@@ -95,6 +121,34 @@ export function TaskModal({ isOpen, onClose, onSave, onDelete, initialData, defa
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleSyncToGoogleTasks = async () => {
+    if (!initialData?.id) return;
+    setSyncingTasks(true);
+    const res = await syncTaskToGoogleTasks(initialData.id);
+    if (res.success) {
+      toast.success(`Synced "${res.title}" to Google Tasks`);
+    } else {
+      toast.error(res.error || "Failed to sync to Google Tasks");
+    }
+    setSyncingTasks(false);
+  };
+
+  const handleSyncToGoogleCalendar = async () => {
+    if (!initialData?.id) return;
+    if (!dueDate) {
+      toast.error("Please set a due date before syncing to calendar");
+      return;
+    }
+    setSyncingCalendar(true);
+    const res = await syncTaskToGoogleCalendar(initialData.id);
+    if (res.success) {
+      toast.success("Synced to Google Calendar");
+    } else {
+      toast.error(res.error || "Failed to sync to Google Calendar");
+    }
+    setSyncingCalendar(false);
   };
 
   if (!isOpen) return null;
@@ -252,6 +306,52 @@ export function TaskModal({ isOpen, onClose, onSave, onDelete, initialData, defa
                 </div>
               )}
             </div>
+
+            {/* Google Sync Section */}
+            {initialData && (
+              <div className="pt-4 border-t border-gray-100">
+                <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] mb-4">
+                  Integrations
+                </label>
+                <div className="flex flex-wrap gap-3">
+                  <button
+                    type="button"
+                    onClick={handleSyncToGoogleTasks}
+                    disabled={syncingTasks || !connectedServices.google_tasks}
+                    className={`flex items-center gap-2 px-4 py-2 text-xs font-bold uppercase tracking-widest transition-all rounded-lg border ${
+                      connectedServices.google_tasks
+                        ? "border-[#E5E5E5] hover:border-[#0A0A0A] bg-white text-[#0A0A0A]"
+                        : "border-[#F4F4F5] bg-[#FAFAFA] text-[#A1A1AA] cursor-not-allowed"
+                    }`}
+                  >
+                    {syncingTasks ? (
+                      <div className="w-3.5 h-3.5 border-2 border-[#0A0A0A] border-t-transparent animate-spin rounded-full" />
+                    ) : (
+                      <SiGoogletasks className="w-3.5 h-3.5" />
+                    )}
+                    {connectedServices.google_tasks ? "Add to Google To Do" : "Google To Do Not Connected"}
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={handleSyncToGoogleCalendar}
+                    disabled={syncingCalendar || !connectedServices.google_calendar}
+                    className={`flex items-center gap-2 px-4 py-2 text-xs font-bold uppercase tracking-widest transition-all rounded-lg border ${
+                      connectedServices.google_calendar
+                        ? "border-[#E5E5E5] hover:border-[#0A0A0A] bg-white text-[#0A0A0A]"
+                        : "border-[#F4F4F5] bg-[#FAFAFA] text-[#A1A1AA] cursor-not-allowed"
+                    }`}
+                  >
+                    {syncingCalendar ? (
+                      <div className="w-3.5 h-3.5 border-2 border-[#0A0A0A] border-t-transparent animate-spin rounded-full" />
+                    ) : (
+                      <SiGooglecalendar className="w-3.5 h-3.5" />
+                    )}
+                    {connectedServices.google_calendar ? "Add to Google Calendar" : "Calendar Not Connected"}
+                  </button>
+                </div>
+              </div>
+            )}
           </form>
         </div>
 

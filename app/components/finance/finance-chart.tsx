@@ -1,18 +1,12 @@
 "use client";
 
-import { AreaChart } from "recharts";
-import { Area } from "recharts";
-import React from "react";
+import { AreaChart, Area } from "recharts";
 import {
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
-  Legend,
   ResponsiveContainer,
-  Line,
-  ComposedChart,
-  Bar,
 } from "recharts";
 import { useTranslation } from "@/app/context/TranslationContext";
 

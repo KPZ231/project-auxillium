@@ -30,6 +30,13 @@ import {
   exportTasksCSV,
   exportFinancesCSV,
 } from "@/actions/ai/aiTools";
+import {
+  saveToGoogleDocs,
+  addToGoogleSheet,
+  createGoogleCalendarEvent,
+  createGoogleTask,
+  uploadToGoogleDrive,
+} from "@/actions/ai/googleTools";
 
 export const maxDuration = 30;
 
@@ -60,6 +67,17 @@ export async function POST(req: Request) {
       system: `You are an intelligent business assistant for the Auxilium CRM application. 
       You help users manage their projects, leads, clients, tasks, and finances. 
       You always query the database using your tools when users ask about their business data. 
+      
+      GOOGLE SERVICES:
+      You have access to Google Docs, Sheets, Calendar, Tasks, and Drive. 
+      - Use these tools when the user explicitly asks to save, export, or schedule something to their Google account.
+      - Always check if the tool execution was successful and provide the link to the created document/event if available.
+      
+      MENTIONS:
+      Users can mention specific entities using the format [Name](entity:type:id). 
+      - When you see this format, you have the direct ID of the entity. 
+      - Use this ID directly in tool calls (e.g., projectId, leadId, clientId) without needing to fetch it first if the user's intent is clear.
+      
       When creating new records (projects, leads, clients, tasks), ensure you have the required information. 
       If the user's request is missing required fields (like a name for a client or project), ask them to provide the missing details before proceeding with the tool call.
       If you cannot find the answer in the retrieved data, state that clearly.
@@ -212,6 +230,50 @@ export async function POST(req: Request) {
             if (entity === "tasks") return exportTasksCSV(spaceId);
             return exportFinancesCSV(spaceId);
           },
+        }),
+        saveToGoogleDocs: tool({
+          description: "Save content to a new Google Doc.",
+          inputSchema: z.object({
+            title: z.string(),
+            content: z.string(),
+          }),
+          execute: async (data) => await saveToGoogleDocs(userId, data),
+        }),
+        addToGoogleSheet: tool({
+          description: "Append rows of data to a Google Sheet.",
+          inputSchema: z.object({
+            spreadsheetTitle: z.string(),
+            rows: z.array(z.array(z.any())),
+          }),
+          execute: async (data) => await addToGoogleSheet(userId, data),
+        }),
+        createGoogleCalendarEvent: tool({
+          description: "Create an event in Google Calendar.",
+          inputSchema: z.object({
+            summary: z.string(),
+            description: z.string().optional(),
+            start: z.string().describe("ISO datetime string"),
+            end: z.string().describe("ISO datetime string"),
+          }),
+          execute: async (data) => await createGoogleCalendarEvent(userId, data),
+        }),
+        createGoogleTask: tool({
+          description: "Add a task to Google Tasks (To Do).",
+          inputSchema: z.object({
+            title: z.string(),
+            notes: z.string().optional(),
+            due: z.string().optional().describe("ISO datetime string"),
+          }),
+          execute: async (data) => await createGoogleTask(userId, data),
+        }),
+        uploadToGoogleDrive: tool({
+          description: "Upload content as a file to Google Drive.",
+          inputSchema: z.object({
+            filename: z.string(),
+            content: z.string(),
+            mimeType: z.string().optional(),
+          }),
+          execute: async (data) => await uploadToGoogleDrive(userId, data),
         }),
       },
     });

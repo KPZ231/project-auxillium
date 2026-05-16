@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { switchSpace } from "@/actions/space";
-import { motion, AnimatePresence } from "motion/react";
+import { motion } from "motion/react";
 import { 
   Building2, 
   ChevronRight, 
@@ -14,7 +14,14 @@ import { useRouter } from "next/navigation";
 import { logoutAction } from "@/actions/logout";
 
 interface SpaceSelectionModalProps {
-  spaces: any[];
+  spaces: {
+    id: string;
+    spaceName: string;
+    _count?: {
+      members: number;
+      projects: number;
+    };
+  }[];
 }
 
 export default function SpaceSelectionModal({ spaces }: SpaceSelectionModalProps) {
@@ -29,8 +36,8 @@ export default function SpaceSelectionModal({ spaces }: SpaceSelectionModalProps
         toast.success("Space activated");
         router.refresh();
       }
-    } catch (error: any) {
-      toast.error(error.message || "Failed to activate space");
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Failed to activate space");
     } finally {
       setIsSubmitting(false);
     }

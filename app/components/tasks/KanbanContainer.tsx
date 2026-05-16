@@ -7,7 +7,10 @@ import { getTasks } from "@/actions/tasks";
 import { Project } from "@/lib/generated/client/browser";
 import { toast } from "sonner";
 import { ChevronRight, FolderKanban, ArrowLeftRight, LayoutGrid, RotateCcw } from "lucide-react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion } from "motion/react";
+import { syncAllTasksToGoogle } from "@/actions/googleSync";
+import { SiGoogletasks, SiGooglecalendar } from "react-icons/si";
+import { getConnectedServices, ConnectorType } from "@/actions/connectors";
 
 interface KanbanContainerProps {
   projects: Project[];
@@ -20,8 +23,40 @@ export function KanbanContainer({ projects, spaceId }: KanbanContainerProps) {
   const urlProjectId = searchParams.get("projectId");
 
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
-  const [tasks, setTasks] = useState<any[]>([]);
+  const [tasks, setTasks] = useState<Record<string, unknown>[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isSyncing, setIsSyncing] = useState(false);
+  const [connectedServices, setConnectedServices] = useState<Record<ConnectorType, boolean>>({
+    google_sheets: false,
+    google_drive: false,
+    google_docs: false,
+    google_calendar: false,
+    google_tasks: false,
+  });
+
+  const fetchTasksForProject = async (projectId: string) => {
+    setIsLoading(true);
+    try {
+      const fetchedTasks = await getTasks(spaceId, projectId);
+      setTasks(fetchedTasks);
+    } catch (error) {
+      console.error("Failed to fetch tasks", error);
+      toast.error("Failed to load project tasks.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    const fetchServices = async () => {
+      const res = await getConnectedServices();
+      if (res.success && res.data) {
+        setConnectedServices(res.data);
+      }
+    };
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    fetchServices();
+  }, []);
 
   // Handle URL changes and data fetching
   useEffect(() => {
@@ -39,20 +74,8 @@ export function KanbanContainer({ projects, spaceId }: KanbanContainerProps) {
     };
 
     syncProject();
-  }, [urlProjectId, spaceId, projects]); // Note: selectedProjectId is omitted to avoid loop, we check it inside
-
-  const fetchTasksForProject = async (projectId: string) => {
-    setIsLoading(true);
-    try {
-      const fetchedTasks = await getTasks(spaceId, projectId);
-      setTasks(fetchedTasks);
-    } catch (error) {
-      console.error("Failed to fetch tasks", error);
-      toast.error("Failed to load project tasks.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [urlProjectId, spaceId, projects]);
 
   const handleProjectChange = (projectId: string) => {
     router.push(`?projectId=${projectId}`, { scroll: false });
@@ -65,6 +88,34 @@ export function KanbanContainer({ projects, spaceId }: KanbanContainerProps) {
     } else {
       router.refresh();
       toast.success("Project list refreshed");
+    }
+  };
+
+  const handleGlobalSync = async (target: "tasks" | "calendar") => {
+    if (!selectedProjectId) return;
+    
+    const serviceName = target === "tasks" ? "Google Tasks" : "Google Calendar";
+    const isConnected = target === "tasks" ? connectedServices.google_tasks : connectedServices.google_calendar;
+
+    if (!isConnected) {
+      toast.error(`${serviceName} is not connected. Please connect it in settings.`);
+      return;
+    }
+
+    setIsSyncing(true);
+    const toastId = toast.loading(`Syncing all tasks to ${serviceName}...`);
+    
+    try {
+      const res = await syncAllTasksToGoogle(selectedProjectId, target);
+      if (res.success) {
+        toast.success(res.message, { id: toastId });
+      } else {
+        toast.error(res.error || "Sync failed", { id: toastId });
+      }
+    } catch (error) {
+      toast.error("An unexpected error occurred", { id: toastId });
+    } finally {
+      setIsSyncing(false);
     }
   };
 
@@ -178,6 +229,31 @@ export function KanbanContainer({ projects, spaceId }: KanbanContainerProps) {
             <RotateCcw size={14} className={isLoading ? "animate-spin" : ""} />
             Refresh
           </button>
+
+          {(connectedServices.google_tasks || connectedServices.google_calendar) && (
+            <div className="flex items-center gap-2 border-l border-[#E5E5E5] pl-3">
+              {connectedServices.google_tasks && (
+                <button
+                  onClick={() => handleGlobalSync("tasks")}
+                  disabled={isSyncing}
+                  title="Sync all to Google Tasks"
+                  className="flex items-center justify-center w-9 h-9 bg-white border border-[#E5E5E5] hover:border-[#0A0A0A] text-[#0A0A0A] transition-all"
+                >
+                  <SiGoogletasks size={14} className={isSyncing ? "animate-pulse" : ""} />
+                </button>
+              )}
+              {connectedServices.google_calendar && (
+                <button
+                  onClick={() => handleGlobalSync("calendar")}
+                  disabled={isSyncing}
+                  title="Sync all to Google Calendar"
+                  className="flex items-center justify-center w-9 h-9 bg-white border border-[#E5E5E5] hover:border-[#0A0A0A] text-[#0A0A0A] transition-all"
+                >
+                  <SiGooglecalendar size={14} className={isSyncing ? "animate-pulse" : ""} />
+                </button>
+              )}
+            </div>
+          )}
 
           <button
             onClick={() => router.push('/dashboard/tasks')} // Clear URL to trigger selection view

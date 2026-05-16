@@ -91,14 +91,14 @@ async function fetchDataForSpace(
   spaceId: string,
   userId: string
 ): Promise<{
-  spaces: any[];
-  projects: any[];
-  leads: any[];
-  clients: any[];
-  employees: any[];
-  tasks: any[];
-  expenses: any[];
-  incomes: any[];
+  spaces: { id: string; spaceName: string; spaceDescription: string | null; icon: string | null; createdAt: Date; owner: { email: string }; members: { id: string }[] }[];
+  projects: { id: string; projectName: string; projectDescription: string; projectStatus: string; createdAt: Date; dueDate: Date | null }[];
+  leads: { id: string; leadName: string; projectType: string | null; contactName: string | null; email: string | null; phone: string | null; status: string; stage: string | null; createdAt: Date }[];
+  clients: { id: string; name: string; email: string | null; phone: string | null; description: string | null; notes: string | null; createdAt: Date }[];
+  employees: { id: string; name: string; email: string | null; phone: string | null; role: string | null; createdAt: Date }[];
+  tasks: { id: string; title: string; description: string | null; status: string; priority: string; dueDate: Date | null; createdAt: Date }[];
+  expenses: { id: string; amount: number; description: string | null; date: Date; category: string | null; isRecurring: boolean; cycle: string | null; createdAt: Date }[];
+  incomes: { id: string; amount: number; description: string | null; date: Date; source: string | null; createdAt: Date }[];
 }> {
   const spaces = await prisma.space.findMany({
     where: {

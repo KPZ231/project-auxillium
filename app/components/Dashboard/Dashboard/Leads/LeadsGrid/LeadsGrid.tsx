@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, AnimatePresence, Variants } from "motion/react";
+import { motion, Variants } from "motion/react";
 import { useState, useEffect, useRef, useMemo } from "react";
 import { getLeads } from "@/actions/getLeads";
 import { reorderLeads } from "@/actions/reorderLeads";
@@ -13,8 +13,6 @@ import {
   ArrowRight, 
   Plus, 
   MoreHorizontal, 
-  User, 
-  Briefcase 
 } from "lucide-react";
 
 interface LeadsGridProps {
@@ -142,6 +140,7 @@ export default function LeadsGrid({ selectedFilter, view, sortBy, searchQuery }:
   };
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchLeadsData();
 
     // Auto-refresh every 5 minutes
@@ -186,11 +185,11 @@ export default function LeadsGrid({ selectedFilter, view, sortBy, searchQuery }:
   }, [leads, selectedFilter, sortBy, searchQuery]);
 
   // Drag and Drop Handlers
-  const handleDragStart = (e: any, position: number) => {
+  const handleDragStart = (e: React.DragEvent, position: number) => {
     dragItem.current = position;
   };
 
-  const handleDragEnter = (e: any, position: number) => {
+  const handleDragEnter = (e: React.DragEvent, position: number) => {
     dragOverItem.current = position;
   };
 
@@ -315,10 +314,10 @@ export default function LeadsGrid({ selectedFilter, view, sortBy, searchQuery }:
             key={lead.id}
             variants={itemVariants}
             draggable
-            onDragStart={(e: any) => handleDragStart(e, index)}
-            onDragEnter={(e: any) => handleDragEnter(e, index)}
+            onDragStart={(e: React.DragEvent) => handleDragStart(e, index)}
+            onDragEnter={(e: React.DragEvent) => handleDragEnter(e, index)}
             onDragEnd={handleDragEnd}
-            onDragOver={(e: any) => e.preventDefault()}
+            onDragOver={(e: React.DragEvent) => e.preventDefault()}
             className="h-full relative"
           >
             <LeadCard lead={lead} />

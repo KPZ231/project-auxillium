@@ -10,6 +10,7 @@ export default function CookieBanner() {
   const [showBanner, setShowBanner] = useState(false);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
     const cookieConsent = getCookie("cookieConsent");
     if (!cookieConsent) {
@@ -53,7 +54,7 @@ export default function CookieBanner() {
               </p>
               <p className="text-xs opacity-70 tracking-tight max-w-2xl">
                 Używamy plików cookie, aby zapewnić najlepszą jakość korzystania z naszej strony. 
-                Klikając "Akceptuję", zgadzasz się na ich przechowywanie na Twoim urządzeniu.
+                Klikając &quot;Akceptuję&quot;, zgadzasz się na ich przechowywanie na Twoim urządzeniu.
               </p>
             </div>
             <div className="flex items-center gap-3 shrink-0">

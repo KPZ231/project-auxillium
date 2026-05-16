@@ -18,7 +18,7 @@ export const getLeads = async (forceRefresh: boolean = false) => {
     const cacheKey = `leads:${userId}${spaceId ? `:${spaceId}` : ""}`
 
     if (!forceRefresh) {
-      const cachedLeads = await getCachedData<any[]>(cacheKey)
+      const cachedLeads = await getCachedData<unknown[]>(cacheKey)
       if (cachedLeads) {
         return { success: true, data: cachedLeads, fromCache: true }
       }

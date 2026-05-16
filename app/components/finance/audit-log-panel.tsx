@@ -9,13 +9,22 @@ interface AuditLogPanelProps {
   spaceId: string;
 }
 
+interface AuditLog {
+  id: string;
+  action: string;
+  type: string;
+  timestamp: string;
+  user?: { name?: string; email?: string };
+}
+
 export function AuditLogPanel({ spaceId }: AuditLogPanelProps) {
   const { t } = useTranslation();
-  const [logs, setLogs] = useState<any[]>([]);
+  const [logs, setLogs] = useState<AuditLog[]>([]);
   const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     if (isOpen && logs.length === 0) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       getAuditLogs(spaceId).then(setLogs);
     }
   }, [isOpen, spaceId, logs.length]);

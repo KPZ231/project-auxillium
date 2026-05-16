@@ -8,7 +8,6 @@ import {
   MoreHorizontal, 
   Mail, 
   Phone, 
-  Briefcase,
   LayoutGrid,
   List as ListIcon,
   ChevronRight
@@ -16,8 +15,21 @@ import {
 import Link from "next/link";
 import EmployeeForm from "./EmployeeForm";
 
+interface Employee {
+  id: string;
+  name: string;
+  email?: string | null;
+  phone?: string | null;
+  role?: string | null;
+  createdAt: string | Date;
+  _count?: {
+    assignedProjects: number;
+    assignedTasks: number;
+  };
+}
+
 interface EmployeeListClientProps {
-  initialEmployees: any[];
+  initialEmployees: Employee[];
 }
 
 export default function EmployeeListClient({ initialEmployees }: EmployeeListClientProps) {
@@ -179,7 +191,7 @@ export default function EmployeeListClient({ initialEmployees }: EmployeeListCli
         {isFormOpen && (
           <EmployeeForm 
             onClose={() => setIsFormOpen(false)} 
-            onSuccess={(newEmp: any) => {
+            onSuccess={(newEmp: Employee) => {
               setEmployees([newEmp, ...employees]);
               setIsFormOpen(false);
             }} 

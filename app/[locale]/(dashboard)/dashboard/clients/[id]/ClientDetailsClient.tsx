@@ -10,7 +10,8 @@ import Link from "next/link";
 import Image from "next/image";
 import { useBreadcrumb } from "@/app/context/BreadcrumbContext";
 import { AssignmentManager } from "@/app/components/assignments/assignment-manager";
-import { PremiumInput, PremiumTextarea, PremiumSelect } from "@/app/components/UI/FormElements";
+import { PremiumInput, PremiumTextarea } from "@/app/components/UI/FormElements";
+import { RelatedDocuments } from "@/app/components/templates/RelatedDocuments";
 
 const STEPS = [
   "Basic Info",
@@ -19,7 +20,42 @@ const STEPS = [
   "Gallery & Timelines"
 ];
 
-export default function ClientDetailsClient({ client, isUnauthorized = false }: { client: any, isUnauthorized?: boolean }) {
+interface Milestone {
+  title: string;
+  date: string;
+  completed: boolean;
+  progress: number;
+}
+
+interface Client {
+  id: string;
+  name: string;
+  email?: string;
+  phone?: string;
+  description?: string;
+  notes?: string;
+  location?: string;
+  photoUrl?: string;
+  timeline?: string;
+  milestones: Milestone[];
+  schedule: unknown[];
+  assignedEmployees: unknown[];
+  incomes: { amount: number; date: string; description: string; source: string }[];
+  expenses: { amount: number; date: string; description: string; category: string }[];
+  projects: { id: string; projectName: string; projectStatus: string }[];
+  spaceId: string;
+  userId: string;
+}
+
+export default function ClientDetailsClient({ 
+  client, 
+  isUnauthorized = false,
+  spaceId
+}: { 
+  client: Client, 
+  isUnauthorized?: boolean,
+  spaceId: string 
+}) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { setCustomLabel } = useBreadcrumb();
@@ -153,9 +189,9 @@ export default function ClientDetailsClient({ client, isUnauthorized = false }: 
     }));
   };
 
-  const updateMilestone = (index: number, field: string, value: any) => {
+  const updateMilestone = (index: number, field: keyof Milestone, value: string | boolean | number) => {
     const newMilestones = [...formData.milestones];
-    newMilestones[index] = { ...newMilestones[index], [field]: value };
+    newMilestones[index] = { ...newMilestones[index], [field]: value } as Milestone;
     setFormData((prev) => ({ ...prev, milestones: newMilestones }));
   };
 
@@ -291,7 +327,7 @@ export default function ClientDetailsClient({ client, isUnauthorized = false }: 
               )}
               
               <div className="space-y-4">
-                {formData.milestones.map((m: any, i: number) => (
+                {formData.milestones.map((m: Milestone, i: number) => (
                   <motion.div 
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -375,8 +411,8 @@ export default function ClientDetailsClient({ client, isUnauthorized = false }: 
   }
 
   // Calculate financials
-  const totalIncome = client.incomes?.reduce((acc: number, inc: any) => acc + inc.amount, 0) || 0;
-  const totalExpense = client.expenses?.reduce((acc: number, exp: any) => acc + exp.amount, 0) || 0;
+  const totalIncome = client.incomes?.reduce((acc: number, inc: { amount: number }) => acc + inc.amount, 0) || 0;
+  const totalExpense = client.expenses?.reduce((acc: number, exp: { amount: number }) => acc + exp.amount, 0) || 0;
 
   return (
     <>
@@ -453,7 +489,7 @@ export default function ClientDetailsClient({ client, isUnauthorized = false }: 
             <section>
               <h2 className="text-[12px] font-bold tracking-[0.08em] uppercase text-[#71717A] mb-4">Milestones</h2>
               <div className="space-y-6 border-l border-[#E5E5E5] pl-6">
-                {client.milestones.map((m: any, i: number) => {
+                {client.milestones.map((m: Milestone, i: number) => {
                   return (
                     <div key={i} className="relative group">
                       <div className="absolute left-[-29px] top-1.5 w-2 h-2 rounded-none border border-[#0A0A0A] transition-colors bg-[#0A0A0A]" />
@@ -471,7 +507,7 @@ export default function ClientDetailsClient({ client, isUnauthorized = false }: 
             <section>
               <h2 className="text-[12px] font-bold tracking-[0.08em] uppercase text-[#71717A] mb-4">Linked Projects</h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {client.projects.map((p: any) => (
+                {client.projects.map((p: { id: string; projectName: string; projectStatus: string }) => (
                   <Link href={`/dashboard/projects/${p.id}`} key={p.id} className="block p-4 border border-[#E5E5E5] hover:border-[#0A0A0A] transition-colors">
                     <h3 className="text-[14px] font-bold uppercase">{p.projectName}</h3>
                     <p className="text-[12px] text-[#71717A]">{p.projectStatus}</p>
@@ -511,9 +547,9 @@ export default function ClientDetailsClient({ client, isUnauthorized = false }: 
             <h2 className="text-[12px] font-bold tracking-[0.08em] uppercase text-[#0A0A0A] mb-6">Recent Transactions</h2>
             <div className="space-y-4">
               {[...(client.incomes || []), ...(client.expenses || [])]
-                .sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime())
+                .sort((a: { date: string }, b: { date: string }) => new Date(b.date).getTime() - new Date(a.date).getTime())
                 .slice(0, 5)
-                .map((t: any, i: number) => {
+                .map((t: { amount: number; date: string; description: string; source?: string }, i: number) => {
                   const isIncome = 'source' in t;
                   return (
                     <div key={i} className="flex justify-between items-center py-2 border-b border-[#F4F4F5] last:border-0">
@@ -541,6 +577,10 @@ export default function ClientDetailsClient({ client, isUnauthorized = false }: 
               entityType="client" 
               initialMembers={client.assignedEmployees || []} 
             />
+          </div>
+
+          <div className="p-6 border border-[#E5E5E5]">
+            <RelatedDocuments spaceId={spaceId} clientId={client.id} />
           </div>
         </div>
       </div>

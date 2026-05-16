@@ -1,10 +1,10 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import redis, { setCachedData, getCachedData, invalidateCache } from "@/lib/redis";
+import { setCachedData, getCachedData, invalidateCache } from "@/lib/redis";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
-import { Expense, Income, RevenueGoal, TransactionCategory } from "@/lib/generated/client/client";
+import { Expense, TransactionCategory } from "@/lib/generated/client/client";
 
 const expenseSchema = z.object({
   amount: z.number().positive(),
@@ -171,7 +171,7 @@ export async function setRevenueGoal(data: z.infer<typeof revenueGoalSchema>) {
 export async function getFinancialSummary(spaceId: string) {
   try {
     const cacheKey = getFinanceCacheKey(spaceId);
-    const cached = await getCachedData<{ months: any[] }>(cacheKey);
+    const cached = await getCachedData<unknown>(cacheKey);
     if (cached) return cached;
 
     // Fetch last 6 months of data
@@ -206,9 +206,9 @@ export async function getFinancialSummary(spaceId: string) {
     };
 
     // Aggregate by month
-    const months: any[] = [];
+    const months: { name: string; expenses: number; income: number; goal: number }[] = [];
     const pnlData: Record<string, { income: number, expense: number }> = {};
-    const waterfallData: any[] = [];
+    const waterfallData: { name: string; amount: number; isTotal?: boolean }[] = [];
 
     for (let i = 0; i < 6; i++) {
       const d = new Date(sixMonthsAgo);
@@ -280,14 +280,18 @@ export async function getFinancialSummary(spaceId: string) {
       pnlData, 
       waterfallData,
       mom: { income: incomeMom, expenses: expenseMom },
-      profitMargin
+      profitMargin,
+      transactions: [
+        ...expenses.map(e => ({ ...e, type: 'EXPENSE' as const })),
+        ...incomes.map(i => ({ ...i, type: 'INCOME' as const }))
+      ].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     };
     await setCachedData(cacheKey, summary, 3600); // Cache for 1 hour
 
     return summary;
   } catch (error) {
     console.error("[GET_FINANCE_SUMMARY_ERROR]", error);
-    return { months: [], pnlData: {}, waterfallData: [], mom: { income: 0, expenses: 0 }, profitMargin: 0 };
+    return { months: [], pnlData: {}, waterfallData: [], mom: { income: 0, expenses: 0 }, profitMargin: 0, transactions: [] };
   }
 }
 

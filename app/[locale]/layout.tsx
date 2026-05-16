@@ -26,14 +26,14 @@ export const metadata: Metadata = {
 
 const getResources = async (locale: string) => {
   const namespaces = ['common', 'dashboard', 'forms', 'marketing'];
-  const resources: Record<string, any> = {};
+  const resources: Record<string, unknown> = {};
   
   for (const ns of namespaces) {
     try {
       const filePath = path.join(process.cwd(), 'public', 'locales', locale, `${ns}.json`);
       const fileContents = await fs.readFile(filePath, 'utf8');
       resources[ns] = JSON.parse(fileContents);
-    } catch (e) {
+    } catch {
       // console.error(`Failed to load namespace ${ns} for locale ${locale}`);
     }
   }
@@ -60,7 +60,7 @@ export default async function LocaleLayout({
       suppressHydrationWarning={true}
     >
       <body className="min-h-full flex flex-col">
-        <TranslationProvider initialLanguage={locale as any} resources={resources}>
+        <TranslationProvider initialLanguage={locale} resources={resources as Record<string, Record<string, string>>}>
           <UserProvider>
             <main className="flex-1">{children}</main>
           </UserProvider>

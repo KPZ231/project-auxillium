@@ -53,6 +53,7 @@ export default function WorkloadFiltersBar({ filters, onFilterChange, employees 
       }
     }, 400);
     return () => clearTimeout(timer);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [search]);
 
   const updateFilter = useCallback((key: keyof WorkloadFilters, value: string) => {

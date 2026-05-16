@@ -258,6 +258,7 @@ export type ClientWhereInput = {
   incomes?: Prisma.IncomeListRelationFilter
   expenses?: Prisma.ExpenseListRelationFilter
   assignedEmployees?: Prisma.EmployeeListRelationFilter
+  generatedDocuments?: Prisma.GeneratedDocumentListRelationFilter
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   space?: Prisma.XOR<Prisma.SpaceNullableScalarRelationFilter, Prisma.SpaceWhereInput> | null
 }
@@ -282,6 +283,7 @@ export type ClientOrderByWithRelationInput = {
   incomes?: Prisma.IncomeOrderByRelationAggregateInput
   expenses?: Prisma.ExpenseOrderByRelationAggregateInput
   assignedEmployees?: Prisma.EmployeeOrderByRelationAggregateInput
+  generatedDocuments?: Prisma.GeneratedDocumentOrderByRelationAggregateInput
   user?: Prisma.UserOrderByWithRelationInput
   space?: Prisma.SpaceOrderByWithRelationInput
 }
@@ -309,6 +311,7 @@ export type ClientWhereUniqueInput = Prisma.AtLeast<{
   incomes?: Prisma.IncomeListRelationFilter
   expenses?: Prisma.ExpenseListRelationFilter
   assignedEmployees?: Prisma.EmployeeListRelationFilter
+  generatedDocuments?: Prisma.GeneratedDocumentListRelationFilter
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   space?: Prisma.XOR<Prisma.SpaceNullableScalarRelationFilter, Prisma.SpaceWhereInput> | null
 }, "id">
@@ -373,6 +376,7 @@ export type ClientCreateInput = {
   incomes?: Prisma.IncomeCreateNestedManyWithoutClientInput
   expenses?: Prisma.ExpenseCreateNestedManyWithoutClientInput
   assignedEmployees?: Prisma.EmployeeCreateNestedManyWithoutAssignedClientsInput
+  generatedDocuments?: Prisma.GeneratedDocumentCreateNestedManyWithoutClientInput
   user: Prisma.UserCreateNestedOneWithoutClientsInput
   space?: Prisma.SpaceCreateNestedOneWithoutClientsInput
 }
@@ -397,6 +401,7 @@ export type ClientUncheckedCreateInput = {
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutClientInput
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutClientInput
   assignedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutAssignedClientsInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutClientInput
 }
 
 export type ClientUpdateInput = {
@@ -417,6 +422,7 @@ export type ClientUpdateInput = {
   incomes?: Prisma.IncomeUpdateManyWithoutClientNestedInput
   expenses?: Prisma.ExpenseUpdateManyWithoutClientNestedInput
   assignedEmployees?: Prisma.EmployeeUpdateManyWithoutAssignedClientsNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUpdateManyWithoutClientNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutClientsNestedInput
   space?: Prisma.SpaceUpdateOneWithoutClientsNestedInput
 }
@@ -441,6 +447,7 @@ export type ClientUncheckedUpdateInput = {
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutClientNestedInput
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutClientNestedInput
   assignedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutAssignedClientsNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutClientNestedInput
 }
 
 export type ClientCreateManyInput = {
@@ -730,6 +737,22 @@ export type ClientUpdateOneWithoutIncomesNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.ClientUpdateToOneWithWhereWithoutIncomesInput, Prisma.ClientUpdateWithoutIncomesInput>, Prisma.ClientUncheckedUpdateWithoutIncomesInput>
 }
 
+export type ClientCreateNestedOneWithoutGeneratedDocumentsInput = {
+  create?: Prisma.XOR<Prisma.ClientCreateWithoutGeneratedDocumentsInput, Prisma.ClientUncheckedCreateWithoutGeneratedDocumentsInput>
+  connectOrCreate?: Prisma.ClientCreateOrConnectWithoutGeneratedDocumentsInput
+  connect?: Prisma.ClientWhereUniqueInput
+}
+
+export type ClientUpdateOneWithoutGeneratedDocumentsNestedInput = {
+  create?: Prisma.XOR<Prisma.ClientCreateWithoutGeneratedDocumentsInput, Prisma.ClientUncheckedCreateWithoutGeneratedDocumentsInput>
+  connectOrCreate?: Prisma.ClientCreateOrConnectWithoutGeneratedDocumentsInput
+  upsert?: Prisma.ClientUpsertWithoutGeneratedDocumentsInput
+  disconnect?: Prisma.ClientWhereInput | boolean
+  delete?: Prisma.ClientWhereInput | boolean
+  connect?: Prisma.ClientWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ClientUpdateToOneWithWhereWithoutGeneratedDocumentsInput, Prisma.ClientUpdateWithoutGeneratedDocumentsInput>, Prisma.ClientUncheckedUpdateWithoutGeneratedDocumentsInput>
+}
+
 export type ClientCreateWithoutUserInput = {
   id?: string
   name: string
@@ -748,6 +771,7 @@ export type ClientCreateWithoutUserInput = {
   incomes?: Prisma.IncomeCreateNestedManyWithoutClientInput
   expenses?: Prisma.ExpenseCreateNestedManyWithoutClientInput
   assignedEmployees?: Prisma.EmployeeCreateNestedManyWithoutAssignedClientsInput
+  generatedDocuments?: Prisma.GeneratedDocumentCreateNestedManyWithoutClientInput
   space?: Prisma.SpaceCreateNestedOneWithoutClientsInput
 }
 
@@ -770,6 +794,7 @@ export type ClientUncheckedCreateWithoutUserInput = {
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutClientInput
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutClientInput
   assignedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutAssignedClientsInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutClientInput
 }
 
 export type ClientCreateOrConnectWithoutUserInput = {
@@ -836,6 +861,7 @@ export type ClientCreateWithoutProjectsInput = {
   incomes?: Prisma.IncomeCreateNestedManyWithoutClientInput
   expenses?: Prisma.ExpenseCreateNestedManyWithoutClientInput
   assignedEmployees?: Prisma.EmployeeCreateNestedManyWithoutAssignedClientsInput
+  generatedDocuments?: Prisma.GeneratedDocumentCreateNestedManyWithoutClientInput
   user: Prisma.UserCreateNestedOneWithoutClientsInput
   space?: Prisma.SpaceCreateNestedOneWithoutClientsInput
 }
@@ -859,6 +885,7 @@ export type ClientUncheckedCreateWithoutProjectsInput = {
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutClientInput
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutClientInput
   assignedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutAssignedClientsInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutClientInput
 }
 
 export type ClientCreateOrConnectWithoutProjectsInput = {
@@ -894,6 +921,7 @@ export type ClientUpdateWithoutProjectsInput = {
   incomes?: Prisma.IncomeUpdateManyWithoutClientNestedInput
   expenses?: Prisma.ExpenseUpdateManyWithoutClientNestedInput
   assignedEmployees?: Prisma.EmployeeUpdateManyWithoutAssignedClientsNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUpdateManyWithoutClientNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutClientsNestedInput
   space?: Prisma.SpaceUpdateOneWithoutClientsNestedInput
 }
@@ -917,6 +945,7 @@ export type ClientUncheckedUpdateWithoutProjectsInput = {
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutClientNestedInput
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutClientNestedInput
   assignedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutAssignedClientsNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutClientNestedInput
 }
 
 export type ClientCreateWithoutSpaceInput = {
@@ -937,6 +966,7 @@ export type ClientCreateWithoutSpaceInput = {
   incomes?: Prisma.IncomeCreateNestedManyWithoutClientInput
   expenses?: Prisma.ExpenseCreateNestedManyWithoutClientInput
   assignedEmployees?: Prisma.EmployeeCreateNestedManyWithoutAssignedClientsInput
+  generatedDocuments?: Prisma.GeneratedDocumentCreateNestedManyWithoutClientInput
   user: Prisma.UserCreateNestedOneWithoutClientsInput
 }
 
@@ -959,6 +989,7 @@ export type ClientUncheckedCreateWithoutSpaceInput = {
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutClientInput
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutClientInput
   assignedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutAssignedClientsInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutClientInput
 }
 
 export type ClientCreateOrConnectWithoutSpaceInput = {
@@ -1004,6 +1035,7 @@ export type ClientCreateWithoutAssignedEmployeesInput = {
   projects?: Prisma.ProjectCreateNestedManyWithoutClientInput
   incomes?: Prisma.IncomeCreateNestedManyWithoutClientInput
   expenses?: Prisma.ExpenseCreateNestedManyWithoutClientInput
+  generatedDocuments?: Prisma.GeneratedDocumentCreateNestedManyWithoutClientInput
   user: Prisma.UserCreateNestedOneWithoutClientsInput
   space?: Prisma.SpaceCreateNestedOneWithoutClientsInput
 }
@@ -1027,6 +1059,7 @@ export type ClientUncheckedCreateWithoutAssignedEmployeesInput = {
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutClientInput
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutClientInput
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutClientInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutClientInput
 }
 
 export type ClientCreateOrConnectWithoutAssignedEmployeesInput = {
@@ -1067,6 +1100,7 @@ export type ClientCreateWithoutExpensesInput = {
   projects?: Prisma.ProjectCreateNestedManyWithoutClientInput
   incomes?: Prisma.IncomeCreateNestedManyWithoutClientInput
   assignedEmployees?: Prisma.EmployeeCreateNestedManyWithoutAssignedClientsInput
+  generatedDocuments?: Prisma.GeneratedDocumentCreateNestedManyWithoutClientInput
   user: Prisma.UserCreateNestedOneWithoutClientsInput
   space?: Prisma.SpaceCreateNestedOneWithoutClientsInput
 }
@@ -1090,6 +1124,7 @@ export type ClientUncheckedCreateWithoutExpensesInput = {
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutClientInput
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutClientInput
   assignedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutAssignedClientsInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutClientInput
 }
 
 export type ClientCreateOrConnectWithoutExpensesInput = {
@@ -1125,6 +1160,7 @@ export type ClientUpdateWithoutExpensesInput = {
   projects?: Prisma.ProjectUpdateManyWithoutClientNestedInput
   incomes?: Prisma.IncomeUpdateManyWithoutClientNestedInput
   assignedEmployees?: Prisma.EmployeeUpdateManyWithoutAssignedClientsNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUpdateManyWithoutClientNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutClientsNestedInput
   space?: Prisma.SpaceUpdateOneWithoutClientsNestedInput
 }
@@ -1148,6 +1184,7 @@ export type ClientUncheckedUpdateWithoutExpensesInput = {
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutClientNestedInput
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutClientNestedInput
   assignedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutAssignedClientsNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutClientNestedInput
 }
 
 export type ClientCreateWithoutIncomesInput = {
@@ -1167,6 +1204,7 @@ export type ClientCreateWithoutIncomesInput = {
   projects?: Prisma.ProjectCreateNestedManyWithoutClientInput
   expenses?: Prisma.ExpenseCreateNestedManyWithoutClientInput
   assignedEmployees?: Prisma.EmployeeCreateNestedManyWithoutAssignedClientsInput
+  generatedDocuments?: Prisma.GeneratedDocumentCreateNestedManyWithoutClientInput
   user: Prisma.UserCreateNestedOneWithoutClientsInput
   space?: Prisma.SpaceCreateNestedOneWithoutClientsInput
 }
@@ -1190,6 +1228,7 @@ export type ClientUncheckedCreateWithoutIncomesInput = {
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutClientInput
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutClientInput
   assignedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutAssignedClientsInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutClientInput
 }
 
 export type ClientCreateOrConnectWithoutIncomesInput = {
@@ -1225,6 +1264,7 @@ export type ClientUpdateWithoutIncomesInput = {
   projects?: Prisma.ProjectUpdateManyWithoutClientNestedInput
   expenses?: Prisma.ExpenseUpdateManyWithoutClientNestedInput
   assignedEmployees?: Prisma.EmployeeUpdateManyWithoutAssignedClientsNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUpdateManyWithoutClientNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutClientsNestedInput
   space?: Prisma.SpaceUpdateOneWithoutClientsNestedInput
 }
@@ -1246,6 +1286,111 @@ export type ClientUncheckedUpdateWithoutIncomesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutClientNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutClientNestedInput
+  assignedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutAssignedClientsNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutClientNestedInput
+}
+
+export type ClientCreateWithoutGeneratedDocumentsInput = {
+  id?: string
+  name: string
+  email?: string | null
+  phone?: string | null
+  description?: string | null
+  notes?: string | null
+  location?: string | null
+  photoUrl?: string | null
+  timeline?: string | null
+  milestones?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  schedule?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  projects?: Prisma.ProjectCreateNestedManyWithoutClientInput
+  incomes?: Prisma.IncomeCreateNestedManyWithoutClientInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutClientInput
+  assignedEmployees?: Prisma.EmployeeCreateNestedManyWithoutAssignedClientsInput
+  user: Prisma.UserCreateNestedOneWithoutClientsInput
+  space?: Prisma.SpaceCreateNestedOneWithoutClientsInput
+}
+
+export type ClientUncheckedCreateWithoutGeneratedDocumentsInput = {
+  id?: string
+  name: string
+  email?: string | null
+  phone?: string | null
+  description?: string | null
+  notes?: string | null
+  location?: string | null
+  photoUrl?: string | null
+  timeline?: string | null
+  milestones?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  schedule?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  userId: string
+  spaceId?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutClientInput
+  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutClientInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutClientInput
+  assignedEmployees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutAssignedClientsInput
+}
+
+export type ClientCreateOrConnectWithoutGeneratedDocumentsInput = {
+  where: Prisma.ClientWhereUniqueInput
+  create: Prisma.XOR<Prisma.ClientCreateWithoutGeneratedDocumentsInput, Prisma.ClientUncheckedCreateWithoutGeneratedDocumentsInput>
+}
+
+export type ClientUpsertWithoutGeneratedDocumentsInput = {
+  update: Prisma.XOR<Prisma.ClientUpdateWithoutGeneratedDocumentsInput, Prisma.ClientUncheckedUpdateWithoutGeneratedDocumentsInput>
+  create: Prisma.XOR<Prisma.ClientCreateWithoutGeneratedDocumentsInput, Prisma.ClientUncheckedCreateWithoutGeneratedDocumentsInput>
+  where?: Prisma.ClientWhereInput
+}
+
+export type ClientUpdateToOneWithWhereWithoutGeneratedDocumentsInput = {
+  where?: Prisma.ClientWhereInput
+  data: Prisma.XOR<Prisma.ClientUpdateWithoutGeneratedDocumentsInput, Prisma.ClientUncheckedUpdateWithoutGeneratedDocumentsInput>
+}
+
+export type ClientUpdateWithoutGeneratedDocumentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  timeline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  milestones?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  schedule?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  projects?: Prisma.ProjectUpdateManyWithoutClientNestedInput
+  incomes?: Prisma.IncomeUpdateManyWithoutClientNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutClientNestedInput
+  assignedEmployees?: Prisma.EmployeeUpdateManyWithoutAssignedClientsNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutClientsNestedInput
+  space?: Prisma.SpaceUpdateOneWithoutClientsNestedInput
+}
+
+export type ClientUncheckedUpdateWithoutGeneratedDocumentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  phone?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  location?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  photoUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  timeline?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  milestones?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  schedule?: Prisma.NullableJsonNullValueInput | runtime.InputJsonValue
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  spaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutClientNestedInput
+  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutClientNestedInput
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutClientNestedInput
   assignedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutAssignedClientsNestedInput
 }
@@ -1285,6 +1430,7 @@ export type ClientUpdateWithoutUserInput = {
   incomes?: Prisma.IncomeUpdateManyWithoutClientNestedInput
   expenses?: Prisma.ExpenseUpdateManyWithoutClientNestedInput
   assignedEmployees?: Prisma.EmployeeUpdateManyWithoutAssignedClientsNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUpdateManyWithoutClientNestedInput
   space?: Prisma.SpaceUpdateOneWithoutClientsNestedInput
 }
 
@@ -1307,6 +1453,7 @@ export type ClientUncheckedUpdateWithoutUserInput = {
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutClientNestedInput
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutClientNestedInput
   assignedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutAssignedClientsNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutClientNestedInput
 }
 
 export type ClientUncheckedUpdateManyWithoutUserInput = {
@@ -1361,6 +1508,7 @@ export type ClientUpdateWithoutSpaceInput = {
   incomes?: Prisma.IncomeUpdateManyWithoutClientNestedInput
   expenses?: Prisma.ExpenseUpdateManyWithoutClientNestedInput
   assignedEmployees?: Prisma.EmployeeUpdateManyWithoutAssignedClientsNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUpdateManyWithoutClientNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutClientsNestedInput
 }
 
@@ -1383,6 +1531,7 @@ export type ClientUncheckedUpdateWithoutSpaceInput = {
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutClientNestedInput
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutClientNestedInput
   assignedEmployees?: Prisma.EmployeeUncheckedUpdateManyWithoutAssignedClientsNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutClientNestedInput
 }
 
 export type ClientUncheckedUpdateManyWithoutSpaceInput = {
@@ -1419,6 +1568,7 @@ export type ClientUpdateWithoutAssignedEmployeesInput = {
   projects?: Prisma.ProjectUpdateManyWithoutClientNestedInput
   incomes?: Prisma.IncomeUpdateManyWithoutClientNestedInput
   expenses?: Prisma.ExpenseUpdateManyWithoutClientNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUpdateManyWithoutClientNestedInput
   user?: Prisma.UserUpdateOneRequiredWithoutClientsNestedInput
   space?: Prisma.SpaceUpdateOneWithoutClientsNestedInput
 }
@@ -1442,6 +1592,7 @@ export type ClientUncheckedUpdateWithoutAssignedEmployeesInput = {
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutClientNestedInput
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutClientNestedInput
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutClientNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutClientNestedInput
 }
 
 export type ClientUncheckedUpdateManyWithoutAssignedEmployeesInput = {
@@ -1472,6 +1623,7 @@ export type ClientCountOutputType = {
   incomes: number
   expenses: number
   assignedEmployees: number
+  generatedDocuments: number
 }
 
 export type ClientCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1479,6 +1631,7 @@ export type ClientCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions
   incomes?: boolean | ClientCountOutputTypeCountIncomesArgs
   expenses?: boolean | ClientCountOutputTypeCountExpensesArgs
   assignedEmployees?: boolean | ClientCountOutputTypeCountAssignedEmployeesArgs
+  generatedDocuments?: boolean | ClientCountOutputTypeCountGeneratedDocumentsArgs
 }
 
 /**
@@ -1519,6 +1672,13 @@ export type ClientCountOutputTypeCountAssignedEmployeesArgs<ExtArgs extends runt
   where?: Prisma.EmployeeWhereInput
 }
 
+/**
+ * ClientCountOutputType without action
+ */
+export type ClientCountOutputTypeCountGeneratedDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.GeneratedDocumentWhereInput
+}
+
 
 export type ClientSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1540,6 +1700,7 @@ export type ClientSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   incomes?: boolean | Prisma.Client$incomesArgs<ExtArgs>
   expenses?: boolean | Prisma.Client$expensesArgs<ExtArgs>
   assignedEmployees?: boolean | Prisma.Client$assignedEmployeesArgs<ExtArgs>
+  generatedDocuments?: boolean | Prisma.Client$generatedDocumentsArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   space?: boolean | Prisma.Client$spaceArgs<ExtArgs>
   _count?: boolean | Prisma.ClientCountOutputTypeDefaultArgs<ExtArgs>
@@ -1609,6 +1770,7 @@ export type ClientInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   incomes?: boolean | Prisma.Client$incomesArgs<ExtArgs>
   expenses?: boolean | Prisma.Client$expensesArgs<ExtArgs>
   assignedEmployees?: boolean | Prisma.Client$assignedEmployeesArgs<ExtArgs>
+  generatedDocuments?: boolean | Prisma.Client$generatedDocumentsArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   space?: boolean | Prisma.Client$spaceArgs<ExtArgs>
   _count?: boolean | Prisma.ClientCountOutputTypeDefaultArgs<ExtArgs>
@@ -1629,6 +1791,7 @@ export type $ClientPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs
     incomes: Prisma.$IncomePayload<ExtArgs>[]
     expenses: Prisma.$ExpensePayload<ExtArgs>[]
     assignedEmployees: Prisma.$EmployeePayload<ExtArgs>[]
+    generatedDocuments: Prisma.$GeneratedDocumentPayload<ExtArgs>[]
     user: Prisma.$UserPayload<ExtArgs>
     space: Prisma.$SpacePayload<ExtArgs> | null
   }
@@ -2046,6 +2209,7 @@ export interface Prisma__ClientClient<T, Null = never, ExtArgs extends runtime.T
   incomes<T extends Prisma.Client$incomesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Client$incomesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IncomePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   expenses<T extends Prisma.Client$expensesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Client$expensesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   assignedEmployees<T extends Prisma.Client$assignedEmployeesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Client$assignedEmployeesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmployeePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  generatedDocuments<T extends Prisma.Client$generatedDocumentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Client$generatedDocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GeneratedDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   space<T extends Prisma.Client$spaceArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Client$spaceArgs<ExtArgs>>): Prisma.Prisma__SpaceClient<runtime.Types.Result.GetResult<Prisma.$SpacePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
@@ -2586,6 +2750,30 @@ export type Client$assignedEmployeesArgs<ExtArgs extends runtime.Types.Extension
   take?: number
   skip?: number
   distinct?: Prisma.EmployeeScalarFieldEnum | Prisma.EmployeeScalarFieldEnum[]
+}
+
+/**
+ * Client.generatedDocuments
+ */
+export type Client$generatedDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the GeneratedDocument
+   */
+  select?: Prisma.GeneratedDocumentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the GeneratedDocument
+   */
+  omit?: Prisma.GeneratedDocumentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GeneratedDocumentInclude<ExtArgs> | null
+  where?: Prisma.GeneratedDocumentWhereInput
+  orderBy?: Prisma.GeneratedDocumentOrderByWithRelationInput | Prisma.GeneratedDocumentOrderByWithRelationInput[]
+  cursor?: Prisma.GeneratedDocumentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.GeneratedDocumentScalarFieldEnum | Prisma.GeneratedDocumentScalarFieldEnum[]
 }
 
 /**

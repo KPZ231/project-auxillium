@@ -1,10 +1,9 @@
 'use server'
 
 import { getUser } from "@/lib/session"
-import { redirect } from "next/navigation"
 import { prisma } from "@/lib/prisma"
 import { z } from "zod"
-import { Lead, LeadStatus } from "@/lib/generated/client/client"
+import { LeadStatus } from "@/lib/generated/client/client"
 import { revalidatePath } from "next/cache"
 import { invalidateCache } from "@/lib/redis"
 

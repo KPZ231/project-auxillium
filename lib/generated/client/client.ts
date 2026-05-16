@@ -111,3 +111,13 @@ export type FinancialAuditLog = Prisma.FinancialAuditLogModel
  * 
  */
 export type Integration = Prisma.IntegrationModel
+/**
+ * Model DocumentTemplate
+ * 
+ */
+export type DocumentTemplate = Prisma.DocumentTemplateModel
+/**
+ * Model GeneratedDocument
+ * 
+ */
+export type GeneratedDocument = Prisma.GeneratedDocumentModel

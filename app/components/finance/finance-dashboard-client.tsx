@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import PageHeader from "@/app/components/Dashboard/Dashboard/Shared/PageHeader/PageHeader";
-import { Plus, BarChart3, TrendingUp, Wallet, Percent, ArrowUpRight, ArrowDownRight, Activity, Zap } from "lucide-react";
+import { Plus, BarChart3, TrendingUp, Wallet, ArrowUpRight, ArrowDownRight, Zap } from "lucide-react";
 import { FinanceChart } from "./finance-chart";
 import { RevenueGoalCard } from "./revenue-goal-card";
 import { ExpenseEstimation } from "./expense-estimation";
@@ -12,11 +12,12 @@ import { CategoryPieChart } from "./category-pie-chart";
 import { CashRunwayWidget } from "./cash-runway-widget";
 import { AuditLogPanel } from "./audit-log-panel";
 import { PnlStatementTable } from "./pnl-statement-table";
+import { TransactionHistoryTable } from "./transaction-history-table";
 import { getFinancialSummary } from "@/actions/finance";
 import { useTranslation } from "@/app/context/TranslationContext";
 
 interface FinanceDashboardClientProps {
-  initialData: any;
+  initialData: Record<string, unknown>;
   userId: string;
   spaceId: string;
 }
@@ -37,7 +38,7 @@ export function FinanceDashboardClient({ initialData, userId, spaceId }: Finance
   const incomeMom = data?.mom?.income || 0;
   const expenseMom = data?.mom?.expenses || 0;
   const profitMargin = data?.profitMargin || 0;
-  const avgBurnRate = (data?.months?.reduce((acc: number, curr: any) => acc + curr.expenses, 0) / (data?.months?.length || 1)) || 0;
+  const avgBurnRate = (data?.months?.reduce((acc: number, curr: { expenses: number }) => acc + curr.expenses, 0) / (data?.months?.length || 1)) || 0;
 
   const renderMom = (val: number, inverseGood = false) => {
     if (val === 0) return null;
@@ -92,7 +93,7 @@ export function FinanceDashboardClient({ initialData, userId, spaceId }: Finance
                 {((currentIncome / (currentGoal || 1)) * 100).toFixed(0)}% {t("dashboard:finance.reached")}
               </div>
             </div>
-
+ 
             <div className="p-8 flex flex-col justify-between h-32">
               <div>
                 <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#71717A] mb-2">{t("dashboard:finance.average_spending")}</p>
@@ -102,7 +103,7 @@ export function FinanceDashboardClient({ initialData, userId, spaceId }: Finance
               </div>
               {renderMom(expenseMom, true)}
             </div>
-
+ 
             <div className="p-8 flex flex-col justify-between h-32">
               <div>
                 <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#71717A] mb-2">{t("dashboard:finance.profitability")}</p>
@@ -112,7 +113,7 @@ export function FinanceDashboardClient({ initialData, userId, spaceId }: Finance
             </div>
           </div>
         </section>
-
+ 
         {/* PERFORMANCE ANALYSIS */}
         <section className="space-y-6">
           <div>
@@ -137,7 +138,7 @@ export function FinanceDashboardClient({ initialData, userId, spaceId }: Finance
             </div>
           </div>
         </section>
-
+ 
         {/* CASH FLOW & SAFETY */}
         <section className="space-y-6">
           <div>
@@ -158,7 +159,7 @@ export function FinanceDashboardClient({ initialData, userId, spaceId }: Finance
             </div>
           </div>
         </section>
-
+ 
         {/* SPENDING INSIGHTS & ACTIVITY */}
         <section className="space-y-6">
           <div>
@@ -203,27 +204,41 @@ export function FinanceDashboardClient({ initialData, userId, spaceId }: Finance
                     </div>
                   </div>
               </div>
-
+ 
               <AuditLogPanel spaceId={spaceId} />
             </div>
           </div>
         </section>
 
         {/* DETAILS TABLE */}
-        <section className="space-y-6">
-          <div>
-            <h2 className="text-[20px] font-black uppercase tracking-tighter text-[#0A0A0A]">
-              {t("dashboard:finance.summary_table")}
-            </h2>
-            <p className="text-[11px] text-[#71717A] uppercase tracking-widest mt-1">
-              {t("dashboard:finance.summary_table_desc")}
-            </p>
+        <section className="space-y-12">
+          <div className="space-y-6">
+            <div>
+              <h2 className="text-[20px] font-black uppercase tracking-tighter text-[#0A0A0A]">
+                {t("dashboard:finance.summary_table")}
+              </h2>
+              <p className="text-[11px] text-[#71717A] uppercase tracking-widest mt-1">
+                {t("dashboard:finance.summary_table_desc")}
+              </p>
+            </div>
+            <PnlStatementTable data={data?.pnlData || {}} />
           </div>
-          <PnlStatementTable data={data?.pnlData || {}} />
+
+          <div className="space-y-6">
+             <div>
+              <h2 className="text-[20px] font-black uppercase tracking-tighter text-[#0A0A0A]">
+                {t("dashboard:finance.transaction_history") || "Transaction History"}
+              </h2>
+              <p className="text-[11px] text-[#71717A] uppercase tracking-widest mt-1">
+                {t("dashboard:finance.transaction_history_desc") || "Review individual incomes and expenses"}
+              </p>
+            </div>
+            <TransactionHistoryTable transactions={data?.transactions || []} />
+          </div>
         </section>
-
+ 
       </div>
-
+ 
       <AddTransactionModal 
         isOpen={isModalOpen} 
         onClose={() => {

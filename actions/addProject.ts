@@ -1,7 +1,6 @@
 'use server'
 
 import { getUser } from "@/lib/session"
-import { redirect } from "next/navigation"
 import { prisma } from "@/lib/prisma"
 import { z } from "zod"
 import { ProjectStatus } from "@/lib/generated/client/client"

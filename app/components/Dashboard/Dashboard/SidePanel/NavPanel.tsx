@@ -2,6 +2,7 @@
 import { usePathname } from "next/navigation";
 import { FaBell, FaUser } from "react-icons/fa6";
 import Link from "next/link";
+import Image from "next/image";
 import { useUser } from "@/app/context/UserContext";
 
 export default function NavPanel() {
@@ -21,9 +22,9 @@ export default function NavPanel() {
             <FaBell className="text-gray-600 text-xl hover:text-(--primary) transition-colors" />
           </Link>
           {/* User Avatar */}
-          <div className="w-8 h-8 bg-gray-200 flex items-center justify-center overflow-hidden border border-gray-300">
+          <div className="w-8 h-8 bg-gray-200 flex items-center justify-center overflow-hidden border border-gray-300 relative">
             {user?.avatarUrl ? (
-              <img src={user.avatarUrl} alt="Avatar" className="w-full h-full object-cover" />
+              <Image src={user.avatarUrl} alt="Avatar" fill className="object-cover" />
             ) : (
               <FaUser className="text-gray-600 w-5 h-5" />
             )}

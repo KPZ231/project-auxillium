@@ -9,8 +9,17 @@ import { AnimatePresence } from "motion/react";
 import { toast } from "sonner";
 import { Search, Filter } from "lucide-react";
 
+interface Task {
+  id: string;
+  title: string;
+  status: string;
+  priority: string;
+  order: number;
+  [key: string]: unknown;
+}
+
 interface KanbanBoardProps {
-  initialTasks: any[];
+  initialTasks: Task[];
   spaceId: string;
   projectId?: string;
 }
@@ -23,15 +32,16 @@ const COLUMNS = [
 ];
 
 export function KanbanBoard({ initialTasks, spaceId, projectId }: KanbanBoardProps) {
-  const [tasks, setTasks] = useState(initialTasks);
+  const [tasks, setTasks] = useState<Task[]>(initialTasks);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedTask, setSelectedTask] = useState<any>(null);
+  const [selectedTask, setSelectedTask] = useState<Task | null>(null);
   const [defaultColumnId, setDefaultColumnId] = useState<string>("TODO");
   const [searchQuery, setSearchQuery] = useState("");
   const [priorityFilter, setPriorityFilter] = useState<string>("ALL");
 
   // Sync state with props
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setTasks(initialTasks);
   }, [initialTasks]);
 
@@ -91,7 +101,7 @@ export function KanbanBoard({ initialTasks, spaceId, projectId }: KanbanBoardPro
     }
   };
 
-  const handleTaskClick = (task: any) => {
+  const handleTaskClick = (task: Task) => {
     setSelectedTask(task);
     setIsModalOpen(true);
   };
@@ -102,7 +112,7 @@ export function KanbanBoard({ initialTasks, spaceId, projectId }: KanbanBoardPro
     setIsModalOpen(true);
   };
 
-  const handleSaveTask = async (data: any) => {
+  const handleSaveTask = async (data: Record<string, unknown>) => {
     try {
       if (selectedTask) {
         const updated = await updateTask(selectedTask.id, data);

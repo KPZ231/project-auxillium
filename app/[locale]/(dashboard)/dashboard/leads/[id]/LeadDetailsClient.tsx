@@ -6,8 +6,6 @@ import { motion, AnimatePresence } from "motion/react";
 import { toast } from "sonner";
 import { deleteLead } from "@/actions/deleteLead";
 import { updateLead } from "@/actions/updateLead";
-import { LeadStatus } from "@/lib/generated/client/browser";
-import Link from "next/link";
 import { useBreadcrumb } from "@/app/context/BreadcrumbContext";
 import { PremiumInput, PremiumTextarea, PremiumSelect } from "@/app/components/UI/FormElements";
 
@@ -17,7 +15,21 @@ const STEPS = [
   "Additional Notes"
 ];
 
-export default function LeadDetailsClient({ lead, isUnauthorized = false }: { lead: any, isUnauthorized?: boolean }) {
+interface Lead {
+  id: string;
+  leadName: string;
+  leadInfo?: string;
+  status: string;
+  projectType?: string;
+  contactName?: string;
+  role?: string;
+  email?: string;
+  phone?: string;
+  stage?: string;
+  turnedIntoClient: boolean;
+}
+
+export default function LeadDetailsClient({ lead, isUnauthorized = false }: { lead: Lead, isUnauthorized?: boolean }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { setCustomLabel } = useBreadcrumb();

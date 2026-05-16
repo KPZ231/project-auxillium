@@ -6,13 +6,13 @@ import { motion, AnimatePresence } from "motion/react";
 import { toast } from "sonner";
 import { deleteProject } from "@/actions/deleteProject";
 import { updateProject } from "@/actions/updateProject";
-import { ProjectStatus } from "@/lib/generated/client/browser";
 import { ImageUploader } from "@/app/components/UI/ImageUploader";
 import Link from "next/link";
 import Image from "next/image";
 import { useBreadcrumb } from "@/app/context/BreadcrumbContext";
 import { AssignmentManager } from "@/app/components/assignments/assignment-manager";
 import { PremiumInput, PremiumTextarea, PremiumSelect } from "@/app/components/UI/FormElements";
+import { RelatedDocuments } from "@/app/components/templates/RelatedDocuments";
 
 const STEPS = [
   "Basic Info",
@@ -22,7 +22,45 @@ const STEPS = [
   "Milestones & Gallery"
 ];
 
-export default function ProjectDetailsClient({ project, isUnauthorized = false }: { project: any, isUnauthorized?: boolean }) {
+interface Milestone {
+  title: string;
+  date: string;
+  completed: boolean;
+  progress: number;
+}
+
+interface Project {
+  id: string;
+  projectName: string;
+  projectDescription: string;
+  projectStatus: string;
+  projectType?: string;
+  priority?: string;
+  budget?: string;
+  location?: string;
+  context?: string;
+  clientInfo?: string;
+  assignedUsersInfo?: string;
+  clientBrief?: string;
+  websiteUrl?: string;
+  githubUrl?: string;
+  timeline?: string;
+  images: string[];
+  milestones: Milestone[];
+  dueDate?: string | Date;
+  assignedEmployees: any[];
+  status: string;
+}
+
+export default function ProjectDetailsClient({ 
+  project, 
+  isUnauthorized = false,
+  spaceId
+}: { 
+  project: Project, 
+  isUnauthorized?: boolean,
+  spaceId: string 
+}) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { setCustomLabel } = useBreadcrumb();
@@ -121,9 +159,9 @@ export default function ProjectDetailsClient({ project, isUnauthorized = false }
     }));
   };
 
-  const updateMilestone = (index: number, field: string, value: any) => {
+  const updateMilestone = (index: number, field: keyof Milestone, value: string | boolean | number) => {
     const newMilestones = [...formData.milestones];
-    newMilestones[index] = { ...newMilestones[index], [field]: value };
+    newMilestones[index] = { ...newMilestones[index], [field]: value } as Milestone;
     setFormData((prev) => ({ ...prev, milestones: newMilestones }));
   };
 
@@ -190,7 +228,7 @@ export default function ProjectDetailsClient({ project, isUnauthorized = false }
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-10">
             <div className="border-l-4 border-[#0A0A0A] pl-6 py-2">
               <h3 className="text-[24px] font-black text-[#0A0A0A] uppercase tracking-tight">2. Narrative & Context</h3>
-              <p className="text-[13px] text-[#71717A] uppercase tracking-wider font-medium">Define the "why" and "how" of the project.</p>
+              <p className="text-[13px] text-[#71717A] uppercase tracking-wider font-medium">Define the &quot;why&quot; and &quot;how&quot; of the project.</p>
             </div>
             
             <div className="space-y-10">
@@ -326,7 +364,7 @@ export default function ProjectDetailsClient({ project, isUnauthorized = false }
               )}
               
               <div className="space-y-4">
-                {formData.milestones.map((m: any, i: number) => (
+                {formData.milestones.map((m: Milestone, i: number) => (
                   <motion.div 
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -412,7 +450,7 @@ export default function ProjectDetailsClient({ project, isUnauthorized = false }
 
   // Calculate overall progress
   const totalProgress = project.milestones && project.milestones.length > 0 
-    ? Math.round(project.milestones.reduce((acc: number, m: any) => acc + (m.progress || (m.completed ? 100 : 0)), 0) / project.milestones.length)
+    ? Math.round(project.milestones.reduce((acc: number, m: Milestone) => acc + (m.progress || (m.completed ? 100 : 0)), 0) / project.milestones.length)
     : 0;
 
   if (isUnauthorized) {
@@ -547,7 +585,7 @@ export default function ProjectDetailsClient({ project, isUnauthorized = false }
               </div>
 
               <div className="space-y-6 border-l border-[#E5E5E5] pl-6">
-                {project.milestones.map((m: any, i: number) => {
+                {project.milestones.map((m: Milestone, i: number) => {
                   const isDone = m.completed || m.progress === 100;
                   return (
                     <div key={i} className="relative group">
@@ -613,6 +651,10 @@ export default function ProjectDetailsClient({ project, isUnauthorized = false }
                 />
               </div>
             </dl>
+          </div>
+
+          <div className="p-6 border border-[#E5E5E5]">
+            <RelatedDocuments spaceId={spaceId} projectId={project.id} />
           </div>
 
           {(project.websiteUrl || project.githubUrl) && (

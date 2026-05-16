@@ -13,7 +13,7 @@ export async function GET(request: NextRequest) {
     const searchParams = request.nextUrl.searchParams;
     const provider = searchParams.get("provider"); // e.g. "google_sheets"
 
-    if (!provider || !["google_sheets", "google_drive", "google_docs"].includes(provider)) {
+    if (!provider || !["google_sheets", "google_drive", "google_docs", "google_calendar", "google_tasks"].includes(provider)) {
       return NextResponse.json({ error: "Invalid provider" }, { status: 400 });
     }
 
@@ -39,6 +39,10 @@ export async function GET(request: NextRequest) {
       scopes = ["https://www.googleapis.com/auth/drive.file"];
     } else if (provider === "google_docs") {
       scopes = ["https://www.googleapis.com/auth/documents"];
+    } else if (provider === "google_calendar") {
+      scopes = ["https://www.googleapis.com/auth/calendar"];
+    } else if (provider === "google_tasks") {
+      scopes = ["https://www.googleapis.com/auth/tasks"];
     }
 
     // Dodajemy e-mail profile itp

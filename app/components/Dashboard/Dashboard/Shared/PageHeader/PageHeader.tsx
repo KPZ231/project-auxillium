@@ -19,7 +19,7 @@ interface PageHeaderProps {
   };
   tabs?: Tab[];
   currentTab?: string;
-  onTabChange?: (value: any) => void;
+  onTabChange?: (value: string) => void;
 }
 
 export default function PageHeader({

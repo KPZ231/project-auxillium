@@ -4,14 +4,9 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { 
   Building2, 
-  Rocket, 
-  ChevronRight, 
-  Sparkles, 
   ArrowRight,
   Loader2,
   CheckCircle2,
-  Globe,
-  Briefcase
 } from "lucide-react";
 import { createSpace } from "@/actions/space";
 import { toast } from "sonner";
@@ -71,7 +66,7 @@ export default function OnboardingPage() {
             
             <p className="text-slate-500 text-xl font-light max-w-xl leading-relaxed">
               Spaces allow you to isolate projects, leads, and team members. 
-              Let's set up your first environment to get started.
+              Let&apos;s set up your first environment to get started.
             </p>
 
             <button

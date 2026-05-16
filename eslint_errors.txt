@@ -1,0 +1,336 @@
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\actions\addLead.ts
+  4:10  warning  'redirect' is defined but never used  @typescript-eslint/no-unused-vars
+  7:10  warning  'Lead' is defined but never used      @typescript-eslint/no-unused-vars
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\actions\addProject.ts
+  4:10  warning  'redirect' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\actions\ai\googleTools.ts
+  59:96  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\actions\connectors.ts
+  7:10  warning  'google' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\actions\employee.ts
+  15:38  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  78:38  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\actions\exportUserData.ts
+   94:11  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   95:13  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   96:10  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   97:12  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   98:14  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   99:10  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  100:13  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  101:12  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\actions\finance.ts
+    4:8    warning  'redis' is defined but never used         @typescript-eslint/no-unused-vars
+    7:19   warning  'Income' is defined but never used        @typescript-eslint/no-unused-vars
+    7:27   warning  'RevenueGoal' is defined but never used   @typescript-eslint/no-unused-vars
+  174:40   error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  209:19   error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  211:26   error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  352:100  warning  'currency' is defined but never used      @typescript-eslint/no-unused-vars
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\actions\getLeads.ts
+  21:47  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\actions\getProjects.ts
+  4:10  warning  'unstable_cache' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\actions\googleSync.ts
+  6:10  warning  'toast' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\actions\leadSearch.ts
+   40:19  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   87:19  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  118:19  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\actions\templates.ts
+    9:94   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   62:39   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   78:12   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   85:53   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+   86:47   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  124:40   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  125:36   error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  138:103  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\actions\uploadImage.ts
+  25:13  warning  'data' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\actions\uploadReceipt.ts
+  25:13  warning  'data' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\[locale]\(dashboard)\dashboard\ai\AIChatClient.tsx
+   18:3  warning  'User' is defined but never used                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   @typescript-eslint/no-unused-vars
+  408:5  error    Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\[locale]\(dashboard)\dashboard\ai\AIChatClient.tsx:408:5
+  406 |
+  407 |   useEffect(() => {
+> 408 |     fetchServices();
+      |     ^^^^^^^^^^^^^ Avoid calling setState() directly within an effect
+  409 |   }, []);
+  410 |
+  411 |   const openConnectorModal = (name: string, type: ConnectorType) => {  react-hooks/set-state-in-effect
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\[locale]\(dashboard)\dashboard\clients\[id]\ClientDetailsClient.tsx
+   13:41  warning  'PremiumSelect' is defined but never used  @typescript-eslint/no-unused-vars
+   41:13  error    Unexpected any. Specify a different type   @typescript-eslint/no-explicit-any
+   42:22  error    Unexpected any. Specify a different type   @typescript-eslint/no-explicit-any
+  159:36  error    Unexpected any. Specify a different type   @typescript-eslint/no-explicit-any
+  160:37  error    Unexpected any. Specify a different type   @typescript-eslint/no-explicit-any
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\[locale]\(dashboard)\dashboard\clients\page.tsx
+  29:122  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\[locale]\(dashboard)\dashboard\lead-search\page.tsx
+  9:13  warning  'locale' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\[locale]\(dashboard)\dashboard\leads\[id]\LeadDetailsClient.tsx
+    9:10  warning  'LeadStatus' is defined but never used    @typescript-eslint/no-unused-vars
+   10:8   warning  'Link' is defined but never used          @typescript-eslint/no-unused-vars
+   93:49  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  168:86  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  383:90  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\[locale]\(dashboard)\dashboard\projects\[id]\ProjectDetailsClient.tsx
+    9:10  warning  'ProjectStatus' is defined but never used  @typescript-eslint/no-unused-vars
+   52:22  error    Unexpected any. Specify a different type   @typescript-eslint/no-explicit-any
+  198:93  error    Unexpected any. Specify a different type   @typescript-eslint/no-explicit-any
+  827:97  error    Unexpected any. Specify a different type   @typescript-eslint/no-explicit-any
+  901:48  error    Unexpected any. Specify a different type   @typescript-eslint/no-explicit-any
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\[locale]\(dashboard)\dashboard\space\employees\[id]\page.tsx
+   5:3  warning  'ArrowLeft' is defined but never used     @typescript-eslint/no-unused-vars
+   9:3  warning  'Shield' is defined but never used        @typescript-eslint/no-unused-vars
+  10:3  warning  'Calendar' is defined but never used      @typescript-eslint/no-unused-vars
+  11:3  warning  'FolderKanban' is defined but never used  @typescript-eslint/no-unused-vars
+  12:3  warning  'CheckCircle2' is defined but never used  @typescript-eslint/no-unused-vars
+  13:3  warning  'Clock' is defined but never used         @typescript-eslint/no-unused-vars
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\[locale]\(dashboard)\dashboard\space\employees\page.tsx
+  4:10  warning  'Users' is defined but never used     @typescript-eslint/no-unused-vars
+  4:17  warning  'UserPlus' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\[locale]\(dashboard)\dashboard\space\settings\page.tsx
+  4:10  warning  'Settings' is defined but never used   @typescript-eslint/no-unused-vars
+  4:20  warning  'Plus' is defined but never used       @typescript-eslint/no-unused-vars
+  4:26  warning  'Building2' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\[locale]\(dashboard)\settings\SettingsClient.tsx
+    5:89  warning  'Link' is defined but never used                                                                                                                                                                                                                                                         @typescript-eslint/no-unused-vars
+   26:3   warning  'userId' is defined but never used                                                                                                                                                                                                                                                       @typescript-eslint/no-unused-vars
+   63:5   warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/set-state-in-effect')
+  200:19  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\[locale]\(marketing)\soon\page.tsx
+  189:12  error  Parsing error: '}' expected
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\[locale]\layout.tsx
+  29:35  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  36:14  warning  'e' is defined but never used             @typescript-eslint/no-unused-vars
+  63:57  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\[locale]\onboarding\page.tsx
+   6:3   warning  'Building2' is defined but never used                            @typescript-eslint/no-unused-vars
+   7:3   warning  'Rocket' is defined but never used                               @typescript-eslint/no-unused-vars
+   8:3   warning  'ChevronRight' is defined but never used                         @typescript-eslint/no-unused-vars
+   9:3   warning  'Sparkles' is defined but never used                             @typescript-eslint/no-unused-vars
+  13:3   warning  'Globe' is defined but never used                                @typescript-eslint/no-unused-vars
+  14:3   warning  'Briefcase' is defined but never used                            @typescript-eslint/no-unused-vars
+  47:21  error    Unexpected any. Specify a different type                         @typescript-eslint/no-explicit-any
+  74:18  error    `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\api\auth\google\callback\route.ts
+  24:14  warning  'e' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\api\documents\generate\route.ts
+  42:33  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\components\ContactForm\ContactForm.tsx
+  49:14  warning  'error' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\components\CookieBanner\CookieBanner.tsx
+  57:26  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  57:36  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\components\Dashboard\Dashboard\Leads\LeadsFilter\LeadsFilters.tsx
+  196:78  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+  196:92  error  `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`  react/no-unescaped-entities
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\components\Dashboard\Dashboard\MetricsOverview\ActivityAndTasks.tsx
+   49:9   warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/set-state-in-effect')
+   69:5   warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/set-state-in-effect')
+   90:9   warning  'listContainerVariants' is assigned a value but never used                                          @typescript-eslint/no-unused-vars
+   98:9   warning  'listItemVariants' is assigned a value but never used                                               @typescript-eslint/no-unused-vars
+  187:37  warning  'idx' is defined but never used                                                                     @typescript-eslint/no-unused-vars
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\components\Dashboard\Dashboard\MetricsOverview\MetricBoxes.tsx
+  6:10  warning  'getProjectCount' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\components\Dashboard\Dashboard\Projects\ProjectsGrid\ProjectsGrid.tsx
+  4:8  warning  'Link' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\components\Dashboard\Dashboard\Projects\ProjectsHeader\ProjectsHeader.tsx
+  24:9  warning  'FilterButton' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\components\Dashboard\Dashboard\Shared\PageHeader\PageHeader.tsx
+  22:25  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\components\Dashboard\Dashboard\SidePanel\NavPanel.tsx
+  26:15  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\components\Dashboard\Dashboard\SidePanel\SidePanel.tsx
+  5:8  warning  'Image' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\components\Dashboard\Dashboard\TopBar\TopBar.tsx
+  61:17  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\components\Dashboard\Space\EmployeeForm.tsx
+   8:13  warning  'User' is defined but never used          @typescript-eslint/no-unused-vars
+   8:19  warning  'Mail' is defined but never used          @typescript-eslint/no-unused-vars
+   8:25  warning  'Phone' is defined but never used         @typescript-eslint/no-unused-vars
+   8:32  warning  'Briefcase' is defined but never used     @typescript-eslint/no-unused-vars
+   8:43  warning  'ShieldCheck' is defined but never used   @typescript-eslint/no-unused-vars
+  60:21  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\components\Dashboard\Space\EmployeeListClient.tsx
+   11:3   warning  'Briefcase' is defined but never used     @typescript-eslint/no-unused-vars
+  195:33  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\components\Dashboard\Space\SpaceSelectionModal.tsx
+   5:18  warning  'AnimatePresence' is defined but never used  @typescript-eslint/no-unused-vars
+  17:11  error    Unexpected any. Specify a different type     @typescript-eslint/no-explicit-any
+  32:21  error    Unexpected any. Specify a different type     @typescript-eslint/no-explicit-any
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\components\Dashboard\Space\SpaceSettingsClient.tsx
+  11:3   warning  'Info' is defined but never used             @typescript-eslint/no-unused-vars
+  12:3   warning  'LayoutDashboard' is defined but never used  @typescript-eslint/no-unused-vars
+  21:18  error    Unexpected any. Specify a different type     @typescript-eslint/no-explicit-any
+  51:21  error    Unexpected any. Specify a different type     @typescript-eslint/no-explicit-any
+  67:21  error    Unexpected any. Specify a different type     @typescript-eslint/no-explicit-any
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\components\Forms\LoginForm\LoginForm.tsx
+  123:65  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\components\Forms\ResetPassword\ResetPasswordConfirm.tsx
+  59:14  warning  'error' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\components\Navbar\Navbar.tsx
+  9:10  warning  'MdAccountCircle' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\components\UI\Breadcrumbs.tsx
+  61:37  warning  'index' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\components\VideoPlayer\VideoPlayer.tsx
+  11:3  warning  'Minimize' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\components\assignments\assignment-manager.tsx
+  13:19  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  46:14  warning  'error' is defined but never used         @typescript-eslint/no-unused-vars
+  72:14  warning  'error' is defined but never used         @typescript-eslint/no-unused-vars
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\components\assignments\member-badge.tsx
+  29:9  warning  'sizeClasses' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\components\finance\add-transaction-modal.tsx
+   33:10  warning  'labels' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  189:14  warning  'err' is defined but never used              @typescript-eslint/no-unused-vars
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\components\finance\audit-log-panel.tsx
+  27:7  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/set-state-in-effect')
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\components\finance\finance-dashboard-client.tsx
+  5:16  warning  'BarChart3' is defined but never used   @typescript-eslint/no-unused-vars
+  5:27  warning  'TrendingUp' is defined but never used  @typescript-eslint/no-unused-vars
+  5:39  warning  'Wallet' is defined but never used      @typescript-eslint/no-unused-vars
+  5:47  warning  'Percent' is defined but never used     @typescript-eslint/no-unused-vars
+  5:86  warning  'Activity' is defined but never used    @typescript-eslint/no-unused-vars
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\components\settings\ConnectorModal.tsx
+  48:14  warning  '_err' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\components\tasks\KanbanBoard.tsx
+  140:14  warning  'error' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\components\tasks\KanbanContainer.tsx
+   57:5   warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/set-state-in-effect')
+  115:14  warning  'error' is defined but never used                                                                   @typescript-eslint/no-unused-vars
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\components\templates\BrandingPanel\index.tsx
+   4:34  warning  'Upload' is defined but never used        @typescript-eslint/no-unused-vars
+  20:62  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\components\templates\DocumentExportModal.tsx
+  26:9  warning  Unused eslint-disable directive (no problems were reported from 'react-hooks/set-state-in-effect')
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\components\templates\DocumentHubHeader.tsx
+  4:10  warning  'FileText' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\components\templates\GeneratedDocumentCard.tsx
+  9:8  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\components\templates\QuickDocumentModal.tsx
+   4:23  warning  'Download' is defined but never used      @typescript-eslint/no-unused-vars
+   4:42  warning  'Search' is defined but never used        @typescript-eslint/no-unused-vars
+  24:46  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  25:42  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  26:44  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\components\templates\TemplateCard.tsx
+   4:38  warning  'Edit3' is defined but never used         @typescript-eslint/no-unused-vars
+  12:13  error    Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\components\templates\TemplateEditor\BlockEditor\SortableBlock.tsx
+  14:23  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                 @typescript-eslint/no-explicit-any
+  92:15  warning  Using `<img>` could result in slower LCP and higher bandwidth. Consider using `<Image />` from `next/image` or a custom image loader to automatically optimize images. This may incur additional usage or cost from your provider. See: https://nextjs.org/docs/messages/no-img-element  @next/next/no-img-element
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\app\context\TranslationContext.tsx
+    8:68   error    Unexpected any. Specify a different type                                                                       @typescript-eslint/no-explicit-any
+    8:99   error    Unexpected any. Specify a different type                                                                       @typescript-eslint/no-explicit-any
+   23:30   error    Unexpected any. Specify a different type                                                                       @typescript-eslint/no-explicit-any
+   70:56   error    Unexpected any. Specify a different type                                                                       @typescript-eslint/no-explicit-any
+   86:87   error    Unexpected any. Specify a different type                                                                       @typescript-eslint/no-explicit-any
+   86:118  error    Unexpected any. Specify a different type                                                                       @typescript-eslint/no-explicit-any
+  103:7    warning  React Hook useMemo has an unnecessary dependency: 'isReady'. Either exclude it or remove the dependency array  react-hooks/exhaustive-deps
+  116:72   error    Unexpected any. Specify a different type                                                                       @typescript-eslint/no-explicit-any
+  127:10   warning  'getCookie' is defined but never used                                                                          @typescript-eslint/no-unused-vars
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\brain\scratch\debug_prisma.ts
+  5:47  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  6:47  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\lib\mail.ts
+  14:37  warning  'success' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\lib\session.ts
+  14:18  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\lib\templates\converters.ts
+  45:29  warning  'index' is defined but never used  @typescript-eslint/no-unused-vars
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\scratch\scraper\firm-scraper\frontend\src\App.jsx
+  383:6   warning  React Hook useEffect has a missing dependency: 'handleSubmit'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  781:83  error    `"` can be escaped with `&quot;`, `&ldquo;`, `&#34;`, `&rdquo;`                                                  react/no-unescaped-entities
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\store\leadSearchStore.ts
+  13:13  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+C:\Users\kapie\Documents\KPZsProductions\ProjectAuxillium\project-auxillium\utils\supabase\proxy.ts
+  11:9   warning  'supabase' is assigned a value but never used  @typescript-eslint/no-unused-vars
+  20:48  warning  'options' is defined but never used            @typescript-eslint/no-unused-vars
+
+Ôťľ 173 problems (78 errors, 95 warnings)
+  0 errors and 6 warnings potentially fixable with the `--fix` option.
+

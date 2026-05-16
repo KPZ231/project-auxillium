@@ -4,9 +4,9 @@ import { getUser } from "@/lib/session";
 import { prisma } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 
-import { google } from "googleapis";
 
-export type ConnectorType = "google_sheets" | "google_drive" | "google_docs";
+
+export type ConnectorType = "google_sheets" | "google_drive" | "google_docs" | "google_calendar" | "google_tasks";
 
 export async function getConnectedServices(): Promise<{ success: boolean; data?: Record<ConnectorType, boolean>; error?: string }> {
   try {
@@ -25,6 +25,8 @@ export async function getConnectedServices(): Promise<{ success: boolean; data?:
       google_sheets: false,
       google_drive: false,
       google_docs: false,
+      google_calendar: false,
+      google_tasks: false,
     };
 
     integrations.forEach(integration => {

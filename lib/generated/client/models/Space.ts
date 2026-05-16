@@ -218,6 +218,8 @@ export type SpaceWhereInput = {
   revenueGoals?: Prisma.RevenueGoalListRelationFilter
   financialLabels?: Prisma.FinancialLabelListRelationFilter
   financialAuditLogs?: Prisma.FinancialAuditLogListRelationFilter
+  documentTemplates?: Prisma.DocumentTemplateListRelationFilter
+  generatedDocuments?: Prisma.GeneratedDocumentListRelationFilter
 }
 
 export type SpaceOrderByWithRelationInput = {
@@ -241,6 +243,8 @@ export type SpaceOrderByWithRelationInput = {
   revenueGoals?: Prisma.RevenueGoalOrderByRelationAggregateInput
   financialLabels?: Prisma.FinancialLabelOrderByRelationAggregateInput
   financialAuditLogs?: Prisma.FinancialAuditLogOrderByRelationAggregateInput
+  documentTemplates?: Prisma.DocumentTemplateOrderByRelationAggregateInput
+  generatedDocuments?: Prisma.GeneratedDocumentOrderByRelationAggregateInput
 }
 
 export type SpaceWhereUniqueInput = Prisma.AtLeast<{
@@ -267,6 +271,8 @@ export type SpaceWhereUniqueInput = Prisma.AtLeast<{
   revenueGoals?: Prisma.RevenueGoalListRelationFilter
   financialLabels?: Prisma.FinancialLabelListRelationFilter
   financialAuditLogs?: Prisma.FinancialAuditLogListRelationFilter
+  documentTemplates?: Prisma.DocumentTemplateListRelationFilter
+  generatedDocuments?: Prisma.GeneratedDocumentListRelationFilter
 }, "id" | "spaceName">
 
 export type SpaceOrderByWithAggregationInput = {
@@ -317,6 +323,8 @@ export type SpaceCreateInput = {
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelCreateNestedManyWithoutSpaceInput
   financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutSpaceInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutSpaceInput
+  generatedDocuments?: Prisma.GeneratedDocumentCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceUncheckedCreateInput = {
@@ -339,6 +347,8 @@ export type SpaceUncheckedCreateInput = {
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelUncheckedCreateNestedManyWithoutSpaceInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutSpaceInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutSpaceInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceUpdateInput = {
@@ -361,6 +371,8 @@ export type SpaceUpdateInput = {
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUpdateManyWithoutSpaceNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutSpaceNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutSpaceNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceUncheckedUpdateInput = {
@@ -383,6 +395,8 @@ export type SpaceUncheckedUpdateInput = {
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUncheckedUpdateManyWithoutSpaceNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutSpaceNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutSpaceNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceCreateManyInput = {
@@ -696,6 +710,38 @@ export type SpaceUpdateOneRequiredWithoutFinancialAuditLogsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.SpaceUpdateToOneWithWhereWithoutFinancialAuditLogsInput, Prisma.SpaceUpdateWithoutFinancialAuditLogsInput>, Prisma.SpaceUncheckedUpdateWithoutFinancialAuditLogsInput>
 }
 
+export type SpaceCreateNestedOneWithoutDocumentTemplatesInput = {
+  create?: Prisma.XOR<Prisma.SpaceCreateWithoutDocumentTemplatesInput, Prisma.SpaceUncheckedCreateWithoutDocumentTemplatesInput>
+  connectOrCreate?: Prisma.SpaceCreateOrConnectWithoutDocumentTemplatesInput
+  connect?: Prisma.SpaceWhereUniqueInput
+}
+
+export type SpaceUpdateOneWithoutDocumentTemplatesNestedInput = {
+  create?: Prisma.XOR<Prisma.SpaceCreateWithoutDocumentTemplatesInput, Prisma.SpaceUncheckedCreateWithoutDocumentTemplatesInput>
+  connectOrCreate?: Prisma.SpaceCreateOrConnectWithoutDocumentTemplatesInput
+  upsert?: Prisma.SpaceUpsertWithoutDocumentTemplatesInput
+  disconnect?: Prisma.SpaceWhereInput | boolean
+  delete?: Prisma.SpaceWhereInput | boolean
+  connect?: Prisma.SpaceWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SpaceUpdateToOneWithWhereWithoutDocumentTemplatesInput, Prisma.SpaceUpdateWithoutDocumentTemplatesInput>, Prisma.SpaceUncheckedUpdateWithoutDocumentTemplatesInput>
+}
+
+export type SpaceCreateNestedOneWithoutGeneratedDocumentsInput = {
+  create?: Prisma.XOR<Prisma.SpaceCreateWithoutGeneratedDocumentsInput, Prisma.SpaceUncheckedCreateWithoutGeneratedDocumentsInput>
+  connectOrCreate?: Prisma.SpaceCreateOrConnectWithoutGeneratedDocumentsInput
+  connect?: Prisma.SpaceWhereUniqueInput
+}
+
+export type SpaceUpdateOneWithoutGeneratedDocumentsNestedInput = {
+  create?: Prisma.XOR<Prisma.SpaceCreateWithoutGeneratedDocumentsInput, Prisma.SpaceUncheckedCreateWithoutGeneratedDocumentsInput>
+  connectOrCreate?: Prisma.SpaceCreateOrConnectWithoutGeneratedDocumentsInput
+  upsert?: Prisma.SpaceUpsertWithoutGeneratedDocumentsInput
+  disconnect?: Prisma.SpaceWhereInput | boolean
+  delete?: Prisma.SpaceWhereInput | boolean
+  connect?: Prisma.SpaceWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.SpaceUpdateToOneWithWhereWithoutGeneratedDocumentsInput, Prisma.SpaceUpdateWithoutGeneratedDocumentsInput>, Prisma.SpaceUncheckedUpdateWithoutGeneratedDocumentsInput>
+}
+
 export type SpaceCreateWithoutOwnerInput = {
   id?: string
   spaceName: string
@@ -715,6 +761,8 @@ export type SpaceCreateWithoutOwnerInput = {
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelCreateNestedManyWithoutSpaceInput
   financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutSpaceInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutSpaceInput
+  generatedDocuments?: Prisma.GeneratedDocumentCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceUncheckedCreateWithoutOwnerInput = {
@@ -736,6 +784,8 @@ export type SpaceUncheckedCreateWithoutOwnerInput = {
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelUncheckedCreateNestedManyWithoutSpaceInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutSpaceInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutSpaceInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceCreateOrConnectWithoutOwnerInput = {
@@ -767,6 +817,8 @@ export type SpaceCreateWithoutMembersInput = {
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelCreateNestedManyWithoutSpaceInput
   financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutSpaceInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutSpaceInput
+  generatedDocuments?: Prisma.GeneratedDocumentCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceUncheckedCreateWithoutMembersInput = {
@@ -788,6 +840,8 @@ export type SpaceUncheckedCreateWithoutMembersInput = {
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelUncheckedCreateNestedManyWithoutSpaceInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutSpaceInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutSpaceInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceCreateOrConnectWithoutMembersInput = {
@@ -860,6 +914,8 @@ export type SpaceCreateWithoutProjectsInput = {
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelCreateNestedManyWithoutSpaceInput
   financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutSpaceInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutSpaceInput
+  generatedDocuments?: Prisma.GeneratedDocumentCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceUncheckedCreateWithoutProjectsInput = {
@@ -881,6 +937,8 @@ export type SpaceUncheckedCreateWithoutProjectsInput = {
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelUncheckedCreateNestedManyWithoutSpaceInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutSpaceInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutSpaceInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceCreateOrConnectWithoutProjectsInput = {
@@ -918,6 +976,8 @@ export type SpaceUpdateWithoutProjectsInput = {
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUpdateManyWithoutSpaceNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutSpaceNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutSpaceNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceUncheckedUpdateWithoutProjectsInput = {
@@ -939,6 +999,8 @@ export type SpaceUncheckedUpdateWithoutProjectsInput = {
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUncheckedUpdateManyWithoutSpaceNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutSpaceNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutSpaceNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceCreateWithoutLeadsInput = {
@@ -960,6 +1022,8 @@ export type SpaceCreateWithoutLeadsInput = {
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelCreateNestedManyWithoutSpaceInput
   financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutSpaceInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutSpaceInput
+  generatedDocuments?: Prisma.GeneratedDocumentCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceUncheckedCreateWithoutLeadsInput = {
@@ -981,6 +1045,8 @@ export type SpaceUncheckedCreateWithoutLeadsInput = {
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelUncheckedCreateNestedManyWithoutSpaceInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutSpaceInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutSpaceInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceCreateOrConnectWithoutLeadsInput = {
@@ -1018,6 +1084,8 @@ export type SpaceUpdateWithoutLeadsInput = {
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUpdateManyWithoutSpaceNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutSpaceNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutSpaceNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceUncheckedUpdateWithoutLeadsInput = {
@@ -1039,6 +1107,8 @@ export type SpaceUncheckedUpdateWithoutLeadsInput = {
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUncheckedUpdateManyWithoutSpaceNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutSpaceNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutSpaceNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceCreateWithoutEmployeesInput = {
@@ -1060,6 +1130,8 @@ export type SpaceCreateWithoutEmployeesInput = {
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelCreateNestedManyWithoutSpaceInput
   financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutSpaceInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutSpaceInput
+  generatedDocuments?: Prisma.GeneratedDocumentCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceUncheckedCreateWithoutEmployeesInput = {
@@ -1081,6 +1153,8 @@ export type SpaceUncheckedCreateWithoutEmployeesInput = {
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelUncheckedCreateNestedManyWithoutSpaceInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutSpaceInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutSpaceInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceCreateOrConnectWithoutEmployeesInput = {
@@ -1118,6 +1192,8 @@ export type SpaceUpdateWithoutEmployeesInput = {
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUpdateManyWithoutSpaceNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutSpaceNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutSpaceNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceUncheckedUpdateWithoutEmployeesInput = {
@@ -1139,6 +1215,8 @@ export type SpaceUncheckedUpdateWithoutEmployeesInput = {
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUncheckedUpdateManyWithoutSpaceNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutSpaceNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutSpaceNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceCreateWithoutTasksInput = {
@@ -1160,6 +1238,8 @@ export type SpaceCreateWithoutTasksInput = {
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelCreateNestedManyWithoutSpaceInput
   financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutSpaceInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutSpaceInput
+  generatedDocuments?: Prisma.GeneratedDocumentCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceUncheckedCreateWithoutTasksInput = {
@@ -1181,6 +1261,8 @@ export type SpaceUncheckedCreateWithoutTasksInput = {
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelUncheckedCreateNestedManyWithoutSpaceInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutSpaceInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutSpaceInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceCreateOrConnectWithoutTasksInput = {
@@ -1218,6 +1300,8 @@ export type SpaceUpdateWithoutTasksInput = {
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUpdateManyWithoutSpaceNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutSpaceNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutSpaceNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceUncheckedUpdateWithoutTasksInput = {
@@ -1239,6 +1323,8 @@ export type SpaceUncheckedUpdateWithoutTasksInput = {
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUncheckedUpdateManyWithoutSpaceNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutSpaceNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutSpaceNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceCreateWithoutExpensesInput = {
@@ -1260,6 +1346,8 @@ export type SpaceCreateWithoutExpensesInput = {
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelCreateNestedManyWithoutSpaceInput
   financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutSpaceInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutSpaceInput
+  generatedDocuments?: Prisma.GeneratedDocumentCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceUncheckedCreateWithoutExpensesInput = {
@@ -1281,6 +1369,8 @@ export type SpaceUncheckedCreateWithoutExpensesInput = {
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelUncheckedCreateNestedManyWithoutSpaceInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutSpaceInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutSpaceInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceCreateOrConnectWithoutExpensesInput = {
@@ -1318,6 +1408,8 @@ export type SpaceUpdateWithoutExpensesInput = {
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUpdateManyWithoutSpaceNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutSpaceNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutSpaceNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceUncheckedUpdateWithoutExpensesInput = {
@@ -1339,6 +1431,8 @@ export type SpaceUncheckedUpdateWithoutExpensesInput = {
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUncheckedUpdateManyWithoutSpaceNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutSpaceNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutSpaceNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceCreateWithoutIncomesInput = {
@@ -1360,6 +1454,8 @@ export type SpaceCreateWithoutIncomesInput = {
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelCreateNestedManyWithoutSpaceInput
   financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutSpaceInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutSpaceInput
+  generatedDocuments?: Prisma.GeneratedDocumentCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceUncheckedCreateWithoutIncomesInput = {
@@ -1381,6 +1477,8 @@ export type SpaceUncheckedCreateWithoutIncomesInput = {
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelUncheckedCreateNestedManyWithoutSpaceInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutSpaceInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutSpaceInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceCreateOrConnectWithoutIncomesInput = {
@@ -1418,6 +1516,8 @@ export type SpaceUpdateWithoutIncomesInput = {
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUpdateManyWithoutSpaceNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutSpaceNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutSpaceNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceUncheckedUpdateWithoutIncomesInput = {
@@ -1439,6 +1539,8 @@ export type SpaceUncheckedUpdateWithoutIncomesInput = {
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUncheckedUpdateManyWithoutSpaceNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutSpaceNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutSpaceNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceCreateWithoutRevenueGoalsInput = {
@@ -1460,6 +1562,8 @@ export type SpaceCreateWithoutRevenueGoalsInput = {
   incomes?: Prisma.IncomeCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelCreateNestedManyWithoutSpaceInput
   financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutSpaceInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutSpaceInput
+  generatedDocuments?: Prisma.GeneratedDocumentCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceUncheckedCreateWithoutRevenueGoalsInput = {
@@ -1481,6 +1585,8 @@ export type SpaceUncheckedCreateWithoutRevenueGoalsInput = {
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelUncheckedCreateNestedManyWithoutSpaceInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutSpaceInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutSpaceInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceCreateOrConnectWithoutRevenueGoalsInput = {
@@ -1518,6 +1624,8 @@ export type SpaceUpdateWithoutRevenueGoalsInput = {
   incomes?: Prisma.IncomeUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUpdateManyWithoutSpaceNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutSpaceNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutSpaceNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceUncheckedUpdateWithoutRevenueGoalsInput = {
@@ -1539,6 +1647,8 @@ export type SpaceUncheckedUpdateWithoutRevenueGoalsInput = {
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUncheckedUpdateManyWithoutSpaceNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutSpaceNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutSpaceNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceCreateWithoutFinancialLabelsInput = {
@@ -1560,6 +1670,8 @@ export type SpaceCreateWithoutFinancialLabelsInput = {
   incomes?: Prisma.IncomeCreateNestedManyWithoutSpaceInput
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutSpaceInput
   financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutSpaceInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutSpaceInput
+  generatedDocuments?: Prisma.GeneratedDocumentCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceUncheckedCreateWithoutFinancialLabelsInput = {
@@ -1581,6 +1693,8 @@ export type SpaceUncheckedCreateWithoutFinancialLabelsInput = {
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutSpaceInput
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutSpaceInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutSpaceInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutSpaceInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceCreateOrConnectWithoutFinancialLabelsInput = {
@@ -1618,6 +1732,8 @@ export type SpaceUpdateWithoutFinancialLabelsInput = {
   incomes?: Prisma.IncomeUpdateManyWithoutSpaceNestedInput
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutSpaceNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutSpaceNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutSpaceNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceUncheckedUpdateWithoutFinancialLabelsInput = {
@@ -1639,6 +1755,8 @@ export type SpaceUncheckedUpdateWithoutFinancialLabelsInput = {
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutSpaceNestedInput
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutSpaceNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutSpaceNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutSpaceNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceCreateWithoutClientsInput = {
@@ -1660,6 +1778,8 @@ export type SpaceCreateWithoutClientsInput = {
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelCreateNestedManyWithoutSpaceInput
   financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutSpaceInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutSpaceInput
+  generatedDocuments?: Prisma.GeneratedDocumentCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceUncheckedCreateWithoutClientsInput = {
@@ -1681,6 +1801,8 @@ export type SpaceUncheckedCreateWithoutClientsInput = {
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelUncheckedCreateNestedManyWithoutSpaceInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutSpaceInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutSpaceInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceCreateOrConnectWithoutClientsInput = {
@@ -1718,6 +1840,8 @@ export type SpaceUpdateWithoutClientsInput = {
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUpdateManyWithoutSpaceNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutSpaceNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutSpaceNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceUncheckedUpdateWithoutClientsInput = {
@@ -1739,6 +1863,8 @@ export type SpaceUncheckedUpdateWithoutClientsInput = {
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUncheckedUpdateManyWithoutSpaceNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutSpaceNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutSpaceNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceCreateWithoutFinancialAuditLogsInput = {
@@ -1760,6 +1886,8 @@ export type SpaceCreateWithoutFinancialAuditLogsInput = {
   incomes?: Prisma.IncomeCreateNestedManyWithoutSpaceInput
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelCreateNestedManyWithoutSpaceInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutSpaceInput
+  generatedDocuments?: Prisma.GeneratedDocumentCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceUncheckedCreateWithoutFinancialAuditLogsInput = {
@@ -1781,6 +1909,8 @@ export type SpaceUncheckedCreateWithoutFinancialAuditLogsInput = {
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutSpaceInput
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutSpaceInput
   financialLabels?: Prisma.FinancialLabelUncheckedCreateNestedManyWithoutSpaceInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutSpaceInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutSpaceInput
 }
 
 export type SpaceCreateOrConnectWithoutFinancialAuditLogsInput = {
@@ -1818,6 +1948,8 @@ export type SpaceUpdateWithoutFinancialAuditLogsInput = {
   incomes?: Prisma.IncomeUpdateManyWithoutSpaceNestedInput
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUpdateManyWithoutSpaceNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutSpaceNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceUncheckedUpdateWithoutFinancialAuditLogsInput = {
@@ -1839,6 +1971,224 @@ export type SpaceUncheckedUpdateWithoutFinancialAuditLogsInput = {
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutSpaceNestedInput
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUncheckedUpdateManyWithoutSpaceNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutSpaceNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutSpaceNestedInput
+}
+
+export type SpaceCreateWithoutDocumentTemplatesInput = {
+  id?: string
+  spaceName: string
+  spaceDescription?: string | null
+  icon?: string | null
+  baseCurrency?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  owner: Prisma.UserCreateNestedOneWithoutOwnedSpacesInput
+  members?: Prisma.UserCreateNestedManyWithoutMemberSpacesInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutSpaceInput
+  leads?: Prisma.LeadCreateNestedManyWithoutSpaceInput
+  clients?: Prisma.ClientCreateNestedManyWithoutSpaceInput
+  employees?: Prisma.EmployeeCreateNestedManyWithoutSpaceInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutSpaceInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutSpaceInput
+  incomes?: Prisma.IncomeCreateNestedManyWithoutSpaceInput
+  revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutSpaceInput
+  financialLabels?: Prisma.FinancialLabelCreateNestedManyWithoutSpaceInput
+  financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutSpaceInput
+  generatedDocuments?: Prisma.GeneratedDocumentCreateNestedManyWithoutSpaceInput
+}
+
+export type SpaceUncheckedCreateWithoutDocumentTemplatesInput = {
+  id?: string
+  spaceName: string
+  spaceDescription?: string | null
+  icon?: string | null
+  baseCurrency?: string
+  ownerId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  members?: Prisma.UserUncheckedCreateNestedManyWithoutMemberSpacesInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutSpaceInput
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutSpaceInput
+  clients?: Prisma.ClientUncheckedCreateNestedManyWithoutSpaceInput
+  employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutSpaceInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutSpaceInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutSpaceInput
+  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutSpaceInput
+  revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutSpaceInput
+  financialLabels?: Prisma.FinancialLabelUncheckedCreateNestedManyWithoutSpaceInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutSpaceInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutSpaceInput
+}
+
+export type SpaceCreateOrConnectWithoutDocumentTemplatesInput = {
+  where: Prisma.SpaceWhereUniqueInput
+  create: Prisma.XOR<Prisma.SpaceCreateWithoutDocumentTemplatesInput, Prisma.SpaceUncheckedCreateWithoutDocumentTemplatesInput>
+}
+
+export type SpaceUpsertWithoutDocumentTemplatesInput = {
+  update: Prisma.XOR<Prisma.SpaceUpdateWithoutDocumentTemplatesInput, Prisma.SpaceUncheckedUpdateWithoutDocumentTemplatesInput>
+  create: Prisma.XOR<Prisma.SpaceCreateWithoutDocumentTemplatesInput, Prisma.SpaceUncheckedCreateWithoutDocumentTemplatesInput>
+  where?: Prisma.SpaceWhereInput
+}
+
+export type SpaceUpdateToOneWithWhereWithoutDocumentTemplatesInput = {
+  where?: Prisma.SpaceWhereInput
+  data: Prisma.XOR<Prisma.SpaceUpdateWithoutDocumentTemplatesInput, Prisma.SpaceUncheckedUpdateWithoutDocumentTemplatesInput>
+}
+
+export type SpaceUpdateWithoutDocumentTemplatesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  spaceName?: Prisma.StringFieldUpdateOperationsInput | string
+  spaceDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  baseCurrency?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  owner?: Prisma.UserUpdateOneRequiredWithoutOwnedSpacesNestedInput
+  members?: Prisma.UserUpdateManyWithoutMemberSpacesNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutSpaceNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutSpaceNestedInput
+  clients?: Prisma.ClientUpdateManyWithoutSpaceNestedInput
+  employees?: Prisma.EmployeeUpdateManyWithoutSpaceNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutSpaceNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutSpaceNestedInput
+  incomes?: Prisma.IncomeUpdateManyWithoutSpaceNestedInput
+  revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutSpaceNestedInput
+  financialLabels?: Prisma.FinancialLabelUpdateManyWithoutSpaceNestedInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutSpaceNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUpdateManyWithoutSpaceNestedInput
+}
+
+export type SpaceUncheckedUpdateWithoutDocumentTemplatesInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  spaceName?: Prisma.StringFieldUpdateOperationsInput | string
+  spaceDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  baseCurrency?: Prisma.StringFieldUpdateOperationsInput | string
+  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  members?: Prisma.UserUncheckedUpdateManyWithoutMemberSpacesNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutSpaceNestedInput
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutSpaceNestedInput
+  clients?: Prisma.ClientUncheckedUpdateManyWithoutSpaceNestedInput
+  employees?: Prisma.EmployeeUncheckedUpdateManyWithoutSpaceNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutSpaceNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutSpaceNestedInput
+  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutSpaceNestedInput
+  revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutSpaceNestedInput
+  financialLabels?: Prisma.FinancialLabelUncheckedUpdateManyWithoutSpaceNestedInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutSpaceNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutSpaceNestedInput
+}
+
+export type SpaceCreateWithoutGeneratedDocumentsInput = {
+  id?: string
+  spaceName: string
+  spaceDescription?: string | null
+  icon?: string | null
+  baseCurrency?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  owner: Prisma.UserCreateNestedOneWithoutOwnedSpacesInput
+  members?: Prisma.UserCreateNestedManyWithoutMemberSpacesInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutSpaceInput
+  leads?: Prisma.LeadCreateNestedManyWithoutSpaceInput
+  clients?: Prisma.ClientCreateNestedManyWithoutSpaceInput
+  employees?: Prisma.EmployeeCreateNestedManyWithoutSpaceInput
+  tasks?: Prisma.TaskCreateNestedManyWithoutSpaceInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutSpaceInput
+  incomes?: Prisma.IncomeCreateNestedManyWithoutSpaceInput
+  revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutSpaceInput
+  financialLabels?: Prisma.FinancialLabelCreateNestedManyWithoutSpaceInput
+  financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutSpaceInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutSpaceInput
+}
+
+export type SpaceUncheckedCreateWithoutGeneratedDocumentsInput = {
+  id?: string
+  spaceName: string
+  spaceDescription?: string | null
+  icon?: string | null
+  baseCurrency?: string
+  ownerId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  members?: Prisma.UserUncheckedCreateNestedManyWithoutMemberSpacesInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutSpaceInput
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutSpaceInput
+  clients?: Prisma.ClientUncheckedCreateNestedManyWithoutSpaceInput
+  employees?: Prisma.EmployeeUncheckedCreateNestedManyWithoutSpaceInput
+  tasks?: Prisma.TaskUncheckedCreateNestedManyWithoutSpaceInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutSpaceInput
+  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutSpaceInput
+  revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutSpaceInput
+  financialLabels?: Prisma.FinancialLabelUncheckedCreateNestedManyWithoutSpaceInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutSpaceInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutSpaceInput
+}
+
+export type SpaceCreateOrConnectWithoutGeneratedDocumentsInput = {
+  where: Prisma.SpaceWhereUniqueInput
+  create: Prisma.XOR<Prisma.SpaceCreateWithoutGeneratedDocumentsInput, Prisma.SpaceUncheckedCreateWithoutGeneratedDocumentsInput>
+}
+
+export type SpaceUpsertWithoutGeneratedDocumentsInput = {
+  update: Prisma.XOR<Prisma.SpaceUpdateWithoutGeneratedDocumentsInput, Prisma.SpaceUncheckedUpdateWithoutGeneratedDocumentsInput>
+  create: Prisma.XOR<Prisma.SpaceCreateWithoutGeneratedDocumentsInput, Prisma.SpaceUncheckedCreateWithoutGeneratedDocumentsInput>
+  where?: Prisma.SpaceWhereInput
+}
+
+export type SpaceUpdateToOneWithWhereWithoutGeneratedDocumentsInput = {
+  where?: Prisma.SpaceWhereInput
+  data: Prisma.XOR<Prisma.SpaceUpdateWithoutGeneratedDocumentsInput, Prisma.SpaceUncheckedUpdateWithoutGeneratedDocumentsInput>
+}
+
+export type SpaceUpdateWithoutGeneratedDocumentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  spaceName?: Prisma.StringFieldUpdateOperationsInput | string
+  spaceDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  baseCurrency?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  owner?: Prisma.UserUpdateOneRequiredWithoutOwnedSpacesNestedInput
+  members?: Prisma.UserUpdateManyWithoutMemberSpacesNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutSpaceNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutSpaceNestedInput
+  clients?: Prisma.ClientUpdateManyWithoutSpaceNestedInput
+  employees?: Prisma.EmployeeUpdateManyWithoutSpaceNestedInput
+  tasks?: Prisma.TaskUpdateManyWithoutSpaceNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutSpaceNestedInput
+  incomes?: Prisma.IncomeUpdateManyWithoutSpaceNestedInput
+  revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutSpaceNestedInput
+  financialLabels?: Prisma.FinancialLabelUpdateManyWithoutSpaceNestedInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutSpaceNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutSpaceNestedInput
+}
+
+export type SpaceUncheckedUpdateWithoutGeneratedDocumentsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  spaceName?: Prisma.StringFieldUpdateOperationsInput | string
+  spaceDescription?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  icon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  baseCurrency?: Prisma.StringFieldUpdateOperationsInput | string
+  ownerId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  members?: Prisma.UserUncheckedUpdateManyWithoutMemberSpacesNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutSpaceNestedInput
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutSpaceNestedInput
+  clients?: Prisma.ClientUncheckedUpdateManyWithoutSpaceNestedInput
+  employees?: Prisma.EmployeeUncheckedUpdateManyWithoutSpaceNestedInput
+  tasks?: Prisma.TaskUncheckedUpdateManyWithoutSpaceNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutSpaceNestedInput
+  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutSpaceNestedInput
+  revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutSpaceNestedInput
+  financialLabels?: Prisma.FinancialLabelUncheckedUpdateManyWithoutSpaceNestedInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutSpaceNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceCreateManyOwnerInput = {
@@ -1870,6 +2220,8 @@ export type SpaceUpdateWithoutOwnerInput = {
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUpdateManyWithoutSpaceNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutSpaceNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutSpaceNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceUncheckedUpdateWithoutOwnerInput = {
@@ -1891,6 +2243,8 @@ export type SpaceUncheckedUpdateWithoutOwnerInput = {
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUncheckedUpdateManyWithoutSpaceNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutSpaceNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutSpaceNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceUncheckedUpdateManyWithoutOwnerInput = {
@@ -1922,6 +2276,8 @@ export type SpaceUpdateWithoutMembersInput = {
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUpdateManyWithoutSpaceNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutSpaceNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutSpaceNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceUncheckedUpdateWithoutMembersInput = {
@@ -1943,6 +2299,8 @@ export type SpaceUncheckedUpdateWithoutMembersInput = {
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutSpaceNestedInput
   financialLabels?: Prisma.FinancialLabelUncheckedUpdateManyWithoutSpaceNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutSpaceNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutSpaceNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutSpaceNestedInput
 }
 
 export type SpaceUncheckedUpdateManyWithoutMembersInput = {
@@ -1973,6 +2331,8 @@ export type SpaceCountOutputType = {
   revenueGoals: number
   financialLabels: number
   financialAuditLogs: number
+  documentTemplates: number
+  generatedDocuments: number
 }
 
 export type SpaceCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1987,6 +2347,8 @@ export type SpaceCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.
   revenueGoals?: boolean | SpaceCountOutputTypeCountRevenueGoalsArgs
   financialLabels?: boolean | SpaceCountOutputTypeCountFinancialLabelsArgs
   financialAuditLogs?: boolean | SpaceCountOutputTypeCountFinancialAuditLogsArgs
+  documentTemplates?: boolean | SpaceCountOutputTypeCountDocumentTemplatesArgs
+  generatedDocuments?: boolean | SpaceCountOutputTypeCountGeneratedDocumentsArgs
 }
 
 /**
@@ -2076,6 +2438,20 @@ export type SpaceCountOutputTypeCountFinancialAuditLogsArgs<ExtArgs extends runt
   where?: Prisma.FinancialAuditLogWhereInput
 }
 
+/**
+ * SpaceCountOutputType without action
+ */
+export type SpaceCountOutputTypeCountDocumentTemplatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.DocumentTemplateWhereInput
+}
+
+/**
+ * SpaceCountOutputType without action
+ */
+export type SpaceCountOutputTypeCountGeneratedDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.GeneratedDocumentWhereInput
+}
+
 
 export type SpaceSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2098,6 +2474,8 @@ export type SpaceSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   revenueGoals?: boolean | Prisma.Space$revenueGoalsArgs<ExtArgs>
   financialLabels?: boolean | Prisma.Space$financialLabelsArgs<ExtArgs>
   financialAuditLogs?: boolean | Prisma.Space$financialAuditLogsArgs<ExtArgs>
+  documentTemplates?: boolean | Prisma.Space$documentTemplatesArgs<ExtArgs>
+  generatedDocuments?: boolean | Prisma.Space$generatedDocumentsArgs<ExtArgs>
   _count?: boolean | Prisma.SpaceCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["space"]>
 
@@ -2150,6 +2528,8 @@ export type SpaceInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   revenueGoals?: boolean | Prisma.Space$revenueGoalsArgs<ExtArgs>
   financialLabels?: boolean | Prisma.Space$financialLabelsArgs<ExtArgs>
   financialAuditLogs?: boolean | Prisma.Space$financialAuditLogsArgs<ExtArgs>
+  documentTemplates?: boolean | Prisma.Space$documentTemplatesArgs<ExtArgs>
+  generatedDocuments?: boolean | Prisma.Space$generatedDocumentsArgs<ExtArgs>
   _count?: boolean | Prisma.SpaceCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type SpaceIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2174,6 +2554,8 @@ export type $SpacePayload<ExtArgs extends runtime.Types.Extensions.InternalArgs 
     revenueGoals: Prisma.$RevenueGoalPayload<ExtArgs>[]
     financialLabels: Prisma.$FinancialLabelPayload<ExtArgs>[]
     financialAuditLogs: Prisma.$FinancialAuditLogPayload<ExtArgs>[]
+    documentTemplates: Prisma.$DocumentTemplatePayload<ExtArgs>[]
+    generatedDocuments: Prisma.$GeneratedDocumentPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -2590,6 +2972,8 @@ export interface Prisma__SpaceClient<T, Null = never, ExtArgs extends runtime.Ty
   revenueGoals<T extends Prisma.Space$revenueGoalsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Space$revenueGoalsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RevenueGoalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   financialLabels<T extends Prisma.Space$financialLabelsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Space$financialLabelsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FinancialLabelPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   financialAuditLogs<T extends Prisma.Space$financialAuditLogsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Space$financialAuditLogsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$FinancialAuditLogPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  documentTemplates<T extends Prisma.Space$documentTemplatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Space$documentTemplatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  generatedDocuments<T extends Prisma.Space$generatedDocumentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Space$generatedDocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GeneratedDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3289,6 +3673,54 @@ export type Space$financialAuditLogsArgs<ExtArgs extends runtime.Types.Extension
   take?: number
   skip?: number
   distinct?: Prisma.FinancialAuditLogScalarFieldEnum | Prisma.FinancialAuditLogScalarFieldEnum[]
+}
+
+/**
+ * Space.documentTemplates
+ */
+export type Space$documentTemplatesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the DocumentTemplate
+   */
+  select?: Prisma.DocumentTemplateSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the DocumentTemplate
+   */
+  omit?: Prisma.DocumentTemplateOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.DocumentTemplateInclude<ExtArgs> | null
+  where?: Prisma.DocumentTemplateWhereInput
+  orderBy?: Prisma.DocumentTemplateOrderByWithRelationInput | Prisma.DocumentTemplateOrderByWithRelationInput[]
+  cursor?: Prisma.DocumentTemplateWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.DocumentTemplateScalarFieldEnum | Prisma.DocumentTemplateScalarFieldEnum[]
+}
+
+/**
+ * Space.generatedDocuments
+ */
+export type Space$generatedDocumentsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the GeneratedDocument
+   */
+  select?: Prisma.GeneratedDocumentSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the GeneratedDocument
+   */
+  omit?: Prisma.GeneratedDocumentOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.GeneratedDocumentInclude<ExtArgs> | null
+  where?: Prisma.GeneratedDocumentWhereInput
+  orderBy?: Prisma.GeneratedDocumentOrderByWithRelationInput | Prisma.GeneratedDocumentOrderByWithRelationInput[]
+  cursor?: Prisma.GeneratedDocumentWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.GeneratedDocumentScalarFieldEnum | Prisma.GeneratedDocumentScalarFieldEnum[]
 }
 
 /**

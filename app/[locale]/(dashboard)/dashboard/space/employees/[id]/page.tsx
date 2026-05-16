@@ -28,8 +28,8 @@ export default async function EmployeeProfilePage({ params }: PageProps) {
     notFound();
   }
 
-  const activeProjects = employee.assignedProjects.filter((p: any) => p.projectStatus === "IN_PROGRESS");
-  const activeTasks = employee.assignedTasks.filter((t: any) => t.status !== "DONE");
+  const activeProjects = employee.assignedProjects.filter((p: { projectStatus: string }) => p.projectStatus === "IN_PROGRESS");
+  const activeTasks = employee.assignedTasks.filter((t: { status: string }) => t.status !== "DONE");
 
   return (
     <div className="max-w-7xl mx-auto space-y-16 py-8">
@@ -130,7 +130,7 @@ export default async function EmployeeProfilePage({ params }: PageProps) {
               </div>
             ) : (
               <div className="space-y-0 border-t border-slate-200">
-                 {activeProjects.map((project: any) => (
+                 {activeProjects.map((project: { id: string; projectName: string }) => (
                    <Link 
                     key={project.id} 
                     href={`/dashboard/projects/${project.id}`}

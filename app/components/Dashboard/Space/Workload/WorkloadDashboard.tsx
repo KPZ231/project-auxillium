@@ -15,6 +15,7 @@ interface WorkloadDashboardProps {
   spaceName: string;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export default function WorkloadDashboard({ spaceId, spaceName }: WorkloadDashboardProps) {
   const { t } = useTranslation();
   const [data, setData] = useState<WorkloadData | null>(null);
@@ -39,6 +40,7 @@ export default function WorkloadDashboard({ spaceId, spaceName }: WorkloadDashbo
   }, []);
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchData(filters);
   }, [filters, fetchData]);
 

@@ -5,11 +5,20 @@ import { Droppable } from "@hello-pangea/dnd";
 import { TaskCard } from "./TaskCard";
 import { Plus } from "lucide-react";
 
+interface Task {
+  id: string;
+  title: string;
+  status: string;
+  priority: string;
+  order: number;
+  [key: string]: unknown;
+}
+
 interface KanbanColumnProps {
   id: string;
   title: string;
-  tasks: any[];
-  onTaskClick: (task: any) => void;
+  tasks: Task[];
+  onTaskClick: (task: Task) => void;
   onAddTask: (columnId: string) => void;
 }
 

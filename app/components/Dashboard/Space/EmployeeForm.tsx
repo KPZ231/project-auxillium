@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { motion } from "motion/react";
-import { X, User, Mail, Phone, Briefcase, ShieldCheck, Loader2 } from "lucide-react";
+import { X, Loader2 } from "lucide-react";
 import { addEmployee } from "@/actions/employee";
 import { toast } from "sonner";
 
@@ -18,9 +18,22 @@ const employeeSchema = z.object({
 
 type EmployeeFormData = z.infer<typeof employeeSchema>;
 
+interface Employee {
+  id: string;
+  name: string;
+  email?: string | null;
+  phone?: string | null;
+  role?: string | null;
+  createdAt: string | Date;
+  _count?: {
+    assignedProjects: number;
+    assignedTasks: number;
+  };
+}
+
 interface EmployeeFormProps {
   onClose: () => void;
-  onSuccess: (employee: any) => void;
+  onSuccess: (employee: Employee) => void;
 }
 
 export default function EmployeeForm({ onClose, onSuccess }: EmployeeFormProps) {
@@ -44,8 +57,8 @@ export default function EmployeeForm({ onClose, onSuccess }: EmployeeFormProps) 
       } else {
         toast.error("Failed to add employee");
       }
-    } catch (error: any) {
-      toast.error(error.message || "An error occurred");
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "An error occurred");
     } finally {
       setIsSubmitting(false);
     }

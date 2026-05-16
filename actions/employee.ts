@@ -7,12 +7,22 @@ import { revalidatePath } from "next/cache";
 
 const CACHE_TTL = 3600; // 1 hour
 
+interface Employee {
+  id: string;
+  name: string;
+  email?: string | null;
+  phone?: string | null;
+  role?: string | null;
+  createdAt: Date;
+  spaceId: string;
+}
+
 export async function getEmployees() {
   const spaceId = await getActiveSpaceId();
   if (!spaceId) return [];
 
   const cacheKey = `employees:${spaceId}`;
-  const cached = await getCachedData<any[]>(cacheKey);
+  const cached = await getCachedData<Employee[]>(cacheKey);
   if (cached) return cached;
 
   const employees = await prisma.employee.findMany({
@@ -75,7 +85,7 @@ export async function getEmployeeById(id: string) {
   if (!spaceId) return null;
 
   const cacheKey = `employee:${id}`;
-  const cached = await getCachedData<any>(cacheKey);
+  const cached = await getCachedData<Employee>(cacheKey);
   if (cached) return cached;
 
   const employee = await prisma.employee.findFirst({

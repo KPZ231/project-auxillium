@@ -2,8 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
-import { Upload, Download, Trash2, LogOut, Mail, ShieldCheck, Save, Image as ImageIcon, Link, TableProperties, HardDrive, FileText, CheckCircle2 } from "lucide-react";
+import Image from "next/image";
+import { Upload, Download, Trash2, LogOut, Mail, ShieldCheck, Save, Image as ImageIcon, Link, CheckCircle2 } from "lucide-react";
 import { toast } from "sonner";
+import { SiGooglesheets, SiGoogledrive, SiGoogledocs, SiGooglecalendar, SiGoogletasks } from "react-icons/si";
 import { uploadAvatar } from "@/actions/uploadAvatar";
 import { ConnectorModal } from "@/app/components/settings/ConnectorModal";
 import { ConnectorType, getConnectedServices } from "@/actions/connectors";
@@ -47,6 +49,8 @@ export default function SettingsClient({
     google_sheets: false,
     google_drive: false,
     google_docs: false,
+    google_calendar: false,
+    google_tasks: false,
   });
 
   const openConnectorModal = (name: string, type: ConnectorType) => {
@@ -55,7 +59,9 @@ export default function SettingsClient({
   };
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setDisplayName(user.name || "");
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setAvatarUrl(user.avatarUrl || "");
   }, [user]);
 
@@ -192,7 +198,9 @@ export default function SettingsClient({
             <div className="relative group shrink-0">
               <div className="w-20 h-20 bg-[#F4F4F5] flex items-center justify-center overflow-hidden border border-[#D4D4D8] group-hover:border-[#0A0A0A] transition-colors duration-150">
                 {avatarUrl ? (
-                  <img src={avatarUrl} alt="Avatar" className="w-full h-full object-cover" />
+                  <div className="relative w-full h-full">
+                    <Image src={avatarUrl} alt="Avatar" fill className="object-cover" />
+                  </div>
                 ) : (
                   <ImageIcon className="w-8 h-8 text-[#71717A]" />
                 )}
@@ -299,7 +307,7 @@ export default function SettingsClient({
             <div className="flex items-center justify-between p-4 border border-[#E5E5E5] bg-white hover:border-[#A1A1AA] transition-colors">
               <div className="flex items-center gap-4">
                 <div className="w-10 h-10 bg-[#F4F4F5] flex items-center justify-center shrink-0">
-                  <TableProperties className="w-5 h-5 text-[#0A0A0A]" />
+                  <SiGooglesheets className="w-5 h-5 text-[#0A0A0A]" />
                 </div>
                 <div>
                   <p className="text-sm font-bold text-[#0A0A0A] flex items-center gap-2">
@@ -327,7 +335,7 @@ export default function SettingsClient({
             <div className="flex items-center justify-between p-4 border border-[#E5E5E5] bg-white hover:border-[#A1A1AA] transition-colors">
               <div className="flex items-center gap-4">
                 <div className="w-10 h-10 bg-[#F4F4F5] flex items-center justify-center shrink-0">
-                  <HardDrive className="w-5 h-5 text-[#0A0A0A]" />
+                  <SiGoogledrive className="w-5 h-5 text-[#0A0A0A]" />
                 </div>
                 <div>
                   <p className="text-sm font-bold text-[#0A0A0A] flex items-center gap-2">
@@ -355,7 +363,7 @@ export default function SettingsClient({
             <div className="flex items-center justify-between p-4 border border-[#E5E5E5] bg-white hover:border-[#A1A1AA] transition-colors">
               <div className="flex items-center gap-4">
                 <div className="w-10 h-10 bg-[#F4F4F5] flex items-center justify-center shrink-0">
-                  <FileText className="w-5 h-5 text-[#0A0A0A]" />
+                  <SiGoogledocs className="w-5 h-5 text-[#0A0A0A]" />
                 </div>
                 <div>
                   <p className="text-sm font-bold text-[#0A0A0A] flex items-center gap-2">
@@ -376,6 +384,62 @@ export default function SettingsClient({
                 }`}
               >
                 {connectedServices.google_docs ? "Manage" : "Connect"}
+              </button>
+            </div>
+
+            {/* Google Calendar */}
+            <div className="flex items-center justify-between p-4 border border-[#E5E5E5] bg-white hover:border-[#A1A1AA] transition-colors">
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 bg-[#F4F4F5] flex items-center justify-center shrink-0">
+                  <SiGooglecalendar className="w-5 h-5 text-[#0A0A0A]" />
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-[#0A0A0A] flex items-center gap-2">
+                    Google Calendar
+                    {connectedServices.google_calendar && <CheckCircle2 className="w-3.5 h-3.5 text-[#16A34A]" />}
+                  </p>
+                  <p className="text-xs font-light text-[#71717A] mt-0.5">
+                    Sync project deadlines and events with your calendar
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={() => openConnectorModal("Google Calendar", "google_calendar")}
+                className={`px-4 py-2 text-[10px] font-bold uppercase tracking-widest transition-colors ${
+                  connectedServices.google_calendar
+                    ? "bg-[#F4F4F5] text-[#0A0A0A] hover:bg-[#E5E5E5]"
+                    : "bg-[#0A0A0A] text-white hover:bg-[#333333]"
+                }`}
+              >
+                {connectedServices.google_calendar ? "Manage" : "Connect"}
+              </button>
+            </div>
+
+            {/* Google Tasks (To Do) */}
+            <div className="flex items-center justify-between p-4 border border-[#E5E5E5] bg-white hover:border-[#A1A1AA] transition-colors">
+              <div className="flex items-center gap-4">
+                <div className="w-10 h-10 bg-[#F4F4F5] flex items-center justify-center shrink-0">
+                  <SiGoogletasks className="w-5 h-5 text-[#0A0A0A]" />
+                </div>
+                <div>
+                  <p className="text-sm font-bold text-[#0A0A0A] flex items-center gap-2">
+                    Google To Do
+                    {connectedServices.google_tasks && <CheckCircle2 className="w-3.5 h-3.5 text-[#16A34A]" />}
+                  </p>
+                  <p className="text-xs font-light text-[#71717A] mt-0.5">
+                    Export and sync CRM tasks with Google Tasks
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={() => openConnectorModal("Google To Do", "google_tasks")}
+                className={`px-4 py-2 text-[10px] font-bold uppercase tracking-widest transition-colors ${
+                  connectedServices.google_tasks
+                    ? "bg-[#F4F4F5] text-[#0A0A0A] hover:bg-[#E5E5E5]"
+                    : "bg-[#0A0A0A] text-white hover:bg-[#333333]"
+                }`}
+              >
+                {connectedServices.google_tasks ? "Manage" : "Connect"}
               </button>
             </div>
           </div>

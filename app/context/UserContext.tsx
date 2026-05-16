@@ -32,8 +32,8 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
       } else {
         setUser(null);
       }
-    } catch (error: any) {
-      if (error.name === "AbortError") return;
+    } catch (error: unknown) {
+      if ((error as { name?: string }).name === "AbortError") return;
       console.error("UserContext: Error fetching user:", error);
       setUser(null);
     } finally {
@@ -56,6 +56,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     const abortController = new AbortController();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchUser(abortController.signal);
     return () => {
       abortController.abort();

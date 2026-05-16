@@ -41,8 +41,8 @@ export default function ComingSoonPage() {
 
       setIsSubmitted(true);
       setEmail("");
-    } catch (err: any) {
-      setError(err.message || "Something went wrong");
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : "Something went wrong");
     } finally {
       setIsLoading(false);
     }
@@ -172,7 +172,6 @@ export default function ComingSoonPage() {
                 </p>
               </div>
             ) : (
-              {/* Success Message */}
               <div className="max-w-md mx-auto">
                 <div className="flex flex-col items-center gap-4">
                   <CheckCircle className="w-16 h-16 text-[#16A34A]" />
@@ -185,7 +184,7 @@ export default function ComingSoonPage() {
                   </p>
                 </div>
               </div>
-            )
+            )}
 
             {/* Features Preview */}
             <div className="mt-16 md:mt-24 grid md:grid-cols-3 gap-8">

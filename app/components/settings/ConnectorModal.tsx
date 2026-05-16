@@ -45,7 +45,7 @@ export const ConnectorModal = ({
           toast.error(res.error || "Failed to initiate connection");
         }
       }
-    } catch (err) {
+    } catch (_err) {
       toast.error("An error occurred");
     } finally {
       setIsSubmitting(false);

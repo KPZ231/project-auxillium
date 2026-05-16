@@ -44,9 +44,10 @@ export default function ActivityAndTasks() {
       if (!spaceId) return;
 
       // Fetch Financial Summary
-      const financeResult = await getFinancialSummary(spaceId) as any;
+      const financeResult = await getFinancialSummary(spaceId) as { months?: { name: string; income: number; expenses: number }[] };
       if (financeResult && financeResult.months) {
-        setChartData(financeResult.months.map((m: any) => ({
+        // eslint-disable-next-line react-hooks/set-state-in-effect
+        setChartData(financeResult.months.map((m) => ({
           name: m.name,
           income: m.income,
           expenses: m.expenses
@@ -56,7 +57,7 @@ export default function ActivityAndTasks() {
       // Fetch All Active Tasks
       const tasksResult = await getRecentTasks(spaceId);
       if (tasksResult.success && tasksResult.tasks) {
-        setActionItems(tasksResult.tasks.map((task: any) => ({
+        setActionItems(tasksResult.tasks.map((task: { id: string; title: string; employee?: { name: string }; project?: { projectName: string }; priority?: string; dueDate?: string; status?: string }) => ({
           id: task.id,
           title: task.title,
           assignee: task.employee ? `Assigned to: ${task.employee.name}` : (task.project ? `Project: ${task.project.projectName}` : "Unassigned"),
@@ -65,6 +66,7 @@ export default function ActivityAndTasks() {
         })));
       }
     };
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchData();
   }, []);
 

@@ -22,7 +22,7 @@ export async function uploadImage(formData: FormData) {
     const filename = `${crypto.randomUUID()}.${fileExtension}`
     
     // Wrzucanie pliku do bucketu 'project-images' w Supabase
-    const { data, error } = await supabase.storage
+    const { error } = await supabase.storage
       .from('project-images')
       .upload(filename, file, {
         cacheControl: '3600',

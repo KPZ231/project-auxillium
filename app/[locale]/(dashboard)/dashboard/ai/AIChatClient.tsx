@@ -15,8 +15,18 @@ import {
   Download,
   Plus,
   Trash2,
+  Briefcase,
+  Users,
+  Target,
+  Link2,
 } from "lucide-react";
+import { SiGooglesheets, SiGoogledrive, SiGoogledocs, SiGooglecalendar, SiGoogletasks } from "react-icons/si";
+import { ConnectorModal } from "@/app/components/settings/ConnectorModal";
+import { ConnectorType, getConnectedServices } from "@/actions/connectors";
 import { DefaultChatTransport } from "ai";
+import { getProjects } from "@/actions/getProjects";
+import { getLeads } from "@/actions/getLeads";
+import { getClients } from "@/actions/clients";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -41,6 +51,11 @@ const TOOL_LABELS: Record<string, string> = {
   deleteTask: "Deleting task",
   deleteExpense: "Deleting expense",
   exportCSV: "Generating CSV export",
+  saveToGoogleDocs: "Saving to Google Docs",
+  addToGoogleSheet: "Adding to Google Sheets",
+  createGoogleCalendarEvent: "Creating calendar event",
+  createGoogleTask: "Adding to Google Tasks",
+  uploadToGoogleDrive: "Uploading to Google Drive",
 };
 
 const MUTATION_TOOLS = new Set([
@@ -201,6 +216,36 @@ function CSVDownloadButton({
 }
 
 // ============================================================
+// EXTERNAL LINK BUTTON
+// ============================================================
+
+function ExternalLinkButton({
+  url,
+  label,
+}: {
+  url: string;
+  label: string;
+}) {
+  return (
+    <div className="flex flex-col gap-1.5">
+      <div className="flex items-center gap-1.5 text-xs text-[#16A34A]">
+        <CheckCircle2 className="h-3 w-3" />
+        <span>Action completed</span>
+      </div>
+      <a
+        href={url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="flex items-center gap-2 rounded-xl border border-[#E4E4E7] bg-white px-3 py-2 text-sm text-[#3F3F46] transition-colors hover:bg-[#F4F4F5]"
+      >
+        <Plus className="h-4 w-4" />
+        <span>View {label}</span>
+      </a>
+    </div>
+  );
+}
+
+// ============================================================
 // MARKDOWN RENDERER
 // ============================================================
 
@@ -300,6 +345,24 @@ const SUGGESTIONS = [
   "Export all projects to CSV",
 ];
 
+interface ToolPart {
+  type: string;
+  state: string;
+  output?: {
+    csv?: string;
+    filename?: string;
+    url?: string;
+    title?: string;
+    summary?: string;
+  };
+}
+
+interface MentionItem {
+  id: string;
+  name: string;
+  type: 'project' | 'client' | 'lead';
+}
+
 // ============================================================
 // MAIN COMPONENT
 // ============================================================
@@ -316,6 +379,114 @@ export default function AIChatClient({ spaceId }: { spaceId: string }) {
   const isSubmitted = status === "submitted";
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const [mentionItems, setMentionItems] = useState<MentionItem[]>([]);
+  const [showMentions, setShowMentions] = useState(false);
+  const [mentionSearch, setMentionSearch] = useState("");
+  const [selectedIndex, setSelectedIndex] = useState(0);
+
+  // Connector state
+  const [isConnectorModalOpen, setIsConnectorModalOpen] = useState(false);
+  const [activeConnector, setActiveConnector] = useState<{ name: string; type: ConnectorType } | null>(null);
+  const [connectedServices, setConnectedServices] = useState<Record<ConnectorType, boolean>>({
+    google_sheets: false,
+    google_drive: false,
+    google_docs: false,
+    google_calendar: false,
+    google_tasks: false,
+  });
+  const [showConnectors, setShowConnectors] = useState(false);
+
+  const fetchServices = async () => {
+    const res = await getConnectedServices();
+    if (res.success && res.data) {
+      setConnectedServices(res.data);
+    }
+  };
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    fetchServices();
+  }, []);
+
+  const openConnectorModal = (name: string, type: ConnectorType) => {
+    setActiveConnector({ name, type });
+    setIsConnectorModalOpen(true);
+    setShowConnectors(false);
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const [projRes, leadRes, clientRes] = await Promise.all([
+        getProjects(),
+        getLeads(),
+        getClients()
+      ]);
+
+      const items: MentionItem[] = [];
+      if (projRes.success) {
+        items.push(...(projRes.data || []).map((p: { id: string; projectName: string }) => ({ id: p.id, name: p.projectName, type: 'project' as const })));
+      }
+      if (leadRes.success) {
+        items.push(...(leadRes.data || []).map((l: { id: string; leadName: string }) => ({ id: l.id, name: l.leadName, type: 'lead' as const })));
+      }
+      if (Array.isArray(clientRes)) {
+        items.push(...clientRes.map((c: { id: string; name: string }) => ({ id: c.id, name: c.name, type: 'client' as const })));
+      }
+      setMentionItems(items);
+    };
+    fetchData();
+  }, []);
+
+  const filteredMentions = useMemo(() => {
+    if (!mentionSearch) return mentionItems;
+    return mentionItems.filter(item => 
+      item.name.toLowerCase().includes(mentionSearch.toLowerCase())
+    );
+  }, [mentionItems, mentionSearch]);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = e.target.value;
+    setInput(val);
+
+    const cursorPosition = e.target.selectionStart || 0;
+    const textBeforeCursor = val.slice(0, cursorPosition);
+    const lastAtSymbol = textBeforeCursor.lastIndexOf("@");
+
+    if (lastAtSymbol !== -1) {
+      const query = textBeforeCursor.slice(lastAtSymbol + 1);
+      if (!query.includes(" ")) {
+        setMentionSearch(query);
+        setShowMentions(true);
+        setSelectedIndex(0);
+        return;
+      }
+    }
+    setShowMentions(false);
+  };
+
+  const insertMention = (item: { id: string; name: string; type: string }) => {
+    const cursorPosition = inputRef.current?.selectionStart || 0;
+    const textBeforeCursor = input.slice(0, cursorPosition);
+    const textAfterCursor = input.slice(cursorPosition);
+    const lastAtSymbol = textBeforeCursor.lastIndexOf("@");
+
+    const newVal = 
+      input.slice(0, lastAtSymbol) + 
+      `@${item.name} ` + 
+      textAfterCursor;
+
+    setInput(newVal);
+    setShowMentions(false);
+    
+    // Maintain a hidden list of mentions to swap on submit
+    // For now, we'll just format it directly in the text on submit
+    
+    setTimeout(() => {
+      inputRef.current?.focus();
+      const newPos = lastAtSymbol + item.name.length + 2;
+      inputRef.current?.setSelectionRange(newPos, newPos);
+    }, 0);
+  };
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -324,7 +495,19 @@ export default function AIChatClient({ spaceId }: { spaceId: string }) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
-    sendMessage({ text: input });
+
+    // Process mentions: find @name and replace with structured text if it matches an item
+    let processedInput = input;
+    mentionItems.forEach(item => {
+      const mentionText = `@${item.name}`;
+      if (processedInput.includes(mentionText)) {
+        // Replace with a format the AI can understand
+        const replacement = `[${item.name}](entity:${item.type}:${item.id})`;
+        processedInput = processedInput.replaceAll(mentionText, replacement);
+      }
+    });
+
+    sendMessage({ text: processedInput });
     setInput("");
   };
 
@@ -427,7 +610,7 @@ export default function AIChatClient({ spaceId }: { spaceId: string }) {
 
                   // ── Tool parts ──
                   if (part.type.startsWith("tool-")) {
-                    const toolPart = part as any;
+                    const toolPart = part as unknown as ToolPart;
                     const toolName = part.type.replace("tool-", "");
 
                     // CSV export — show download button
@@ -441,6 +624,22 @@ export default function AIChatClient({ spaceId }: { spaceId: string }) {
                           <CSVDownloadButton
                             csv={toolPart.output.csv}
                             filename={toolPart.output.filename ?? "export.csv"}
+                          />
+                        </div>
+                      );
+                    }
+
+                    // Google Service Actions — show link button
+                    if (
+                      ["saveToGoogleDocs", "addToGoogleSheet", "createGoogleCalendarEvent"].includes(toolName) &&
+                      toolPart.state === "output-available" &&
+                      toolPart.output?.url
+                    ) {
+                      return (
+                        <div key={index} className="px-1">
+                          <ExternalLinkButton
+                            url={toolPart.output.url}
+                            label={toolPart.output.title || toolPart.output.summary || "Link"}
                           />
                         </div>
                       );
@@ -473,38 +672,143 @@ export default function AIChatClient({ spaceId }: { spaceId: string }) {
       {/* ── Input area ── */}
       <div className="px-4 pb-6 pt-2 md:px-8">
         <div className="mx-auto max-w-3xl">
-          <form
-            onSubmit={handleSubmit}
-            className="flex items-center gap-2 rounded-2xl border border-[#E4E4E7] bg-[#FAFAFA] px-4 py-2 transition-shadow focus-within:border-[#A1A1AA] focus-within:shadow-sm"
-          >
-            <input
-              ref={inputRef}
-              className="flex-1 bg-transparent py-1.5 text-sm text-[#0A0A0A] placeholder:text-[#A1A1AA] focus:outline-none disabled:opacity-50"
-              value={input}
-              placeholder="Ask, create, delete, or export your data..."
-              onChange={(e) => setInput(e.target.value)}
-              disabled={isLoading}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" && !e.shiftKey) handleSubmit(e as any);
-              }}
-            />
-            <button
-              type="submit"
-              disabled={isLoading || !input.trim()}
-              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-[#0A0A0A] text-white transition-all hover:bg-[#1A1A1A] disabled:opacity-30 disabled:cursor-not-allowed"
+          <div className="relative">
+            {showMentions && filteredMentions.length > 0 && (
+              <div className="absolute bottom-full mb-2 w-full overflow-hidden rounded-xl border border-[#E4E4E7] bg-white shadow-xl">
+                <div className="max-h-60 overflow-y-auto p-1">
+                  {filteredMentions.map((item, index) => (
+                    <button
+                      key={`${item.type}-${item.id}`}
+                      onClick={() => insertMention(item)}
+                      onMouseEnter={() => setSelectedIndex(index)}
+                      className={`flex w-full items-center gap-3 px-3 py-2 text-left text-sm transition-colors ${
+                        index === selectedIndex ? "bg-[#F4F4F5]" : "hover:bg-[#FAFAFA]"
+                      }`}
+                    >
+                      <div className="flex h-6 w-6 items-center justify-center rounded-lg bg-[#F4F4F5]">
+                        {item.type === 'project' && <Briefcase className="h-3.5 w-3.5 text-[#71717A]" />}
+                        {item.type === 'client' && <Users className="h-3.5 w-3.5 text-[#71717A]" />}
+                        {item.type === 'lead' && <Target className="h-3.5 w-3.5 text-[#71717A]" />}
+                      </div>
+                      <div className="flex-1 overflow-hidden">
+                        <div className="truncate font-medium text-[#0A0A0A]">{item.name}</div>
+                        <div className="text-[10px] uppercase tracking-wider text-[#A1A1AA]">{item.type}</div>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+            {showConnectors && (
+              <div className="absolute bottom-full mb-2 right-0 w-64 overflow-hidden rounded-xl border border-[#E4E4E7] bg-white shadow-xl">
+                <div className="p-3 border-b border-[#F4F4F5]">
+                  <h3 className="text-[10px] font-bold text-[#71717A] uppercase tracking-widest">Connectors</h3>
+                </div>
+                <div className="p-1">
+                  {[
+                    { name: "Google Docs", type: "google_docs", icon: SiGoogledocs },
+                    { name: "Google Sheets", type: "google_sheets", icon: SiGooglesheets },
+                    { name: "Google Drive", type: "google_drive", icon: SiGoogledrive },
+                    { name: "Google Calendar", type: "google_calendar", icon: SiGooglecalendar },
+                    { name: "Google To Do", type: "google_tasks", icon: SiGoogletasks },
+                  ].map((service) => (
+                    <button
+                      key={service.type}
+                      onClick={() => openConnectorModal(service.name, service.type as ConnectorType)}
+                      className="flex w-full items-center gap-3 px-3 py-2 text-left text-sm hover:bg-[#F4F4F5] transition-colors group"
+                    >
+                      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-[#F4F4F5] group-hover:bg-white transition-colors">
+                        <service.icon className="h-4 w-4 text-[#0A0A0A]" />
+                      </div>
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between">
+                          <span className="font-medium text-[#0A0A0A]">{service.name}</span>
+                          {connectedServices[service.type as ConnectorType] && (
+                            <div className="h-1.5 w-1.5 rounded-full bg-[#16A34A]" />
+                          )}
+                        </div>
+                        <div className="text-[10px] text-[#71717A]">
+                          {connectedServices[service.type as ConnectorType] ? "Connected" : "Not connected"}
+                        </div>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <form
+              onSubmit={handleSubmit}
+              className="flex items-center gap-2 rounded-2xl border border-[#E4E4E7] bg-[#FAFAFA] px-4 py-2 transition-shadow focus-within:border-[#A1A1AA] focus-within:shadow-sm"
             >
-              {isLoading ? (
-                <Loader2 className="h-4 w-4 animate-spin" />
-              ) : (
-                <Send className="h-4 w-4" />
-              )}
-            </button>
-          </form>
+              <button
+                type="button"
+                onClick={() => setShowConnectors(!showConnectors)}
+                className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-xl transition-all ${
+                  showConnectors ? "bg-[#0A0A0A] text-white" : "text-[#71717A] hover:bg-[#F4F4F5]"
+                }`}
+              >
+                <Link2 className="h-4 w-4" />
+              </button>
+              <input
+                ref={inputRef}
+                className="flex-1 bg-transparent py-1.5 text-sm text-[#0A0A0A] placeholder:text-[#A1A1AA] focus:outline-none disabled:opacity-50"
+                value={input}
+                placeholder="Ask @projects, @clients, or @leads..."
+                onChange={handleInputChange}
+                disabled={isLoading}
+                onKeyDown={(e) => {
+                  if (showMentions && filteredMentions.length > 0) {
+                    if (e.key === "ArrowDown") {
+                      e.preventDefault();
+                      setSelectedIndex((prev) => (prev + 1) % filteredMentions.length);
+                    } else if (e.key === "ArrowUp") {
+                      e.preventDefault();
+                      setSelectedIndex((prev) => (prev - 1 + filteredMentions.length) % filteredMentions.length);
+                    } else if (e.key === "Enter") {
+                      e.preventDefault();
+                      insertMention(filteredMentions[selectedIndex]);
+                    } else if (e.key === "Escape") {
+                      setShowMentions(false);
+                    }
+                  } else if (e.key === "Enter" && !e.shiftKey) {
+                    handleSubmit(e as unknown as React.FormEvent);
+                  }
+                }}
+              />
+              <button
+                type="submit"
+                disabled={isLoading || !input.trim()}
+                className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-[#0A0A0A] text-white transition-all hover:bg-[#1A1A1A] disabled:opacity-30 disabled:cursor-not-allowed"
+              >
+                {isLoading ? (
+                  <Loader2 className="h-4 w-4 animate-spin" />
+                ) : (
+                  <Send className="h-4 w-4" />
+                )}
+              </button>
+            </form>
+          </div>
           <p className="mt-2 text-center text-xs text-[#A1A1AA]">
             AI can make mistakes. Verify critical changes in your dashboard.
           </p>
         </div>
       </div>
+
+      {/* Modals */}
+      {activeConnector && (
+        <ConnectorModal
+          isOpen={isConnectorModalOpen}
+          onClose={() => setIsConnectorModalOpen(false)}
+          connectorName={activeConnector.name}
+          connectorType={activeConnector.type}
+          isConnected={connectedServices[activeConnector.type]}
+          onSuccess={(isConnected) => {
+            setConnectedServices(prev => ({ ...prev, [activeConnector.type]: isConnected }));
+            fetchServices();
+          }}
+        />
+      )}
     </div>
   );
 }

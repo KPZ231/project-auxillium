@@ -4,8 +4,13 @@ import React from "react";
 import { AlertCircle, CheckCircle2, AlertTriangle, ShieldCheck } from "lucide-react";
 import { useTranslation } from "@/app/context/TranslationContext";
 
+interface WaterfallItem {
+  name: string;
+  amount: number;
+}
+
 interface CashRunwayWidgetProps {
-  waterfallData: any[];
+  waterfallData: WaterfallItem[];
   avgBurnRate: number;
 }
 

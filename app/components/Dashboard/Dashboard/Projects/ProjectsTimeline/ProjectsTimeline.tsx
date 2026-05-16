@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { motion, Variants } from "motion/react";
-import { getProjects, forceRefreshProjects } from "@/actions/getProjects";
+import { getProjects } from "@/actions/getProjects";
 import { Project } from "@/lib/generated/client/browser";
 import { toast } from "sonner";
 import { ChevronLeft, ChevronRight } from "lucide-react";
@@ -35,6 +35,7 @@ export default function ProjectsTimeline() {
   };
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchProjects();
   }, []);
 

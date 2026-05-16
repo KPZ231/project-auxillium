@@ -33,7 +33,19 @@ const BAR_COLORS: Record<string, string> = {
 
 const PIE_COLORS = ["#0A0A0A", "#71717A", "#D4D4D8", "#A1A1AA", "#E5E5E5"];
 
-const CustomTooltip = ({ active, payload, label }: any) => {
+interface TooltipEntry {
+  name: string;
+  value: number;
+  [key: string]: unknown;
+}
+
+interface TooltipProps {
+  active?: boolean;
+  payload?: TooltipEntry[];
+  label?: string;
+}
+
+const CustomTooltip = ({ active, payload, label }: TooltipProps) => {
   if (!active || !payload || !payload.length) return null;
 
   return (
@@ -41,7 +53,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
       <p className="text-[10px] font-bold uppercase tracking-[0.3em] mb-2 text-white/60">
         {label}
       </p>
-      {payload.map((entry: any, idx: number) => (
+      {payload.map((entry, idx: number) => (
         <p key={idx} className="text-xs font-mono">
           {entry.name}: <span className="font-black">{entry.value}</span>
         </p>
@@ -50,7 +62,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   );
 };
 
-const PieTooltip = ({ active, payload }: any) => {
+const PieTooltip = ({ active, payload }: TooltipProps) => {
   if (!active || !payload || !payload.length) return null;
 
   return (

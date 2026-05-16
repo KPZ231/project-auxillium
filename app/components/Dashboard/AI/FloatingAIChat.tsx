@@ -16,7 +16,6 @@ import {
   Plus,
   Trash2,
   X,
-  MessageSquare,
 } from "lucide-react";
 import { DefaultChatTransport } from "ai";
 import ReactMarkdown from "react-markdown";
@@ -332,7 +331,7 @@ export default function FloatingAIChat({ spaceId }: { spaceId: string | null }) 
                       }
 
                       if (part.type.startsWith("tool-")) {
-                        const toolPart = part as any;
+                        const toolPart = part as { type: string; state: string; output?: { csv?: string; filename?: string } };
                         const toolName = part.type.replace("tool-", "");
 
                         if (

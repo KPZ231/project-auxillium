@@ -17,7 +17,7 @@ export const ExpenseEstimation = ({ spaceId }: ExpenseEstimationProps) => {
     estimatedPerMonth: number;
     totalForPeriod: number;
     recurringTotal: number;
-    recurringExpenses?: any[];
+    recurringExpenses?: { recurringDay: number; amount: number; category?: string }[];
   } | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -29,7 +29,9 @@ export const ExpenseEstimation = ({ spaceId }: ExpenseEstimationProps) => {
   };
 
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchEstimation();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [spaceId, months]);
 
   return (

@@ -2,8 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { getEmployees } from "@/actions/employee";
-import { MemberBadge } from "./member-badge";
-import { motion, AnimatePresence } from "motion/react";
+import { motion } from "motion/react";
 
 interface MemberSelectorProps {
   onSelect: (employeeId: string) => void;
@@ -12,8 +11,14 @@ interface MemberSelectorProps {
   onClose: () => void;
 }
 
+interface Employee {
+  id: string;
+  name: string;
+  role?: string;
+}
+
 export function MemberSelector({ onSelect, assignedIds, isOpen, onClose }: MemberSelectorProps) {
-  const [employees, setEmployees] = useState<any[]>([]);
+  const [employees, setEmployees] = useState<Employee[]>([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
 

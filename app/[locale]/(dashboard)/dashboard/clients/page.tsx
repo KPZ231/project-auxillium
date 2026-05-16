@@ -26,7 +26,7 @@ export default async function ClientsPage() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {clients.map((client: any) => (
+            {clients.map((client: { id: string; name: string; email?: string | null; photoUrl?: string | null; projects: any[] }) => (
               <Link href={`/dashboard/clients/${client.id}`} key={client.id} className="group block bg-white border border-[#E5E5E5] hover:border-[#0A0A0A] transition-colors relative overflow-hidden">
                 <div className="p-6">
                   <div className="flex items-start gap-4 mb-4">

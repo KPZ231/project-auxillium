@@ -8,8 +8,6 @@ import {
   Building2, 
   CheckCircle2, 
   ChevronRight, 
-  Info,
-  LayoutDashboard,
   ShieldCheck,
   Calendar,
   Loader2
@@ -17,10 +15,25 @@ import {
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
+interface Space {
+  id: string;
+  spaceName: string;
+  _count?: {
+    members: number;
+    projects: number;
+  };
+}
+
 interface SpaceSettingsClientProps {
-  initialSpaces: any[];
+  initialSpaces: Space[];
   activeSpaceId: string | undefined;
-  activeSpace: any;
+  activeSpace: {
+    id: string;
+    spaceName: string;
+    spaceDescription?: string | null;
+    owner: { name: string | null };
+    createdAt: Date | string;
+  } | null;
 }
 
 export default function SpaceSettingsClient({ initialSpaces, activeSpaceId, activeSpace }: SpaceSettingsClientProps) {

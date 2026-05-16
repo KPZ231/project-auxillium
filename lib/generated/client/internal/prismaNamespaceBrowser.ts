@@ -64,7 +64,9 @@ export const ModelName = {
   FinancialLabel: 'FinancialLabel',
   Client: 'Client',
   FinancialAuditLog: 'FinancialAuditLog',
-  Integration: 'Integration'
+  Integration: 'Integration',
+  DocumentTemplate: 'DocumentTemplate',
+  GeneratedDocument: 'GeneratedDocument'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -328,6 +330,40 @@ export const IntegrationScalarFieldEnum = {
 export type IntegrationScalarFieldEnum = (typeof IntegrationScalarFieldEnum)[keyof typeof IntegrationScalarFieldEnum]
 
 
+export const DocumentTemplateScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  spaceId: 'spaceId',
+  name: 'name',
+  type: 'type',
+  content: 'content',
+  blocks: 'blocks',
+  branding: 'branding',
+  usageCount: 'usageCount',
+  isDefault: 'isDefault',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type DocumentTemplateScalarFieldEnum = (typeof DocumentTemplateScalarFieldEnum)[keyof typeof DocumentTemplateScalarFieldEnum]
+
+
+export const GeneratedDocumentScalarFieldEnum = {
+  id: 'id',
+  templateId: 'templateId',
+  userId: 'userId',
+  spaceId: 'spaceId',
+  clientId: 'clientId',
+  dealId: 'dealId',
+  name: 'name',
+  filePath: 'filePath',
+  contextData: 'contextData',
+  createdAt: 'createdAt'
+} as const
+
+export type GeneratedDocumentScalarFieldEnum = (typeof GeneratedDocumentScalarFieldEnum)[keyof typeof GeneratedDocumentScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -342,6 +378,13 @@ export const NullableJsonNullValueInput = {
 } as const
 
 export type NullableJsonNullValueInput = (typeof NullableJsonNullValueInput)[keyof typeof NullableJsonNullValueInput]
+
+
+export const JsonNullValueInput = {
+  JsonNull: JsonNull
+} as const
+
+export type JsonNullValueInput = (typeof JsonNullValueInput)[keyof typeof JsonNullValueInput]
 
 
 export const QueryMode = {

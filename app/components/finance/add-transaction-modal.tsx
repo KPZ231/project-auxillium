@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { PremiumInput, PremiumSelect, PremiumTextarea } from "@/app/components/UI/FormElements";
 import { toast } from "sonner";
-import { addExpense, addIncome, createLabel, getLabels, checkAnomaly, getFinanceEntities } from "@/actions/finance";
+import { addExpense, addIncome, getLabels, checkAnomaly, getFinanceEntities } from "@/actions/finance";
 import { uploadReceipt } from "@/actions/uploadReceipt";
-import { X, Plus, AlertTriangle, UploadCloud } from "lucide-react";
+import { X, AlertTriangle, UploadCloud } from "lucide-react";
 import { TransactionCategory } from "@/lib/generated/client/client";
 
 interface AddTransactionModalProps {
@@ -31,7 +31,7 @@ export const AddTransactionModal = ({ isOpen, onClose, spaceId, userId }: AddTra
     labelIds: [] as string[],
   });
   const [labels, setLabels] = useState<{ id: string; name: string }[]>([]);
-  const [entities, setEntities] = useState<{ clients: any[], projects: any[] }>({ clients: [], projects: [] });
+  const [entities, setEntities] = useState<{ clients: { id: string; name: string; type: string }[]; projects: { id: string; name: string; type: string }[] }>({ clients: [], projects: [] });
   const [isSubmitting, setIsSubmitting] = useState(false);
   
   // File upload state
@@ -53,8 +53,10 @@ export const AddTransactionModal = ({ isOpen, onClose, spaceId, userId }: AddTra
 
   useEffect(() => {
     if (isOpen) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       fetchData();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen, type, spaceId]);
 
   // Debounced anomaly check
@@ -69,6 +71,7 @@ export const AddTransactionModal = ({ isOpen, onClose, spaceId, userId }: AddTra
         }, 500);
       }
     } else {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setAnomalyWarning(false);
     }
     return () => {

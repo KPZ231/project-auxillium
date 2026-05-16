@@ -22,7 +22,7 @@ export async function uploadReceipt(formData: FormData) {
     const filename = `${crypto.randomUUID()}.${fileExtension}`
     
     // Upload file to 'finance-receipts' bucket in Supabase
-    const { data, error } = await supabase.storage
+    const { error } = await supabase.storage
       .from('finance-receipts')
       .upload(filename, file, {
         cacheControl: '3600',

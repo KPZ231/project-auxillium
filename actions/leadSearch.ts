@@ -37,9 +37,9 @@ export async function startLeadSearch(query: string, limit: number) {
 
     const data = await response.json();
     return { success: true, data };
-  } catch (error: any) {
+  } catch (error) {
     console.error("[startLeadSearch Error]", error);
-    return { success: false, error: error.message || "Unknown error" };
+    return { success: false, error: error instanceof Error ? error.message : "Unknown error" };
   }
 }
 
@@ -84,9 +84,9 @@ export async function getLeadSearchJob(jobId: string) {
     }
 
     return { success: true, data };
-  } catch (error: any) {
+  } catch (error) {
     console.error("[getLeadSearchJob Error]", error);
-    return { success: false, error: error.message || "Unknown error" };
+    return { success: false, error: error instanceof Error ? error.message : "Unknown error" };
   }
 }
 
@@ -115,8 +115,8 @@ export async function deleteLeadSearchJob(jobId: string) {
     }
 
     return { success: true };
-  } catch (error: any) {
+  } catch (error) {
     console.error("[deleteLeadSearchJob Error]", error);
-    return { success: false, error: error.message || "Unknown error" };
+    return { success: false, error: error instanceof Error ? error.message : "Unknown error" };
   }
 }

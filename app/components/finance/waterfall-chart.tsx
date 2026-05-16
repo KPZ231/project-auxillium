@@ -15,6 +15,7 @@ export function WaterfallChart({ data }: WaterfallChartProps) {
   let runningTotal = 0;
   const processedData = data.map((item) => {
     if (item.isTotal) {
+      // eslint-disable-next-line react-hooks/immutability
       runningTotal = item.amount;
       return {
         name: item.name,
@@ -66,7 +67,7 @@ export function WaterfallChart({ data }: WaterfallChartProps) {
             tickLine={false} 
           />
           <Tooltip 
-            formatter={(val: any, name: any, props: any) => [`$${props.payload.amount}`, "Amount"]}
+            formatter={(val: number, name: string, props: { payload: { amount: number } }) => [`$${props.payload.amount}`, "Amount"]}
             cursor={{ fill: "#FAFAFA" }}
             contentStyle={{ 
               borderRadius: "0px", 

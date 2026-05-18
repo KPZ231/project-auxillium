@@ -4,7 +4,7 @@ import { useState } from "react";
 import { inviteByEmail, generateInviteLink } from "@/actions/invitations";
 import { updateMemberRole, removeMember } from "@/actions/members";
 import { SpaceRole } from "@/lib/generated/client/client";
-import { Trash2, Link as LinkIcon, Mail, Check, X, Copy } from "lucide-react";
+import { Trash2, Link as LinkIcon, Mail, Copy } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 type Member = {

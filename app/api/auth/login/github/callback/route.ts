@@ -69,7 +69,7 @@ export async function GET(request: NextRequest) {
     });
     
     const emailsData = await emailsRes.json();
-    const primaryEmailObj = emailsData.find((e: any) => e.primary && e.verified) || emailsData.find((e: any) => e.verified) || emailsData[0];
+    const primaryEmailObj = emailsData.find((e: { primary: boolean; verified: boolean; email: string }) => e.primary && e.verified) || emailsData.find((e: { primary: boolean; verified: boolean; email: string }) => e.verified) || emailsData[0];
     const email = primaryEmailObj?.email;
 
     if (!email || !userData.id) {

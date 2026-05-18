@@ -25,7 +25,7 @@ export async function loginAction(formData: LoginFormData) {
 
   const { email: providedEmail, username, password } = validatedFields.data;
   let email = providedEmail;
-  let searchUsername = username;
+  const searchUsername = username;
 
   if (!email && username && username.includes("@")) {
     email = username;
@@ -50,7 +50,16 @@ export async function loginAction(formData: LoginFormData) {
       return { error: "Nieprawidłowy e-mail/login lub hasło." };
     }
 
-    // 4. Verify password with Argon2
+    // 4. Handle OAuth users who don't have a password hash
+    if (!user.passwordHash) {
+      if (user.authProvider && user.authProvider !== "LOCAL") {
+        const providerName = user.authProvider === "GOOGLE" ? "Google" : "GitHub";
+        return { error: `To konto korzysta z logowania przez ${providerName}. Zaloguj się przy użyciu tej metody.` };
+      }
+      return { error: "Nieprawidłowy e-mail/login lub hasło." };
+    }
+
+    // 5. Verify password with Argon2
     const isValidPassword = await verify(user.passwordHash, password);
 
     if (!isValidPassword) {

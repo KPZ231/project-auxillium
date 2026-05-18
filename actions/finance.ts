@@ -394,7 +394,7 @@ export async function estimateFutureExpenses(spaceId: string, monthsCount: numbe
   }
 }
 
-export async function checkAnomaly(spaceId: string, category: TransactionCategory, amount: number, currency: string) {
+export async function checkAnomaly(spaceId: string, category: TransactionCategory, amount: number, _currency: string) {
   try {
     const threeMonthsAgo = new Date();
     threeMonthsAgo.setMonth(threeMonthsAgo.getMonth() - 3);

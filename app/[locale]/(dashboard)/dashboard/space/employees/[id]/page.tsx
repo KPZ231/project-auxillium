@@ -1,16 +1,10 @@
 import React from "react";
 import { getEmployeeById } from "@/actions/employee";
 import { notFound } from "next/navigation";
-import { 
-  ArrowLeft, 
-  Mail, 
-  Phone, 
-  Briefcase, 
-  Shield, 
-  Calendar,
-  FolderKanban,
-  CheckCircle2,
-  Clock,
+import {
+  Mail,
+  Phone,
+  Briefcase,
   CheckSquare,
   ChevronRight
 } from "lucide-react";

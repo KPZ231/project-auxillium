@@ -55,8 +55,8 @@ export default function SpaceSettingsClient({ initialSpaces, activeSpaceId, acti
         setIsCreating(false);
         router.refresh();
       }
-    } catch (error: any) {
-      toast.error(error.message || "Failed to create space");
+    } catch (error: unknown) {
+      toast.error(error instanceof Error ? error.message : "Failed to create space");
     } finally {
       setIsSubmitting(false);
     }
@@ -71,8 +71,8 @@ export default function SpaceSettingsClient({ initialSpaces, activeSpaceId, acti
         toast.success("Switched space successfully");
         router.refresh();
       }
-    } catch (error: any) {
-      toast.error(error.message || "Failed to switch space");
+    } catch (error: unknown) {
+      toast.error(error instanceof Error ? error.message : "Failed to switch space");
     }
   };
 

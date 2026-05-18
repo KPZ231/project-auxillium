@@ -22,7 +22,7 @@ interface FinanceData {
   profitMargin?: number;
   waterfallData?: { name: string; amount: number; isTotal?: boolean }[];
   pnlData?: Record<string, { income: number; expense: number }>;
-  transactions?: any[];
+  transactions?: Array<{ id: string; amount: number; date: Date }>,
 }
 
 interface FinanceDashboardClientProps {

@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
         spaceId: spaceId,
         name: `${template.name}_${new Date().toISOString().split('T')[0]}`,
         filePath: "", // In a real app, this would be a URL to S3/Cloudinary
-        contextData: context as any,
+        contextData: context as Record<string, unknown>,
       }
     });
 

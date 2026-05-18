@@ -81,7 +81,7 @@ export async function markAsRead(id: string) {
       data: { isRead: true }
     })
     return true
-  } catch (error) {
+  } catch {
     return false
   }
 }
@@ -101,7 +101,7 @@ export async function markAllAsRead() {
       data: { isRead: true }
     })
     return true
-  } catch (error) {
+  } catch {
     return false
   }
 }
@@ -115,7 +115,7 @@ export async function deleteNotification(id: string) {
       where: { id, userId }
     })
     return true
-  } catch (error) {
+  } catch {
     return false
   }
 }

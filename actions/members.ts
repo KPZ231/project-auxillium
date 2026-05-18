@@ -45,7 +45,7 @@ export async function removeMember(spaceId: string, targetUserId: string) {
   if (!userId) return { error: "Nieautoryzowany" };
 
   // Allow users to leave space OR admins to remove others
-  let isLeaving = userId === targetUserId;
+  const isLeaving = userId === targetUserId;
   
   if (!isLeaving) {
     const permission = await checkPermission(userId, spaceId, "manage_members");

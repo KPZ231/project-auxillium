@@ -48,7 +48,7 @@ interface Project {
   images: string[];
   milestones: Milestone[];
   dueDate?: string | Date;
-  assignedEmployees: any[];
+  assignedEmployees: Array<{ id: string; name: string; avatarUrl?: string }>,
   status: string;
 }
 
@@ -194,7 +194,7 @@ export default function ProjectDetailsClient({
               <PremiumSelect 
                 label="Status" 
                 value={formData.projectStatus} 
-                onChange={(e) => setFormData({...formData, projectStatus: e.target.value as any})}
+                onChange={(e) => setFormData({...formData, projectStatus: e.target.value as "IN_PROGRESS" | "DONE" | "CANCELED"})}
                 options={[
                   { value: "IN_PROGRESS", label: "In Progress" },
                   { value: "DONE", label: "Done" },
@@ -823,7 +823,7 @@ export default function ProjectDetailsClient({
                   <PremiumSelect 
                     label="Status" 
                     value={formData.projectStatus} 
-                    onChange={(e) => setFormData({...formData, projectStatus: e.target.value as any})}
+                    onChange={(e) => setFormData({...formData, projectStatus: e.target.value as "IN_PROGRESS" | "DONE" | "CANCELED"})}
                     options={[
                       { value: "IN_PROGRESS", label: "In Progress" },
                       { value: "DONE", label: "Done" },
@@ -897,7 +897,7 @@ export default function ProjectDetailsClient({
                     <label className="block text-[12px] font-bold uppercase tracking-[0.08em] text-[#71717A]">Milestones</label>
                     <button type="button" onClick={addMilestone} className="text-[12px] font-medium text-[#0A0A0A] hover:underline">+ Add</button>
                   </div>
-                  {formData.milestones.map((m: any, i: number) => (
+                  {formData.milestones.map((m: { title: string; date: string; completed?: boolean; progress?: number }, i: number) => (
                     <div key={i} className="flex flex-col gap-3 bg-[#F4F4F5] p-3 border border-[#E5E5E5]">
                       <div className="flex items-center gap-4">
                         <input type="checkbox" checked={m.completed || m.progress === 100} onChange={(e) => {

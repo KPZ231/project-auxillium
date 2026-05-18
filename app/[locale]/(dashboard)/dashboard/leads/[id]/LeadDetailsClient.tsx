@@ -88,7 +88,7 @@ export default function LeadDetailsClient({ lead, isUnauthorized = false }: { le
   const handleEditSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    const result = await updateLead(formData as any);
+    const result = await updateLead(formData as { leadName: string; description: string; email: string; projectType: string; status: string; currentStage: string; budget: string; timeline: string; websiteUrl?: string; githubUrl?: string; });
 
     if (result.success) {
       toast.success("Lead updated successfully");
@@ -163,7 +163,7 @@ export default function LeadDetailsClient({ lead, isUnauthorized = false }: { le
               <PremiumSelect 
                 label="Status" 
                 value={formData.status} 
-                onChange={(e) => setFormData({...formData, status: e.target.value as any})}
+                onChange={(e) => setFormData({...formData, status: e.target.value as "COLD" | "NEGOTIATION" | "QUALIFIED"})}
                 options={[
                   { value: "COLD", label: "Cold" },
                   { value: "NEGOTIATION", label: "Negotiation" },
@@ -378,7 +378,7 @@ export default function LeadDetailsClient({ lead, isUnauthorized = false }: { le
                   <PremiumSelect 
                     label="Status" 
                     value={formData.status} 
-                    onChange={(e) => setFormData({...formData, status: e.target.value as any})}
+                    onChange={(e) => setFormData({...formData, status: e.target.value as "COLD" | "NEGOTIATION" | "QUALIFIED"})}
                     options={[
                       { value: "COLD", label: "Cold" },
                       { value: "NEGOTIATION", label: "Negotiation" },

@@ -1,7 +1,7 @@
 import React from "react";
 import { getSpaces, getActiveSpaceId, getActiveSpace } from "@/actions/space";
 import SpaceSettingsClient from "@/app/components/Dashboard/Space/SpaceSettingsClient";
-import { Settings, Plus, Building2 } from "lucide-react";
+import { Settings } from "lucide-react";
 
 export default async function SpaceSettingsPage() {
   const spaces = await getSpaces();

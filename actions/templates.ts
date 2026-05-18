@@ -34,20 +34,50 @@ export async function getTemplates(spaceId: string): Promise<{ success: boolean;
       },
       orderBy: { updatedAt: 'desc' }
     });
-    return { success: true, templates };
+    
+    const mappedTemplates: Template[] = templates.map(t => ({
+      id: t.id,
+      name: t.name,
+      type: t.type,
+      userId: t.userId,
+      spaceId: t.spaceId,
+      content: t.content,
+      branding: (t.branding as unknown as BrandingSettings) || DEFAULT_BRANDING,
+      blocks: t.blocks,
+      usageCount: t.usageCount,
+      createdAt: t.createdAt,
+      updatedAt: t.updatedAt
+    }));
+
+    return { success: true, templates: mappedTemplates };
   } catch (error) {
     console.error("Failed to fetch templates:", error);
     return { success: false, error: "Failed to fetch templates" };
   }
 }
 
-export async function getTemplateById(id: string) {
+export async function getTemplateById(id: string): Promise<{ success: boolean; template?: Template; error?: string }> {
   try {
     const template = await prisma.documentTemplate.findUnique({
       where: { id }
     });
     if (!template) return { success: false, error: "Template not found" };
-    return { success: true, template };
+    
+    const mappedTemplate: Template = {
+      id: template.id,
+      name: template.name,
+      type: template.type,
+      userId: template.userId,
+      spaceId: template.spaceId,
+      content: template.content,
+      branding: (template.branding as unknown as BrandingSettings) || DEFAULT_BRANDING,
+      blocks: template.blocks,
+      usageCount: template.usageCount,
+      createdAt: template.createdAt,
+      updatedAt: template.updatedAt
+    };
+
+    return { success: true, template: mappedTemplate };
   } catch (error) {
     console.error("Failed to fetch template by ID:", error);
     return { success: false, error: "Failed to fetch template" };
@@ -73,7 +103,7 @@ export async function createTemplate(data: {
         userId,
         spaceId: data.spaceId,
         content: preset?.content || "",
-        branding: DEFAULT_BRANDING as unknown as any, // Prisma expects specific JSON type, but we can avoid explicit 'any' in interface
+        branding: DEFAULT_BRANDING as unknown as Record<string, unknown>, // Prisma expects specific JSON type
         blocks: []
       }
     });
@@ -96,8 +126,8 @@ export async function updateTemplate(id: string, data: {
       where: { id },
       data: {
         ...data,
-        branding: data.branding ? (data.branding as unknown as any) : undefined,
-        blocks: data.blocks ? (data.blocks as unknown as any) : undefined
+        branding: data.branding ? (data.branding as Record<string, unknown>) : undefined,
+        blocks: data.blocks ? (data.blocks as Record<string, unknown>[]) : undefined
       }
     });
     revalidatePath(`/dashboard/templates/${id}/edit`);
@@ -135,8 +165,8 @@ export async function duplicateTemplate(id: string) {
         name: `Kopia: ${original.name}`,
         type: original.type,
         content: original.content,
-        branding: original.branding as any,
-        blocks: original.blocks as any,
+        branding: original.branding as Record<string, unknown>,
+        blocks: original.blocks as Record<string, unknown>[],
         userId,
         spaceId: original.spaceId
       }
@@ -149,7 +179,7 @@ export async function duplicateTemplate(id: string) {
   }
 }
 
-export async function getGeneratedDocuments(spaceId: string): Promise<{ success: boolean; documents?: any[]; error?: string }> {
+export async function getGeneratedDocuments(spaceId: string): Promise<{ success: boolean; documents?: Array<{ id: string; name: string }> ; error?: string }> {
   const { userId } = await getUser();
   if (!userId) return { success: false, error: "Unauthorized" };
 

@@ -3,7 +3,7 @@
 import { prisma } from "@/lib/prisma";
 import { getUser, login, SESSION_DURATION } from "@/lib/session";
 import { checkPermission } from "@/lib/permissions";
-import { SpaceRole, InvitationStatus } from "@/lib/generated/client/client";
+import { SpaceRole } from "@/lib/generated/client/client";
 import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
 

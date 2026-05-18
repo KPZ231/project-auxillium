@@ -424,13 +424,13 @@ export default function AIChatClient({ spaceId }: { spaceId: string }) {
 
       const items: MentionItem[] = [];
       if (projRes.success) {
-        items.push(...(projRes.data as any[] || []).map((p: { id: string; projectName: string }) => ({ id: p.id, name: p.projectName, type: 'project' as const })));
+        items.push(...(projRes.data as Array<{ id: string; projectName: string }> || []).map((p: { id: string; projectName: string }) => ({ id: p.id, name: p.projectName, type: 'project' as const })));
       }
       if (leadRes.success) {
-        items.push(...(leadRes.data as any[] || []).map((l: { id: string; leadName: string }) => ({ id: l.id, name: l.leadName, type: 'lead' as const })));
+        items.push(...(leadRes.data as Array<{ id: string; leadName: string }> || []).map((l: { id: string; leadName: string }) => ({ id: l.id, name: l.leadName, type: 'lead' as const })));
       }
       if (Array.isArray(clientRes)) {
-        items.push(...(clientRes as any[]).map((c: { id: string; name: string }) => ({ id: c.id, name: c.name, type: 'client' as const })));
+        items.push(...(clientRes as Array<{ id: string; name: string }>).map((c: { id: string; name: string }) => ({ id: c.id, name: c.name, type: 'client' as const })));
       }
       setMentionItems(items);
     };

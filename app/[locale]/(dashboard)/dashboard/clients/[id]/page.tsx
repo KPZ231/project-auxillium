@@ -35,8 +35,8 @@ export default async function ClientDetailsPage({ params }: { params: Promise<{ 
     incomes: client.incomes.map((i: { amount: number; date: Date; createdAt: Date; updatedAt: Date }) => ({ ...i, date: i.date.toISOString(), createdAt: i.createdAt.toISOString(), updatedAt: i.updatedAt.toISOString() })),
     expenses: client.expenses.map((e: { amount: number; date: Date; createdAt: Date; updatedAt: Date }) => ({ ...e, date: e.date.toISOString(), createdAt: e.createdAt.toISOString(), updatedAt: e.updatedAt.toISOString() })),
     projects: client.projects.map((p: { createdAt: Date; updatedAt: Date; dueDate: Date | null }) => ({ ...p, createdAt: p.createdAt.toISOString(), updatedAt: p.updatedAt.toISOString(), dueDate: p.dueDate ? p.dueDate.toISOString() : null })),
-    milestones: client.milestones as any,
-    schedule: client.schedule as any,
+    milestones: client.milestones as Array<unknown>,
+    schedule: client.schedule as Array<unknown>,
   }
 
 

@@ -1,4 +1,3 @@
-import { getTranslations } from "next-intl/server";
 import { prisma } from "@/lib/prisma";
 import { getActiveSpaceId } from "@/actions/space";
 import { getUser } from "@/lib/session";

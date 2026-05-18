@@ -162,8 +162,8 @@ export default function ClientDetailsClient({
     };
 
     const result = financeType === "INCOME" 
-      ? await addIncome(payload as any) 
-      : await addExpense(payload as any);
+      ? await addIncome(payload as { amount: number; description: string; source: string; clientId: string })
+      : await addExpense(payload as { amount: number; description: string; category: string; clientId: string });
 
     if (result.success) {
       toast.success(`${financeType === "INCOME" ? "Income" : "Expense"} added successfully`);

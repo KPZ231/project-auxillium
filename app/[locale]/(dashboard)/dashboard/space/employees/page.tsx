@@ -1,7 +1,7 @@
 import React from "react";
 import { getEmployees } from "@/actions/employee";
 import EmployeeListClient from "@/app/components/Dashboard/Space/EmployeeListClient";
-import { Users, UserPlus, Settings2 } from "lucide-react";
+import { Settings2 } from "lucide-react";
 import Link from "next/link";
 
 export default async function EmployeesPage({

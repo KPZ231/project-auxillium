@@ -51,8 +51,14 @@ export async function updateLead(data: UpdateLeadInput) {
             return { success: false, error: "Lead not found" }
         }
 
-        if (existingLead.userId !== userId) {
-            return { success: false, error: "Unauthorized access to lead" }
+        if (existingLead.spaceId) {
+            const { checkPermission } = await import("@/lib/permissions");
+            const permission = await checkPermission(userId, existingLead.spaceId, "write");
+            if (!permission.allowed) {
+                return { success: false, error: "Brak uprawnień do edycji leadów w tej przestrzeni" };
+            }
+        } else if (existingLead.userId !== userId) {
+            return { success: false, error: "Unauthorized access to lead" };
         }
 
         const updatedLead = await prisma.lead.update({

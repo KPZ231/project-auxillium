@@ -399,7 +399,10 @@ export const ModelName = {
   FinancialAuditLog: 'FinancialAuditLog',
   Integration: 'Integration',
   DocumentTemplate: 'DocumentTemplate',
-  GeneratedDocument: 'GeneratedDocument'
+  GeneratedDocument: 'GeneratedDocument',
+  Notification: 'Notification',
+  SpaceMember: 'SpaceMember',
+  SpaceInvitation: 'SpaceInvitation'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -415,7 +418,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "passwordResetToken" | "project" | "lead" | "space" | "employee" | "task" | "expense" | "income" | "revenueGoal" | "financialLabel" | "client" | "financialAuditLog" | "integration" | "documentTemplate" | "generatedDocument"
+    modelProps: "user" | "passwordResetToken" | "project" | "lead" | "space" | "employee" | "task" | "expense" | "income" | "revenueGoal" | "financialLabel" | "client" | "financialAuditLog" | "integration" | "documentTemplate" | "generatedDocument" | "notification" | "spaceMember" | "spaceInvitation"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1603,6 +1606,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Notification: {
+      payload: Prisma.$NotificationPayload<ExtArgs>
+      fields: Prisma.NotificationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.NotificationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.NotificationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
+        }
+        findFirst: {
+          args: Prisma.NotificationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.NotificationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
+        }
+        findMany: {
+          args: Prisma.NotificationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>[]
+        }
+        create: {
+          args: Prisma.NotificationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
+        }
+        createMany: {
+          args: Prisma.NotificationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.NotificationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>[]
+        }
+        delete: {
+          args: Prisma.NotificationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
+        }
+        update: {
+          args: Prisma.NotificationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
+        }
+        deleteMany: {
+          args: Prisma.NotificationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.NotificationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.NotificationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>[]
+        }
+        upsert: {
+          args: Prisma.NotificationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$NotificationPayload>
+        }
+        aggregate: {
+          args: Prisma.NotificationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateNotification>
+        }
+        groupBy: {
+          args: Prisma.NotificationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.NotificationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.NotificationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.NotificationCountAggregateOutputType> | number
+        }
+      }
+    }
+    SpaceMember: {
+      payload: Prisma.$SpaceMemberPayload<ExtArgs>
+      fields: Prisma.SpaceMemberFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SpaceMemberFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpaceMemberPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SpaceMemberFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpaceMemberPayload>
+        }
+        findFirst: {
+          args: Prisma.SpaceMemberFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpaceMemberPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SpaceMemberFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpaceMemberPayload>
+        }
+        findMany: {
+          args: Prisma.SpaceMemberFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpaceMemberPayload>[]
+        }
+        create: {
+          args: Prisma.SpaceMemberCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpaceMemberPayload>
+        }
+        createMany: {
+          args: Prisma.SpaceMemberCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SpaceMemberCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpaceMemberPayload>[]
+        }
+        delete: {
+          args: Prisma.SpaceMemberDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpaceMemberPayload>
+        }
+        update: {
+          args: Prisma.SpaceMemberUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpaceMemberPayload>
+        }
+        deleteMany: {
+          args: Prisma.SpaceMemberDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SpaceMemberUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SpaceMemberUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpaceMemberPayload>[]
+        }
+        upsert: {
+          args: Prisma.SpaceMemberUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpaceMemberPayload>
+        }
+        aggregate: {
+          args: Prisma.SpaceMemberAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSpaceMember>
+        }
+        groupBy: {
+          args: Prisma.SpaceMemberGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SpaceMemberGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SpaceMemberCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SpaceMemberCountAggregateOutputType> | number
+        }
+      }
+    }
+    SpaceInvitation: {
+      payload: Prisma.$SpaceInvitationPayload<ExtArgs>
+      fields: Prisma.SpaceInvitationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SpaceInvitationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpaceInvitationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SpaceInvitationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpaceInvitationPayload>
+        }
+        findFirst: {
+          args: Prisma.SpaceInvitationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpaceInvitationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SpaceInvitationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpaceInvitationPayload>
+        }
+        findMany: {
+          args: Prisma.SpaceInvitationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpaceInvitationPayload>[]
+        }
+        create: {
+          args: Prisma.SpaceInvitationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpaceInvitationPayload>
+        }
+        createMany: {
+          args: Prisma.SpaceInvitationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SpaceInvitationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpaceInvitationPayload>[]
+        }
+        delete: {
+          args: Prisma.SpaceInvitationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpaceInvitationPayload>
+        }
+        update: {
+          args: Prisma.SpaceInvitationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpaceInvitationPayload>
+        }
+        deleteMany: {
+          args: Prisma.SpaceInvitationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SpaceInvitationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SpaceInvitationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpaceInvitationPayload>[]
+        }
+        upsert: {
+          args: Prisma.SpaceInvitationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SpaceInvitationPayload>
+        }
+        aggregate: {
+          args: Prisma.SpaceInvitationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSpaceInvitation>
+        }
+        groupBy: {
+          args: Prisma.SpaceInvitationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SpaceInvitationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SpaceInvitationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SpaceInvitationCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1647,6 +1872,8 @@ export const UserScalarFieldEnum = {
   email: 'email',
   username: 'username',
   passwordHash: 'passwordHash',
+  authProvider: 'authProvider',
+  providerId: 'providerId',
   name: 'name',
   avatarUrl: 'avatarUrl',
   createdAt: 'createdAt',
@@ -1735,6 +1962,7 @@ export type SpaceScalarFieldEnum = (typeof SpaceScalarFieldEnum)[keyof typeof Sp
 
 export const EmployeeScalarFieldEnum = {
   id: 'id',
+  userId: 'userId',
   name: 'name',
   email: 'email',
   phone: 'phone',
@@ -1921,6 +2149,46 @@ export const GeneratedDocumentScalarFieldEnum = {
 export type GeneratedDocumentScalarFieldEnum = (typeof GeneratedDocumentScalarFieldEnum)[keyof typeof GeneratedDocumentScalarFieldEnum]
 
 
+export const NotificationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  spaceId: 'spaceId',
+  title: 'title',
+  message: 'message',
+  link: 'link',
+  isRead: 'isRead',
+  createdAt: 'createdAt'
+} as const
+
+export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
+
+
+export const SpaceMemberScalarFieldEnum = {
+  id: 'id',
+  spaceId: 'spaceId',
+  userId: 'userId',
+  role: 'role',
+  joinedAt: 'joinedAt'
+} as const
+
+export type SpaceMemberScalarFieldEnum = (typeof SpaceMemberScalarFieldEnum)[keyof typeof SpaceMemberScalarFieldEnum]
+
+
+export const SpaceInvitationScalarFieldEnum = {
+  id: 'id',
+  spaceId: 'spaceId',
+  invitedEmail: 'invitedEmail',
+  inviteToken: 'inviteToken',
+  role: 'role',
+  status: 'status',
+  expiresAt: 'expiresAt',
+  createdById: 'createdById',
+  createdAt: 'createdAt'
+} as const
+
+export type SpaceInvitationScalarFieldEnum = (typeof SpaceInvitationScalarFieldEnum)[keyof typeof SpaceInvitationScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -2093,6 +2361,34 @@ export type EnumTransactionCategoryFieldRefInput<$PrismaModel> = FieldRefInputTy
 export type ListEnumTransactionCategoryFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'TransactionCategory[]'>
     
 
+
+/**
+ * Reference to a field of type 'SpaceRole'
+ */
+export type EnumSpaceRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SpaceRole'>
+    
+
+
+/**
+ * Reference to a field of type 'SpaceRole[]'
+ */
+export type ListEnumSpaceRoleFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'SpaceRole[]'>
+    
+
+
+/**
+ * Reference to a field of type 'InvitationStatus'
+ */
+export type EnumInvitationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InvitationStatus'>
+    
+
+
+/**
+ * Reference to a field of type 'InvitationStatus[]'
+ */
+export type ListEnumInvitationStatusFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'InvitationStatus[]'>
+    
+
 /**
  * Batch Payload for updateMany & deleteMany & createMany
  */
@@ -2219,6 +2515,9 @@ export type GlobalOmitConfig = {
   integration?: Prisma.IntegrationOmit
   documentTemplate?: Prisma.DocumentTemplateOmit
   generatedDocument?: Prisma.GeneratedDocumentOmit
+  notification?: Prisma.NotificationOmit
+  spaceMember?: Prisma.SpaceMemberOmit
+  spaceInvitation?: Prisma.SpaceInvitationOmit
 }
 
 /* Types for Logging */

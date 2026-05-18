@@ -21,8 +21,14 @@ export async function deleteLead(leadId: string, confirmationName: string) {
             return { success: false, error: "Lead not found" }
         }
 
-        if (lead.userId !== userId) {
-            return { success: false, error: "Unauthorized access to lead" }
+        if (lead.spaceId) {
+            const { checkPermission } = await import("@/lib/permissions");
+            const permission = await checkPermission(userId, lead.spaceId, "delete");
+            if (!permission.allowed) {
+                return { success: false, error: "Brak uprawnień do usuwania leadów w tej przestrzeni" };
+            }
+        } else if (lead.userId !== userId) {
+            return { success: false, error: "Unauthorized access to lead" };
         }
 
         if (lead.leadName !== confirmationName) {

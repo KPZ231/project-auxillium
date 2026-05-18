@@ -54,7 +54,7 @@ export function KanbanContainer({ projects, spaceId }: KanbanContainerProps) {
         setConnectedServices(res.data);
       }
     };
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+     
     fetchServices();
   }, []);
 

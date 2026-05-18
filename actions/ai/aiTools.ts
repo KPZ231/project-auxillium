@@ -1,7 +1,7 @@
 "use server";
 
 import { prisma } from "@/lib/prisma";
-import { ProjectStatus, LeadStatus } from "@/lib/generated/client/client";
+import { ProjectStatus, LeadStatus, TransactionCategory } from "@/lib/generated/client/client";
 
 
 // ============================================================
@@ -241,7 +241,7 @@ export async function createExpenseForAI(
   data: {
     amount: number;
     description?: string;
-    category?: string;
+    category?: TransactionCategory;
     date?: string;
   }
 ) {

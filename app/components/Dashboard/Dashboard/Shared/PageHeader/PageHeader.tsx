@@ -17,6 +17,12 @@ interface PageHeaderProps {
     onClick?: () => void;
     icon?: ReactNode;
   };
+  secondaryAction?: {
+    label: string;
+    href?: string;
+    onClick?: () => void;
+    icon?: ReactNode;
+  };
   tabs?: Tab[];
   currentTab?: string;
   onTabChange?: (value: string) => void;
@@ -26,6 +32,7 @@ export default function PageHeader({
   title,
   subtitle,
   primaryAction,
+  secondaryAction,
   tabs,
   currentTab,
   onTabChange,
@@ -84,18 +91,29 @@ export default function PageHeader({
         )}
 
         {/* Right Side: Buttons */}
-        {primaryAction && (
+        {(primaryAction || secondaryAction) && (
           <motion.div
             className="flex flex-row items-center gap-4"
             variants={itemVariants}
           >
-            <Button
-              content={primaryAction.label}
-              url={primaryAction.href || "#"}
-              onClick={primaryAction.onClick}
-              variant="primary"
-              icon={primaryAction.icon}
-            />
+            {secondaryAction && (
+              <Button
+                content={secondaryAction.label}
+                url={secondaryAction.href || "#"}
+                onClick={secondaryAction.onClick}
+                variant="secondary"
+                icon={secondaryAction.icon}
+              />
+            )}
+            {primaryAction && (
+              <Button
+                content={primaryAction.label}
+                url={primaryAction.href || "#"}
+                onClick={primaryAction.onClick}
+                variant="primary"
+                icon={primaryAction.icon}
+              />
+            )}
           </motion.div>
         )}
       </motion.div>

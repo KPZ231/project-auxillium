@@ -20,7 +20,10 @@ export async function createSpace(formData: FormData) {
       spaceDescription,
       ownerId: userId,
       members: {
-        connect: { id: userId },
+        create: {
+          userId: userId,
+          role: "ADMIN",
+        },
       },
     },
   });
@@ -50,7 +53,7 @@ export async function getSpaces() {
   return await prisma.space.findMany({
     where: {
       members: {
-        some: { id: userId },
+        some: { userId: userId },
       },
     },
     include: {
@@ -74,7 +77,7 @@ export async function switchSpace(spaceId: string) {
     where: {
       id: spaceId,
       members: {
-        some: { id: userId },
+        some: { userId: userId },
       },
     },
   });

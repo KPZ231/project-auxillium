@@ -27,19 +27,25 @@ interface Milestone {
   progress: number;
 }
 
+interface Member {
+  id: string;
+  name: string;
+  role?: string | null;
+}
+
 interface Client {
   id: string;
   name: string;
-  email?: string;
-  phone?: string;
-  description?: string;
-  notes?: string;
-  location?: string;
-  photoUrl?: string;
-  timeline?: string;
+  email?: string | null;
+  phone?: string | null;
+  description?: string | null;
+  notes?: string | null;
+  location?: string | null;
+  photoUrl?: string | null;
+  timeline?: string | null;
   milestones: Milestone[];
   schedule: unknown[];
-  assignedEmployees: unknown[];
+  assignedEmployees: Member[];
   incomes: { amount: number; date: string; description: string; source: string }[];
   expenses: { amount: number; date: string; description: string; category: string }[];
   projects: { id: string; projectName: string; projectStatus: string }[];

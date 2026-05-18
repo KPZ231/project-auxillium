@@ -6,6 +6,7 @@ import { z } from "zod"
 import { ProjectStatus } from "@/lib/generated/client/client"
 import { revalidatePath } from "next/cache"
 import { invalidateWorkloadCache } from "./workload"
+import { createNotification } from "./notifications"
 
 
 // 1. Zod Schema: The most scalable way to validate incoming data.
@@ -58,6 +59,12 @@ export async function addProject(data: AddProjectInput) {
         const { getActiveSpaceId } = await import("./space");
         const spaceId = await getActiveSpaceId();
 
+        const { checkPermission } = await import("@/lib/permissions");
+        const permission = await checkPermission(userId, spaceId, "write");
+        if (!permission.allowed) {
+            return { success: false, error: "Brak uprawnień do tworzenia projektów" };
+        }
+
         // 5. Utworzenie projektu
         const newProject = await prisma.project.create({
             data: {
@@ -80,6 +87,14 @@ export async function addProject(data: AddProjectInput) {
         if (spaceId) {
           await invalidateWorkloadCache(spaceId);
         }
+
+        await createNotification({
+            title: `Nowy projekt: ${newProject.projectName}`,
+            message: `Projekt został pomyślnie utworzony w przestrzeni roboczej.`,
+            link: `/dashboard/projects`,
+            spaceId: spaceId ?? undefined,
+            userId: userId
+        });
 
         return {
             success: true,

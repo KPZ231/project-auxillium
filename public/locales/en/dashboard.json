@@ -243,6 +243,9 @@
     "download_csv": "Download CSV",
     "delete_job": "Delete Job",
     "rate_limit_error": "You have reached your search limit. Please try again later.",
-    "no_jobs": "No active or recent searches."
+    "no_jobs": "No active or recent searches.",
+    "beta_banner_title": "Feature is disabled in the program beta.",
+    "beta_banner_description": "The Lead Search tool allows you to automatically search and extract company contact details directly from Google Maps based on a given search query and result limit. The system fetches real-time public data such as company name, phone number, email address, website, and ratings, allowing you to instantly build a complete database of potential clients for your business.",
+    "beta_banner_button": "Back to Dashboard"
   }
 }

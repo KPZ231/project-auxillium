@@ -21,8 +21,14 @@ export async function deleteProject(projectId: string, confirmationName: string)
             return { success: false, error: "Project not found" }
         }
 
-        if (project.userId !== userId) {
-            return { success: false, error: "Unauthorized access to project" }
+        if (project.spaceId) {
+            const { checkPermission } = await import("@/lib/permissions");
+            const permission = await checkPermission(userId, project.spaceId, "delete");
+            if (!permission.allowed) {
+                return { success: false, error: "Brak uprawnień do usuwania projektów w tej przestrzeni" };
+            }
+        } else if (project.userId !== userId) {
+            return { success: false, error: "Unauthorized access to project" };
         }
 
         if (project.projectName !== confirmationName) {

@@ -11,7 +11,7 @@ export interface SessionPayload {
   userId: string;
   hasSpace?: boolean;
   expires: string | number | Date;
-  [key: string]: any; // Allow for other fields if necessary
+  [key: string]: unknown; // Allow for other fields if necessary
 }
 
 export async function encrypt(payload: SessionPayload) {

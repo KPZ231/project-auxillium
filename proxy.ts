@@ -106,8 +106,8 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(loginUrl)
   }
 
-  // B. Redirect authenticated users with a space to dashboard if they are at public routes or root
-  if (session && session.hasSpace && (isPublicRoute || path === '/')) {
+  // B. Redirect authenticated users with a space to dashboard if they are at public routes
+  if (session && session.hasSpace && isPublicRoute) {
     return NextResponse.redirect(new URL(`/${currentLocale}/dashboard`, request.nextUrl))
   }
 

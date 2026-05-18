@@ -31,6 +31,10 @@ export async function registerAction(formData: RegisterFormData) {
     email = username;
   }
 
+  if (email) {
+    email = email.toLowerCase();
+  }
+
   try {
     // 3. Check if user already exists
     const existingUser = await prisma.user.findFirst({

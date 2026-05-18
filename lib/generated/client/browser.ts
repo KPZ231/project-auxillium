@@ -97,3 +97,18 @@ export type DocumentTemplate = Prisma.DocumentTemplateModel
  * 
  */
 export type GeneratedDocument = Prisma.GeneratedDocumentModel
+/**
+ * Model Notification
+ * 
+ */
+export type Notification = Prisma.NotificationModel
+/**
+ * Model SpaceMember
+ * 
+ */
+export type SpaceMember = Prisma.SpaceMemberModel
+/**
+ * Model SpaceInvitation
+ * 
+ */
+export type SpaceInvitation = Prisma.SpaceInvitationModel

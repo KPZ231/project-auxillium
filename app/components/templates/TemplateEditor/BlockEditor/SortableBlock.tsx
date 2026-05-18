@@ -11,7 +11,7 @@ interface SortableBlockProps {
   block: DocumentBlock;
   isSelected?: boolean;
   onSelect: () => void;
-  onUpdate: (content: any) => void;
+  onUpdate: (content: Record<string, unknown>) => void;
   onDelete: () => void;
 }
 

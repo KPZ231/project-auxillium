@@ -243,6 +243,9 @@
     "download_csv": "Pobierz CSV",
     "delete_job": "Usuń Zadanie",
     "rate_limit_error": "Osiągnąłeś limit wyszukiwań. Spróbuj ponownie później.",
-    "no_jobs": "Brak aktywnych lub ostatnich wyszukiwań."
+    "no_jobs": "Brak aktywnych lub ostatnich wyszukiwań.",
+    "beta_banner_title": "Feature nie działa w becie programu.",
+    "beta_banner_description": "Narzędzie Wyszukiwarki Leadów umożliwia automatyczne wyszukiwanie i ekstrahowanie danych teleadresowych firm bezpośrednio z Google Maps na podstawie podanej frazy oraz określonego limitu wyników. Dzięki temu system pobiera w czasie rzeczywistym dane takie jak nazwa firmy, numer telefonu, adres e-mail, strona internetowa oraz oceny, pozwalając Ci na błyskawiczne zbudowanie gotowej bazy potencjalnych klientów dla Twojego biznesu.",
+    "beta_banner_button": "Wróć do Dashboardu"
   }
 }

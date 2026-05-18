@@ -33,18 +33,18 @@ interface Project {
   id: string;
   projectName: string;
   projectDescription: string;
-  projectStatus: string;
-  projectType?: string;
-  priority?: string;
-  budget?: string;
-  location?: string;
-  context?: string;
-  clientInfo?: string;
-  assignedUsersInfo?: string;
-  clientBrief?: string;
-  websiteUrl?: string;
-  githubUrl?: string;
-  timeline?: string;
+  projectStatus: "DONE" | "IN_PROGRESS" | "CANCELED";
+  projectType?: string | null;
+  priority?: string | null;
+  budget?: string | null;
+  location?: string | null;
+  context?: string | null;
+  clientInfo?: string | null;
+  assignedUsersInfo?: string | null;
+  clientBrief?: string | null;
+  websiteUrl?: string | null;
+  githubUrl?: string | null;
+  timeline?: string | null;
   images: string[];
   milestones: Milestone[];
   dueDate?: string | Date;
@@ -95,7 +95,7 @@ export default function ProjectDetailsClient({
     id: project.id,
     projectName: project.projectName,
     projectDescription: project.projectDescription,
-    projectStatus: project.projectStatus,
+    projectStatus: project.projectStatus as "DONE" | "IN_PROGRESS" | "CANCELED",
     projectType: project.projectType || "",
     priority: project.priority || "",
     budget: project.budget || "",

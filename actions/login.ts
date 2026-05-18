@@ -23,7 +23,17 @@ export async function loginAction(formData: LoginFormData) {
     return { error: "Nieprawidłowe dane logowania." };
   }
 
-  const { email, username, password } = validatedFields.data;
+  const { email: providedEmail, username, password } = validatedFields.data;
+  let email = providedEmail;
+  let searchUsername = username;
+
+  if (!email && username && username.includes("@")) {
+    email = username;
+  }
+
+  if (email) {
+    email = email.toLowerCase();
+  }
 
   try {
     // 3. Find user
@@ -31,7 +41,7 @@ export async function loginAction(formData: LoginFormData) {
       where: {
         OR: [
           { email: email || "___non_existent___" },
-          { username: username || "___non_existent___" }
+          { username: searchUsername || "___non_existent___" }
         ]
       }
     });

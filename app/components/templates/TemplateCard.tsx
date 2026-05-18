@@ -8,8 +8,16 @@ import { useRouter } from 'next/navigation';
 import { deleteTemplate, duplicateTemplate } from '@/actions/templates';
 import { toast } from 'sonner';
 
+interface Template {
+  id: string;
+  name: string;
+  type: string;
+  updatedAt: string | Date;
+  usageCount: number;
+}
+
 interface TemplateCardProps {
-  template: any;
+  template: Template;
 }
 
 export const TemplateCard: React.FC<TemplateCardProps> = ({ template }) => {

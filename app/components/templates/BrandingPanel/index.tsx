@@ -17,7 +17,7 @@ export const BrandingPanel: React.FC<BrandingPanelProps> = ({ settings, onChange
     setActiveSection(activeSection === section ? null : section);
   };
 
-  const updateSetting = (key: keyof BrandingSettings, value: any) => {
+  const updateSetting = <K extends keyof BrandingSettings>(key: K, value: BrandingSettings[K]) => {
     onChange({ ...settings, [key]: value });
   };
 

@@ -16,8 +16,17 @@ import { TransactionHistoryTable } from "./transaction-history-table";
 import { getFinancialSummary } from "@/actions/finance";
 import { useTranslation } from "@/app/context/TranslationContext";
 
+interface FinanceData {
+  months?: { income: number; expenses: number; goal: number }[];
+  mom?: { income: number; expenses: number; profitMarginPrev?: number };
+  profitMargin?: number;
+  waterfallData?: { name: string; amount: number; isTotal?: boolean }[];
+  pnlData?: Record<string, { income: number; expense: number }>;
+  transactions?: any[];
+}
+
 interface FinanceDashboardClientProps {
-  initialData: Record<string, unknown>;
+  initialData: FinanceData;
   userId: string;
   spaceId: string;
 }
@@ -32,8 +41,9 @@ export function FinanceDashboardClient({ initialData, userId, spaceId }: Finance
     setData(summary);
   };
 
-  const currentGoal = data?.months?.[data.months.length - 1]?.goal || 0;
-  const currentIncome = data?.months?.[data.months.length - 1]?.income || 0;
+  const months = data?.months || [];
+  const currentGoal = months[months.length - 1]?.goal || 0;
+  const currentIncome = months[months.length - 1]?.income || 0;
   
   const incomeMom = data?.mom?.income || 0;
   const expenseMom = data?.mom?.expenses || 0;

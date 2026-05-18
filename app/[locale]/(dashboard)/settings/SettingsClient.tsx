@@ -61,7 +61,7 @@ export default function SettingsClient({
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setDisplayName(user.name || "");
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+     
     setAvatarUrl(user.avatarUrl || "");
   }, [user]);
 

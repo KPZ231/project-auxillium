@@ -5,6 +5,7 @@ import { Prisma } from "@/lib/generated/client/client";
 import { getCachedData, setCachedData, invalidateCache } from "@/lib/redis";
 import { revalidatePath } from "next/cache";
 import { invalidateWorkloadCache } from "./workload";
+import { createNotification } from "./notifications";
 
 export type Subtask = {
   id: string;
@@ -74,6 +75,14 @@ export async function getTasks(spaceId: string, projectId?: string) {
 }
 
 export async function createTask(data: TaskInput) {
+  const { getUser } = await import("@/lib/session");
+  const { userId } = await getUser();
+  if (!userId) throw new Error("Unauthorized");
+
+  const { checkPermission } = await import("@/lib/permissions");
+  const permission = await checkPermission(userId, data.spaceId, "read");
+  if (!permission.allowed) throw new Error("Brak uprawnień do tworzenia zadań");
+
   const taskCount = await prisma.task.count({
     where: { 
       spaceId: data.spaceId, 
@@ -101,6 +110,14 @@ export async function createTask(data: TaskInput) {
 
   await invalidateAllTaskCaches(spaceId, projectId);
   await invalidateWorkloadCache(spaceId);
+  
+  await createNotification({
+    title: `Nowe zadanie: ${newTask.title}`,
+    message: `Zadanie "${newTask.title}" zostało pomyślnie utworzone.`,
+    link: `/dashboard/tasks`,
+    spaceId: spaceId
+  });
+  
   revalidatePath('/dashboard/tasks');
 
   return newTask;
@@ -109,6 +126,14 @@ export async function createTask(data: TaskInput) {
 export async function updateTask(taskId: string, data: Partial<TaskInput>) {
   const existingTask = await prisma.task.findUnique({ where: { id: taskId } });
   if (!existingTask) throw new Error("Task not found");
+
+  const { getUser } = await import("@/lib/session");
+  const { userId } = await getUser();
+  if (!userId) throw new Error("Unauthorized");
+
+  const { checkPermission } = await import("@/lib/permissions");
+  const permission = await checkPermission(userId, existingTask.spaceId, "read");
+  if (!permission.allowed) throw new Error("Brak uprawnień do edycji zadań");
 
   const { spaceId, projectId, employeeId, subtasks, ...otherData } = data;
 
@@ -143,6 +168,14 @@ export async function deleteTask(taskId: string) {
   const existingTask = await prisma.task.findUnique({ where: { id: taskId } });
   if (!existingTask) throw new Error("Task not found");
 
+  const { getUser } = await import("@/lib/session");
+  const { userId } = await getUser();
+  if (!userId) throw new Error("Unauthorized");
+
+  const { checkPermission } = await import("@/lib/permissions");
+  const permission = await checkPermission(userId, existingTask.spaceId, "delete");
+  if (!permission.allowed) throw new Error("Brak uprawnień do usuwania zadań");
+
   await prisma.task.delete({
     where: { id: taskId }
   });
@@ -162,6 +195,14 @@ export async function updateTaskStatusAndOrder(
 ) {
   const existingTask = await prisma.task.findUnique({ where: { id: taskId } });
   if (!existingTask) throw new Error("Task not found");
+
+  const { getUser } = await import("@/lib/session");
+  const { userId } = await getUser();
+  if (!userId) throw new Error("Unauthorized");
+
+  const { checkPermission } = await import("@/lib/permissions");
+  const permission = await checkPermission(userId, existingTask.spaceId, "read");
+  if (!permission.allowed) throw new Error("Brak uprawnień do zmiany statusu/kolejności zadań");
 
   const updates = columnTasks.map(t => 
     prisma.task.update({

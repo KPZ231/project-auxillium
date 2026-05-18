@@ -28,28 +28,30 @@ export default async function DocumentHubPage({ params }: { params: Promise<{ lo
   const documents = response.success && response.documents ? response.documents : [];
 
   return (
-    <div className="p-8 max-w-7xl mx-auto min-h-screen">
+    <div className="flex flex-col w-full">
       <DocumentHubHeader language={locale} spaceId={spaceId} />
       
-      {documents.length === 0 ? (
-        <div className="flex flex-col items-center justify-center py-32 border border-dashed border-[#E5E5E5] bg-[#FAFAFA]">
-          <div className="text-4xl mb-4">📄</div>
-          <p className="text-[#71717A] mb-1 font-medium">Brak utworzonych dokumentów</p>
-          <p className="text-[#A1A1AA] text-sm mb-6">Generuj dokumenty z poziomu edytora szablonów.</p>
-          <a 
-            href={`/${locale}/dashboard/templates`}
-            className="text-xs font-bold uppercase tracking-widest hover:underline text-[#0A0A0A]"
-          >
-            Przejdź do szablonów &rarr;
-          </a>
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {documents.map((doc: { id: string; title: string; content: string; createdAt: string }) => (
-            <GeneratedDocumentCard key={doc.id} doc={doc} />
-          ))}
-        </div>
-      )}
+      <div className="p-8">
+        {documents.length === 0 ? (
+          <div className="flex flex-col items-center justify-center py-32 border border-dashed border-[#E5E5E5] bg-[#FAFAFA]">
+            <div className="text-4xl mb-4">📄</div>
+            <p className="text-[#71717A] mb-1 font-medium">Brak utworzonych dokumentów</p>
+            <p className="text-[#A1A1AA] text-sm mb-6">Generuj dokumenty z poziomu edytora szablonów.</p>
+            <a 
+              href={`/${locale}/dashboard/templates`}
+              className="text-xs font-bold uppercase tracking-widest hover:underline text-[#0A0A0A]"
+            >
+              Przejdź do szablonów &rarr;
+            </a>
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {documents.map((doc: { id: string; title: string; content: string; createdAt: string }) => (
+              <GeneratedDocumentCard key={doc.id} doc={doc} />
+            ))}
+          </div>
+        )}
+      </div>
     </div>
   );
 }

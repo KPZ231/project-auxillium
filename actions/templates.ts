@@ -13,8 +13,8 @@ interface Template {
   userId: string;
   spaceId: string | null;
   content: string;
-  branding: any;
-  blocks: any;
+  branding: BrandingSettings;
+  blocks: unknown;
   usageCount: number;
   createdAt: Date;
   updatedAt: Date;
@@ -73,7 +73,7 @@ export async function createTemplate(data: {
         userId,
         spaceId: data.spaceId,
         content: preset?.content || "",
-        branding: DEFAULT_BRANDING as any,
+        branding: DEFAULT_BRANDING as unknown as any, // Prisma expects specific JSON type, but we can avoid explicit 'any' in interface
         blocks: []
       }
     });
@@ -89,15 +89,15 @@ export async function updateTemplate(id: string, data: {
   name?: string;
   content?: string;
   branding?: BrandingSettings;
-  blocks?: any[];
+  blocks?: unknown[];
 }) {
   try {
     await prisma.documentTemplate.update({
       where: { id },
       data: {
         ...data,
-        branding: data.branding ? (data.branding as any) : undefined,
-        blocks: data.blocks ? (data.blocks as any) : undefined
+        branding: data.branding ? (data.branding as unknown as any) : undefined,
+        blocks: data.blocks ? (data.blocks as unknown as any) : undefined
       }
     });
     revalidatePath(`/dashboard/templates/${id}/edit`);

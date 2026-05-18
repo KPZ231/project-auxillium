@@ -1,6 +1,10 @@
 {
   "app_name": "Auxillium",
   "tagline": "New definition of management",
+  "beta_announcement": {
+    "message": "Auxillium is currently in beta version.",
+    "link_text": "Report an issue on GitHub"
+  },
   "buttons": {
     "log_in": "Log In",
     "sign_up": "Sign Up",

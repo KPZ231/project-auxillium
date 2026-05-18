@@ -29,6 +29,8 @@ export type UserMinAggregateOutputType = {
   email: string | null
   username: string | null
   passwordHash: string | null
+  authProvider: string | null
+  providerId: string | null
   name: string | null
   avatarUrl: string | null
   createdAt: Date | null
@@ -41,6 +43,8 @@ export type UserMaxAggregateOutputType = {
   email: string | null
   username: string | null
   passwordHash: string | null
+  authProvider: string | null
+  providerId: string | null
   name: string | null
   avatarUrl: string | null
   createdAt: Date | null
@@ -53,6 +57,8 @@ export type UserCountAggregateOutputType = {
   email: number
   username: number
   passwordHash: number
+  authProvider: number
+  providerId: number
   name: number
   avatarUrl: number
   createdAt: number
@@ -67,6 +73,8 @@ export type UserMinAggregateInputType = {
   email?: true
   username?: true
   passwordHash?: true
+  authProvider?: true
+  providerId?: true
   name?: true
   avatarUrl?: true
   createdAt?: true
@@ -79,6 +87,8 @@ export type UserMaxAggregateInputType = {
   email?: true
   username?: true
   passwordHash?: true
+  authProvider?: true
+  providerId?: true
   name?: true
   avatarUrl?: true
   createdAt?: true
@@ -91,6 +101,8 @@ export type UserCountAggregateInputType = {
   email?: true
   username?: true
   passwordHash?: true
+  authProvider?: true
+  providerId?: true
   name?: true
   avatarUrl?: true
   createdAt?: true
@@ -175,7 +187,9 @@ export type UserGroupByOutputType = {
   id: string
   email: string
   username: string
-  passwordHash: string
+  passwordHash: string | null
+  authProvider: string
+  providerId: string | null
   name: string | null
   avatarUrl: string | null
   createdAt: Date
@@ -208,7 +222,9 @@ export type UserWhereInput = {
   id?: Prisma.StringFilter<"User"> | string
   email?: Prisma.StringFilter<"User"> | string
   username?: Prisma.StringFilter<"User"> | string
-  passwordHash?: Prisma.StringFilter<"User"> | string
+  passwordHash?: Prisma.StringNullableFilter<"User"> | string | null
+  authProvider?: Prisma.StringFilter<"User"> | string
+  providerId?: Prisma.StringNullableFilter<"User"> | string | null
   name?: Prisma.StringNullableFilter<"User"> | string | null
   avatarUrl?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
@@ -219,7 +235,7 @@ export type UserWhereInput = {
   leads?: Prisma.LeadListRelationFilter
   clients?: Prisma.ClientListRelationFilter
   ownedSpaces?: Prisma.SpaceListRelationFilter
-  memberSpaces?: Prisma.SpaceListRelationFilter
+  spaceMemberships?: Prisma.SpaceMemberListRelationFilter
   expenses?: Prisma.ExpenseListRelationFilter
   incomes?: Prisma.IncomeListRelationFilter
   revenueGoals?: Prisma.RevenueGoalListRelationFilter
@@ -227,13 +243,17 @@ export type UserWhereInput = {
   integrations?: Prisma.IntegrationListRelationFilter
   documentTemplates?: Prisma.DocumentTemplateListRelationFilter
   generatedDocuments?: Prisma.GeneratedDocumentListRelationFilter
+  notifications?: Prisma.NotificationListRelationFilter
+  createdInvitations?: Prisma.SpaceInvitationListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
   username?: Prisma.SortOrder
-  passwordHash?: Prisma.SortOrder
+  passwordHash?: Prisma.SortOrderInput | Prisma.SortOrder
+  authProvider?: Prisma.SortOrder
+  providerId?: Prisma.SortOrderInput | Prisma.SortOrder
   name?: Prisma.SortOrderInput | Prisma.SortOrder
   avatarUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -244,7 +264,7 @@ export type UserOrderByWithRelationInput = {
   leads?: Prisma.LeadOrderByRelationAggregateInput
   clients?: Prisma.ClientOrderByRelationAggregateInput
   ownedSpaces?: Prisma.SpaceOrderByRelationAggregateInput
-  memberSpaces?: Prisma.SpaceOrderByRelationAggregateInput
+  spaceMemberships?: Prisma.SpaceMemberOrderByRelationAggregateInput
   expenses?: Prisma.ExpenseOrderByRelationAggregateInput
   incomes?: Prisma.IncomeOrderByRelationAggregateInput
   revenueGoals?: Prisma.RevenueGoalOrderByRelationAggregateInput
@@ -252,16 +272,20 @@ export type UserOrderByWithRelationInput = {
   integrations?: Prisma.IntegrationOrderByRelationAggregateInput
   documentTemplates?: Prisma.DocumentTemplateOrderByRelationAggregateInput
   generatedDocuments?: Prisma.GeneratedDocumentOrderByRelationAggregateInput
+  notifications?: Prisma.NotificationOrderByRelationAggregateInput
+  createdInvitations?: Prisma.SpaceInvitationOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
   id?: string
   email?: string
   username?: string
+  providerId?: string
   AND?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
   OR?: Prisma.UserWhereInput[]
   NOT?: Prisma.UserWhereInput | Prisma.UserWhereInput[]
-  passwordHash?: Prisma.StringFilter<"User"> | string
+  passwordHash?: Prisma.StringNullableFilter<"User"> | string | null
+  authProvider?: Prisma.StringFilter<"User"> | string
   name?: Prisma.StringNullableFilter<"User"> | string | null
   avatarUrl?: Prisma.StringNullableFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
@@ -272,7 +296,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   leads?: Prisma.LeadListRelationFilter
   clients?: Prisma.ClientListRelationFilter
   ownedSpaces?: Prisma.SpaceListRelationFilter
-  memberSpaces?: Prisma.SpaceListRelationFilter
+  spaceMemberships?: Prisma.SpaceMemberListRelationFilter
   expenses?: Prisma.ExpenseListRelationFilter
   incomes?: Prisma.IncomeListRelationFilter
   revenueGoals?: Prisma.RevenueGoalListRelationFilter
@@ -280,13 +304,17 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   integrations?: Prisma.IntegrationListRelationFilter
   documentTemplates?: Prisma.DocumentTemplateListRelationFilter
   generatedDocuments?: Prisma.GeneratedDocumentListRelationFilter
-}, "id" | "email" | "username">
+  notifications?: Prisma.NotificationListRelationFilter
+  createdInvitations?: Prisma.SpaceInvitationListRelationFilter
+}, "id" | "email" | "username" | "providerId">
 
 export type UserOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   email?: Prisma.SortOrder
   username?: Prisma.SortOrder
-  passwordHash?: Prisma.SortOrder
+  passwordHash?: Prisma.SortOrderInput | Prisma.SortOrder
+  authProvider?: Prisma.SortOrder
+  providerId?: Prisma.SortOrderInput | Prisma.SortOrder
   name?: Prisma.SortOrderInput | Prisma.SortOrder
   avatarUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -304,7 +332,9 @@ export type UserScalarWhereWithAggregatesInput = {
   id?: Prisma.StringWithAggregatesFilter<"User"> | string
   email?: Prisma.StringWithAggregatesFilter<"User"> | string
   username?: Prisma.StringWithAggregatesFilter<"User"> | string
-  passwordHash?: Prisma.StringWithAggregatesFilter<"User"> | string
+  passwordHash?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  authProvider?: Prisma.StringWithAggregatesFilter<"User"> | string
+  providerId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   name?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   avatarUrl?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
@@ -316,7 +346,9 @@ export type UserCreateInput = {
   id?: string
   email: string
   username: string
-  passwordHash: string
+  passwordHash?: string | null
+  authProvider?: string
+  providerId?: string | null
   name?: string | null
   avatarUrl?: string | null
   createdAt?: Date | string
@@ -327,7 +359,7 @@ export type UserCreateInput = {
   leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientCreateNestedManyWithoutUserInput
   ownedSpaces?: Prisma.SpaceCreateNestedManyWithoutOwnerInput
-  memberSpaces?: Prisma.SpaceCreateNestedManyWithoutMembersInput
+  spaceMemberships?: Prisma.SpaceMemberCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutUserInput
@@ -335,13 +367,17 @@ export type UserCreateInput = {
   integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
   documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutUserInput
   generatedDocuments?: Prisma.GeneratedDocumentCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  createdInvitations?: Prisma.SpaceInvitationCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateInput = {
   id?: string
   email: string
   username: string
-  passwordHash: string
+  passwordHash?: string | null
+  authProvider?: string
+  providerId?: string | null
   name?: string | null
   avatarUrl?: string | null
   createdAt?: Date | string
@@ -352,7 +388,7 @@ export type UserUncheckedCreateInput = {
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutUserInput
   ownedSpaces?: Prisma.SpaceUncheckedCreateNestedManyWithoutOwnerInput
-  memberSpaces?: Prisma.SpaceUncheckedCreateNestedManyWithoutMembersInput
+  spaceMemberships?: Prisma.SpaceMemberUncheckedCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutUserInput
@@ -360,13 +396,17 @@ export type UserUncheckedCreateInput = {
   integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
   documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutUserInput
   generatedDocuments?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  createdInvitations?: Prisma.SpaceInvitationUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -377,7 +417,7 @@ export type UserUpdateInput = {
   leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUpdateManyWithoutUserNestedInput
   ownedSpaces?: Prisma.SpaceUpdateManyWithoutOwnerNestedInput
-  memberSpaces?: Prisma.SpaceUpdateManyWithoutMembersNestedInput
+  spaceMemberships?: Prisma.SpaceMemberUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutUserNestedInput
@@ -385,13 +425,17 @@ export type UserUpdateInput = {
   integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
   documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutUserNestedInput
   generatedDocuments?: Prisma.GeneratedDocumentUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  createdInvitations?: Prisma.SpaceInvitationUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -402,7 +446,7 @@ export type UserUncheckedUpdateInput = {
   leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutUserNestedInput
   ownedSpaces?: Prisma.SpaceUncheckedUpdateManyWithoutOwnerNestedInput
-  memberSpaces?: Prisma.SpaceUncheckedUpdateManyWithoutMembersNestedInput
+  spaceMemberships?: Prisma.SpaceMemberUncheckedUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutUserNestedInput
@@ -410,13 +454,17 @@ export type UserUncheckedUpdateInput = {
   integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
   documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutUserNestedInput
   generatedDocuments?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  createdInvitations?: Prisma.SpaceInvitationUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateManyInput = {
   id?: string
   email: string
   username: string
-  passwordHash: string
+  passwordHash?: string | null
+  authProvider?: string
+  providerId?: string | null
   name?: string | null
   avatarUrl?: string | null
   createdAt?: Date | string
@@ -428,7 +476,9 @@ export type UserUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -440,7 +490,9 @@ export type UserUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -453,6 +505,8 @@ export type UserCountOrderByAggregateInput = {
   email?: Prisma.SortOrder
   username?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
+  authProvider?: Prisma.SortOrder
+  providerId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   avatarUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -465,6 +519,8 @@ export type UserMaxOrderByAggregateInput = {
   email?: Prisma.SortOrder
   username?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
+  authProvider?: Prisma.SortOrder
+  providerId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   avatarUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -477,6 +533,8 @@ export type UserMinOrderByAggregateInput = {
   email?: Prisma.SortOrder
   username?: Prisma.SortOrder
   passwordHash?: Prisma.SortOrder
+  authProvider?: Prisma.SortOrder
+  providerId?: Prisma.SortOrder
   name?: Prisma.SortOrder
   avatarUrl?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
@@ -487,16 +545,6 @@ export type UserMinOrderByAggregateInput = {
 export type UserScalarRelationFilter = {
   is?: Prisma.UserWhereInput
   isNot?: Prisma.UserWhereInput
-}
-
-export type UserListRelationFilter = {
-  every?: Prisma.UserWhereInput
-  some?: Prisma.UserWhereInput
-  none?: Prisma.UserWhereInput
-}
-
-export type UserOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
 }
 
 export type StringFieldUpdateOperationsInput = {
@@ -559,50 +607,12 @@ export type UserCreateNestedOneWithoutOwnedSpacesInput = {
   connect?: Prisma.UserWhereUniqueInput
 }
 
-export type UserCreateNestedManyWithoutMemberSpacesInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutMemberSpacesInput, Prisma.UserUncheckedCreateWithoutMemberSpacesInput> | Prisma.UserCreateWithoutMemberSpacesInput[] | Prisma.UserUncheckedCreateWithoutMemberSpacesInput[]
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMemberSpacesInput | Prisma.UserCreateOrConnectWithoutMemberSpacesInput[]
-  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-}
-
-export type UserUncheckedCreateNestedManyWithoutMemberSpacesInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutMemberSpacesInput, Prisma.UserUncheckedCreateWithoutMemberSpacesInput> | Prisma.UserCreateWithoutMemberSpacesInput[] | Prisma.UserUncheckedCreateWithoutMemberSpacesInput[]
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMemberSpacesInput | Prisma.UserCreateOrConnectWithoutMemberSpacesInput[]
-  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-}
-
 export type UserUpdateOneRequiredWithoutOwnedSpacesNestedInput = {
   create?: Prisma.XOR<Prisma.UserCreateWithoutOwnedSpacesInput, Prisma.UserUncheckedCreateWithoutOwnedSpacesInput>
   connectOrCreate?: Prisma.UserCreateOrConnectWithoutOwnedSpacesInput
   upsert?: Prisma.UserUpsertWithoutOwnedSpacesInput
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutOwnedSpacesInput, Prisma.UserUpdateWithoutOwnedSpacesInput>, Prisma.UserUncheckedUpdateWithoutOwnedSpacesInput>
-}
-
-export type UserUpdateManyWithoutMemberSpacesNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutMemberSpacesInput, Prisma.UserUncheckedCreateWithoutMemberSpacesInput> | Prisma.UserCreateWithoutMemberSpacesInput[] | Prisma.UserUncheckedCreateWithoutMemberSpacesInput[]
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMemberSpacesInput | Prisma.UserCreateOrConnectWithoutMemberSpacesInput[]
-  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutMemberSpacesInput | Prisma.UserUpsertWithWhereUniqueWithoutMemberSpacesInput[]
-  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  update?: Prisma.UserUpdateWithWhereUniqueWithoutMemberSpacesInput | Prisma.UserUpdateWithWhereUniqueWithoutMemberSpacesInput[]
-  updateMany?: Prisma.UserUpdateManyWithWhereWithoutMemberSpacesInput | Prisma.UserUpdateManyWithWhereWithoutMemberSpacesInput[]
-  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
-}
-
-export type UserUncheckedUpdateManyWithoutMemberSpacesNestedInput = {
-  create?: Prisma.XOR<Prisma.UserCreateWithoutMemberSpacesInput, Prisma.UserUncheckedCreateWithoutMemberSpacesInput> | Prisma.UserCreateWithoutMemberSpacesInput[] | Prisma.UserUncheckedCreateWithoutMemberSpacesInput[]
-  connectOrCreate?: Prisma.UserCreateOrConnectWithoutMemberSpacesInput | Prisma.UserCreateOrConnectWithoutMemberSpacesInput[]
-  upsert?: Prisma.UserUpsertWithWhereUniqueWithoutMemberSpacesInput | Prisma.UserUpsertWithWhereUniqueWithoutMemberSpacesInput[]
-  set?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  disconnect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  delete?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  connect?: Prisma.UserWhereUniqueInput | Prisma.UserWhereUniqueInput[]
-  update?: Prisma.UserUpdateWithWhereUniqueWithoutMemberSpacesInput | Prisma.UserUpdateWithWhereUniqueWithoutMemberSpacesInput[]
-  updateMany?: Prisma.UserUpdateManyWithWhereWithoutMemberSpacesInput | Prisma.UserUpdateManyWithWhereWithoutMemberSpacesInput[]
-  deleteMany?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
 }
 
 export type UserCreateNestedOneWithoutExpensesInput = {
@@ -717,11 +727,55 @@ export type UserUpdateOneRequiredWithoutGeneratedDocumentsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutGeneratedDocumentsInput, Prisma.UserUpdateWithoutGeneratedDocumentsInput>, Prisma.UserUncheckedUpdateWithoutGeneratedDocumentsInput>
 }
 
+export type UserCreateNestedOneWithoutNotificationsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationsInput, Prisma.UserUncheckedCreateWithoutNotificationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutNotificationsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutNotificationsInput, Prisma.UserUncheckedCreateWithoutNotificationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutNotificationsInput
+  upsert?: Prisma.UserUpsertWithoutNotificationsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutNotificationsInput, Prisma.UserUpdateWithoutNotificationsInput>, Prisma.UserUncheckedUpdateWithoutNotificationsInput>
+}
+
+export type UserCreateNestedOneWithoutSpaceMembershipsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSpaceMembershipsInput, Prisma.UserUncheckedCreateWithoutSpaceMembershipsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSpaceMembershipsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutSpaceMembershipsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutSpaceMembershipsInput, Prisma.UserUncheckedCreateWithoutSpaceMembershipsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutSpaceMembershipsInput
+  upsert?: Prisma.UserUpsertWithoutSpaceMembershipsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutSpaceMembershipsInput, Prisma.UserUpdateWithoutSpaceMembershipsInput>, Prisma.UserUncheckedUpdateWithoutSpaceMembershipsInput>
+}
+
+export type UserCreateNestedOneWithoutCreatedInvitationsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedInvitationsInput, Prisma.UserUncheckedCreateWithoutCreatedInvitationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedInvitationsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutCreatedInvitationsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutCreatedInvitationsInput, Prisma.UserUncheckedCreateWithoutCreatedInvitationsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutCreatedInvitationsInput
+  upsert?: Prisma.UserUpsertWithoutCreatedInvitationsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCreatedInvitationsInput, Prisma.UserUpdateWithoutCreatedInvitationsInput>, Prisma.UserUncheckedUpdateWithoutCreatedInvitationsInput>
+}
+
 export type UserCreateWithoutResetTokensInput = {
   id?: string
   email: string
   username: string
-  passwordHash: string
+  passwordHash?: string | null
+  authProvider?: string
+  providerId?: string | null
   name?: string | null
   avatarUrl?: string | null
   createdAt?: Date | string
@@ -731,7 +785,7 @@ export type UserCreateWithoutResetTokensInput = {
   leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientCreateNestedManyWithoutUserInput
   ownedSpaces?: Prisma.SpaceCreateNestedManyWithoutOwnerInput
-  memberSpaces?: Prisma.SpaceCreateNestedManyWithoutMembersInput
+  spaceMemberships?: Prisma.SpaceMemberCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutUserInput
@@ -739,13 +793,17 @@ export type UserCreateWithoutResetTokensInput = {
   integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
   documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutUserInput
   generatedDocuments?: Prisma.GeneratedDocumentCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  createdInvitations?: Prisma.SpaceInvitationCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutResetTokensInput = {
   id?: string
   email: string
   username: string
-  passwordHash: string
+  passwordHash?: string | null
+  authProvider?: string
+  providerId?: string | null
   name?: string | null
   avatarUrl?: string | null
   createdAt?: Date | string
@@ -755,7 +813,7 @@ export type UserUncheckedCreateWithoutResetTokensInput = {
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutUserInput
   ownedSpaces?: Prisma.SpaceUncheckedCreateNestedManyWithoutOwnerInput
-  memberSpaces?: Prisma.SpaceUncheckedCreateNestedManyWithoutMembersInput
+  spaceMemberships?: Prisma.SpaceMemberUncheckedCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutUserInput
@@ -763,6 +821,8 @@ export type UserUncheckedCreateWithoutResetTokensInput = {
   integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
   documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutUserInput
   generatedDocuments?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  createdInvitations?: Prisma.SpaceInvitationUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutResetTokensInput = {
@@ -785,7 +845,9 @@ export type UserUpdateWithoutResetTokensInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -795,7 +857,7 @@ export type UserUpdateWithoutResetTokensInput = {
   leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUpdateManyWithoutUserNestedInput
   ownedSpaces?: Prisma.SpaceUpdateManyWithoutOwnerNestedInput
-  memberSpaces?: Prisma.SpaceUpdateManyWithoutMembersNestedInput
+  spaceMemberships?: Prisma.SpaceMemberUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutUserNestedInput
@@ -803,13 +865,17 @@ export type UserUpdateWithoutResetTokensInput = {
   integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
   documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutUserNestedInput
   generatedDocuments?: Prisma.GeneratedDocumentUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  createdInvitations?: Prisma.SpaceInvitationUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutResetTokensInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -819,7 +885,7 @@ export type UserUncheckedUpdateWithoutResetTokensInput = {
   leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutUserNestedInput
   ownedSpaces?: Prisma.SpaceUncheckedUpdateManyWithoutOwnerNestedInput
-  memberSpaces?: Prisma.SpaceUncheckedUpdateManyWithoutMembersNestedInput
+  spaceMemberships?: Prisma.SpaceMemberUncheckedUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutUserNestedInput
@@ -827,13 +893,17 @@ export type UserUncheckedUpdateWithoutResetTokensInput = {
   integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
   documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutUserNestedInput
   generatedDocuments?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  createdInvitations?: Prisma.SpaceInvitationUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutProjectsInput = {
   id?: string
   email: string
   username: string
-  passwordHash: string
+  passwordHash?: string | null
+  authProvider?: string
+  providerId?: string | null
   name?: string | null
   avatarUrl?: string | null
   createdAt?: Date | string
@@ -843,7 +913,7 @@ export type UserCreateWithoutProjectsInput = {
   leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientCreateNestedManyWithoutUserInput
   ownedSpaces?: Prisma.SpaceCreateNestedManyWithoutOwnerInput
-  memberSpaces?: Prisma.SpaceCreateNestedManyWithoutMembersInput
+  spaceMemberships?: Prisma.SpaceMemberCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutUserInput
@@ -851,13 +921,17 @@ export type UserCreateWithoutProjectsInput = {
   integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
   documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutUserInput
   generatedDocuments?: Prisma.GeneratedDocumentCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  createdInvitations?: Prisma.SpaceInvitationCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutProjectsInput = {
   id?: string
   email: string
   username: string
-  passwordHash: string
+  passwordHash?: string | null
+  authProvider?: string
+  providerId?: string | null
   name?: string | null
   avatarUrl?: string | null
   createdAt?: Date | string
@@ -867,7 +941,7 @@ export type UserUncheckedCreateWithoutProjectsInput = {
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutUserInput
   ownedSpaces?: Prisma.SpaceUncheckedCreateNestedManyWithoutOwnerInput
-  memberSpaces?: Prisma.SpaceUncheckedCreateNestedManyWithoutMembersInput
+  spaceMemberships?: Prisma.SpaceMemberUncheckedCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutUserInput
@@ -875,6 +949,8 @@ export type UserUncheckedCreateWithoutProjectsInput = {
   integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
   documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutUserInput
   generatedDocuments?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  createdInvitations?: Prisma.SpaceInvitationUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutProjectsInput = {
@@ -897,7 +973,9 @@ export type UserUpdateWithoutProjectsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -907,7 +985,7 @@ export type UserUpdateWithoutProjectsInput = {
   leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUpdateManyWithoutUserNestedInput
   ownedSpaces?: Prisma.SpaceUpdateManyWithoutOwnerNestedInput
-  memberSpaces?: Prisma.SpaceUpdateManyWithoutMembersNestedInput
+  spaceMemberships?: Prisma.SpaceMemberUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutUserNestedInput
@@ -915,13 +993,17 @@ export type UserUpdateWithoutProjectsInput = {
   integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
   documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutUserNestedInput
   generatedDocuments?: Prisma.GeneratedDocumentUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  createdInvitations?: Prisma.SpaceInvitationUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutProjectsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -931,7 +1013,7 @@ export type UserUncheckedUpdateWithoutProjectsInput = {
   leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutUserNestedInput
   ownedSpaces?: Prisma.SpaceUncheckedUpdateManyWithoutOwnerNestedInput
-  memberSpaces?: Prisma.SpaceUncheckedUpdateManyWithoutMembersNestedInput
+  spaceMemberships?: Prisma.SpaceMemberUncheckedUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutUserNestedInput
@@ -939,13 +1021,17 @@ export type UserUncheckedUpdateWithoutProjectsInput = {
   integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
   documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutUserNestedInput
   generatedDocuments?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  createdInvitations?: Prisma.SpaceInvitationUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutLeadsInput = {
   id?: string
   email: string
   username: string
-  passwordHash: string
+  passwordHash?: string | null
+  authProvider?: string
+  providerId?: string | null
   name?: string | null
   avatarUrl?: string | null
   createdAt?: Date | string
@@ -955,7 +1041,7 @@ export type UserCreateWithoutLeadsInput = {
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientCreateNestedManyWithoutUserInput
   ownedSpaces?: Prisma.SpaceCreateNestedManyWithoutOwnerInput
-  memberSpaces?: Prisma.SpaceCreateNestedManyWithoutMembersInput
+  spaceMemberships?: Prisma.SpaceMemberCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutUserInput
@@ -963,13 +1049,17 @@ export type UserCreateWithoutLeadsInput = {
   integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
   documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutUserInput
   generatedDocuments?: Prisma.GeneratedDocumentCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  createdInvitations?: Prisma.SpaceInvitationCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutLeadsInput = {
   id?: string
   email: string
   username: string
-  passwordHash: string
+  passwordHash?: string | null
+  authProvider?: string
+  providerId?: string | null
   name?: string | null
   avatarUrl?: string | null
   createdAt?: Date | string
@@ -979,7 +1069,7 @@ export type UserUncheckedCreateWithoutLeadsInput = {
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutUserInput
   ownedSpaces?: Prisma.SpaceUncheckedCreateNestedManyWithoutOwnerInput
-  memberSpaces?: Prisma.SpaceUncheckedCreateNestedManyWithoutMembersInput
+  spaceMemberships?: Prisma.SpaceMemberUncheckedCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutUserInput
@@ -987,6 +1077,8 @@ export type UserUncheckedCreateWithoutLeadsInput = {
   integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
   documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutUserInput
   generatedDocuments?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  createdInvitations?: Prisma.SpaceInvitationUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutLeadsInput = {
@@ -1009,7 +1101,9 @@ export type UserUpdateWithoutLeadsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1019,7 +1113,7 @@ export type UserUpdateWithoutLeadsInput = {
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUpdateManyWithoutUserNestedInput
   ownedSpaces?: Prisma.SpaceUpdateManyWithoutOwnerNestedInput
-  memberSpaces?: Prisma.SpaceUpdateManyWithoutMembersNestedInput
+  spaceMemberships?: Prisma.SpaceMemberUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutUserNestedInput
@@ -1027,13 +1121,17 @@ export type UserUpdateWithoutLeadsInput = {
   integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
   documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutUserNestedInput
   generatedDocuments?: Prisma.GeneratedDocumentUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  createdInvitations?: Prisma.SpaceInvitationUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutLeadsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1043,7 +1141,7 @@ export type UserUncheckedUpdateWithoutLeadsInput = {
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutUserNestedInput
   ownedSpaces?: Prisma.SpaceUncheckedUpdateManyWithoutOwnerNestedInput
-  memberSpaces?: Prisma.SpaceUncheckedUpdateManyWithoutMembersNestedInput
+  spaceMemberships?: Prisma.SpaceMemberUncheckedUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutUserNestedInput
@@ -1051,13 +1149,17 @@ export type UserUncheckedUpdateWithoutLeadsInput = {
   integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
   documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutUserNestedInput
   generatedDocuments?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  createdInvitations?: Prisma.SpaceInvitationUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutOwnedSpacesInput = {
   id?: string
   email: string
   username: string
-  passwordHash: string
+  passwordHash?: string | null
+  authProvider?: string
+  providerId?: string | null
   name?: string | null
   avatarUrl?: string | null
   createdAt?: Date | string
@@ -1067,7 +1169,7 @@ export type UserCreateWithoutOwnedSpacesInput = {
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientCreateNestedManyWithoutUserInput
-  memberSpaces?: Prisma.SpaceCreateNestedManyWithoutMembersInput
+  spaceMemberships?: Prisma.SpaceMemberCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutUserInput
@@ -1075,13 +1177,17 @@ export type UserCreateWithoutOwnedSpacesInput = {
   integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
   documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutUserInput
   generatedDocuments?: Prisma.GeneratedDocumentCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  createdInvitations?: Prisma.SpaceInvitationCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutOwnedSpacesInput = {
   id?: string
   email: string
   username: string
-  passwordHash: string
+  passwordHash?: string | null
+  authProvider?: string
+  providerId?: string | null
   name?: string | null
   avatarUrl?: string | null
   createdAt?: Date | string
@@ -1091,7 +1197,7 @@ export type UserUncheckedCreateWithoutOwnedSpacesInput = {
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutUserInput
-  memberSpaces?: Prisma.SpaceUncheckedCreateNestedManyWithoutMembersInput
+  spaceMemberships?: Prisma.SpaceMemberUncheckedCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutUserInput
@@ -1099,64 +1205,13 @@ export type UserUncheckedCreateWithoutOwnedSpacesInput = {
   integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
   documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutUserInput
   generatedDocuments?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  createdInvitations?: Prisma.SpaceInvitationUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutOwnedSpacesInput = {
   where: Prisma.UserWhereUniqueInput
   create: Prisma.XOR<Prisma.UserCreateWithoutOwnedSpacesInput, Prisma.UserUncheckedCreateWithoutOwnedSpacesInput>
-}
-
-export type UserCreateWithoutMemberSpacesInput = {
-  id?: string
-  email: string
-  username: string
-  passwordHash: string
-  name?: string | null
-  avatarUrl?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  lastActiveSpaceId?: string | null
-  resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
-  projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
-  leads?: Prisma.LeadCreateNestedManyWithoutUserInput
-  clients?: Prisma.ClientCreateNestedManyWithoutUserInput
-  ownedSpaces?: Prisma.SpaceCreateNestedManyWithoutOwnerInput
-  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
-  incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
-  revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutUserInput
-  financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutUserInput
-  integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
-  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutUserInput
-  generatedDocuments?: Prisma.GeneratedDocumentCreateNestedManyWithoutUserInput
-}
-
-export type UserUncheckedCreateWithoutMemberSpacesInput = {
-  id?: string
-  email: string
-  username: string
-  passwordHash: string
-  name?: string | null
-  avatarUrl?: string | null
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  lastActiveSpaceId?: string | null
-  resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
-  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
-  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
-  clients?: Prisma.ClientUncheckedCreateNestedManyWithoutUserInput
-  ownedSpaces?: Prisma.SpaceUncheckedCreateNestedManyWithoutOwnerInput
-  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
-  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
-  revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutUserInput
-  financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutUserInput
-  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
-  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutUserInput
-  generatedDocuments?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutUserInput
-}
-
-export type UserCreateOrConnectWithoutMemberSpacesInput = {
-  where: Prisma.UserWhereUniqueInput
-  create: Prisma.XOR<Prisma.UserCreateWithoutMemberSpacesInput, Prisma.UserUncheckedCreateWithoutMemberSpacesInput>
 }
 
 export type UserUpsertWithoutOwnedSpacesInput = {
@@ -1174,7 +1229,9 @@ export type UserUpdateWithoutOwnedSpacesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1184,7 +1241,7 @@ export type UserUpdateWithoutOwnedSpacesInput = {
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUpdateManyWithoutUserNestedInput
-  memberSpaces?: Prisma.SpaceUpdateManyWithoutMembersNestedInput
+  spaceMemberships?: Prisma.SpaceMemberUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutUserNestedInput
@@ -1192,13 +1249,17 @@ export type UserUpdateWithoutOwnedSpacesInput = {
   integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
   documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutUserNestedInput
   generatedDocuments?: Prisma.GeneratedDocumentUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  createdInvitations?: Prisma.SpaceInvitationUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutOwnedSpacesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1208,7 +1269,7 @@ export type UserUncheckedUpdateWithoutOwnedSpacesInput = {
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutUserNestedInput
-  memberSpaces?: Prisma.SpaceUncheckedUpdateManyWithoutMembersNestedInput
+  spaceMemberships?: Prisma.SpaceMemberUncheckedUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutUserNestedInput
@@ -1216,44 +1277,17 @@ export type UserUncheckedUpdateWithoutOwnedSpacesInput = {
   integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
   documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutUserNestedInput
   generatedDocuments?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutUserNestedInput
-}
-
-export type UserUpsertWithWhereUniqueWithoutMemberSpacesInput = {
-  where: Prisma.UserWhereUniqueInput
-  update: Prisma.XOR<Prisma.UserUpdateWithoutMemberSpacesInput, Prisma.UserUncheckedUpdateWithoutMemberSpacesInput>
-  create: Prisma.XOR<Prisma.UserCreateWithoutMemberSpacesInput, Prisma.UserUncheckedCreateWithoutMemberSpacesInput>
-}
-
-export type UserUpdateWithWhereUniqueWithoutMemberSpacesInput = {
-  where: Prisma.UserWhereUniqueInput
-  data: Prisma.XOR<Prisma.UserUpdateWithoutMemberSpacesInput, Prisma.UserUncheckedUpdateWithoutMemberSpacesInput>
-}
-
-export type UserUpdateManyWithWhereWithoutMemberSpacesInput = {
-  where: Prisma.UserScalarWhereInput
-  data: Prisma.XOR<Prisma.UserUpdateManyMutationInput, Prisma.UserUncheckedUpdateManyWithoutMemberSpacesInput>
-}
-
-export type UserScalarWhereInput = {
-  AND?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
-  OR?: Prisma.UserScalarWhereInput[]
-  NOT?: Prisma.UserScalarWhereInput | Prisma.UserScalarWhereInput[]
-  id?: Prisma.StringFilter<"User"> | string
-  email?: Prisma.StringFilter<"User"> | string
-  username?: Prisma.StringFilter<"User"> | string
-  passwordHash?: Prisma.StringFilter<"User"> | string
-  name?: Prisma.StringNullableFilter<"User"> | string | null
-  avatarUrl?: Prisma.StringNullableFilter<"User"> | string | null
-  createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
-  updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
-  lastActiveSpaceId?: Prisma.StringNullableFilter<"User"> | string | null
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  createdInvitations?: Prisma.SpaceInvitationUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutExpensesInput = {
   id?: string
   email: string
   username: string
-  passwordHash: string
+  passwordHash?: string | null
+  authProvider?: string
+  providerId?: string | null
   name?: string | null
   avatarUrl?: string | null
   createdAt?: Date | string
@@ -1264,20 +1298,24 @@ export type UserCreateWithoutExpensesInput = {
   leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientCreateNestedManyWithoutUserInput
   ownedSpaces?: Prisma.SpaceCreateNestedManyWithoutOwnerInput
-  memberSpaces?: Prisma.SpaceCreateNestedManyWithoutMembersInput
+  spaceMemberships?: Prisma.SpaceMemberCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutUserInput
   financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutUserInput
   integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
   documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutUserInput
   generatedDocuments?: Prisma.GeneratedDocumentCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  createdInvitations?: Prisma.SpaceInvitationCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutExpensesInput = {
   id?: string
   email: string
   username: string
-  passwordHash: string
+  passwordHash?: string | null
+  authProvider?: string
+  providerId?: string | null
   name?: string | null
   avatarUrl?: string | null
   createdAt?: Date | string
@@ -1288,13 +1326,15 @@ export type UserUncheckedCreateWithoutExpensesInput = {
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutUserInput
   ownedSpaces?: Prisma.SpaceUncheckedCreateNestedManyWithoutOwnerInput
-  memberSpaces?: Prisma.SpaceUncheckedCreateNestedManyWithoutMembersInput
+  spaceMemberships?: Prisma.SpaceMemberUncheckedCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutUserInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutUserInput
   integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
   documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutUserInput
   generatedDocuments?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  createdInvitations?: Prisma.SpaceInvitationUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutExpensesInput = {
@@ -1317,7 +1357,9 @@ export type UserUpdateWithoutExpensesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1328,20 +1370,24 @@ export type UserUpdateWithoutExpensesInput = {
   leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUpdateManyWithoutUserNestedInput
   ownedSpaces?: Prisma.SpaceUpdateManyWithoutOwnerNestedInput
-  memberSpaces?: Prisma.SpaceUpdateManyWithoutMembersNestedInput
+  spaceMemberships?: Prisma.SpaceMemberUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutUserNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutUserNestedInput
   integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
   documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutUserNestedInput
   generatedDocuments?: Prisma.GeneratedDocumentUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  createdInvitations?: Prisma.SpaceInvitationUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutExpensesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1352,20 +1398,24 @@ export type UserUncheckedUpdateWithoutExpensesInput = {
   leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutUserNestedInput
   ownedSpaces?: Prisma.SpaceUncheckedUpdateManyWithoutOwnerNestedInput
-  memberSpaces?: Prisma.SpaceUncheckedUpdateManyWithoutMembersNestedInput
+  spaceMemberships?: Prisma.SpaceMemberUncheckedUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutUserNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutUserNestedInput
   integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
   documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutUserNestedInput
   generatedDocuments?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  createdInvitations?: Prisma.SpaceInvitationUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutIncomesInput = {
   id?: string
   email: string
   username: string
-  passwordHash: string
+  passwordHash?: string | null
+  authProvider?: string
+  providerId?: string | null
   name?: string | null
   avatarUrl?: string | null
   createdAt?: Date | string
@@ -1376,20 +1426,24 @@ export type UserCreateWithoutIncomesInput = {
   leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientCreateNestedManyWithoutUserInput
   ownedSpaces?: Prisma.SpaceCreateNestedManyWithoutOwnerInput
-  memberSpaces?: Prisma.SpaceCreateNestedManyWithoutMembersInput
+  spaceMemberships?: Prisma.SpaceMemberCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutUserInput
   financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutUserInput
   integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
   documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutUserInput
   generatedDocuments?: Prisma.GeneratedDocumentCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  createdInvitations?: Prisma.SpaceInvitationCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutIncomesInput = {
   id?: string
   email: string
   username: string
-  passwordHash: string
+  passwordHash?: string | null
+  authProvider?: string
+  providerId?: string | null
   name?: string | null
   avatarUrl?: string | null
   createdAt?: Date | string
@@ -1400,13 +1454,15 @@ export type UserUncheckedCreateWithoutIncomesInput = {
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutUserInput
   ownedSpaces?: Prisma.SpaceUncheckedCreateNestedManyWithoutOwnerInput
-  memberSpaces?: Prisma.SpaceUncheckedCreateNestedManyWithoutMembersInput
+  spaceMemberships?: Prisma.SpaceMemberUncheckedCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutUserInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutUserInput
   integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
   documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutUserInput
   generatedDocuments?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  createdInvitations?: Prisma.SpaceInvitationUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutIncomesInput = {
@@ -1429,7 +1485,9 @@ export type UserUpdateWithoutIncomesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1440,20 +1498,24 @@ export type UserUpdateWithoutIncomesInput = {
   leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUpdateManyWithoutUserNestedInput
   ownedSpaces?: Prisma.SpaceUpdateManyWithoutOwnerNestedInput
-  memberSpaces?: Prisma.SpaceUpdateManyWithoutMembersNestedInput
+  spaceMemberships?: Prisma.SpaceMemberUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutUserNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutUserNestedInput
   integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
   documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutUserNestedInput
   generatedDocuments?: Prisma.GeneratedDocumentUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  createdInvitations?: Prisma.SpaceInvitationUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutIncomesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1464,20 +1526,24 @@ export type UserUncheckedUpdateWithoutIncomesInput = {
   leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutUserNestedInput
   ownedSpaces?: Prisma.SpaceUncheckedUpdateManyWithoutOwnerNestedInput
-  memberSpaces?: Prisma.SpaceUncheckedUpdateManyWithoutMembersNestedInput
+  spaceMemberships?: Prisma.SpaceMemberUncheckedUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutUserNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutUserNestedInput
   integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
   documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutUserNestedInput
   generatedDocuments?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  createdInvitations?: Prisma.SpaceInvitationUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutRevenueGoalsInput = {
   id?: string
   email: string
   username: string
-  passwordHash: string
+  passwordHash?: string | null
+  authProvider?: string
+  providerId?: string | null
   name?: string | null
   avatarUrl?: string | null
   createdAt?: Date | string
@@ -1488,20 +1554,24 @@ export type UserCreateWithoutRevenueGoalsInput = {
   leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientCreateNestedManyWithoutUserInput
   ownedSpaces?: Prisma.SpaceCreateNestedManyWithoutOwnerInput
-  memberSpaces?: Prisma.SpaceCreateNestedManyWithoutMembersInput
+  spaceMemberships?: Prisma.SpaceMemberCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
   financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutUserInput
   integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
   documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutUserInput
   generatedDocuments?: Prisma.GeneratedDocumentCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  createdInvitations?: Prisma.SpaceInvitationCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutRevenueGoalsInput = {
   id?: string
   email: string
   username: string
-  passwordHash: string
+  passwordHash?: string | null
+  authProvider?: string
+  providerId?: string | null
   name?: string | null
   avatarUrl?: string | null
   createdAt?: Date | string
@@ -1512,13 +1582,15 @@ export type UserUncheckedCreateWithoutRevenueGoalsInput = {
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutUserInput
   ownedSpaces?: Prisma.SpaceUncheckedCreateNestedManyWithoutOwnerInput
-  memberSpaces?: Prisma.SpaceUncheckedCreateNestedManyWithoutMembersInput
+  spaceMemberships?: Prisma.SpaceMemberUncheckedCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutUserInput
   integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
   documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutUserInput
   generatedDocuments?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  createdInvitations?: Prisma.SpaceInvitationUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutRevenueGoalsInput = {
@@ -1541,7 +1613,9 @@ export type UserUpdateWithoutRevenueGoalsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1552,20 +1626,24 @@ export type UserUpdateWithoutRevenueGoalsInput = {
   leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUpdateManyWithoutUserNestedInput
   ownedSpaces?: Prisma.SpaceUpdateManyWithoutOwnerNestedInput
-  memberSpaces?: Prisma.SpaceUpdateManyWithoutMembersNestedInput
+  spaceMemberships?: Prisma.SpaceMemberUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutUserNestedInput
   integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
   documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutUserNestedInput
   generatedDocuments?: Prisma.GeneratedDocumentUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  createdInvitations?: Prisma.SpaceInvitationUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutRevenueGoalsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1576,20 +1654,24 @@ export type UserUncheckedUpdateWithoutRevenueGoalsInput = {
   leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutUserNestedInput
   ownedSpaces?: Prisma.SpaceUncheckedUpdateManyWithoutOwnerNestedInput
-  memberSpaces?: Prisma.SpaceUncheckedUpdateManyWithoutMembersNestedInput
+  spaceMemberships?: Prisma.SpaceMemberUncheckedUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutUserNestedInput
   integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
   documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutUserNestedInput
   generatedDocuments?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  createdInvitations?: Prisma.SpaceInvitationUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutClientsInput = {
   id?: string
   email: string
   username: string
-  passwordHash: string
+  passwordHash?: string | null
+  authProvider?: string
+  providerId?: string | null
   name?: string | null
   avatarUrl?: string | null
   createdAt?: Date | string
@@ -1599,7 +1681,7 @@ export type UserCreateWithoutClientsInput = {
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   ownedSpaces?: Prisma.SpaceCreateNestedManyWithoutOwnerInput
-  memberSpaces?: Prisma.SpaceCreateNestedManyWithoutMembersInput
+  spaceMemberships?: Prisma.SpaceMemberCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutUserInput
@@ -1607,13 +1689,17 @@ export type UserCreateWithoutClientsInput = {
   integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
   documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutUserInput
   generatedDocuments?: Prisma.GeneratedDocumentCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  createdInvitations?: Prisma.SpaceInvitationCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutClientsInput = {
   id?: string
   email: string
   username: string
-  passwordHash: string
+  passwordHash?: string | null
+  authProvider?: string
+  providerId?: string | null
   name?: string | null
   avatarUrl?: string | null
   createdAt?: Date | string
@@ -1623,7 +1709,7 @@ export type UserUncheckedCreateWithoutClientsInput = {
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   ownedSpaces?: Prisma.SpaceUncheckedCreateNestedManyWithoutOwnerInput
-  memberSpaces?: Prisma.SpaceUncheckedCreateNestedManyWithoutMembersInput
+  spaceMemberships?: Prisma.SpaceMemberUncheckedCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutUserInput
@@ -1631,6 +1717,8 @@ export type UserUncheckedCreateWithoutClientsInput = {
   integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
   documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutUserInput
   generatedDocuments?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  createdInvitations?: Prisma.SpaceInvitationUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutClientsInput = {
@@ -1653,7 +1741,9 @@ export type UserUpdateWithoutClientsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1663,7 +1753,7 @@ export type UserUpdateWithoutClientsInput = {
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   ownedSpaces?: Prisma.SpaceUpdateManyWithoutOwnerNestedInput
-  memberSpaces?: Prisma.SpaceUpdateManyWithoutMembersNestedInput
+  spaceMemberships?: Prisma.SpaceMemberUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutUserNestedInput
@@ -1671,13 +1761,17 @@ export type UserUpdateWithoutClientsInput = {
   integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
   documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutUserNestedInput
   generatedDocuments?: Prisma.GeneratedDocumentUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  createdInvitations?: Prisma.SpaceInvitationUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutClientsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1687,7 +1781,7 @@ export type UserUncheckedUpdateWithoutClientsInput = {
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   ownedSpaces?: Prisma.SpaceUncheckedUpdateManyWithoutOwnerNestedInput
-  memberSpaces?: Prisma.SpaceUncheckedUpdateManyWithoutMembersNestedInput
+  spaceMemberships?: Prisma.SpaceMemberUncheckedUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutUserNestedInput
@@ -1695,13 +1789,17 @@ export type UserUncheckedUpdateWithoutClientsInput = {
   integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
   documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutUserNestedInput
   generatedDocuments?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  createdInvitations?: Prisma.SpaceInvitationUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutFinancialAuditLogsInput = {
   id?: string
   email: string
   username: string
-  passwordHash: string
+  passwordHash?: string | null
+  authProvider?: string
+  providerId?: string | null
   name?: string | null
   avatarUrl?: string | null
   createdAt?: Date | string
@@ -1712,20 +1810,24 @@ export type UserCreateWithoutFinancialAuditLogsInput = {
   leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientCreateNestedManyWithoutUserInput
   ownedSpaces?: Prisma.SpaceCreateNestedManyWithoutOwnerInput
-  memberSpaces?: Prisma.SpaceCreateNestedManyWithoutMembersInput
+  spaceMemberships?: Prisma.SpaceMemberCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutUserInput
   integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
   documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutUserInput
   generatedDocuments?: Prisma.GeneratedDocumentCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  createdInvitations?: Prisma.SpaceInvitationCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutFinancialAuditLogsInput = {
   id?: string
   email: string
   username: string
-  passwordHash: string
+  passwordHash?: string | null
+  authProvider?: string
+  providerId?: string | null
   name?: string | null
   avatarUrl?: string | null
   createdAt?: Date | string
@@ -1736,13 +1838,15 @@ export type UserUncheckedCreateWithoutFinancialAuditLogsInput = {
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutUserInput
   ownedSpaces?: Prisma.SpaceUncheckedCreateNestedManyWithoutOwnerInput
-  memberSpaces?: Prisma.SpaceUncheckedCreateNestedManyWithoutMembersInput
+  spaceMemberships?: Prisma.SpaceMemberUncheckedCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutUserInput
   integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
   documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutUserInput
   generatedDocuments?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  createdInvitations?: Prisma.SpaceInvitationUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutFinancialAuditLogsInput = {
@@ -1765,7 +1869,9 @@ export type UserUpdateWithoutFinancialAuditLogsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1776,20 +1882,24 @@ export type UserUpdateWithoutFinancialAuditLogsInput = {
   leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUpdateManyWithoutUserNestedInput
   ownedSpaces?: Prisma.SpaceUpdateManyWithoutOwnerNestedInput
-  memberSpaces?: Prisma.SpaceUpdateManyWithoutMembersNestedInput
+  spaceMemberships?: Prisma.SpaceMemberUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutUserNestedInput
   integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
   documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutUserNestedInput
   generatedDocuments?: Prisma.GeneratedDocumentUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  createdInvitations?: Prisma.SpaceInvitationUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutFinancialAuditLogsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1800,20 +1910,24 @@ export type UserUncheckedUpdateWithoutFinancialAuditLogsInput = {
   leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutUserNestedInput
   ownedSpaces?: Prisma.SpaceUncheckedUpdateManyWithoutOwnerNestedInput
-  memberSpaces?: Prisma.SpaceUncheckedUpdateManyWithoutMembersNestedInput
+  spaceMemberships?: Prisma.SpaceMemberUncheckedUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutUserNestedInput
   integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
   documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutUserNestedInput
   generatedDocuments?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  createdInvitations?: Prisma.SpaceInvitationUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutIntegrationsInput = {
   id?: string
   email: string
   username: string
-  passwordHash: string
+  passwordHash?: string | null
+  authProvider?: string
+  providerId?: string | null
   name?: string | null
   avatarUrl?: string | null
   createdAt?: Date | string
@@ -1824,20 +1938,24 @@ export type UserCreateWithoutIntegrationsInput = {
   leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientCreateNestedManyWithoutUserInput
   ownedSpaces?: Prisma.SpaceCreateNestedManyWithoutOwnerInput
-  memberSpaces?: Prisma.SpaceCreateNestedManyWithoutMembersInput
+  spaceMemberships?: Prisma.SpaceMemberCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutUserInput
   financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutUserInput
   documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutUserInput
   generatedDocuments?: Prisma.GeneratedDocumentCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  createdInvitations?: Prisma.SpaceInvitationCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutIntegrationsInput = {
   id?: string
   email: string
   username: string
-  passwordHash: string
+  passwordHash?: string | null
+  authProvider?: string
+  providerId?: string | null
   name?: string | null
   avatarUrl?: string | null
   createdAt?: Date | string
@@ -1848,13 +1966,15 @@ export type UserUncheckedCreateWithoutIntegrationsInput = {
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutUserInput
   ownedSpaces?: Prisma.SpaceUncheckedCreateNestedManyWithoutOwnerInput
-  memberSpaces?: Prisma.SpaceUncheckedCreateNestedManyWithoutMembersInput
+  spaceMemberships?: Prisma.SpaceMemberUncheckedCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutUserInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutUserInput
   documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutUserInput
   generatedDocuments?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  createdInvitations?: Prisma.SpaceInvitationUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutIntegrationsInput = {
@@ -1877,7 +1997,9 @@ export type UserUpdateWithoutIntegrationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1888,20 +2010,24 @@ export type UserUpdateWithoutIntegrationsInput = {
   leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUpdateManyWithoutUserNestedInput
   ownedSpaces?: Prisma.SpaceUpdateManyWithoutOwnerNestedInput
-  memberSpaces?: Prisma.SpaceUpdateManyWithoutMembersNestedInput
+  spaceMemberships?: Prisma.SpaceMemberUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutUserNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutUserNestedInput
   documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutUserNestedInput
   generatedDocuments?: Prisma.GeneratedDocumentUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  createdInvitations?: Prisma.SpaceInvitationUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutIntegrationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1912,20 +2038,24 @@ export type UserUncheckedUpdateWithoutIntegrationsInput = {
   leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutUserNestedInput
   ownedSpaces?: Prisma.SpaceUncheckedUpdateManyWithoutOwnerNestedInput
-  memberSpaces?: Prisma.SpaceUncheckedUpdateManyWithoutMembersNestedInput
+  spaceMemberships?: Prisma.SpaceMemberUncheckedUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutUserNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutUserNestedInput
   documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutUserNestedInput
   generatedDocuments?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  createdInvitations?: Prisma.SpaceInvitationUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutDocumentTemplatesInput = {
   id?: string
   email: string
   username: string
-  passwordHash: string
+  passwordHash?: string | null
+  authProvider?: string
+  providerId?: string | null
   name?: string | null
   avatarUrl?: string | null
   createdAt?: Date | string
@@ -1936,20 +2066,24 @@ export type UserCreateWithoutDocumentTemplatesInput = {
   leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientCreateNestedManyWithoutUserInput
   ownedSpaces?: Prisma.SpaceCreateNestedManyWithoutOwnerInput
-  memberSpaces?: Prisma.SpaceCreateNestedManyWithoutMembersInput
+  spaceMemberships?: Prisma.SpaceMemberCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutUserInput
   financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutUserInput
   integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
   generatedDocuments?: Prisma.GeneratedDocumentCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  createdInvitations?: Prisma.SpaceInvitationCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutDocumentTemplatesInput = {
   id?: string
   email: string
   username: string
-  passwordHash: string
+  passwordHash?: string | null
+  authProvider?: string
+  providerId?: string | null
   name?: string | null
   avatarUrl?: string | null
   createdAt?: Date | string
@@ -1960,13 +2094,15 @@ export type UserUncheckedCreateWithoutDocumentTemplatesInput = {
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutUserInput
   ownedSpaces?: Prisma.SpaceUncheckedCreateNestedManyWithoutOwnerInput
-  memberSpaces?: Prisma.SpaceUncheckedCreateNestedManyWithoutMembersInput
+  spaceMemberships?: Prisma.SpaceMemberUncheckedCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutUserInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutUserInput
   integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
   generatedDocuments?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  createdInvitations?: Prisma.SpaceInvitationUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutDocumentTemplatesInput = {
@@ -1989,7 +2125,9 @@ export type UserUpdateWithoutDocumentTemplatesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2000,20 +2138,24 @@ export type UserUpdateWithoutDocumentTemplatesInput = {
   leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUpdateManyWithoutUserNestedInput
   ownedSpaces?: Prisma.SpaceUpdateManyWithoutOwnerNestedInput
-  memberSpaces?: Prisma.SpaceUpdateManyWithoutMembersNestedInput
+  spaceMemberships?: Prisma.SpaceMemberUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutUserNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutUserNestedInput
   integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
   generatedDocuments?: Prisma.GeneratedDocumentUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  createdInvitations?: Prisma.SpaceInvitationUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutDocumentTemplatesInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2024,20 +2166,24 @@ export type UserUncheckedUpdateWithoutDocumentTemplatesInput = {
   leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutUserNestedInput
   ownedSpaces?: Prisma.SpaceUncheckedUpdateManyWithoutOwnerNestedInput
-  memberSpaces?: Prisma.SpaceUncheckedUpdateManyWithoutMembersNestedInput
+  spaceMemberships?: Prisma.SpaceMemberUncheckedUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutUserNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutUserNestedInput
   integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
   generatedDocuments?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  createdInvitations?: Prisma.SpaceInvitationUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserCreateWithoutGeneratedDocumentsInput = {
   id?: string
   email: string
   username: string
-  passwordHash: string
+  passwordHash?: string | null
+  authProvider?: string
+  providerId?: string | null
   name?: string | null
   avatarUrl?: string | null
   createdAt?: Date | string
@@ -2048,20 +2194,24 @@ export type UserCreateWithoutGeneratedDocumentsInput = {
   leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientCreateNestedManyWithoutUserInput
   ownedSpaces?: Prisma.SpaceCreateNestedManyWithoutOwnerInput
-  memberSpaces?: Prisma.SpaceCreateNestedManyWithoutMembersInput
+  spaceMemberships?: Prisma.SpaceMemberCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutUserInput
   financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutUserInput
   integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
   documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  createdInvitations?: Prisma.SpaceInvitationCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserUncheckedCreateWithoutGeneratedDocumentsInput = {
   id?: string
   email: string
   username: string
-  passwordHash: string
+  passwordHash?: string | null
+  authProvider?: string
+  providerId?: string | null
   name?: string | null
   avatarUrl?: string | null
   createdAt?: Date | string
@@ -2072,13 +2222,15 @@ export type UserUncheckedCreateWithoutGeneratedDocumentsInput = {
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutUserInput
   ownedSpaces?: Prisma.SpaceUncheckedCreateNestedManyWithoutOwnerInput
-  memberSpaces?: Prisma.SpaceUncheckedCreateNestedManyWithoutMembersInput
+  spaceMemberships?: Prisma.SpaceMemberUncheckedCreateNestedManyWithoutUserInput
   expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
   incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
   revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutUserInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutUserInput
   integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
   documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  createdInvitations?: Prisma.SpaceInvitationUncheckedCreateNestedManyWithoutCreatedByInput
 }
 
 export type UserCreateOrConnectWithoutGeneratedDocumentsInput = {
@@ -2101,7 +2253,9 @@ export type UserUpdateWithoutGeneratedDocumentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2112,20 +2266,24 @@ export type UserUpdateWithoutGeneratedDocumentsInput = {
   leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUpdateManyWithoutUserNestedInput
   ownedSpaces?: Prisma.SpaceUpdateManyWithoutOwnerNestedInput
-  memberSpaces?: Prisma.SpaceUpdateManyWithoutMembersNestedInput
+  spaceMemberships?: Prisma.SpaceMemberUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutUserNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutUserNestedInput
   integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
   documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  createdInvitations?: Prisma.SpaceInvitationUpdateManyWithoutCreatedByNestedInput
 }
 
 export type UserUncheckedUpdateWithoutGeneratedDocumentsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2136,20 +2294,224 @@ export type UserUncheckedUpdateWithoutGeneratedDocumentsInput = {
   leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutUserNestedInput
   ownedSpaces?: Prisma.SpaceUncheckedUpdateManyWithoutOwnerNestedInput
-  memberSpaces?: Prisma.SpaceUncheckedUpdateManyWithoutMembersNestedInput
+  spaceMemberships?: Prisma.SpaceMemberUncheckedUpdateManyWithoutUserNestedInput
   expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
   incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
   revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutUserNestedInput
   financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutUserNestedInput
   integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
   documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  createdInvitations?: Prisma.SpaceInvitationUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
-export type UserUpdateWithoutMemberSpacesInput = {
+export type UserCreateWithoutNotificationsInput = {
+  id?: string
+  email: string
+  username: string
+  passwordHash?: string | null
+  authProvider?: string
+  providerId?: string | null
+  name?: string | null
+  avatarUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  lastActiveSpaceId?: string | null
+  resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  leads?: Prisma.LeadCreateNestedManyWithoutUserInput
+  clients?: Prisma.ClientCreateNestedManyWithoutUserInput
+  ownedSpaces?: Prisma.SpaceCreateNestedManyWithoutOwnerInput
+  spaceMemberships?: Prisma.SpaceMemberCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
+  incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
+  revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutUserInput
+  financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutUserInput
+  generatedDocuments?: Prisma.GeneratedDocumentCreateNestedManyWithoutUserInput
+  createdInvitations?: Prisma.SpaceInvitationCreateNestedManyWithoutCreatedByInput
+}
+
+export type UserUncheckedCreateWithoutNotificationsInput = {
+  id?: string
+  email: string
+  username: string
+  passwordHash?: string | null
+  authProvider?: string
+  providerId?: string | null
+  name?: string | null
+  avatarUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  lastActiveSpaceId?: string | null
+  resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
+  clients?: Prisma.ClientUncheckedCreateNestedManyWithoutUserInput
+  ownedSpaces?: Prisma.SpaceUncheckedCreateNestedManyWithoutOwnerInput
+  spaceMemberships?: Prisma.SpaceMemberUncheckedCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
+  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
+  revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutUserInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutUserInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutUserInput
+  createdInvitations?: Prisma.SpaceInvitationUncheckedCreateNestedManyWithoutCreatedByInput
+}
+
+export type UserCreateOrConnectWithoutNotificationsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationsInput, Prisma.UserUncheckedCreateWithoutNotificationsInput>
+}
+
+export type UserUpsertWithoutNotificationsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutNotificationsInput, Prisma.UserUncheckedUpdateWithoutNotificationsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutNotificationsInput, Prisma.UserUncheckedCreateWithoutNotificationsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutNotificationsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutNotificationsInput, Prisma.UserUncheckedUpdateWithoutNotificationsInput>
+}
+
+export type UserUpdateWithoutNotificationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
+  clients?: Prisma.ClientUpdateManyWithoutUserNestedInput
+  ownedSpaces?: Prisma.SpaceUpdateManyWithoutOwnerNestedInput
+  spaceMemberships?: Prisma.SpaceMemberUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
+  incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
+  revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutUserNestedInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutUserNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUpdateManyWithoutUserNestedInput
+  createdInvitations?: Prisma.SpaceInvitationUpdateManyWithoutCreatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutNotificationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
+  clients?: Prisma.ClientUncheckedUpdateManyWithoutUserNestedInput
+  ownedSpaces?: Prisma.SpaceUncheckedUpdateManyWithoutOwnerNestedInput
+  spaceMemberships?: Prisma.SpaceMemberUncheckedUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
+  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
+  revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutUserNestedInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutUserNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutUserNestedInput
+  createdInvitations?: Prisma.SpaceInvitationUncheckedUpdateManyWithoutCreatedByNestedInput
+}
+
+export type UserCreateWithoutSpaceMembershipsInput = {
+  id?: string
+  email: string
+  username: string
+  passwordHash?: string | null
+  authProvider?: string
+  providerId?: string | null
+  name?: string | null
+  avatarUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  lastActiveSpaceId?: string | null
+  resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  leads?: Prisma.LeadCreateNestedManyWithoutUserInput
+  clients?: Prisma.ClientCreateNestedManyWithoutUserInput
+  ownedSpaces?: Prisma.SpaceCreateNestedManyWithoutOwnerInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
+  incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
+  revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutUserInput
+  financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutUserInput
+  generatedDocuments?: Prisma.GeneratedDocumentCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  createdInvitations?: Prisma.SpaceInvitationCreateNestedManyWithoutCreatedByInput
+}
+
+export type UserUncheckedCreateWithoutSpaceMembershipsInput = {
+  id?: string
+  email: string
+  username: string
+  passwordHash?: string | null
+  authProvider?: string
+  providerId?: string | null
+  name?: string | null
+  avatarUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  lastActiveSpaceId?: string | null
+  resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
+  clients?: Prisma.ClientUncheckedCreateNestedManyWithoutUserInput
+  ownedSpaces?: Prisma.SpaceUncheckedCreateNestedManyWithoutOwnerInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
+  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
+  revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutUserInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutUserInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  createdInvitations?: Prisma.SpaceInvitationUncheckedCreateNestedManyWithoutCreatedByInput
+}
+
+export type UserCreateOrConnectWithoutSpaceMembershipsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutSpaceMembershipsInput, Prisma.UserUncheckedCreateWithoutSpaceMembershipsInput>
+}
+
+export type UserUpsertWithoutSpaceMembershipsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutSpaceMembershipsInput, Prisma.UserUncheckedUpdateWithoutSpaceMembershipsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutSpaceMembershipsInput, Prisma.UserUncheckedCreateWithoutSpaceMembershipsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutSpaceMembershipsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutSpaceMembershipsInput, Prisma.UserUncheckedUpdateWithoutSpaceMembershipsInput>
+}
+
+export type UserUpdateWithoutSpaceMembershipsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2167,13 +2529,17 @@ export type UserUpdateWithoutMemberSpacesInput = {
   integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
   documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutUserNestedInput
   generatedDocuments?: Prisma.GeneratedDocumentUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  createdInvitations?: Prisma.SpaceInvitationUpdateManyWithoutCreatedByNestedInput
 }
 
-export type UserUncheckedUpdateWithoutMemberSpacesInput = {
+export type UserUncheckedUpdateWithoutSpaceMembershipsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -2191,18 +2557,136 @@ export type UserUncheckedUpdateWithoutMemberSpacesInput = {
   integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
   documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutUserNestedInput
   generatedDocuments?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  createdInvitations?: Prisma.SpaceInvitationUncheckedUpdateManyWithoutCreatedByNestedInput
 }
 
-export type UserUncheckedUpdateManyWithoutMemberSpacesInput = {
+export type UserCreateWithoutCreatedInvitationsInput = {
+  id?: string
+  email: string
+  username: string
+  passwordHash?: string | null
+  authProvider?: string
+  providerId?: string | null
+  name?: string | null
+  avatarUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  lastActiveSpaceId?: string | null
+  resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  leads?: Prisma.LeadCreateNestedManyWithoutUserInput
+  clients?: Prisma.ClientCreateNestedManyWithoutUserInput
+  ownedSpaces?: Prisma.SpaceCreateNestedManyWithoutOwnerInput
+  spaceMemberships?: Prisma.SpaceMemberCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
+  incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
+  revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutUserInput
+  financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutUserInput
+  generatedDocuments?: Prisma.GeneratedDocumentCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutCreatedInvitationsInput = {
+  id?: string
+  email: string
+  username: string
+  passwordHash?: string | null
+  authProvider?: string
+  providerId?: string | null
+  name?: string | null
+  avatarUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  lastActiveSpaceId?: string | null
+  resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
+  clients?: Prisma.ClientUncheckedCreateNestedManyWithoutUserInput
+  ownedSpaces?: Prisma.SpaceUncheckedCreateNestedManyWithoutOwnerInput
+  spaceMemberships?: Prisma.SpaceMemberUncheckedCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
+  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
+  revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutUserInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutUserInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutCreatedInvitationsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedInvitationsInput, Prisma.UserUncheckedCreateWithoutCreatedInvitationsInput>
+}
+
+export type UserUpsertWithoutCreatedInvitationsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutCreatedInvitationsInput, Prisma.UserUncheckedUpdateWithoutCreatedInvitationsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutCreatedInvitationsInput, Prisma.UserUncheckedCreateWithoutCreatedInvitationsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutCreatedInvitationsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutCreatedInvitationsInput, Prisma.UserUncheckedUpdateWithoutCreatedInvitationsInput>
+}
+
+export type UserUpdateWithoutCreatedInvitationsInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   email?: Prisma.StringFieldUpdateOperationsInput | string
   username?: Prisma.StringFieldUpdateOperationsInput | string
-  passwordHash?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
+  clients?: Prisma.ClientUpdateManyWithoutUserNestedInput
+  ownedSpaces?: Prisma.SpaceUpdateManyWithoutOwnerNestedInput
+  spaceMemberships?: Prisma.SpaceMemberUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
+  incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
+  revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutUserNestedInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutUserNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutCreatedInvitationsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
+  clients?: Prisma.ClientUncheckedUpdateManyWithoutUserNestedInput
+  ownedSpaces?: Prisma.SpaceUncheckedUpdateManyWithoutOwnerNestedInput
+  spaceMemberships?: Prisma.SpaceMemberUncheckedUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
+  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
+  revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutUserNestedInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutUserNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -2216,7 +2700,7 @@ export type UserCountOutputType = {
   leads: number
   clients: number
   ownedSpaces: number
-  memberSpaces: number
+  spaceMemberships: number
   expenses: number
   incomes: number
   revenueGoals: number
@@ -2224,6 +2708,8 @@ export type UserCountOutputType = {
   integrations: number
   documentTemplates: number
   generatedDocuments: number
+  notifications: number
+  createdInvitations: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2232,7 +2718,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   leads?: boolean | UserCountOutputTypeCountLeadsArgs
   clients?: boolean | UserCountOutputTypeCountClientsArgs
   ownedSpaces?: boolean | UserCountOutputTypeCountOwnedSpacesArgs
-  memberSpaces?: boolean | UserCountOutputTypeCountMemberSpacesArgs
+  spaceMemberships?: boolean | UserCountOutputTypeCountSpaceMembershipsArgs
   expenses?: boolean | UserCountOutputTypeCountExpensesArgs
   incomes?: boolean | UserCountOutputTypeCountIncomesArgs
   revenueGoals?: boolean | UserCountOutputTypeCountRevenueGoalsArgs
@@ -2240,6 +2726,8 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   integrations?: boolean | UserCountOutputTypeCountIntegrationsArgs
   documentTemplates?: boolean | UserCountOutputTypeCountDocumentTemplatesArgs
   generatedDocuments?: boolean | UserCountOutputTypeCountGeneratedDocumentsArgs
+  notifications?: boolean | UserCountOutputTypeCountNotificationsArgs
+  createdInvitations?: boolean | UserCountOutputTypeCountCreatedInvitationsArgs
 }
 
 /**
@@ -2290,8 +2778,8 @@ export type UserCountOutputTypeCountOwnedSpacesArgs<ExtArgs extends runtime.Type
 /**
  * UserCountOutputType without action
  */
-export type UserCountOutputTypeCountMemberSpacesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
-  where?: Prisma.SpaceWhereInput
+export type UserCountOutputTypeCountSpaceMembershipsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SpaceMemberWhereInput
 }
 
 /**
@@ -2343,12 +2831,28 @@ export type UserCountOutputTypeCountGeneratedDocumentsArgs<ExtArgs extends runti
   where?: Prisma.GeneratedDocumentWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountNotificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.NotificationWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountCreatedInvitationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SpaceInvitationWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   email?: boolean
   username?: boolean
   passwordHash?: boolean
+  authProvider?: boolean
+  providerId?: boolean
   name?: boolean
   avatarUrl?: boolean
   createdAt?: boolean
@@ -2359,7 +2863,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   leads?: boolean | Prisma.User$leadsArgs<ExtArgs>
   clients?: boolean | Prisma.User$clientsArgs<ExtArgs>
   ownedSpaces?: boolean | Prisma.User$ownedSpacesArgs<ExtArgs>
-  memberSpaces?: boolean | Prisma.User$memberSpacesArgs<ExtArgs>
+  spaceMemberships?: boolean | Prisma.User$spaceMembershipsArgs<ExtArgs>
   expenses?: boolean | Prisma.User$expensesArgs<ExtArgs>
   incomes?: boolean | Prisma.User$incomesArgs<ExtArgs>
   revenueGoals?: boolean | Prisma.User$revenueGoalsArgs<ExtArgs>
@@ -2367,6 +2871,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   integrations?: boolean | Prisma.User$integrationsArgs<ExtArgs>
   documentTemplates?: boolean | Prisma.User$documentTemplatesArgs<ExtArgs>
   generatedDocuments?: boolean | Prisma.User$generatedDocumentsArgs<ExtArgs>
+  notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
+  createdInvitations?: boolean | Prisma.User$createdInvitationsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -2375,6 +2881,8 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   email?: boolean
   username?: boolean
   passwordHash?: boolean
+  authProvider?: boolean
+  providerId?: boolean
   name?: boolean
   avatarUrl?: boolean
   createdAt?: boolean
@@ -2387,6 +2895,8 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   email?: boolean
   username?: boolean
   passwordHash?: boolean
+  authProvider?: boolean
+  providerId?: boolean
   name?: boolean
   avatarUrl?: boolean
   createdAt?: boolean
@@ -2399,6 +2909,8 @@ export type UserSelectScalar = {
   email?: boolean
   username?: boolean
   passwordHash?: boolean
+  authProvider?: boolean
+  providerId?: boolean
   name?: boolean
   avatarUrl?: boolean
   createdAt?: boolean
@@ -2406,14 +2918,14 @@ export type UserSelectScalar = {
   lastActiveSpaceId?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "username" | "passwordHash" | "name" | "avatarUrl" | "createdAt" | "updatedAt" | "lastActiveSpaceId", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "username" | "passwordHash" | "authProvider" | "providerId" | "name" | "avatarUrl" | "createdAt" | "updatedAt" | "lastActiveSpaceId", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   resetTokens?: boolean | Prisma.User$resetTokensArgs<ExtArgs>
   projects?: boolean | Prisma.User$projectsArgs<ExtArgs>
   leads?: boolean | Prisma.User$leadsArgs<ExtArgs>
   clients?: boolean | Prisma.User$clientsArgs<ExtArgs>
   ownedSpaces?: boolean | Prisma.User$ownedSpacesArgs<ExtArgs>
-  memberSpaces?: boolean | Prisma.User$memberSpacesArgs<ExtArgs>
+  spaceMemberships?: boolean | Prisma.User$spaceMembershipsArgs<ExtArgs>
   expenses?: boolean | Prisma.User$expensesArgs<ExtArgs>
   incomes?: boolean | Prisma.User$incomesArgs<ExtArgs>
   revenueGoals?: boolean | Prisma.User$revenueGoalsArgs<ExtArgs>
@@ -2421,6 +2933,8 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   integrations?: boolean | Prisma.User$integrationsArgs<ExtArgs>
   documentTemplates?: boolean | Prisma.User$documentTemplatesArgs<ExtArgs>
   generatedDocuments?: boolean | Prisma.User$generatedDocumentsArgs<ExtArgs>
+  notifications?: boolean | Prisma.User$notificationsArgs<ExtArgs>
+  createdInvitations?: boolean | Prisma.User$createdInvitationsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -2434,7 +2948,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     leads: Prisma.$LeadPayload<ExtArgs>[]
     clients: Prisma.$ClientPayload<ExtArgs>[]
     ownedSpaces: Prisma.$SpacePayload<ExtArgs>[]
-    memberSpaces: Prisma.$SpacePayload<ExtArgs>[]
+    spaceMemberships: Prisma.$SpaceMemberPayload<ExtArgs>[]
     expenses: Prisma.$ExpensePayload<ExtArgs>[]
     incomes: Prisma.$IncomePayload<ExtArgs>[]
     revenueGoals: Prisma.$RevenueGoalPayload<ExtArgs>[]
@@ -2442,12 +2956,16 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     integrations: Prisma.$IntegrationPayload<ExtArgs>[]
     documentTemplates: Prisma.$DocumentTemplatePayload<ExtArgs>[]
     generatedDocuments: Prisma.$GeneratedDocumentPayload<ExtArgs>[]
+    notifications: Prisma.$NotificationPayload<ExtArgs>[]
+    createdInvitations: Prisma.$SpaceInvitationPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     email: string
     username: string
-    passwordHash: string
+    passwordHash: string | null
+    authProvider: string
+    providerId: string | null
     name: string | null
     avatarUrl: string | null
     createdAt: Date
@@ -2852,7 +3370,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   leads<T extends Prisma.User$leadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$leadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   clients<T extends Prisma.User$clientsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$clientsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   ownedSpaces<T extends Prisma.User$ownedSpacesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$ownedSpacesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SpacePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-  memberSpaces<T extends Prisma.User$memberSpacesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$memberSpacesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SpacePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  spaceMemberships<T extends Prisma.User$spaceMembershipsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$spaceMembershipsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SpaceMemberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   expenses<T extends Prisma.User$expensesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$expensesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ExpensePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   incomes<T extends Prisma.User$incomesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$incomesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IncomePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   revenueGoals<T extends Prisma.User$revenueGoalsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$revenueGoalsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$RevenueGoalPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -2860,6 +3378,8 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   integrations<T extends Prisma.User$integrationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$integrationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$IntegrationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   documentTemplates<T extends Prisma.User$documentTemplatesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$documentTemplatesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$DocumentTemplatePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   generatedDocuments<T extends Prisma.User$generatedDocumentsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$generatedDocumentsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$GeneratedDocumentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  notifications<T extends Prisma.User$notificationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$notificationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$NotificationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  createdInvitations<T extends Prisma.User$createdInvitationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$createdInvitationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SpaceInvitationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2893,6 +3413,8 @@ export interface UserFieldRefs {
   readonly email: Prisma.FieldRef<"User", 'String'>
   readonly username: Prisma.FieldRef<"User", 'String'>
   readonly passwordHash: Prisma.FieldRef<"User", 'String'>
+  readonly authProvider: Prisma.FieldRef<"User", 'String'>
+  readonly providerId: Prisma.FieldRef<"User", 'String'>
   readonly name: Prisma.FieldRef<"User", 'String'>
   readonly avatarUrl: Prisma.FieldRef<"User", 'String'>
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
@@ -3411,27 +3933,27 @@ export type User$ownedSpacesArgs<ExtArgs extends runtime.Types.Extensions.Intern
 }
 
 /**
- * User.memberSpaces
+ * User.spaceMemberships
  */
-export type User$memberSpacesArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+export type User$spaceMembershipsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   /**
-   * Select specific fields to fetch from the Space
+   * Select specific fields to fetch from the SpaceMember
    */
-  select?: Prisma.SpaceSelect<ExtArgs> | null
+  select?: Prisma.SpaceMemberSelect<ExtArgs> | null
   /**
-   * Omit specific fields from the Space
+   * Omit specific fields from the SpaceMember
    */
-  omit?: Prisma.SpaceOmit<ExtArgs> | null
+  omit?: Prisma.SpaceMemberOmit<ExtArgs> | null
   /**
    * Choose, which related nodes to fetch as well
    */
-  include?: Prisma.SpaceInclude<ExtArgs> | null
-  where?: Prisma.SpaceWhereInput
-  orderBy?: Prisma.SpaceOrderByWithRelationInput | Prisma.SpaceOrderByWithRelationInput[]
-  cursor?: Prisma.SpaceWhereUniqueInput
+  include?: Prisma.SpaceMemberInclude<ExtArgs> | null
+  where?: Prisma.SpaceMemberWhereInput
+  orderBy?: Prisma.SpaceMemberOrderByWithRelationInput | Prisma.SpaceMemberOrderByWithRelationInput[]
+  cursor?: Prisma.SpaceMemberWhereUniqueInput
   take?: number
   skip?: number
-  distinct?: Prisma.SpaceScalarFieldEnum | Prisma.SpaceScalarFieldEnum[]
+  distinct?: Prisma.SpaceMemberScalarFieldEnum | Prisma.SpaceMemberScalarFieldEnum[]
 }
 
 /**
@@ -3600,6 +4122,54 @@ export type User$generatedDocumentsArgs<ExtArgs extends runtime.Types.Extensions
   take?: number
   skip?: number
   distinct?: Prisma.GeneratedDocumentScalarFieldEnum | Prisma.GeneratedDocumentScalarFieldEnum[]
+}
+
+/**
+ * User.notifications
+ */
+export type User$notificationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Notification
+   */
+  select?: Prisma.NotificationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Notification
+   */
+  omit?: Prisma.NotificationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.NotificationInclude<ExtArgs> | null
+  where?: Prisma.NotificationWhereInput
+  orderBy?: Prisma.NotificationOrderByWithRelationInput | Prisma.NotificationOrderByWithRelationInput[]
+  cursor?: Prisma.NotificationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.NotificationScalarFieldEnum | Prisma.NotificationScalarFieldEnum[]
+}
+
+/**
+ * User.createdInvitations
+ */
+export type User$createdInvitationsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SpaceInvitation
+   */
+  select?: Prisma.SpaceInvitationSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SpaceInvitation
+   */
+  omit?: Prisma.SpaceInvitationOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SpaceInvitationInclude<ExtArgs> | null
+  where?: Prisma.SpaceInvitationWhereInput
+  orderBy?: Prisma.SpaceInvitationOrderByWithRelationInput | Prisma.SpaceInvitationOrderByWithRelationInput[]
+  cursor?: Prisma.SpaceInvitationWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SpaceInvitationScalarFieldEnum | Prisma.SpaceInvitationScalarFieldEnum[]
 }
 
 /**

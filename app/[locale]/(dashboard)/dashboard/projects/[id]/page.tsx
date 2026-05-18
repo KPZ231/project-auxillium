@@ -30,6 +30,7 @@ export default async function ProjectDetailsPage({ params }: { params: Promise<{
     ...project,
     createdAt: project.createdAt.toISOString(),
     updatedAt: project.updatedAt.toISOString(),
+    milestones: project.milestones as any,
   }
 
   return (

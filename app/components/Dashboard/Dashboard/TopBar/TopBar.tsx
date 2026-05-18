@@ -8,6 +8,7 @@ import { Breadcrumbs } from "@/app/components/UI/Breadcrumbs";
 import ProfileModal from "../ProfileModal/ProfileModal";
 import { logoutAction } from "@/actions/logout";
 import { useUser } from "@/app/context/UserContext";
+import { NotificationDropdown } from "./NotificationDropdown";
 
 interface InitialUser {
   name: string | null;
@@ -46,9 +47,7 @@ export default function TopBar({ initialUser }: TopBarProps) {
         </div>
 
         <div className="flex items-center gap-6">
-          <button className="text-gray-400 hover:text-black transition">
-            <Bell className="w-4 h-4" />
-          </button>
+          <NotificationDropdown />
 
           {/* User Avatar Dropdown */}
           <div className="relative">

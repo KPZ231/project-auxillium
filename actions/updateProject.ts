@@ -58,8 +58,14 @@ export async function updateProject(data: UpdateProjectInput) {
             return { success: false, error: "Project not found" }
         }
 
-        if (existingProject.userId !== userId) {
-            return { success: false, error: "Unauthorized access to project" }
+        if (existingProject.spaceId) {
+            const { checkPermission } = await import("@/lib/permissions");
+            const permission = await checkPermission(userId, existingProject.spaceId, "write");
+            if (!permission.allowed) {
+                return { success: false, error: "Brak uprawnień do edycji projektów w tej przestrzeni" };
+            }
+        } else if (existingProject.userId !== userId) {
+            return { success: false, error: "Unauthorized access to project" };
         }
 
         const updatedProject = await prisma.project.update({

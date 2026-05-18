@@ -10,7 +10,7 @@ export interface LeadJob {
   total: number;
   leads: number;
   log?: string[];
-  results?: any[];
+  results?: unknown[];
 }
 
 interface LeadSearchState {

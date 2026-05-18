@@ -11,40 +11,44 @@ datasource db {
 }
 
 model User {
-  id            String    @id @default(cuid())
-  email         String    @unique
-  username      String    @unique
-  passwordHash  String
-  name          String?   // User's display name
-  avatarUrl     String?   // URL to user's avatar image
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  id           String   @id @default(cuid())
+  email        String   @unique
+  username     String   @unique
+  passwordHash String?
+  authProvider String   @default("LOCAL") // LOCAL, GOOGLE, GITHUB
+  providerId   String?  @unique
+  name         String? // User's display name
+  avatarUrl    String? // URL to user's avatar image
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 
   lastActiveSpaceId String?
-  
-  resetTokens   PasswordResetToken[]
-  projects      Project[]
-  leads         Lead[]
-  clients       Client[]
-  
-  ownedSpaces   Space[]   @relation("SpaceOwner")
-  memberSpaces  Space[]   @relation("SpaceMembers")
 
-  expenses      Expense[]
-  incomes       Income[]
-  revenueGoals  RevenueGoal[]
+  resetTokens PasswordResetToken[]
+  projects    Project[]
+  leads       Lead[]
+  clients     Client[]
+
+  ownedSpaces      Space[]       @relation("SpaceOwner")
+  spaceMemberships SpaceMember[]
+
+  expenses           Expense[]
+  incomes            Income[]
+  revenueGoals       RevenueGoal[]
   financialAuditLogs FinancialAuditLog[]
-  integrations  Integration[]
-  documentTemplates DocumentTemplate[]
+  integrations       Integration[]
+  documentTemplates  DocumentTemplate[]
   generatedDocuments GeneratedDocument[]
+  notifications      Notification[]
+  createdInvitations SpaceInvitation[]
 }
 
 model PasswordResetToken {
-  id        String   @id @default(cuid())
-  token     String   @unique
-  expires   DateTime
-  userId    String
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id      String   @id @default(cuid())
+  token   String   @unique
+  expires DateTime
+  userId  String
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([token])
 }
@@ -61,154 +65,170 @@ enum LeadStatus {
   COLD
 }
 
+enum SpaceRole {
+  ADMIN
+  MODERATOR
+  USER
+}
+
+enum InvitationStatus {
+  PENDING
+  ACCEPTED
+  EXPIRED
+}
+
 model Project {
   id                 String        @id @default(cuid())
   projectName        String        @unique
   projectDescription String
   projectStatus      ProjectStatus @default(IN_PROGRESS)
-  images             String[]      // Tablica na URL-e do zdjęć
+  images             String[] // Tablica na URL-e do zdjęć
 
   // Nowe pola do edycji projektu
-  budget             String?
-  location           String?
-  projectType        String?       // np. Residential, Commercial, Web, Branding
-  priority           String?       // np. Low, Medium, High, Critical
-  context            String?
-  clientInfo         String?
-  assignedUsersInfo  String?
-  clientBrief        String?
-  websiteUrl         String?
-  githubUrl          String?
-  timeline           String?
-  milestones         Json?         // Może przechowywać listę obiektów np. [{ title, date, completed }]
-  dueDate            DateTime?     // Pole daty końcowej projektu
-  
-  clientId           String?
-  client             Client?       @relation(fields: [clientId], references: [id], onDelete: SetNull)
-  
-  order              Int           @default(0) // Kolejność do Drag & Drop
+  budget            String?
+  location          String?
+  projectType       String? // np. Residential, Commercial, Web, Branding
+  priority          String? // np. Low, Medium, High, Critical
+  context           String?
+  clientInfo        String?
+  assignedUsersInfo String?
+  clientBrief       String?
+  websiteUrl        String?
+  githubUrl         String?
+  timeline          String?
+  milestones        Json? // Może przechowywać listę obiektów np. [{ title, date, completed }]
+  dueDate           DateTime? // Pole daty końcowej projektu
 
-  userId             String
-  user               User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-  
-  spaceId            String?
-  space              Space?        @relation(fields: [spaceId], references: [id], onDelete: Cascade)
-  
+  clientId String?
+  client   Client? @relation(fields: [clientId], references: [id], onDelete: SetNull)
+
+  order Int @default(0) // Kolejność do Drag & Drop
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  spaceId String?
+  space   Space?  @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+
   tasks              Task[]
-  assignedEmployees  Employee[]    @relation("AssignedProjects")
+  assignedEmployees  Employee[]          @relation("AssignedProjects")
   incomes            Income[]
   expenses           Expense[]
   generatedDocuments GeneratedDocument[]
 
-  createdAt          DateTime      @default(now())
-  updatedAt          DateTime      @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([userId])
   @@index([spaceId])
 }
 
 model Lead {
-  id               String      @id @default(cuid())
+  id               String     @id @default(cuid())
   projectType      String?
-  leadName         String      @unique
+  leadName         String     @unique
   contactName      String?
   role             String?
   email            String?
   phone            String?
-  status           LeadStatus  @default(COLD)
+  status           LeadStatus @default(COLD)
   stage            String?
-  turnedIntoClient Boolean?    @default(false)
+  turnedIntoClient Boolean?   @default(false)
   leadInfo         String?
-  order            Int         @default(0)
+  order            Int        @default(0)
 
-  userId           String
-  user             User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  spaceId          String?
-  space            Space?      @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+  spaceId String?
+  space   Space?  @relation(fields: [spaceId], references: [id], onDelete: Cascade)
 
-  createdAt        DateTime    @default(now())
-  updatedAt        DateTime    @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([userId])
   @@index([spaceId])
 }
 
 model Space {
-  id               String     @id @default(cuid())
-  spaceName        String     @unique
+  id               String  @id @default(cuid())
+  spaceName        String  @unique
   spaceDescription String?
   icon             String?
-  baseCurrency     String     @default("USD")
-  
-  ownerId          String
-  owner            User       @relation("SpaceOwner", fields: [ownerId], references: [id])
-  
-  members          User[]     @relation("SpaceMembers")
-  
-  projects         Project[]
-  leads            Lead[]
-  clients          Client[]
-  employees        Employee[]
-  tasks            Task[]
-  expenses         Expense[]
-  incomes          Income[]
-  revenueGoals     RevenueGoal[]
-  financialLabels  FinancialLabel[]
+  baseCurrency     String  @default("USD")
+
+  ownerId String
+  owner   User   @relation("SpaceOwner", fields: [ownerId], references: [id])
+
+  members     SpaceMember[]
+  invitations SpaceInvitation[]
+
+  projects           Project[]
+  leads              Lead[]
+  clients            Client[]
+  employees          Employee[]
+  tasks              Task[]
+  expenses           Expense[]
+  incomes            Income[]
+  revenueGoals       RevenueGoal[]
+  financialLabels    FinancialLabel[]
   financialAuditLogs FinancialAuditLog[]
   documentTemplates  DocumentTemplate[]
   generatedDocuments GeneratedDocument[]
+  notifications      Notification[]
 
-  createdAt        DateTime   @default(now())
-  updatedAt        DateTime   @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([ownerId])
 }
 
 model Employee {
-  id            String    @id @default(cuid())
-  name          String
-  email         String?
-  phone         String?
-  role          String?   // Position title
-  permissions   Json?     // Roles/Permissions details
-  
-  spaceId       String
-  space         Space     @relation(fields: [spaceId], references: [id], onDelete: Cascade)
-  
+  id          String  @id @default(cuid())
+  userId      String? // Powiązanie z User.id
+  name        String
+  email       String?
+  phone       String?
+  role        String? // Position title
+  permissions Json? // Roles/Permissions details
+
+  spaceId String
+  space   Space  @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+
   assignedProjects Project[] @relation("AssignedProjects")
   assignedClients  Client[]  @relation("AssignedClients")
   assignedTasks    Task[]    @relation("AssignedEmployee")
-  
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
 
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([spaceId, userId])
   @@index([spaceId])
 }
 
 model Task {
-  id            String    @id @default(cuid())
-  title         String
-  description   String?
-  status        String    @default("TODO") // TODO, IN_PROGRESS, DONE
-  priority      String    @default("MEDIUM") // LOW, MEDIUM, HIGH
-  
-  spaceId       String
-  space         Space     @relation(fields: [spaceId], references: [id], onDelete: Cascade)
-  
-  employeeId    String?
-  employee      Employee? @relation("AssignedEmployee", fields: [employeeId], references: [id])
-  
-  projectId     String?
-  project       Project?  @relation(fields: [projectId], references: [id])
-  
-  dueDate       DateTime?
-  order         Int       @default(0)
-  workload      Int?
-  subtasks      Json?
-  
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  id          String  @id @default(cuid())
+  title       String
+  description String?
+  status      String  @default("TODO") // TODO, IN_PROGRESS, DONE
+  priority    String  @default("MEDIUM") // LOW, MEDIUM, HIGH
+
+  spaceId String
+  space   Space  @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+
+  employeeId String?
+  employee   Employee? @relation("AssignedEmployee", fields: [employeeId], references: [id])
+
+  projectId String?
+  project   Project? @relation(fields: [projectId], references: [id])
+
+  dueDate  DateTime?
+  order    Int       @default(0)
+  workload Int?
+  subtasks Json?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([spaceId])
   @@index([employeeId])
@@ -225,33 +245,33 @@ enum TransactionCategory {
 }
 
 model Expense {
-  id           String   @id @default(cuid())
+  id           String               @id @default(cuid())
   amount       Float
   description  String?
-  date         DateTime @default(now())
+  date         DateTime             @default(now())
   category     TransactionCategory?
-  currency     String   @default("USD")
+  currency     String               @default("USD")
   receiptUrl   String?
-  isRecurring  Boolean  @default(false)
-  cycle        String?  // e.g. "monthly", "yearly"
+  isRecurring  Boolean              @default(false)
+  cycle        String? // e.g. "monthly", "yearly"
   recurringDay Int?
-  
-  spaceId     String
-  space       Space    @relation(fields: [spaceId], references: [id], onDelete: Cascade)
-  
-  userId      String
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  labels      FinancialLabel[] @relation("ExpenseLabels")
+  spaceId String
+  space   Space  @relation(fields: [spaceId], references: [id], onDelete: Cascade)
 
-  clientId    String?
-  client      Client?          @relation(fields: [clientId], references: [id], onDelete: SetNull)
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  projectId   String?
-  project     Project?         @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  labels FinancialLabel[] @relation("ExpenseLabels")
 
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  clientId String?
+  client   Client? @relation(fields: [clientId], references: [id], onDelete: SetNull)
+
+  projectId String?
+  project   Project? @relation(fields: [projectId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([spaceId])
   @@index([userId])
@@ -259,34 +279,34 @@ model Expense {
 }
 
 model Income {
-  id           String   @id @default(cuid())
+  id           String               @id @default(cuid())
   amount       Float
   description  String?
-  date         DateTime @default(now())
-  source       String?  // e.g. "project", "service"
+  date         DateTime             @default(now())
+  source       String? // e.g. "project", "service"
   category     TransactionCategory?
-  currency     String   @default("USD")
+  currency     String               @default("USD")
   receiptUrl   String?
-  isRecurring  Boolean  @default(false)
+  isRecurring  Boolean              @default(false)
   cycle        String?
   recurringDay Int?
-  
-  spaceId     String
-  space       Space    @relation(fields: [spaceId], references: [id], onDelete: Cascade)
-  
-  userId      String
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  labels      FinancialLabel[] @relation("IncomeLabels")
+  spaceId String
+  space   Space  @relation(fields: [spaceId], references: [id], onDelete: Cascade)
 
-  clientId    String?
-  client      Client?          @relation(fields: [clientId], references: [id], onDelete: SetNull)
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  projectId   String?
-  project     Project?         @relation(fields: [projectId], references: [id], onDelete: SetNull)
+  labels FinancialLabel[] @relation("IncomeLabels")
 
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  clientId String?
+  client   Client? @relation(fields: [clientId], references: [id], onDelete: SetNull)
+
+  projectId String?
+  project   Project? @relation(fields: [projectId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([spaceId])
   @@index([userId])
@@ -294,19 +314,19 @@ model Income {
 }
 
 model RevenueGoal {
-  id          String   @id @default(cuid())
-  amount      Float
-  month       Int      // 1-12
-  year        Int
-  
-  spaceId     String
-  space       Space    @relation(fields: [spaceId], references: [id], onDelete: Cascade)
-  
-  userId      String
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id     String @id @default(cuid())
+  amount Float
+  month  Int // 1-12
+  year   Int
 
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  spaceId String
+  space   Space  @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@unique([spaceId, month, year])
   @@index([spaceId])
@@ -314,47 +334,47 @@ model RevenueGoal {
 }
 
 model FinancialLabel {
-  id        String   @id @default(cuid())
-  name      String
-  color     String?
-  type      String   // "EXPENSE" or "INCOME"
-  
-  spaceId   String
-  space     Space    @relation(fields: [spaceId], references: [id], onDelete: Cascade)
-  
-  expenses  Expense[] @relation("ExpenseLabels")
-  incomes   Income[]  @relation("IncomeLabels")
+  id    String  @id @default(cuid())
+  name  String
+  color String?
+  type  String // "EXPENSE" or "INCOME"
+
+  spaceId String
+  space   Space  @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+
+  expenses Expense[] @relation("ExpenseLabels")
+  incomes  Income[]  @relation("IncomeLabels")
 
   @@unique([spaceId, name, type])
 }
 
 model Client {
-  id               String      @id @default(cuid())
-  name             String
-  email            String?
-  phone            String?
-  description      String?
-  notes            String?
-  location         String?
-  photoUrl         String?
-  timeline         String?
-  milestones       Json?
-  schedule         Json?
-  
-  projects         Project[] 
-  incomes          Income[] 
-  expenses         Expense[]
-  assignedEmployees Employee[] @relation("AssignedClients")
+  id          String  @id @default(cuid())
+  name        String
+  email       String?
+  phone       String?
+  description String?
+  notes       String?
+  location    String?
+  photoUrl    String?
+  timeline    String?
+  milestones  Json?
+  schedule    Json?
+
+  projects           Project[]
+  incomes            Income[]
+  expenses           Expense[]
+  assignedEmployees  Employee[]          @relation("AssignedClients")
   generatedDocuments GeneratedDocument[]
-  
-  userId           String
-  user             User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  
-  spaceId          String?
-  space            Space?      @relation(fields: [spaceId], references: [id], onDelete: Cascade)
-  
-  createdAt        DateTime    @default(now())
-  updatedAt        DateTime    @updatedAt
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  spaceId String?
+  space   Space?  @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([userId])
   @@index([spaceId])
@@ -363,88 +383,143 @@ model Client {
 model FinancialAuditLog {
   id            String   @id @default(cuid())
   userId        String
-  action        String   // CREATE, UPDATE, DELETE
+  action        String // CREATE, UPDATE, DELETE
   transactionId String
-  type          String   // EXPENSE, INCOME
+  type          String // EXPENSE, INCOME
   timestamp     DateTime @default(now())
-  diff          Json?    
+  diff          Json?
   spaceId       String
-  
-  space         Space    @relation(fields: [spaceId], references: [id], onDelete: Cascade)
-  user          User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  space Space @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([spaceId])
   @@index([userId])
 }
 
 model Integration {
-  id           String   @id @default(cuid())
-  provider     String   // e.g., "google_sheets", "google_drive"
-  accessToken  String   @db.Text
-  refreshToken String?  @db.Text
+  id           String    @id @default(cuid())
+  provider     String // e.g., "google_sheets", "google_drive"
+  accessToken  String    @db.Text
+  refreshToken String?   @db.Text
   expiresAt    DateTime?
-  
-  userId       String
-  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  createdAt    DateTime @default(now())
-  updatedAt    DateTime @updatedAt
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@unique([userId, provider])
   @@index([userId])
 }
 
 model DocumentTemplate {
-  id          String   @id @default(cuid())
-  userId      String
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  
-  spaceId     String?
-  space       Space?    @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  name        String
-  type        String   // 'offer' | 'contract' | 'invoice' | 'receipt' | 'nda' | 'brief' | 'reminder' | 'custom'
-  content     String   @db.Text // Markdown content z tagami {{variable}}
-  blocks      Json?    // JSON struktura bloków drag&drop
-  
-  branding    Json     // { logo, headerText, footerText, primaryColor, font, margins, ... }
-  
-  usageCount  Int      @default(0)
-  isDefault   Boolean  @default(false)
-  
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  
-  documents   GeneratedDocument[]
+  spaceId String?
+  space   Space?  @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+
+  name    String
+  type    String // 'offer' | 'contract' | 'invoice' | 'receipt' | 'nda' | 'brief' | 'reminder' | 'custom'
+  content String @db.Text // Markdown content z tagami {{variable}}
+  blocks  Json? // JSON struktura bloków drag&drop
+
+  branding Json // { logo, headerText, footerText, primaryColor, font, margins, ... }
+
+  usageCount Int     @default(0)
+  isDefault  Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  documents GeneratedDocument[]
 
   @@index([userId])
   @@index([spaceId])
 }
 
 model GeneratedDocument {
-  id          String   @id @default(cuid())
-  templateId  String
-  template    DocumentTemplate @relation(fields: [templateId], references: [id], onDelete: Cascade)
-  
-  userId      String
-  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id         String           @id @default(cuid())
+  templateId String
+  template   DocumentTemplate @relation(fields: [templateId], references: [id], onDelete: Cascade)
 
-  spaceId     String?
-  space       Space?    @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  clientId    String?
-  client      Client?  @relation(fields: [clientId], references: [id], onDelete: SetNull)
-  
-  dealId      String?
-  project     Project? @relation(fields: [dealId], references: [id], onDelete: SetNull)
-  
+  spaceId String?
+  space   Space?  @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+
+  clientId String?
+  client   Client? @relation(fields: [clientId], references: [id], onDelete: SetNull)
+
+  dealId  String?
+  project Project? @relation(fields: [dealId], references: [id], onDelete: SetNull)
+
   name        String?
-  filePath    String   // Ścieżka do wygenerowanego PDF
-  contextData Json     // Snapshot danych w momencie generowania
-  
-  createdAt   DateTime @default(now())
+  filePath    String // Ścieżka do wygenerowanego PDF
+  contextData Json // Snapshot danych w momencie generowania
+
+  createdAt DateTime @default(now())
 
   @@index([templateId])
   @@index([userId])
   @@index([spaceId])
+}
+
+model Notification {
+  id String @id @default(cuid())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  spaceId String?
+  space   Space?  @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+
+  title   String
+  message String?
+  link    String?
+  isRead  Boolean @default(false)
+
+  createdAt DateTime @default(now())
+
+  @@index([userId])
+  @@index([spaceId])
+}
+
+model SpaceMember {
+  id       String    @id @default(cuid())
+  spaceId  String
+  userId   String
+  role     SpaceRole @default(USER)
+  joinedAt DateTime  @default(now())
+
+  space Space @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([spaceId, userId])
+  @@index([spaceId])
+  @@index([userId])
+}
+
+model SpaceInvitation {
+  id           String           @id @default(cuid())
+  spaceId      String
+  invitedEmail String?
+  inviteToken  String           @unique
+  role         SpaceRole        @default(USER)
+  status       InvitationStatus @default(PENDING)
+  expiresAt    DateTime
+
+  createdById String
+  createdBy   User   @relation(fields: [createdById], references: [id], onDelete: Cascade)
+  space       Space  @relation(fields: [spaceId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+
+  @@index([spaceId])
+  @@index([inviteToken])
+  @@index([invitedEmail])
 }

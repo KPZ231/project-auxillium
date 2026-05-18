@@ -66,7 +66,10 @@ export const ModelName = {
   FinancialAuditLog: 'FinancialAuditLog',
   Integration: 'Integration',
   DocumentTemplate: 'DocumentTemplate',
-  GeneratedDocument: 'GeneratedDocument'
+  GeneratedDocument: 'GeneratedDocument',
+  Notification: 'Notification',
+  SpaceMember: 'SpaceMember',
+  SpaceInvitation: 'SpaceInvitation'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -90,6 +93,8 @@ export const UserScalarFieldEnum = {
   email: 'email',
   username: 'username',
   passwordHash: 'passwordHash',
+  authProvider: 'authProvider',
+  providerId: 'providerId',
   name: 'name',
   avatarUrl: 'avatarUrl',
   createdAt: 'createdAt',
@@ -178,6 +183,7 @@ export type SpaceScalarFieldEnum = (typeof SpaceScalarFieldEnum)[keyof typeof Sp
 
 export const EmployeeScalarFieldEnum = {
   id: 'id',
+  userId: 'userId',
   name: 'name',
   email: 'email',
   phone: 'phone',
@@ -362,6 +368,46 @@ export const GeneratedDocumentScalarFieldEnum = {
 } as const
 
 export type GeneratedDocumentScalarFieldEnum = (typeof GeneratedDocumentScalarFieldEnum)[keyof typeof GeneratedDocumentScalarFieldEnum]
+
+
+export const NotificationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  spaceId: 'spaceId',
+  title: 'title',
+  message: 'message',
+  link: 'link',
+  isRead: 'isRead',
+  createdAt: 'createdAt'
+} as const
+
+export type NotificationScalarFieldEnum = (typeof NotificationScalarFieldEnum)[keyof typeof NotificationScalarFieldEnum]
+
+
+export const SpaceMemberScalarFieldEnum = {
+  id: 'id',
+  spaceId: 'spaceId',
+  userId: 'userId',
+  role: 'role',
+  joinedAt: 'joinedAt'
+} as const
+
+export type SpaceMemberScalarFieldEnum = (typeof SpaceMemberScalarFieldEnum)[keyof typeof SpaceMemberScalarFieldEnum]
+
+
+export const SpaceInvitationScalarFieldEnum = {
+  id: 'id',
+  spaceId: 'spaceId',
+  invitedEmail: 'invitedEmail',
+  inviteToken: 'inviteToken',
+  role: 'role',
+  status: 'status',
+  expiresAt: 'expiresAt',
+  createdById: 'createdById',
+  createdAt: 'createdAt'
+} as const
+
+export type SpaceInvitationScalarFieldEnum = (typeof SpaceInvitationScalarFieldEnum)[keyof typeof SpaceInvitationScalarFieldEnum]
 
 
 export const SortOrder = {

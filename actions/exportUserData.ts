@@ -91,7 +91,7 @@ async function fetchDataForSpace(
   spaceId: string,
   userId: string
 ): Promise<{
-  spaces: { id: string; spaceName: string; spaceDescription: string | null; icon: string | null; createdAt: Date; owner: { email: string }; members: { id: string }[] }[];
+  spaces: { id: string; spaceName: string; spaceDescription: string | null; icon: string | null; createdAt: Date; ownerId: string; owner: { email: string }; members: { id: string }[] }[];
   projects: { id: string; projectName: string; projectDescription: string; projectStatus: string; createdAt: Date; dueDate: Date | null }[];
   leads: { id: string; leadName: string; projectType: string | null; contactName: string | null; email: string | null; phone: string | null; status: string; stage: string | null; createdAt: Date }[];
   clients: { id: string; name: string; email: string | null; phone: string | null; description: string | null; notes: string | null; createdAt: Date }[];
@@ -113,6 +113,7 @@ async function fetchDataForSpace(
       spaceDescription: true,
       icon: true,
       createdAt: true,
+      ownerId: true,
       owner: {
         select: { email: true },
       },

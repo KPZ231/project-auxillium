@@ -23,7 +23,8 @@ export async function requestPasswordReset(formData: ResetPasswordFormData) {
     return { error: "Nieprawidłowy adres e-mail." };
   }
 
-  const { email } = validatedFields.data;
+  const { email: providedEmail } = validatedFields.data;
+  const email = providedEmail ? providedEmail.toLowerCase() : "";
 
   try {
     // 3. Find user

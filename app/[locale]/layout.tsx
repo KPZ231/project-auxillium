@@ -5,6 +5,7 @@ import { promises as fs } from 'fs';
 import path from 'path';
 import { UserProvider } from "@/app/context/UserContext";
 import { TranslationProvider } from "@/app/context/TranslationContext";
+import BetaAnnoucementBar from "@/app/components/BetaAnnoucementBar/BetaAnnoucementBar";
 import "@/app/globals.css";
 
 const inter = Inter({
@@ -60,8 +61,9 @@ export default async function LocaleLayout({
       suppressHydrationWarning={true}
     >
       <body className="min-h-full flex flex-col">
-        <TranslationProvider initialLanguage={locale} resources={resources as Record<string, Record<string, string>>}>
+        <TranslationProvider initialLanguage={locale as "pl" | "en" | "de"} resources={resources as Record<string, Record<string, string>>}>
           <UserProvider>
+            <BetaAnnoucementBar />
             <main className="flex-1">{children}</main>
           </UserProvider>
         </TranslationProvider>

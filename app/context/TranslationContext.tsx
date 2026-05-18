@@ -5,7 +5,7 @@ import i18next, { getI18nConfig } from '@/lib/i18n';
 import { supportedLanguages, defaultLanguage, Language } from '@/lib/i18n-config';
 
 interface TranslationContextType {
-  t: (key: string, defaultValueOrOptions?: string | Record<string, any>, options?: Record<string, any>) => string;
+  t: (key: string, defaultValueOrOptions?: string | Record<string, unknown>, options?: Record<string, unknown>) => string;
   language: Language;
   setLanguage: (lang: Language) => void;
   availableLanguages: Language[];
@@ -20,7 +20,7 @@ export function TranslationProvider({
 }: { 
   children: ReactNode;
   initialLanguage?: Language;
-  resources?: Record<string, any>;
+  resources?: Record<string, unknown>;
 }) {
   const [language, setLanguageState] = useState<Language>(initialLanguage || defaultLanguage);
   
@@ -67,7 +67,7 @@ export function TranslationProvider({
       const storedLang = typeof window !== 'undefined' ? localStorage.getItem('i18next') as Language | undefined : undefined;
       const preferredLang = initialLanguage || storedLang || defaultLanguage;
 
-      if (supportedLanguages.includes(preferredLang as any) && i18next.language !== preferredLang) {
+      if (supportedLanguages.includes(preferredLang as Language) && i18next.language !== preferredLang) {
         await i18next.changeLanguage(preferredLang as Language);
       }
       setIsReady(true);
@@ -83,7 +83,7 @@ export function TranslationProvider({
   }, [initialLanguage]);
 
   // Stable t function - defined outside of useMemo for maximum stability
-  const t = useCallback((key: string, defaultValueOrOptions?: string | Record<string, any>, options?: Record<string, any>) => {
+  const t = useCallback((key: string, defaultValueOrOptions?: string | Record<string, unknown>, options?: Record<string, unknown>) => {
     if (!i18next.isInitialized) {
       return typeof defaultValueOrOptions === 'string' ? defaultValueOrOptions : key;
     }
@@ -113,7 +113,7 @@ export function useTranslation() {
   const context = useContext(TranslationContext);
   if (!context) {
     return {
-      t: (key: string, defaultValueOrOptions?: string | Record<string, any>) => 
+      t: (key: string, defaultValueOrOptions?: string | Record<string, unknown>) => 
         typeof defaultValueOrOptions === 'string' ? defaultValueOrOptions : key,
       language: defaultLanguage,
       setLanguage: async () => {},

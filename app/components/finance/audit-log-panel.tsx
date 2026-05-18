@@ -24,7 +24,7 @@ export function AuditLogPanel({ spaceId }: AuditLogPanelProps) {
 
   useEffect(() => {
     if (isOpen && logs.length === 0) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
+       
       getAuditLogs(spaceId).then(setLogs);
     }
   }, [isOpen, spaceId, logs.length]);

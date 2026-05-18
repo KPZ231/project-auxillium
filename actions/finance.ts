@@ -5,6 +5,7 @@ import { setCachedData, getCachedData, invalidateCache } from "@/lib/redis";
 import { revalidatePath } from "next/cache";
 import { z } from "zod";
 import { Expense, TransactionCategory } from "@/lib/generated/client/client";
+import { createNotification } from "./notifications";
 
 const expenseSchema = z.object({
   amount: z.number().positive(),
@@ -56,6 +57,12 @@ export async function addExpense(data: z.infer<typeof expenseSchema>) {
   try {
     const validated = expenseSchema.parse(data);
     
+    const { checkPermission } = await import("@/lib/permissions");
+    const permission = await checkPermission(validated.userId, validated.spaceId, "write");
+    if (!permission.allowed) {
+      return { success: false, error: "Brak uprawnień do dodawania wydatków" };
+    }
+
     const expense = await prisma.expense.create({
       data: {
         amount: validated.amount,
@@ -88,6 +95,14 @@ export async function addExpense(data: z.infer<typeof expenseSchema>) {
       }
     });
 
+    await createNotification({
+      title: "Nowy wydatek dodany",
+      message: `Wydatek na kwotę ${validated.amount} ${validated.currency} został dodany.`,
+      link: "/dashboard/costs-expenses",
+      spaceId: validated.spaceId,
+      userId: validated.userId
+    });
+
     await invalidateCache(getFinanceCacheKey(validated.spaceId));
     revalidatePath("/dashboard/costs-expenses");
     return { success: true, data: expense };
@@ -101,6 +116,12 @@ export async function addIncome(data: z.infer<typeof incomeSchema>) {
   try {
     const validated = incomeSchema.parse(data);
     
+    const { checkPermission } = await import("@/lib/permissions");
+    const permission = await checkPermission(validated.userId, validated.spaceId, "write");
+    if (!permission.allowed) {
+      return { success: false, error: "Brak uprawnień do dodawania przychodów" };
+    }
+
     const income = await prisma.income.create({
       data: {
         amount: validated.amount,
@@ -134,6 +155,14 @@ export async function addIncome(data: z.infer<typeof incomeSchema>) {
       }
     });
 
+    await createNotification({
+      title: "Nowy przychód dodany",
+      message: `Przychód na kwotę ${validated.amount} ${validated.currency} został dodany.`,
+      link: "/dashboard/costs-expenses",
+      spaceId: validated.spaceId,
+      userId: validated.userId
+    });
+
     await invalidateCache(getFinanceCacheKey(validated.spaceId));
     revalidatePath("/dashboard/costs-expenses");
     return { success: true, data: income };
@@ -147,6 +176,12 @@ export async function setRevenueGoal(data: z.infer<typeof revenueGoalSchema>) {
   try {
     const validated = revenueGoalSchema.parse(data);
     
+    const { checkPermission } = await import("@/lib/permissions");
+    const permission = await checkPermission(validated.userId, validated.spaceId, "write");
+    if (!permission.allowed) {
+      return { success: false, error: "Brak uprawnień do modyfikowania celów finansowych" };
+    }
+
     const goal = await prisma.revenueGoal.upsert({
       where: {
         spaceId_month_year: {
@@ -297,6 +332,16 @@ export async function getFinancialSummary(spaceId: string) {
 
 export async function createLabel(name: string, type: "EXPENSE" | "INCOME", spaceId: string, color?: string) {
   try {
+    const { getUser } = await import("@/lib/session");
+    const { userId } = await getUser();
+    if (!userId) return { success: false, error: "Unauthorized" };
+
+    const { checkPermission } = await import("@/lib/permissions");
+    const permission = await checkPermission(userId, spaceId, "write");
+    if (!permission.allowed) {
+      return { success: false, error: "Brak uprawnień do tworzenia etykiet" };
+    }
+
     const label = await prisma.financialLabel.create({
       data: { name, type, spaceId, color },
     });

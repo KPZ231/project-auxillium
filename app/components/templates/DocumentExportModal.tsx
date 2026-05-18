@@ -23,7 +23,7 @@ export const DocumentExportModal: React.FC<DocumentExportModalProps> = ({ isOpen
   useEffect(() => {
     if (isOpen) {
       const fetchData = async () => {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
+         
         setLoading(true);
         const [clientsRes, projectsRes] = await Promise.all([
           getClientsForAI(spaceId),

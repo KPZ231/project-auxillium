@@ -5,6 +5,7 @@ import { prisma } from "@/lib/prisma"
 import { z } from "zod"
 import { revalidatePath } from "next/cache"
 import { setCachedData, getCachedData, invalidateCache } from "@/lib/redis"
+import { createNotification } from "./notifications"
 
 // Zod Schemas
 const addClientSchema = z.object({
@@ -53,6 +54,12 @@ export async function addClient(data: AddClientInput) {
     const { getActiveSpaceId } = await import("./space")
     const spaceId = await getActiveSpaceId()
 
+    const { checkPermission } = await import("@/lib/permissions");
+    const permission = await checkPermission(userId, spaceId, "write");
+    if (!permission.allowed) {
+      return { success: false, error: "Brak uprawnień do dodawania klientów" }
+    }
+
     const newClient = await prisma.client.create({
       data: {
         name: name.trim(),
@@ -66,6 +73,14 @@ export async function addClient(data: AddClientInput) {
     // Invalidate Cache
     const cacheKey = spaceId ? `clients_user_${userId}_space_${spaceId}` : `clients_user_${userId}`
     await invalidateCache(cacheKey)
+    
+    await createNotification({
+        title: `Nowy klient: ${newClient.name}`,
+        message: `Klient został pomyślnie utworzony w przestrzeni roboczej.`,
+        link: `/dashboard/clients/${newClient.id}`,
+        spaceId: spaceId ?? undefined,
+        userId: userId
+    })
 
     revalidatePath('/dashboard/clients', 'page')
 
@@ -101,8 +116,18 @@ export async function updateClient(data: UpdateClientInput) {
 
   try {
     const client = await prisma.client.findUnique({ where: { id } })
-    if (!client || client.userId !== userId) {
-      return { success: false, error: "Client not found or unauthorized" }
+    if (!client) {
+      return { success: false, error: "Client not found" }
+    }
+
+    if (client.spaceId) {
+      const { checkPermission } = await import("@/lib/permissions");
+      const permission = await checkPermission(userId, client.spaceId, "write");
+      if (!permission.allowed) {
+        return { success: false, error: "Brak uprawnień do edycji klientów w tej przestrzeni" }
+      }
+    } else if (client.userId !== userId) {
+      return { success: false, error: "Unauthorized" }
     }
 
     await prisma.client.update({
@@ -143,8 +168,18 @@ export async function deleteClient(id: string, confirmationName: string) {
 
   try {
     const client = await prisma.client.findUnique({ where: { id } })
-    if (!client || client.userId !== userId) {
-      return { success: false, error: "Client not found or unauthorized" }
+    if (!client) {
+      return { success: false, error: "Client not found" }
+    }
+
+    if (client.spaceId) {
+      const { checkPermission } = await import("@/lib/permissions");
+      const permission = await checkPermission(userId, client.spaceId, "delete");
+      if (!permission.allowed) {
+        return { success: false, error: "Brak uprawnień do usuwania klientów w tej przestrzeni" }
+      }
+    } else if (client.userId !== userId) {
+      return { success: false, error: "Unauthorized" }
     }
 
     if (client.name.trim() !== confirmationName.trim()) {

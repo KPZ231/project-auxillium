@@ -5,6 +5,7 @@ import { FileText, Layout, Search, Filter, Plus } from 'lucide-react';
 import { useTranslation } from '@/app/context/TranslationContext';
 import { useRouter } from 'next/navigation';
 import { QuickDocumentModal } from './QuickDocumentModal';
+import PageHeader from "@/app/components/Dashboard/Dashboard/Shared/PageHeader/PageHeader";
 
 interface DocumentHubHeaderProps {
   language: string;
@@ -17,36 +18,23 @@ export const DocumentHubHeader: React.FC<DocumentHubHeaderProps> = ({ language, 
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   return (
-    <div className="mb-10">
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8">
-        <div>
-          <h3 className="font-light text-base text-[#71717A] tracking-tight uppercase mb-1">
-            {t("documents:hub.title", "Centrum Dokumentacji")}
-          </h3>
-          <h2 className="font-bold text-3xl tracking-wide uppercase">
-            {t("documents:hub.subtitle", "Utworzone Dokumenty")}
-          </h2>
-        </div>
-        
-        <div className="flex gap-4">
-          <button 
-            onClick={() => setIsModalOpen(true)}
-            className="bg-[#0A0A0A] text-white px-6 py-3 flex items-center gap-2 hover:bg-[#262626] transition-colors font-medium"
-          >
-            <Plus size={18} />
-            {t("documents:hub.create_document", "Utwórz dokument")}
-          </button>
-          <button 
-            onClick={() => router.push(`/${language}/dashboard/templates`)}
-            className="border border-[#0A0A0A] text-[#0A0A0A] px-6 py-3 flex items-center gap-2 hover:bg-[#FAFAFA] transition-colors font-medium"
-          >
-            <Layout size={18} />
-            {t("documents:hub.manage_templates", "Zarządzaj szablonami")}
-          </button>
-        </div>
-      </div>
+    <div className="mb-10 w-full">
+      <PageHeader
+        title={t("documents:hub.subtitle", "Utworzone Dokumenty")}
+        subtitle={t("documents:hub.title", "Centrum Dokumentacji")}
+        primaryAction={{
+          label: t("documents:hub.create_document", "Utwórz dokument").toUpperCase(),
+          onClick: () => setIsModalOpen(true),
+          icon: <Plus className="w-4 h-4" strokeWidth={2.5} />
+        }}
+        secondaryAction={{
+          label: t("documents:hub.manage_templates", "Zarządzaj szablonami").toUpperCase(),
+          href: `/${language}/dashboard/templates`,
+          icon: <Layout className="w-4 h-4" strokeWidth={2.5} />
+        }}
+      />
 
-      <div className="flex flex-col md:flex-row items-center gap-4 bg-[#FAFAFA] border border-[#E5E5E5] p-2">
+      <div className="mt-8 flex flex-col md:flex-row items-center gap-4 bg-[#FAFAFA] border border-[#E5E5E5] p-2">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-[#A1A1AA]" size={18} />
           <input 

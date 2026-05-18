@@ -151,13 +151,17 @@ export default function LoginForm() {
         {/* Social Buttons */}
         <div className="w-full flex flex-col gap-3">
           {[
-            { icon: <FcGoogle className="w-5 h-5" />, name: "Google" },
-            { icon: <FaApple className="w-5 h-5" />, name: "Apple" },
-            { icon: <FaGithub className="w-5 h-5" />, name: "GitHub" },
+            { icon: <FcGoogle className="w-5 h-5" />, name: "Google", url: "/api/auth/login/google" },
+            { icon: <FaGithub className="w-5 h-5" />, name: "GitHub", url: "/api/auth/login/github" },
           ].map((social) => (
             <button
               key={social.name}
               type="button"
+              onClick={() => {
+                if (social.url !== "#") {
+                  window.location.href = social.url;
+                }
+              }}
               className="w-full py-4 border border-(--tertiary) flex items-center justify-center gap-3 text-xs font-bold uppercase tracking-wider hover:bg-(--neutral) hover:text-(--secondary) transition-all group"
             >
               <span className="opacity-60 group-hover:opacity-100 transition-opacity">{social.icon}</span>

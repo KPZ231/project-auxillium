@@ -90,7 +90,7 @@ export default function ComingSoonPage() {
                 <span className="text-[#0A0A0A]">Is Coming</span>
               </h2>
               <p className="text-lg text-[#71717A] max-w-2xl mx-auto leading-relaxed">
-                We're crafting the future of business management.
+                We&apos;re crafting the future of business management.
                 Join our launch list to be the first to experience
                 Auxillium and transform how you manage your projects,
                 clients, and finances.
@@ -179,7 +179,7 @@ export default function ComingSoonPage() {
                     Thank You!
                   </h3>
                   <p className="text-[#71717A]">
-                    You've been added to our launch list.
+                    You&apos;ve been added to our launch list.
                     We'll notify you when Auxillium is ready.
                   </p>
                 </div>

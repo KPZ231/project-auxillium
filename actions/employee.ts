@@ -15,6 +15,12 @@ interface Employee {
   role?: string | null;
   createdAt: Date;
   spaceId: string;
+  assignedProjects?: { id: string; projectName: string; projectStatus: string }[];
+  assignedTasks?: { id: string; title: string; status: string }[];
+  _count?: {
+    assignedProjects: number;
+    assignedTasks: number;
+  };
 }
 
 export async function getEmployees() {
@@ -134,13 +140,13 @@ export async function getEmployeeWorkload(id: string) {
   const employee = await getEmployeeById(id);
   if (!employee) return null;
 
-  const activeProjectsCount = employee.assignedProjects.filter((p: { projectStatus: string }) => p.projectStatus === "IN_PROGRESS").length;
-  const activeTasksCount = employee.assignedTasks.filter((t: { status: string }) => t.status !== "DONE").length;
+  const activeProjectsCount = (employee.assignedProjects || []).filter((p: { projectStatus: string }) => p.projectStatus === "IN_PROGRESS").length;
+  const activeTasksCount = (employee.assignedTasks || []).filter((t: { status: string }) => t.status !== "DONE").length;
 
   return {
     activeProjectsCount,
     activeTasksCount,
-    totalProjects: employee.assignedProjects.length,
-    totalTasks: employee.assignedTasks.length,
+    totalProjects: (employee.assignedProjects || []).length,
+    totalTasks: (employee.assignedTasks || []).length,
   };
 }

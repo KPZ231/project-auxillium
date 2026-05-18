@@ -46,7 +46,7 @@ export default function ActivityAndTasks() {
       // Fetch Financial Summary
       const financeResult = await getFinancialSummary(spaceId) as { months?: { name: string; income: number; expenses: number }[] };
       if (financeResult && financeResult.months) {
-        // eslint-disable-next-line react-hooks/set-state-in-effect
+         
         setChartData(financeResult.months.map((m) => ({
           name: m.name,
           income: m.income,
@@ -66,7 +66,7 @@ export default function ActivityAndTasks() {
         })));
       }
     };
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+     
     fetchData();
   }, []);
 

@@ -6,6 +6,7 @@ import { z } from "zod"
 import { LeadStatus } from "@/lib/generated/client/client"
 import { revalidatePath } from "next/cache"
 import { invalidateCache } from "@/lib/redis"
+import { createNotification } from "./notifications"
 
 
 // 1. Zod Schema
@@ -56,6 +57,12 @@ export async function addLead(data: AddLeadInput) {
         const { getActiveSpaceId } = await import("./space");
         const spaceId = await getActiveSpaceId();
 
+        const { checkPermission } = await import("@/lib/permissions");
+        const permission = await checkPermission(userId, spaceId, "write");
+        if (!permission.allowed) {
+            return { success: false, error: "Brak uprawnień do tworzenia leadów" };
+        }
+
         // Get the current max order
         const lastLead = await prisma.lead.findFirst({
             where: { userId, ...(spaceId ? { spaceId } : {}) },
@@ -83,6 +90,15 @@ export async function addLead(data: AddLeadInput) {
 
         // Invalidate cache
         await invalidateCache(`leads:${userId}${spaceId ? `:${spaceId}` : ""}`)
+        
+        await createNotification({
+            title: `Nowy potencjalny klient: ${newLead.leadName}`,
+            message: `Lead został pomyślnie utworzony w przestrzeni roboczej.`,
+            link: `/dashboard/leads`,
+            spaceId: spaceId ?? undefined,
+            userId: userId
+        })
+        
         revalidatePath('/dashboard/leads', 'page')
 
         return {

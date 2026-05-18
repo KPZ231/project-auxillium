@@ -5,8 +5,24 @@ import { FileText, Download, User, Briefcase, Calendar } from 'lucide-react';
 import { format } from 'date-fns';
 import { pl } from 'date-fns/locale';
 
+interface GeneratedDocument {
+  id: string;
+  name?: string;
+  createdAt: string | Date;
+  template?: {
+    name: string;
+    type: string;
+  };
+  client?: {
+    name: string;
+  };
+  project?: {
+    projectName: string;
+  };
+}
+
 interface GeneratedDocumentCardProps {
-  doc: any;
+  doc: GeneratedDocument;
 }
 
 export const GeneratedDocumentCard: React.FC<GeneratedDocumentCardProps> = ({ doc }) => {

@@ -14,6 +14,10 @@ interface QuickDocumentModalProps {
   initialProjectId?: string;
 }
 
+interface Template { id: string; name: string; type: string; }
+interface Client { id: string; name: string; }
+interface Project { id: string; projectName: string; }
+
 export const QuickDocumentModal: React.FC<QuickDocumentModalProps> = ({ 
   isOpen, 
   onClose, 
@@ -21,9 +25,9 @@ export const QuickDocumentModal: React.FC<QuickDocumentModalProps> = ({
   initialClientId = '',
   initialProjectId = ''
 }) => {
-  const [templates, setTemplates] = useState<any[]>([]);
-  const [clients, setClients] = useState<any[]>([]);
-  const [projects, setProjects] = useState<any[]>([]);
+  const [templates, setTemplates] = useState<Template[]>([]);
+  const [clients, setClients] = useState<Client[]>([]);
+  const [projects, setProjects] = useState<Project[]>([]);
   
   const [selectedTemplate, setSelectedTemplate] = useState('');
   const [selectedClient, setSelectedClient] = useState(initialClientId);
@@ -42,9 +46,9 @@ export const QuickDocumentModal: React.FC<QuickDocumentModalProps> = ({
           getProjectsForAI(spaceId)
         ]);
         
-        if (templatesRes.success && templatesRes.templates) setTemplates(templatesRes.templates);
-        if (Array.isArray(clientsRes)) setClients(clientsRes);
-        if (Array.isArray(projectsRes)) setProjects(projectsRes);
+        if (templatesRes.success && templatesRes.templates) setTemplates(templatesRes.templates as unknown as Template[]);
+        if (Array.isArray(clientsRes)) setClients(clientsRes as unknown as Client[]);
+        if (Array.isArray(projectsRes)) setProjects(projectsRes as unknown as Project[]);
         setLoading(false);
       };
       fetchData();

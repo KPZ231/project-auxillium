@@ -25,7 +25,7 @@ export default async function TemplatesPage({ params }: { params: Promise<{ loca
   }
 
   const templatesResponse = await getTemplates(spaceId);
-  const templates = templatesResponse.success ? templatesResponse.templates : [];
+  const templates = templatesResponse.success && templatesResponse.templates ? templatesResponse.templates : [];
 
   return (
     <div className="p-8 max-w-7xl mx-auto min-h-screen">
@@ -39,7 +39,7 @@ export default async function TemplatesPage({ params }: { params: Promise<{ loca
         </div>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {templates.map((template: { id: string; title: string; type: string; createdAt: string }) => (
+          {templates.map((template: any) => (
             <TemplateCard key={template.id} template={template} />
           ))}
         </div>

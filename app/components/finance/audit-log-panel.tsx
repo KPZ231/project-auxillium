@@ -13,8 +13,8 @@ interface AuditLog {
   id: string;
   action: string;
   type: string;
-  timestamp: string;
-  user?: { name?: string; email?: string };
+  timestamp: Date | string;
+  user?: { name?: string | null; email?: string };
 }
 
 export function AuditLogPanel({ spaceId }: AuditLogPanelProps) {

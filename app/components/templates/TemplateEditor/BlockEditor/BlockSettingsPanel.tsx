@@ -27,7 +27,7 @@ export const BlockSettingsPanel: React.FC<BlockSettingsPanelProps> = ({ block, o
               <label className="text-[10px] font-bold uppercase tracking-widest text-[#71717A]">Tekst Nagłówka</label>
               <input 
                 type="text"
-                value={block.content.text}
+                value={block.content.text as any || ''}
                 onChange={(e) => updateField('text', e.target.value)}
                 className="w-full p-2 border border-[#E5E5E5] text-xs focus:border-[#0A0A0A] outline-none"
               />
@@ -53,7 +53,7 @@ export const BlockSettingsPanel: React.FC<BlockSettingsPanelProps> = ({ block, o
           <div className="space-y-2">
             <label className="text-[10px] font-bold uppercase tracking-widest text-[#71717A]">Treść Tekstu</label>
             <textarea 
-              value={block.content.text}
+              value={block.content.text as any || ''}
               onChange={(e) => updateField('text', e.target.value)}
               className="w-full p-2 border border-[#E5E5E5] text-xs focus:border-[#0A0A0A] outline-none h-40 resize-none"
             />
@@ -66,7 +66,7 @@ export const BlockSettingsPanel: React.FC<BlockSettingsPanelProps> = ({ block, o
               <label className="text-[10px] font-bold uppercase tracking-widest text-[#71717A]">URL Obrazu</label>
               <input 
                 type="text"
-                value={block.content.url || ''}
+                value={block.content.url as any || ''}
                 onChange={(e) => updateField('url', e.target.value)}
                 placeholder="https://..."
                 className="w-full p-2 border border-[#E5E5E5] text-xs focus:border-[#0A0A0A] outline-none"
@@ -76,7 +76,7 @@ export const BlockSettingsPanel: React.FC<BlockSettingsPanelProps> = ({ block, o
               <label className="text-[10px] font-bold uppercase tracking-widest text-[#71717A]">Szerokość (%)</label>
               <input 
                 type="number"
-                value={block.content.width || 100}
+                value={block.content.width as any || 100}
                 onChange={(e) => updateField('width', parseInt(e.target.value))}
                 className="w-full p-2 border border-[#E5E5E5] text-xs focus:border-[#0A0A0A] outline-none"
               />
@@ -118,7 +118,7 @@ export const BlockSettingsPanel: React.FC<BlockSettingsPanelProps> = ({ block, o
             <div className="space-y-2">
               <label className="text-[10px] font-bold uppercase tracking-widest text-[#71717A]">Wybierz Zmienną</label>
               <select 
-                value={block.content.variable || ''}
+                value={block.content.variable as any || ''}
                 onChange={(e) => updateField('variable', e.target.value)}
                 className="w-full p-2 border border-[#E5E5E5] text-xs focus:border-[#0A0A0A] outline-none bg-white"
               >

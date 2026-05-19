@@ -115,12 +115,12 @@ export function KanbanBoard({ initialTasks, spaceId, projectId }: KanbanBoardPro
   const handleSaveTask = async (data: Record<string, unknown>) => {
     try {
       if (selectedTask) {
-        const updated = await updateTask(selectedTask.id, data);
+        const updated = await updateTask(selectedTask.id, data as any);
         // Use the server-returned data to ensure all relations and IDs are correct
         setTasks(prev => prev.map(t => t.id === updated.id ? updated : t));
         toast.success("Task updated");
       } else {
-        const created = await createTask(data);
+        const created = await createTask(data as any);
         setTasks(prev => [...prev, created]);
         toast.success("Task created");
       }

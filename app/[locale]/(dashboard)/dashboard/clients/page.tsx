@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default async function ClientsPage() {
-  const clients = await getClients();
+  const clients = await getClients() as any[];
 
   return (
     <div className="flex flex-col w-full">

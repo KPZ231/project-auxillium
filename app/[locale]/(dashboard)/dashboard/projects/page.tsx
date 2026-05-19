@@ -18,7 +18,7 @@ export default function Projects() {
                     { label: "Calendar", value: "timeline" }
                 ]}
                 currentTab={view}
-                onTabChange={setView}
+                onTabChange={(v) => setView(v as "grid" | "timeline")}
                 primaryAction={{
                     label: "NEW PROJECT",
                     href: "/dashboard/projects/new",

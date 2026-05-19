@@ -57,7 +57,7 @@ export default function ActivityAndTasks() {
       // Fetch All Active Tasks
       const tasksResult = await getRecentTasks(spaceId);
       if (tasksResult.success && tasksResult.tasks) {
-        setActionItems(tasksResult.tasks.map((task: { id: string; title: string; employee?: { name: string }; project?: { projectName: string }; priority?: string; dueDate?: string; status?: string }) => ({
+        setActionItems(tasksResult.tasks.map((task: any) => ({
           id: task.id,
           title: task.title,
           assignee: task.employee ? `Assigned to: ${task.employee.name}` : (task.project ? `Project: ${task.project.projectName}` : "Unassigned"),

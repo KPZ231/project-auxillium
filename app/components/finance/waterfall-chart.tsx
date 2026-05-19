@@ -67,7 +67,7 @@ export function WaterfallChart({ data }: WaterfallChartProps) {
             tickLine={false} 
           />
           <Tooltip 
-            formatter={(val: number, name: string, props: { payload: { amount: number } }) => [`$${props.payload.amount}`, "Amount"]}
+            formatter={((val: any, name: any, props: any) => [`$${props.payload.amount}`, "Amount"]) as any}
             cursor={{ fill: "#FAFAFA" }}
             contentStyle={{ 
               borderRadius: "0px", 

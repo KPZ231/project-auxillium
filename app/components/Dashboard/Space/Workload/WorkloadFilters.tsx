@@ -131,7 +131,7 @@ export default function WorkloadFiltersBar({ filters, onFilterChange, employees 
                   {STATUS_OPTIONS.map((opt) => (
                     <Chip
                       key={opt.value}
-                      label={opt.label || t(`dashboard:${opt.labelKey}`, opt.value)}
+                      label={(opt as any).label || t(`dashboard:${(opt as any).labelKey}`, opt.value)}
                       active={(filters.projectStatus || "ALL") === opt.value}
                       onClick={() => updateFilter("projectStatus", opt.value)}
                     />
@@ -143,7 +143,7 @@ export default function WorkloadFiltersBar({ filters, onFilterChange, employees 
                   {PRIORITY_OPTIONS.map((opt) => (
                     <Chip
                       key={opt.value}
-                      label={opt.label || t(`dashboard:${opt.labelKey}`, opt.value)}
+                      label={(opt as any).label || t(`dashboard:${(opt as any).labelKey}`, opt.value)}
                       active={(filters.taskPriority || "ALL") === opt.value}
                       onClick={() => updateFilter("taskPriority", opt.value)}
                     />
@@ -158,7 +158,7 @@ export default function WorkloadFiltersBar({ filters, onFilterChange, employees 
                   {DATE_RANGE_OPTIONS.map((opt) => (
                     <Chip
                       key={opt.value}
-                      label={opt.label || t(`dashboard:${opt.labelKey}`, opt.value)}
+                      label={(opt as any).label || t(`dashboard:${(opt as any).labelKey}`, opt.value)}
                       active={(filters.dateRange || "all") === opt.value}
                       onClick={() => updateFilter("dateRange", opt.value)}
                     />
@@ -170,7 +170,7 @@ export default function WorkloadFiltersBar({ filters, onFilterChange, employees 
                   {DUE_FILTER_OPTIONS.map((opt) => (
                     <Chip
                       key={opt.value}
-                      label={opt.label || t(`dashboard:${opt.labelKey}`, opt.value)}
+                      label={(opt as any).label || t(`dashboard:${(opt as any).labelKey}`, opt.value)}
                       active={(filters.dueFilter || "all") === opt.value}
                       onClick={() => updateFilter("dueFilter", opt.value)}
                     />

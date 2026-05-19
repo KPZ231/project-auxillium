@@ -165,7 +165,7 @@ export async function POST(req: Request) {
             date: z.string().optional(),
           }),
           execute: async (data) =>
-            await createExpenseForAI(spaceId, userId, data),
+            await createExpenseForAI(spaceId, userId, data as any),
         }),
 
         createIncome: tool({

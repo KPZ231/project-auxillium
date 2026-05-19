@@ -26,7 +26,7 @@ import { BlockSidebar } from './BlockSidebar';
 
 export interface DocumentBlock {
   id: string;
-  type: 'text' | 'heading' | 'table' | 'image' | 'divider' | 'variable' | 'signature' | 'page-break';
+  type: 'text' | 'heading' | 'table' | 'image' | 'divider' | 'variable' | 'signature' | 'page-break' | 'list' | 'quote';
   content: Record<string, string | number | boolean | undefined>;
 }
 
@@ -119,7 +119,7 @@ export const BlockEditor: React.FC<BlockEditorProps> = ({
                     block={block} 
                     isSelected={selectedBlockId === block.id}
                     onSelect={() => onSelectBlock(block.id)}
-                    onUpdate={(content) => updateBlock(block.id, content)}
+                    onUpdate={(content) => updateBlock(block.id, content as any)}
                     onDelete={() => deleteBlock(block.id)}
                   />
                 ))}

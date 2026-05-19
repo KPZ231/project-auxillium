@@ -45,7 +45,7 @@ export default async function ClientDetailsPage({ params }: { params: Promise<{ 
   return (
     <div className="w-full max-w-5xl mx-auto py-12 px-4">
       <Suspense fallback={<div>Loading...</div>}>
-        <ClientDetailsClient client={serializedClient} isUnauthorized={isUnauthorized} spaceId={spaceId || ""} />
+        <ClientDetailsClient client={serializedClient as any} isUnauthorized={isUnauthorized} spaceId={spaceId || ""} />
       </Suspense>
     </div>
   );

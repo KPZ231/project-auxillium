@@ -1,0 +1,218 @@
+actions/templates.ts(106,9): error TS2322: Type 'Record<string, unknown>' is not assignable to type 'JsonNullClass | InputJsonValue'.
+  Type 'Record<string, unknown>' is missing the following properties from type 'readonly (InputJsonValue | null)[]': length, concat, join, slice, and 26 more.
+actions/templates.ts(129,9): error TS2322: Type 'Record<string, unknown> | undefined' is not assignable to type 'JsonNullClass | InputJsonValue | undefined'.
+  Type 'Record<string, unknown>' is not assignable to type 'JsonNullClass | InputJsonValue | undefined'.
+    Type 'Record<string, unknown>' is missing the following properties from type 'readonly (InputJsonValue | null)[]': length, concat, join, slice, and 26 more.
+actions/templates.ts(129,36): error TS2352: Conversion of type 'BrandingSettings' to type 'Record<string, unknown>' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Index signature for type 'string' is missing in type 'BrandingSettings'.
+actions/templates.ts(130,9): error TS2322: Type 'Record<string, unknown>[] | undefined' is not assignable to type 'NullableJsonNullValueInput | InputJsonValue | undefined'.
+  Type 'Record<string, unknown>[]' is not assignable to type 'NullableJsonNullValueInput | InputJsonValue | undefined'.
+    Type 'Record<string, unknown>[]' is not assignable to type 'InputJsonObject'.
+      Index signature for type 'string' is missing in type 'Record<string, unknown>[]'.
+actions/templates.ts(168,9): error TS2322: Type 'Record<string, unknown>' is not assignable to type 'JsonNullClass | InputJsonValue'.
+  Type 'Record<string, unknown>' is missing the following properties from type 'readonly (InputJsonValue | null)[]': length, concat, join, slice, and 26 more.
+actions/templates.ts(169,9): error TS2322: Type 'Record<string, unknown>[]' is not assignable to type 'NullableJsonNullValueInput | InputJsonValue | undefined'.
+  Type 'Record<string, unknown>[]' is not assignable to type 'InputJsonObject'.
+    Index signature for type 'string' is missing in type 'Record<string, unknown>[]'.
+actions/templates.ts(202,29): error TS2322: Type '({ project: { projectName: string; } | null; client: { name: string; } | null; template: { name: string; type: string; }; } & { name: string | null; userId: string; id: string; createdAt: Date; ... 5 more ...; contextData: JsonValue; })[]' is not assignable to type '{ id: string; name: string; }[]'.
+  Type '{ project: { projectName: string; } | null; client: { name: string; } | null; template: { name: string; type: string; }; } & { name: string | null; userId: string; id: string; createdAt: Date; ... 5 more ...; contextData: JsonValue; }' is not assignable to type '{ id: string; name: string; }'.
+    Types of property 'name' are incompatible.
+      Type 'string | null' is not assignable to type 'string'.
+        Type 'null' is not assignable to type 'string'.
+app/[locale]/(dashboard)/dashboard/clients/[id]/ClientDetailsClient.tsx(165,25): error TS2345: Argument of type '{ amount: number; description: string; source: string; clientId: string; }' is not assignable to parameter of type '{ amount: number; date: Date; currency: string; isRecurring: boolean; spaceId: string; userId: string; description?: string | undefined; source?: string | undefined; category?: "Marketing" | ... 5 more ... | undefined; ... 5 more ...; projectId?: string | undefined; }'.
+  Type '{ amount: number; description: string; source: string; clientId: string; }' is missing the following properties from type '{ amount: number; date: Date; currency: string; isRecurring: boolean; spaceId: string; userId: string; description?: string | undefined; source?: string | undefined; category?: "Marketing" | ... 5 more ... | undefined; ... 5 more ...; projectId?: string | undefined; }': date, currency, isRecurring, spaceId, userId
+app/[locale]/(dashboard)/dashboard/clients/[id]/ClientDetailsClient.tsx(166,26): error TS2345: Argument of type '{ amount: number; description: string; category: string; clientId: string; }' is not assignable to parameter of type '{ amount: number; date: Date; currency: string; isRecurring: boolean; spaceId: string; userId: string; description?: string | undefined; category?: "Marketing" | "SaaS" | "Taxes" | "Salary" | "Revenue" | "Other" | undefined; ... 5 more ...; projectId?: string | undefined; }'.
+  Type '{ amount: number; description: string; category: string; clientId: string; }' is missing the following properties from type '{ amount: number; date: Date; currency: string; isRecurring: boolean; spaceId: string; userId: string; description?: string | undefined; category?: "Marketing" | "SaaS" | "Taxes" | "Salary" | "Revenue" | "Other" | undefined; ... 5 more ...; projectId?: string | undefined; }': date, currency, isRecurring, spaceId, userId
+app/[locale]/(dashboard)/dashboard/clients/[id]/page.tsx(48,30): error TS2322: Type '{ createdAt: string; updatedAt: string; incomes: { date: string; createdAt: string; updatedAt: string; amount: number; }[]; expenses: { date: string; createdAt: string; updatedAt: string; amount: number; }[]; ... 14 more ...; photoUrl: string | null; }' is not assignable to type 'Client'.
+  Types of property 'milestones' are incompatible.
+    Type 'unknown[]' is not assignable to type 'Milestone[]'.
+      Type 'unknown' is not assignable to type 'Milestone'.
+app/[locale]/(dashboard)/dashboard/clients/page.tsx(29,26): error TS2345: Argument of type '(client: { id: string; name: string; email?: string | null; photoUrl?: string | null; projects: Array<{ id: string; }>; }) => JSX.Element' is not assignable to parameter of type '(value: unknown, index: number, array: unknown[]) => Element'.
+  Types of parameters 'client' and 'value' are incompatible.
+    Type 'unknown' is not assignable to type '{ id: string; name: string; email?: string | null | undefined; photoUrl?: string | null | undefined; projects: { id: string; }[]; }'.
+app/[locale]/(dashboard)/dashboard/documents/page.tsx(49,28): error TS2345: Argument of type '(doc: { id: string; title: string; content: string; createdAt: string; }) => JSX.Element' is not assignable to parameter of type '(value: { id: string; name: string; }, index: number, array: { id: string; name: string; }[]) => Element'.
+  Types of parameters 'doc' and 'value' are incompatible.
+    Type '{ id: string; name: string; }' is missing the following properties from type '{ id: string; title: string; content: string; createdAt: string; }': title, content, createdAt
+app/[locale]/(dashboard)/dashboard/leads/[id]/LeadDetailsClient.tsx(91,37): error TS2345: Argument of type '{ leadName: string; description: string; email: string; projectType: string; status: string; currentStage: string; budget: string; timeline: string; websiteUrl?: string | undefined; githubUrl?: string | undefined; }' is not assignable to parameter of type '{ id: string; leadName: string; status: "QUALIFIED" | "NEGOTIATION" | "COLD"; leadInfo?: string | null | undefined; projectType?: string | null | undefined; contactName?: string | null | undefined; ... 4 more ...; turnedIntoClient?: boolean | undefined; }'.
+  Property 'id' is missing in type '{ leadName: string; description: string; email: string; projectType: string; status: string; currentStage: string; budget: string; timeline: string; websiteUrl?: string | undefined; githubUrl?: string | undefined; }' but required in type '{ id: string; leadName: string; status: "QUALIFIED" | "NEGOTIATION" | "COLD"; leadInfo?: string | null | undefined; projectType?: string | null | undefined; contactName?: string | null | undefined; ... 4 more ...; turnedIntoClient?: boolean | undefined; }'.
+app/[locale]/(dashboard)/dashboard/leads/[id]/LeadDetailsClient.tsx(91,37): error TS2352: Conversion of type '{ id: string; leadName: string; leadInfo: string; status: string; projectType: string; contactName: string; role: string; email: string; phone: string; stage: string; turnedIntoClient: boolean; }' to type '{ leadName: string; description: string; email: string; projectType: string; status: string; currentStage: string; budget: string; timeline: string; websiteUrl?: string | undefined; githubUrl?: string | undefined; }' may be a mistake because neither type sufficiently overlaps with the other. If this was intentional, convert the expression to 'unknown' first.
+  Type '{ id: string; leadName: string; leadInfo: string; status: string; projectType: string; contactName: string; role: string; email: string; phone: string; stage: string; turnedIntoClient: boolean; }' is missing the following properties from type '{ leadName: string; description: string; email: string; projectType: string; status: string; currentStage: string; budget: string; timeline: string; websiteUrl?: string | undefined; githubUrl?: string | undefined; }': description, currentStage, budget, timeline
+app/[locale]/(dashboard)/dashboard/leads/[id]/page.tsx(33,28): error TS2322: Type '{ createdAt: string; updatedAt: string; userId: string; id: string; role: string | null; email: string | null; spaceId: string | null; leadName: string; contactName: string | null; phone: string | null; ... 5 more ...; order: number; }' is not assignable to type 'Lead'.
+  Types of property 'leadInfo' are incompatible.
+    Type 'string | null' is not assignable to type 'string | undefined'.
+      Type 'null' is not assignable to type 'string | undefined'.
+app/[locale]/(dashboard)/dashboard/projects/[id]/page.tsx(39,31): error TS2741: Property 'status' is missing in type '{ createdAt: string; updatedAt: string; milestones: Array<{ id: string; title: string; completed: boolean; }>; assignedEmployees: { name: string; userId: string | null; id: string; ... 6 more ...; permissions: JsonValue | null; }[]; ... 20 more ...; clientId: string | null; }' but required in type 'Project'.
+app/[locale]/(dashboard)/dashboard/projects/page.tsx(21,17): error TS2322: Type 'Dispatch<SetStateAction<"timeline" | "grid">>' is not assignable to type '(value: string) => void'.
+  Types of parameters 'value' and 'value' are incompatible.
+    Type 'string' is not assignable to type 'SetStateAction<"timeline" | "grid">'.
+app/[locale]/(dashboard)/dashboard/space/employees/[id]/page.tsx(25,26): error TS18048: 'employee.assignedProjects' is possibly 'undefined'.
+app/[locale]/(dashboard)/dashboard/space/employees/[id]/page.tsx(26,23): error TS18048: 'employee.assignedTasks' is possibly 'undefined'.
+app/[locale]/(dashboard)/dashboard/tasks/page.tsx(31,28): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(props: KanbanContainerProps, context?: any): string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | ... 4 more ... | undefined', gave the following error.
+    Type '{ id: string; projectName: string; }[]' is not assignable to type '{ clientId: string | null; id: string; userId: string; priority: string | null; spaceId: string | null; dueDate: Date | null; order: number; createdAt: Date; updatedAt: Date; ... 14 more ...; milestones: JsonValue; }[]'.
+      Type '{ id: string; projectName: string; }' is missing the following properties from type '{ clientId: string | null; id: string; userId: string; priority: string | null; spaceId: string | null; dueDate: Date | null; order: number; createdAt: Date; updatedAt: Date; ... 14 more ...; milestones: JsonValue; }': clientId, userId, priority, spaceId, and 18 more.
+  Overload 2 of 2, '(props: KanbanContainerProps): string | number | bigint | boolean | ReactElement<unknown, string | JSXElementConstructor<any>> | ... 4 more ... | undefined', gave the following error.
+    Type '{ id: string; projectName: string; }[]' is not assignable to type '{ clientId: string | null; id: string; userId: string; priority: string | null; spaceId: string | null; dueDate: Date | null; order: number; createdAt: Date; updatedAt: Date; ... 14 more ...; milestones: JsonValue; }[]'.
+      Type '{ id: string; projectName: string; }' is missing the following properties from type '{ clientId: string | null; id: string; userId: string; priority: string | null; spaceId: string | null; dueDate: Date | null; order: number; createdAt: Date; updatedAt: Date; ... 14 more ...; milestones: JsonValue; }': clientId, userId, priority, spaceId, and 18 more.
+app/[locale]/(dashboard)/dashboard/templates/[templateId]/edit/page.tsx(25,26): error TS2322: Type 'Template' is not assignable to type 'TemplateData'.
+  Types of property 'blocks' are incompatible.
+    Type 'unknown' is not assignable to type 'DocumentBlock[]'.
+app/[locale]/(dashboard)/dashboard/templates/page.tsx(34,8): error TS18048: 'templates' is possibly 'undefined'.
+app/[locale]/(dashboard)/dashboard/templates/page.tsx(42,12): error TS18048: 'templates' is possibly 'undefined'.
+app/[locale]/(dashboard)/dashboard/templates/page.tsx(42,26): error TS2345: Argument of type '(template: { id: string; title: string; type: string; createdAt: string; }) => JSX.Element' is not assignable to parameter of type '(value: Template, index: number, array: Template[]) => Element'.
+  Types of parameters 'template' and 'value' are incompatible.
+    Property 'title' is missing in type 'Template' but required in type '{ id: string; title: string; type: string; createdAt: string; }'.
+app/[locale]/(dashboard)/dashboard/templates/page.tsx(43,45): error TS2739: Type '{ id: string; title: string; type: string; createdAt: string; }' is missing the following properties from type 'Template': name, updatedAt, usageCount
+app/[locale]/(dashboard)/layout.tsx(54,25): error TS2322: Type 'string | undefined' is not assignable to type 'string | null'.
+  Type 'undefined' is not assignable to type 'string | null'.
+app/api/auth/google/route.ts(35,9): error TS7034: Variable 'scopes' implicitly has type 'any[]' in some locations where its type cannot be determined.
+app/api/auth/google/route.ts(59,14): error TS7005: Variable 'scopes' implicitly has an 'any[]' type.
+app/api/chat/route.ts(168,55): error TS2345: Argument of type '{ amount: number; description?: string | undefined; category?: string | undefined; date?: string | undefined; }' is not assignable to parameter of type '{ amount: number; description?: string | undefined; category?: TransactionCategory | undefined; date?: string | undefined; }'.
+  Types of property 'category' are incompatible.
+    Type 'string | undefined' is not assignable to type 'TransactionCategory | undefined'.
+      Type 'string' is not assignable to type 'TransactionCategory | undefined'.
+app/api/documents/generate/route.ts(42,9): error TS2322: Type 'Record<string, unknown>' is not assignable to type 'JsonNullClass | InputJsonValue'.
+  Type 'Record<string, unknown>' is missing the following properties from type 'readonly (InputJsonValue | null)[]': length, concat, join, slice, and 26 more.
+app/api/documents/generate/route.ts(52,29): error TS2345: Argument of type 'Uint8Array<ArrayBufferLike>' is not assignable to parameter of type 'BodyInit | null | undefined'.
+  Type 'Uint8Array<ArrayBufferLike>' is missing the following properties from type 'URLSearchParams': size, append, delete, get, and 2 more.
+app/components/assignments/member-selector.tsx(31,24): error TS2345: Argument of type 'Employee[] | ({ _count: { assignedProjects: number; assignedTasks: number; }; } & { name: string; userId: string | null; id: string; createdAt: Date; updatedAt: Date; ... 4 more ...; permissions: JsonValue; })[]' is not assignable to parameter of type 'SetStateAction<Employee[]>'.
+  Type 'Employee[]' is not assignable to type 'SetStateAction<Employee[]>'.
+    Type 'Employee[]' is not assignable to type 'Employee[]'. Two different types with this name exist, but they are unrelated.
+      Type 'Employee' is not assignable to type 'Employee'. Two different types with this name exist, but they are unrelated.
+        Types of property 'role' are incompatible.
+          Type 'string | null | undefined' is not assignable to type 'string | undefined'.
+            Type 'null' is not assignable to type 'string | undefined'.
+app/components/Dashboard/Dashboard/Leads/LeadsGrid/LeadsGrid.tsx(317,13): error TS2322: Type '(e: React.DragEvent) => void' is not assignable to type '(event: MouseEvent | PointerEvent | TouchEvent, info: PanInfo) => void'.
+  Types of parameters 'e' and 'event' are incompatible.
+    Type 'MouseEvent | PointerEvent | TouchEvent' is not assignable to type 'DragEvent<Element>'.
+      Type 'MouseEvent' is missing the following properties from type 'DragEvent<Element>': dataTransfer, nativeEvent, isDefaultPrevented, isPropagationStopped, persist
+app/components/Dashboard/Dashboard/MetricsOverview/ActivityAndTasks.tsx(60,46): error TS2345: Argument of type '(task: { id: string; title: string; employee?: { name: string; }; project?: { projectName: string; }; priority?: string; dueDate?: string; status?: string; }) => { id: string; title: string; assignee: string; badge: { ...; } | ... 1 more ... | undefined; completed: boolean; }' is not assignable to parameter of type '(value: { project: { priority: string | null; userId: string; id: string; createdAt: Date; updatedAt: Date; spaceId: string | null; projectType: string | null; order: number; projectStatus: ProjectStatus; ... 14 more ...; clientId: string | null; } | null; employee: { ...; } | null; } & { ...; }, index: number, arra...'.
+  Types of parameters 'task' and 'value' are incompatible.
+    Type '{ project: { priority: string | null; userId: string; id: string; createdAt: Date; updatedAt: Date; spaceId: string | null; projectType: string | null; order: number; projectStatus: ProjectStatus; ... 14 more ...; clientId: string | null; } | null; employee: { ...; } | null; } & { ...; }' is not assignable to type '{ id: string; title: string; employee?: { name: string; } | undefined; project?: { projectName: string; } | undefined; priority?: string | undefined; dueDate?: string | undefined; status?: string | undefined; }'.
+      Types of property 'employee' are incompatible.
+        Type '{ name: string; userId: string | null; id: string; createdAt: Date; updatedAt: Date; role: string | null; email: string | null; spaceId: string; phone: string | null; permissions: JsonValue; } | null' is not assignable to type '{ name: string; } | undefined'.
+          Type 'null' is not assignable to type '{ name: string; } | undefined'.
+app/components/Dashboard/Dashboard/Projects/ProjectsGrid/ProjectsGrid.tsx(245,17): error TS2322: Type '(e: React.DragEvent<HTMLDivElement>) => void' is not assignable to type '(event: MouseEvent | PointerEvent | TouchEvent, info: PanInfo) => void'.
+  Types of parameters 'e' and 'event' are incompatible.
+    Type 'MouseEvent | PointerEvent | TouchEvent' is not assignable to type 'DragEvent<HTMLDivElement>'.
+      Type 'MouseEvent' is missing the following properties from type 'DragEvent<HTMLDivElement>': dataTransfer, nativeEvent, isDefaultPrevented, isPropagationStopped, persist
+app/components/Dashboard/Space/SpaceSidePanel.tsx(69,18): error TS2345: Argument of type '{ owner: { name: string | null; email: string; }; } & { spaceName: string; spaceDescription: string | null; id: string; icon: string | null; baseCurrency: string; createdAt: Date; updatedAt: Date; ownerId: string; }' is not assignable to parameter of type 'SetStateAction<SpaceData | null>'.
+  Type '{ owner: { name: string | null; email: string; }; } & { spaceName: string; spaceDescription: string | null; id: string; icon: string | null; baseCurrency: string; createdAt: Date; updatedAt: Date; ownerId: string; }' is not assignable to type 'SpaceData'.
+    Types of property 'spaceDescription' are incompatible.
+      Type 'string | null' is not assignable to type 'string | undefined'.
+        Type 'null' is not assignable to type 'string | undefined'.
+app/components/Dashboard/Space/Workload/WorkloadFilters.tsx(134,34): error TS2339: Property 'label' does not exist on type '{ value: string; labelKey: string; }'.
+app/components/Dashboard/Space/Workload/WorkloadFilters.tsx(173,34): error TS2339: Property 'label' does not exist on type '{ value: string; labelKey: string; }'.
+app/components/finance/audit-log-panel.tsx(28,34): error TS2345: Argument of type 'Dispatch<SetStateAction<AuditLog[]>>' is not assignable to parameter of type '(value: ({ user: { name: string | null; email: string; avatarUrl: string | null; }; } & { userId: string; id: string; spaceId: string; type: string; action: string; transactionId: string; timestamp: Date; diff: JsonValue; })[]) => void | PromiseLike<...>'.
+  Types of parameters 'value' and 'value' are incompatible.
+    Type '({ user: { name: string | null; email: string; avatarUrl: string | null; }; } & { userId: string; id: string; spaceId: string; type: string; action: string; transactionId: string; timestamp: Date; diff: JsonValue; })[]' is not assignable to type 'SetStateAction<AuditLog[]>'.
+      Type '({ user: { name: string | null; email: string; avatarUrl: string | null; }; } & { userId: string; id: string; spaceId: string; type: string; action: string; transactionId: string; timestamp: Date; diff: JsonValue; })[]' is not assignable to type 'AuditLog[]'.
+        Type '{ user: { name: string | null; email: string; avatarUrl: string | null; }; } & { userId: string; id: string; spaceId: string; type: string; action: string; transactionId: string; timestamp: Date; diff: JsonValue; }' is not assignable to type 'AuditLog'.
+          Types of property 'timestamp' are incompatible.
+            Type 'Date' is not assignable to type 'string'.
+app/components/finance/category-pie-chart.tsx(50,13): error TS2322: Type '(value: number) => string' is not assignable to type 'Formatter<ValueType, NameType> & ((value: ValueType, name: NameType, item: TooltipPayloadEntry, index: number, payload: TooltipPayload) => ReactNode | [...])'.
+  Type '(value: number) => string' is not assignable to type 'Formatter<ValueType, NameType>'.
+    Types of parameters 'value' and 'value' are incompatible.
+      Type 'ValueType | undefined' is not assignable to type 'number'.
+        Type 'undefined' is not assignable to type 'number'.
+app/components/finance/expense-estimation.tsx(27,19): error TS2345: Argument of type '{ estimatedPerMonth: number; totalForPeriod: number; recurringTotal: number; recurringExpenses: { userId: string; id: string; createdAt: Date; updatedAt: Date; spaceId: string; ... 10 more ...; recurringDay: number | null; }[]; } | null' is not assignable to parameter of type 'SetStateAction<{ estimatedPerMonth: number; totalForPeriod: number; recurringTotal: number; recurringExpenses?: { recurringDay: number; amount: number; category?: string | undefined; }[] | undefined; } | null>'.
+  Type '{ estimatedPerMonth: number; totalForPeriod: number; recurringTotal: number; recurringExpenses: { userId: string; id: string; createdAt: Date; updatedAt: Date; spaceId: string; date: Date; ... 9 more ...; recurringDay: number | null; }[]; }' is not assignable to type 'SetStateAction<{ estimatedPerMonth: number; totalForPeriod: number; recurringTotal: number; recurringExpenses?: { recurringDay: number; amount: number; category?: string | undefined; }[] | undefined; } | null>'.
+    Type '{ estimatedPerMonth: number; totalForPeriod: number; recurringTotal: number; recurringExpenses: { userId: string; id: string; createdAt: Date; updatedAt: Date; spaceId: string; date: Date; ... 9 more ...; recurringDay: number | null; }[]; }' is not assignable to type '{ estimatedPerMonth: number; totalForPeriod: number; recurringTotal: number; recurringExpenses?: { recurringDay: number; amount: number; category?: string | undefined; }[] | undefined; }'.
+      Types of property 'recurringExpenses' are incompatible.
+        Type '{ userId: string; id: string; createdAt: Date; updatedAt: Date; spaceId: string; date: Date; clientId: string | null; description: string | null; projectId: string | null; ... 6 more ...; recurringDay: number | null; }[]' is not assignable to type '{ recurringDay: number; amount: number; category?: string | undefined; }[]'.
+          Type '{ userId: string; id: string; createdAt: Date; updatedAt: Date; spaceId: string; date: Date; clientId: string | null; description: string | null; projectId: string | null; ... 6 more ...; recurringDay: number | null; }' is not assignable to type '{ recurringDay: number; amount: number; category?: string | undefined; }'.
+            Types of property 'recurringDay' are incompatible.
+              Type 'number | null' is not assignable to type 'number'.
+                Type 'null' is not assignable to type 'number'.
+app/components/finance/finance-dashboard-client.tsx(51,24): error TS2532: Object is possibly 'undefined'.
+app/components/finance/finance-dashboard-client.tsx(139,29): error TS2322: Type '{ income: number; expenses: number; goal: number; }[]' is not assignable to type 'DataPoint[]'.
+  Property 'name' is missing in type '{ income: number; expenses: number; goal: number; }' but required in type 'DataPoint'.
+app/components/finance/finance-dashboard-client.tsx(246,38): error TS2322: Type '{ id: string; amount: number; date: Date; }[]' is not assignable to type 'Transaction[]'.
+  Property 'type' is missing in type '{ id: string; amount: number; date: Date; }' but required in type 'Transaction'.
+app/components/finance/waterfall-chart.tsx(70,13): error TS2322: Type '(val: number, name: string, props: { payload: { amount: number; }; }) => [string, string]' is not assignable to type 'Formatter<ValueType, NameType> & ((value: ValueType, name: NameType, item: TooltipPayloadEntry, index: number, payload: TooltipPayload) => ReactNode | [...])'.
+  Type '(val: number, name: string, props: { payload: { amount: number; }; }) => [string, string]' is not assignable to type 'Formatter<ValueType, NameType>'.
+    Types of parameters 'val' and 'value' are incompatible.
+      Type 'ValueType | undefined' is not assignable to type 'number'.
+        Type 'undefined' is not assignable to type 'number'.
+app/components/tasks/KanbanBoard.tsx(123,42): error TS2345: Argument of type 'Record<string, unknown>' is not assignable to parameter of type 'TaskInput'.
+  Type 'Record<string, unknown>' is missing the following properties from type 'TaskInput': title, status, priority, spaceId
+app/components/tasks/KanbanColumn.tsx(59,17): error TS2322: Type '(task: Task) => void' is not assignable to type '(task: TaskProps) => void'.
+  Types of parameters 'task' and 'task' are incompatible.
+    Type 'TaskProps' is missing the following properties from type 'Task': status, order
+app/components/tasks/KanbanContainer.tsx(286,11): error TS2322: Type 'Record<string, unknown>[]' is not assignable to type 'Task[]'.
+  Type 'Record<string, unknown>' is missing the following properties from type 'Task': id, title, status, priority, order
+app/components/tasks/TaskModal.tsx(129,45): error TS2345: Argument of type '{}' is not assignable to parameter of type 'string'.
+app/components/tasks/TaskModal.tsx(145,48): error TS2345: Argument of type '{}' is not assignable to parameter of type 'string'.
+app/components/templates/BrandingPanel/index.tsx(87,73): error TS2345: Argument of type 'string' is not assignable to parameter of type '"left" | "center" | "right"'.
+app/components/templates/RelatedDocuments.tsx(26,45): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(predicate: (value: { id: string; name: string; }, index: number, array: { id: string; name: string; }[]) => value is { id: string; name: string; }, thisArg?: any): { id: string; name: string; }[]', gave the following error.
+    Argument of type '(doc: { clientId?: string; projectId?: string; }) => boolean' is not assignable to parameter of type '(value: { id: string; name: string; }, index: number, array: { id: string; name: string; }[]) => value is { id: string; name: string; }'.
+      Types of parameters 'doc' and 'value' are incompatible.
+        Type '{ id: string; name: string; }' has no properties in common with type '{ clientId?: string | undefined; projectId?: string | undefined; }'.
+  Overload 2 of 2, '(predicate: (value: { id: string; name: string; }, index: number, array: { id: string; name: string; }[]) => unknown, thisArg?: any): { id: string; name: string; }[]', gave the following error.
+    Argument of type '(doc: { clientId?: string; projectId?: string; }) => boolean' is not assignable to parameter of type '(value: { id: string; name: string; }, index: number, array: { id: string; name: string; }[]) => unknown'.
+      Types of parameters 'doc' and 'value' are incompatible.
+        Type '{ id: string; name: string; }' has no properties in common with type '{ clientId?: string | undefined; projectId?: string | undefined; }'.
+app/components/templates/RelatedDocuments.tsx(31,20): error TS2345: Argument of type '{ id: string; name: string; }[]' is not assignable to parameter of type 'SetStateAction<{ id: string; clientId?: string | undefined; projectId?: string | undefined; createdAt: string; template?: { name: string; } | undefined; }[]>'.
+  Type '{ id: string; name: string; }[]' is not assignable to type '{ id: string; clientId?: string | undefined; projectId?: string | undefined; createdAt: string; template?: { name: string; } | undefined; }[]'.
+    Property 'createdAt' is missing in type '{ id: string; name: string; }' but required in type '{ id: string; clientId?: string | undefined; projectId?: string | undefined; createdAt: string; template?: { name: string; } | undefined; }'.
+app/components/templates/TemplateEditor/BlockEditor/BlockSettingsPanel.tsx(30,17): error TS2322: Type 'string | number | boolean | undefined' is not assignable to type 'string | number | readonly string[] | undefined'.
+  Type 'false' is not assignable to type 'string | number | readonly string[] | undefined'.
+app/components/templates/TemplateEditor/BlockEditor/BlockSettingsPanel.tsx(56,15): error TS2322: Type 'string | number | boolean | undefined' is not assignable to type 'string | number | readonly string[] | undefined'.
+  Type 'false' is not assignable to type 'string | number | readonly string[] | undefined'.
+app/components/templates/TemplateEditor/BlockEditor/BlockSettingsPanel.tsx(69,17): error TS2322: Type 'string | number | true' is not assignable to type 'string | number | readonly string[] | undefined'.
+  Type 'true' is not assignable to type 'string | number | readonly string[] | undefined'.
+app/components/templates/TemplateEditor/BlockEditor/BlockSettingsPanel.tsx(79,17): error TS2322: Type 'string | number | true' is not assignable to type 'string | number | readonly string[] | undefined'.
+  Type 'true' is not assignable to type 'string | number | readonly string[] | undefined'.
+app/components/templates/TemplateEditor/BlockEditor/BlockSettingsPanel.tsx(121,17): error TS2322: Type 'string | number | true' is not assignable to type 'string | number | readonly string[] | undefined'.
+  Type 'true' is not assignable to type 'string | number | readonly string[] | undefined'.
+app/components/templates/TemplateEditor/BlockEditor/BlockSidebar.tsx(25,5): error TS2322: Type '"list"' is not assignable to type '"text" | "heading" | "table" | "image" | "divider" | "variable" | "signature" | "page-break"'.
+app/components/templates/TemplateEditor/BlockEditor/BlockSidebar.tsx(26,5): error TS2322: Type '"quote"' is not assignable to type '"text" | "heading" | "table" | "image" | "divider" | "variable" | "signature" | "page-break"'.
+app/components/templates/TemplateEditor/BlockEditor/index.tsx(122,66): error TS2345: Argument of type 'Record<string, unknown>' is not assignable to parameter of type 'Record<string, string | number | boolean | undefined>'.
+  'string' index signatures are incompatible.
+    Type 'unknown' is not assignable to type 'string | number | boolean | undefined'.
+app/components/templates/TemplateEditor/BlockEditor/SortableBlock.tsx(69,13): error TS2322: Type 'string | number | boolean | undefined' is not assignable to type 'string | number | readonly string[] | undefined'.
+  Type 'false' is not assignable to type 'string | number | readonly string[] | undefined'.
+app/components/templates/TemplateEditor/BlockEditor/SortableBlock.tsx(80,13): error TS2322: Type 'string | number | boolean | undefined' is not assignable to type 'string | number | readonly string[] | undefined'.
+  Type 'false' is not assignable to type 'string | number | readonly string[] | undefined'.
+app/components/templates/TemplateEditor/BlockEditor/SortableBlock.tsx(85,51): error TS2339: Property 'split' does not exist on type 'string | number | boolean'.
+  Property 'split' does not exist on type 'number'.
+app/components/templates/TemplateEditor/BlockEditor/SortableBlock.tsx(93,17): error TS2322: Type 'string | number | true' is not assignable to type 'string | Blob | undefined'.
+  Type 'number' is not assignable to type 'string | Blob | undefined'.
+app/components/templates/TemplateEditor/BlockEditor/SortableBlock.tsx(129,12): error TS2678: Type '"quote"' is not comparable to type '"text" | "heading" | "table" | "image" | "divider" | "variable" | "signature" | "page-break"'.
+app/components/templates/TemplateEditor/BlockEditor/SortableBlock.tsx(134,15): error TS2322: Type 'string | number | boolean | undefined' is not assignable to type 'string | number | readonly string[] | undefined'.
+  Type 'false' is not assignable to type 'string | number | readonly string[] | undefined'.
+app/components/templates/TemplateEditor/BlockEditor/SortableBlock.tsx(142,12): error TS2678: Type '"list"' is not comparable to type '"text" | "heading" | "table" | "image" | "divider" | "variable" | "signature" | "page-break"'.
+app/components/templates/TemplateEditor/BlockEditor/SortableBlock.tsx(145,61): error TS2339: Property 'map' does not exist on type 'string | number | true | string[]'.
+  Property 'map' does not exist on type 'string'.
+app/components/templates/TemplateEditor/BlockEditor/SortableBlock.tsx(162,71): error TS2488: Type 'string | number | true | never[]' must have a '[Symbol.iterator]()' method that returns an iterator.
+app/context/TranslationContext.tsx(31,7): error TS2322: Type 'Record<string, unknown>' is not assignable to type 'Resource'.
+  'string' index signatures are incompatible.
+    Type 'unknown' is not assignable to type 'ResourceLanguage'.
+app/context/TranslationContext.tsx(40,19): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(o: {}): string[]', gave the following error.
+    Argument of type 'unknown' is not assignable to parameter of type '{}'.
+  Overload 2 of 2, '(o: object): string[]', gave the following error.
+    Argument of type 'unknown' is not assignable to parameter of type 'object'.
+app/context/TranslationContext.tsx(41,44): error TS2571: Object is of type 'unknown'.
+app/context/TranslationContext.tsx(106,34): error TS2322: Type '{ t: (key: string, defaultValueOrOptions?: string | Record<string, unknown>, options?: Record<string, unknown>) => string; language: "pl" | "en" | "de"; setLanguage: (lang: Language) => Promise<...>; availableLanguages: readonly [...]; }' is not assignable to type 'TranslationContextType'.
+  Types of property 'availableLanguages' are incompatible.
+    The type 'readonly ["pl", "en", "de"]' is 'readonly' and cannot be assigned to the mutable type '("pl" | "en" | "de")[]'.
+lib/i18n-client.ts(13,3): error TS2561: Object literal may only specify known properties, but 'supportedLanguages' does not exist in type 'InitOptions<object>'. Did you mean to write 'supportedLngs'?
+lib/i18n-server.ts(2,10): error TS2614: Module '"i18next-resources-to-backend"' has no exported member 'Translations'. Did you mean to use 'import Translations from "i18next-resources-to-backend"' instead?
+lib/i18n-server.ts(19,6): error TS2769: No overload matches this call.
+  Overload 1 of 2, '(callback?: Callback | undefined): Promise<TFunction<"translation", undefined>>', gave the following error.
+    Object literal may only specify known properties, and 'fallbackLng' does not exist in type 'Callback'.
+  Overload 2 of 2, '(options: InitOptions<{ loadPath: string; }>, callback?: Callback | undefined): Promise<TFunction<"translation", undefined>>', gave the following error.
+    Object literal may only specify known properties, but 'supportedLanguages' does not exist in type 'InitOptions<{ loadPath: string; }>'. Did you mean to write 'supportedLngs'?
+lib/templates/converters.ts(10,32): error TS2345: Argument of type 'string | number | true' is not assignable to parameter of type 'number'.
+  Type 'string' is not assignable to type 'number'.
+lib/templates/converters.ts(13,14): error TS2678: Type '"list"' is not comparable to type '"text" | "heading" | "table" | "image" | "divider" | "variable" | "signature" | "page-break"'.
+lib/templates/converters.ts(15,14): error TS2339: Property 'map' does not exist on type 'string | number | true | never[]'.
+  Property 'map' does not exist on type 'string'.
+lib/templates/converters.ts(17,14): error TS2678: Type '"quote"' is not comparable to type '"text" | "heading" | "table" | "image" | "divider" | "variable" | "signature" | "page-break"'.
+lib/templates/converters.ts(69,9): error TS2322: Type '"list"' is not assignable to type '"text" | "heading" | "table" | "image" | "divider" | "variable" | "signature" | "page-break"'.
+lib/templates/converters.ts(70,20): error TS2322: Type 'string[]' is not assignable to type 'string | number | boolean | undefined'.
+lib/templates/converters.ts(79,9): error TS2322: Type '"quote"' is not assignable to type '"text" | "heading" | "table" | "image" | "divider" | "variable" | "signature" | "page-break"'.
+lib/templates/pdf-generator.ts(2,10): error TS2459: Module '"@/actions/templates"' declares 'BrandingSettings' locally, but it is not exported.
+lib/templates/pdf-generator.ts(87,37): error TS2322: Type '"networkidle0"' is not assignable to type '"load" | "domcontentloaded" | ("load" | "domcontentloaded")[] | undefined'.

@@ -8,7 +8,7 @@ interface TranslationContextType {
   t: (key: string, defaultValueOrOptions?: string | Record<string, unknown>, options?: Record<string, unknown>) => string;
   language: Language;
   setLanguage: (lang: Language) => void;
-  availableLanguages: Language[];
+  availableLanguages: readonly Language[];
 }
 
 const TranslationContext = createContext<TranslationContextType | undefined>(undefined);
@@ -28,7 +28,7 @@ export function TranslationProvider({
   if (typeof window !== 'undefined' && !i18next.isInitialized) {
     const config = getI18nConfig();
     if (resources) {
-      config.resources = resources;
+      config.resources = resources as any;
     }
     if (initialLanguage) {
       config.lng = initialLanguage;
@@ -36,9 +36,10 @@ export function TranslationProvider({
     i18next.init(config);
   } else if (typeof window !== 'undefined' && i18next.isInitialized && resources) {
     // If already initialized but new resources came in
-    Object.keys(resources).forEach(lng => {
-      Object.keys(resources[lng]).forEach(ns => {
-        i18next.addResourceBundle(lng, ns, resources[lng][ns], true, true);
+    const resAny = resources as any;
+    Object.keys(resAny).forEach(lng => {
+      Object.keys(resAny[lng]).forEach(ns => {
+        i18next.addResourceBundle(lng, ns, resAny[lng][ns], true, true);
       });
     });
   }

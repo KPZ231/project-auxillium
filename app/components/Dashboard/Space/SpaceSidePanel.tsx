@@ -66,7 +66,7 @@ export default function SpaceSidePanel() {
     const loadSpace = async () => {
       const data = await getActiveSpace();
       if (data) {
-        setSpace(data);
+        setSpace(data as any);
       }
     };
     loadSpace();

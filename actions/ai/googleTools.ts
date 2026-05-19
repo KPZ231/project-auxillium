@@ -41,13 +41,23 @@ export async function saveToGoogleDocs(userId: string, data: { title: string; co
       },
     });
 
-    return { 
-      success: true, 
+    return {
+      success: true,
       url: `https://docs.google.com/document/d/${documentId}/edit`,
-      title: data.title 
+      title: data.title
     };
   } catch (error) {
     console.error("Error saving to Google Docs:", error);
+    const isPermissionError =
+      (error as any).status === 403 ||
+      (error as any).code === 403 ||
+      (error as any).response?.status === 403 ||
+      (error as any).message?.toLowerCase().includes("permission") ||
+      (error as any).message?.toLowerCase().includes("scope");
+
+    if (isPermissionError) {
+      return { error: "Insufficient permissions. Please disconnect and reconnect Google Docs in settings to grant the required Google Drive access." };
+    }
     return { error: "Failed to save to Google Docs." };
   }
 }
@@ -65,8 +75,9 @@ export async function addToGoogleSheet(userId: string, data: { spreadsheetTitle:
     const drive = google.drive({ version: "v3", auth });
 
     // Search for existing spreadsheet or create new
+    const safeTitle = data.spreadsheetTitle.replace(/'/g, "\\'");
     const searchRes = await drive.files.list({
-      q: `name = '${data.spreadsheetTitle}' and mimeType = 'application/vnd.google-apps.spreadsheet' and trashed = false`,
+      q: `name = '${safeTitle}' and mimeType = 'application/vnd.google-apps.spreadsheet' and trashed = false`,
       fields: "files(id)",
     });
 
@@ -91,13 +102,23 @@ export async function addToGoogleSheet(userId: string, data: { spreadsheetTitle:
       },
     });
 
-    return { 
-      success: true, 
+    return {
+      success: true,
       url: `https://docs.google.com/spreadsheets/d/${spreadsheetId}/edit`,
-      title: data.spreadsheetTitle 
+      title: data.spreadsheetTitle
     };
   } catch (error) {
     console.error("Error adding to Google Sheets:", error);
+    const isPermissionError =
+      (error as any).status === 403 ||
+      (error as any).code === 403 ||
+      (error as any).response?.status === 403 ||
+      (error as any).message?.toLowerCase().includes("permission") ||
+      (error as any).message?.toLowerCase().includes("scope");
+
+    if (isPermissionError) {
+      return { error: "Insufficient permissions. Please disconnect and reconnect Google Sheets in settings to grant the required Google Drive access." };
+    }
     return { error: "Failed to add to Google Sheets." };
   }
 }
@@ -106,9 +127,9 @@ export async function addToGoogleSheet(userId: string, data: { spreadsheetTitle:
 // GOOGLE CALENDAR
 // ============================================================
 
-export async function createGoogleCalendarEvent(userId: string, data: { 
-  summary: string; 
-  description?: string; 
+export async function createGoogleCalendarEvent(userId: string, data: {
+  summary: string;
+  description?: string;
   start: string; // ISO string
   end: string; // ISO string
 }) {
@@ -128,10 +149,10 @@ export async function createGoogleCalendarEvent(userId: string, data: {
       },
     });
 
-    return { 
-      success: true, 
+    return {
+      success: true,
       url: event.data.htmlLink,
-      summary: data.summary 
+      summary: data.summary
     };
   } catch (error) {
     console.error("Error creating Google Calendar event:", error);
@@ -163,9 +184,9 @@ export async function createGoogleTask(userId: string, data: { title: string; no
       },
     });
 
-    return { 
-      success: true, 
-      title: task.data.title 
+    return {
+      success: true,
+      title: task.data.title
     };
   } catch (error) {
     console.error("Error creating Google Task:", error);
@@ -194,10 +215,10 @@ export async function uploadToGoogleDrive(userId: string, data: { filename: stri
       },
     });
 
-    return { 
-      success: true, 
+    return {
+      success: true,
       id: file.data.id,
-      name: file.data.name 
+      name: file.data.name
     };
   } catch (error) {
     console.error("Error uploading to Google Drive:", error);

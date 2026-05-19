@@ -17,14 +17,14 @@ export const ExpenseEstimation = ({ spaceId }: ExpenseEstimationProps) => {
     estimatedPerMonth: number;
     totalForPeriod: number;
     recurringTotal: number;
-    recurringExpenses?: { recurringDay: number; amount: number; category?: string }[];
+    recurringExpenses?: { recurringDay: number | null; amount: number; category?: string }[];
   } | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchEstimation = async () => {
     setIsLoading(true);
     const res = await estimateFutureExpenses(spaceId, parseInt(months));
-    setEstimation(res);
+    setEstimation(res as any);
     setIsLoading(false);
   };
 

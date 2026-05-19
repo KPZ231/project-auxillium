@@ -10,7 +10,7 @@ export type { Language };
 
 const i18nConfig: InitOptions = {
   fallbackLng: defaultLanguage,
-  supportedLanguages: supportedLanguages,
+  supportedLngs: supportedLanguages,
   lng: defaultLanguage,
   debug: process.env.NODE_ENV !== 'production',
   interpolation: {

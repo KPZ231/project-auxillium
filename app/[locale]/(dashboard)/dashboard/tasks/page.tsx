@@ -28,7 +28,7 @@ export default async function KanbanPage({ params }: { params: Promise<{ locale:
 
   return (
     <div className="h-[calc(100vh-64px)] w-full overflow-hidden">
-      <KanbanClientWrapper projects={projects as { id: string; projectName: string }[]} spaceId={spaceId} />
+      <KanbanClientWrapper projects={projects as any} spaceId={spaceId} />
     </div>
   );
 }

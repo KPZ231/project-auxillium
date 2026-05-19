@@ -3,7 +3,7 @@ import { DocumentBlock } from "@/app/components/templates/TemplateEditor/BlockEd
 
 export function blocksToMarkdown(blocks: DocumentBlock[]): string {
   return blocks
-    .map((block) => {
+    .map((block: any) => {
       switch (block.type) {
         case 'heading':
           const level = block.content.level || 1;
@@ -66,8 +66,8 @@ export function markdownToBlocks(markdown: string): DocumentBlock[] {
       const items = trimmed.split('\n').map(l => l.replace(/^([-*]|\d+\.)\s+/, ''));
       blocks.push({
         id,
-        type: 'list',
-        content: { items }
+        type: 'list' as any,
+        content: { items } as any
       });
       return;
     }
@@ -76,8 +76,8 @@ export function markdownToBlocks(markdown: string): DocumentBlock[] {
     if (trimmed.startsWith('> ')) {
       blocks.push({
         id,
-        type: 'quote',
-        content: { text: trimmed.replace(/^>\s+/, '') }
+        type: 'quote' as any,
+        content: { text: trimmed.replace(/^>\s+/, '') } as any
       });
       return;
     }

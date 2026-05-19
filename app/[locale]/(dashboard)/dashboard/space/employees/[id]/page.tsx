@@ -22,8 +22,8 @@ export default async function EmployeeProfilePage({ params }: PageProps) {
     notFound();
   }
 
-  const activeProjects = employee.assignedProjects.filter((p: { projectStatus: string }) => p.projectStatus === "IN_PROGRESS");
-  const activeTasks = employee.assignedTasks.filter((t: { status: string }) => t.status !== "DONE");
+  const activeProjects = (employee.assignedProjects || []).filter((p: { projectStatus: string }) => p.projectStatus === "IN_PROGRESS");
+  const activeTasks = (employee.assignedTasks || []).filter((t: { status: string }) => t.status !== "DONE");
 
   return (
     <div className="max-w-7xl mx-auto space-y-16 py-8">

@@ -22,5 +22,5 @@ export default async function EditTemplatePage({
     notFound();
   }
 
-  return <TemplateEditor template={res.template} />;
+  return <TemplateEditor template={res.template as any} />;
 }

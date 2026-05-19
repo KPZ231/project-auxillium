@@ -88,7 +88,7 @@ export default function LeadDetailsClient({ lead, isUnauthorized = false }: { le
   const handleEditSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    const result = await updateLead(formData as { leadName: string; description: string; email: string; projectType: string; status: string; currentStage: string; budget: string; timeline: string; websiteUrl?: string; githubUrl?: string; });
+    const result = await updateLead(formData as any);
 
     if (result.success) {
       toast.success("Lead updated successfully");

@@ -30,7 +30,7 @@ export default async function LeadDetailsPage({ params }: { params: Promise<{ id
   return (
     <div className="w-full max-w-5xl mx-auto py-12 px-4">
       <Suspense fallback={<div>Loading...</div>}>
-        <LeadDetailsClient lead={serializedLead} isUnauthorized={isUnauthorized} />
+        <LeadDetailsClient lead={serializedLead as any} isUnauthorized={isUnauthorized} />
       </Suspense>
     </div>
   )

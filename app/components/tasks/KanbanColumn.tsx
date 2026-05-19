@@ -56,7 +56,7 @@ export function KanbanColumn({ id, title, tasks, onTaskClick, onAddTask }: Kanba
                 key={task.id} 
                 task={task} 
                 index={index} 
-                onClick={onTaskClick} 
+                onClick={onTaskClick as any} 
               />
             ))}
             {provided.placeholder}

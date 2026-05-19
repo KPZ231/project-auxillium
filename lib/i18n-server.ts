@@ -1,5 +1,4 @@
 import { createInstance } from 'i18next';
-import { Translations } from 'i18next-resources-to-backend';
 import Backend from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import { initReactI18next } from 'react-i18next';
@@ -18,7 +17,7 @@ export async function initI18n() {
     .use(initReactI18next)
     .init({
       fallbackLng: defaultLanguage,
-      supportedLanguages: supportedLanguages,
+      supportedLngs: supportedLanguages,
       lng: defaultLanguage,
       debug: process.env.NODE_ENV !== 'production',
       interpolation: {
@@ -44,7 +43,7 @@ export async function initI18n() {
 }
 
 // Load resources from JSON files (for server-side rendering)
-export async function loadResources(language: Language): Promise<Translations> {
+export async function loadResources(language: Language): Promise<any> {
   try {
     const response = await fetch(`http://localhost:3000/locales/${language}/common.json`);
     if (response.ok) {

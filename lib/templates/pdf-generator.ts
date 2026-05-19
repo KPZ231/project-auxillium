@@ -1,5 +1,5 @@
 import puppeteer from 'puppeteer';
-import { BrandingSettings } from '@/actions/templates';
+import { BrandingSettings } from '@/types/templates';
 import { marked } from 'marked';
 
 export async function generatePDF(htmlContent: string, branding: BrandingSettings) {
@@ -84,7 +84,7 @@ export async function generatePDF(htmlContent: string, branding: BrandingSetting
     </html>
   `;
 
-  await page.setContent(fullHtml, { waitUntil: 'networkidle0' });
+  await page.setContent(fullHtml, { waitUntil: 'networkidle0' as any });
   
   const pdfBuffer = await page.pdf({
     format: 'A4',

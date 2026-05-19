@@ -103,8 +103,8 @@ export async function createTemplate(data: {
         userId,
         spaceId: data.spaceId,
         content: preset?.content || "",
-        branding: DEFAULT_BRANDING as unknown as Record<string, unknown>, // Prisma expects specific JSON type
-        blocks: []
+        branding: DEFAULT_BRANDING as any, // Prisma expects specific JSON type
+        blocks: [] as any
       }
     });
     revalidatePath('/dashboard/templates');
@@ -126,8 +126,8 @@ export async function updateTemplate(id: string, data: {
       where: { id },
       data: {
         ...data,
-        branding: data.branding ? (data.branding as Record<string, unknown>) : undefined,
-        blocks: data.blocks ? (data.blocks as Record<string, unknown>[]) : undefined
+        branding: data.branding ? (data.branding as any) : undefined,
+        blocks: data.blocks ? (data.blocks as any) : undefined
       }
     });
     revalidatePath(`/dashboard/templates/${id}/edit`);
@@ -165,8 +165,8 @@ export async function duplicateTemplate(id: string) {
         name: `Kopia: ${original.name}`,
         type: original.type,
         content: original.content,
-        branding: original.branding as Record<string, unknown>,
-        blocks: original.blocks as Record<string, unknown>[],
+        branding: original.branding as any,
+        blocks: original.blocks as any,
         userId,
         spaceId: original.spaceId
       }
@@ -179,7 +179,7 @@ export async function duplicateTemplate(id: string) {
   }
 }
 
-export async function getGeneratedDocuments(spaceId: string): Promise<{ success: boolean; documents?: Array<{ id: string; name: string }> ; error?: string }> {
+export async function getGeneratedDocuments(spaceId: string): Promise<{ success: boolean; documents?: any[] ; error?: string }> {
   const { userId } = await getUser();
   if (!userId) return { success: false, error: "Unauthorized" };
 
@@ -199,7 +199,7 @@ export async function getGeneratedDocuments(spaceId: string): Promise<{ success:
       },
       orderBy: { createdAt: 'desc' }
     });
-    return { success: true, documents };
+    return { success: true, documents: documents as any[] };
   } catch (error) {
     console.error("Failed to fetch generated documents:", error);
     return { success: false, error: "Failed to fetch generated documents" };

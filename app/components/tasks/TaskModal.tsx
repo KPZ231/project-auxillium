@@ -126,7 +126,7 @@ export function TaskModal({ isOpen, onClose, onSave, onDelete, initialData, defa
   const handleSyncToGoogleTasks = async () => {
     if (!initialData?.id) return;
     setSyncingTasks(true);
-    const res = await syncTaskToGoogleTasks(initialData.id);
+    const res = await syncTaskToGoogleTasks(initialData.id as string);
     if (res.success) {
       toast.success(`Synced "${res.title}" to Google Tasks`);
     } else {
@@ -142,7 +142,7 @@ export function TaskModal({ isOpen, onClose, onSave, onDelete, initialData, defa
       return;
     }
     setSyncingCalendar(true);
-    const res = await syncTaskToGoogleCalendar(initialData.id);
+    const res = await syncTaskToGoogleCalendar(initialData.id as string);
     if (res.success) {
       toast.success("Synced to Google Calendar");
     } else {

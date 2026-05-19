@@ -23,7 +23,7 @@ export function KanbanContainer({ projects, spaceId }: KanbanContainerProps) {
   const urlProjectId = searchParams.get("projectId");
 
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
-  const [tasks, setTasks] = useState<Record<string, unknown>[]>([]);
+  const [tasks, setTasks] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [isSyncing, setIsSyncing] = useState(false);
   const [connectedServices, setConnectedServices] = useState<Record<ConnectorType, boolean>>({

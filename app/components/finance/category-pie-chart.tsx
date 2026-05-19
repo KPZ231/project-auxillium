@@ -47,7 +47,7 @@ export function CategoryPieChart({ data }: CategoryPieChartProps) {
             ))}
           </Pie>
           <Tooltip 
-            formatter={(value: number) => `$${Number(value).toLocaleString()}`}
+            formatter={((value: any) => `$${Number(value).toLocaleString()}`) as any}
             contentStyle={{ 
               borderRadius: "0px", 
               border: "2px solid #0A0A0A", 

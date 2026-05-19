@@ -18,7 +18,7 @@ interface Employee {
 }
 
 export function MemberSelector({ onSelect, assignedIds, isOpen, onClose }: MemberSelectorProps) {
-  const [employees, setEmployees] = useState<Employee[]>([]);
+  const [employees, setEmployees] = useState<any[]>([]);
   const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
 

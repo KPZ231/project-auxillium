@@ -84,7 +84,7 @@ export const BrandingPanel: React.FC<BrandingPanelProps> = ({ settings, onChange
                     {['left', 'center', 'right'].map((align) => (
                       <button
                         key={align}
-                        onClick={() => updateSetting('headerAlignment', align)}
+                        onClick={() => updateSetting('headerAlignment', align as "left" | "center" | "right")}
                         className={`flex-1 py-2 text-[10px] uppercase font-bold ${
                           settings.headerAlignment === align ? 'bg-[#0A0A0A] text-white' : 'hover:bg-[#F4F4F5]'
                         }`}

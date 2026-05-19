@@ -48,7 +48,7 @@ export function FinanceDashboardClient({ initialData, userId, spaceId }: Finance
   const incomeMom = data?.mom?.income || 0;
   const expenseMom = data?.mom?.expenses || 0;
   const profitMargin = data?.profitMargin || 0;
-  const avgBurnRate = (data?.months?.reduce((acc: number, curr: { expenses: number }) => acc + curr.expenses, 0) / (data?.months?.length || 1)) || 0;
+  const avgBurnRate = (((data?.months || []).reduce((acc: number, curr: { expenses: number }) => acc + curr.expenses, 0)) / ((data?.months || []).length || 1)) || 0;
 
   const renderMom = (val: number, inverseGood = false) => {
     if (val === 0) return null;
@@ -136,7 +136,7 @@ export function FinanceDashboardClient({ initialData, userId, spaceId }: Finance
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
-              <FinanceChart data={data?.months || []} />
+              <FinanceChart data={(data?.months || []) as any} />
             </div>
             <div className="lg:col-span-1">
               <RevenueGoalCard 
@@ -243,7 +243,7 @@ export function FinanceDashboardClient({ initialData, userId, spaceId }: Finance
                 {t("dashboard:finance.transaction_history_desc") || "Review individual incomes and expenses"}
               </p>
             </div>
-            <TransactionHistoryTable transactions={data?.transactions || []} />
+            <TransactionHistoryTable transactions={(data?.transactions || []) as any} />
           </div>
         </section>
  

@@ -39,7 +39,7 @@ export async function POST(req: NextRequest) {
         spaceId: spaceId,
         name: `${template.name}_${new Date().toISOString().split('T')[0]}`,
         filePath: "", // In a real app, this would be a URL to S3/Cloudinary
-        contextData: context as Record<string, unknown>,
+        contextData: context as any,
       }
     });
 
@@ -49,7 +49,7 @@ export async function POST(req: NextRequest) {
       data: { usageCount: { increment: 1 } }
     });
 
-    return new NextResponse(pdfBuffer, {
+    return new NextResponse(pdfBuffer as any, {
       headers: {
         'Content-Type': 'application/pdf',
         'Content-Disposition': `attachment; filename="${template.name.replace(/\s+/g, '_')}.pdf"`,

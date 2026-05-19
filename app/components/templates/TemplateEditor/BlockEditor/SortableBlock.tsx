@@ -66,7 +66,7 @@ export const SortableBlock: React.FC<SortableBlockProps> = ({
           <input 
             autoFocus
             type="text"
-            value={block.content.text}
+            value={block.content.text as any || ''}
             onPointerDown={(e) => e.stopPropagation()}
             onChange={(e) => onUpdate({ ...block.content, text: e.target.value })}
             className="w-full text-2xl font-bold border-none outline-none focus:ring-0 p-0 bg-transparent"
@@ -77,12 +77,12 @@ export const SortableBlock: React.FC<SortableBlockProps> = ({
         return (
           <textarea 
             autoFocus
-            value={block.content.text}
+            value={block.content.text as any || ''}
             onPointerDown={(e) => e.stopPropagation()}
             onChange={(e) => onUpdate({ ...block.content, text: e.target.value })}
             className="w-full text-sm border-none outline-none focus:ring-0 p-0 bg-transparent resize-none min-h-[40px]"
             placeholder="Zacznij pisać..."
-            rows={Math.max(2, block.content.text?.split('\n').length || 1)}
+            rows={Math.max(2, (block.content.text as any)?.split('\n').length || 1)}
           />
         );
       case 'image':
@@ -90,7 +90,7 @@ export const SortableBlock: React.FC<SortableBlockProps> = ({
           <div className="space-y-2">
             {block.content.url ? (
               <img 
-                src={block.content.url} 
+                src={block.content.url as any} 
                 alt="Block" 
                 style={{ width: `${block.content.width || 100}%` }}
                 className="max-h-[300px] object-contain"
@@ -131,7 +131,7 @@ export const SortableBlock: React.FC<SortableBlockProps> = ({
           <blockquote className="border-l-4 border-[#0A0A0A] pl-4 italic text-sm text-[#71717A]">
             <textarea 
               autoFocus
-              value={block.content.text}
+              value={block.content.text as any || ''}
               onPointerDown={(e) => e.stopPropagation()}
               onChange={(e) => onUpdate({ ...block.content, text: e.target.value })}
               className="w-full border-none outline-none focus:ring-0 p-0 bg-transparent resize-none"
@@ -142,7 +142,7 @@ export const SortableBlock: React.FC<SortableBlockProps> = ({
       case 'list':
         return (
           <div className="space-y-2 pl-4">
-             {(block.content.items || ['Element listy...']).map((item: string, i: number) => (
+             {((block.content.items || ['Element listy...']) as any).map((item: string, i: number) => (
                <div key={i} className="flex items-center gap-2">
                  <div className="w-1.5 h-1.5 rounded-full bg-[#0A0A0A]" />
                  <input 
@@ -150,7 +150,7 @@ export const SortableBlock: React.FC<SortableBlockProps> = ({
                    value={item}
                    onPointerDown={(e) => e.stopPropagation()}
                    onChange={(e) => {
-                     const newItems = [...(block.content.items || [])];
+                     const newItems = [...((block.content.items as any) || [])];
                      newItems[i] = e.target.value;
                      onUpdate({ ...block.content, items: newItems });
                    }}
@@ -159,7 +159,7 @@ export const SortableBlock: React.FC<SortableBlockProps> = ({
                </div>
              ))}
              <button 
-               onClick={() => onUpdate({ ...block.content, items: [...(block.content.items || []), ''] })}
+               onClick={() => onUpdate({ ...block.content, items: [...((block.content.items as any) || []), ''] })}
                className="text-[10px] uppercase font-bold text-[#A1A1AA] hover:text-[#0A0A0A]"
              >
                + Dodaj element

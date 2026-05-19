@@ -242,10 +242,10 @@ export default function ProjectsGrid() {
                 className={`${colSpan} ${rowSpan} bg-white relative`}
                 style={{ minHeight }}
                 draggable
-                onDragStart={(e: React.DragEvent<HTMLDivElement>) => handleDragStart(e, index)}
-                onDragEnter={(e: React.DragEvent<HTMLDivElement>) => handleDragEnter(e, index)}
-                onDragEnd={handleDragEnd}
-                onDragOver={(e: React.DragEvent<HTMLDivElement>) => e.preventDefault()}
+                onDragStart={((e: React.DragEvent<HTMLDivElement>) => handleDragStart(e, index)) as any}
+                onDragEnter={((e: React.DragEvent<HTMLDivElement>) => handleDragEnter(e, index)) as any}
+                onDragEnd={handleDragEnd as any}
+                onDragOver={((e: React.DragEvent<HTMLDivElement>) => e.preventDefault()) as any}
               >
                 <ProjectCard project={project} />
               </motion.div>

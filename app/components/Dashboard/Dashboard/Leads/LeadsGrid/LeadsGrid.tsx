@@ -314,10 +314,10 @@ export default function LeadsGrid({ selectedFilter, view, sortBy, searchQuery }:
             key={lead.id}
             variants={itemVariants}
             draggable
-            onDragStart={(e: React.DragEvent) => handleDragStart(e, index)}
-            onDragEnter={(e: React.DragEvent) => handleDragEnter(e, index)}
-            onDragEnd={handleDragEnd}
-            onDragOver={(e: React.DragEvent) => e.preventDefault()}
+            onDragStart={((e: React.DragEvent) => handleDragStart(e, index)) as any}
+            onDragEnter={((e: React.DragEvent) => handleDragEnter(e, index)) as any}
+            onDragEnd={handleDragEnd as any}
+            onDragOver={((e: React.DragEvent) => e.preventDefault()) as any}
             className="h-full relative"
           >
             <LeadCard lead={lead} />

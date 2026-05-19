@@ -32,13 +32,19 @@ export async function GET(request: NextRequest) {
       redirectUri
     );
 
-    let scopes = [];
+    let scopes: string[] = [];
     if (provider === "google_sheets") {
-      scopes = ["https://www.googleapis.com/auth/spreadsheets"];
+      scopes = [
+        "https://www.googleapis.com/auth/spreadsheets",
+        "https://www.googleapis.com/auth/drive.file"
+      ];
     } else if (provider === "google_drive") {
       scopes = ["https://www.googleapis.com/auth/drive.file"];
     } else if (provider === "google_docs") {
-      scopes = ["https://www.googleapis.com/auth/documents"];
+      scopes = [
+        "https://www.googleapis.com/auth/documents",
+        "https://www.googleapis.com/auth/drive.file"
+      ];
     } else if (provider === "google_calendar") {
       scopes = ["https://www.googleapis.com/auth/calendar"];
     } else if (provider === "google_tasks") {

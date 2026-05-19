@@ -25,7 +25,7 @@ export default function MetricsOverview() {
   return (
     <>
       <motion.div
-        className="flex flex-row justify-between px-4 py-2 w-full items-center"
+        className="flex flex-col sm:flex-row justify-between px-4 py-2 w-full items-start sm:items-center gap-4"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}

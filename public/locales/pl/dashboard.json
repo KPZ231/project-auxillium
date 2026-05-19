@@ -170,7 +170,11 @@
     "audit_log_desc": "Chronologiczna historia zmian finansowych.",
     "executive_summary": "Podsumowanie wykonawcze",
     "accelerate_management": "Przyspiesz zarządzanie",
-    "data_cache_notice": "Dane finansowe są cache'owane dla wydajności. Nowe wpisy wyzwalają natychmiastowe aktualizacje."
+    "data_cache_notice": "Dane finansowe są cache'owane dla wydajności. Nowe wpisy wyzwalają natychmiastowe aktualizacje.",
+    "mobile_warning_title": "Dostęp Mobilny",
+    "mobile_warning_desc": "Ta sekcja zawiera rozbudowane wykresy i tabele finansowe zoptymalizowane pod kątem ekranów komputerowych. Czy chcesz kontynuować?",
+    "mobile_warning_back": "Wróć do dashboardu",
+    "mobile_warning_continue": "Kontynuuj mimo to"
   },
   "employees": {
     "title": "Pracownicy",

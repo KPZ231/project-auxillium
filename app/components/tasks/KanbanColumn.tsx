@@ -47,7 +47,7 @@ export function KanbanColumn({ id, title, tasks, onTaskClick, onAddTask }: Kanba
           <div
             ref={provided.innerRef}
             {...provided.droppableProps}
-            className={`flex-1 overflow-y-auto p-3 transition-colors duration-200
+            className={`flex-1 overflow-y-auto overflow-x-hidden p-3 transition-colors duration-200
               ${snapshot.isDraggingOver ? "bg-gray-100/80" : "bg-transparent"}
             `}
           >

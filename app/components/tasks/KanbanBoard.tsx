@@ -143,9 +143,9 @@ export function KanbanBoard({ initialTasks, spaceId, projectId }: KanbanBoardPro
   };
 
   return (
-    <div className="flex flex-col h-full bg-white">
+    <div className="flex flex-col h-full w-full max-w-full bg-white">
       {/* Progress Bar Header */}
-      <div className="px-6 py-4 border-b border-gray-100 flex items-center gap-8 justify-between">
+      <div className="px-6 py-4 border-b border-gray-100 flex flex-col md:flex-row items-stretch md:items-center gap-4 md:gap-8 justify-between">
         <div className="flex-1">
           <h2 className="text-xl font-black text-gray-900 tracking-tighter uppercase leading-none">
             Board
@@ -155,7 +155,7 @@ export function KanbanBoard({ initialTasks, spaceId, projectId }: KanbanBoardPro
           </p>
         </div>
         
-        <div className="flex-[2] max-w-lg">
+        <div className="w-full md:flex-[2] md:max-w-lg">
           <div className="flex justify-between items-center mb-1.5 text-[10px] font-black text-gray-500 uppercase tracking-widest">
             <span>Project Momentum</span>
             <span>{progressPercentage}%</span>
@@ -168,10 +168,10 @@ export function KanbanBoard({ initialTasks, spaceId, projectId }: KanbanBoardPro
           </div>
         </div>
 
-        <div className="flex-1 text-right">
+        <div className="md:flex-1 text-left md:text-right">
           <button 
             onClick={() => handleAddTask("TODO")}
-            className="px-4 py-2 bg-black text-white text-[10px] font-bold uppercase tracking-widest hover:bg-gray-800 transition-all shadow-sm"
+            className="w-full md:w-auto px-4 py-2 bg-black text-white text-[10px] font-bold uppercase tracking-widest hover:bg-gray-800 transition-all shadow-sm"
           >
             + New Task
           </button>
@@ -212,7 +212,7 @@ export function KanbanBoard({ initialTasks, spaceId, projectId }: KanbanBoardPro
       </div>
 
       {/* Board Columns */}
-      <div className="flex-1 overflow-x-auto p-6">
+      <div className="flex-1 overflow-x-auto overflow-y-hidden p-6">
         <DragDropContext onDragEnd={onDragEnd}>
           <div className="flex gap-6 h-full items-start">
             {COLUMNS.map(column => (

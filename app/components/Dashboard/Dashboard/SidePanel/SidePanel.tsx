@@ -85,7 +85,7 @@ export default function SidePanel() {
         animate={{ scale: 1 }}
         transition={{ duration: 0.25 }}
         onClick={() => setIsMobileOpen(!isMobileOpen)}
-        className="md:hidden fixed bottom-6 right-6 z-70 w-14 h-14 rounded-full bg-black text-white shadow-xl flex items-center justify-center"
+        className="md:hidden fixed bottom-6 left-6 z-[70] w-14 h-14 rounded-none bg-black text-white border border-white flex items-center justify-center"
       >
         {isMobileOpen ? (
           <ChevronLeft className="w-6 h-6" />

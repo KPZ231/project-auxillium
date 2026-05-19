@@ -91,7 +91,7 @@ export default function SpaceSidePanel() {
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         onClick={() => setIsMobileOpen(!isMobileOpen)}
-        className="md:hidden fixed bottom-6 right-6 z-70 w-14 h-14 rounded-none bg-black text-white flex items-center justify-center border border-white"
+        className="md:hidden fixed bottom-6 left-6 z-[70] w-14 h-14 rounded-none bg-black text-white flex items-center justify-center border border-white"
       >
         {isMobileOpen ? <ChevronLeft className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
       </motion.button>

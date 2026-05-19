@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PageHeader from "@/app/components/Dashboard/Dashboard/Shared/PageHeader/PageHeader";
 import { Plus, BarChart3, TrendingUp, Wallet, ArrowUpRight, ArrowDownRight, Zap } from "lucide-react";
 import { FinanceChart } from "./finance-chart";
@@ -34,7 +34,18 @@ interface FinanceDashboardClientProps {
 export function FinanceDashboardClient({ initialData, userId, spaceId }: FinanceDashboardClientProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [data, setData] = useState(initialData);
+  const [showMobileWarning, setShowMobileWarning] = useState(false);
   const { t } = useTranslation();
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const isMobile = window.innerWidth < 768;
+      const dismissed = sessionStorage.getItem("finance_mobile_warning_dismissed");
+      if (isMobile && !dismissed) {
+        setShowMobileWarning(true);
+      }
+    }
+  }, []);
 
   const refreshData = async () => {
     const summary = await getFinancialSummary(spaceId);
@@ -258,6 +269,41 @@ export function FinanceDashboardClient({ initialData, userId, spaceId }: Finance
         spaceId={spaceId} 
         userId={userId} 
       />
+
+      {showMobileWarning && (
+        <div className="fixed inset-0 z-[100] bg-black/80 flex items-center justify-center p-4 backdrop-blur-sm">
+          <div className="bg-white border border-[#0A0A0A] p-6 sm:p-8 max-w-sm sm:max-w-md w-full rounded-none flex flex-col gap-6 text-center max-h-[90vh] overflow-y-auto">
+            <div>
+              <h3 className="text-[12px] font-black uppercase tracking-[0.2em] text-[#0A0A0A]">
+                {t("dashboard:finance.mobile_warning_title", "Dostęp Mobilny")}
+              </h3>
+              <p className="text-[10px] text-[#71717A] uppercase tracking-widest mt-2 leading-relaxed">
+                {t("dashboard:finance.mobile_warning_desc", "Ta sekcja zawiera rozbudowane wykresy i tabele finansowe zoptymalizowane pod kątem ekranów komputerowych. Czy chcesz kontynuować?")}
+              </p>
+            </div>
+            
+            <div className="flex flex-col gap-3 mt-2">
+              <button
+                onClick={() => {
+                  window.location.href = "/" + (window.location.pathname.split("/")[1] || "pl") + "/dashboard";
+                }}
+                className="w-full p-3 sm:p-4 bg-[#0A0A0A] text-white hover:opacity-90 text-[11px] font-black uppercase tracking-[0.15em] rounded-none transition-opacity duration-200"
+              >
+                {t("dashboard:finance.mobile_warning_back", "Wróć do dashboardu")}
+              </button>
+              <button
+                onClick={() => {
+                  sessionStorage.setItem("finance_mobile_warning_dismissed", "true");
+                  setShowMobileWarning(false);
+                }}
+                className="w-full p-3 sm:p-4 bg-transparent text-[#0A0A0A] border border-[#0A0A0A] hover:bg-[#F4F4F5] text-[11px] font-black uppercase tracking-[0.15em] rounded-none transition-colors duration-200"
+              >
+                {t("dashboard:finance.mobile_warning_continue", "Kontynuuj mimo to")}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

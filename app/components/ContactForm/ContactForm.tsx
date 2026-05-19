@@ -178,7 +178,7 @@ export default function ContactForm() {
 
         {/* Right Side: Info */}
         <div className="flex flex-col gap-16 pt-2">
-          <div className="flex flex-row justify-between">
+          <div className="flex flex-col sm:flex-row gap-8 justify-between">
             <motion.div
               variants={itemVariants}
               custom={5}

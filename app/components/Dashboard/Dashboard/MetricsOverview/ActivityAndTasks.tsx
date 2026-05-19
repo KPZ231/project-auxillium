@@ -114,7 +114,7 @@ export default function ActivityAndTasks() {
           variants={itemVariants}
           className="col-span-1 md:col-span-2 bg-white border border-gray-300 p-8 flex flex-col min-h-[500px]"
         >
-          <div className="flex justify-between items-center mb-10 z-10">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-10 z-10">
             <h3 className="text-sm font-bold text-black tracking-widest uppercase">
               {t("dashboard:metrics.revenue_expenses", "Revenue & Expenses")}
             </h3>

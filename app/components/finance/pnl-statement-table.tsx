@@ -46,7 +46,7 @@ export function PnlStatementTable({ data }: PnlStatementTableProps) {
 
   return (
     <div className="bg-white border border-[#0A0A0A] w-full">
-      <div className="p-8 border-b border-[#0A0A0A] flex justify-between items-center bg-white">
+      <div className="p-8 border-b border-[#0A0A0A] flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 bg-white">
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 bg-[#0A0A0A] flex items-center justify-center text-white">
             <FileText className="w-6 h-6" />

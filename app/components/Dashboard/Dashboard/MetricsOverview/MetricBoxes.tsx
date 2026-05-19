@@ -174,7 +174,7 @@ export default function MetricBoxes() {
 
             {/* Middle row */}
             <div className="grow flex items-center relative z-10 mt-4">
-              <h2 className="text-[5rem] leading-none font-extrabold text-black tracking-tighter">
+              <h2 className="text-5xl sm:text-6xl md:text-5xl lg:text-7xl xl:text-[5rem] leading-none font-extrabold text-black tracking-tighter">
                 {item.value}
               </h2>
             </div>

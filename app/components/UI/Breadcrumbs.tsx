@@ -51,7 +51,7 @@ export function Breadcrumbs({ items }: BreadcrumbsProps) {
 
   return (
     <nav aria-label="Breadcrumb" className="flex items-center text-[11px] font-medium tracking-wider uppercase text-gray-400">
-      <ol className="flex items-center space-x-2">
+      <ol className="flex flex-wrap items-center space-x-1 sm:space-x-2 gap-y-1">
         <li>
           <Link href="/dashboard" className="hover:text-black transition-colors flex items-center">
             <Home className="w-3 h-3 mr-1" />

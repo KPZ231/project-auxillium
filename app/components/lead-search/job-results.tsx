@@ -86,7 +86,7 @@ function JobCard({ job }: { job: LeadJob }) {
         </div>
       </div>
 
-      <div className="grid grid-cols-3 gap-4 mb-6">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 mb-6">
         <div>
           <div className="text-[12px] text-[#71717A] uppercase tracking-wide mb-1">
             {t("lead_search_ui.progress")}

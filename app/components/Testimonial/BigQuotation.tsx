@@ -48,7 +48,7 @@ export default function BigQuotation({
               className="lg:col-span-7 flex gap-8 lg:gap-12"
             >
               <div className="w-1.5 bg-(--primary) self-stretch shrink-0" />
-              <h3 className="font-bold text-6xl lg:text-8xl tracking-tighter leading-[0.9] text-(--primary)">
+              <h3 className="font-bold text-4xl sm:text-5xl md:text-6xl lg:text-8xl tracking-tighter leading-[0.9] text-(--primary)">
                 &quot;{quoteContent}&quot;
               </h3>
             </motion.div>

@@ -36,7 +36,7 @@ export const ExpenseEstimation = ({ spaceId }: ExpenseEstimationProps) => {
 
   return (
     <div className="bg-white border border-[#0A0A0A] p-8 h-full">
-      <div className="flex justify-between items-start mb-10">
+      <div className="flex flex-col sm:flex-row justify-between items-start gap-4 mb-10">
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 bg-[#FAFAFA] border border-[#0A0A0A] flex items-center justify-center">
             <BrainCircuit className="w-5 h-5 text-[#0A0A0A]" />
@@ -72,7 +72,7 @@ export const ExpenseEstimation = ({ spaceId }: ExpenseEstimationProps) => {
         </div>
       ) : estimation ? (
         <div className="space-y-10">
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div className="p-6 bg-[#FAFAFA] border border-[#0A0A0A]">
               <p className="text-[10px] font-black uppercase tracking-[0.15em] text-[#71717A]">
                 {t("dashboard:finance.est_monthly")}
@@ -95,7 +95,7 @@ export const ExpenseEstimation = ({ spaceId }: ExpenseEstimationProps) => {
             <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#71717A] mb-4">
               {t("dashboard:finance.total_predicted_for")} {months} {t("dashboard:finance.months")}
             </p>
-            <div className="p-10 bg-[#0A0A0A] text-white flex justify-between items-center transition-transform hover:scale-[1.01] duration-300">
+            <div className="p-6 sm:p-10 bg-[#0A0A0A] text-white flex justify-between items-center transition-transform hover:scale-[1.01] duration-300">
               <span className="text-[40px] font-black tracking-tighter">
                 ${estimation.totalForPeriod.toLocaleString(undefined, { maximumFractionDigits: 0 })}
               </span>

@@ -10,9 +10,9 @@ export default function Footer() {
 
   return (
     <footer className="w-full bg-(--secondary) text-(--primary) border-t border-(--tetriary) mt-auto">
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 h-32 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-8 md:py-0 md:h-32 flex flex-col md:flex-row items-center justify-between gap-6 md:gap-12">
         {/* Brand */}
-        <div className="flex-1">
+        <div className="flex-1 flex justify-center md:justify-start">
           <Image
             src="/images/auxillium-logo-3.png"
             alt="Auxillium Logo"
@@ -23,7 +23,7 @@ export default function Footer() {
         </div>
 
         {/* Links */}
-        <div className="flex-1 flex justify-center gap-8 md:gap-12">
+        <div className="flex-1 flex flex-wrap justify-center gap-6 md:gap-12">
           {navLinks.map((link, index) => (
             <Link
               key={link.name}
@@ -38,7 +38,7 @@ export default function Footer() {
         </div>
 
         {/* Copyright */}
-        <div className="flex-1 flex justify-end">
+        <div className="flex-1 flex justify-center md:justify-end text-center md:text-right">
           <p className="text-[10px] md:text-[11px] font-medium tracking-wider text-(--neutral) uppercase">
             © 2024 AUXILLIUM. SYSTEM ZARZĄDZANIA.
           </p>

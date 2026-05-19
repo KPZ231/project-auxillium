@@ -43,7 +43,7 @@ export default function SearchForm() {
 
   return (
     <form onSubmit={handleSubmit} className="mb-16">
-      <div className="flex flex-col md:flex-row gap-4 items-end">
+      <div className="flex flex-col md:flex-row gap-4 items-stretch md:items-end">
         <div className="flex-1">
           <label className="block text-[14px] font-regular text-[#71717A] mb-2 uppercase tracking-wide">
             {t("lead_search_ui.query_label")}

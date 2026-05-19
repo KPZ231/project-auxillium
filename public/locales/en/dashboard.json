@@ -170,7 +170,11 @@
     "audit_log_desc": "Chronological history of financial modifications.",
     "executive_summary": "Executive Summary",
     "accelerate_management": "Accelerate Management",
-    "data_cache_notice": "Financial data is cached for performance. New entries will trigger immediate updates."
+    "data_cache_notice": "Financial data is cached for performance. New entries will trigger immediate updates.",
+    "mobile_warning_title": "Mobile Access",
+    "mobile_warning_desc": "This dashboard contains dense financial charts and tools optimized for desktop screens. Do you want to proceed?",
+    "mobile_warning_back": "Back to Dashboard",
+    "mobile_warning_continue": "Proceed Anyway"
   },
   "employees": {
     "title": "Employees",

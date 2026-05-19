@@ -115,7 +115,11 @@
     "recurring_yearly": "Jährlich",
     "source": "Quelle",
     "month": "Monat",
-    "year": "Jahr"
+    "year": "Jahr",
+    "mobile_warning_title": "Mobiler Zugriff",
+    "mobile_warning_desc": "Dieses Dashboard enthält detaillierte Finanzdiagramme und -werkzeuge, die für Desktop-Bildschirme optimiert sind. Möchten Sie fortfahren?",
+    "mobile_warning_back": "Zurück zum Dashboard",
+    "mobile_warning_continue": "Trotzdem fortfahren"
   },
   "employees": {
     "title": "Mitarbeiter",

@@ -137,7 +137,7 @@ export function ImageUploader({ images, onChange, maxImages }: ImageUploaderProp
                   e.stopPropagation();
                   removeImage(index);
                 }}
-                className="absolute top-2 right-2 bg-[#0A0A0A] text-white w-6 h-6 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 text-xs"
+                className="absolute top-2 right-2 bg-[#0A0A0A] text-white w-6 h-6 flex items-center justify-center opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-200 text-xs"
                 title="Remove image"
               >
                 ✕

@@ -204,9 +204,9 @@ export function KanbanContainer({ projects, spaceId }: KanbanContainerProps) {
   }
 
   return (
-    <div className="flex flex-col h-full bg-[#FAFAFA]">
+    <div className="flex flex-col h-full w-full max-w-full bg-[#FAFAFA]">
       {/* Project Selector Header */}
-      <div className="px-6 py-3 bg-white border-b border-[#E5E5E5] flex items-center justify-between">
+      <div className="px-6 py-4 bg-white border-b border-[#E5E5E5] flex flex-col md:flex-row gap-4 items-stretch md:items-center justify-between">
         <div className="flex items-center gap-4">
           <div className="h-10 w-10 bg-[#0A0A0A] flex items-center justify-center text-white font-black text-sm">
             {selectedProject?.projectName.charAt(0)}
@@ -221,7 +221,7 @@ export function KanbanContainer({ projects, spaceId }: KanbanContainerProps) {
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-3">
           <button
             onClick={handleRefresh}
             className="flex items-center gap-2 px-4 py-2 text-[11px] font-bold uppercase tracking-widest bg-white border border-[#E5E5E5] hover:border-[#0A0A0A] text-[#0A0A0A] transition-all"
@@ -274,7 +274,7 @@ export function KanbanContainer({ projects, spaceId }: KanbanContainerProps) {
       </div>
 
       {/* Main Kanban Content */}
-      <div className="flex-1 overflow-hidden relative">
+      <div className="flex-1 relative">
         {isLoading && (
           <div className="absolute inset-0 z-20 flex items-center justify-center bg-white/60 backdrop-blur-[2px]">
              <div className="w-8 h-8 border-2 border-[#0A0A0A] border-t-transparent rounded-full animate-spin"></div>

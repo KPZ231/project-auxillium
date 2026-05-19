@@ -103,7 +103,7 @@ export default function ActivityAndTasks() {
   return (
     <section className="w-full px-8 mb-16">
       <motion.div
-        className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8"
+        className="w-full grid grid-cols-1 md:grid-cols-3 gap-8"
         variants={containerVariants}
         initial="hidden"
         whileInView="visible"

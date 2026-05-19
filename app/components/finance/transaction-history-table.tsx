@@ -64,7 +64,52 @@ export function TransactionHistoryTable({ transactions }: TransactionHistoryTabl
         </div>
       </div>
 
-      <div className="overflow-x-auto">
+      {/* Mobile Card List */}
+      <div className="md:hidden flex flex-col divide-y divide-[#F4F4F5]">
+        {filteredTransactions.length > 0 ? (
+          filteredTransactions.map((tx) => {
+            const isExpense = tx.type === "EXPENSE";
+            const date = new Date(tx.date).toLocaleDateString();
+            return (
+              <div
+                key={`${tx.type}-${tx.id}`}
+                onClick={() => setSelectedTransaction(tx)}
+                className="p-4 flex flex-col gap-3 cursor-pointer hover:bg-[#FAFAFA]"
+              >
+                <div className="flex justify-between items-start">
+                  <div className="flex items-center gap-3">
+                    <div className={`p-2 ${isExpense ? "bg-[#DC2626]/10 text-[#DC2626]" : "bg-[#16A34A]/10 text-[#16A34A]"}`}>
+                      {isExpense ? <ArrowDownRight className="w-3 h-3" /> : <ArrowUpRight className="w-3 h-3" />}
+                    </div>
+                    <span className="text-[13px] font-bold text-[#0A0A0A] uppercase tracking-tight">
+                      {tx.description || (isExpense ? "Expense" : "Income")}
+                    </span>
+                  </div>
+                  <div className={`text-[14px] text-right font-mono font-black ${isExpense ? "text-[#DC2626]" : "text-[#16A34A]"}`}>
+                    {isExpense ? "-" : "+"}${tx.amount.toLocaleString()}
+                  </div>
+                </div>
+                <div className="flex justify-between items-center text-[10px] text-[#71717A] uppercase tracking-widest font-black">
+                  <span>{date}</span>
+                  <div className="flex items-center gap-2">
+                    <span className="px-2 py-1 bg-[#FAFAFA] border border-[#E5E5E5]">
+                      {tx.category || "General"}
+                    </span>
+                    {tx.receiptUrl && <FileText className="w-4 h-4 text-[#0A0A0A]" />}
+                  </div>
+                </div>
+              </div>
+            );
+          })
+        ) : (
+          <div className="p-8 text-center text-[12px] font-black uppercase tracking-[0.2em] text-[#D4D4D8]">
+            No transactions found
+          </div>
+        )}
+      </div>
+
+      {/* Desktop Table */}
+      <div className="hidden md:block overflow-x-auto">
         <table className="w-full text-left border-collapse">
           <thead>
             <tr className="border-b border-[#0A0A0A]">

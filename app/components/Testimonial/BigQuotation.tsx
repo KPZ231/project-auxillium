@@ -28,7 +28,7 @@ export default function BigQuotation({
 
   return (
     <>
-      <section className="w-full px-6 lg:px-12 pt-16 lg:pt-24 mt-20 mb-12">
+      <section className="w-full px-4 lg:px-12 pt-16 lg:pt-24 mt-20 mb-12">
         <motion.div
           initial="hidden"
           whileInView="visible"

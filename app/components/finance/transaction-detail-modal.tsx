@@ -33,8 +33,8 @@ export function TransactionDetailModal({ isOpen, onClose, transaction }: Transac
   const date = new Date(transaction.date).toLocaleDateString();
 
   return (
-    <div className="fixed inset-0 z-100 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-      <div className="bg-white border border-[#0A0A0A] w-full max-w-2xl max-h-[90vh] overflow-y-auto relative">
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm md:p-4">
+      <div className="bg-white border-0 md:border md:border-[#0A0A0A] w-full h-full md:h-auto max-w-full md:max-w-2xl max-h-screen md:max-h-[90vh] overflow-y-auto relative">
         <button 
           onClick={onClose}
           className="absolute top-4 right-4 p-2 hover:bg-[#F4F4F5] transition-colors"
@@ -42,22 +42,22 @@ export function TransactionDetailModal({ isOpen, onClose, transaction }: Transac
           <X className="w-5 h-5 text-[#0A0A0A]" />
         </button>
 
-        <div className="p-12">
-          <div className="flex items-center gap-4 mb-12">
-            <div className={`w-16 h-16 flex items-center justify-center text-white ${isExpense ? "bg-[#DC2626]" : "bg-[#16A34A]"}`}>
-              {isExpense ? <ArrowDownRight className="w-8 h-8" /> : <ArrowUpRight className="w-8 h-8" />}
+        <div className="p-6 md:p-12 mt-8 md:mt-0">
+          <div className="flex items-center gap-4 mb-8 md:mb-12">
+            <div className={`w-12 h-12 md:w-16 md:h-16 shrink-0 flex items-center justify-center text-white ${isExpense ? "bg-[#DC2626]" : "bg-[#16A34A]"}`}>
+              {isExpense ? <ArrowDownRight className="w-6 h-6 md:w-8 md:h-8" /> : <ArrowUpRight className="w-6 h-6 md:w-8 md:h-8" />}
             </div>
             <div>
-              <h2 className="text-[24px] font-black uppercase tracking-tighter text-[#0A0A0A]">
+              <h2 className="text-[20px] md:text-[24px] font-black uppercase tracking-tighter text-[#0A0A0A]">
                 {transaction.description || (isExpense ? t("dashboard:finance.expense") : t("dashboard:finance.income"))}
               </h2>
-              <p className="text-[12px] text-[#71717A] uppercase tracking-widest mt-1">
+              <p className="text-[10px] md:text-[12px] text-[#71717A] uppercase tracking-widest mt-1">
                 {isExpense ? t("dashboard:finance.expense_details") : t("dashboard:finance.income_details")}
               </p>
             </div>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 mb-8 md:mb-12">
             <div className="space-y-8">
               <div>
                 <p className="text-[10px] font-black uppercase tracking-[0.2em] text-[#71717A] mb-2 flex items-center gap-2">

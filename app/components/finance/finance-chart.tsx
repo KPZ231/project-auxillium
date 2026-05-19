@@ -25,8 +25,8 @@ export const FinanceChart = ({ data }: FinanceChartProps) => {
   const { t } = useTranslation();
 
   return (
-    <div className="bg-white border border-[#0A0A0A] p-8 w-full h-[500px]">
-      <div className="flex justify-between items-start mb-8">
+    <div className="bg-white border border-[#0A0A0A] p-4 md:p-8 w-full h-[400px] md:h-[500px]">
+      <div className="flex flex-col md:flex-row justify-between items-start gap-4 mb-6 md:mb-8">
         <div>
           <h3 className="text-[14px] font-black uppercase tracking-[0.25em] text-[#0A0A0A]">
             {t("dashboard:finance.revenue_chart")}

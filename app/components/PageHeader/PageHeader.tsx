@@ -36,8 +36,8 @@ export default function PageHeader({
 
   return (
     <>
-      <section className="w-full px-6 lg:px-12 py-24 bg-(--secondary)">
-        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 justify-between">
+      <section className="w-full px-6 lg:px-12 py-16 md:py-24 bg-(--secondary)">
+        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 md:gap-16 justify-between">
           {/* Left Side: Header & Description */}
           <div className="lg:w-1/3 flex flex-col gap-6 lg:gap-8 justify-center">
             <motion.div
@@ -68,6 +68,7 @@ export default function PageHeader({
               viewport={{ once: true, amount: 0.2 }}
             >
               <Button
+                className="w-full md:w-auto"
                 content={button.content}
                 variant={button.variant}
                 url={button.url}

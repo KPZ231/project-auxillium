@@ -107,7 +107,7 @@ export const TemplateEditor: React.FC<TemplateEditorProps> = ({ template: initia
   return (
     <div className="flex flex-col h-screen bg-white">
       {/* TOOLBAR */}
-      <div className="h-16 border-b border-[#E5E5E5] flex items-center justify-between px-6 bg-white z-20">
+      <div className="h-auto md:h-16 py-4 md:py-0 border-b border-[#E5E5E5] flex flex-col md:flex-row items-center justify-between px-4 md:px-6 bg-white z-20 gap-4">
         <div className="flex items-center gap-4">
           <button 
             onClick={() => router.push('/dashboard/templates')}
@@ -124,7 +124,7 @@ export const TemplateEditor: React.FC<TemplateEditorProps> = ({ template: initia
           />
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="flex flex-wrap items-center justify-center gap-2 md:gap-4 w-full md:w-auto">
           <div className="flex border border-[#E5E5E5] bg-[#FAFAFA] p-1">
             <button 
               onClick={() => handleModeChange('markdown')}
@@ -174,7 +174,7 @@ export const TemplateEditor: React.FC<TemplateEditorProps> = ({ template: initia
       {/* MAIN EDITOR AREA */}
       <div className="flex-1 flex overflow-hidden relative">
         {/* Editor Panel */}
-        <div className={`flex-1 flex flex-col transition-all duration-300 ${isSidebarOpen ? 'mr-[320px]' : 'mr-0'}`}>
+        <div className={`flex-1 flex flex-col transition-all duration-300 ${isSidebarOpen ? 'md:mr-[320px]' : 'mr-0'}`}>
           <div className="flex-1 flex overflow-hidden">
             {mode === 'markdown' ? (
               <MarkdownPanel 
@@ -201,7 +201,7 @@ export const TemplateEditor: React.FC<TemplateEditorProps> = ({ template: initia
         <button
           onClick={() => setIsSidebarOpen(!isSidebarOpen)}
           className={`absolute top-1/2 -translate-y-1/2 z-30 bg-white border border-[#E5E5E5] p-1 hover:bg-[#FAFAFA] transition-all shadow-sm ${
-            isSidebarOpen ? 'right-[320px]' : 'right-0'
+            isSidebarOpen ? 'right-[320px] max-md:right-0 max-md:-translate-x-full' : 'right-0'
           }`}
         >
           {isSidebarOpen ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
@@ -209,7 +209,7 @@ export const TemplateEditor: React.FC<TemplateEditorProps> = ({ template: initia
 
         {/* Sidebars */}
         <div 
-          className={`absolute right-0 top-0 bottom-0 w-[320px] bg-white border-l border-[#E5E5E5] z-20 transition-transform duration-300 transform ${
+          className={`absolute right-0 top-0 bottom-0 w-full md:w-[320px] bg-white border-l border-[#E5E5E5] z-20 transition-transform duration-300 transform ${
             isSidebarOpen ? 'translate-x-0' : 'translate-x-full'
           }`}
         >
@@ -243,7 +243,7 @@ export const TemplateEditor: React.FC<TemplateEditorProps> = ({ template: initia
 
       {/* PREVIEW MODAL */}
       {isPreviewModalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-8">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 md:p-8 p-4">
           <div className="bg-white w-full max-w-5xl h-full flex flex-col rounded-lg overflow-hidden relative shadow-2xl">
             <div className="h-14 bg-white border-b border-[#E5E5E5] flex items-center justify-between px-6 shrink-0 z-10 relative shadow-sm">
               <h2 className="font-bold text-sm uppercase tracking-widest">Podgląd Dokumentu</h2>

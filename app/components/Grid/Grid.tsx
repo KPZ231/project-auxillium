@@ -41,10 +41,10 @@ export default function Grid({ title, subtitle, cards }: GridProps) {
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
           variants={containerVariants}
-          className="max-w-7xl grid grid-cols-2 mx-auto gap-16"
+          className="max-w-7xl grid grid-cols-1 md:grid-cols-2 mx-auto gap-8 md:gap-16"
         >
-          <motion.div variants={itemVariants} custom={0} className="col-span-2">
-            <h2 className="font-bold text-4xl tracking-wide">{title}</h2>
+          <motion.div variants={itemVariants} custom={0} className="col-span-1 md:col-span-2">
+            <h2 className="font-bold text-3xl md:text-4xl tracking-wide">{title}</h2>
             <p className="text-base font-light tracking-tight text-(--neutral)">
               {subtitle}
             </p>
@@ -55,12 +55,12 @@ export default function Grid({ title, subtitle, cards }: GridProps) {
               key={index}
               variants={itemVariants}
               custom={index + 1}
-              className="border border-(--primary) p-8"
+              className="border border-(--primary) p-6 md:p-8"
             >
-              <h2 className="font-bold text-3xl tracking-wide">
+              <h2 className="font-bold text-2xl md:text-3xl tracking-wide">
                 {card.header}
               </h2>
-              <p className="text-base font-light tracking-tight text-(--neutral)">
+              <p className="text-base font-light tracking-tight text-(--neutral) mt-2">
                 {card.content}
               </p>
             </motion.div>

@@ -104,7 +104,7 @@ async function fetchDataForSpace(
     where: {
       OR: [
         { ownerId: userId },
-        { members: { some: { id: userId } } },
+        { members: { some: { userId } } },
       ],
     },
     select: {

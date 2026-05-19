@@ -101,7 +101,7 @@ export default function ActivityAndTasks() {
   };
 
   return (
-    <section className="w-full px-8 mb-16">
+    <section className="w-full px-4 md:px-8 mb-16">
       <motion.div
         className="w-full grid grid-cols-1 md:grid-cols-3 gap-8"
         variants={containerVariants}
@@ -112,7 +112,7 @@ export default function ActivityAndTasks() {
         {/* Left Panel: Activity Trajectory */}
         <motion.div
           variants={itemVariants}
-          className="col-span-1 md:col-span-2 bg-white border border-gray-300 p-8 flex flex-col min-h-[500px]"
+          className="col-span-1 md:col-span-2 bg-white border border-gray-300 p-4 md:p-8 flex flex-col min-h-[500px]"
         >
           <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-10 z-10">
             <h3 className="text-sm font-bold text-black tracking-widest uppercase">

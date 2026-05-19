@@ -114,7 +114,7 @@ export async function GET(request: NextRequest) {
 
     // Check if user has a space
     const userSpace = await prisma.space.findFirst({
-      where: { members: { some: { id: user.id } } }
+      where: { members: { some: { userId: user.id } } }
     });
     
     await login(user.id, !!userSpace);

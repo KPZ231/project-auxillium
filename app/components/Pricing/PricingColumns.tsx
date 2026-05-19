@@ -48,7 +48,7 @@ export default function PricingColumns({ name, header, plans }: PricingProps) {
   };
 
   return (
-    <section className="w-full px-6 lg:px-12 py-16">
+    <section className="w-full px-4 lg:px-12 py-16">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-14">
@@ -91,7 +91,7 @@ export default function PricingColumns({ name, header, plans }: PricingProps) {
               >
                 <div
                   key={index}
-                  className={`relative p-10 flex flex-col min-h-[620px] border-b lg:border-b-0 lg:border-r last:border-r-0 border-(--primary)
+                  className={`relative p-6 md:p-10 flex flex-col min-h-[620px] border-b lg:border-b-0 lg:border-r last:border-b-0 lg:last:border-r-0 border-(--primary)
                 ${
                   featured
                     ? "bg-(--primary) text-(--secondary)"

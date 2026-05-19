@@ -4,20 +4,20 @@ import { getTemplateById } from "@/actions/templates";
 import { redirect, notFound } from "next/navigation";
 import { TemplateEditor } from "@/app/components/templates/TemplateEditor";
 
-export default async function EditTemplatePage({ 
-  params 
-}: { 
-  params: Promise<{ locale: string, templateId: string }> 
+export default async function EditTemplatePage({
+  params
+}: {
+  params: Promise<{ locale: string, templateId: string }>
 }) {
   const { locale, templateId } = await params;
   const { isAuthenticatedAndLogedIn } = await getUser();
-  
+
   if (!isAuthenticatedAndLogedIn) {
     redirect(`/${locale}/login`);
   }
 
   const res = await getTemplateById(templateId);
-  
+
   if (!res.success || !res.template) {
     notFound();
   }

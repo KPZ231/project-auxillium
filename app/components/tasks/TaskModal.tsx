@@ -154,12 +154,12 @@ export function TaskModal({ isOpen, onClose, onSave, onDelete, initialData, defa
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm md:p-4">
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
         exit={{ opacity: 0, scale: 0.95 }}
-        className="w-full max-w-2xl bg-white shadow-2xl rounded-xl overflow-hidden flex flex-col max-h-[90vh]"
+        className="w-full h-full md:h-auto max-w-full md:max-w-2xl bg-white md:shadow-2xl md:rounded-xl overflow-hidden flex flex-col max-h-screen md:max-h-[90vh]"
       >
         <div className="p-5 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
           <div>
@@ -191,7 +191,7 @@ export function TaskModal({ isOpen, onClose, onSave, onDelete, initialData, defa
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
                 <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Status</label>
                 <select
@@ -220,7 +220,7 @@ export function TaskModal({ isOpen, onClose, onSave, onDelete, initialData, defa
               </div>
             </div>
 
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
                 <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Due Date</label>
                 <input
@@ -355,8 +355,8 @@ export function TaskModal({ isOpen, onClose, onSave, onDelete, initialData, defa
           </form>
         </div>
 
-        <div className="p-5 border-t border-gray-100 bg-gray-50/50 flex justify-between items-center">
-          <div>
+        <div className="p-5 border-t border-gray-100 bg-gray-50/50 flex flex-col-reverse md:flex-row justify-between items-center gap-4">
+          <div className="w-full md:w-auto">
             {initialData && onDelete && (
               <button
                 type="button"
@@ -371,7 +371,7 @@ export function TaskModal({ isOpen, onClose, onSave, onDelete, initialData, defa
               </button>
             )}
           </div>
-          <div className="flex gap-3">
+          <div className="flex flex-col md:flex-row w-full md:w-auto gap-3">
             <button
               type="button"
               onClick={onClose}

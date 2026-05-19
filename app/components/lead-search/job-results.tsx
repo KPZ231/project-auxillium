@@ -50,7 +50,7 @@ function JobCard({ job }: { job: LeadJob }) {
 
   return (
     <div className="bg-[#FFFFFF] border border-[#E5E5E5] p-6 hover:border-[#0A0A0A] transition-colors relative group">
-      <div className="flex justify-between items-start mb-6">
+      <div className="flex flex-col md:flex-row justify-between items-start gap-4 mb-6">
         <div>
           <h3 className="font-semibold text-[20px] text-[#0A0A0A] mb-1">
             {job.query}

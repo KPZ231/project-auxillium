@@ -203,7 +203,7 @@ export const AddTransactionModal = ({ isOpen, onClose, spaceId, userId }: AddTra
 
   return (
     <AnimatePresence>
-      <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+      <div className="fixed inset-0 z-50 flex items-center justify-center md:p-4">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -216,7 +216,7 @@ export const AddTransactionModal = ({ isOpen, onClose, spaceId, userId }: AddTra
           initial={{ opacity: 0, scale: 0.95, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
-          className="relative w-full max-w-2xl bg-[#FAFAFA] border border-[#0A0A0A] shadow-2xl p-8 max-h-[90vh] overflow-y-auto"
+          className="relative w-full h-full md:h-auto max-w-full md:max-w-2xl bg-[#FAFAFA] border-0 md:border md:border-[#0A0A0A] shadow-2xl p-6 md:p-8 max-h-screen md:max-h-[90vh] overflow-y-auto"
         >
           <div className="flex justify-between items-start mb-8">
             <div>
@@ -256,7 +256,7 @@ export const AddTransactionModal = ({ isOpen, onClose, spaceId, userId }: AddTra
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <PremiumInput
                 label="Amount"
                 type="number"
@@ -288,7 +288,7 @@ export const AddTransactionModal = ({ isOpen, onClose, spaceId, userId }: AddTra
               </div>
             )}
 
-            <div className="grid grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <PremiumSelect
                 label="Link to (Client or Project)"
                 required
@@ -347,7 +347,7 @@ export const AddTransactionModal = ({ isOpen, onClose, spaceId, userId }: AddTra
               </div>
 
               {formData.isRecurring && (
-                <div className="grid grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <PremiumSelect
                     label="Billing Cycle"
                     value={formData.cycle}

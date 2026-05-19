@@ -70,7 +70,7 @@ export async function loginAction(formData: LoginFormData) {
     const userSpace = await prisma.space.findFirst({
       where: {
         members: {
-          some: { id: user.id }
+          some: { userId: user.id }
         }
       }
     });

@@ -61,7 +61,7 @@ export default function RegisterForm() {
   };
 
   return (
-    <section className="w-full min-h-screen px-6 py-20 flex flex-col items-center mt-24 justify-center">
+    <section className="w-full min-h-screen px-6 py-12 md:py-20 flex flex-col items-center mt-16 md:mt-24 justify-center">
       <div className="w-full max-w-[450px] flex flex-col items-center gap-12">
         {/* Header */}
         <div className="text-center flex flex-col gap-3">

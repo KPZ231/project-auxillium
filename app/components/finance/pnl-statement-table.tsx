@@ -69,7 +69,53 @@ export function PnlStatementTable({ data }: PnlStatementTableProps) {
         </button>
       </div>
 
-      <div className="overflow-x-auto">
+      {/* Mobile Card List */}
+      <div className="md:hidden flex flex-col divide-y divide-[#F4F4F5]">
+        {categories.map(cat => (
+          <div key={cat} className="p-4 flex flex-col gap-2 hover:bg-[#FAFAFA]">
+            <div className="font-bold text-[#0A0A0A] uppercase tracking-tight text-[13px]">{cat}</div>
+            <div className="flex justify-between items-center text-[13px] font-mono">
+              <div className="flex flex-col">
+                <span className="text-[10px] text-[#71717A] uppercase tracking-widest font-black">{t("dashboard:finance.incomes")}</span>
+                <span className="font-bold">${data[cat].income.toLocaleString()}</span>
+              </div>
+              <div className="flex flex-col text-center">
+                <span className="text-[10px] text-[#71717A] uppercase tracking-widest font-black">{t("dashboard:finance.expenses")}</span>
+                <span className="font-bold text-[#71717A]">-${data[cat].expense.toLocaleString()}</span>
+              </div>
+              <div className="flex flex-col text-right">
+                <span className="text-[10px] text-[#71717A] uppercase tracking-widest font-black">Net</span>
+                <span className={`font-black ${data[cat].income - data[cat].expense >= 0 ? "text-[#0A0A0A]" : "text-[#DC2626]"}`}>
+                  ${(data[cat].income - data[cat].expense).toLocaleString()}
+                </span>
+              </div>
+            </div>
+          </div>
+        ))}
+        {/* Total Summary on Mobile */}
+        <div className="p-4 bg-[#FAFAFA] border-t border-[#0A0A0A] flex flex-col gap-2">
+          <div className="font-black text-[#0A0A0A] uppercase tracking-[0.2em] text-[12px]">Total</div>
+          <div className="flex justify-between items-center text-[15px] font-mono font-black">
+            <div className="flex flex-col">
+              <span className="text-[10px] text-[#71717A] uppercase tracking-widest">{t("dashboard:finance.incomes")}</span>
+              <span>${totalIncome.toLocaleString()}</span>
+            </div>
+            <div className="flex flex-col text-center">
+              <span className="text-[10px] text-[#71717A] uppercase tracking-widest">{t("dashboard:finance.expenses")}</span>
+              <span className="text-[#71717A]">-${totalExpense.toLocaleString()}</span>
+            </div>
+            <div className="flex flex-col text-right">
+              <span className="text-[10px] text-[#71717A] uppercase tracking-widest">Net</span>
+              <span className={`${netProfit >= 0 ? "text-[#0A0A0A]" : "text-[#DC2626]"}`}>
+                ${netProfit.toLocaleString()}
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Desktop Table */}
+      <div className="hidden md:block overflow-x-auto">
         <table className="w-full text-left border-collapse">
           <thead>
             <tr className="border-b border-[#0A0A0A]">

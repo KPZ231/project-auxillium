@@ -34,8 +34,8 @@ export default function ContentColumns({
   };
 
   return (
-    <section className="w-full px-6 lg:px-12 pt-6 mt-12 mb-12">
-      <div className="max-w-7xl mx-auto flex flex-wrap justify-between gap-12">
+    <section className="w-full px-6 lg:px-12 pt-6 mt-8 md:mt-12 mb-8 md:mb-12">
+      <div className="max-w-7xl mx-auto flex flex-wrap justify-between gap-8 md:gap-12">
         {content.map((item, index) => (
           <motion.div
             key={index}
@@ -44,10 +44,10 @@ export default function ContentColumns({
             whileInView="visible"
             viewport={{ once: true, amount: 0.2 }}
             variants={cardVariants}
-            className="w-full sm:w-[45%] lg:w-[22%] flex flex-col gap-6 border-l border-zinc-200 pl-8"
+            className="w-full sm:w-[45%] lg:w-[22%] flex flex-col gap-4 md:gap-6 border-l border-zinc-200 pl-6 md:pl-8"
           >
             {/* Icon container */}
-            <div className="w-12 h-12 bg-(--primary) flex items-center justify-center">
+            <div className="w-12 h-12 bg-(--primary) flex items-center justify-center shrink-0">
               <item.icon className="w-4 h-4 text-(--secondary)" />
             </div>
 

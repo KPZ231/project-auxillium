@@ -71,6 +71,10 @@ export async function updateLead(data: UpdateLeadInput) {
 
         // Invalidate cache
         await invalidateCache(`leads:${userId}`)
+        if (existingLead.spaceId) {
+            await invalidateCache(`leads:${userId}:${existingLead.spaceId}`);
+            await invalidateCache(`dashboard:metrics:${existingLead.spaceId}`);
+        }
         revalidatePath('/dashboard/leads', 'page')
         revalidatePath(`/dashboard/leads/${id}`, 'page')
 

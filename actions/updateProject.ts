@@ -85,6 +85,8 @@ export async function updateProject(data: UpdateProjectInput) {
         // Invalidate workload cache
         if (existingProject.spaceId) {
           await invalidateWorkloadCache(existingProject.spaceId);
+          const { invalidateCache } = await import("@/lib/redis");
+          await invalidateCache(`dashboard:metrics:${existingProject.spaceId}`);
         }
 
         return {

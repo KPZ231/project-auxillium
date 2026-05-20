@@ -5,6 +5,7 @@ import { TrendingUp, Layers, Target } from "lucide-react";
 import { ResponsiveContainer, LineChart, Line } from "recharts";
 import { getProjectCount, getDashboardMetrics } from "@/actions/getMetrics";
 import { getActiveSpaceId } from "@/actions/space";
+import LoadingCircle from "@/app/components/UI/LoadingCircle";
 
 interface MetricData {
   id: string;
@@ -61,54 +62,65 @@ import { useTranslation } from "@/app/context/TranslationContext";
 export default function MetricBoxes() {
   const { t } = useTranslation();
   const [data, setData] = useState<MetricData[]>(mockData);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchMetrics = async () => {
-      const spaceId = await getActiveSpaceId();
-      if (!spaceId) return;
+      setLoading(true);
+      try {
+        const spaceId = await getActiveSpaceId();
+        if (!spaceId) {
+          setLoading(false);
+          return;
+        }
 
-      const result = await getDashboardMetrics(spaceId);
-      
-      if (result.success && result.metrics) {
-        const { totalRevenue, activeProjectsCount, newLeadsCount, criticalProjectsCount } = result.metrics;
+        const result = await getDashboardMetrics(spaceId);
         
-        setData([
-          {
-            id: "revenue",
-            title: "REVENUE",
-            value: `$${(totalRevenue / 1000).toFixed(1)}k`,
-            badgeText: "Real-time",
-            badgeType: "dark",
-            subText: "total generated",
-            icon: "trending",
-            chartData: [
-              { value: totalRevenue * 0.4 },
-              { value: totalRevenue * 0.6 },
-              { value: totalRevenue * 0.5 },
-              { value: totalRevenue * 0.8 },
-              { value: totalRevenue * 0.9 },
-              { value: totalRevenue },
-            ],
-          },
-          {
-            id: "projects",
-            title: "ACTIVE PROJECTS",
-            value: activeProjectsCount.toString(),
-            badgeText: `${criticalProjectsCount} ${t("dashboard:status.critical", "Critical")}`,
-            badgeType: "outline",
-            subText: "in progress",
-            icon: "layers",
-          },
-          {
-            id: "leads",
-            title: "NEW LEADS",
-            value: newLeadsCount.toString(),
-            badgeText: "Last 30d",
-            badgeType: "dark",
-            subText: "potential clients",
-            icon: "target",
-          },
-        ]);
+        if (result.success && result.metrics) {
+          const { totalRevenue, activeProjectsCount, newLeadsCount, criticalProjectsCount } = result.metrics;
+          
+          setData([
+            {
+              id: "revenue",
+              title: "REVENUE",
+              value: `$${(totalRevenue / 1000).toFixed(1)}k`,
+              badgeText: "Real-time",
+              badgeType: "dark",
+              subText: "total generated",
+              icon: "trending",
+              chartData: [
+                { value: totalRevenue * 0.4 },
+                { value: totalRevenue * 0.6 },
+                { value: totalRevenue * 0.5 },
+                { value: totalRevenue * 0.8 },
+                { value: totalRevenue * 0.9 },
+                { value: totalRevenue },
+              ],
+            },
+            {
+              id: "projects",
+              title: "ACTIVE PROJECTS",
+              value: activeProjectsCount.toString(),
+              badgeText: `${criticalProjectsCount} ${t("dashboard:status.critical", "Critical")}`,
+              badgeType: "outline",
+              subText: "in progress",
+              icon: "layers",
+            },
+            {
+              id: "leads",
+              title: "NEW LEADS",
+              value: newLeadsCount.toString(),
+              badgeText: "Last 30d",
+              badgeType: "dark",
+              subText: "potential clients",
+              icon: "target",
+            },
+          ]);
+        }
+      } catch (err) {
+        console.error("Error fetching metrics:", err);
+      } finally {
+        setLoading(false);
       }
     };
     fetchMetrics();
@@ -173,14 +185,20 @@ export default function MetricBoxes() {
             </div>
 
             {/* Middle row */}
-            <div className="grow flex items-center relative z-10 mt-4">
-              <h2 className="text-5xl sm:text-6xl md:text-5xl lg:text-7xl xl:text-[5rem] leading-none font-extrabold text-black tracking-tighter">
-                {item.value}
-              </h2>
-            </div>
+            {loading ? (
+              <div className="grow flex items-center justify-center relative z-10 mt-4">
+                <LoadingCircle size="md" />
+              </div>
+            ) : (
+              <div className="grow flex items-center relative z-10 mt-4">
+                <h2 className="text-5xl sm:text-6xl md:text-5xl lg:text-7xl xl:text-[5rem] leading-none font-extrabold text-black tracking-tighter">
+                  {item.value}
+                </h2>
+              </div>
+            )}
 
             {/* Recharts background sparkline for Gross Revenue (optional nice touch) */}
-            {item.chartData && (
+            {!loading && item.chartData && (
               <div className="absolute inset-0 top-1/3 opacity-15 pointer-events-none">
                 <ResponsiveContainer width="100%" height="100%">
                   <LineChart data={item.chartData}>
@@ -199,19 +217,25 @@ export default function MetricBoxes() {
             )}
 
             {/* Bottom row */}
-            <div className="flex items-center gap-3 z-10">
-              <span
-                className={`text-xs font-bold px-2 py-1 ${
-                  item.badgeType === "dark"
-                    ? "bg-black text-white"
-                    : "border border-gray-400 bg-gray-100 text-black"
-                }`}
-              >
-                {item.id === "projects" ? item.badgeText : t(`dashboard:metrics.${item.id}_badge`, item.badgeText)}
-              </span>
-              <span className="text-xs text-gray-400 font-medium leading-tight max-w-[80px]">
-                {t(`dashboard:metrics.${item.id}_subtext`, item.subText)}
-              </span>
+            <div className="flex items-center gap-3 z-10 h-8">
+              {loading ? (
+                <div className="h-4 bg-gray-100 w-24 animate-pulse"></div>
+              ) : (
+                <>
+                  <span
+                    className={`text-xs font-bold px-2 py-1 ${
+                      item.badgeType === "dark"
+                        ? "bg-black text-white"
+                        : "border border-gray-400 bg-gray-100 text-black"
+                    }`}
+                  >
+                    {item.id === "projects" ? item.badgeText : t(`dashboard:metrics.${item.id}_badge`, item.badgeText)}
+                  </span>
+                  <span className="text-xs text-gray-400 font-medium leading-tight max-w-[80px]">
+                    {t(`dashboard:metrics.${item.id}_subtext`, item.subText)}
+                  </span>
+                </>
+              )}
             </div>
           </motion.div>
         ))}

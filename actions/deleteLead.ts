@@ -41,6 +41,10 @@ export async function deleteLead(leadId: string, confirmationName: string) {
 
         // Invalidate cache
         await invalidateCache(`leads:${userId}`)
+        if (lead.spaceId) {
+            await invalidateCache(`leads:${userId}:${lead.spaceId}`);
+            await invalidateCache(`dashboard:metrics:${lead.spaceId}`);
+        }
         revalidatePath('/dashboard/leads', 'page')
 
         return {

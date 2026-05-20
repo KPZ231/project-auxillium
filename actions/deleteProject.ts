@@ -63,6 +63,8 @@ export async function deleteProject(projectId: string, confirmationName: string)
         // Invalidate workload cache
         if (project.spaceId) {
           await invalidateWorkloadCache(project.spaceId);
+          const { invalidateCache } = await import("@/lib/redis");
+          await invalidateCache(`dashboard:metrics:${project.spaceId}`);
         }
 
         return {

@@ -56,7 +56,7 @@ const getFinanceCacheKey = (spaceId: string) => `finance:summary:${spaceId}`;
 export async function addExpense(data: z.infer<typeof expenseSchema>) {
   try {
     const validated = expenseSchema.parse(data);
-    
+
     const { checkPermission } = await import("@/lib/permissions");
     const permission = await checkPermission(validated.userId, validated.spaceId, "write");
     if (!permission.allowed) {
@@ -115,7 +115,7 @@ export async function addExpense(data: z.infer<typeof expenseSchema>) {
 export async function addIncome(data: z.infer<typeof incomeSchema>) {
   try {
     const validated = incomeSchema.parse(data);
-    
+
     const { checkPermission } = await import("@/lib/permissions");
     const permission = await checkPermission(validated.userId, validated.spaceId, "write");
     if (!permission.allowed) {
@@ -164,6 +164,7 @@ export async function addIncome(data: z.infer<typeof incomeSchema>) {
     });
 
     await invalidateCache(getFinanceCacheKey(validated.spaceId));
+    await invalidateCache(`dashboard:metrics:${validated.spaceId}`);
     revalidatePath("/dashboard/costs-expenses");
     return { success: true, data: income };
   } catch (error) {
@@ -175,7 +176,7 @@ export async function addIncome(data: z.infer<typeof incomeSchema>) {
 export async function setRevenueGoal(data: z.infer<typeof revenueGoalSchema>) {
   try {
     const validated = revenueGoalSchema.parse(data);
-    
+
     const { checkPermission } = await import("@/lib/permissions");
     const permission = await checkPermission(validated.userId, validated.spaceId, "write");
     if (!permission.allowed) {
@@ -252,15 +253,15 @@ export async function getFinancialSummary(spaceId: string) {
       const monthIndex = d.getMonth() + 1;
       const year = d.getFullYear();
 
-      const monthExpensesList = expenses.filter((e) => 
-        new Date(e.date).getMonth() + 1 === monthIndex && 
+      const monthExpensesList = expenses.filter((e) =>
+        new Date(e.date).getMonth() + 1 === monthIndex &&
         new Date(e.date).getFullYear() === year
       );
-      
+
       const monthExpenses = monthExpensesList.reduce((acc, curr) => acc + convertAmount(curr.amount, curr.currency), 0);
 
-      const monthIncomesList = incomes.filter((i) => 
-        new Date(i.date).getMonth() + 1 === monthIndex && 
+      const monthIncomesList = incomes.filter((i) =>
+        new Date(i.date).getMonth() + 1 === monthIndex &&
         new Date(i.date).getFullYear() === year
       );
 
@@ -299,10 +300,10 @@ export async function getFinancialSummary(spaceId: string) {
 
     const currentMonth = months[months.length - 1];
     const prevMonth = months[months.length - 2];
-    
+
     let incomeMom = 0;
     let expenseMom = 0;
-    
+
     if (prevMonth) {
       incomeMom = prevMonth.income ? ((currentMonth.income - prevMonth.income) / prevMonth.income) * 100 : 0;
       expenseMom = prevMonth.expenses ? ((currentMonth.expenses - prevMonth.expenses) / prevMonth.expenses) * 100 : 0;
@@ -310,9 +311,9 @@ export async function getFinancialSummary(spaceId: string) {
 
     const profitMargin = currentMonth.income ? ((currentMonth.income - currentMonth.expenses) / currentMonth.income) * 100 : 0;
 
-    const summary = { 
-      months, 
-      pnlData, 
+    const summary = {
+      months,
+      pnlData,
       waterfallData,
       mom: { income: incomeMom, expenses: expenseMom },
       profitMargin,
@@ -374,14 +375,14 @@ export async function estimateFutureExpenses(spaceId: string, monthsCount: numbe
     const recurringMonthly = expenses
       .filter((e: Expense) => e.isRecurring && e.cycle === "monthly")
       .reduce((acc: number, curr: Expense) => acc + curr.amount, 0);
-    
+
     const oneTimeExpenses = expenses.filter((e: Expense) => !e.isRecurring);
-    const oneTimeAvg = oneTimeExpenses.length > 0 
+    const oneTimeAvg = oneTimeExpenses.length > 0
       ? oneTimeExpenses.reduce((acc: number, curr: Expense) => acc + curr.amount, 0) / Math.max(1, expenses.length / 12) / 12 // average per month over years
       : 0;
 
     const estimatedPerMonth = recurringMonthly + oneTimeAvg;
-    
+
     return {
       estimatedPerMonth,
       totalForPeriod: estimatedPerMonth * monthsCount,
@@ -411,7 +412,7 @@ export async function checkAnomaly(spaceId: string, category: TransactionCategor
 
     // A simple average without complex currency conversion for the warning
     const avg = expenses.reduce((acc, curr) => acc + curr.amount, 0) / expenses.length;
-    
+
     return amount > (avg * 2);
   } catch (error) {
     console.error("[CHECK_ANOMALY_ERROR]", error);

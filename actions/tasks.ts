@@ -43,6 +43,8 @@ const invalidateAllTaskCaches = async (spaceId: string, projectId?: string | nul
   }
   // Always invalidate general space cache because it contains all tasks
   await invalidateCache(`space:${spaceId}:tasks`);
+  // Invalidate recent tasks cache
+  await invalidateCache(`space:${spaceId}:tasks:recent`);
 };
 
 export async function getTasks(spaceId: string, projectId?: string) {
@@ -225,6 +227,12 @@ export async function updateTaskStatusAndOrder(
 
 export async function getRecentTasks(spaceId: string, limit?: number) {
   try {
+    const cacheKey = `space:${spaceId}:tasks:recent`;
+    const cached = await getCachedData<any>(cacheKey);
+    if (cached) {
+      return { success: true, tasks: limit ? cached.slice(0, limit) : cached };
+    }
+
     const tasks = await prisma.task.findMany({
       where: { 
         spaceId,
@@ -236,10 +244,12 @@ export async function getRecentTasks(spaceId: string, limit?: number) {
       },
       orderBy: {
         createdAt: 'desc'
-      },
-      ...(limit ? { take: limit } : {})
+      }
     });
-    return { success: true, tasks };
+
+    await setCachedData(cacheKey, tasks, 300);
+
+    return { success: true, tasks: limit ? tasks.slice(0, limit) : tasks };
   } catch (error) {
     console.error("Failed to fetch recent tasks:", error);
     return { success: false, error: "Failed to fetch recent tasks" };

@@ -86,6 +86,8 @@ export async function addProject(data: AddProjectInput) {
         // Invalidate workload cache
         if (spaceId) {
           await invalidateWorkloadCache(spaceId);
+          const { invalidateCache } = await import("@/lib/redis");
+          await invalidateCache(`dashboard:metrics:${spaceId}`);
         }
 
         await createNotification({

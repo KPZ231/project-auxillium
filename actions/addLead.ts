@@ -90,6 +90,9 @@ export async function addLead(data: AddLeadInput) {
 
         // Invalidate cache
         await invalidateCache(`leads:${userId}${spaceId ? `:${spaceId}` : ""}`)
+        if (spaceId) {
+          await invalidateCache(`dashboard:metrics:${spaceId}`);
+        }
         
         await createNotification({
             title: `Nowy potencjalny klient: ${newLead.leadName}`,

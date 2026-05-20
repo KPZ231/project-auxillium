@@ -2,6 +2,9 @@
 
 import { prisma } from "@/lib/prisma"
 import { getUser } from "@/lib/session"
+import { getCachedData, setCachedData } from "@/lib/redis"
+
+const getMetricsCacheKey = (spaceId: string) => `dashboard:metrics:${spaceId}`;
 
 export async function getProjectCount() {
   try {
@@ -41,6 +44,15 @@ export async function getDashboardMetrics(spaceId: string) {
     const { isAuthenticatedAndLogedIn, userId } = await getUser()
     if (!isAuthenticatedAndLogedIn || !userId) return { success: false, error: "Unauthorized" }
 
+    const cacheKey = getMetricsCacheKey(spaceId);
+    const cached = await getCachedData<any>(cacheKey);
+    if (cached) {
+      return { 
+        success: true, 
+        metrics: cached 
+      }
+    }
+
     // 1. Total Revenue (Sum of all incomes in this space)
     const incomes = await prisma.income.findMany({
       where: { spaceId }
@@ -78,14 +90,18 @@ export async function getDashboardMetrics(spaceId: string) {
       }
     })
 
+    const metrics = {
+      totalRevenue,
+      activeProjectsCount,
+      newLeadsCount,
+      criticalProjectsCount
+    }
+
+    await setCachedData(cacheKey, metrics, 300);
+
     return { 
       success: true, 
-      metrics: {
-        totalRevenue,
-        activeProjectsCount,
-        newLeadsCount,
-        criticalProjectsCount
-      }
+      metrics
     }
   } catch (error) {
     console.error("Failed to fetch dashboard metrics:", error)

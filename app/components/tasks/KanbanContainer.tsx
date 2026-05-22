@@ -206,13 +206,13 @@ export function KanbanContainer({ projects, spaceId }: KanbanContainerProps) {
   return (
     <div className="flex flex-col h-full w-full max-w-full bg-[#FAFAFA]">
       {/* Project Selector Header */}
-      <div className="px-6 py-4 bg-white border-b border-[#E5E5E5] flex flex-col md:flex-row gap-4 items-stretch md:items-center justify-between">
-        <div className="flex items-center gap-4">
-          <div className="h-10 w-10 bg-[#0A0A0A] flex items-center justify-center text-white font-black text-sm">
+      <div className="px-4 py-3 md:px-6 md:py-4 bg-white border-b border-[#E5E5E5] flex flex-row items-center gap-4 justify-between">
+        <div className="flex items-center gap-3">
+          <div className="h-10 w-10 bg-[#0A0A0A] flex items-center justify-center text-white font-black text-sm flex-shrink-0">
             {selectedProject?.projectName.charAt(0)}
           </div>
-          <div>
-            <h2 className="text-sm font-black uppercase tracking-tight text-[#0A0A0A]">
+          <div className="min-w-0">
+            <h2 className="text-sm font-black uppercase tracking-tight text-[#0A0A0A] truncate max-w-[120px] sm:max-w-none">
               {selectedProject?.projectName}
             </h2>
             <p className="text-[10px] text-[#71717A] font-bold uppercase tracking-widest">
@@ -221,23 +221,24 @@ export function KanbanContainer({ projects, spaceId }: KanbanContainerProps) {
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center gap-3">
+        <div className="flex items-center gap-2 flex-shrink-0">
           <button
             onClick={handleRefresh}
-            className="flex items-center gap-2 px-4 py-2 text-[11px] font-bold uppercase tracking-widest bg-white border border-[#E5E5E5] hover:border-[#0A0A0A] text-[#0A0A0A] transition-all"
+            title="Refresh"
+            className="flex items-center justify-center gap-2 px-3 py-2 text-[11px] font-bold uppercase tracking-widest bg-white border border-[#E5E5E5] hover:border-[#0A0A0A] text-[#0A0A0A] transition-all"
           >
             <RotateCcw size={14} className={isLoading ? "animate-spin" : ""} />
-            Refresh
+            <span className="hidden sm:inline">Refresh</span>
           </button>
 
           {(connectedServices.google_tasks || connectedServices.google_calendar) && (
-            <div className="flex items-center gap-2 border-l border-[#E5E5E5] pl-3">
+            <div className="flex items-center gap-2 border-l border-[#E5E5E5] pl-2">
               {connectedServices.google_tasks && (
                 <button
                   onClick={() => handleGlobalSync("tasks")}
                   disabled={isSyncing}
                   title="Sync all to Google Tasks"
-                  className="flex items-center justify-center w-9 h-9 bg-white border border-[#E5E5E5] hover:border-[#0A0A0A] text-[#0A0A0A] transition-all"
+                  className="flex items-center justify-center w-8 h-8 bg-white border border-[#E5E5E5] hover:border-[#0A0A0A] text-[#0A0A0A] transition-all"
                 >
                   <SiGoogletasks size={14} className={isSyncing ? "animate-pulse" : ""} />
                 </button>
@@ -247,7 +248,7 @@ export function KanbanContainer({ projects, spaceId }: KanbanContainerProps) {
                   onClick={() => handleGlobalSync("calendar")}
                   disabled={isSyncing}
                   title="Sync all to Google Calendar"
-                  className="flex items-center justify-center w-9 h-9 bg-white border border-[#E5E5E5] hover:border-[#0A0A0A] text-[#0A0A0A] transition-all"
+                  className="flex items-center justify-center w-8 h-8 bg-white border border-[#E5E5E5] hover:border-[#0A0A0A] text-[#0A0A0A] transition-all"
                 >
                   <SiGooglecalendar size={14} className={isSyncing ? "animate-pulse" : ""} />
                 </button>
@@ -257,18 +258,20 @@ export function KanbanContainer({ projects, spaceId }: KanbanContainerProps) {
 
           <button
             onClick={() => router.push('/dashboard/tasks')} // Clear URL to trigger selection view
-            className="flex items-center gap-2 px-4 py-2 text-[11px] font-bold uppercase tracking-widest bg-white border border-[#E5E5E5] hover:border-[#0A0A0A] text-[#0A0A0A] transition-all"
+            title="Switch Project"
+            className="flex items-center justify-center gap-2 px-3 py-2 text-[11px] font-bold uppercase tracking-widest bg-white border border-[#E5E5E5] hover:border-[#0A0A0A] text-[#0A0A0A] transition-all"
           >
             <ArrowLeftRight size={14} />
-            Switch Project
+            <span className="hidden sm:inline">Switch Project</span>
           </button>
           
           <button
             onClick={() => router.push('/dashboard/projects')}
-            className="flex items-center gap-2 px-4 py-2 text-[11px] font-bold uppercase tracking-widest bg-white border border-[#E5E5E5] hover:border-[#0A0A0A] text-[#0A0A0A] transition-all"
+            title="All Projects"
+            className="flex items-center justify-center gap-2 px-3 py-2 text-[11px] font-bold uppercase tracking-widest bg-white border border-[#E5E5E5] hover:border-[#0A0A0A] text-[#0A0A0A] transition-all"
           >
             <LayoutGrid size={14} />
-            All Projects
+            <span className="hidden sm:inline">All Projects</span>
           </button>
         </div>
       </div>

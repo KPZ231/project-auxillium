@@ -8,7 +8,7 @@ import {
   XAxis,
   CartesianGrid,
 } from "recharts";
-import { Square, CheckSquare, Plus } from "lucide-react";
+import { Square, CheckSquare } from "lucide-react";
 import { getFinancialSummary } from "@/actions/finance";
 import { getRecentTasks } from "@/actions/tasks";
 import { getActiveSpaceId } from "@/actions/space";
@@ -39,6 +39,7 @@ export default function ActivityAndTasks() {
   const [chartData, setChartData] = useState<ChartData[]>([]);
   const [actionItems, setActionItems] = useState<ActionItem[]>([]);
   const [loading, setLoading] = useState(true);
+  const [visibleTasksCount, setVisibleTasksCount] = useState(5);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -193,7 +194,6 @@ export default function ActivityAndTasks() {
             <h3 className="text-sm font-bold text-black tracking-widest uppercase">
               {t("dashboard:metrics.action_items", "Action Items")}
             </h3>
-            <Plus className="w-5 h-5 text-black cursor-pointer" />
           </div>
 
           {/* List */}
@@ -207,45 +207,58 @@ export default function ActivityAndTasks() {
                 No action items
               </div>
             ) : (
-              actionItems.map((item, idx) => (
-                <div
-                  key={item.id}
-                  className={`flex gap-4 p-6 border-b border-gray-200 last:border-b-0 ${
-                    item.completed ? "opacity-50" : ""
-                  }`}
-                >
-                  <div className="mt-1 shrink-0">
-                    {item.completed ? (
-                      <CheckSquare className="w-5 h-5 text-gray-500" strokeWidth={2} />
-                    ) : (
-                      <Square className="w-5 h-5 text-black" strokeWidth={2} />
-                    )}
-                  </div>
-                  <div className="flex flex-col gap-1 w-full">
-                    <div className="flex justify-between items-start">
-                      <p
-                        className={`text-sm font-bold leading-tight ${
-                          item.completed ? "text-gray-500 line-through" : "text-black"
-                        }`}
-                      >
-                        {item.title}
-                      </p>
-                      {item.badge && !item.completed && (
-                        <span
-                          className={`text-[0.65rem] font-bold px-2 py-0.5 border uppercase tracking-wider ml-2 shrink-0 ${
-                            item.badge.type === "urgent"
-                              ? "border-red-400 text-red-500 bg-red-50"
-                              : "border-gray-400 text-gray-600 bg-gray-100"
-                          }`}
-                        >
-                          {t(`dashboard:status.${item.badge.type}`, item.badge.text)}
-                        </span>
+              <>
+                {actionItems.slice(0, visibleTasksCount).map((item, idx) => (
+                  <div
+                    key={item.id}
+                    className={`flex gap-4 p-6 border-b border-gray-200 last:border-b-0 ${
+                      item.completed ? "opacity-50" : ""
+                    }`}
+                  >
+                    <div className="mt-1 shrink-0">
+                      {item.completed ? (
+                        <CheckSquare className="w-5 h-5 text-gray-500" strokeWidth={2} />
+                      ) : (
+                        <Square className="w-5 h-5 text-black" strokeWidth={2} />
                       )}
                     </div>
-                    <p className="text-xs text-gray-500 font-medium">{item.assignee}</p>
+                    <div className="flex flex-col gap-1 w-full">
+                      <div className="flex justify-between items-start">
+                        <p
+                          className={`text-sm font-bold leading-tight ${
+                            item.completed ? "text-gray-500 line-through" : "text-black"
+                          }`}
+                        >
+                          {item.title}
+                        </p>
+                        {item.badge && !item.completed && (
+                          <span
+                            className={`text-[0.65rem] font-bold px-2 py-0.5 border uppercase tracking-wider ml-2 shrink-0 ${
+                              item.badge.type === "urgent"
+                                ? "border-red-400 text-red-500 bg-red-50"
+                                : "border-gray-400 text-gray-600 bg-gray-100"
+                            }`}
+                          >
+                            {t(`dashboard:status.${item.badge.type}`, item.badge.text)}
+                          </span>
+                        )}
+                      </div>
+                      <p className="text-xs text-gray-500 font-medium">{item.assignee}</p>
+                    </div>
                   </div>
-                </div>
-              ))
+                ))}
+                
+                {actionItems.length > visibleTasksCount && (
+                  <div className="p-6 border-t border-gray-200">
+                    <button
+                      onClick={() => setVisibleTasksCount((prev) => prev + 5)}
+                      className="block w-full py-4 border border-gray-300 text-center text-xs font-bold tracking-widest uppercase hover:bg-gray-50 transition-colors cursor-pointer text-black"
+                    >
+                      {t("dashboard:metrics.load_more", "Do załadowania więcej")}
+                    </button>
+                  </div>
+                )}
+              </>
             )}
           </div>
 

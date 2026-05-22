@@ -24,7 +24,7 @@ interface KanbanColumnProps {
 
 export function KanbanColumn({ id, title, tasks, onTaskClick, onAddTask }: KanbanColumnProps) {
   return (
-    <div className="flex flex-col flex-1 min-w-[300px] max-w-[350px] bg-gray-50/50 rounded-2xl h-full border border-gray-100 overflow-hidden">
+    <div className="flex flex-col flex-1 min-w-0 md:min-w-[300px] max-w-full md:max-w-[350px] bg-gray-50/50 rounded-2xl h-full border border-gray-100 overflow-hidden">
       {/* Column Header */}
       <div className="flex items-center justify-between p-4 border-b border-gray-100 bg-white">
         <div className="flex items-center gap-2">

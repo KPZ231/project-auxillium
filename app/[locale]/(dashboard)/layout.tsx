@@ -40,18 +40,24 @@ export default async function DashboardLayout({
     <BreadcrumbProvider>
       <div className="flex min-h-screen bg-gray-50 relative">
         {/* Sidebar - dynamically chosen based on route */}
-        <SidePanelWrapper />
+        <div className="print:hidden">
+          <SidePanelWrapper />
+        </div>
         
         {/* Main Content Area */}
-        <main className="flex-1 transition-all duration-400 flex flex-col">
-          <TopBar initialUser={userData} />
-          <div className="p-4 md:p-8 flex-1">
+        <main className="flex-1 transition-all duration-400 flex flex-col print:p-0 print:m-0 print:bg-white">
+          <div className="print:hidden">
+            <TopBar initialUser={userData} />
+          </div>
+          <div className="p-4 md:p-8 flex-1 print:p-0 print:m-0">
             {children}
           </div>
         </main>
 
         {/* Global AI Chat */}
-        <FloatingAIChat spaceId={activeSpaceId || null} />
+        <div className="print:hidden">
+          <FloatingAIChat spaceId={activeSpaceId || null} />
+        </div>
       </div>
       {showSelector && <SpaceSelectionModal spaces={spaces} />}
     </BreadcrumbProvider>

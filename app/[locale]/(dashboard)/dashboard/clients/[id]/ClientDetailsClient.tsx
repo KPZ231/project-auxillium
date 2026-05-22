@@ -10,7 +10,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useBreadcrumb } from "@/app/context/BreadcrumbContext";
 import { AssignmentManager } from "@/app/components/assignments/assignment-manager";
-import { PremiumInput, PremiumTextarea } from "@/app/components/UI/FormElements";
+import { PremiumInput, PremiumSelect, PremiumTextarea } from "@/app/components/UI/FormElements";
 import { RelatedDocuments } from "@/app/components/templates/RelatedDocuments";
 
 const STEPS = [
@@ -158,7 +158,7 @@ export default function ClientDetailsClient({
       spaceId: client.spaceId || "", // Assuming client has spaceId
       userId: client.userId,
       clientId: client.id,
-      ...(financeType === "INCOME" ? { source: financeData.source } : { category: financeData.category })
+      ...(financeType === "INCOME" ? { source: financeData.source } : { category: financeData.category || undefined })
     };
 
     const result = financeType === "INCOME" 
@@ -793,12 +793,28 @@ export default function ClientDetailsClient({
                 onChange={(e) => setFinanceData({...financeData, date: e.target.value})} 
               />
 
-              <PremiumInput 
-                label={financeType === "INCOME" ? "Source" : "Category"} 
-                value={financeType === "INCOME" ? financeData.source : financeData.category} 
-                onChange={(e) => setFinanceData({...financeData, [financeType === "INCOME" ? 'source' : 'category']: e.target.value})} 
-                placeholder={financeType === "INCOME" ? "e.g. Project Payment" : "e.g. Software License"}
-              />
+              {financeType === "INCOME" ? (
+                <PremiumInput 
+                  label="Source" 
+                  value={financeData.source} 
+                  onChange={(e) => setFinanceData({...financeData, source: e.target.value})} 
+                  placeholder="e.g. Project Payment"
+                />
+              ) : (
+                <PremiumSelect
+                  label="Category"
+                  value={financeData.category}
+                  onChange={(e) => setFinanceData({...financeData, category: e.target.value})}
+                  options={[
+                    { value: "", label: "Select Category" },
+                    { value: "Marketing", label: "Marketing" },
+                    { value: "SaaS", label: "SaaS" },
+                    { value: "Taxes", label: "Taxes" },
+                    { value: "Salary", label: "Salary" },
+                    { value: "Other", label: "Other" },
+                  ]}
+                />
+              )}
 
               <PremiumTextarea 
                 label="Description" 

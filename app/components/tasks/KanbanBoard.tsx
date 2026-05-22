@@ -38,6 +38,7 @@ export function KanbanBoard({ initialTasks, spaceId, projectId }: KanbanBoardPro
   const [defaultColumnId, setDefaultColumnId] = useState<string>("TODO");
   const [searchQuery, setSearchQuery] = useState("");
   const [priorityFilter, setPriorityFilter] = useState<string>("ALL");
+  const [activeTab, setActiveTab] = useState<string>("TODO");
 
   // Sync state with props
   useEffect(() => {
@@ -145,8 +146,8 @@ export function KanbanBoard({ initialTasks, spaceId, projectId }: KanbanBoardPro
   return (
     <div className="flex flex-col h-full w-full max-w-full bg-white">
       {/* Progress Bar Header */}
-      <div className="px-6 py-4 border-b border-gray-100 flex flex-col md:flex-row items-stretch md:items-center gap-4 md:gap-8 justify-between">
-        <div className="flex-1">
+      <div className="px-4 py-3 md:px-6 md:py-4 border-b border-gray-100 flex flex-row items-center gap-4 justify-between">
+        <div className="hidden md:block md:flex-1">
           <h2 className="text-xl font-black text-gray-900 tracking-tighter uppercase leading-none">
             Board
           </h2>
@@ -155,8 +156,8 @@ export function KanbanBoard({ initialTasks, spaceId, projectId }: KanbanBoardPro
           </p>
         </div>
         
-        <div className="w-full md:flex-[2] md:max-w-lg">
-          <div className="flex justify-between items-center mb-1.5 text-[10px] font-black text-gray-500 uppercase tracking-widest">
+        <div className="flex-1 max-w-xs md:max-w-md">
+          <div className="flex justify-between items-center mb-1 text-[9px] md:text-[10px] font-black text-gray-500 uppercase tracking-widest">
             <span>Project Momentum</span>
             <span>{progressPercentage}%</span>
           </div>
@@ -168,10 +169,10 @@ export function KanbanBoard({ initialTasks, spaceId, projectId }: KanbanBoardPro
           </div>
         </div>
 
-        <div className="md:flex-1 text-left md:text-right">
+        <div className="flex-shrink-0">
           <button 
-            onClick={() => handleAddTask("TODO")}
-            className="w-full md:w-auto px-4 py-2 bg-black text-white text-[10px] font-bold uppercase tracking-widest hover:bg-gray-800 transition-all shadow-sm"
+            onClick={() => handleAddTask(activeTab)}
+            className="px-3 py-2 md:px-4 md:py-2 bg-black text-white text-[10px] font-bold uppercase tracking-widest hover:bg-gray-800 transition-all shadow-sm"
           >
             + New Task
           </button>
@@ -179,8 +180,8 @@ export function KanbanBoard({ initialTasks, spaceId, projectId }: KanbanBoardPro
       </div>
 
       {/* Filter Bar */}
-      <div className="px-6 py-3 bg-gray-50/50 border-b border-gray-100 flex flex-wrap items-center gap-4">
-        <div className="relative flex-1 max-w-sm">
+      <div className="px-4 py-3 md:px-6 md:py-3 bg-gray-50/50 border-b border-gray-100 flex flex-col sm:flex-row sm:items-center gap-3">
+        <div className="relative w-full sm:w-auto sm:flex-1 sm:max-w-sm">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
           <input
             type="text"
@@ -191,40 +192,69 @@ export function KanbanBoard({ initialTasks, spaceId, projectId }: KanbanBoardPro
           />
         </div>
 
-        <div className="flex items-center gap-2">
-          <Filter size={16} className="text-gray-400" />
-          <select
-            value={priorityFilter}
-            onChange={(e) => setPriorityFilter(e.target.value)}
-            className="bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-black transition-all"
-          >
-            <option value="ALL">All Priorities</option>
-            <option value="LOW">Low</option>
-            <option value="MEDIUM">Medium</option>
-            <option value="HIGH">High</option>
-            <option value="CRITICAL">Critical</option>
-          </select>
-        </div>
-
-        <div className="text-xs text-gray-500 font-medium ml-auto">
-          Showing {filteredTasks.length} of {tasks.length} tasks
+        <div className="flex items-center justify-between gap-3 w-full sm:w-auto sm:ml-auto">
+          <div className="flex items-center gap-2">
+            <Filter size={16} className="text-gray-400" />
+            <select
+              value={priorityFilter}
+              onChange={(e) => setPriorityFilter(e.target.value)}
+              className="bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-black transition-all"
+            >
+              <option value="ALL">All Priorities</option>
+              <option value="LOW">Low</option>
+              <option value="MEDIUM">Medium</option>
+              <option value="HIGH">High</option>
+              <option value="CRITICAL">Critical</option>
+            </select>
+          </div>
+          <div className="text-xs text-gray-500 font-medium">
+            Showing {filteredTasks.length} of {tasks.length} tasks
+          </div>
         </div>
       </div>
 
+      {/* Mobile Column Tabs */}
+      <div className="flex md:hidden border-b border-gray-200 bg-white sticky top-0 z-10">
+        {COLUMNS.map(column => {
+          const columnTasks = filteredTasks.filter(t => t.status === column.id);
+          const isActive = activeTab === column.id;
+          return (
+            <button
+              key={column.id}
+              onClick={() => setActiveTab(column.id)}
+              className={`flex-1 py-3 text-center text-xs font-bold uppercase tracking-wider border-b-2 transition-all ${
+                isActive 
+                  ? "border-black text-black" 
+                  : "border-transparent text-gray-400 hover:text-gray-600"
+              }`}
+            >
+              {column.title} ({columnTasks.length})
+            </button>
+          );
+        })}
+      </div>
+
       {/* Board Columns */}
-      <div className="flex-1 overflow-x-auto overflow-y-hidden p-6">
+      <div className="flex-1 overflow-x-auto overflow-y-auto md:overflow-y-hidden p-4 md:p-6">
         <DragDropContext onDragEnd={onDragEnd}>
-          <div className="flex gap-6 h-full items-start">
-            {COLUMNS.map(column => (
-              <KanbanColumn
-                key={column.id}
-                id={column.id}
-                title={column.title}
-                tasks={filteredTasks.filter(t => t.status === column.id).sort((a, b) => a.order - b.order)}
-                onTaskClick={handleTaskClick}
-                onAddTask={handleAddTask}
-              />
-            ))}
+          <div className="flex flex-col md:flex-row gap-4 md:gap-6 h-full items-stretch md:items-start w-full md:w-auto">
+            {COLUMNS.map(column => {
+              const isColumnActive = activeTab === column.id;
+              return (
+                <div 
+                  key={column.id} 
+                  className={`${isColumnActive ? "flex" : "hidden md:flex"} flex-col flex-1 h-full w-full md:w-auto`}
+                >
+                  <KanbanColumn
+                    id={column.id}
+                    title={column.title}
+                    tasks={filteredTasks.filter(t => t.status === column.id).sort((a, b) => a.order - b.order)}
+                    onTaskClick={handleTaskClick}
+                    onAddTask={handleAddTask}
+                  />
+                </div>
+              );
+            })}
           </div>
         </DragDropContext>
       </div>

@@ -4,6 +4,7 @@ import { useState, useRef } from "react";
 import { uploadImage } from "@/actions/uploadImage";
 import { toast } from "sonner";
 import Image from "next/image";
+import { useTranslation } from "@/app/context/TranslationContext";
 
 interface ImageUploaderProps {
   images: string[];
@@ -15,6 +16,7 @@ export function ImageUploader({ images, onChange, maxImages }: ImageUploaderProp
   const [isDragging, setIsDragging] = useState(false);
   const [isUploading, setIsUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const { t } = useTranslation();
 
   const handleFileSelect = async (files: FileList | null) => {
     if (!files || files.length === 0) return;
@@ -25,7 +27,7 @@ export function ImageUploader({ images, onChange, maxImages }: ImageUploaderProp
     try {
       for (let i = 0; i < files.length; i++) {
         if (maxImages && newImages.length >= maxImages) {
-           toast.error(`Maximum of ${maxImages} image(s) allowed.`);
+           toast.error(t("ui:imageUploader.toast.maxImagesError", { max: maxImages }));
            break;
         }
 
@@ -33,7 +35,7 @@ export function ImageUploader({ images, onChange, maxImages }: ImageUploaderProp
         
         // Basic validation
         if (!file.type.startsWith("image/")) {
-          toast.error(`File ${file.name} is not an image.`);
+          toast.error(t("ui:imageUploader.toast.invalidFileError", { name: file.name }));
           continue;
         }
 
@@ -45,14 +47,14 @@ export function ImageUploader({ images, onChange, maxImages }: ImageUploaderProp
         if (result.success && result.url) {
           newImages.push(result.url);
         } else {
-          toast.error(result.error || `Failed to upload ${file.name}`);
+          toast.error(result.error || t("ui:imageUploader.toast.uploadFailedError", { name: file.name }));
         }
       }
 
       onChange(newImages);
-      toast.success("Images uploaded successfully!");
+      toast.success(t("ui:imageUploader.toast.success"));
     } catch (error) {
-      toast.error("An error occurred during upload.");
+      toast.error(t("ui:imageUploader.toast.uploadError"));
       console.error(error);
     } finally {
       setIsUploading(false);
@@ -106,14 +108,14 @@ export function ImageUploader({ images, onChange, maxImages }: ImageUploaderProp
         />
         <div className="text-center">
           {isUploading ? (
-            <span className="text-[#0A0A0A] text-[14px] font-medium">Uploading...</span>
+            <span className="text-[#0A0A0A] text-[14px] font-medium">{t("ui:imageUploader.uploading")}</span>
           ) : (
             <>
               <span className="block text-[#0A0A0A] text-[14px] font-medium">
-                Click or drag images here
+                {t("ui:imageUploader.prompt")}
               </span>
               <span className="block text-[#71717A] text-[12px] mt-1">
-                High-res JPG or PNG
+                {t("ui:imageUploader.formats")}
               </span>
             </>
           )}
@@ -127,7 +129,7 @@ export function ImageUploader({ images, onChange, maxImages }: ImageUploaderProp
             <div key={`${url}-${index}`} className="relative group aspect-square border border-[#E5E5E5] bg-[#FAFAFA]">
               <Image
                 src={url}
-                alt={`Uploaded project image ${index + 1}`}
+                alt={t("ui:imageUploader.imageAlt", { number: index + 1 })}
                 fill
                 className="object-cover"
               />
@@ -138,7 +140,7 @@ export function ImageUploader({ images, onChange, maxImages }: ImageUploaderProp
                   removeImage(index);
                 }}
                 className="absolute top-2 right-2 bg-[#0A0A0A] text-white w-6 h-6 flex items-center justify-center opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity duration-200 text-xs"
-                title="Remove image"
+                title={t("ui:imageUploader.removeImageTitle")}
               >
                 ✕
               </button>

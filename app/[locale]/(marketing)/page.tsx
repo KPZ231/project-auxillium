@@ -42,7 +42,7 @@ export default function Home() {
         }}
         image={{
           src: "/images/heroImage.png",
-          alt: "Auxillium Logo",
+          alt: t("marketing:hero.imageAlt"),
           width: 450,
           height: 450,
         }}
@@ -61,7 +61,7 @@ export default function Home() {
             planName: t("marketing:pricing.free"),
             cost: 0,
             description: t("marketing:pricing.free_desc"),
-            list: [t("marketing:pricing.free_desc"), "Lorem", "Lorem"],
+            list: [t("marketing:pricing.free_desc"), t("marketing:pricing.feature_lorem"), t("marketing:pricing.feature_lorem")],
             button: {
               content: t("marketing:pricing.cta"),
               variant: "primary",
@@ -72,7 +72,7 @@ export default function Home() {
             planName: t("marketing:pricing.pro"),
             cost: 100,
             description: t("marketing:pricing.pro_desc"),
-            list: [t("marketing:pricing.pro_desc"), "Lorem", "Lorem"],
+            list: [t("marketing:pricing.pro_desc"), t("marketing:pricing.feature_lorem"), t("marketing:pricing.feature_lorem")],
             button: {
               content: t("marketing:pricing.cta"),
               variant: "primary",
@@ -83,7 +83,7 @@ export default function Home() {
             planName: t("marketing:pricing.enterprise"),
             cost: 1000,
             description: t("marketing:pricing.enterprise_desc"),
-            list: [t("marketing:pricing.enterprise_desc"), "Lorem", "Lorem"],
+            list: [t("marketing:pricing.enterprise_desc"), t("marketing:pricing.feature_lorem"), t("marketing:pricing.feature_lorem")],
             button: {
               content: t("marketing:pricing.cta"),
               variant: "primary",

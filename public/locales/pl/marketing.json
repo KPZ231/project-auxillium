@@ -1,116 +1,114 @@
 {
   "hero": {
-    "title": "AUXILLIUM <br/> nowa definicja zarządzania",
-    "subtitle": "Minimalizm, który napędza twój biznes",
-    "cta": "Zacznij teraz",
-    "subtitle_alternative": "Minimalism that drives your business"
+    "title": "AUXILIUM <br/> nowa definicja zarządzania",
+    "subtitle": "Jeden system. Pełna kontrola. Zero chaosu.",
+    "cta": "Zacznij za darmo"
   },
   "features": {
-    "title": "Zaoszczędź do 30%",
-    "description": "Dzięki automatyzacji procesów oszczędzasz czas i pieniądze",
-    "subtitle": "Increase efficiency",
-    "subtitle_alternative": "Through process automation you save time and money"
+    "title": "Odzyskaj do 30% czasu pracy",
+    "description": "Automatyzuj powtarzalne procesy, eliminuj silosy danych i zarządzaj całą firmą z jednego miejsca.",
+    "subtitle": "Efektywność, która procentuje"
   },
   "pricing": {
-    "title": "Sprawdź nasze plany",
-    "subtitle": "Choose the right plan for your needs",
+    "title": "Prosty cennik. Żadnych niespodzianek.",
+    "subtitle": "Wybierz plan dopasowany do skali Twojej firmy",
     "free": "Free",
     "pro": "Pro",
     "enterprise": "Enterprise",
-    "free_desc": "Darmowy plan",
-    "pro_desc": "Plan Pro",
-    "enterprise_desc": "Plan Enterprise",
-    "cta": "Zacznij teraz"
+    "free_desc": "Dla zespołów, które dopiero zaczynają",
+    "pro_desc": "Dla rosnących firm potrzebujących pełnej kontroli",
+    "enterprise_desc": "Dla organizacji wymagających skalowalności i dedykowanego wsparcia",
+    "cta": "Zacznij za darmo"
   },
   "testimonials": {
     "title": "Filozofia",
-    "subtitle": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+    "subtitle": "Wierzymy, że dobre oprogramowanie nie przeszkadza — ono znika w tle i po prostu działa."
   },
   "faq": {
     "title": "Często zadawane pytania",
-    "subtitle": "Wszystko co musisz wiedzieć o Auxillium",
-    "q1": "Jak zacząć korzystać z systemu?",
-    "a1": "Wystarczy zarejestrować się na naszej platformie i wybrać plan darmowy, aby przetestować podstawowe funkcjonalności.",
+    "subtitle": "Wszystko, co musisz wiedzieć przed pierwszym logowaniem",
+    "q1": "Jak szybko mogę zacząć korzystać z systemu?",
+    "a1": "Rejestracja zajmuje mniej niż 2 minuty. Plan Free nie wymaga karty kredytowej — możesz od razu przetestować kluczowe funkcje bez żadnych zobowiązań.",
     "q2": "Czy mogę zmienić plan w dowolnym momencie?",
-    "a2": "Tak, możesz przejść na wyższy lub niższy plan w dowolnym momencie. Zmiany wejdą w życie od kolejnego okresu rozliczeniowego.",
+    "a2": "Tak. Możesz przejść na wyższy lub niższy plan w każdej chwili. Zmiana wchodzi w życie od następnego okresu rozliczeniowego, bez ukrytych opłat.",
     "q3": "Jakie metody płatności są obsługiwane?",
-    "a3": "Obsługujemy płatności kartą, przelewy błyskawiczne oraz płatności cykliczne (subskrypcje)."
+    "a3": "Akceptujemy płatności kartą (Visa, Mastercard), szybkie przelewy bankowe oraz subskrypcje cykliczne. Faktury VAT wystawiane są automatycznie."
   },
   "cta": {
-    "title": "Gotowy na zmianę?",
-    "subtitle": "Zacznij korzystać z Auxillium już dziś i przekonaj się, jak łatwe może być zarządzanie Twoim biznesem.",
-    "cta": "Zacznij teraz"
+    "title": "Czas zamienić chaos w system.",
+    "subtitle": "Dołącz do firm, które zarządzają mądrzej. Pierwsze 14 dni planu Pro — bezpłatnie.",
+    "cta": "Wypróbuj Auxilium"
   },
   "about": {
     "title": "O nas",
-    "description": "Dowiedz się więcej o naszej firmie",
+    "description": "Budujemy narzędzia, które rosną razem z Twoją firmą",
     "offer_title": "Co oferujemy",
-    "offer_subtitle": "Jako KPZ's Productions oferujemy szeroki zakres usług związanych z tworzeniem oprogramowania. Nasz zespół składa się z doświadczonych programistów i projektantów, którzy są w stanie sprostać nawet najbardziej wymagającym zadaniom.",
-    "offer_item1": "Nowe technologie",
-    "offer_item1_desc": "Nowe technologie",
-    "offer_item2": "Nowe technologie",
-    "offer_item2_desc": "Nowe technologie",
-    "offer_item3": "Nowe technologie",
-    "offer_item3_desc": "Nowe technologie",
-    "offer_item4": "Nowe technologie",
-    "offer_item4_desc": "Nowe technologie",
+    "offer_subtitle": "Auxilium to platforma stworzona przez zespół KPZ's Productions — programistów i product designerów z doświadczeniem w skalowaniu firm sektora MŚP. Rozumiemy, że rosnące organizacje potrzebują narzędzi, które dorównują ich ambicjom.",
+    "offer_item1": "Zarządzanie projektami",
+    "offer_item1_desc": "Przejrzysty widok postępów, terminów i podziału obowiązków w całym zespole.",
+    "offer_item2": "Śledzenie leadów i klientów",
+    "offer_item2_desc": "CRM dopasowany do tempa sprzedaży MŚP — skuteczny i bez zbędnej złożoności.",
+    "offer_item3": "Finanse i koszty",
+    "offer_item3_desc": "Kontroluj przychody, wydatki i cele finansowe w czasie rzeczywistym.",
+    "offer_item4": "Zarządzanie zespołu",
+    "offer_item4_desc": "Onboarding, przypisywanie zadań, monitorowanie obciążenia pracą — wszystko w jednym miejscu.",
     "why_choose_us": "Co nas wyróżnia",
-    "quote_content": "Pomagamy firmom transformować cyfrowo i skalować biznes",
-    "sub_content": "Łączymy kreatywność z danymi. Tworzymy oprogramowanie, które napędza wzrost, zwiększa wydajność i otwiera nowe możliwości rynkowe dla naszych klientów."
+    "quote_content": "Pomagamy firmom zastąpić chaos wielu narzędzi jedną, spójną platformą operacyjną.",
+    "sub_content": "Łączymy intuicyjną obsługę z zaawansowaną funkcjonalnością. Tworzymy oprogramowanie, które nie tylko doskonale wygląda, ale realnie przyspiesza podejmowanie decyzji, zwiększa odpowiedzialność zespołu i ułatwia skalowanie biznesu."
   },
   "contact": {
     "title": "Kontakt",
-    "description": "Skontaktuj się z nami"
+    "description": "Masz pytania? Napisz do nas — odpowiemy w ciągu jednego dnia roboczego."
   },
   "cookies": {
     "title": "Polityka Cookies",
-    "description": "Poityka Cookies strony internetowej",
+    "description": "Polityka plików cookies serwisu Auxilium",
     "publication_date": "Data publikacji: 26.04.2026",
     "section1": {
       "title": "1. Definicje",
-      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+      "content": "Użyte w niniejszej polityce pojęcia oznaczają: Cookies — pliki tekstowe zapisywane na urządzeniu użytkownika przez przeglądarkę internetową w celu przechowywania informacji o sesji i preferencjach."
     },
     "section2": {
-      "title": "2. Definicje",
-      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+      "title": "2. Rodzaje wykorzystywanych plików cookies",
+      "content": "Serwis wykorzystuje cookies niezbędne do działania platformy, cookies analityczne służące poprawie jakości usług oraz cookies preferencji, które zapamiętują ustawienia użytkownika pomiędzy sesjami."
     },
     "section3": {
-      "title": "3. Definicje",
-      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+      "title": "3. Zarządzanie cookies",
+      "content": "Użytkownik może w dowolnym momencie zmienić ustawienia dotyczące plików cookies w swojej przeglądarce. Wyłączenie cookies niezbędnych może ograniczyć funkcjonalność platformy."
     }
   },
   "privacy": {
     "title": "Polityka Prywatności",
-    "description": "Polityka prywatności strony internetowej",
+    "description": "Polityka prywatności i ochrony danych osobowych serwisu Auxilium",
     "publication_date": "Data publikacji: 26.04.2026",
     "section1": {
-      "title": "1. Definicje",
-      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+      "title": "1. Administrator danych",
+      "content": "Administratorem danych osobowych jest KPZ's Productions. Dane przetwarzane są zgodnie z Rozporządzeniem RODO oraz polskimi przepisami o ochronie danych osobowych."
     },
     "section2": {
-      "title": "2. Definicje",
-      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+      "title": "2. Zakres i cel przetwarzania danych",
+      "content": "Dane osobowe zbierane są wyłącznie w zakresie niezbędnym do świadczenia usług platformy Auxilium: obsługi konta, realizacji subskrypcji oraz komunikacji z użytkownikiem."
     },
     "section3": {
-      "title": "3. Definicje",
-      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+      "title": "3. Prawa użytkownika",
+      "content": "Użytkownikowi przysługuje prawo dostępu do danych, ich sprostowania, usunięcia, ograniczenia przetwarzania oraz przenoszenia. W celu realizacji praw prosimy o kontakt pod adresem podanym w sekcji Kontakt."
     }
   },
   "terms": {
     "title": "Regulamin",
-    "description": "Regulamin strony internetowej",
+    "description": "Regulamin korzystania z platformy Auxilium",
     "publication_date": "Data publikacji: 26.04.2026",
     "section1": {
-      "title": "1. Definicje",
-      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+      "title": "1. Postanowienia ogólne",
+      "content": "Niniejszy regulamin określa zasady korzystania z platformy Auxilium, świadczonej przez KPZ's Productions. Korzystanie z platformy oznacza akceptację poniższych warunków."
     },
     "section2": {
-      "title": "2. Definicje",
-      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+      "title": "2. Prawa i obowiązki użytkownika",
+      "content": "Użytkownik zobowiązuje się do korzystania z platformy zgodnie z jej przeznaczeniem, nienaruszania praw osób trzecich oraz nieudostępniania danych dostępowych osobom nieuprawnionym."
     },
     "section3": {
-      "title": "3. Definicje",
-      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+      "title": "3. Odpowiedzialność i zmiany regulaminu",
+      "content": "KPZ's Productions zastrzega sobie prawo do wprowadzania zmian w regulaminie z zachowaniem 14-dniowego okresu powiadomienia użytkowników. Dalsze korzystanie z platformy po tym czasie oznacza akceptację wprowadzonych zmian."
     }
   }
 }

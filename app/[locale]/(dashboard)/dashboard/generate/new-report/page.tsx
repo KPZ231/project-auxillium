@@ -14,17 +14,9 @@ export default async function NewReportPage({ params }: { params: Promise<{ loca
 
   const spaceId = await getActiveSpaceId();
 
-  if (!spaceId) {
-    return (
-      <div className="flex h-full items-center justify-center text-[#71717A] text-[14px]">
-        Please select or create a space to view the report generator.
-      </div>
-    );
-  }
-
   return (
     <div className="w-full flex flex-col print:p-0 print:m-0">
-      <ReportClient spaceId={spaceId} locale={locale} />
+      <ReportClient spaceId={spaceId ?? null} locale={locale} />
     </div>
   );
 }

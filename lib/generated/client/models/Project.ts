@@ -874,10 +874,6 @@ export type ProjectUpdateimagesInput = {
   push?: string | string[]
 }
 
-export type NullableDateTimeFieldUpdateOperationsInput = {
-  set?: Date | string | null
-}
-
 export type IntFieldUpdateOperationsInput = {
   set?: number
   increment?: number

@@ -99,7 +99,11 @@ export const UserScalarFieldEnum = {
   avatarUrl: 'avatarUrl',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
-  lastActiveSpaceId: 'lastActiveSpaceId'
+  lastActiveSpaceId: 'lastActiveSpaceId',
+  stripeCustomerId: 'stripeCustomerId',
+  stripeSubscriptionId: 'stripeSubscriptionId',
+  stripePriceId: 'stripePriceId',
+  stripeCurrentPeriodEnd: 'stripeCurrentPeriodEnd'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]

@@ -3,6 +3,8 @@
 import { motion, Variants } from "motion/react";
 import Button from "../Button/Button";
 import { Check } from "lucide-react";
+import { useUser } from "@/app/context/UserContext";
+import { useState } from "react";
 
 interface PricingProps {
   name: string;
@@ -13,6 +15,7 @@ interface PricingProps {
     cost: number;
     description?: string;
     list: string[];
+    priceId?: string;
 
     button: {
       content: string;
@@ -23,6 +26,48 @@ interface PricingProps {
 }
 
 export default function PricingColumns({ name, header, plans }: PricingProps) {
+  const { user } = useUser();
+  const [loadingPriceId, setLoadingPriceId] = useState<string | null>(null);
+
+  const handleCheckout = async (e: React.MouseEvent<HTMLAnchorElement>, plan: PricingProps["plans"][0]) => {
+    if (!user) {
+      // Not logged in -> go to signup (default link behavior)
+      return;
+    }
+
+    if (plan.cost === 0 || !plan.priceId) {
+      // Free plan or no price ID -> allow default behavior
+      return;
+    }
+
+    e.preventDefault();
+    setLoadingPriceId(plan.priceId);
+
+    try {
+      const response = await fetch("/api/stripe/checkout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          planName: plan.planName,
+          priceId: plan.priceId,
+        }),
+      });
+
+      const data = await response.json();
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        console.error(data.error);
+        alert(data.error || "Something went wrong.");
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Failed to initiate checkout");
+    } finally {
+      setLoadingPriceId(null);
+    }
+  };
+
   // Define variants for the staggered animation
   const cardVariants: Variants = {
     hidden: { opacity: 0, scale: 0.8, y: 20 },
@@ -149,10 +194,11 @@ export default function PricingColumns({ name, header, plans }: PricingProps) {
                   {/* Button */}
                   <Button
                     className="w-full justify-center"
-                    content={plan.button.content}
+                    content={loadingPriceId === plan.priceId ? "Processing..." : plan.button.content}
                     variant={featured ? "secondary" : "primary"}
                     url={plan.button.url}
-                    showArrow={true}
+                    showArrow={loadingPriceId !== plan.priceId}
+                    onClick={(e) => handleCheckout(e, plan)}
                   />
                 </div>
               </motion.div>

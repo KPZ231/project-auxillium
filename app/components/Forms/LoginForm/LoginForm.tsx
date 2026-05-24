@@ -94,7 +94,7 @@ export default function LoginForm() {
             />
             {errors.username && (
               <span className="text-[10px] font-bold text-red-500 uppercase tracking-wider">
-                {errors.username.message}
+                {t(`forms:errors.${errors.username.message}` as `forms:errors.${string}`, { defaultValue: errors.username.message })}
               </span>
             )}
           </div>

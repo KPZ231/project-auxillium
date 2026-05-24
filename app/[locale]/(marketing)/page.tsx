@@ -71,6 +71,7 @@ export default function Home() {
           {
             planName: t("marketing:pricing.pro"),
             cost: 100,
+            priceId: "price_1Taey5EBFAZLdzO9LlYWpLIj",
             description: t("marketing:pricing.pro_desc"),
             list: [t("marketing:pricing.pro_desc"), t("marketing:pricing.feature_lorem"), t("marketing:pricing.feature_lorem")],
             button: {
@@ -82,6 +83,7 @@ export default function Home() {
           {
             planName: t("marketing:pricing.enterprise"),
             cost: 1000,
+            priceId: "price_1Taey4EBFAZLdzO9Rkn8Jy6Z",
             description: t("marketing:pricing.enterprise_desc"),
             list: [t("marketing:pricing.enterprise_desc"), t("marketing:pricing.feature_lorem"), t("marketing:pricing.feature_lorem")],
             button: {

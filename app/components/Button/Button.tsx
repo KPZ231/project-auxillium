@@ -7,7 +7,7 @@ interface ButtonProps {
   variant: "primary" | "secondary";
   url: string;
   showArrow?: boolean;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement>) => void;
   icon?: React.ReactNode;
 }
 

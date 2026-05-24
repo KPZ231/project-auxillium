@@ -7,7 +7,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter, useSearchParams } from "next/navigation";
 import { FaArrowRight } from "react-icons/fa";
 import { z } from "zod";
-import { z } from "zod";
 import { resetPassword } from "@/actions/reset-password";
 import { useTranslation } from "@/app/context/TranslationContext";
 

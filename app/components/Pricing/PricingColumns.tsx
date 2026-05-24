@@ -30,17 +30,23 @@ export default function PricingColumns({ name, header, plans }: PricingProps) {
   const [loadingPriceId, setLoadingPriceId] = useState<string | null>(null);
 
   const handleCheckout = async (e: React.MouseEvent<HTMLAnchorElement>, plan: PricingProps["plans"][0]) => {
-    if (!user) {
-      // Not logged in -> go to signup (default link behavior)
-      return;
-    }
-
     if (plan.cost === 0 || !plan.priceId) {
       // Free plan or no price ID -> allow default behavior
       return;
     }
 
     e.preventDefault();
+
+    if (isLoading) {
+      // Wait for auth to load
+      return;
+    }
+
+    if (!user) {
+      // Not logged in -> go to register
+      window.location.href = plan.button.url;
+      return;
+    }
     setLoadingPriceId(plan.priceId);
 
     try {

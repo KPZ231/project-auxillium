@@ -38,7 +38,7 @@ export default function Home() {
         button={{
           content: t("marketing:hero.cta"),
           variant: "primary",
-          url: `/${language}/signup`,
+          url: `/${language}/register`,
         }}
         image={{
           src: "/images/heroImage.png",
@@ -65,7 +65,7 @@ export default function Home() {
             button: {
               content: t("marketing:pricing.cta"),
               variant: "primary",
-              url: `/${language}/signup`,
+              url: `/${language}/register`,
             },
           },
           {
@@ -75,9 +75,9 @@ export default function Home() {
             description: t("marketing:pricing.pro_desc"),
             list: [t("marketing:pricing.pro_desc"), t("marketing:pricing.feature_lorem"), t("marketing:pricing.feature_lorem")],
             button: {
-              content: t("marketing:pricing.cta"),
+              content: "Wybierz plan",
               variant: "primary",
-              url: `/${language}/signup`,
+              url: `/${language}/register`,
             },
           },
           {
@@ -87,9 +87,9 @@ export default function Home() {
             description: t("marketing:pricing.enterprise_desc"),
             list: [t("marketing:pricing.enterprise_desc"), t("marketing:pricing.feature_lorem"), t("marketing:pricing.feature_lorem")],
             button: {
-              content: t("marketing:pricing.cta"),
+              content: "Skontaktuj się z nami",
               variant: "primary",
-              url: `/${language}/signup`,
+              url: `/${language}/register`,
             },
           },
         ]}
@@ -119,7 +119,7 @@ export default function Home() {
         button={{
           content: t("marketing:cta.cta"),
           variant: "primary",
-          url: `/${language}/signup`,
+          url: `/${language}/register`,
         }}
       ></CTA>
     </>

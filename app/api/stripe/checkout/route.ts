@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { stripe } from "@/lib/stripe";
 import { getUser } from "@/lib/session";
 import { prisma } from "@/lib/prisma";
+import Stripe from "stripe";
 
 export async function POST(request: NextRequest) {
   try {
@@ -16,6 +17,13 @@ export async function POST(request: NextRequest) {
 
     const body = await request.json();
     const { planName, priceId } = body;
+
+    if (!priceId) {
+      return NextResponse.json(
+        { error: "Missing priceId in request body." },
+        { status: 400 }
+      );
+    }
 
     // Retrieve the user to see if they already have a Stripe Customer ID
     const user = await prisma.user.findUnique({
@@ -47,8 +55,15 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    // Determine the base URL for redirecting
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || new URL(request.url).origin;
+    // Derive base URL from the request itself so it works on any domain
+    const origin = request.headers.get("origin") ||
+      process.env.NEXT_PUBLIC_APP_URL ||
+      new URL(request.url).origin;
+
+    // Detect locale from the Referer header (e.g. https://auxillium.site/pl → pl)
+    const referer = request.headers.get("referer") || "";
+    const localeMatch = referer.match(/\/([a-z]{2})\b/);
+    const locale = localeMatch?.[1] ?? "pl";
 
     // Create a Checkout Session
     const session = await stripe.checkout.sessions.create({
@@ -56,13 +71,13 @@ export async function POST(request: NextRequest) {
       customer: customerId,
       line_items: [
         {
-          price: priceId || "price_dummy", // Provide actual price ID from environment or request
+          price: priceId,
           quantity: 1,
         },
       ],
       mode: "subscription",
-      success_url: `${baseUrl}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${baseUrl}/checkout/cancel`,
+      success_url: `${origin}/${locale}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
+      cancel_url: `${origin}/${locale}/checkout/cancel`,
       metadata: {
         userId: user.id,
         planName: planName || "Pro",
@@ -76,7 +91,14 @@ export async function POST(request: NextRequest) {
 
     return NextResponse.json({ sessionId: session.id, url: session.url });
   } catch (error) {
-    console.error("Error creating checkout session:", error);
+    if (error instanceof Stripe.errors.StripeError) {
+      console.error("Stripe error:", error.type, error.message, error.code);
+      return NextResponse.json(
+        { error: error.message },
+        { status: error.statusCode ?? 500 }
+      );
+    }
+    console.error("Unexpected error creating checkout session:", error);
     return NextResponse.json(
       { error: "Internal Server Error" },
       { status: 500 }

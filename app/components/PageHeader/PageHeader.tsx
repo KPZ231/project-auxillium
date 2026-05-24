@@ -1,95 +1,112 @@
 "use client";
+
 import Button from "../Button/Button";
 import { motion, Variants } from "motion/react";
-import Image from "next/image";
 
 interface PageHeaderProps {
   header: string;
   description: string;
-  image: {
+  /** Optional label shown above the header in small caps */
+  eyebrow?: string;
+  image?: {
     src: string;
     alt: string;
     width: number;
     height: number;
   };
-  button: {
+  button?: {
     content: string;
     variant: "primary" | "secondary";
     url: string;
   };
 }
 
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 16 },
+  visible: (delay: number = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut", delay },
+  }),
+};
+
 export default function PageHeader({
   header,
   description,
-  image,
+  eyebrow,
   button,
 }: PageHeaderProps) {
-  const textVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: "easeOut" },
-    },
-  };
-
   return (
-    <>
-      <section className="w-full px-6 lg:px-12 py-16 md:py-24 bg-(--secondary)">
-        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-8 md:gap-16 justify-between">
-          {/* Left Side: Header & Description */}
-          <div className="lg:w-1/3 flex flex-col gap-6 lg:gap-8 justify-center">
-            <motion.div
-              variants={textVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-            >
-              <h2 className="tracking-tight text-4xl md:text-5xl lg:text-6xl text-(--primary) font-bold leading-tight">
-                {header}
-              </h2>
-            </motion.div>
-            <motion.div
-              variants={textVariants}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-            >
-              <p className="tracking-widest text-sm text-(--neutral) font-light uppercase">
-                {description}
-              </p>
-            </motion.div>
+    <section className="w-full px-6 lg:px-12 pt-10 pb-16 mt-16 bg-[#FAFAFA] border-b border-[#E5E5E5]">
+      <div className="max-w-7xl mx-auto">
 
-            <motion.div
-              variants={textVariants}
+        {/* Top rule */}
+        <motion.div
+          variants={fadeUp}
+          custom={0}
+          initial="hidden"
+          animate="visible"
+          className="h-px bg-[#0A0A0A] mb-10 w-12"
+        />
+
+        <div className="flex flex-col lg:flex-row gap-10 lg:gap-20 justify-between">
+
+          {/* Left — eyebrow + header */}
+          <div className="lg:w-1/2 flex flex-col gap-4">
+            {eyebrow && (
+              <motion.p
+                variants={fadeUp}
+                custom={0.05}
+                initial="hidden"
+                animate="visible"
+                className="text-[11px] font-medium uppercase tracking-[0.18em] text-[#71717A]"
+              >
+                {eyebrow}
+              </motion.p>
+            )}
+
+            <motion.h1
+              variants={fadeUp}
+              custom={0.15}
               initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
+              animate="visible"
+              className="text-4xl md:text-5xl lg:text-6xl font-bold text-[#0A0A0A] leading-[1.08] tracking-tight"
             >
-              <Button
-                className="w-full md:w-auto"
-                content={button.content}
-                variant={button.variant}
-                url={button.url}
-                showArrow={true}
-              ></Button>
-            </motion.div>
+              {header}
+            </motion.h1>
           </div>
 
-          {/* Right Side: Image */}
-          <div className="lg:w-2/3 flex items-center">
-            <Image
-              src={image.src}
-              alt={image.alt}
-              width={image.width}
-              height={image.height}
-              className="w-full h-auto object-cover"
-              priority
-            ></Image>
+          {/* Right — description + optional CTA */}
+          <div className="lg:w-1/2 flex flex-col gap-6 justify-end">
+            <motion.p
+              variants={fadeUp}
+              custom={0.25}
+              initial="hidden"
+              animate="visible"
+              className="text-base font-light text-[#71717A] leading-[1.65] max-w-md"
+            >
+              {description}
+            </motion.p>
+
+            {button && (
+              <motion.div
+                variants={fadeUp}
+                custom={0.35}
+                initial="hidden"
+                animate="visible"
+              >
+                <Button
+                  className="w-auto"
+                  content={button.content}
+                  variant={button.variant}
+                  url={button.url}
+                  showArrow
+                />
+              </motion.div>
+            )}
           </div>
         </div>
-      </section>
-    </>
+      </div>
+    </section>
   );
 }

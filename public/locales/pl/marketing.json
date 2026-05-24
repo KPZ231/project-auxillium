@@ -2,7 +2,9 @@
   "hero": {
     "title": "AUXILIUM <br/> nowa definicja zarządzania",
     "subtitle": "Jeden system. Pełna kontrola. Zero chaosu.",
-    "cta": "Zacznij za darmo"
+    "cta": "Zacznij za darmo",
+    "cta_secondary": "Obejrzyj demo",
+    "social_proof": "ponad 500 firm już zarządza mądrzej"
   },
   "features": {
     "title": "Odzyskaj do 30% czasu pracy",

@@ -26,7 +26,7 @@ interface PricingProps {
 }
 
 export default function PricingColumns({ name, header, plans }: PricingProps) {
-  const { user } = useUser();
+  const { user, isLoading } = useUser();
   const [loadingPriceId, setLoadingPriceId] = useState<string | null>(null);
 
   const handleCheckout = async (e: React.MouseEvent<HTMLAnchorElement>, plan: PricingProps["plans"][0]) => {

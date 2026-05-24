@@ -12,16 +12,10 @@ export default function About() {
       <HeroSection
         header={t("marketing:about.title")}
         description={t("marketing:about.description")}
-        image={{
-          src: "/images/background-image.jpeg",
-          alt: "Hero Image",
-          width: 450,
-          height: 450,
-        }}
         button={{
           content: t("marketing:hero.cta"),
           variant: "primary",
-          url: `/${language}/signup`,
+          url: `/${language}/register`,
         }}
       ></HeroSection>
       <Grid

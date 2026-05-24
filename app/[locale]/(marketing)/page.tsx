@@ -40,12 +40,11 @@ export default function Home() {
           variant: "primary",
           url: `/${language}/register`,
         }}
-        image={{
-          src: "/images/heroImage.png",
-          alt: t("marketing:hero.imageAlt"),
-          width: 450,
-          height: 450,
+        buttonSecondary={{
+          content: t("marketing:hero.cta_secondary"),
+          url: `/${language}/about`,
         }}
+        socialProof={t("marketing:hero.social_proof")}
       ></HeroSection>
       <ContentColumns count={3} content={contentColumnsData}></ContentColumns>
       <TemplateAnalitics></TemplateAnalitics>

@@ -12,6 +12,7 @@ interface UserData {
   plan: Plan;
   limits: PlanLimits;
   features: PlanFeatures;
+  renewalDate: string | null;
 }
 
 interface UserContextType {

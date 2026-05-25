@@ -44,6 +44,7 @@ export async function GET() {
       plan,
       limits,
       features,
+      renewalDate: user.stripeCurrentPeriodEnd?.toISOString() ?? null,
     });
   } catch (error) {
     console.error("Error fetching user data:", error);

@@ -2,6 +2,7 @@
 
 import { getUser } from "@/lib/session"
 import { prisma } from "@/lib/prisma"
+import { getUserPlanById } from "@/lib/subscription"
 import { z } from "zod"
 import { LeadStatus } from "@/lib/generated/client/client"
 import { revalidatePath } from "next/cache"
@@ -44,6 +45,12 @@ export async function addLead(data: AddLeadInput) {
     }
 
     const { leadName, contactName, role, email, phone, status, stage, leadInfo } = parsedData.data
+
+    const { plan, limits } = await getUserPlanById(userId)
+    const leadCount = await prisma.lead.count({ where: { userId } })
+    if (limits.leads !== null && leadCount >= limits.leads) {
+        return { success: false, error: "LEAD_LIMIT_REACHED", plan }
+    }
 
     try {
         const existingLead = await prisma.lead.findUnique({

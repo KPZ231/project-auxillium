@@ -2,6 +2,7 @@
 
 import { getUser } from "@/lib/session"
 import { prisma } from "@/lib/prisma"
+import { getUserPlanById } from "@/lib/subscription"
 import { z } from "zod"
 import { revalidatePath } from "next/cache"
 import { setCachedData, getCachedData, invalidateCache } from "@/lib/redis"
@@ -49,6 +50,12 @@ export async function addClient(data: AddClientInput) {
   }
 
   const { name, email, description } = parsedData.data
+
+  const { plan, limits } = await getUserPlanById(userId)
+  const clientCount = await prisma.client.count({ where: { userId } })
+  if (limits.clients !== null && clientCount >= limits.clients) {
+    return { success: false, error: "CLIENT_LIMIT_REACHED", plan }
+  }
 
   try {
     const { getActiveSpaceId } = await import("./space")

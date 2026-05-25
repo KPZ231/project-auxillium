@@ -2,6 +2,7 @@
 
 import { prisma } from "@/lib/prisma";
 import { getUser, login, SESSION_DURATION } from "@/lib/session";
+import { getUserPlanById } from "@/lib/subscription";
 import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
 
@@ -13,6 +14,12 @@ export async function createSpace(formData: FormData) {
   const spaceDescription = formData.get("spaceDescription") as string;
 
   if (!spaceName) throw new Error("Space name is required");
+
+  const { plan, limits } = await getUserPlanById(userId)
+  const spaceCount = await prisma.space.count({ where: { ownerId: userId } })
+  if (limits.spaces !== null && spaceCount >= limits.spaces) {
+    return { success: false, error: "SPACE_LIMIT_REACHED", plan }
+  }
 
   const space = await prisma.space.create({
     data: {

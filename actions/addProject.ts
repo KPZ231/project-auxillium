@@ -2,6 +2,7 @@
 
 import { getUser } from "@/lib/session"
 import { prisma } from "@/lib/prisma"
+import { getUserPlanById } from "@/lib/subscription"
 import { z } from "zod"
 import { ProjectStatus } from "@/lib/generated/client/client"
 import { revalidatePath } from "next/cache"
@@ -46,6 +47,12 @@ export async function addProject(data: AddProjectInput) {
     }
 
     const { projectName, projectDescription, projectStatus, images, dueDate } = parsedData.data
+
+    const { plan, limits } = await getUserPlanById(userId)
+    const projectCount = await prisma.project.count({ where: { userId } })
+    if (limits.projects !== null && projectCount >= limits.projects) {
+        return { success: false, error: "PROJECT_LIMIT_REACHED", plan }
+    }
 
     try {
         const existingProject = await prisma.project.findUnique({

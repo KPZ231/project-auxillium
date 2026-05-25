@@ -30,13 +30,22 @@ export const leadSearchRateLimit = new Ratelimit({
   prefix: "ratelimit:leadsearch",
 });
 
-export async function checkRateLimit(identifier: string, type: "auth" | "email" | "leadsearch" = "auth") {
+// Rate limiter for AI chat (PRO users)
+export const aiProRateLimit = new Ratelimit({
+  redis,
+  limiter: Ratelimit.slidingWindow(25, "1 h"), // 25 prompts per hour
+  analytics: true,
+  prefix: "ratelimit:ai:pro",
+});
+
+export async function checkRateLimit(identifier: string, type: "auth" | "email" | "leadsearch" | "ai" = "auth") {
   let limiter = authRateLimit;
   if (type === "email") limiter = emailRateLimit;
   if (type === "leadsearch") limiter = leadSearchRateLimit;
-  
+  if (type === "ai") limiter = aiProRateLimit;
+
   const { success, limit, remaining, reset } = await limiter.limit(identifier);
-  
+
   return {
     success,
     limit,

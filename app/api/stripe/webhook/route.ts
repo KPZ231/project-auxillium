@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { stripe } from "@/lib/stripe";
 import { prisma } from "@/lib/prisma";
+import { invalidateUserPlanCache } from "@/lib/subscription";
 import Stripe from "stripe";
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET;
@@ -51,6 +52,7 @@ export async function POST(request: NextRequest) {
             stripeCurrentPeriodEnd: new Date((subscription as any).current_period_end * 1000),
           },
         });
+        await invalidateUserPlanCache(userId);
         break;
       }
       default:

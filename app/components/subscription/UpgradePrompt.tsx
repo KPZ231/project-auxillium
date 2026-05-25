@@ -2,7 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
-import LockIcon from "@mui/icons-material/Lock";
+import { Lock } from "lucide-react";
 
 interface UpgradePromptProps {
   feature: string;
@@ -23,7 +23,7 @@ export default function UpgradePrompt({
     <div className="flex flex-col items-center justify-center min-h-[320px] py-12 px-6 text-center">
       {/* Lock icon */}
       <div className="w-16 h-16 border border-gray-200 flex items-center justify-center mb-6">
-        <LockIcon sx={{ fontSize: 28, color: "#000" }} />
+        <Lock size={28} color="#000" />
       </div>
 
       {/* Current plan badge */}

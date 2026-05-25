@@ -19,9 +19,11 @@ import {
   Menu,
   FileText,
   Settings,
+  Lock,
 } from "lucide-react";
 
 import { useTranslation } from "@/app/context/TranslationContext";
+import { useUserPlan } from "@/app/context/UserContext";
 
 interface NavLink {
   key: string;
@@ -41,8 +43,11 @@ const navLinks: NavLink[] = [
   { key: "nav.documents", href: "/dashboard/documents", icon: FileText },
 ];
 
+const GATED_HREFS = new Set(["/dashboard/lead-search", "/dashboard/ai"]);
+
 export default function SidePanel() {
   const { t, language } = useTranslation();
+  const { plan, isFree } = useUserPlan();
   const pathname = usePathname();
   
   // Helper to get path without locale for comparison and building localized links
@@ -134,9 +139,30 @@ export default function SidePanel() {
                   transition={{ duration: 0.15 }}
                   className="flex flex-col"
                 >
-                  <h1 className="text-xl font-black tracking-tight uppercase">
-                    Auxillium
-                  </h1>
+                  <div className="flex items-center gap-2">
+                    <h1 className="text-xl font-black tracking-tight uppercase">
+                      Auxillium
+                    </h1>
+                    <span
+                      className="inline-flex items-center px-1.5 py-0 rounded-sm text-[9px] font-bold tracking-widest leading-5"
+                      style={{
+                        backgroundColor:
+                          plan === "ENTERPRISE"
+                            ? "#f5a623"
+                            : plan === "PRO"
+                            ? "#e8f5e9"
+                            : "#f0f0f0",
+                        color:
+                          plan === "ENTERPRISE" ? "#fff" : "#555",
+                        border:
+                          plan === "PRO"
+                            ? "1px solid #a5d6a7"
+                            : "1px solid transparent",
+                      }}
+                    >
+                      {plan}
+                    </span>
+                  </div>
                   <span className="text-[10px] tracking-[0.3em] text-gray-400">
                     V1.0.4
                   </span>
@@ -165,6 +191,7 @@ export default function SidePanel() {
               const active = currentPathWithoutLocale === link.href;
               const Icon = link.icon;
               const localizedHref = `/${language}${link.href}`;
+              const isGated = isFree && GATED_HREFS.has(link.href);
 
               return (
                 <li key={link.href}>
@@ -175,7 +202,7 @@ export default function SidePanel() {
                       active
                         ? "bg-black text-white"
                         : "text-gray-500 hover:bg-gray-100 hover:text-black"
-                    }`}
+                    }${isGated ? " opacity-60" : ""}`}
                   >
                     {active && (
                       <motion.div
@@ -198,9 +225,12 @@ export default function SidePanel() {
                           animate={{ opacity: 1, x: 0 }}
                           exit={{ opacity: 0, x: -6 }}
                           transition={{ duration: 0.15 }}
-                          className="text-xs font-bold tracking-wider whitespace-nowrap"
+                          className="flex items-center gap-1.5 text-xs font-bold tracking-wider whitespace-nowrap"
                         >
                           {t(`dashboard:${link.key}`)}
+                          {isGated && (
+                            <Lock className="w-3 h-3 shrink-0 opacity-70" />
+                          )}
                         </motion.span>
                       )}
                     </AnimatePresence>

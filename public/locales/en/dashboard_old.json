@@ -1,0 +1,147 @@
+{
+  "ai": {
+    "chat": "AI Chat"
+  },
+  "client": {
+    "client_details": "Client Details",
+    "client_email": "Client Email",
+    "client_name": "Client Name",
+    "client_phone": "Client Phone",
+    "clients": "Clients",
+    "delete_client": "Delete Client",
+    "edit_client": "Edit Client",
+    "new_client": "New Client",
+    "total_projects": "Total Projects",
+    "total_spent": "Total Spent"
+  },
+  "dashboard": {
+    "subtitle": "Managing 12 ongoing architectural and design initiatives.",
+    "title": "Dashboard"
+  },
+  "documents": {
+    "title": "Documents"
+  },
+  "employees": {
+    "active_projects": "Active Projects",
+    "active_tasks": "Active Tasks",
+    "add_employee": "Add Employee",
+    "delete_employee": "Delete Employee",
+    "edit_employee": "Edit Employee",
+    "employee_email": "Email",
+    "employee_name": "Name",
+    "employee_phone": "Phone",
+    "employee_role": "Role",
+    "subtitle": "Manage your team members and their workloads.",
+    "title": "Employees",
+    "workload": "Workload"
+  },
+  "finance": {
+    "activity_log": "Activity Log",
+    "add_expense": "Add Expense",
+    "add_income": "Add Income",
+    "critical": "Critical",
+    "cycle": "Cycle",
+    "financial_summary": "Financial Summary",
+    "healthy": "Healthy",
+    "is_recurring": "Recurring",
+    "month": "Month",
+    "revenue_goals": "Revenue Goals",
+    "set_goal": "Set Goal",
+    "source": "Source",
+    "warning": "Warning",
+    "year": "Year"
+  },
+  "lead": {
+    "contact_info": "Contact Info",
+    "delete_lead": "Delete Lead",
+    "edit_lead": "Edit Lead",
+    "lead_details": "Lead Details",
+    "lead_info": "Lead Information",
+    "lead_name": "Lead Name",
+    "lead_search": "Lead Search",
+    "leads": "Leads",
+    "new_lead": "New Lead",
+    "stage": "Stage"
+  },
+  "lead_search_ui": {
+    "status": "Status"
+  },
+  "metrics": {
+    "active_projects": "Active Projects",
+    "activity_trajectory": "Activity Trajectory",
+    "completed_tasks": "Completed Tasks",
+    "expenses": "Expenses",
+    "gross_revenue": "Gross Revenue",
+    "growth": "Growth",
+    "leads": "New Leads",
+    "leads_badge": "+42",
+    "leads_subtext": "from AI campaigns",
+    "new_leads": "New Leads",
+    "pending_tasks": "Pending Tasks",
+    "profit": "Profit",
+    "projects": "Active Projects",
+    "projects_subtext": "deployment phase",
+    "revenue": "Gross Revenue",
+    "revenue_badge": "+12.4%",
+    "revenue_goal": "Revenue Goal",
+    "revenue_subtext": "vs last quarter",
+    "team_members": "Team Members"
+  },
+  "project": {
+    "assigned_to": "Assigned To",
+    "budget": "Budget",
+    "client": "Client",
+    "delete_project": "Delete Project",
+    "due_date": "Due Date",
+    "edit_project": "Edit Project",
+    "location": "Location",
+    "new_project": "New Project",
+    "priority": "Priority",
+    "project_description": "Project Description",
+    "project_details": "Project Details",
+    "project_name": "Project Name",
+    "project_status": "Project Status",
+    "project_type": "Project Type",
+    "projects": "Projects"
+  },
+  "space": {
+    "create_space": "Create Space",
+    "employees": "Employees",
+    "members": "Members",
+    "projects": "Projects",
+    "space_description": "Space Description",
+    "space_name": "Space Name",
+    "switch_space": "Switch Space",
+    "title": "Space"
+  },
+  "status": {
+    "cancelled": "Cancelled",
+    "cold": "Cold",
+    "in_progress": "In Progress",
+    "negotiation": "Negotiation",
+    "pending": "Pending",
+    "qualified": "Qualified",
+    "today": "Today",
+    "urgent": "Urgent"
+  },
+  "task": {
+    "assignee": "Assignee",
+    "delete_task": "Delete Task",
+    "due_date": "Due Date",
+    "edit_task": "Edit Task",
+    "new_task": "New Task",
+    "priority": "Priority",
+    "status": "Status",
+    "subtasks": "Subtasks",
+    "task_description": "Task Description",
+    "task_title": "Task Title",
+    "tasks": "Tasks",
+    "workload": "Workload"
+  },
+  "workload": {
+    "filter_due_soon": "Due Soon",
+    "filter_no_due": "No Due Date",
+    "filter_overdue": "Overdue",
+    "todo": "To Do"
+  }
+}

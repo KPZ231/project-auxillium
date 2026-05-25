@@ -1,0 +1,16 @@
+{
+  "imageUploader": {
+    "formats": "Unterstützte Formate: JPG, PNG, WebP",
+    "imageAlt": "Hochgeladenes Bild",
+    "prompt": "Bild hierher ziehen oder klicken zum Durchsuchen",
+    "removeImageTitle": "Bild entfernen",
+    "toast": {
+      "invalidFileError": "Ungültiges Dateiformat",
+      "maxImagesError": "Maximale Anzahl an Bildern erreicht",
+      "success": "Bild erfolgreich hochgeladen",
+      "uploadError": "Fehler beim Hochladen",
+      "uploadFailedError": "Bild-Upload fehlgeschlagen"
+    },
+    "uploading": "Wird hochgeladen..."
+  }
+}

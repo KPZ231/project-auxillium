@@ -1,0 +1,47 @@
+{
+  "errors": {
+    "field_required": "To pole jest wymagane",
+    "invalid_email": "Niepoprawny format adresu e-mail",
+    "invalid_input": "Nieprawidłowe dane",
+    "invalid_login": "Niepoprawny format loginu",
+    "minimum_characters": "Min. {{count}} znaki",
+    "password_no_digit": "Hasło musi zawierać co najmniej jedną cyfrę",
+    "password_no_lowercase": "Hasło musi zawierać co najmniej jedną małą literę",
+    "password_no_uppercase": "Hasło musi zawierać co najmniej jedną wielką literę",
+    "password_too_short": "Hasło musi mieć co najmniej 8 znaków",
+    "passwords_do_not_match": "Hasła są różne"
+  },
+  "form": {
+    "company": "Firma",
+    "contact_name": "Nazwa kontaktu",
+    "description": "Opis",
+    "first_name": "Imię",
+    "last_name": "Nazwisko",
+    "lead_name": "Nazwa potencjalnego klienta",
+    "location": "Lokalizacja",
+    "notes": "Notatki",
+    "phone": "Telefon",
+    "project_type": "Typ projektu",
+    "role": "Rola",
+    "subject": "Temat",
+    "username": "Nazwa użytkownika",
+    "website": "Strona www"
+  },
+  "labels": {
+    "contact_failed": "Nie udało się wysłać wiadomości",
+    "days": {
+      "closed": "ZAMKNIĘTE",
+      "mon_fri": "PON - PT",
+      "sat": "SOBOTA",
+      "sun": "NIEDZIELA"
+    }
+  },
+  "placeholders": {
+    "company": "Nazwa firmy",
+    "confirm_password": "••••••••",
+    "contact_name": "Jan Nowak",
+    "lead_name": "Nazwa firmy lub osoby",
+    "phone": "+48 123 456 789",
+    "website": "https://www.example.com"
+  }
+}

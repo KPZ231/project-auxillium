@@ -82,6 +82,7 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.4",
     "i18next-resources-to-backend": "^1.2.1",
+    "i18next-scanner": "^4.6.0",
     "prisma": "^7.8.0",
     "tailwindcss": "^4",
     "typescript": "^5"

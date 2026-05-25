@@ -1,51 +1,6 @@
 {
-  "hero": {
-    "title": "AUXILIUM <br/> nowa definicja zarządzania",
-    "subtitle": "Jeden system. Pełna kontrola. Zero chaosu.",
-    "cta": "Zacznij za darmo",
-    "cta_secondary": "Obejrzyj demo",
-    "social_proof": "ponad 500 firm już zarządza mądrzej"
-  },
-  "features": {
-    "title": "Odzyskaj do 30% czasu pracy",
-    "description": "Automatyzuj powtarzalne procesy, eliminuj silosy danych i zarządzaj całą firmą z jednego miejsca.",
-    "subtitle": "Efektywność, która procentuje"
-  },
-  "pricing": {
-    "title": "Prosty cennik. Żadnych niespodzianek.",
-    "subtitle": "Wybierz plan dopasowany do skali Twojej firmy",
-    "free": "Free",
-    "pro": "Pro",
-    "enterprise": "Enterprise",
-    "free_desc": "Dla zespołów, które dopiero zaczynają",
-    "pro_desc": "Dla rosnących firm potrzebujących pełnej kontroli",
-    "enterprise_desc": "Dla organizacji wymagających skalowalności i dedykowanego wsparcia",
-    "cta": "Zacznij za darmo"
-  },
-  "testimonials": {
-    "title": "Filozofia",
-    "subtitle": "Wierzymy, że dobre oprogramowanie nie przeszkadza — ono znika w tle i po prostu działa."
-  },
-  "faq": {
-    "title": "Często zadawane pytania",
-    "subtitle": "Wszystko, co musisz wiedzieć przed pierwszym logowaniem",
-    "q1": "Jak szybko mogę zacząć korzystać z systemu?",
-    "a1": "Rejestracja zajmuje mniej niż 2 minuty. Plan Free nie wymaga karty kredytowej — możesz od razu przetestować kluczowe funkcje bez żadnych zobowiązań.",
-    "q2": "Czy mogę zmienić plan w dowolnym momencie?",
-    "a2": "Tak. Możesz przejść na wyższy lub niższy plan w każdej chwili. Zmiana wchodzi w życie od następnego okresu rozliczeniowego, bez ukrytych opłat.",
-    "q3": "Jakie metody płatności są obsługiwane?",
-    "a3": "Akceptujemy płatności kartą (Visa, Mastercard), szybkie przelewy bankowe oraz subskrypcje cykliczne. Faktury VAT wystawiane są automatycznie."
-  },
-  "cta": {
-    "title": "Czas zamienić chaos w system.",
-    "subtitle": "Dołącz do firm, które zarządzają mądrzej. Pierwsze 14 dni planu Pro — bezpłatnie.",
-    "cta": "Wypróbuj Auxilium"
-  },
   "about": {
-    "title": "O nas",
     "description": "Budujemy narzędzia, które rosną razem z Twoją firmą",
-    "offer_title": "Co oferujemy",
-    "offer_subtitle": "Auxilium to platforma stworzona przez zespół KPZ's Productions — programistów i product designerów z doświadczeniem w skalowaniu firm sektora MŚP. Rozumiemy, że rosnące organizacje potrzebują narzędzi, które dorównują ich ambicjom.",
     "offer_item1": "Zarządzanie projektami",
     "offer_item1_desc": "Przejrzysty widok postępów, terminów i podziału obowiązków w całym zespole.",
     "offer_item2": "Śledzenie leadów i klientów",
@@ -54,63 +9,195 @@
     "offer_item3_desc": "Kontroluj przychody, wydatki i cele finansowe w czasie rzeczywistym.",
     "offer_item4": "Zarządzanie zespołu",
     "offer_item4_desc": "Onboarding, przypisywanie zadań, monitorowanie obciążenia pracą — wszystko w jednym miejscu.",
-    "why_choose_us": "Co nas wyróżnia",
+    "offer_subtitle": "Auxilium to platforma stworzona przez zespół KPZ's Productions — programistów i product designerów z doświadczeniem w skalowaniu firm sektora MŚP. Rozumiemy, że rosnące organizacje potrzebują narzędzi, które dorównują ich ambicjom.",
+    "offer_title": "Co oferujemy",
     "quote_content": "Pomagamy firmom zastąpić chaos wielu narzędzi jedną, spójną platformą operacyjną.",
-    "sub_content": "Łączymy intuicyjną obsługę z zaawansowaną funkcjonalnością. Tworzymy oprogramowanie, które nie tylko doskonale wygląda, ale realnie przyspiesza podejmowanie decyzji, zwiększa odpowiedzialność zespołu i ułatwia skalowanie biznesu."
+    "sub_content": "Łączymy intuicyjną obsługę z zaawansowaną funkcjonalnością. Tworzymy oprogramowanie, które nie tylko doskonale wygląda, ale realnie przyspiesza podejmowanie decyzji, zwiększa odpowiedzialność zespołu i ułatwia skalowanie biznesu.",
+    "title": "O nas",
+    "why_choose_us": "Co nas wyróżnia"
   },
   "contact": {
-    "title": "Kontakt",
-    "description": "Masz pytania? Napisz do nas — odpowiemy w ciągu jednego dnia roboczego."
+    "description": "Masz pytania? Napisz do nas — odpowiemy w ciągu jednego dnia roboczego.",
+    "title": "Kontakt"
   },
   "cookies": {
-    "title": "Polityka Cookies",
     "description": "Polityka plików cookies serwisu Auxilium",
     "publication_date": "Data publikacji: 26.04.2026",
+    "sections_count": "8",
+    "title": "Polityka Cookies",
     "section1": {
       "title": "1. Definicje",
-      "content": "Użyte w niniejszej polityce pojęcia oznaczają: Cookies — pliki tekstowe zapisywane na urządzeniu użytkownika przez przeglądarkę internetową w celu przechowywania informacji o sesji i preferencjach."
+      "content": "Na potrzeby niniejszej polityki cookies stosuje się następujące definicje: Cookies (ciasteczka) — małe pliki tekstowe zapisywane na urządzeniu końcowym Użytkownika przez przeglądarkę internetową, zawierające dane potrzebne do prawidłowego funkcjonowania serwisu; Serwis — platforma Auxilium dostępna pod adresem auxilium.app; Urządzenie końcowe — komputer, telefon, tablet lub inne urządzenie, za pośrednictwem którego Użytkownik korzysta z Serwisu; Sesja — okres aktywności Użytkownika w Serwisie od zalogowania do wylogowania lub zamknięcia przeglądarki; Administrator — KPZ's Productions, podmiot odpowiedzialny za przetwarzanie danych w ramach Serwisu."
     },
     "section2": {
       "title": "2. Rodzaje wykorzystywanych plików cookies",
-      "content": "Serwis wykorzystuje cookies niezbędne do działania platformy, cookies analityczne służące poprawie jakości usług oraz cookies preferencji, które zapamiętują ustawienia użytkownika pomiędzy sesjami."
+      "content": "Serwis Auxilium wykorzystuje następujące rodzaje plików cookies ze względu na czas przechowywania: cookies sesyjne — usuwane automatycznie po zakończeniu sesji przeglądarki; cookies trwałe — przechowywane na urządzeniu Użytkownika przez określony czas lub do ich ręcznego usunięcia. Ze względu na cel: cookies niezbędne — konieczne do prawidłowego działania Serwisu i niemogące być wyłączone; cookies funkcjonalne — zapamiętujące preferencje Użytkownika, np. język interfejsu; cookies analityczne — gromadzące anonimowe dane statystyczne o korzystaniu z Serwisu; cookies marketingowe — służące ewentualnej personalizacji treści."
     },
     "section3": {
-      "title": "3. Zarządzanie cookies",
-      "content": "Użytkownik może w dowolnym momencie zmienić ustawienia dotyczące plików cookies w swojej przeglądarce. Wyłączenie cookies niezbędnych może ograniczyć funkcjonalność platformy."
+      "title": "3. Cookies niezbędne do funkcjonowania serwisu",
+      "content": "Cookies niezbędne są wymagane do prawidłowego działania platformy i nie mogą być wyłączone bez utraty podstawowej funkcjonalności. Obejmują one: sesyjne tokeny uwierzytelniające zapewniające bezpieczeństwo logowania; identyfikator aktywnej przestrzeni roboczej (active_space_id); token sesji JWT przechowywany w httpOnly cookie o 24-godzinnym czasie ważności; ustawienia języka interfejsu. Podstawą prawną przetwarzania danych za pośrednictwem cookies niezbędnych jest niezbędność do wykonania umowy o świadczenie usług drogą elektroniczną (art. 6 ust. 1 lit. b RODO) oraz uzasadniony interes Administratora polegający na zapewnieniu bezpieczeństwa platformy (art. 6 ust. 1 lit. f RODO)."
+    },
+    "section4": {
+      "title": "4. Cookies analityczne i statystyczne",
+      "content": "Cookies analityczne pozwalają zbierać anonimowe informacje o sposobie korzystania z Serwisu, w tym: liczbie odwiedzin, czasie spędzonym na stronie, stronach przeglądanych przez Użytkowników oraz źródłach ruchu. Dane te służą wyłącznie poprawie funkcjonalności i treści platformy i nie są łączone z danymi umożliwiającymi identyfikację Użytkownika. Cookies analityczne są instalowane wyłącznie po uzyskaniu dobrowolnej zgody Użytkownika. Zgoda ta może być wycofana w dowolnym momencie bez wpływu na zgodność z prawem przetwarzania przed jej wycofaniem."
+    },
+    "section5": {
+      "title": "5. Cookies marketingowe i personalizacyjne",
+      "content": "Cookies marketingowe mogą być wykorzystywane do personalizacji treści na podstawie zachowania Użytkownika w Serwisie. Aktualnie Serwis Auxilium nie stosuje cookies marketingowych podmiotów trzecich do celów reklamowych. W przypadku planowanego wprowadzenia takich cookies Użytkownicy zostaną uprzednio poinformowani i poproszeni o wyrażenie odrębnej, świadomej zgody zgodnie z wymogami dyrektywy ePrivacy (2002/58/WE) oraz RODO. Wszelkie cookies marketingowe będą wyraźnie opisane w zaktualizowanej wersji niniejszej polityki."
+    },
+    "section6": {
+      "title": "6. Zarządzanie ustawieniami cookies",
+      "content": "Użytkownik może zarządzać plikami cookies poprzez: ustawienia przeglądarki internetowej — możliwe jest zablokowanie lub ograniczenie zapisywania cookies bądź usunięcie cookies już zapisanych; panel zarządzania zgodami dostępny przy pierwszej wizycie w Serwisie. Wyłączenie cookies niezbędnych może uniemożliwić logowanie oraz korzystanie z platformy. Instrukcje zarządzania cookies dla popularnych przeglądarek: Chrome — chrome://settings/cookies; Firefox — about:preferences#privacy; Safari — Preferencje > Prywatność; Microsoft Edge — edge://settings/cookies."
+    },
+    "section7": {
+      "title": "7. Zgoda na cookies i jej odwołanie",
+      "content": "Przy pierwszej wizycie w Serwisie Użytkownik jest informowany o stosowanych plikach cookies i proszony o wyrażenie dobrowolnej zgody na cookies nieobowiązkowe zgodnie z art. 173 ustawy Prawo telekomunikacyjne i art. 6 ust. 1 lit. a RODO. Zgoda może być wycofana w dowolnym momencie bez podania przyczyny i bez negatywnych konsekwencji dla Użytkownika — wycofanie zgody na cookies analityczne lub marketingowe nie ogranicza dostępu do podstawowych funkcji platformy. Wycofanie zgody jest możliwe poprzez zmianę ustawień cookies w przeglądarce lub w panelu zarządzania zgodami w Serwisie."
+    },
+    "section8": {
+      "title": "8. Zmiany polityki cookies",
+      "content": "Administrator zastrzega sobie prawo do aktualizacji niniejszej polityki cookies w miarę zmian technologicznych, prawnych lub funkcjonalnych Serwisu. Wszelkie zmiany będą publikowane na stronie auxilium.app/cookies wraz z datą wejścia w życie. O istotnych zmianach Użytkownicy zostaną powiadomieni poprzez komunikat wyświetlany w Serwisie lub drogą elektroniczną. W przypadku pytań dotyczących cookies prosimy o kontakt: kontakt@auxilium.app."
     }
   },
+  "cta": {
+    "cta": "Wypróbuj Auxilium",
+    "subtitle": "Dołącz do firm, które zarządzają mądrzej. Pierwsze 14 dni planu Pro — bezpłatnie.",
+    "title": "Czas zamienić chaos w system."
+  },
+  "faq": {
+    "a1": "Rejestracja zajmuje mniej niż 2 minuty. Plan Free nie wymaga karty kredytowej — możesz od razu przetestować kluczowe funkcje bez żadnych zobowiązań.",
+    "a2": "Tak. Możesz przejść na wyższy lub niższy plan w każdej chwili. Zmiana wchodzi w życie od następnego okresu rozliczeniowego, bez ukrytych opłat.",
+    "a3": "Akceptujemy płatności kartą (Visa, Mastercard), szybkie przelewy bankowe oraz subskrypcje cykliczne. Faktury VAT wystawiane są automatycznie.",
+    "q1": "Jak szybko mogę zacząć korzystać z systemu?",
+    "q2": "Czy mogę zmienić plan w dowolnym momencie?",
+    "q3": "Jakie metody płatności są obsługiwane?",
+    "subtitle": "Wszystko, co musisz wiedzieć przed pierwszym logowaniem",
+    "title": "Często zadawane pytania"
+  },
+  "features": {
+    "description": "Automatyzuj powtarzalne procesy, eliminuj silosy danych i zarządzaj całą firmą z jednego miejsca.",
+    "subtitle": "Efektywność, która procentuje",
+    "title": "Odzyskaj do 30% czasu pracy"
+  },
+  "hero": {
+    "cta": "Zacznij za darmo",
+    "cta_secondary": "Obejrzyj demo",
+    "social_proof": "ponad 500 firm już zarządza mądrzej",
+    "subtitle": "Jeden system. Pełna kontrola. Zero chaosu.",
+    "title": "AUXILIUM <br/> nowa definicja zarządzania"
+  },
+  "pricing": {
+    "cta": "Zacznij za darmo",
+    "choose_plan": "Wybierz plan",
+    "contact_us": "Skontaktuj się z nami",
+    "enterprise": "Enterprise",
+    "enterprise_desc": "Dla organizacji wymagających skalowalności i dedykowanego wsparcia",
+    "feature_lorem": "Przykładowy opis funkcji",
+    "free": "Free",
+    "free_desc": "Dla zespołów, które dopiero zaczynają",
+    "pro": "Pro",
+    "pro_desc": "Dla rosnących firm potrzebujących pełnej kontroli",
+    "subtitle": "Wybierz plan dopasowany do skali Twojej firmy",
+    "title": "Prosty cennik. Żadnych niespodzianek."
+  },
   "privacy": {
-    "title": "Polityka Prywatności",
     "description": "Polityka prywatności i ochrony danych osobowych serwisu Auxilium",
     "publication_date": "Data publikacji: 26.04.2026",
+    "sections_count": "10",
+    "title": "Polityka Prywatności",
     "section1": {
-      "title": "1. Administrator danych",
-      "content": "Administratorem danych osobowych jest KPZ's Productions. Dane przetwarzane są zgodnie z Rozporządzeniem RODO oraz polskimi przepisami o ochronie danych osobowych."
+      "title": "1. Administrator danych osobowych",
+      "content": "Administratorem danych osobowych Użytkowników platformy Auxilium jest KPZ's Productions (dalej: „Administrator\"). W sprawach dotyczących ochrony danych osobowych można kontaktować się z Administratorem pod adresem e-mail: kontakt@auxilium.app. Administrator przetwarza dane osobowe zgodnie z Rozporządzeniem Parlamentu Europejskiego i Rady (UE) 2016/679 z dnia 27 kwietnia 2016 r. (RODO), ustawą z dnia 10 maja 2018 r. o ochronie danych osobowych (Dz.U. 2018 poz. 1000) oraz innymi obowiązującymi przepisami prawa."
     },
     "section2": {
-      "title": "2. Zakres i cel przetwarzania danych",
-      "content": "Dane osobowe zbierane są wyłącznie w zakresie niezbędnym do świadczenia usług platformy Auxilium: obsługi konta, realizacji subskrypcji oraz komunikacji z użytkownikiem."
+      "title": "2. Zakres zbieranych danych osobowych",
+      "content": "Administrator zbiera następujące kategorie danych osobowych: dane identyfikacyjne (imię, nazwisko, nazwa użytkownika); dane kontaktowe (adres e-mail); dane dotyczące korzystania z usług (plany subskrypcji, historia płatności); dane techniczne (adres IP, typ przeglądarki, identyfikatory sesji); dane wprowadzone przez Użytkownika w ramach korzystania z platformy (projekty, leady, dane klientów i pracowników). Podanie danych oznaczonych jako obowiązkowe jest warunkiem korzystania z platformy. Podanie pozostałych danych jest dobrowolne."
     },
     "section3": {
-      "title": "3. Prawa użytkownika",
-      "content": "Użytkownikowi przysługuje prawo dostępu do danych, ich sprostowania, usunięcia, ograniczenia przetwarzania oraz przenoszenia. W celu realizacji praw prosimy o kontakt pod adresem podanym w sekcji Kontakt."
+      "title": "3. Cele i podstawy prawne przetwarzania",
+      "content": "Dane osobowe są przetwarzane w następujących celach i na następujących podstawach prawnych: wykonanie umowy (art. 6 ust. 1 lit. b RODO) — rejestracja konta, świadczenie usług platformy, obsługa płatności; wypełnienie obowiązków prawnych (art. 6 ust. 1 lit. c RODO) — wystawianie faktur VAT, przechowywanie dokumentacji księgowej przez wymagany przepisami okres; prawnie uzasadniony interes Administratora (art. 6 ust. 1 lit. f RODO) — zapewnienie bezpieczeństwa platformy, marketing bezpośredni do istniejących klientów, dochodzenie ewentualnych roszczeń; zgoda (art. 6 ust. 1 lit. a RODO) — wysyłanie komunikatów marketingowych do nowych Użytkowników, nieobowiązkowe pliki cookies."
+    },
+    "section4": {
+      "title": "4. Odbiorcy danych osobowych",
+      "content": "Dane osobowe Użytkowników mogą być przekazywane następującym kategoriom odbiorców: operatorom płatności (Stripe Inc.) w zakresie niezbędnym do realizacji płatności subskrypcyjnych; dostawcom infrastruktury chmurowej i hostingowej (Vercel Inc., Supabase Inc., Upstash Inc.) w zakresie niezbędnym do świadczenia usług platformy; dostawcom usług e-mail wykorzystywanych do komunikacji z Użytkownikami; organom publicznym uprawnionym do otrzymania danych na podstawie obowiązujących przepisów prawa. Administrator nie sprzedaje danych osobowych Użytkowników podmiotom trzecim w celach komercyjnych."
+    },
+    "section5": {
+      "title": "5. Czas przechowywania danych",
+      "content": "Dane osobowe są przechowywane przez czas trwania umowy, a po jej zakończeniu: przez okres 5 lat — dane niezbędne do celów podatkowych i rachunkowych (zgodnie z art. 74 ustawy o rachunkowości); przez okres 3 lat od rozwiązania umowy — dane niezbędne do ewentualnego dochodzenia roszczeń cywilnych; do momentu wycofania zgody lub osiągnięcia celu — dane przetwarzane na podstawie zgody. Po upływie okresu przechowywania dane są trwale usuwane lub anonimizowane w sposób uniemożliwiający ich powiązanie z konkretną osobą."
+    },
+    "section6": {
+      "title": "6. Prawa osób, których dane dotyczą",
+      "content": "Każdy Użytkownik ma prawo do: dostępu do swoich danych osobowych i uzyskania ich kopii (art. 15 RODO); sprostowania nieprawidłowych lub niekompletnych danych (art. 16 RODO); usunięcia danych w przypadkach określonych w art. 17 RODO (prawo do bycia zapomnianym); ograniczenia przetwarzania danych (art. 18 RODO); przenoszenia danych do innego administratora w formacie nadającym się do odczytu maszynowego (art. 20 RODO); sprzeciwu wobec przetwarzania danych na podstawie prawnie uzasadnionego interesu (art. 21 RODO); cofnięcia zgody w dowolnym momencie bez negatywnych konsekwencji. Wnioski należy składać na adres: kontakt@auxilium.app. Administrator odpowiada bez zbędnej zwłoki, nie później niż w terminie 1 miesiąca. Użytkownik ma prawo wniesienia skargi do Prezesa Urzędu Ochrony Danych Osobowych, ul. Stawki 2, 00-193 Warszawa."
+    },
+    "section7": {
+      "title": "7. Przekazywanie danych poza Europejski Obszar Gospodarczy",
+      "content": "Niektórzy odbiorcy danych, w szczególności Stripe Inc. i Vercel Inc., mają siedziby w Stanach Zjednoczonych. Przekazywanie danych do tych podmiotów odbywa się na podstawie standardowych klauzul umownych zatwierdzonych przez Komisję Europejską (art. 46 ust. 2 lit. c RODO), które zapewniają adekwatny poziom ochrony danych osobowych. Użytkownik może uzyskać kopię stosowanych klauzul, kontaktując się z Administratorem pod adresem kontakt@auxilium.app."
+    },
+    "section8": {
+      "title": "8. Bezpieczeństwo danych",
+      "content": "Administrator stosuje odpowiednie środki techniczne i organizacyjne zapewniające bezpieczeństwo przetwarzanych danych osobowych, w tym: szyfrowanie transmisji danych przy użyciu protokołu TLS/HTTPS; przechowywanie haseł wyłącznie w postaci zaszyfrowanej przy użyciu algorytmu Argon2; ograniczenie dostępu do danych wyłącznie do uprawnionych pracowników i procesorów; regularne kopie zapasowe danych. W przypadku naruszenia bezpieczeństwa danych osobowych Administrator powiadomi właściwy organ nadzorczy (UODO) w ciągu 72 godzin, a Użytkowników bez zbędnej zwłoki, jeżeli naruszenie może powodować wysokie ryzyko dla ich praw i wolności."
+    },
+    "section9": {
+      "title": "9. Kontakt w sprawach ochrony danych",
+      "content": "W sprawach dotyczących przetwarzania danych osobowych prosimy o kontakt: drogą elektroniczną pod adresem kontakt@auxilium.app; pisemnie na adres siedziby KPZ's Productions. Administrator udzieli odpowiedzi bez zbędnej zwłoki, nie później niż w terminie jednego miesiąca od dnia otrzymania wniosku. W uzasadnionych, złożonych przypadkach termin może zostać przedłużony o kolejne 2 miesiące, o czym Administrator niezwłocznie poinformuje wnioskodawcę na piśmie wraz z podaniem przyczyn opóźnienia."
+    },
+    "section10": {
+      "title": "10. Zmiany polityki prywatności",
+      "content": "Administrator zastrzega sobie prawo do wprowadzania zmian w niniejszej polityce prywatności w związku ze zmianami prawnymi, technologicznymi lub organizacyjnymi. Wszelkie zmiany będą publikowane na stronie auxilium.app/privacy i wchodzą w życie w terminie wskazanym przy każdej zmianie, nie krótszym niż 14 dni od daty publikacji. O istotnych zmianach dotyczących zakresu lub podstaw przetwarzania danych Użytkownicy zostaną poinformowani drogą elektroniczną na podany przy rejestracji adres e-mail. Dalsze korzystanie z platformy po wejściu zmian w życie oznacza ich akceptację."
     }
   },
   "terms": {
-    "title": "Regulamin",
     "description": "Regulamin korzystania z platformy Auxilium",
     "publication_date": "Data publikacji: 26.04.2026",
+    "sections_count": "10",
+    "title": "Regulamin",
     "section1": {
       "title": "1. Postanowienia ogólne",
-      "content": "Niniejszy regulamin określa zasady korzystania z platformy Auxilium, świadczonej przez KPZ's Productions. Korzystanie z platformy oznacza akceptację poniższych warunków."
+      "content": "Niniejszy regulamin określa zasady i warunki korzystania z platformy Auxilium, świadczonej przez KPZ's Productions (dalej: „Usługodawca„). Korzystanie z platformy Auxilium oznacza akceptację niniejszego regulaminu w całości. Usługa świadczona jest drogą elektroniczną zgodnie z ustawą z dnia 18 lipca 2002 r. o świadczeniu usług drogą elektroniczną (Dz.U. 2002 nr 144 poz. 1204 ze zm.) oraz przepisami prawa Unii Europejskiej, w szczególności Dyrektywą 2000/31/WE o handlu elektronicznym. Regulamin jest dostępny bezpłatnie pod adresem auxilium.app/terms."
     },
     "section2": {
-      "title": "2. Prawa i obowiązki użytkownika",
-      "content": "Użytkownik zobowiązuje się do korzystania z platformy zgodnie z jej przeznaczeniem, nienaruszania praw osób trzecich oraz nieudostępniania danych dostępowych osobom nieuprawnionym."
+      "title": "2. Definicje",
+      "content": "Na potrzeby niniejszego regulaminu stosuje się następujące definicje: Platforma — system informatyczny Auxilium dostępny pod adresem auxilium.app; Użytkownik — osoba fizyczna posiadająca pełną zdolność do czynności prawnych, osoba prawna lub jednostka organizacyjna nieposiadająca osobowości prawnej, która zawarła umowę o świadczenie usług drogą elektroniczną; Konto — indywidualny panel Użytkownika chroniony loginem i hasłem lub logowaniem OAuth; Subskrypcja — płatny lub bezpłatny plan korzystania z platformy; Przestrzeń (Space) — izolowane środowisko robocze w ramach platformy, do którego mogą należeć różni Użytkownicy; Dane osobowe — informacje pozwalające zidentyfikować Użytkownika w rozumieniu RODO."
     },
     "section3": {
-      "title": "3. Odpowiedzialność i zmiany regulaminu",
-      "content": "KPZ's Productions zastrzega sobie prawo do wprowadzania zmian w regulaminie z zachowaniem 14-dniowego okresu powiadomienia użytkowników. Dalsze korzystanie z platformy po tym czasie oznacza akceptację wprowadzonych zmian."
+      "title": "3. Rejestracja i konto użytkownika",
+      "content": "Korzystanie z funkcji platformy wymaga rejestracji i założenia konta. Użytkownik zobowiązuje się do podania prawdziwych, aktualnych i kompletnych danych podczas rejestracji. Hasło do konta jest poufne i Użytkownik odpowiada za jego bezpieczeństwo oraz wszelkie działania podjęte przy użyciu jego danych logowania. Usługodawca nie ponosi odpowiedzialności za szkody wynikłe z nieautoryzowanego dostępu spowodowanego ujawnieniem hasła przez Użytkownika. Jedno konto może być przypisane wyłącznie do jednej osoby fizycznej. Rejestracja przez osoby poniżej 16 roku życia jest niedozwolona bez zgody rodzica lub opiekuna prawnego."
+    },
+    "section4": {
+      "title": "4. Prawa i obowiązki użytkownika",
+      "content": "Użytkownik ma prawo do korzystania z funkcji platformy zgodnie z wykupionym planem subskrypcji. Użytkownik zobowiązuje się do: korzystania z platformy zgodnie z jej przeznaczeniem i obowiązującym prawem polskim i europejskim; nienaruszania praw osób trzecich, w tym praw własności intelektualnej; niepodejmowania działań mogących zakłócić działanie platformy, w szczególności poprzez reverse engineering, zautomatyzowane ataki, nieautoryzowane skanowanie zasobów lub próby obejścia zabezpieczeń; niezamieszczania treści bezprawnych, obraźliwych, dyskryminujących lub sprzecznych z dobrymi obyczajami. Naruszenie powyższych zasad może skutkować zawieszeniem lub trwałym usunięciem konta."
+    },
+    "section5": {
+      "title": "5. Subskrypcje i płatności",
+      "content": "Platforma oferuje bezpłatny plan Free oraz płatne plany Pro i Enterprise. Płatności za subskrypcje realizowane są cyklicznie (miesięcznie lub rocznie) za pośrednictwem operatora płatności Stripe Inc. Faktury VAT wystawiane są automatycznie i przesyłane na adres e-mail Użytkownika. Użytkownik ma prawo do zmiany planu w dowolnym momencie; zmiana wchodzi w życie od następnego okresu rozliczeniowego. Usługodawca zastrzega sobie prawo do zmiany cennika z zachowaniem co najmniej 30-dniowego okresu powiadomienia Użytkowników. Subskrypcja może zostać anulowana w dowolnym momencie, jednak płatności uiszczone za bieżący okres rozliczeniowy nie podlegają zwrotowi, z zastrzeżeniem bezwzględnie obowiązujących przepisów o ochronie konsumentów."
+    },
+    "section6": {
+      "title": "6. Odpowiedzialność usługodawcy",
+      "content": "Usługodawca zobowiązuje się do świadczenia usług z należytą starannością i dołożenia wszelkich starań w celu zapewnienia ciągłości działania platformy. Usługodawca nie ponosi odpowiedzialności za: przerwy techniczne wynikające z konieczności przeprowadzenia prac konserwacyjnych, o których Użytkownicy będą powiadamiani z wyprzedzeniem; skutki działania siły wyższej; szkody wynikłe z nieprawidłowego lub niezgodnego z regulaminem korzystania z platformy przez Użytkownika; utratę danych spowodowaną działaniem lub zaniechaniem Użytkownika. Łączna odpowiedzialność Usługodawcy wobec jednego Użytkownika nie może przekroczyć kwoty zapłaconej przez Użytkownika za ostatnie 3 miesiące subskrypcji. Powyższe ograniczenia nie mają zastosowania do szkód wyrządzonych umyślnie ani do roszczeń konsumentów wynikających z bezwzględnie obowiązujących przepisów prawa."
+    },
+    "section7": {
+      "title": "7. Własność intelektualna",
+      "content": "Wszelkie prawa własności intelektualnej do platformy Auxilium, w tym prawa autorskie, znaki towarowe, wzory przemysłowe i oprogramowanie, należą do Usługodawcy lub podmiotów, od których Usługodawca uzyskał stosowne licencje. Użytkownik nabywa wyłącznie ograniczone, niewyłączne, nieprzenoszalne i odwołalne prawo do korzystania z platformy w zakresie określonym niniejszym regulaminem. Zabrania się kopiowania, modyfikowania, dekompilowania, dezasemblowania lub rozpowszechniania jakichkolwiek elementów platformy bez uprzedniej pisemnej zgody Usługodawcy. Treści wprowadzone do platformy przez Użytkownika pozostają jego własnością; Użytkownik udziela Usługodawcy nieodpłatnej, niewyłącznej licencji na ich przechowywanie i przetwarzanie wyłącznie w celu świadczenia usługi."
+    },
+    "section8": {
+      "title": "8. Rozwiązanie umowy",
+      "content": "Użytkownik może wypowiedzieć umowę w dowolnym momencie poprzez usunięcie konta w ustawieniach platformy lub wysłanie pisemnego wniosku na adres kontakt@auxilium.app. Usługodawca może rozwiązać umowę z zachowaniem 14-dniowego okresu wypowiedzenia, podając przyczyny wypowiedzenia. W przypadku rażącego naruszenia postanowień regulaminu Usługodawca może zablokować lub usunąć konto ze skutkiem natychmiastowym, informując Użytkownika o powodach tej decyzji. Po rozwiązaniu umowy dane Użytkownika są przechowywane przez okres wymagany przepisami prawa, a następnie trwale usuwane. Konsumentowi przysługuje ustawowe prawo odstąpienia od umowy zawartej na odległość w terminie 14 dni od jej zawarcia bez podawania przyczyny, o ile nie skorzystał wcześniej z usług platformy (art. 27 ustawy z dnia 30 maja 2014 r. o prawach konsumenta)."
+    },
+    "section9": {
+      "title": "9. Zmiany regulaminu",
+      "content": "Usługodawca zastrzega sobie prawo do wprowadzania zmian w regulaminie z uzasadnionych przyczyn, w szczególności w związku ze zmianami przepisów prawa, wymogów technicznych lub oferty usług. O planowanych zmianach Użytkownicy są informowani drogą elektroniczną (e-mail lub powiadomienie w serwisie) z co najmniej 14-dniowym wyprzedzeniem przed wejściem zmian w życie. Dalsze korzystanie z platformy po upływie okresu powiadomienia oznacza akceptację nowego regulaminu. Jeżeli Użytkownik nie akceptuje zmian, ma prawo rozwiązać umowę przed wejściem zmian w życie bez żadnych negatywnych konsekwencji."
+    },
+    "section10": {
+      "title": "10. Postanowienia końcowe i prawo właściwe",
+      "content": "W sprawach nieuregulowanych niniejszym regulaminem stosuje się przepisy prawa polskiego, w szczególności Kodeksu cywilnego, ustawy o świadczeniu usług drogą elektroniczną oraz ustawy o prawach konsumenta. Sądem właściwym do rozstrzygania sporów wynikłych z umowy jest sąd właściwy dla siedziby Usługodawcy; Użytkownicy będący konsumentami mogą dochodzić roszczeń przed sądem właściwym dla miejsca swojego zamieszkania lub skorzystać z pozasądowego rozstrzygania sporów, w szczególności za pośrednictwem platformy ODR dostępnej pod adresem ec.europa.eu/consumers/odr. Jeżeli jakiekolwiek postanowienie regulaminu okaże się nieważne lub bezskuteczne, pozostałe postanowienia zachowują pełną moc wiążącą."
     }
+  },
+  "testimonials": {
+    "subtitle": "Wierzymy, że dobre oprogramowanie nie przeszkadza — ono znika w tle i po prostu działa.",
+    "title": "Filozofia"
+  },
+  "footer": {
+    "privacy": "Prywatność",
+    "cookies": "Cookies",
+    "terms": "Regulamin Usługi"
   }
 }

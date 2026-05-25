@@ -4,6 +4,7 @@ import React from "react";
 import { Draggable } from "@hello-pangea/dnd";
 import { Calendar, Clock, CheckSquare, MoreHorizontal } from "lucide-react";
 import { format } from "date-fns";
+import { useTranslation } from "@/app/context/TranslationContext";
 
 interface Subtask {
   id: string;
@@ -38,9 +39,12 @@ const priorityColors: Record<string, string> = {
 };
 
 export function TaskCard({ task, index, onClick }: TaskCardProps) {
+  const { t } = useTranslation();
   // Calculate subtask progress
   const completedSubtasks = task.subtasks?.filter(st => st.isCompleted).length || 0;
   const totalSubtasks = task.subtasks?.length || 0;
+
+  const priorityLabel = t(`dashboard:kanban_board.priority_${task.priority.toLowerCase()}`);
 
   return (
     <Draggable draggableId={task.id} index={index}>
@@ -57,7 +61,7 @@ export function TaskCard({ task, index, onClick }: TaskCardProps) {
           {/* Header */}
           <div className="flex justify-between items-start mb-2">
             <span className={`text-[10px] font-bold px-2 py-0.5 rounded-sm uppercase tracking-wider ${priorityColors[task.priority] || priorityColors.MEDIUM}`}>
-              {task.priority}
+              {priorityLabel}
             </span>
             <button className="text-gray-400 hover:text-gray-700 opacity-0 group-hover:opacity-100 transition-opacity">
               <MoreHorizontal size={16} />

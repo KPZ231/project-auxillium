@@ -2,6 +2,7 @@
 import { motion, Variants } from "motion/react";
 import Button from "@/app/components/Button/Button";
 import { ReactNode } from "react";
+import { useTranslation } from "@/app/context/TranslationContext";
 
 interface Tab {
   label: string;
@@ -11,6 +12,7 @@ interface Tab {
 interface PageHeaderProps {
   title: string;
   subtitle?: string;
+  subtitleValues?: Record<string, any>;
   primaryAction?: {
     label: string;
     href?: string;
@@ -31,12 +33,14 @@ interface PageHeaderProps {
 export default function PageHeader({
   title,
   subtitle,
+  subtitleValues,
   primaryAction,
   secondaryAction,
   tabs,
   currentTab,
   onTabChange,
 }: PageHeaderProps) {
+  const { t } = useTranslation();
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -64,11 +68,11 @@ export default function PageHeader({
         {/* Left Side: Text */}
         <motion.div className="flex flex-col gap-1" variants={itemVariants}>
           <h2 className="text-4xl font-black text-black tracking-tight">
-            {title}
+            {t(title)}
           </h2>
           {subtitle && (
             <p className="text-sm font-medium text-gray-500">
-              {subtitle}
+              {t(subtitle, subtitleValues)}
             </p>
           )}
         </motion.div>
@@ -84,7 +88,7 @@ export default function PageHeader({
                   currentTab === tab.value ? "bg-white text-black shadow-sm" : "text-gray-500 hover:text-black"
                 }`}
               >
-                {tab.label}
+                {t(tab.label)}
               </button>
             ))}
           </motion.div>
@@ -98,7 +102,7 @@ export default function PageHeader({
           >
             {secondaryAction && (
               <Button
-                content={secondaryAction.label}
+                content={t(secondaryAction.label)}
                 url={secondaryAction.href || "#"}
                 onClick={secondaryAction.onClick}
                 variant="secondary"
@@ -107,7 +111,7 @@ export default function PageHeader({
             )}
             {primaryAction && (
               <Button
-                content={primaryAction.label}
+                content={t(primaryAction.label)}
                 url={primaryAction.href || "#"}
                 onClick={primaryAction.onClick}
                 variant="primary"

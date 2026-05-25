@@ -10,10 +10,11 @@ export default async function ClientsPage() {
   return (
     <div className="flex flex-col w-full">
       <PageHeader 
-        title="Client Roster" 
-        subtitle={`Managing ${clients.length} active client relationships.`}
+        title="dashboard:clients.page_title" 
+        subtitle="dashboard:clients.page_subtitle"
+        subtitleValues={{ count: clients.length }}
         primaryAction={{
-          label: "NEW CLIENT",
+          label: "dashboard:clients.new_client",
           href: "/dashboard/clients/new",
           icon: <Plus className="w-4 h-4" strokeWidth={2.5} />
         }}

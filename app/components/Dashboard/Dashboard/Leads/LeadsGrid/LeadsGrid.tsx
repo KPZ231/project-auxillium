@@ -14,6 +14,7 @@ import {
   Plus, 
   MoreHorizontal, 
 } from "lucide-react";
+import { useTranslation } from "@/app/context/TranslationContext";
 
 interface LeadsGridProps {
   selectedFilter: string;
@@ -37,6 +38,7 @@ const getStatusStyles = (status: LeadStatus) => {
 
 function LeadCard({ lead }: { lead: Lead }) {
   const router = useRouter();
+  const { t } = useTranslation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
@@ -55,10 +57,10 @@ function LeadCard({ lead }: { lead: Lead }) {
         <div className="space-y-4">
           {/* Contact Person */}
           <div>
-            <p className="text-[10px] font-bold text-gray-300 uppercase tracking-widest mb-1">Contact</p>
+            <p className="text-[10px] font-bold text-gray-300 uppercase tracking-widest mb-1">{t("dashboard:leads.contact", "Contact")}</p>
             <div className="flex flex-col">
-              <span className="text-sm font-bold text-gray-800">{lead.contactName || "Unknown Contact"}</span>
-              <span className="text-[11px] text-gray-400">{lead.role || "No role specified"}</span>
+              <span className="text-sm font-bold text-gray-800">{lead.contactName || t("dashboard:leads.unknown_contact", "Unknown Contact")}</span>
+              <span className="text-[11px] text-gray-400">{lead.role || t("dashboard:leads.no_role", "No role specified")}</span>
             </div>
           </div>
 
@@ -83,9 +85,9 @@ function LeadCard({ lead }: { lead: Lead }) {
       {/* Card Footer */}
       <div className="mt-auto bg-gray-50/50 border-t border-gray-100 p-6 py-4 flex items-center justify-between">
         <div>
-          <p className="text-[9px] font-bold text-gray-300 uppercase tracking-widest mb-1">Stage</p>
+          <p className="text-[9px] font-bold text-gray-300 uppercase tracking-widest mb-1">{t("dashboard:leads.stage", "Stage")}</p>
           <p className="text-[11px] font-mono text-gray-600">
-            {lead.stage || "00 / Discovery"}
+            {lead.stage || t("dashboard:leads.discovery", "00 / Discovery")}
           </p>
         </div>
         <button 
@@ -114,6 +116,7 @@ export default function LeadsGrid({ selectedFilter, view, sortBy, searchQuery }:
   const [isLoading, setIsLoading] = useState(true);
   const [isRefreshing, setIsRefreshing] = useState(false);
   const router = useRouter();
+  const { t } = useTranslation();
 
   // Drag and Drop state
   const dragItem = useRef<number | null>(null);
@@ -128,11 +131,11 @@ export default function LeadsGrid({ selectedFilter, view, sortBy, searchQuery }:
       if (result.success && result.data) {
         setLeads(result.data as Lead[]);
       } else {
-        toast.error("Failed to load leads");
+        toast.error(t("dashboard:leads.failed_load", "Failed to load leads"));
       }
     } catch (error) {
       console.error(error);
-      toast.error("An error occurred while loading leads");
+      toast.error(t("dashboard:leads.error_loading", "An error occurred while loading leads"));
     } finally {
       setIsLoading(false);
       setIsRefreshing(false);
@@ -242,12 +245,12 @@ export default function LeadsGrid({ selectedFilter, view, sortBy, searchQuery }:
       try {
         const result = await reorderLeads(orderedIds);
         if (!result.success) {
-          toast.error("Failed to save lead order");
+          toast.error(t("dashboard:leads.failed_save_order", "Failed to save lead order"));
           fetchLeadsData(true);
         }
       } catch (error) {
         console.error(error);
-        toast.error("An error occurred while saving order");
+        toast.error(t("dashboard:leads.error_saving_order", "An error occurred while saving order"));
         fetchLeadsData(true);
       }
     } else {
@@ -274,7 +277,7 @@ export default function LeadsGrid({ selectedFilter, view, sortBy, searchQuery }:
           transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
           className="w-12 h-12 border-[3px] border-black border-t-transparent rounded-full"
         />
-        <p className="mt-6 text-[11px] font-black uppercase tracking-[0.2em] text-gray-400">Loading leads database...</p>
+        <p className="mt-6 text-[11px] font-black uppercase tracking-[0.2em] text-gray-400">{t("dashboard:leads.loading_leads", "Loading leads database...")}</p>
       </div>
     );
   }
@@ -283,7 +286,7 @@ export default function LeadsGrid({ selectedFilter, view, sortBy, searchQuery }:
     <div className="w-full">
       <div className="flex justify-between items-center mb-8">
         <h2 className="text-[10px] font-black uppercase tracking-[0.2em] text-gray-400">
-          Showing {filteredLeads.length} Leads
+          {t("dashboard:leads.showing_leads", "Showing {{count}} Leads", { count: filteredLeads.length })}
         </h2>
         <button
           onClick={() => fetchLeadsData(true)}
@@ -296,7 +299,7 @@ export default function LeadsGrid({ selectedFilter, view, sortBy, searchQuery }:
               transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
               className="w-3 h-3 border-2 border-black border-t-transparent rounded-full"
            />
-          ) : "Refresh Data"}
+          ) : t("dashboard:leads.refresh_data", "Refresh Data")}
         </button>
       </div>
 
@@ -334,14 +337,14 @@ export default function LeadsGrid({ selectedFilter, view, sortBy, searchQuery }:
             <Plus className="text-gray-400 group-hover:text-white transition-colors" size={24} />
           </div>
           <p className="text-sm font-black uppercase tracking-widest text-gray-400 group-hover:text-black transition-colors">
-            Manually Add Lead
+            {t("dashboard:leads.manually_add_lead", "Manually Add Lead")}
           </p>
         </motion.div>
       </motion.div>
 
       {filteredLeads.length === 0 && (
         <div className="w-full py-20 text-center border border-dashed border-gray-200 rounded-lg">
-          <p className="text-gray-400 font-medium">No leads match your current filters.</p>
+          <p className="text-gray-400 font-medium">{t("dashboard:leads.no_leads_match", "No leads match your current filters.")}</p>
         </div>
       )}
     </div>

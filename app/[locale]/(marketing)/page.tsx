@@ -69,24 +69,24 @@ export default function Home() {
           },
           {
             planName: t("marketing:pricing.pro"),
-            cost: 100,
+            cost: 25,
             priceId: "price_1Taey5EBFAZLdzO9LlYWpLIj",
             description: t("marketing:pricing.pro_desc"),
             list: [t("marketing:pricing.pro_desc"), t("marketing:pricing.feature_lorem"), t("marketing:pricing.feature_lorem")],
             button: {
-              content: "Wybierz plan",
+              content: t("marketing:pricing.choose_plan", "Choose plan"),
               variant: "primary",
               url: `/${language}/register`,
             },
           },
           {
             planName: t("marketing:pricing.enterprise"),
-            cost: 1000,
+            cost: 55,
             priceId: "price_1Taey4EBFAZLdzO9Rkn8Jy6Z",
             description: t("marketing:pricing.enterprise_desc"),
             list: [t("marketing:pricing.enterprise_desc"), t("marketing:pricing.feature_lorem"), t("marketing:pricing.feature_lorem")],
             button: {
-              content: "Skontaktuj się z nami",
+              content: t("marketing:pricing.contact_us", "Contact us"),
               variant: "primary",
               url: `/${language}/register`,
             },

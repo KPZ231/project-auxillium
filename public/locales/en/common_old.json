@@ -1,0 +1,50 @@
+{
+  "app_name": "Auxillium",
+  "buttons": {
+    "accept": "Accept",
+    "calendar": "Calendar",
+    "cancel": "Cancel",
+    "cookies": "Cookies",
+    "create": "Create",
+    "decline": "Decline",
+    "delete": "Delete",
+    "edit": "Edit",
+    "filter": "Filter",
+    "grid": "Grid",
+    "list": "List",
+    "loading": "Loading...",
+    "logout": "Logout",
+    "new": "New",
+    "notifications": "Notifications",
+    "privacy": "Privacy",
+    "profile": "Profile",
+    "save": "Save",
+    "search": "Search",
+    "settings": "Settings",
+    "sort": "Sort",
+    "submit": "Submit",
+    "terms": "Terms",
+    "view": "View"
+  },
+  "messages": {
+    "loading": "Loading...",
+    "not_found": "Not found",
+    "success": "Success",
+    "unauthorized": "Unauthorized"
+  },
+  "navigation": {
+    "ai_chat": "AI Chat",
+    "clients": "Clients",
+    "costs_expenses": "Costs & Expenses",
+    "dashboard": "Dashboard",
+    "documents": "Documents",
+    "employees": "Employees",
+    "lead_search": "Lead Search",
+    "leads": "Leads",
+    "manage_space": "Manage Space",
+    "projects": "Projects",
+    "tasks": "Tasks",
+    "workload": "Workload"
+  },
+  "tagline": "New definition of management"
+}

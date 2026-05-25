@@ -4,5 +4,6 @@
       "Bash(npm run *)",
       "Bash(npm install *)"
     ]
-  }
+  },
+  "outputStyle": "default"
 }

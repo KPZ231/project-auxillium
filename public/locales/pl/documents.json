@@ -1,0 +1,10 @@
+{
+  "hub": {
+    "create_document": "Utwórz dokument",
+    "filter": "Filtruj",
+    "manage_templates": "Zarządzaj szablonami",
+    "search_placeholder": "Szukaj dokumentów...",
+    "subtitle": "Twórz, zarządzaj i organizuj dokumenty firmowe",
+    "title": "Centrum Dokumentów"
+  }
+}

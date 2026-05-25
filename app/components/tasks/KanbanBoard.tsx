@@ -8,6 +8,7 @@ import { updateTaskStatusAndOrder, createTask, updateTask, deleteTask } from "@/
 import { AnimatePresence } from "motion/react";
 import { toast } from "sonner";
 import { Search, Filter } from "lucide-react";
+import { useTranslation } from "@/app/context/TranslationContext";
 
 interface Task {
   id: string;
@@ -24,11 +25,11 @@ interface KanbanBoardProps {
   projectId?: string;
 }
 
-const COLUMNS = [
-  { id: "TODO", title: "To Do" },
-  { id: "IN_PROGRESS", title: "In Progress" },
-  { id: "REVIEW", title: "Review" },
-  { id: "DONE", title: "Done" },
+const getColumns = (t: any) => [
+  { id: "TODO", title: t("dashboard:kanban_board.status_todo") },
+  { id: "IN_PROGRESS", title: t("dashboard:kanban_board.status_in_progress") },
+  { id: "REVIEW", title: t("dashboard:kanban_board.status_review") },
+  { id: "DONE", title: t("dashboard:kanban_board.status_done") },
 ];
 
 export function KanbanBoard({ initialTasks, spaceId, projectId }: KanbanBoardProps) {
@@ -39,6 +40,9 @@ export function KanbanBoard({ initialTasks, spaceId, projectId }: KanbanBoardPro
   const [searchQuery, setSearchQuery] = useState("");
   const [priorityFilter, setPriorityFilter] = useState<string>("ALL");
   const [activeTab, setActiveTab] = useState<string>("TODO");
+  const { t } = useTranslation();
+  
+  const COLUMNS = getColumns(t);
 
   // Sync state with props
   useEffect(() => {
@@ -97,7 +101,7 @@ export function KanbanBoard({ initialTasks, spaceId, projectId }: KanbanBoardPro
       );
     } catch (error) {
       console.error("Failed to update task order", error);
-      toast.error("Failed to update task order");
+      toast.error(t("dashboard:kanban_board.failed_update_order"));
       setTasks(tasks); // Rollback
     }
   };
@@ -119,14 +123,14 @@ export function KanbanBoard({ initialTasks, spaceId, projectId }: KanbanBoardPro
         const updated = await updateTask(selectedTask.id, data as any);
         // Use the server-returned data to ensure all relations and IDs are correct
         setTasks(prev => prev.map(t => t.id === updated.id ? updated : t));
-        toast.success("Task updated");
+        toast.success(t("dashboard:kanban_board.task_updated"));
       } else {
         const created = await createTask(data as any);
         setTasks(prev => [...prev, created]);
-        toast.success("Task created");
+        toast.success(t("dashboard:kanban_board.task_created"));
       }
     } catch (error) {
-      toast.error("An error occurred");
+      toast.error(t("dashboard:kanban_board.error_occurred"));
       throw error;
     }
   };
@@ -137,9 +141,9 @@ export function KanbanBoard({ initialTasks, spaceId, projectId }: KanbanBoardPro
       await deleteTask(selectedTask.id);
       setTasks(tasks.filter(t => t.id !== selectedTask.id));
       setIsModalOpen(false);
-      toast.success("Task deleted");
+      toast.success(t("dashboard:kanban_board.task_deleted"));
     } catch (error) {
-      toast.error("Failed to delete task");
+      toast.error(t("dashboard:kanban_board.failed_delete"));
     }
   };
 
@@ -149,16 +153,16 @@ export function KanbanBoard({ initialTasks, spaceId, projectId }: KanbanBoardPro
       <div className="px-4 py-3 md:px-6 md:py-4 border-b border-gray-100 flex flex-row items-center gap-4 justify-between">
         <div className="hidden md:block md:flex-1">
           <h2 className="text-xl font-black text-gray-900 tracking-tighter uppercase leading-none">
-            Board
+            {t("dashboard:kanban_board.board_title")}
           </h2>
           <p className="text-[10px] text-gray-400 font-bold uppercase tracking-widest mt-1">
-            Task Orchestration
+            {t("dashboard:kanban_board.board_subtitle")}
           </p>
         </div>
         
         <div className="flex-1 max-w-xs md:max-w-md">
           <div className="flex justify-between items-center mb-1 text-[9px] md:text-[10px] font-black text-gray-500 uppercase tracking-widest">
-            <span>Project Momentum</span>
+            <span>{t("dashboard:kanban_board.project_momentum")}</span>
             <span>{progressPercentage}%</span>
           </div>
           <div className="w-full bg-gray-100 rounded-full h-1.5 overflow-hidden">
@@ -174,7 +178,7 @@ export function KanbanBoard({ initialTasks, spaceId, projectId }: KanbanBoardPro
             onClick={() => handleAddTask(activeTab)}
             className="px-3 py-2 md:px-4 md:py-2 bg-black text-white text-[10px] font-bold uppercase tracking-widest hover:bg-gray-800 transition-all shadow-sm"
           >
-            + New Task
+            {t("dashboard:kanban_board.new_task")}
           </button>
         </div>
       </div>
@@ -185,7 +189,7 @@ export function KanbanBoard({ initialTasks, spaceId, projectId }: KanbanBoardPro
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
           <input
             type="text"
-            placeholder="Search tasks..."
+            placeholder={t("dashboard:kanban_board.search_placeholder")}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full pl-10 pr-4 py-2 bg-white border border-gray-200 rounded-lg text-sm focus:border-black outline-none transition-all"
@@ -200,15 +204,15 @@ export function KanbanBoard({ initialTasks, spaceId, projectId }: KanbanBoardPro
               onChange={(e) => setPriorityFilter(e.target.value)}
               className="bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm outline-none focus:border-black transition-all"
             >
-              <option value="ALL">All Priorities</option>
-              <option value="LOW">Low</option>
-              <option value="MEDIUM">Medium</option>
-              <option value="HIGH">High</option>
-              <option value="CRITICAL">Critical</option>
+              <option value="ALL">{t("dashboard:kanban_board.all_priorities")}</option>
+              <option value="LOW">{t("dashboard:kanban_board.priority_low")}</option>
+              <option value="MEDIUM">{t("dashboard:kanban_board.priority_medium")}</option>
+              <option value="HIGH">{t("dashboard:kanban_board.priority_high")}</option>
+              <option value="CRITICAL">{t("dashboard:kanban_board.priority_critical")}</option>
             </select>
           </div>
           <div className="text-xs text-gray-500 font-medium">
-            Showing {filteredTasks.length} of {tasks.length} tasks
+            {t("dashboard:kanban_board.showing_tasks", { count: filteredTasks.length, total: tasks.length })}
           </div>
         </div>
       </div>

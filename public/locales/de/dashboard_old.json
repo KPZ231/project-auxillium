@@ -1,0 +1,137 @@
+{
+  "ai": {
+    "chat": "AI Chat"
+  },
+  "client": {
+    "client_details": "Kundedetails",
+    "client_email": "Kunden-E-Mail",
+    "client_name": "Kundenname",
+    "client_phone": "Kunden-Telefon",
+    "clients": "Kunden",
+    "delete_client": "Kunde löschen",
+    "edit_client": "Kunde bearbeiten",
+    "new_client": "Neuer Kunde",
+    "total_projects": "Gesamtprojekte",
+    "total_spent": "Gesamtausgaben"
+  },
+  "dashboard": {
+    "subtitle": "Verwaltung von 12 laufenden architektonischen und Design-Projekten.",
+    "title": "Dashboard"
+  },
+  "documents": {
+    "title": "Dokumente"
+  },
+  "employees": {
+    "active_projects": "Aktive Projekte",
+    "active_tasks": "Aktive Aufgaben",
+    "add_employee": "Mitarbeiter hinzufügen",
+    "delete_employee": "Mitarbeiter löschen",
+    "edit_employee": "Mitarbeiter bearbeiten",
+    "employee_email": "E-Mail",
+    "employee_name": "Name",
+    "employee_phone": "Telefon",
+    "employee_role": "Rolle",
+    "subtitle": "Verwalten Sie Ihre Teammitglieder und ihre Arbeitslasten.",
+    "title": "Mitarbeiter",
+    "workload": "Arbeitslast"
+  },
+  "finance": {
+    "add_expense": "Ausgabe hinzufügen",
+    "add_income": "Einnahme hinzufügen",
+    "cycle": "zyklus",
+    "financial_summary": "Finanzübersicht",
+    "is_recurring": "Wiederkehrend",
+    "month": "Monat",
+    "revenue_goals": "Umsatzziele",
+    "set_goal": "Ziel festlegen",
+    "source": "Quelle",
+    "year": "Jahr"
+  },
+  "lead": {
+    "contact_info": "Kontaktinformationen",
+    "delete_lead": "Lead löschen",
+    "edit_lead": "Lead bearbeiten",
+    "lead_details": "Lead-Details",
+    "lead_info": "Lead-Informationen",
+    "lead_name": "Lead-Name",
+    "lead_search": "Lead-Suche",
+    "leads": "Leads",
+    "new_lead": "Neuer Lead",
+    "stage": "Phase"
+  },
+  "lead_search_ui": {
+    "status": "Status"
+  },
+  "metrics": {
+    "active_projects": "Aktive Projekte",
+    "activity_trajectory": "Aktivitätsverlauf",
+    "completed_tasks": "Abgeschlossene Aufgaben",
+    "expenses": "Ausgaben",
+    "gross_revenue": "Bruttoumsatz",
+    "growth": "Wachstum",
+    "leads": "Neue Leads",
+    "leads_badge": "+42",
+    "leads_subtext": "aus AI-Kampagnen",
+    "new_leads": "Neue Leads",
+    "pending_tasks": "Offene Aufgaben",
+    "profit": "Profit",
+    "projects": "Aktive Projekte",
+    "projects_subtext": "Bereitstellungsphase",
+    "revenue": "Bruttoumsatz",
+    "revenue_badge": "+12.4%",
+    "revenue_goal": "Umsatzziel",
+    "revenue_subtext": "vs. letztes Quartal",
+    "team_members": "Teammitglieder"
+  },
+  "project": {
+    "assigned_to": "Zugewiesen an",
+    "budget": "Budget",
+    "client": "Kunde",
+    "delete_project": "Projekt löschen",
+    "due_date": "Fälligkeit",
+    "edit_project": "Projekt bearbeiten",
+    "location": "Standort",
+    "new_project": "Neues Projekt",
+    "priority": "Priorität",
+    "project_description": "Projektbeschreibung",
+    "project_details": "Projektdetails",
+    "project_name": "Projektname",
+    "project_status": "Projektstatus",
+    "project_type": "Projektart",
+    "projects": "Projekte"
+  },
+  "space": {
+    "create_space": "Bereich erstellen",
+    "employees": "Mitarbeiter",
+    "members": "Mitglieder",
+    "projects": "Projekte",
+    "space_description": "Bereichsbeschreibung",
+    "space_name": "Bereichsname",
+    "switch_space": "Bereich wechseln",
+    "title": "Bereich"
+  },
+  "status": {
+    "cancelled": "Storniert",
+    "cold": "Kalt",
+    "in_progress": "In Bearbeitung",
+    "negotiation": "Verhandlung",
+    "pending": "Ausstehend",
+    "qualified": "Qualifiziert",
+    "today": "Heute",
+    "urgent": "Dringend"
+  },
+  "task": {
+    "assignee": "Zuständiger",
+    "delete_task": "Aufgabe löschen",
+    "due_date": "Fälligkeit",
+    "edit_task": "Aufgabe bearbeiten",
+    "new_task": "Neue Aufgabe",
+    "priority": "Priorität",
+    "status": "Status",
+    "subtasks": "Teilaufgaben",
+    "task_description": "Aufgabenbeschreibung",
+    "task_title": "Aufgabentitel",
+    "tasks": "Aufgaben",
+    "workload": "Arbeitslast"
+  }
+}

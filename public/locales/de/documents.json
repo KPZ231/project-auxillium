@@ -1,0 +1,10 @@
+{
+  "hub": {
+    "create_document": "Dokument erstellen",
+    "filter": "Filtern",
+    "manage_templates": "Vorlagen verwalten",
+    "search_placeholder": "Dokumente suchen...",
+    "subtitle": "Erstellen, verwalten und organisieren Sie Ihre Geschäftsdokumente",
+    "title": "Dokumenten-Hub"
+  }
+}

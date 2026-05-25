@@ -4,6 +4,7 @@ import { Box, Typography } from '@mui/material';
 import { LineChart, BarChart } from '@mui/x-charts';
 import { motion } from 'motion/react';
 import { useState } from 'react';
+import { useTranslation } from "@/app/context/TranslationContext";
 
 const performanceData = [
   { month: 'Jan', value: 45 },
@@ -25,6 +26,7 @@ const growthData = [
 const MotionBox = motion(Box);
 
 export default function TemplateAnalitics() {
+  const { t } = useTranslation();
   const [perfData, setPerfData] = useState(performanceData.map(d => ({ ...d, value: 0 })));
   const [revData, setRevData] = useState(growthData.map(d => ({ ...d, value: 0 })));
 
@@ -50,7 +52,7 @@ export default function TemplateAnalitics() {
               lineHeight: 1.1
             }}
           >
-            Przykładowe Analityki
+            {t("dashboard:leads.analytics_title", "Przykładowe Analityki")}
           </Typography>
           <Typography 
             sx={{ 
@@ -61,7 +63,7 @@ export default function TemplateAnalitics() {
               fontWeight: 300
             }}
           >
-            Przykładowe dane reprezentowane przez wykresy <b>Auxillium</b>
+            <span dangerouslySetInnerHTML={{ __html: t("dashboard:leads.analytics_subtitle", "Przykładowe dane reprezentowane przez wykresy <b>Auxillium</b>") }} />
           </Typography>
         </MotionBox>
 
@@ -76,7 +78,7 @@ export default function TemplateAnalitics() {
             sx={{ border: '1px solid var(--tetriary)', p: 4, transition: 'border-color 0.2s', '&:hover': { borderColor: 'var(--primary)' } }}
           >
             <Typography variant="h3" sx={{ fontSize: '16px', fontWeight: 600, mb: 4, fontFamily: 'Inter', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-              Efficiency Trend
+              {t("dashboard:leads.efficiency_trend", "Efficiency Trend")}
             </Typography>
             <Box sx={{ height: 300, width: '100%' }}>
               <LineChart
@@ -92,7 +94,7 @@ export default function TemplateAnalitics() {
                   color: 'var(--primary)',
                   showMark: true,
                   area: true,
-                  label: 'Efficiency %'
+                  label: t("dashboard:leads.efficiency_label", 'Efficiency %')
                 }]}
                 height={300}
                 margin={{ top: 20, bottom: 30, left: 40, right: 10 }}
@@ -130,7 +132,7 @@ export default function TemplateAnalitics() {
             sx={{ border: '1px solid var(--tetriary)', p: 4, transition: 'border-color 0.2s', '&:hover': { borderColor: 'var(--primary)' } }}
           >
             <Typography variant="h3" sx={{ fontSize: '16px', fontWeight: 600, mb: 4, fontFamily: 'Inter', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-              Revenue Growth
+              {t("dashboard:leads.revenue_growth", "Revenue Growth")}
             </Typography>
             <Box sx={{ height: 300, width: '100%' }}>
               <BarChart
@@ -142,7 +144,7 @@ export default function TemplateAnalitics() {
                 series={[{ 
                   dataKey: 'value', 
                   color: 'var(--primary)',
-                  label: 'Revenue (k$)'
+                  label: t("dashboard:leads.revenue_label", 'Revenue (k$)')
                 }]}
                 height={300}
                 margin={{ top: 20, bottom: 30, left: 40, right: 10 }}

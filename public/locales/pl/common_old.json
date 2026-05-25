@@ -1,0 +1,50 @@
+{
+  "app_name": "Auxillium",
+  "buttons": {
+    "accept": "Akceptuję",
+    "calendar": "Kalendarz",
+    "cancel": "Anuluj",
+    "cookies": "Pliki cookie",
+    "create": "Utwórz",
+    "decline": "Odrzucam",
+    "delete": "Usuń",
+    "edit": "Edytuj",
+    "filter": "Filtruj",
+    "grid": "Siatka",
+    "list": "Lista",
+    "loading": "Ładowanie...",
+    "logout": "Wyloguj się",
+    "new": "Nowy",
+    "notifications": "Powiadomienia",
+    "privacy": "Prywatność",
+    "profile": "Profil",
+    "save": "Zapisz",
+    "search": "Szukaj",
+    "settings": "Ustawienia",
+    "sort": "Sortuj",
+    "submit": "Wyślij",
+    "terms": "Regulamin",
+    "view": "Widok"
+  },
+  "messages": {
+    "loading": "Ładowanie...",
+    "not_found": "Nie znaleziono",
+    "success": "Sukces",
+    "unauthorized": "NieAutoryzowany"
+  },
+  "navigation": {
+    "ai_chat": "AI Czat",
+    "clients": "Klienci",
+    "costs_expenses": "Koszty i wydatki",
+    "dashboard": "Panel główny",
+    "documents": "Dokumenty",
+    "employees": "Pracownicy",
+    "lead_search": "Wyszukiwanie leadów",
+    "leads": "Leady",
+    "manage_space": "Zarządzaj miejscem",
+    "projects": "Projekty",
+    "tasks": "Zadania",
+    "workload": "Obciążenie"
+  },
+  "tagline": "Nowa definicja zarządzania"
+}

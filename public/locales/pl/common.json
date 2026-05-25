@@ -1,62 +1,18 @@
 {
-  "app_name": "Auxillium",
-  "tagline": "Nowa definicja zarządzania",
   "beta_announcement": {
-    "message": "Auxillium jest obecnie w wersji beta.",
-    "link_text": "Zgłoś błąd na GitHubie"
+    "link_text": "Zgłoś błąd na GitHubie",
+    "message": "Auxillium jest obecnie w wersji beta."
   },
   "buttons": {
-    "log_in": "Logowanie",
-    "sign_up": "Zarejestruj się",
-    "dashboard": "Panel główny",
     "about": "O nas",
-    "pricing": "Cennik",
     "contact": "Kontakt",
-    "privacy": "Prywatność",
-    "terms": "Regulamin",
-    "cookies": "Pliki cookie",
-    "accept": "Akceptuję",
-    "decline": "Odrzucam",
-    "loading": "Ładowanie...",
-    "submit": "Wyślij",
-    "save": "Zapisz",
-    "cancel": "Anuluj",
-    "delete": "Usuń",
-    "edit": "Edytuj",
-    "create": "Utwórz",
-    "new": "Nowy",
-    "search": "Szukaj",
-    "filter": "Filtruj",
-    "sort": "Sortuj",
-    "view": "Widok",
-    "grid": "Siatka",
-    "list": "Lista",
-    "calendar": "Kalendarz",
-    "settings": "Ustawienia",
-    "profile": "Profil",
-    "notifications": "Powiadomienia",
-    "logout": "Wyloguj się"
-  },
-  "navigation": {
     "dashboard": "Panel główny",
-    "projects": "Projekty",
-    "costs_expenses": "Koszty i wydatki",
-    "tasks": "Zadania",
-    "lead_search": "Wyszukiwanie leadów",
-    "leads": "Leady",
-    "clients": "Klienci",
-    "ai_chat": "AI Czat",
-    "documents": "Dokumenty",
-    "employees": "Pracownicy",
-    "workload": "Obciążenie",
-    "manage_space": "Zarządzaj miejscem"
+    "log_in": "Logowanie",
+    "pricing": "Cennik",
+    "sign_up": "Zarejestruj się"
   },
   "messages": {
-    "loading": "Ładowanie...",
     "error": "Wystąpił błąd",
-    "success": "Sukces",
-    "unauthorized": "NieAutoryzowany",
-    "not_found": "Nie znaleziono",
     "network_error": "Błąd połączenia",
     "please_try_again": "Spróbuj ponownie później"
   }

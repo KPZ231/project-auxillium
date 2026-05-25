@@ -1,0 +1,147 @@
+{
+  "ai": {
+    "chat": "AI Chat"
+  },
+  "client": {
+    "client_details": "Szczegóły klienta",
+    "client_email": "E-mail klienta",
+    "client_name": "Nazwa klienta",
+    "client_phone": "Telefon klienta",
+    "clients": "Klienci",
+    "delete_client": "Usuń klienta",
+    "edit_client": "Edytuj klienta",
+    "new_client": "Nowy klient",
+    "total_projects": "Łącznie projektów",
+    "total_spent": "Łącznie wydatków"
+  },
+  "dashboard": {
+    "subtitle": "Zarządzasz 12 bieżącymi inicjatywami architektonicznymi i projektowymi.",
+    "title": "Panel główny"
+  },
+  "documents": {
+    "title": "Dokumenty"
+  },
+  "employees": {
+    "active_projects": "Aktywne projekty",
+    "active_tasks": "Aktywne zadania",
+    "add_employee": "Dodaj pracownika",
+    "delete_employee": "Usuń pracownika",
+    "edit_employee": "Edytuj pracownika",
+    "employee_email": "E-mail",
+    "employee_name": "Imię i nazwisko",
+    "employee_phone": "Telefon",
+    "employee_role": "Rola",
+    "subtitle": "Zarządzaj członkami zespołu i ich obciążeniem.",
+    "title": "Pracownicy",
+    "workload": "Obciążenie"
+  },
+  "finance": {
+    "activity_log": "Historia aktywności",
+    "add_expense": "Dodaj wydatek",
+    "add_income": "Dodaj przychód",
+    "critical": "Krytycznie",
+    "cycle": "Cykl",
+    "financial_summary": "Podsumowanie finansowe",
+    "healthy": "Stabilnie",
+    "is_recurring": "Cykliczny",
+    "month": "Miesiąc",
+    "revenue_goals": "Cele przychodu",
+    "set_goal": "Ustaw cel",
+    "source": "Źródło",
+    "warning": "Ostrzeżenie",
+    "year": "Rok"
+  },
+  "lead": {
+    "contact_info": "Dane kontaktowe",
+    "delete_lead": "Usuń lead",
+    "edit_lead": "Edytuj lead",
+    "lead_details": "Szczegóły leada",
+    "lead_info": "Informacje o leadzie",
+    "lead_name": "Nazwa leada",
+    "lead_search": "Szukaj leadów",
+    "leads": "Leady",
+    "new_lead": "Nowy lead",
+    "stage": "Etap"
+  },
+  "lead_search_ui": {
+    "status": "Status"
+  },
+  "metrics": {
+    "active_projects": "Aktywne projekty",
+    "activity_trajectory": "Trajektoria Aktywności",
+    "completed_tasks": "Ukończone zadania",
+    "expenses": "Wydatki",
+    "gross_revenue": "Przychód brutto",
+    "growth": "Wzrost",
+    "leads": "Nowe Leady",
+    "leads_badge": "+42",
+    "leads_subtext": "z kampanii AI",
+    "new_leads": "Nowe leady",
+    "pending_tasks": "Oczekujące zadania",
+    "profit": "Zysk",
+    "projects": "Aktywne Projekty",
+    "projects_subtext": "faza wdrożenia",
+    "revenue": "Przychód Brutto",
+    "revenue_badge": "+12.4%",
+    "revenue_goal": "Cel przychodu",
+    "revenue_subtext": "vs ostatni kwartał",
+    "team_members": "Członkowie zespołu"
+  },
+  "project": {
+    "assigned_to": "Przydzielony do",
+    "budget": "Budżet",
+    "client": "Klient",
+    "delete_project": "Usuń projekt",
+    "due_date": "Termin końcowy",
+    "edit_project": "Edytuj projekt",
+    "location": "Lokalizacja",
+    "new_project": "Nowy projekt",
+    "priority": "Priorytet",
+    "project_description": "Opis projektu",
+    "project_details": "Szczegóły projektu",
+    "project_name": "Nazwa projektu",
+    "project_status": "Status projektu",
+    "project_type": "Typ projektu",
+    "projects": "Projekty"
+  },
+  "space": {
+    "create_space": "Utwórz miejsce",
+    "employees": "Pracownicy",
+    "members": "Członkowie",
+    "projects": "Projekty",
+    "space_description": "Opis miejsca",
+    "space_name": "Nazwa miejsca",
+    "switch_space": "Przełącz miejsce",
+    "title": "Miejsce"
+  },
+  "status": {
+    "cancelled": "Anulowane",
+    "cold": "Zimny",
+    "in_progress": "W trakcie",
+    "negotiation": "Negocjacje",
+    "pending": "Oczekujące",
+    "qualified": "Kwalifikowany",
+    "today": "Dzisiaj",
+    "urgent": "Pilne"
+  },
+  "task": {
+    "assignee": "Przydzielony",
+    "delete_task": "Usuń zadanie",
+    "due_date": "Termin",
+    "edit_task": "Edytuj zadanie",
+    "new_task": "Nowe zadanie",
+    "priority": "Priorytet",
+    "status": "Status",
+    "subtasks": "Podzadania",
+    "task_description": "Opis zadania",
+    "task_title": "Tytuł zadania",
+    "tasks": "Zadania",
+    "workload": "Obciążenie"
+  },
+  "workload": {
+    "filter_due_soon": "Wkrótce termin",
+    "filter_no_due": "Bez terminu",
+    "filter_overdue": "Zaległe",
+    "todo": "Do zrobienia"
+  }
+}

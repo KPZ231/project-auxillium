@@ -1,0 +1,47 @@
+{
+  "errors": {
+    "field_required": "This field is required",
+    "invalid_email": "Invalid email format",
+    "invalid_input": "Invalid input",
+    "invalid_login": "Invalid login format",
+    "minimum_characters": "Min. {{count}} characters",
+    "password_no_digit": "Password must contain at least one digit",
+    "password_no_lowercase": "Password must contain at least one lowercase letter",
+    "password_no_uppercase": "Password must contain at least one uppercase letter",
+    "password_too_short": "Password must be at least 8 characters",
+    "passwords_do_not_match": "Passwords do not match"
+  },
+  "form": {
+    "company": "Company",
+    "contact_name": "Contact name",
+    "description": "Description",
+    "first_name": "First name",
+    "last_name": "Last name",
+    "lead_name": "Lead name",
+    "location": "Location",
+    "notes": "Notes",
+    "phone": "Phone",
+    "project_type": "Project type",
+    "role": "Role",
+    "subject": "Subject",
+    "username": "Username",
+    "website": "Website"
+  },
+  "labels": {
+    "contact_failed": "Failed to send message",
+    "days": {
+      "closed": "CLOSED",
+      "mon_fri": "MON - FRI",
+      "sat": "SATURDAY",
+      "sun": "SUNDAY"
+    }
+  },
+  "placeholders": {
+    "company": "Company name",
+    "confirm_password": "••••••••",
+    "contact_name": "Jane Smith",
+    "lead_name": "Company or individual name",
+    "phone": "+1 234 567 890",
+    "website": "https://www.example.com"
+  }
+}

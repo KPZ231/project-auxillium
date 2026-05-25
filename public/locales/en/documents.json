@@ -1,0 +1,10 @@
+{
+  "hub": {
+    "create_document": "Create Document",
+    "filter": "Filter",
+    "manage_templates": "Manage Templates",
+    "search_placeholder": "Search documents...",
+    "subtitle": "Create, manage, and organize your business documents",
+    "title": "Document Hub"
+  }
+}

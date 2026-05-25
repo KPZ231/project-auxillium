@@ -1,11 +1,19 @@
+'use client'
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
+
 
 export default function Footer() {
+
+  const year: number = new Date().getFullYear();
+  const pathname = usePathname();
+
+
   const navLinks = [
-    { name: "PRYWATNOŚĆ", url: "/prywatnosc" },
-    { name: "REGULAMIN", url: "/regulamin" },
-    { name: "COOKIES", url: "/cookies" },
+    { name: "Privacy", url: "/privacy" },
+    { name: "Terms & Conditions", url: "/terms" },
+    { name: "Cookies", url: "/cookies" },
   ];
 
   return (
@@ -24,12 +32,12 @@ export default function Footer() {
 
         {/* Links */}
         <div className="flex-1 flex flex-wrap justify-center gap-6 md:gap-12">
-          {navLinks.map((link, index) => (
+          {navLinks.map((link) => (
             <Link
               key={link.name}
               href={link.url}
               className={`text-[11px] font-bold tracking-[0.2em] hover:text-(--neutral) transition-colors ${
-                index === 0 ? "underline underline-offset-4 decoration-2" : ""
+                pathname === link.url ? "underline underline-offset-4 decoration-2" : ""
               }`}
             >
               {link.name}
@@ -40,7 +48,7 @@ export default function Footer() {
         {/* Copyright */}
         <div className="flex-1 flex justify-center md:justify-end text-center md:text-right">
           <p className="text-[10px] md:text-[11px] font-medium tracking-wider text-(--neutral) uppercase">
-            © 2024 AUXILLIUM. SYSTEM ZARZĄDZANIA.
+            © {year} AUXILLIUM. SYSTEM ZARZĄDZANIA.
           </p>
         </div>
       </div>

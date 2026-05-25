@@ -8,9 +8,11 @@ import { useBreadcrumb } from "@/app/context/BreadcrumbContext";
 import { useEffect } from "react";
 import { PremiumInput, PremiumTextarea } from "@/app/components/UI/FormElements";
 import { AddLeadInput } from "@/actions/addLead";
+import { useTranslation } from "@/app/context/TranslationContext";
 
 export default function NewLead() {
   const router = useRouter();
+  const { t } = useTranslation();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState<AddLeadInput>({
     leadName: "",
@@ -20,9 +22,9 @@ export default function NewLead() {
   const { setCustomLabel } = useBreadcrumb();
 
   useEffect(() => {
-    setCustomLabel("New Lead");
+    setCustomLabel(t("dashboard:leads.new_lead_title", "New Lead"));
     return () => setCustomLabel(null);
-  }, [setCustomLabel]);
+  }, [setCustomLabel, t]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,7 +33,7 @@ export default function NewLead() {
     const result = await addLead(formData);
     
     if (result.success) {
-      toast.success("Lead created successfully!");
+      toast.success(t("dashboard:leads.lead_created", "Lead created successfully!"));
       router.push(`/dashboard/leads/${result.leadId}?setup=true`);
     } else {
       toast.error(result.error);
@@ -66,32 +68,32 @@ export default function NewLead() {
       >
         <motion.div variants={itemVariants}>
           <h1 className="text-[40px] leading-[1.1] font-bold text-[#0A0A0A] tracking-tight">
-            New Lead
+            {t("dashboard:leads.new_lead_title", "New Lead")}
           </h1>
           <p className="mt-4 text-[#71717A] text-[16px] font-light leading-[1.65]">
-            Add a new business opportunity. Keep it minimal.
+            {t("dashboard:leads.new_lead_subtitle", "Add a new business opportunity. Keep it minimal.")}
           </p>
         </motion.div>
 
         <motion.form variants={itemVariants} onSubmit={handleSubmit} className="space-y-8">
           
           <PremiumInput 
-            label="Lead / Company Name" 
+            label={t("dashboard:leads.lead_company_name", "Lead / Company Name")} 
             required 
             value={formData.leadName} 
             onChange={(e) => setFormData({ ...formData, leadName: e.target.value })} 
-            placeholder="e.g. Acme Corp"
-            helperText="The name of the company or individual."
+            placeholder={t("dashboard:leads.lead_company_placeholder", "e.g. Acme Corp")}
+            helperText={t("dashboard:leads.lead_company_helper", "The name of the company or individual.")}
           />
 
           <PremiumTextarea 
-            label="Description / Notes" 
+            label={t("dashboard:leads.description_notes", "Description / Notes")} 
             required 
             rows={5} 
             value={formData.leadInfo} 
             onChange={(e) => setFormData({ ...formData, leadInfo: e.target.value })} 
-            placeholder="Describe the opportunity..."
-            helperText="Brief summary of why this lead is important."
+            placeholder={t("dashboard:leads.description_placeholder", "Describe the opportunity...")}
+            helperText={t("dashboard:leads.description_helper", "Brief summary of why this lead is important.")}
           />
 
           <div className="pt-12 border-t border-[#F4F4F5]">
@@ -100,7 +102,7 @@ export default function NewLead() {
               disabled={isSubmitting}
               className="h-[56px] px-12 bg-[#0A0A0A] text-[#FAFAFA] text-[14px] font-bold uppercase tracking-widest rounded-none hover:bg-[#FAFAFA] hover:text-[#0A0A0A] border border-[#0A0A0A] transition-all duration-300 disabled:opacity-30 disabled:cursor-not-allowed shadow-sm hover:shadow-xl"
             >
-              {isSubmitting ? "Creating..." : "Initialize Lead"}
+              {isSubmitting ? t("dashboard:leads.creating", "Creating...") : t("dashboard:leads.initialize_lead", "Initialize Lead")}
             </button>
           </div>
           

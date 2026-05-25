@@ -2,6 +2,7 @@ import React from "react";
 import { getSpaces, getActiveSpaceId, getActiveSpace } from "@/actions/space";
 import SpaceSettingsClient from "@/app/components/Dashboard/Space/SpaceSettingsClient";
 import { Settings } from "lucide-react";
+import PageHeader from "@/app/components/Dashboard/Dashboard/Shared/PageHeader/PageHeader";
 
 export default async function SpaceSettingsPage() {
   const spaces = await getSpaces();
@@ -10,10 +11,10 @@ export default async function SpaceSettingsPage() {
 
   return (
     <div className="max-w-5xl mx-auto space-y-10">
-      <div className="flex flex-col gap-2">
-        <h1 className="text-3xl font-black text-slate-900 tracking-tight uppercase">Space Settings</h1>
-        <p className="text-slate-500 font-medium">Manage your operational units and workspaces.</p>
-      </div>
+      <PageHeader 
+        title="dashboard:space_settings.title" 
+        subtitle="dashboard:space_settings.subtitle" 
+      />
 
       <SpaceSettingsClient 
         initialSpaces={spaces} 

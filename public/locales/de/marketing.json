@@ -1,118 +1,205 @@
 {
+  "about": {
+    "description": "Erfahren Sie mehr über unser Unternehmen",
+    "offer_item1": "Projektmanagement",
+    "offer_item1_desc": "Klare Übersicht über Fortschritt, Fristen und Verantwortlichkeiten im gesamten Team.",
+    "offer_item2": "Lead- & Kundenverfolgung",
+    "offer_item2_desc": "CRM auf das KMU-Verkaufstempo zugeschnitten — effektiv und ohne unnötige Komplexität.",
+    "offer_item3": "Finanzen & Kosten",
+    "offer_item3_desc": "Kontrollieren Sie Einnahmen, Ausgaben und Finanzziele in Echtzeit.",
+    "offer_item4": "Teammanagement",
+    "offer_item4_desc": "Onboarding, Aufgabenzuweisung, Arbeitsbelastungsüberwachung — alles an einem Ort.",
+    "offer_subtitle": "Als KPZ's Productions bieten wir ein breites Spektrum von Dienstleistungen im Bereich Softwareentwicklung an. Unser Team besteht aus erfahrenen Programmierern und Designern, die auch die anspruchsvollsten Aufgaben meistern können.",
+    "offer_title": "Was wir anbieten",
+    "quote_content": "Wir helfen Unternehmen, sich digital zu transformieren und ihr Geschäft zu skalieren",
+    "sub_content": "Wir verbinden Kreativität mit Daten. Wir erstellen Software, die Wachstum fördert, Effizienz steigert und neue Marktchancen für unsere Kunden eröffnet.",
+    "title": "Über uns",
+    "why_choose_us": "Was uns auszeichnet"
+  },
+  "contact": {
+    "description": "Nehmen Sie Kontakt mit uns auf",
+    "title": "Kontakt"
+  },
+  "cookies": {
+    "description": "Cookie-Richtlinie der Auxilium-Plattform",
+    "publication_date": "Veröffentlicht am: 26.04.2026",
+    "sections_count": "8",
+    "title": "Cookie-Richtlinie",
+    "section1": {
+      "title": "1. Definitionen",
+      "content": "Für die Zwecke dieser Cookie-Richtlinie gelten folgende Definitionen: Cookies — kleine Textdateien, die vom Webbrowser auf dem Endgerät des Nutzers gespeichert werden und Daten für die ordnungsgemäße Funktion der Website enthalten; Dienst — die Auxilium-Plattform unter auxilium.app; Endgerät — Computer, Telefon, Tablet oder sonstiges Gerät, über das der Nutzer den Dienst nutzt; Sitzung — der Zeitraum der Nutzeraktivität auf dem Dienst von der Anmeldung bis zur Abmeldung oder zum Schließen des Browsers; Verantwortlicher — KPZ's Productions, das Unternehmen, das für die Datenverarbeitung innerhalb des Dienstes verantwortlich ist."
+    },
+    "section2": {
+      "title": "2. Arten der verwendeten Cookies",
+      "content": "Der Auxilium-Dienst verwendet folgende Cookie-Arten nach Speicherdauer: Sitzungs-Cookies — werden automatisch beim Beenden der Browsersitzung gelöscht; persistente Cookies — werden für einen bestimmten Zeitraum oder bis zur manuellen Löschung auf dem Gerät gespeichert. Nach Zweck: notwendige Cookies — für den ordnungsgemäßen Betrieb des Dienstes erforderlich und nicht deaktivierbar; funktionale Cookies — speichern Nutzereinstellungen, z. B. Sprachpräferenzen; analytische Cookies — erfassen anonyme Statistiken zur Dienstnutzung; Marketing-Cookies — zur möglichen Inhaltspersonalisierung."
+    },
+    "section3": {
+      "title": "3. Für den Betrieb des Dienstes notwendige Cookies",
+      "content": "Notwendige Cookies sind für den ordnungsgemäßen Betrieb der Plattform erforderlich und können nicht deaktiviert werden, ohne die Kernfunktionalität zu verlieren. Sie umfassen: Sitzungsauthentifizierungstoken für sichere Anmeldung; aktive Arbeitsbereichskennung (active_space_id); JWT-Sitzungstoken in einem httpOnly-Cookie mit 24-Stunden-Ablaufzeit; Spracheinstellungen der Benutzeroberfläche. Rechtsgrundlage für die Verarbeitung über notwendige Cookies ist die Vertragserfüllung (Art. 6 Abs. 1 lit. b DSGVO) und das berechtigte Interesse des Verantwortlichen an der Plattformsicherheit (Art. 6 Abs. 1 lit. f DSGVO)."
+    },
+    "section4": {
+      "title": "4. Analytische und statistische Cookies",
+      "content": "Analytische Cookies ermöglichen es uns, anonyme Informationen über die Nutzung des Dienstes zu sammeln, darunter: Besucherzahlen, Verweildauer, besuchte Seiten und Zugriffsquellen. Diese Daten werden ausschließlich zur Verbesserung der Plattformfunktionalität und -inhalte genutzt und nicht mit Daten verknüpft, die einzelne Nutzer identifizieren. Analytische Cookies werden ausschließlich nach Einholung der freiwilligen Einwilligung des Nutzers gesetzt, die jederzeit ohne Auswirkung auf die Rechtmäßigkeit der vorherigen Verarbeitung widerrufen werden kann."
+    },
+    "section5": {
+      "title": "5. Marketing- und Personalisierungs-Cookies",
+      "content": "Marketing-Cookies können zur Personalisierung von Inhalten auf Basis des Nutzerverhaltens im Dienst eingesetzt werden. Derzeit verwendet der Auxilium-Dienst keine Drittanbieter-Marketing-Cookies für Werbezwecke. Sollten solche Cookies eingeführt werden, werden Nutzer vorab informiert und um eine gesonderte, informierte Einwilligung gemäß den Anforderungen der ePrivacy-Richtlinie (2002/58/EG) und der DSGVO gebeten. Alle Marketing-Cookies werden in der aktualisierten Version dieser Richtlinie klar beschrieben."
+    },
+    "section6": {
+      "title": "6. Verwaltung der Cookie-Einstellungen",
+      "content": "Nutzer können Cookies verwalten über: Webbrowser-Einstellungen — Speicherung von Cookies kann blockiert oder eingeschränkt oder bereits gespeicherte Cookies können gelöscht werden; das Einwilligungsverwaltungs-Panel, das beim ersten Besuch des Dienstes verfügbar ist. Das Deaktivieren notwendiger Cookies kann die Anmeldung und Nutzung der Plattform verhindern. Cookie-Verwaltungsanweisungen für gängige Browser: Chrome — chrome://settings/cookies; Firefox — about:preferences#privacy; Safari — Einstellungen > Datenschutz; Microsoft Edge — edge://settings/cookies."
+    },
+    "section7": {
+      "title": "7. Cookie-Einwilligung und deren Widerruf",
+      "content": "Beim ersten Besuch des Dienstes werden Nutzer über die verwendeten Cookies informiert und um freiwillige Einwilligung in optionale Cookies (analytisch, Marketing) gemäß Art. 6 Abs. 1 lit. a DSGVO gebeten. Die Einwilligung kann jederzeit ohne Angabe von Gründen und ohne negative Folgen widerrufen werden — der Widerruf der Einwilligung für analytische oder Marketing-Cookies schränkt den Zugang zu den Kernfunktionen der Plattform nicht ein. Der Widerruf ist über die Browser-Einstellungen oder das Einwilligungsverwaltungs-Panel im Dienst möglich."
+    },
+    "section8": {
+      "title": "8. Änderungen der Cookie-Richtlinie",
+      "content": "Der Verantwortliche behält sich das Recht vor, diese Cookie-Richtlinie bei technischen, rechtlichen oder funktionalen Änderungen des Dienstes zu aktualisieren. Alle Änderungen werden unter auxilium.app/cookies zusammen mit dem Inkrafttretensdatum veröffentlicht. Über wesentliche Änderungen werden Nutzer über eine Mitteilung im Dienst oder auf elektronischem Wege informiert. Bei Fragen zu Cookies wenden Sie sich bitte an: kontakt@auxilium.app."
+    }
+  },
+  "cta": {
+    "cta": "Jetzt starten",
+    "subtitle": "Starten Sie noch heute mit Auxillium und überzeugen Sie sich, wie einfach Ihr Geschäftsmanagement sein kann.",
+    "title": "Bereit für eine Veränderung?"
+  },
+  "faq": {
+    "a1": "Registrieren Sie sich einfach auf unserer Plattform und wählen Sie den kostenlosen Plan, um die grundlegenden Funktionen zu testen.",
+    "a2": "Ja, Sie können jederzeit auf einen höheren oder niedrigeren Plan umsteigen. Änderungen werden ab der nächsten Abrechnungsperiode wirksam.",
+    "a3": "Wir akzeptieren Kartenzahlungen, Sofortüberweisungen und wiederkehrende Zahlungen (Abo-Modelle).",
+    "q1": "Wie beginne ich mit der Nutzung des Systems?",
+    "q2": "Kann ich meinen Plan jederzeit ändern?",
+    "q3": "Welche Zahlungsmethoden werden akzeptiert?",
+    "subtitle": "Alles was Sie über Auxillium wissen müssen",
+    "title": "Häufig gestellte Fragen"
+  },
+  "features": {
+    "description": "Durch Prozessautomatisierung sparen Sie Zeit und Geld",
+    "subtitle": "Effizienz steigern",
+    "subtitle_alternative": "Durch Prozessautomatisierung sparen Sie Zeit und Geld",
+    "title": "Sparen Sie bis zu 30%"
+  },
   "hero": {
-    "title": "AUXILLIUM <br/> neue Definition des Managements",
-    "subtitle": "Minimalismus, der Ihr Geschäft voranbringt",
     "cta": "Jetzt starten",
     "cta_secondary": "Demo ansehen",
     "social_proof": "über 500 Unternehmen managen bereits smarter",
-    "subtitle_alternative": "Minimalismus, der Ihr Geschäft voranbringt"
-  },
-  "features": {
-    "title": "SParen Sie bis zu 30%",
-    "description": "Durch Prozessautomatisierung sparen Sie Zeit und Geld",
-    "subtitle": "Effizienz steigern",
-    "subtitle_alternative": "Durch Prozessautomatisierung sparen Sie Zeit und Geld"
+    "subtitle": "Minimalismus, der Ihr Geschäft voranbringt",
+    "subtitle_alternative": "Minimalismus, der Ihr Geschäft voranbringt",
+    "title": "AUXILLIUM <br/> neue Definition des Managements"
   },
   "pricing": {
-    "title": "Überprüfen Sie unsere Pläne",
-    "subtitle": "Wählen Sie den richtigen Plan für Ihre Bedürfnisse",
-    "free": "Kostenlos",
-    "pro": "Pro",
+    "cta": "Jetzt starten",
+    "choose_plan": "Plan wählen",
+    "contact_us": "Kontaktieren Sie uns",
     "enterprise": "Enterprise",
-    "free_desc": "Kostenloser Plan",
-    "pro_desc": "Pro-Plan",
-    "enterprise_desc": "Enterprise-Plan",
-    "cta": "Jetzt starten"
-  },
-  "testimonials": {
-    "title": "Philosophie",
-    "subtitle": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
-  },
-  "faq": {
-    "title": "Häufig gestellte Fragen",
-    "subtitle": "Alles was Sie über Auxillium wissen müssen",
-    "q1": "Wie beginne ich mit der Nutzung des Systems?",
-    "a1": "Registrieren Sie sich einfach auf unserer Plattform und wählen Sie den kostenlosen Plan, um die grundlegenden Funktionen zu testen.",
-    "q2": "Kann ich meinen Plan jederzeit ändern?",
-    "a2": "Ja, Sie können jederzeit auf einen höheren oder niedrigeren Plan umsteigen. Änderungen werden ab der nächsten Abrechnungsperiode wirksam.",
-    "q3": "Welche Zahlungsmethoden werden akzeptiert?",
-    "a3": "Wir akzeptieren Kartenzahlungen, Sofortüberweisungen und wiederkehrende Zahlungen (Abo-Modelle)."
-  },
-  "cta": {
-    "title": "Bereit für eine Veränderung?",
-    "subtitle": "Starten Sie noch heute mit Auxillium und überzeugen Sie sich, wie einfach Ihr Geschäftsmanagement sein kann.",
-    "cta": "Jetzt starten"
-  },
-  "about": {
-    "title": "Über uns",
-    "description": "Erfahren Sie mehr über unser Unternehmen",
-    "offer_title": "Was wir anbieten",
-    "offer_subtitle": "Als KPZ's Productions bieten wir ein breites Spektrum von Dienstleistungen im Bereich Softwareentwicklung an. Unser Team besteht aus erfahrenen Programmierern und Designern, die auch die anspruchsvollsten Aufgaben meistern können.",
-    "offer_item1": "Neue Technologien",
-    "offer_item1_desc": "Neue Technologien",
-    "offer_item2": "Neue Technologien",
-    "offer_item2_desc": "Neue Technologien",
-    "offer_item3": "Neue Technologien",
-    "offer_item3_desc": "Neue Technologien",
-    "offer_item4": "Neue Technologien",
-    "offer_item4_desc": "Neue Technologien",
-    "why_choose_us": "Was uns auszeichnet",
-    "quote_content": "Wir helfen Unternehmen, sich digital zu transformieren und ihr Geschäft zu skalieren",
-    "sub_content": "Wir verbinden Kreativität mit Daten. Wir erstellen Software, die Wachstum fördert, Effizienz steigert und neue Marktchancen für unsere Kunden eröffnet."
-  },
-  "contact": {
-    "title": "Kontakt",
-    "description": "Nehmen Sie Kontakt mit uns auf"
-  },
-  "cookies": {
-    "title": "Cookie-Richtlinie",
-    "description": "Website Cookie-Richtlinie",
-    "publication_date": "Veröffentlicht am: 26.04.2026",
-    "section1": {
-      "title": "1. Definitionen",
-      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
-    },
-    "section2": {
-      "title": "2. Definitionen",
-      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
-    },
-    "section3": {
-      "title": "3. Definitionen",
-      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
-    }
+    "enterprise_desc": "Für Organisationen, die Skalierbarkeit und dedizierten Support benötigen",
+    "feature_lorem": "Beispielhafte Funktionsbeschreibung",
+    "free": "Kostenlos",
+    "free_desc": "Für Teams, die gerade anfangen",
+    "pro": "Pro",
+    "pro_desc": "Für wachsende Unternehmen, die volle Kontrolle benötigen",
+    "subtitle": "Wählen Sie den richtigen Plan für Ihre Bedürfnisse",
+    "title": "Überprüfen Sie unsere Pläne"
   },
   "privacy": {
-    "title": "Datenschutzrichtlinie",
-    "description": "Website Datenschutzrichtlinie",
+    "description": "Datenschutzerklärung und Schutz personenbezogener Daten der Auxilium-Plattform",
     "publication_date": "Veröffentlicht am: 26.04.2026",
+    "sections_count": "10",
+    "title": "Datenschutzerklärung",
     "section1": {
-      "title": "1. Definitionen",
-      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+      "title": "1. Verantwortlicher",
+      "content": "Verantwortlicher für die Verarbeitung personenbezogener Daten der Nutzer der Auxilium-Plattform ist KPZ's Productions (nachfolgend „Verantwortlicher\"). Für Fragen zum Datenschutz können Sie den Verantwortlichen unter kontakt@auxilium.app kontaktieren. Der Verantwortliche verarbeitet personenbezogene Daten gemäß der Verordnung (EU) 2016/679 des Europäischen Parlaments und des Rates vom 27. April 2016 (DSGVO) sowie den geltenden nationalen Datenschutzgesetzen."
     },
     "section2": {
-      "title": "2. Definitionen",
-      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+      "title": "2. Umfang der erhobenen personenbezogenen Daten",
+      "content": "Der Verantwortliche erhebt folgende Kategorien personenbezogener Daten: Identifikationsdaten (Name, Benutzername); Kontaktdaten (E-Mail-Adresse); Dienstnutzungsdaten (Abonnementpläne, Zahlungshistorie); technische Daten (IP-Adresse, Browsertyp, Sitzungskennung); vom Nutzer im Rahmen der Plattformnutzung eingegebene Daten (Projekte, Leads, Kunden- und Mitarbeiterdaten). Die Angabe der als Pflichtfelder gekennzeichneten Daten ist Voraussetzung für die Nutzung der Plattform. Die Angabe weiterer Daten ist freiwillig."
     },
     "section3": {
-      "title": "3. Definitionen",
-      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+      "title": "3. Zwecke und Rechtsgrundlagen der Verarbeitung",
+      "content": "Personenbezogene Daten werden für folgende Zwecke und auf folgenden Rechtsgrundlagen verarbeitet: Vertragserfüllung (Art. 6 Abs. 1 lit. b DSGVO) — Kontoregistrierung, Erbringung der Plattformdienste, Zahlungsabwicklung; Erfüllung rechtlicher Verpflichtungen (Art. 6 Abs. 1 lit. c DSGVO) — Ausstellung von Rechnungen, Aufbewahrung von Buchungsunterlagen; berechtigte Interessen des Verantwortlichen (Art. 6 Abs. 1 lit. f DSGVO) — Plattformsicherheit, Direktmarketing gegenüber Bestandskunden, Geltendmachung von Ansprüchen; Einwilligung (Art. 6 Abs. 1 lit. a DSGVO) — Marketingkommunikation an neue Nutzer, optionale Cookies."
+    },
+    "section4": {
+      "title": "4. Empfänger personenbezogener Daten",
+      "content": "Personenbezogene Daten können an folgende Empfängerkategorien weitergegeben werden: Zahlungsdienstleister (Stripe Inc.) soweit für die Abonnementzahlungsabwicklung erforderlich; Cloud-Infrastruktur- und Hosting-Anbieter (Vercel Inc., Supabase Inc., Upstash Inc.) soweit für die Erbringung der Plattformdienste erforderlich; E-Mail-Dienstleister für die Kommunikation mit Nutzern; Behörden, die gesetzlich zum Empfang von Daten berechtigt sind. Der Verantwortliche verkauft keine personenbezogenen Daten der Nutzer zu kommerziellen Zwecken an Dritte."
+    },
+    "section5": {
+      "title": "5. Datenspeicherfristen",
+      "content": "Personenbezogene Daten werden für die Dauer des Vertrags gespeichert und danach: für 5 Jahre — steuer- und buchhalterisch relevante Daten; für 3 Jahre ab Vertragsende — für die Geltendmachung etwaiger zivilrechtlicher Ansprüche erforderliche Daten; bis zur Einwilligungswiderrufung oder Zweckerreichung — auf Einwilligung basierend verarbeitete Daten. Nach Ablauf der Aufbewahrungsfrist werden Daten dauerhaft gelöscht oder in einer Weise anonymisiert, die keine Zuordnung zu einer bestimmten Person ermöglicht."
+    },
+    "section6": {
+      "title": "6. Rechte der betroffenen Personen",
+      "content": "Jeder Nutzer hat das Recht auf: Auskunft über seine personenbezogenen Daten und Erhalt einer Kopie (Art. 15 DSGVO); Berichtigung unrichtiger oder unvollständiger Daten (Art. 16 DSGVO); Löschung von Daten in den in Art. 17 DSGVO genannten Fällen (Recht auf Vergessenwerden); Einschränkung der Verarbeitung (Art. 18 DSGVO); Datenübertragbarkeit in einem maschinenlesbaren Format (Art. 20 DSGVO); Widerspruch gegen die Verarbeitung aufgrund berechtigter Interessen (Art. 21 DSGVO); jederzeitigen Widerruf der Einwilligung ohne negative Folgen. Anfragen können an kontakt@auxilium.app gestellt werden. Der Verantwortliche antwortet unverzüglich, spätestens innerhalb eines Monats. Nutzer haben das Recht, bei der zuständigen Datenschutzbehörde Beschwerde einzulegen."
+    },
+    "section7": {
+      "title": "7. Datenübermittlung außerhalb des Europäischen Wirtschaftsraums",
+      "content": "Einige Datenempfänger, insbesondere Stripe Inc. und Vercel Inc., haben ihren Sitz in den Vereinigten Staaten. Die Übermittlung von Daten an diese Unternehmen erfolgt auf der Grundlage von Standardvertragsklauseln, die von der Europäischen Kommission genehmigt wurden (Art. 46 Abs. 2 lit. c DSGVO) und ein angemessenes Datenschutzniveau gewährleisten. Nutzer können eine Kopie der angewandten Klauseln beim Verantwortlichen unter kontakt@auxilium.app anfordern."
+    },
+    "section8": {
+      "title": "8. Datensicherheit",
+      "content": "Der Verantwortliche setzt geeignete technische und organisatorische Maßnahmen zum Schutz personenbezogener Daten ein, darunter: Verschlüsselung der Datenübertragung mittels TLS/HTTPS-Protokoll; ausschließlich verschlüsselte Passwortspeicherung mit dem Argon2-Algorithmus; Zugriffskontrollen, die den Datenzugang auf autorisiertes Personal und Auftragsverarbeiter beschränken; regelmäßige Datensicherungen. Im Falle einer Datenschutzverletzung wird der Verantwortliche die zuständige Aufsichtsbehörde innerhalb von 72 Stunden und die betroffenen Nutzer unverzüglich informieren, sofern die Verletzung voraussichtlich ein hohes Risiko für deren Rechte und Freiheiten darstellt."
+    },
+    "section9": {
+      "title": "9. Kontakt in Datenschutzangelegenheiten",
+      "content": "Für Fragen zur Datenverarbeitung wenden Sie sich bitte an: per E-Mail an kontakt@auxilium.app; schriftlich an die Anschrift von KPZ's Productions. Der Verantwortliche antwortet unverzüglich und innerhalb eines Monats nach Eingang der Anfrage. In begründeten, komplexen Fällen kann diese Frist um weitere 2 Monate verlängert werden, worüber der Verantwortliche den Antragsteller schriftlich und unter Angabe der Gründe informiert."
+    },
+    "section10": {
+      "title": "10. Änderungen der Datenschutzerklärung",
+      "content": "Der Verantwortliche behält sich das Recht vor, diese Datenschutzerklärung bei rechtlichen, technologischen oder organisatorischen Änderungen zu aktualisieren. Alle Änderungen werden unter auxilium.app/privacy veröffentlicht und treten zu dem bei jeder Änderung angegebenen Zeitpunkt in Kraft, frühestens 14 Tage nach Veröffentlichung. Über wesentliche Änderungen, die den Umfang oder die Grundlage der Datenverarbeitung betreffen, werden Nutzer per E-Mail an die bei der Registrierung angegebene Adresse informiert. Die weitere Nutzung der Plattform nach Inkrafttreten der Änderungen gilt als Zustimmung."
     }
   },
   "terms": {
-    "title": "Nutzungsbedingungen",
-    "description": "Website Nutzungsbedingungen",
+    "description": "Nutzungsbedingungen der Auxilium-Plattform",
     "publication_date": "Veröffentlicht am: 26.04.2026",
+    "sections_count": "10",
+    "title": "Nutzungsbedingungen",
     "section1": {
-      "title": "1. Definitionen",
-      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+      "title": "1. Allgemeine Bestimmungen",
+      "content": "Diese Nutzungsbedingungen regeln die Bedingungen für die Nutzung der Auxilium-Plattform, die von KPZ's Productions (nachfolgend „Dienstanbieter“ ) bereitgestellt wird. Die Nutzung der Auxilium-Plattform setzt die vollständige Zustimmung zu diesen Nutzungsbedingungen voraus. Der Dienst wird auf elektronischem Wege gemäß der anwendbaren polnischen und EU-Gesetzgebung, einschließlich der Richtlinie 2000/31/EG über den elektronischen Geschäftsverkehr, erbracht. Diese Nutzungsbedingungen sind kostenlos unter auxilium.app/terms verfügbar."
     },
     "section2": {
       "title": "2. Definitionen",
-      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+      "content": "Für die Zwecke dieser Nutzungsbedingungen gelten folgende Definitionen: Plattform — das Auxilium-Softwaresystem unter auxilium.app; Nutzer — eine natürliche Person mit voller Geschäftsfähigkeit, eine juristische Person oder eine Organisationseinheit, die einen Vertrag über elektronische Dienstleistungen geschlossen hat; Konto — ein individuelles Nutzer-Panel, das durch Anmeldedaten oder OAuth-Login geschützt ist; Abonnement — ein kostenpflichtiger oder kostenloser Plan zur Nutzung der Plattform; Space — eine isolierte Arbeitsumgebung innerhalb der Plattform, der verschiedene Nutzer angehören können; Personenbezogene Daten — Informationen, die die Identifizierung eines Nutzers im Sinne der DSGVO ermöglichen."
     },
     "section3": {
-      "title": "3. Definitionen",
-      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+      "title": "3. Registrierung und Nutzerkonto",
+      "content": "Die Nutzung der Plattformfunktionen erfordert eine Registrierung und die Erstellung eines Kontos. Nutzer müssen bei der Registrierung genaue, aktuelle und vollständige Informationen angeben. Ihr Passwort ist vertraulich und Sie sind für dessen Sicherheit sowie alle mit Ihren Anmeldedaten vorgenommenen Handlungen verantwortlich. Der Dienstanbieter haftet nicht für Schäden, die durch unbefugten Zugriff infolge der Offenlegung Ihres Passworts entstehen. Jedes Konto darf nur einer natürlichen Person zugeordnet sein. Die Registrierung durch Personen unter 16 Jahren ist ohne Einwilligung eines Elternteils oder Erziehungsberechtigten nicht gestattet."
+    },
+    "section4": {
+      "title": "4. Rechte und Pflichten des Nutzers",
+      "content": "Nutzer haben das Recht, auf Plattformfunktionen gemäß ihrem Abonnementplan zuzugreifen. Nutzer verpflichten sich: die Plattform bestimmungsgemäß und im Einklang mit dem geltenden polnischen und EU-Recht zu nutzen; keine Rechte Dritter, einschließlich Rechte des geistigen Eigentums, zu verletzen; keine Handlungen vorzunehmen, die den Plattformbetrieb stören könnten, insbesondere durch Reverse Engineering, automatisierte Angriffe, unbefugtes Scannen von Ressourcen oder Versuche, Sicherheitsmaßnahmen zu umgehen; keine rechtswidrigen, beleidigenden, diskriminierenden oder sittenwidrigen Inhalte einzustellen. Verstöße können zur Sperrung oder dauerhaften Löschung des Kontos führen."
+    },
+    "section5": {
+      "title": "5. Abonnements und Zahlungen",
+      "content": "Die Plattform bietet einen kostenlosen Plan (Free) sowie kostenpflichtige Pläne (Pro und Enterprise) an. Abonnementzahlungen werden wiederkehrend (monatlich oder jährlich) über den Zahlungsdienstleister Stripe Inc. abgewickelt. Rechnungen werden automatisch erstellt und an die E-Mail-Adresse des Nutzers gesendet. Nutzer können ihren Abonnementplan jederzeit wechseln; Änderungen werden ab dem nächsten Abrechnungszeitraum wirksam. Der Dienstanbieter behält sich vor, die Preise mit mindestens 30 Tagen Vorlauf anzupassen. Abonnements können jederzeit gekündigt werden; Zahlungen für den laufenden Abrechnungszeitraum werden vorbehaltlich zwingender Verbraucherschutzvorschriften nicht erstattet."
+    },
+    "section6": {
+      "title": "6. Haftung des Dienstanbieters",
+      "content": "Der Dienstanbieter verpflichtet sich, die Dienste mit der gebotenen Sorgfalt zu erbringen und alles Zumutbare zu tun, um die Kontinuität der Plattform zu gewährleisten. Der Dienstanbieter haftet nicht für: technische Unterbrechungen aufgrund von Wartungsarbeiten, über die Nutzer vorab informiert werden; Ereignisse höherer Gewalt; Schäden durch unsachgemäße oder vertragswidrige Nutzung der Plattform; Datenverluste durch Nutzerhandlungen oder -unterlassungen. Die Gesamthaftung des Dienstanbieters gegenüber einem Nutzer übersteigt nicht den Betrag, den der Nutzer in den letzten 3 Monaten für das Abonnement bezahlt hat. Diese Haftungsbeschränkungen gelten nicht bei vorsätzlich verursachten Schäden und nicht für Verbraucheransprüche aus zwingenden gesetzlichen Bestimmungen."
+    },
+    "section7": {
+      "title": "7. Geistiges Eigentum",
+      "content": "Alle Rechte des geistigen Eigentums an der Auxilium-Plattform, einschließlich Urheberrechte, Marken, Geschmacksmuster und Software, liegen beim Dienstanbieter oder seinen Lizenzgebern. Nutzer erwerben lediglich ein beschränktes, nicht ausschließliches, nicht übertragbares und widerrufliches Recht zur Nutzung der Plattform gemäß diesen Nutzungsbedingungen. Das Kopieren, Ändern, Dekompilieren, Disassemblieren oder Verbreiten von Elementen der Plattform ohne vorherige schriftliche Zustimmung ist untersagt. Vom Nutzer hochgeladene Inhalte bleiben dessen Eigentum; der Nutzer gewährt dem Dienstanbieter eine gebührenfreie, nicht ausschließliche Lizenz zur Speicherung und Verarbeitung dieser Inhalte ausschließlich zum Zweck der Leistungserbringung."
+    },
+    "section8": {
+      "title": "8. Kündigung",
+      "content": "Nutzer können den Vertrag jederzeit kündigen, indem sie ihr Konto in den Plattformeinstellungen löschen oder einen schriftlichen Antrag an kontakt@auxilium.app senden. Der Dienstanbieter kann den Vertrag mit einer Frist von 14 Tagen und unter Angabe der Gründe kündigen. Bei schwerwiegenden Verstößen gegen diese Nutzungsbedingungen kann der Dienstanbieter das Konto mit sofortiger Wirkung sperren oder löschen und den Nutzer über die Gründe informieren. Nach Vertragsbeendigung werden Nutzerdaten für den gesetzlich vorgeschriebenen Zeitraum aufbewahrt und anschließend dauerhaft gelöscht. Verbraucher haben das gesetzliche Widerrufsrecht bei Fernabsatzverträgen innerhalb von 14 Tagen nach Vertragsschluss ohne Angabe von Gründen, sofern sie die Plattformdienste noch nicht genutzt haben."
+    },
+    "section9": {
+      "title": "9. Änderungen der Nutzungsbedingungen",
+      "content": "Der Dienstanbieter behält sich das Recht vor, diese Nutzungsbedingungen aus berechtigten Gründen zu aktualisieren, insbesondere bei Gesetzesänderungen, technischen Anforderungen oder Änderungen des Dienstangebots. Über geplante Änderungen werden Nutzer elektronisch (per E-Mail oder In-App-Benachrichtigung) mit mindestens 14 Tagen Vorlauf informiert. Die weitere Nutzung der Plattform nach Ablauf der Ankündigungsfrist gilt als Zustimmung zu den geänderten Nutzungsbedingungen. Lehnt ein Nutzer die Änderungen ab, hat er das Recht, den Vertrag vor Inkrafttreten der Änderungen ohne negative Folgen zu kündigen."
+    },
+    "section10": {
+      "title": "10. Anwendbares Recht und Schlussbestimmungen",
+      "content": "Diese Nutzungsbedingungen unterliegen polnischem Recht, insbesondere dem Zivilgesetzbuch, dem Gesetz über elektronische Dienste und dem Verbraucherschutzgesetz. Streitigkeiten werden von Gerichten am Sitz des Dienstanbieters entschieden; Verbraucher können Ansprüche auch vor den für ihren Wohnort zuständigen Gerichten geltend machen. Verbraucher können alternative Streitbeilegungsverfahren nutzen, einschließlich der EU-Plattform für Online-Streitbeilegung unter ec.europa.eu/consumers/odr. Sollte eine Bestimmung dieser Nutzungsbedingungen unwirksam oder undurchsetzbar sein, bleiben die übrigen Bestimmungen in vollem Umfang in Kraft."
     }
+  },
+  "testimonials": {
+    "subtitle": "Wir glauben, dass gute Software nicht im Weg steht — sie verschwindet im Hintergrund und funktioniert einfach.",
+    "title": "Philosophie"
+  },
+  "footer": {
+    "privacy": "Datenschutzerklärung",
+    "cookies": "Cookies",
+    "terms": "Nutzungsbedingungen"
   }
 }

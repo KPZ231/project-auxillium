@@ -4,6 +4,7 @@ import { getUser } from "@/lib/session";
 import { redirect } from "next/navigation";
 import { checkPermission } from "@/lib/permissions";
 import MembersClient from "./MembersClient";
+import PageHeader from "@/app/components/Dashboard/Dashboard/Shared/PageHeader/PageHeader";
 
 export default async function MembersPage({
   params,
@@ -47,10 +48,10 @@ export default async function MembersPage({
 
   return (
     <div className="flex flex-col gap-8">
-      <div>
-        <h1 className="text-h2 font-semibold text-zinc-900 mb-1">Członkowie zespołu</h1>
-        <p className="text-body text-zinc-500">Zarządzaj dostępem do przestrzeni roboczej.</p>
-      </div>
+      <PageHeader 
+        title="dashboard:members.title" 
+        subtitle="dashboard:members.subtitle" 
+      />
       
       <MembersClient 
         members={members} 

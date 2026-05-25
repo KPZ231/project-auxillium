@@ -8,6 +8,7 @@ import { getConnectedServices, ConnectorType } from "@/actions/connectors";
 import { syncTaskToGoogleTasks, syncTaskToGoogleCalendar } from "@/actions/googleSync";
 import { toast } from "sonner";
 import { SiGoogletasks, SiGooglecalendar } from "react-icons/si";
+import { useTranslation } from "@/app/context/TranslationContext";
 
 export interface Subtask {
   id: string;
@@ -35,6 +36,7 @@ export function TaskModal({ isOpen, onClose, onSave, onDelete, initialData, defa
   const [dueDate, setDueDate] = useState("");
   const [employeeId, setEmployeeId] = useState<string | null>(null);
   const [subtasks, setSubtasks] = useState<Subtask[]>([]);
+  const { t } = useTranslation();
   
   const [isMemberSelectorOpen, setIsMemberSelectorOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -128,9 +130,9 @@ export function TaskModal({ isOpen, onClose, onSave, onDelete, initialData, defa
     setSyncingTasks(true);
     const res = await syncTaskToGoogleTasks(initialData.id as string);
     if (res.success) {
-      toast.success(`Synced "${res.title}" to Google Tasks`);
+      toast.success(`${t("dashboard:task_modal.synced_tasks")} "${res.title}" ${t("dashboard:task_modal.synced_tasks_to")}`);
     } else {
-      toast.error(res.error || "Failed to sync to Google Tasks");
+      toast.error(res.error || t("dashboard:task_modal.sync_tasks_failed"));
     }
     setSyncingTasks(false);
   };
@@ -138,15 +140,15 @@ export function TaskModal({ isOpen, onClose, onSave, onDelete, initialData, defa
   const handleSyncToGoogleCalendar = async () => {
     if (!initialData?.id) return;
     if (!dueDate) {
-      toast.error("Please set a due date before syncing to calendar");
+      toast.error(t("dashboard:task_modal.sync_calendar_req"));
       return;
     }
     setSyncingCalendar(true);
     const res = await syncTaskToGoogleCalendar(initialData.id as string);
     if (res.success) {
-      toast.success("Synced to Google Calendar");
+      toast.success(t("dashboard:task_modal.synced_calendar"));
     } else {
-      toast.error(res.error || "Failed to sync to Google Calendar");
+      toast.error(res.error || t("dashboard:task_modal.sync_calendar_failed"));
     }
     setSyncingCalendar(false);
   };
@@ -164,11 +166,11 @@ export function TaskModal({ isOpen, onClose, onSave, onDelete, initialData, defa
         <div className="p-5 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
           <div>
             <h2 className="text-lg font-bold text-gray-900 leading-none">
-              {initialData ? "Edit Task" : "Create Task"}
+              {initialData ? t("dashboard:task_modal.edit_task") : t("dashboard:task_modal.create_task")}
             </h2>
             {projectId && (
               <p className="text-[10px] font-bold text-gray-400 uppercase tracking-widest mt-1">
-                Project Context Active
+                {t("dashboard:task_modal.project_context_active")}
               </p>
             )}
           </div>
@@ -180,49 +182,49 @@ export function TaskModal({ isOpen, onClose, onSave, onDelete, initialData, defa
         <div className="p-6 overflow-y-auto flex-1">
           <form id="task-form" onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Title</label>
+              <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">{t("dashboard:task_modal.title")}</label>
               <input
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:border-black focus:ring-1 focus:ring-black outline-none transition-all"
-                placeholder="Task title..."
+                placeholder={t("dashboard:task_modal.title_placeholder")}
                 required
               />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Status</label>
+                <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">{t("dashboard:task_modal.status")}</label>
                 <select
                   value={status}
                   onChange={(e) => setStatus(e.target.value)}
                   className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg outline-none"
                 >
-                  <option value="TODO">To Do</option>
-                  <option value="IN_PROGRESS">In Progress</option>
-                  <option value="REVIEW">Review</option>
-                  <option value="DONE">Done</option>
+                  <option value="TODO">{t("dashboard:task_modal.status_todo")}</option>
+                  <option value="IN_PROGRESS">{t("dashboard:task_modal.status_in_progress")}</option>
+                  <option value="REVIEW">{t("dashboard:task_modal.status_review")}</option>
+                  <option value="DONE">{t("dashboard:task_modal.status_done")}</option>
                 </select>
               </div>
               <div>
-                <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Priority</label>
+                <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">{t("dashboard:task_modal.priority")}</label>
                 <select
                   value={priority}
                   onChange={(e) => setPriority(e.target.value)}
                   className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg outline-none"
                 >
-                  <option value="LOW">Low</option>
-                  <option value="MEDIUM">Medium</option>
-                  <option value="HIGH">High</option>
-                  <option value="CRITICAL">Critical</option>
+                  <option value="LOW">{t("dashboard:task_modal.priority_low")}</option>
+                  <option value="MEDIUM">{t("dashboard:task_modal.priority_medium")}</option>
+                  <option value="HIGH">{t("dashboard:task_modal.priority_high")}</option>
+                  <option value="CRITICAL">{t("dashboard:task_modal.priority_critical")}</option>
                 </select>
               </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
-                <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Due Date</label>
+                <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">{t("dashboard:task_modal.due_date")}</label>
                 <input
                   type="date"
                   value={dueDate}
@@ -231,46 +233,46 @@ export function TaskModal({ isOpen, onClose, onSave, onDelete, initialData, defa
                 />
               </div>
               <div>
-                <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Workload (hrs/pts)</label>
+                <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">{t("dashboard:task_modal.workload")}</label>
                 <input
                   type="number"
                   value={workload}
                   onChange={(e) => setWorkload(e.target.value === "" ? "" : Number(e.target.value))}
                   className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg outline-none text-sm"
-                  placeholder="e.g. 5"
+                  placeholder={t("dashboard:task_modal.workload_placeholder")}
                 />
               </div>
               <div>
-                <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Assignee</label>
+                <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">{t("dashboard:task_modal.assignee")}</label>
                 <button
                   type="button"
                   onClick={() => setIsMemberSelectorOpen(true)}
                   className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg outline-none text-sm text-left truncate text-gray-600 hover:bg-gray-100 transition-colors"
                 >
-                  {employeeId ? "Change Assignee" : "Assign someone"}
+                  {employeeId ? t("dashboard:task_modal.change_assignee") : t("dashboard:task_modal.assign_someone")}
                 </button>
               </div>
             </div>
 
             <div>
-              <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">Description</label>
+              <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider mb-2">{t("dashboard:task_modal.description")}</label>
               <textarea
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 className="w-full px-4 py-2 bg-gray-50 border border-gray-200 rounded-lg focus:border-black focus:ring-1 focus:ring-black outline-none transition-all h-24 resize-none"
-                placeholder="Add more details..."
+                placeholder={t("dashboard:task_modal.description_placeholder")}
               />
             </div>
 
             <div>
               <div className="flex justify-between items-center mb-2">
-                <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider">Subtasks</label>
+                <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider">{t("dashboard:task_modal.subtasks")}</label>
                 <button 
                   type="button" 
                   onClick={handleAddSubtask}
                   className="text-xs font-medium text-blue-600 hover:text-blue-800 flex items-center gap-1"
                 >
-                  <Plus size={14} /> Add subtask
+                  <Plus size={14} /> {t("dashboard:task_modal.add_subtask")}
                 </button>
               </div>
               {subtasks.length > 0 ? (
@@ -288,7 +290,7 @@ export function TaskModal({ isOpen, onClose, onSave, onDelete, initialData, defa
                         value={st.title}
                         onChange={(e) => updateSubtask(st.id, { title: e.target.value })}
                         className="flex-1 px-3 py-1.5 text-sm bg-white border border-gray-200 rounded-md focus:border-black outline-none"
-                        placeholder="Subtask title..."
+                        placeholder={t("dashboard:task_modal.subtask_placeholder")}
                       />
                       <button
                         type="button"
@@ -302,7 +304,7 @@ export function TaskModal({ isOpen, onClose, onSave, onDelete, initialData, defa
                 </div>
               ) : (
                 <div className="text-sm text-gray-500 italic p-4 bg-gray-50 rounded-lg text-center border border-dashed border-gray-200">
-                  No subtasks added yet.
+                  {t("dashboard:task_modal.no_subtasks")}
                 </div>
               )}
             </div>
@@ -311,7 +313,7 @@ export function TaskModal({ isOpen, onClose, onSave, onDelete, initialData, defa
             {initialData && (
               <div className="pt-4 border-t border-gray-100">
                 <label className="block text-[10px] font-bold text-gray-400 uppercase tracking-[0.2em] mb-4">
-                  Integrations
+                  {t("dashboard:task_modal.integrations")}
                 </label>
                 <div className="flex flex-wrap gap-3">
                   <button
@@ -329,7 +331,7 @@ export function TaskModal({ isOpen, onClose, onSave, onDelete, initialData, defa
                     ) : (
                       <SiGoogletasks className="w-3.5 h-3.5" />
                     )}
-                    {connectedServices.google_tasks ? "Add to Google To Do" : "Google To Do Not Connected"}
+                    {connectedServices.google_tasks ? t("dashboard:task_modal.add_google_tasks") : t("dashboard:task_modal.google_tasks_not_connected")}
                   </button>
 
                   <button
@@ -347,7 +349,7 @@ export function TaskModal({ isOpen, onClose, onSave, onDelete, initialData, defa
                     ) : (
                       <SiGooglecalendar className="w-3.5 h-3.5" />
                     )}
-                    {connectedServices.google_calendar ? "Add to Google Calendar" : "Calendar Not Connected"}
+                    {connectedServices.google_calendar ? t("dashboard:task_modal.add_google_calendar") : t("dashboard:task_modal.google_calendar_not_connected")}
                   </button>
                 </div>
               </div>
@@ -361,13 +363,13 @@ export function TaskModal({ isOpen, onClose, onSave, onDelete, initialData, defa
               <button
                 type="button"
                 onClick={() => {
-                  if (confirm("Are you sure you want to delete this task?")) {
+                  if (confirm(t("dashboard:task_modal.delete_confirm"))) {
                     onDelete();
                   }
                 }}
                 className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50 rounded-lg transition-colors"
               >
-                <Trash2 size={16} /> Delete Task
+                <Trash2 size={16} /> {t("dashboard:task_modal.delete_task")}
               </button>
             )}
           </div>
@@ -377,7 +379,7 @@ export function TaskModal({ isOpen, onClose, onSave, onDelete, initialData, defa
               onClick={onClose}
               className="px-5 py-2.5 text-sm font-medium text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
             >
-              Cancel
+              {t("dashboard:task_modal.cancel")}
             </button>
             <button
               form="task-form"
@@ -385,7 +387,7 @@ export function TaskModal({ isOpen, onClose, onSave, onDelete, initialData, defa
               disabled={loading}
               className="px-5 py-2.5 text-sm font-medium text-white bg-black hover:bg-gray-800 rounded-lg shadow-sm transition-all disabled:opacity-50"
             >
-              {loading ? "Saving..." : "Save Task"}
+              {loading ? t("dashboard:task_modal.saving") : t("dashboard:task_modal.save_task")}
             </button>
           </div>
         </div>

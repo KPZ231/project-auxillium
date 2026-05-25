@@ -11,16 +11,16 @@ export default function Projects() {
     return (
         <div className="flex flex-col w-full">
             <PageHeader 
-                title="Active Portfolios" 
-                subtitle="Managing 12 ongoing architectural and design initiatives."
+                title="dashboard:projects.page_title" 
+                subtitle="dashboard:projects.page_subtitle"
                 tabs={[
-                    { label: "Grid", value: "grid" },
-                    { label: "Calendar", value: "timeline" }
+                    { label: "dashboard:projects.tab_grid", value: "grid" },
+                    { label: "dashboard:projects.tab_calendar", value: "timeline" }
                 ]}
                 currentTab={view}
                 onTabChange={(v) => setView(v as "grid" | "timeline")}
                 primaryAction={{
-                    label: "NEW PROJECT",
+                    label: "dashboard:projects.new_project",
                     href: "/dashboard/projects/new",
                     icon: <Plus className="w-4 h-4" strokeWidth={2.5} />
                 }}

@@ -30,19 +30,15 @@ interface NavLink {
 }
 
 const navLinks: NavLink[] = [
-  { key: "dashboard.title", href: "/dashboard", icon: LayoutDashboard },
-  { key: "project.projects", href: "/dashboard/projects", icon: FolderKanban },
-  {
-    key: "finance.title",
-    href: "/dashboard/costs-expenses",
-    icon: Receipt,
-  },
-  { key: "task.tasks", href: "/dashboard/tasks", icon: ClipboardList },
-  { key: "lead.lead_search", href: "/dashboard/lead-search", icon: UserSearch },
-  { key: "lead.leads", href: "/dashboard/leads", icon: Users },
-  { key: "client.clients", href: "/dashboard/clients", icon: Contact2 },
-  { key: "ai.chat", href: "/dashboard/ai", icon: MessageSquareCode },
-  { key: "documents.title", href: "/dashboard/documents", icon: FileText },
+  { key: "nav.dashboard", href: "/dashboard", icon: LayoutDashboard },
+  { key: "nav.projects", href: "/dashboard/projects", icon: FolderKanban },
+  { key: "nav.finance", href: "/dashboard/costs-expenses", icon: Receipt },
+  { key: "nav.tasks", href: "/dashboard/tasks", icon: ClipboardList },
+  { key: "nav.lead_search", href: "/dashboard/lead-search", icon: UserSearch },
+  { key: "nav.leads", href: "/dashboard/leads", icon: Users },
+  { key: "nav.clients", href: "/dashboard/clients", icon: Contact2 },
+  { key: "nav.ai_chat", href: "/dashboard/ai", icon: MessageSquareCode },
+  { key: "nav.documents", href: "/dashboard/documents", icon: FileText },
 ];
 
 export default function SidePanel() {

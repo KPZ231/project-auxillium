@@ -11,6 +11,7 @@ import { motion } from "motion/react";
 import { syncAllTasksToGoogle } from "@/actions/googleSync";
 import { SiGoogletasks, SiGooglecalendar } from "react-icons/si";
 import { getConnectedServices, ConnectorType } from "@/actions/connectors";
+import { useTranslation } from "@/app/context/TranslationContext";
 
 interface KanbanContainerProps {
   projects: Project[];
@@ -21,6 +22,7 @@ export function KanbanContainer({ projects, spaceId }: KanbanContainerProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const urlProjectId = searchParams.get("projectId");
+  const { t } = useTranslation();
 
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
   const [tasks, setTasks] = useState<any[]>([]);
@@ -41,7 +43,7 @@ export function KanbanContainer({ projects, spaceId }: KanbanContainerProps) {
       setTasks(fetchedTasks);
     } catch (error) {
       console.error("Failed to fetch tasks", error);
-      toast.error("Failed to load project tasks.");
+      toast.error(t("dashboard:kanban_ui.failed_load"));
     } finally {
       setIsLoading(false);
     }
@@ -84,10 +86,10 @@ export function KanbanContainer({ projects, spaceId }: KanbanContainerProps) {
   const handleRefresh = async () => {
     if (selectedProjectId) {
       await fetchTasksForProject(selectedProjectId);
-      toast.success("Data refreshed");
+      toast.success(t("dashboard:kanban_ui.data_refreshed"));
     } else {
       router.refresh();
-      toast.success("Project list refreshed");
+      toast.success(t("dashboard:kanban_ui.project_list_refreshed"));
     }
   };
 
@@ -98,22 +100,22 @@ export function KanbanContainer({ projects, spaceId }: KanbanContainerProps) {
     const isConnected = target === "tasks" ? connectedServices.google_tasks : connectedServices.google_calendar;
 
     if (!isConnected) {
-      toast.error(`${serviceName} is not connected. Please connect it in settings.`);
+      toast.error(`${serviceName} ${t("dashboard:kanban_ui.not_connected")}`);
       return;
     }
 
     setIsSyncing(true);
-    const toastId = toast.loading(`Syncing all tasks to ${serviceName}...`);
+    const toastId = toast.loading(`${t("dashboard:kanban_ui.syncing_tasks")} ${serviceName}...`);
     
     try {
       const res = await syncAllTasksToGoogle(selectedProjectId, target);
       if (res.success) {
         toast.success(res.message, { id: toastId });
       } else {
-        toast.error(res.error || "Sync failed", { id: toastId });
+        toast.error(res.error || t("dashboard:kanban_ui.sync_failed"), { id: toastId });
       }
     } catch (error) {
-      toast.error("An unexpected error occurred", { id: toastId });
+      toast.error(t("dashboard:kanban_ui.unexpected_error"), { id: toastId });
     } finally {
       setIsSyncing(false);
     }
@@ -122,8 +124,8 @@ export function KanbanContainer({ projects, spaceId }: KanbanContainerProps) {
   if (projects.length === 0) {
     return (
       <div className="flex h-full flex-col items-center justify-center text-center p-6 text-[#71717A] bg-[#FAFAFA]">
-        <h2 className="text-[18px] font-bold text-[#0A0A0A] mb-2">No Projects Found</h2>
-        <p className="text-[14px]">You need to create a project before managing tasks.</p>
+        <h2 className="text-[18px] font-bold text-[#0A0A0A] mb-2">{t("dashboard:kanban_ui.no_projects_title")}</h2>
+        <p className="text-[14px]">{t("dashboard:kanban_ui.no_projects_desc")}</p>
       </div>
     );
   }
@@ -141,10 +143,10 @@ export function KanbanContainer({ projects, spaceId }: KanbanContainerProps) {
         >
           <div className="text-center mb-12">
             <h2 className="text-4xl font-black tracking-tighter uppercase mb-4 text-[#0A0A0A]">
-              Select Project
+              {t("dashboard:kanban_ui.select_project")}
             </h2>
             <p className="text-[#71717A] font-medium uppercase tracking-widest text-xs">
-              Choose a workspace to manage tasks and track progress
+              {t("dashboard:kanban_ui.select_project_desc")}
             </p>
           </div>
 
@@ -154,7 +156,7 @@ export function KanbanContainer({ projects, spaceId }: KanbanContainerProps) {
               className="flex items-center gap-2 px-4 py-2 text-[10px] font-bold uppercase tracking-widest bg-white border border-[#E5E5E5] hover:border-[#0A0A0A] text-[#0A0A0A] transition-all"
             >
               <RotateCcw size={14} className={isLoading ? "animate-spin" : ""} />
-              Refresh Projects
+              {t("dashboard:kanban_ui.refresh_projects")}
             </button>
           </div>
 
@@ -172,7 +174,7 @@ export function KanbanContainer({ projects, spaceId }: KanbanContainerProps) {
                 </div>
                 
                 <span className="text-[10px] font-bold text-[#71717A] uppercase tracking-widest mb-2 block">
-                  Project ID: {project.id.slice(-6)}
+                  {t("dashboard:kanban_ui.project_id")}: {project.id.slice(-6)}
                 </span>
                 <h3 className="text-xl font-black uppercase tracking-tight text-[#0A0A0A] mb-4 group-hover:text-black">
                   {project.projectName}
@@ -189,12 +191,12 @@ export function KanbanContainer({ projects, spaceId }: KanbanContainerProps) {
 
           {projects.length === 0 && (
             <div className="text-center py-20 border border-dashed border-[#D4D4D8] bg-white">
-              <p className="text-[#71717A] mb-4">No active projects found in this space.</p>
+              <p className="text-[#71717A] mb-4">{t("dashboard:kanban_ui.no_active_projects")}</p>
               <button 
                 onClick={() => router.push('/dashboard/projects/new')}
                 className="px-6 py-3 bg-black text-white font-bold uppercase tracking-widest text-xs hover:bg-gray-800 transition-all"
               >
-                Create First Project
+                {t("dashboard:kanban_ui.create_first_project")}
               </button>
             </div>
           )}
@@ -216,7 +218,7 @@ export function KanbanContainer({ projects, spaceId }: KanbanContainerProps) {
               {selectedProject?.projectName}
             </h2>
             <p className="text-[10px] text-[#71717A] font-bold uppercase tracking-widest">
-              Task Board
+              {t("dashboard:kanban_ui.task_board")}
             </p>
           </div>
         </div>
@@ -224,11 +226,11 @@ export function KanbanContainer({ projects, spaceId }: KanbanContainerProps) {
         <div className="flex items-center gap-2 flex-shrink-0">
           <button
             onClick={handleRefresh}
-            title="Refresh"
+            title={t("dashboard:kanban_ui.refresh")}
             className="flex items-center justify-center gap-2 px-3 py-2 text-[11px] font-bold uppercase tracking-widest bg-white border border-[#E5E5E5] hover:border-[#0A0A0A] text-[#0A0A0A] transition-all"
           >
             <RotateCcw size={14} className={isLoading ? "animate-spin" : ""} />
-            <span className="hidden sm:inline">Refresh</span>
+            <span className="hidden sm:inline">{t("dashboard:kanban_ui.refresh")}</span>
           </button>
 
           {(connectedServices.google_tasks || connectedServices.google_calendar) && (
@@ -237,7 +239,7 @@ export function KanbanContainer({ projects, spaceId }: KanbanContainerProps) {
                 <button
                   onClick={() => handleGlobalSync("tasks")}
                   disabled={isSyncing}
-                  title="Sync all to Google Tasks"
+                  title={t("dashboard:kanban_ui.sync_to_tasks")}
                   className="flex items-center justify-center w-8 h-8 bg-white border border-[#E5E5E5] hover:border-[#0A0A0A] text-[#0A0A0A] transition-all"
                 >
                   <SiGoogletasks size={14} className={isSyncing ? "animate-pulse" : ""} />
@@ -247,7 +249,7 @@ export function KanbanContainer({ projects, spaceId }: KanbanContainerProps) {
                 <button
                   onClick={() => handleGlobalSync("calendar")}
                   disabled={isSyncing}
-                  title="Sync all to Google Calendar"
+                  title={t("dashboard:kanban_ui.sync_to_calendar")}
                   className="flex items-center justify-center w-8 h-8 bg-white border border-[#E5E5E5] hover:border-[#0A0A0A] text-[#0A0A0A] transition-all"
                 >
                   <SiGooglecalendar size={14} className={isSyncing ? "animate-pulse" : ""} />
@@ -258,20 +260,20 @@ export function KanbanContainer({ projects, spaceId }: KanbanContainerProps) {
 
           <button
             onClick={() => router.push('/dashboard/tasks')} // Clear URL to trigger selection view
-            title="Switch Project"
+            title={t("dashboard:kanban_ui.switch_project")}
             className="flex items-center justify-center gap-2 px-3 py-2 text-[11px] font-bold uppercase tracking-widest bg-white border border-[#E5E5E5] hover:border-[#0A0A0A] text-[#0A0A0A] transition-all"
           >
             <ArrowLeftRight size={14} />
-            <span className="hidden sm:inline">Switch Project</span>
+            <span className="hidden sm:inline">{t("dashboard:kanban_ui.switch_project")}</span>
           </button>
           
           <button
             onClick={() => router.push('/dashboard/projects')}
-            title="All Projects"
+            title={t("dashboard:kanban_ui.all_projects")}
             className="flex items-center justify-center gap-2 px-3 py-2 text-[11px] font-bold uppercase tracking-widest bg-white border border-[#E5E5E5] hover:border-[#0A0A0A] text-[#0A0A0A] transition-all"
           >
             <LayoutGrid size={14} />
-            <span className="hidden sm:inline">All Projects</span>
+            <span className="hidden sm:inline">{t("dashboard:kanban_ui.all_projects")}</span>
           </button>
         </div>
       </div>

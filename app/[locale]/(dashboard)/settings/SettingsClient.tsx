@@ -14,6 +14,7 @@ import { exportUserData } from "@/actions/exportUserData";
 import { deleteAccountAction } from "@/actions/updateProfile";
 import { logoutAction } from "@/actions/logout";
 import { useUser } from "@/app/context/UserContext";
+import { useTranslation } from "@/app/context/TranslationContext";
 
 interface UserData {
   id: string;
@@ -41,6 +42,7 @@ export default function SettingsClient({
   const [isDeleting, setIsDeleting] = useState(false);
   const [displayName, setDisplayName] = useState(initialUser.name || "");
   const [avatarUrl, setAvatarUrl] = useState(initialUser.avatarUrl || "");
+  const { t } = useTranslation();
 
   // Connector state
   const [isConnectorModalOpen, setIsConnectorModalOpen] = useState(false);
@@ -79,11 +81,11 @@ export default function SettingsClient({
     const success = searchParams.get("success");
 
     if (error) {
-      toast.error(`Integration failed: ${error.replace(/_/g, " ")}`);
+      toast.error(t("dashboard:settings.integration_failed") + ` ${error.replace(/_/g, " ")}`);
       // Clean up URL
       router.replace(`/${locale}/settings`);
     } else if (success) {
-      toast.success("Integration connected successfully!");
+      toast.success(t("dashboard:settings.integration_success"));
       // Clean up URL
       router.replace(`/${locale}/settings`);
     }
@@ -94,10 +96,10 @@ export default function SettingsClient({
     setIsSaving(true);
     const result = await updateProfile({ displayName });
     if (result.success) {
-      toast.success("Profile updated successfully!");
+      toast.success(t("dashboard:settings.profile_updated"));
       refreshUser();
     } else {
-      toast.error(result.error || "Failed to update profile");
+      toast.error(result.error || t("dashboard:settings.profile_update_failed"));
     }
     setIsSaving(false);
   };
@@ -106,7 +108,7 @@ export default function SettingsClient({
     const file = e.target.files?.[0];
     if (!file) return;
 
-    const toastId = toast.loading("Uploading avatar...");
+    const toastId = toast.loading(t("dashboard:settings.uploading_avatar"));
 
     const formData = new FormData();
     formData.append("file", file);
@@ -117,11 +119,11 @@ export default function SettingsClient({
       // Update local state immediately — no page reload needed
       setAvatarUrl(result.url);
       setUser((prev) => ({ ...prev, avatarUrl: result.url! }));
-      toast.success("Avatar updated!", { id: toastId });
+      toast.success(t("dashboard:settings.avatar_updated"), { id: toastId });
       // Refresh global UserContext so TopBar avatar updates too
       refreshUser();
     } else {
-      toast.error(result.error || "Failed to upload avatar", { id: toastId });
+      toast.error(result.error || t("dashboard:settings.avatar_upload_failed"), { id: toastId });
     }
   };
 
@@ -142,9 +144,9 @@ export default function SettingsClient({
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      toast.success("Data exported successfully!");
+      toast.success(t("dashboard:settings.data_exported"));
     } else {
-      toast.error(result.error || "Failed to export data");
+      toast.error(result.error || t("dashboard:settings.data_export_failed"));
     }
     setIsExporting(false);
   };
@@ -155,7 +157,7 @@ export default function SettingsClient({
 
   const handleDeleteAccount = async () => {
     if (
-      !confirm("Are you sure you want to delete your account? This action cannot be undone!")
+      !confirm(t("dashboard:settings.delete_confirm"))
     ) {
       return;
     }
@@ -164,10 +166,10 @@ export default function SettingsClient({
     const result = await deleteAccountAction();
 
     if (result.success) {
-      toast.success("Account deleted successfully!");
+      toast.success(t("dashboard:settings.account_deleted"));
       router.push(`/${locale}/login`);
     } else {
-      toast.error(result.error || "Failed to delete account");
+      toast.error(result.error || t("dashboard:settings.account_delete_failed"));
     }
     setIsDeleting(false);
   };
@@ -178,11 +180,11 @@ export default function SettingsClient({
       {/* ── Page Header ── */}
       <div className="mb-16">
         <p className="text-[10px] font-bold text-[#71717A] uppercase tracking-[0.4em] mb-3">
-          Account
+          {t("dashboard:settings.account")}
         </p>
-        <h1 className="text-[40px] font-bold text-[#0A0A0A] leading-[1.1]">Settings</h1>
+        <h1 className="text-[40px] font-bold text-[#0A0A0A] leading-[1.1]">{t("dashboard:settings.title")}</h1>
         <p className="text-base font-light text-[#71717A] mt-3 leading-[1.65]">
-          Manage your profile and account preferences
+          {t("dashboard:settings.subtitle")}
         </p>
       </div>
 
@@ -190,7 +192,7 @@ export default function SettingsClient({
       <section className="border-t border-[#D4D4D8]">
         <div className="py-10">
           <p className="text-[10px] font-bold text-[#71717A] uppercase tracking-[0.4em] mb-8">
-            Profile Information
+            {t("dashboard:settings.profile_info")}
           </p>
 
           {/* Avatar row */}
@@ -222,7 +224,7 @@ export default function SettingsClient({
               </p>
               <p className="text-sm font-light text-[#71717A] mt-0.5">@{user.username}</p>
               <p className="text-xs text-[#71717A] mt-3 leading-relaxed">
-                Click the upload icon to change your profile photo.
+                {t("dashboard:settings.avatar_hint")}
               </p>
             </div>
           </div>
@@ -231,14 +233,14 @@ export default function SettingsClient({
           <form onSubmit={handleDisplayNameChange}>
             <div className="mb-6">
               <label className="block text-[10px] font-bold text-[#71717A] uppercase tracking-[0.4em] mb-2">
-                Display Name
+                {t("dashboard:settings.display_name")}
               </label>
               <input
                 type="text"
                 value={displayName}
                 onChange={(e) => setDisplayName(e.target.value)}
                 className="w-full h-10 px-3 bg-white border border-[#D4D4D8] text-sm text-[#0A0A0A] placeholder-[#A1A1AA] focus:outline-none focus:border-[#0A0A0A] hover:border-[#A1A1AA] transition-colors duration-150"
-                placeholder="Enter your display name"
+                placeholder={t("dashboard:settings.display_name_placeholder")}
               />
             </div>
             <div className="flex justify-end">
@@ -250,12 +252,12 @@ export default function SettingsClient({
                 {isSaving ? (
                   <>
                     <div className="w-3.5 h-3.5 border-2 border-white border-t-transparent animate-spin" />
-                    Saving...
+                    {t("dashboard:settings.saving")}
                   </>
                 ) : (
                   <>
                     <Save className="w-3.5 h-3.5" />
-                    Save Changes
+                    {t("dashboard:settings.save_changes")}
                   </>
                 )}
               </button>
@@ -268,7 +270,7 @@ export default function SettingsClient({
       <section className="border-t border-[#D4D4D8]">
         <div className="py-10">
           <p className="text-[10px] font-bold text-[#71717A] uppercase tracking-[0.4em] mb-6">
-            Account Details
+            {t("dashboard:settings.account_details")}
           </p>
 
           {/* Username */}
@@ -277,7 +279,7 @@ export default function SettingsClient({
               <ShieldCheck className="w-4 h-4 text-[#71717A]" />
             </div>
             <p className="text-[10px] font-bold text-[#71717A] uppercase tracking-[0.3em] w-36 shrink-0">
-              Username
+              {t("dashboard:settings.username")}
             </p>
             <p className="text-sm font-bold text-[#0A0A0A]">@{user.username}</p>
           </div>
@@ -288,7 +290,7 @@ export default function SettingsClient({
               <Mail className="w-4 h-4 text-[#71717A]" />
             </div>
             <p className="text-[10px] font-bold text-[#71717A] uppercase tracking-[0.3em] w-36 shrink-0">
-              Email
+              {t("dashboard:settings.email")}
             </p>
             <p className="text-sm font-bold text-[#0A0A0A]">{user.email}</p>
           </div>
@@ -299,7 +301,7 @@ export default function SettingsClient({
       <section className="border-t border-[#D4D4D8]">
         <div className="py-10">
           <p className="text-[10px] font-bold text-[#71717A] uppercase tracking-[0.4em] mb-6">
-            Integrations & Connectors
+            {t("dashboard:settings.integrations")}
           </p>
           
           <div className="space-y-4">
@@ -315,7 +317,7 @@ export default function SettingsClient({
                     {connectedServices.google_sheets && <CheckCircle2 className="w-3.5 h-3.5 text-[#16A34A]" />}
                   </p>
                   <p className="text-xs font-light text-[#71717A] mt-0.5">
-                    Sync financial data and reports directly to sheets
+                    {t("dashboard:settings.sync_sheets")}
                   </p>
                 </div>
               </div>
@@ -327,7 +329,7 @@ export default function SettingsClient({
                     : "bg-[#0A0A0A] text-white hover:bg-[#333333]"
                 }`}
               >
-                {connectedServices.google_sheets ? "Manage" : "Connect"}
+                {connectedServices.google_sheets ? t("dashboard:settings.manage") : t("dashboard:settings.connect")}
               </button>
             </div>
 
@@ -343,7 +345,7 @@ export default function SettingsClient({
                     {connectedServices.google_drive && <CheckCircle2 className="w-3.5 h-3.5 text-[#16A34A]" />}
                   </p>
                   <p className="text-xs font-light text-[#71717A] mt-0.5">
-                    Store and organize project receipts and attachments
+                    {t("dashboard:settings.sync_drive")}
                   </p>
                 </div>
               </div>
@@ -355,7 +357,7 @@ export default function SettingsClient({
                     : "bg-[#0A0A0A] text-white hover:bg-[#333333]"
                 }`}
               >
-                {connectedServices.google_drive ? "Manage" : "Connect"}
+                {connectedServices.google_drive ? t("dashboard:settings.manage") : t("dashboard:settings.connect")}
               </button>
             </div>
 
@@ -371,7 +373,7 @@ export default function SettingsClient({
                     {connectedServices.google_docs && <CheckCircle2 className="w-3.5 h-3.5 text-[#16A34A]" />}
                   </p>
                   <p className="text-xs font-light text-[#71717A] mt-0.5">
-                    Generate and export proposals and invoices
+                    {t("dashboard:settings.sync_docs")}
                   </p>
                 </div>
               </div>
@@ -383,7 +385,7 @@ export default function SettingsClient({
                     : "bg-[#0A0A0A] text-white hover:bg-[#333333]"
                 }`}
               >
-                {connectedServices.google_docs ? "Manage" : "Connect"}
+                {connectedServices.google_docs ? t("dashboard:settings.manage") : t("dashboard:settings.connect")}
               </button>
             </div>
 
@@ -399,7 +401,7 @@ export default function SettingsClient({
                     {connectedServices.google_calendar && <CheckCircle2 className="w-3.5 h-3.5 text-[#16A34A]" />}
                   </p>
                   <p className="text-xs font-light text-[#71717A] mt-0.5">
-                    Sync project deadlines and events with your calendar
+                    {t("dashboard:settings.sync_calendar")}
                   </p>
                 </div>
               </div>
@@ -411,7 +413,7 @@ export default function SettingsClient({
                     : "bg-[#0A0A0A] text-white hover:bg-[#333333]"
                 }`}
               >
-                {connectedServices.google_calendar ? "Manage" : "Connect"}
+                {connectedServices.google_calendar ? t("dashboard:settings.manage") : t("dashboard:settings.connect")}
               </button>
             </div>
 
@@ -427,7 +429,7 @@ export default function SettingsClient({
                     {connectedServices.google_tasks && <CheckCircle2 className="w-3.5 h-3.5 text-[#16A34A]" />}
                   </p>
                   <p className="text-xs font-light text-[#71717A] mt-0.5">
-                    Export and sync CRM tasks with Google Tasks
+                    {t("dashboard:settings.sync_tasks")}
                   </p>
                 </div>
               </div>
@@ -439,7 +441,7 @@ export default function SettingsClient({
                     : "bg-[#0A0A0A] text-white hover:bg-[#333333]"
                 }`}
               >
-                {connectedServices.google_tasks ? "Manage" : "Connect"}
+                {connectedServices.google_tasks ? t("dashboard:settings.manage") : t("dashboard:settings.connect")}
               </button>
             </div>
           </div>
@@ -450,13 +452,13 @@ export default function SettingsClient({
       <section className="border-t border-[#D4D4D8]">
         <div className="py-10">
           <p className="text-[10px] font-bold text-[#71717A] uppercase tracking-[0.4em] mb-6">
-            Data Management
+            {t("dashboard:settings.data_management")}
           </p>
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-bold text-[#0A0A0A]">Export User Data</p>
+              <p className="text-sm font-bold text-[#0A0A0A]">{t("dashboard:settings.export_data")}</p>
               <p className="text-xs font-light text-[#71717A] mt-1">
-                Download your personal data as CSV
+                {t("dashboard:settings.export_data_desc")}
               </p>
             </div>
             <button
@@ -465,7 +467,7 @@ export default function SettingsClient({
               className="h-10 px-6 border border-[#0A0A0A] text-[#0A0A0A] text-xs font-bold uppercase tracking-widest hover:bg-[#0A0A0A] hover:text-white transition-colors duration-150 disabled:opacity-30 disabled:cursor-not-allowed flex items-center gap-2"
             >
               <Download className="w-3.5 h-3.5" />
-              {isExporting ? "Exporting..." : "Download CSV"}
+              {isExporting ? t("dashboard:settings.exporting") : t("dashboard:settings.download_csv")}
             </button>
           </div>
         </div>
@@ -475,13 +477,13 @@ export default function SettingsClient({
       <section className="border-t border-[#D4D4D8]">
         <div className="py-10">
           <p className="text-[10px] font-bold text-[#71717A] uppercase tracking-[0.4em] mb-6">
-            Account Actions
+            {t("dashboard:settings.account_actions")}
           </p>
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-bold text-[#0A0A0A]">Sign Out</p>
+              <p className="text-sm font-bold text-[#0A0A0A]">{t("dashboard:settings.sign_out")}</p>
               <p className="text-xs font-light text-[#71717A] mt-1">
-                End your current session
+                {t("dashboard:settings.sign_out_desc")}
               </p>
             </div>
             <button
@@ -489,7 +491,7 @@ export default function SettingsClient({
               className="h-10 px-6 border border-[#D4D4D8] text-[#0A0A0A] text-xs font-bold uppercase tracking-widest hover:border-[#0A0A0A] transition-colors duration-150 flex items-center gap-2"
             >
               <LogOut className="w-3.5 h-3.5" />
-              Sign Out
+              {t("dashboard:settings.sign_out")}
             </button>
           </div>
         </div>
@@ -499,13 +501,13 @@ export default function SettingsClient({
       <section className="border-t border-[#DC2626]">
         <div className="py-10">
           <p className="text-[10px] font-bold text-[#DC2626] uppercase tracking-[0.4em] mb-6">
-            Danger Zone
+            {t("dashboard:settings.danger_zone")}
           </p>
           <div className="flex items-center justify-between">
             <div>
-              <p className="text-sm font-bold text-[#0A0A0A]">Delete Account</p>
+              <p className="text-sm font-bold text-[#0A0A0A]">{t("dashboard:settings.delete_account")}</p>
               <p className="text-xs font-light text-[#71717A] mt-1">
-                Permanently remove your account and all data. This cannot be undone.
+                {t("dashboard:settings.delete_account_desc")}
               </p>
             </div>
             <button
@@ -514,7 +516,7 @@ export default function SettingsClient({
               className="h-10 px-6 bg-[#DC2626] text-white text-xs font-bold uppercase tracking-widest hover:bg-[#b91c1c] transition-colors duration-150 disabled:opacity-30 disabled:cursor-not-allowed flex items-center gap-2"
             >
               <Trash2 className="w-3.5 h-3.5" />
-              {isDeleting ? "Deleting..." : "Delete Account"}
+              {isDeleting ? t("dashboard:settings.deleting") : t("dashboard:settings.delete_account")}
             </button>
           </div>
         </div>

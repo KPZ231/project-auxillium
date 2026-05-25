@@ -3,6 +3,7 @@
 import { AnimatePresence, motion } from "motion/react";
 import { useState, useEffect } from "react";
 import { Search, LayoutGrid, List } from "lucide-react";
+import { useTranslation } from "@/app/context/TranslationContext";
 
 interface LeadsFiltersProps {
   selectedFilter: string;
@@ -31,6 +32,7 @@ export default function LeadsFilter({
   searchQuery,
   onSearchChange,
 }: LeadsFiltersProps) {
+  const { t } = useTranslation();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   // Keyboard shortcut for search
@@ -48,7 +50,12 @@ export default function LeadsFilter({
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, []);
 
-  const filters = ["ALL ACTIVE", "QUALIFIED", "NEGOTIATION", "COLD"];
+  const filters = [
+    t("dashboard:leads.filter_all_active", "ALL ACTIVE"),
+    t("dashboard:leads.filter_qualified", "QUALIFIED"),
+    t("dashboard:leads.filter_negotiation", "NEGOTIATION"),
+    t("dashboard:leads.filter_cold", "COLD"),
+  ];
 
   return (
     <section className="w-full px-8 py-6 flex flex-row items-center justify-between border-b border-gray-200 bg-white">
@@ -73,16 +80,16 @@ export default function LeadsFilter({
       <div className="flex flex-row items-center gap-8">
         {/* Sort */}
         <div className="flex items-center gap-2">
-          <span className="text-xs text-gray-400 font-medium">Sort by:</span>
+          <span className="text-xs text-gray-400 font-medium">{t("dashboard:leads.sort_by", "Sort by:")}</span>
           <select
             value={sortBy}
             onChange={(e) => onSortChange(e.target.value)}
             className="text-xs font-bold text-gray-800 bg-transparent cursor-pointer focus:outline-none"
           >
-            <option value="Manual Order">Manual Order</option>
-            <option value="Last Activity">Last Activity</option>
-            <option value="Newest">Newest</option>
-            <option value="Oldest">Oldest</option>
+            <option value="Manual Order">{t("dashboard:leads.sort_manual", "Manual Order")}</option>
+            <option value="Last Activity">{t("dashboard:leads.sort_last_activity", "Last Activity")}</option>
+            <option value="Newest">{t("dashboard:leads.sort_newest", "Newest")}</option>
+            <option value="Oldest">{t("dashboard:leads.sort_oldest", "Oldest")}</option>
           </select>
         </div>
 
@@ -142,7 +149,7 @@ export default function LeadsFilter({
                   <input
                     autoFocus
                     type="text"
-                    placeholder="Search leads..."
+                    placeholder={t("dashboard:leads.search_leads", "Search leads...")}
                     value={searchQuery}
                     onChange={(e) => onSearchChange(e.target.value)}
                     className="flex-1 text-[18px] outline-none bg-transparent placeholder:text-[#D4D4D8] font-light text-[#0A0A0A]"
@@ -162,7 +169,7 @@ export default function LeadsFilter({
                   {!searchQuery ? (
                     <div className="p-8">
                       <h3 className="text-[11px] font-bold text-[#71717A] uppercase tracking-[0.2em] mb-6">
-                        Quick Suggestions
+                        {t("dashboard:leads.quick_suggestions", "Quick Suggestions")}
                       </h3>
                       <div className="space-y-3">
                         {SUGGESTIONS.map((item) => (
@@ -193,10 +200,10 @@ export default function LeadsFilter({
                   ) : (
                     <div className="p-12 text-center">
                       <p className="text-sm text-gray-500">
-                        Searching for <span className="font-bold text-black">&quot;{searchQuery}&quot;</span>...
+                        {t("dashboard:leads.searching_for", "Searching for")} <span className="font-bold text-black">&quot;{searchQuery}&quot;</span>...
                       </p>
                       <p className="text-[10px] text-gray-400 mt-2 uppercase tracking-widest">
-                        Press Enter to see all results
+                        {t("dashboard:leads.press_enter", "Press Enter to see all results")}
                       </p>
                     </div>
                   )}
@@ -208,13 +215,13 @@ export default function LeadsFilter({
                       <kbd className="px-2 py-1 rounded-none bg-white border border-[#D4D4D8] text-[10px] font-bold shadow-sm text-[#0A0A0A]">
                         ↵
                       </kbd>
-                      <span className="text-[10px] text-[#71717A] font-bold uppercase tracking-widest">Select</span>
+                      <span className="text-[10px] text-[#71717A] font-bold uppercase tracking-widest">{t("dashboard:leads.select", "Select")}</span>
                     </div>
                     <div className="flex items-center gap-2">
                       <kbd className="px-2 py-1 rounded-none bg-white border border-[#D4D4D8] text-[10px] font-bold shadow-sm text-[#0A0A0A]">
                         ↑↓
                       </kbd>
-                      <span className="text-[10px] text-[#71717A] font-bold uppercase tracking-widest">Navigate</span>
+                      <span className="text-[10px] text-[#71717A] font-bold uppercase tracking-widest">{t("dashboard:leads.navigate", "Navigate")}</span>
                     </div>
                   </div>
                   <span className="text-[10px] text-[#D4D4D8] uppercase tracking-[0.3em] font-black">Auxilium Engine</span>

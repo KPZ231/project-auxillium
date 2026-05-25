@@ -1,0 +1,16 @@
+{
+  "imageUploader": {
+    "formats": "Obsługiwane formaty: JPG, PNG, WebP",
+    "imageAlt": "Przesłane zdjęcie",
+    "prompt": "Przeciągnij i upuść zdjęcie lub kliknij, aby wybrać",
+    "removeImageTitle": "Usuń zdjęcie",
+    "toast": {
+      "invalidFileError": "Nieprawidłowy format pliku",
+      "maxImagesError": "Osiągnięto maksymalną liczbę zdjęć",
+      "success": "Zdjęcie przesłane pomyślnie",
+      "uploadError": "Błąd przesyłania",
+      "uploadFailedError": "Nie udało się przesłać zdjęcia"
+    },
+    "uploading": "Przesyłanie..."
+  }
+}

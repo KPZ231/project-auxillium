@@ -1,89 +1,92 @@
 {
-  "form": {
-    "email_or_login": "Email or login",
-    "password": "Password",
-    "confirm_password": "Confirm password",
-    "username": "Username",
-    "full_name": "Full name",
-    "phone": "Phone",
-    "description": "Description",
-    "notes": "Notes",
-    "location": "Location",
-    "website": "Website",
-    "company": "Company",
-    "role": "Role",
-    "lead_name": "Lead name",
-    "contact_name": "Contact name",
-    "project_type": "Project type",
-    "email": "Email",
-    "first_name": "First name",
-    "last_name": "Last name",
-    "message": "Message",
-    "subject": "Subject"
+  "buttons": {
+    "log_in": "Log In",
+    "reset_password": "Reset Password",
+    "sign_up": "Sign Up",
+    "submit": "Submit"
   },
-  "placeholders": {
-    "email_or_login": "Enter your email or login",
-    "password": "••••••••",
-    "confirm_password": "••••••••",
-    "full_name": "John Doe",
-    "phone": "+1 234 567 890",
-    "description": "Describe your need...",
-    "lead_name": "Company or individual name",
-    "contact_name": "Jane Smith",
-    "email": "john@example.com",
-    "company": "Company name",
-    "website": "https://www.example.com"
+  "contact_title": "Contact Us",
+  "days": {
+    "closed": "Closed",
+    "mon_fri": "Mon – Fri",
+    "sat": "Sat",
+    "sun": "Sun"
+  },
+  "errors": {
+    "contact_failed": "Failed to send message",
+    "reset_failed": "Password reset failed"
+  },
+  "form": {
+    "confirm_password": "Confirm password",
+    "email": "Email",
+    "email_or_login": "Email or login",
+    "full_name": "Full name",
+    "message": "Message",
+    "password": "Password"
   },
   "labels": {
-    "phone": "Call",
-    "email": "Write",
     "available": "Availability",
-    "days": {
-      "mon_fri": "MON - FRI",
-      "sat": "SATURDAY",
-      "sun": "SUNDAY",
-      "closed": "CLOSED"
-    },
-    "login_title": "Log In",
-    "login_subtitle": "Welcome back to Auxillium system.",
-    "login_button": "Log In",
-    "logging_in": "Logging in...",
-    "registration_title": "Registration",
-    "registration_subtitle": "Welcome to Auxillium system.",
-    "registering": "Registering...",
-    "or_continue_with": "or continue with",
+    "email": "Write",
     "forgot_password": "Forgot password?",
-    "no_account": "Don't have an account?",
     "have_account": "Already have an account?",
+    "logging_in": "Logging in...",
+    "login_button": "Log In",
+    "login_failed": "Login failed",
+    "login_subtitle": "Welcome back to Auxillium system.",
+    "login_title": "Log In",
+    "no_account": "Don't have an account?",
+    "or_continue_with": "or continue with",
+    "password_reset_subtitle": "Enter your email address and we'll send you a link to reset your password.",
+    "password_reset_title": "Reset Password",
+    "phone": "Call",
+    "registering": "Registering...",
+    "registration_failed": "Registration failed",
+    "registration_subtitle": "Welcome to Auxillium system.",
+    "registration_title": "Registration",
+    "resetting": "Resetting...",
     "validation_error": "Validation error",
-    "validation_error_desc": "Please correct the errors in the form before submitting.",
-    "contact_failed": "Failed to send message",
-    "login_failed": "Login failed"
+    "validation_error_desc": "Please correct the errors in the form before submitting."
   },
-  "buttons": {
-    "submit": "Submit",
-    "sign_up": "Sign Up",
-    "log_in": "Log In"
+  "messages": {
+    "check_email": "Check your email for further instructions",
+    "error": "An error occurred"
+  },
+  "placeholders": {
+    "description": "Describe your need...",
+    "email": "john@example.com",
+    "email_or_login": "Enter your email or login",
+    "full_name": "John Doe",
+    "password": "••••••••"
+  },
+  "ResetPasswordConfirm": {
+    "form": {
+      "confirmPasswordLabel": "Confirm new password",
+      "newPasswordLabel": "New password",
+      "submitButton": "Change Password",
+      "submitting": "Changing password...",
+      "subtitle": "Enter your new password below.",
+      "title": "Set New Password"
+    },
+    "invalidLink": {
+      "desc": "This password reset link is invalid or has expired. Please request a new one.",
+      "title": "Invalid Link"
+    },
+    "toast": {
+      "changeFailed": "Password change failed",
+      "connectionError": "Connection error. Please try again later.",
+      "errorTitle": "Error",
+      "invalidToken": "Invalid or expired reset token",
+      "successDesc": "Your password has been changed. You can now log in.",
+      "successTitle": "Password Changed"
+    }
   },
   "success": {
     "contact_thanks": "Thank you for contacting us. We will reply as soon as possible.",
     "login_success": "Login successful",
-    "registration_success": "Registration successful",
-    "password_reset_email_sent": "Password reset link has been sent",
     "message_sent": "Message sent!",
-    "redirecting_dashboard": "Redirecting to user dashboard..."
-  },
-  "errors": {
-    "invalid_email": "Invalid email format",
-    "invalid_login": "Invalid login format",
-    "password_too_short": "Password must be at least 8 characters",
-    "password_no_uppercase": "Password must contain at least one uppercase letter",
-    "password_no_lowercase": "Password must contain at least one lowercase letter",
-    "password_no_digit": "Password must contain at least one digit",
-    "passwords_do_not_match": "Passwords do not match",
-    "field_required": "This field is required",
-    "minimum_characters": "Min. {{count}} characters",
-    "invalid_input": "Invalid input",
-    "contact_failed": "Failed to send message"
+    "password_reset_email_sent": "Password reset link has been sent",
+    "redirecting": "Redirecting...",
+    "redirecting_dashboard": "Redirecting to user dashboard...",
+    "registration_success": "Registration successful"
   }
 }

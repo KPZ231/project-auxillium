@@ -1,118 +1,205 @@
 {
+  "about": {
+    "description": "Learn more about our company",
+    "offer_item1": "Project Management",
+    "offer_item1_desc": "Clear view of progress, deadlines and responsibility across your entire team.",
+    "offer_item2": "Lead & Client Tracking",
+    "offer_item2_desc": "CRM tailored to SMB sales pace — effective and without unnecessary complexity.",
+    "offer_item3": "Finance & Costs",
+    "offer_item3_desc": "Control revenues, expenses and financial goals in real time.",
+    "offer_item4": "Team Management",
+    "offer_item4_desc": "Onboarding, task assignment, workload monitoring — all in one place.",
+    "offer_subtitle": "As KPZ's Productions, we offer a wide range of services related to software development. Our team consists of experienced programmers and designers who are able to handle even the most demanding tasks.",
+    "offer_title": "What We Offer",
+    "quote_content": "We help companies transform digitally and scale their business",
+    "sub_content": "We combine creativity with data. We create software that drives growth, increases efficiency, and opens up new market opportunities for our clients.",
+    "title": "About Us",
+    "why_choose_us": "What Makes Us Special"
+  },
+  "contact": {
+    "description": "Get in touch with us",
+    "title": "Contact"
+  },
+  "cookies": {
+    "description": "Cookie Policy of the Auxilium platform",
+    "publication_date": "Published on: 26.04.2026",
+    "sections_count": "8",
+    "title": "Cookie Policy",
+    "section1": {
+      "title": "1. Definitions",
+      "content": "For the purposes of this Cookie Policy, the following definitions apply: Cookies — small text files stored on the User's end device by the web browser, containing data required for the proper functioning of the website; Service — the Auxilium platform available at auxilium.app; End Device — a computer, phone, tablet or other device through which the User accesses the Service; Session — the period of User activity on the Service from login to logout or browser closure; Controller — KPZ's Productions, the entity responsible for processing data within the Service."
+    },
+    "section2": {
+      "title": "2. Types of cookies used",
+      "content": "The Auxilium Service uses the following types of cookies by storage duration: session cookies — deleted automatically when the browser session ends; persistent cookies — stored on the User's device for a specified period or until manually deleted. By purpose: necessary cookies — required for the correct operation of the Service and cannot be disabled; functional cookies — remembering User preferences, such as interface language; analytical cookies — collecting anonymous statistical data about Service usage; marketing cookies — used for potential content personalisation."
+    },
+    "section3": {
+      "title": "3. Cookies necessary for the operation of the service",
+      "content": "Necessary cookies are required for the correct operation of the platform and cannot be disabled without losing core functionality. They include: session authentication tokens ensuring secure login; active workspace identifier (active_space_id); JWT session token stored in an httpOnly cookie with a 24-hour expiry; interface language settings. The legal basis for processing data through necessary cookies is the necessity to perform the electronic services agreement (Art. 6(1)(b) GDPR) and the Controller's legitimate interest in ensuring platform security (Art. 6(1)(f) GDPR)."
+    },
+    "section4": {
+      "title": "4. Analytical and statistical cookies",
+      "content": "Analytical cookies allow us to collect anonymous information about how the Service is used, including: number of visits, time spent on the page, pages viewed by Users, and traffic sources. This data is used exclusively to improve platform functionality and content and is not linked to data identifying individual Users. Analytical cookies are installed only after obtaining the User's voluntary consent, which may be withdrawn at any time without affecting the lawfulness of processing carried out before withdrawal."
+    },
+    "section5": {
+      "title": "5. Marketing and personalisation cookies",
+      "content": "Marketing cookies may be used to personalise content based on User behaviour on the Service. Currently, the Auxilium Service does not use third-party marketing cookies for advertising purposes. Should such cookies be introduced, Users will be informed in advance and asked to provide separate, informed consent in accordance with the requirements of the ePrivacy Directive (2002/58/EC) and GDPR. Any marketing cookies will be clearly described in the updated version of this policy."
+    },
+    "section6": {
+      "title": "6. Managing cookie settings",
+      "content": "Users can manage cookies through: web browser settings — it is possible to block or restrict cookie storage or delete cookies already stored; the consent management panel available upon first visit to the Service. Disabling necessary cookies may prevent login and use of the platform. Cookie management instructions for popular browsers: Chrome — chrome://settings/cookies; Firefox — about:preferences#privacy; Safari — Preferences > Privacy; Microsoft Edge — edge://settings/cookies."
+    },
+    "section7": {
+      "title": "7. Cookie consent and its withdrawal",
+      "content": "Upon first visiting the Service, Users are informed about the cookies in use and asked to give voluntary consent to optional cookies (analytical, marketing) in accordance with Art. 6(1)(a) GDPR. Consent may be withdrawn at any time without giving reasons and without negative consequences for the User — withdrawal of consent for analytical or marketing cookies does not restrict access to core platform features. Consent may be withdrawn by changing cookie settings in the browser or in the Service's consent management panel."
+    },
+    "section8": {
+      "title": "8. Changes to the cookie policy",
+      "content": "The Controller reserves the right to update this Cookie Policy as technology, law, or Service functionality changes. All changes will be published at auxilium.app/cookies together with the effective date. Users will be notified of significant changes via a message displayed in the Service or electronically. For questions regarding cookies, please contact: kontakt@auxilium.app."
+    }
+  },
+  "cta": {
+    "cta": "Start now",
+    "subtitle": "Start using Auxillium today and see how easy managing your business can be.",
+    "title": "Ready for a change?"
+  },
+  "faq": {
+    "a1": "Just register on our platform and choose the free plan to test the basic features.",
+    "a2": "Yes, you can switch to a higher or lower plan at any time. Changes will take effect from the next billing period.",
+    "a3": "We accept card payments, instant transfers, and recurring payments (subscriptions).",
+    "q1": "How do I start using the system?",
+    "q2": "Can I change my plan at any time?",
+    "q3": "What payment methods are accepted?",
+    "subtitle": "Everything you need to know about Auxillium",
+    "title": "Frequently asked questions"
+  },
+  "features": {
+    "description": "Through process automation you save time and money",
+    "subtitle": "Increase efficiency",
+    "subtitle_alternative": "Through process automation you save time and money",
+    "title": "Save up to 30%"
+  },
   "hero": {
-    "title": "AUXILLIUM <br/> new definition of management",
-    "subtitle": "Minimalism that drives your business",
     "cta": "Start now",
     "cta_secondary": "Watch demo",
     "social_proof": "over 500 companies already manage smarter",
-    "subtitle_alternative": "Minimalism that drives your business"
-  },
-  "features": {
-    "title": "Save up to 30%",
-    "description": "Through process automation you save time and money",
-    "subtitle": "Increase efficiency",
-    "subtitle_alternative": "Through process automation you save time and money"
+    "subtitle": "Minimalism that drives your business",
+    "subtitle_alternative": "Minimalism that drives your business",
+    "title": "AUXILLIUM <br/> new definition of management"
   },
   "pricing": {
-    "title": "Check our plans",
-    "subtitle": "Choose the right plan for your needs",
-    "free": "Free",
-    "pro": "Pro",
+    "cta": "Start now",
+    "choose_plan": "Choose plan",
+    "contact_us": "Contact us",
     "enterprise": "Enterprise",
-    "free_desc": "Free plan",
-    "pro_desc": "Pro Plan",
-    "enterprise_desc": "Enterprise Plan",
-    "cta": "Start now"
-  },
-  "testimonials": {
-    "title": "Philosophy",
-    "subtitle": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
-  },
-  "faq": {
-    "title": "Frequently asked questions",
-    "subtitle": "Everything you need to know about Auxillium",
-    "q1": "How do I start using the system?",
-    "a1": "Just register on our platform and choose the free plan to test the basic features.",
-    "q2": "Can I change my plan at any time?",
-    "a2": "Yes, you can switch to a higher or lower plan at any time. Changes will take effect from the next billing period.",
-    "q3": "What payment methods are accepted?",
-    "a3": "We accept card payments, instant transfers, and recurring payments (subscriptions)."
-  },
-  "cta": {
-    "title": "Ready for a change?",
-    "subtitle": "Start using Auxillium today and see how easy managing your business can be.",
-    "cta": "Start now"
-  },
-  "about": {
-    "title": "About Us",
-    "description": "Learn more about our company",
-    "offer_title": "What We Offer",
-    "offer_subtitle": "As KPZ's Productions, we offer a wide range of services related to software development. Our team consists of experienced programmers and designers who are able to handle even the most demanding tasks.",
-    "offer_item1": "New Technologies",
-    "offer_item1_desc": "New Technologies",
-    "offer_item2": "New Technologies",
-    "offer_item2_desc": "New Technologies",
-    "offer_item3": "New Technologies",
-    "offer_item3_desc": "New Technologies",
-    "offer_item4": "New Technologies",
-    "offer_item4_desc": "New Technologies",
-    "why_choose_us": "What Makes Us Special",
-    "quote_content": "We help companies transform digitally and scale their business",
-    "sub_content": "We combine creativity with data. We create software that drives growth, increases efficiency, and opens up new market opportunities for our clients."
-  },
-  "contact": {
-    "title": "Contact",
-    "description": "Get in touch with us"
-  },
-  "cookies": {
-    "title": "Cookie Policy",
-    "description": "Website Cookie Policy",
-    "publication_date": "Published on: 26.04.2026",
-    "section1": {
-      "title": "1. Definitions",
-      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
-    },
-    "section2": {
-      "title": "2. Definitions",
-      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
-    },
-    "section3": {
-      "title": "3. Definitions",
-      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
-    }
+    "enterprise_desc": "For organisations requiring scalability and dedicated support",
+    "feature_lorem": "Lorem ipsum feature description",
+    "free": "Free",
+    "free_desc": "For teams just getting started",
+    "pro": "Pro",
+    "pro_desc": "For growing businesses that need full control",
+    "subtitle": "Choose the right plan for your needs",
+    "title": "Check our plans"
   },
   "privacy": {
-    "title": "Privacy Policy",
-    "description": "Website Privacy Policy",
+    "description": "Privacy Policy and Personal Data Protection of the Auxilium platform",
     "publication_date": "Published on: 26.04.2026",
+    "sections_count": "10",
+    "title": "Privacy Policy",
     "section1": {
-      "title": "1. Definitions",
-      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+      "title": "1. Data Controller",
+      "content": "The controller of personal data of users of the Auxilium platform is KPZ's Productions (hereinafter: 'Controller'). For matters concerning personal data protection, you may contact the Controller at: kontakt@auxilium.app. The Controller processes personal data in accordance with Regulation (EU) 2016/679 of the European Parliament and of the Council of 27 April 2016 (GDPR), the Polish Act of 10 May 2018 on the Protection of Personal Data, and other applicable legislation."
     },
     "section2": {
-      "title": "2. Definitions",
-      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+      "title": "2. Scope of personal data collected",
+      "content": "The Controller collects the following categories of personal data: identification data (name, username); contact data (email address); service usage data (subscription plans, payment history); technical data (IP address, browser type, session identifiers); data entered by the User while using the platform (projects, leads, client and employee data). Provision of mandatory data is a condition for using the platform. Provision of other data is voluntary."
     },
     "section3": {
-      "title": "3. Definitions",
-      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+      "title": "3. Purposes and legal bases for processing",
+      "content": "Personal data are processed for the following purposes and on the following legal bases: performance of contract (Art. 6(1)(b) GDPR) — account registration, platform service delivery, payment processing; compliance with legal obligations (Art. 6(1)(c) GDPR) — issuing VAT invoices, retaining accounting records for the required period; legitimate interest of the Controller (Art. 6(1)(f) GDPR) — platform security, direct marketing to existing customers, pursuit of potential claims; consent (Art. 6(1)(a) GDPR) — marketing communications to new users, optional cookies."
+    },
+    "section4": {
+      "title": "4. Recipients of personal data",
+      "content": "Personal data may be shared with the following categories of recipients: payment processors (Stripe Inc.) to the extent necessary for subscription payment processing; cloud infrastructure and hosting providers (Vercel Inc., Supabase Inc., Upstash Inc.) to the extent necessary for platform service delivery; email service providers used for communication with Users; public authorities entitled to receive data under applicable law. The Controller does not sell Users' personal data to third parties for commercial purposes."
+    },
+    "section5": {
+      "title": "5. Data retention period",
+      "content": "Personal data are retained for the duration of the contract, and thereafter: for 5 years — data required for tax and accounting purposes; for 3 years from contract termination — data required for potential civil claims; until consent is withdrawn or the purpose is achieved — data processed on the basis of consent. Upon expiry of the retention period, data are permanently deleted or anonymised in a manner preventing attribution to a specific person."
+    },
+    "section6": {
+      "title": "6. Rights of data subjects",
+      "content": "Every User has the right to: access their personal data and obtain a copy (Art. 15 GDPR); rectification of inaccurate or incomplete data (Art. 16 GDPR); erasure of data in cases specified in Art. 17 GDPR (right to be forgotten); restriction of processing (Art. 18 GDPR); data portability in a machine-readable format (Art. 20 GDPR); object to processing based on legitimate interest (Art. 21 GDPR); withdraw consent at any time without negative consequences. Requests may be submitted to: kontakt@auxilium.app. The Controller will respond without undue delay and within one month. Users have the right to lodge a complaint with the President of the Personal Data Protection Office (UODO), ul. Stawki 2, 00-193 Warsaw, Poland."
+    },
+    "section7": {
+      "title": "7. Transfer of data outside the European Economic Area",
+      "content": "Some recipients of data, in particular Stripe Inc. and Vercel Inc., are based in the United States. Transfers of data to these entities are based on standard contractual clauses approved by the European Commission (Art. 46(2)(c) GDPR), which ensure an adequate level of personal data protection. Users may obtain a copy of the applicable clauses by contacting the Controller at kontakt@auxilium.app."
+    },
+    "section8": {
+      "title": "8. Data security",
+      "content": "The Controller applies appropriate technical and organisational measures to ensure the security of personal data, including: data transmission encryption using the TLS/HTTPS protocol; storage of passwords exclusively in encrypted form using the Argon2 algorithm; access controls restricting data access to authorised personnel and processors only; regular data backups. In the event of a personal data breach, the Controller will notify the competent supervisory authority within 72 hours, and Users without undue delay if the breach is likely to result in a high risk to their rights and freedoms."
+    },
+    "section9": {
+      "title": "9. Contact for data protection matters",
+      "content": "For matters related to personal data processing, please contact us: by email at kontakt@auxilium.app; in writing to the registered address of KPZ's Productions. The Controller will respond without undue delay and within one month of receiving the request. In justified, complex cases, this period may be extended by a further 2 months, and the Controller will promptly inform the applicant in writing of the reasons for the delay."
+    },
+    "section10": {
+      "title": "10. Changes to the privacy policy",
+      "content": "The Controller reserves the right to make changes to this privacy policy in connection with legal, technological, or organisational changes. All changes will be published at auxilium.app/privacy and will take effect on the date indicated with each change, no earlier than 14 days after publication. Users will be notified of significant changes by email to the address provided at registration. Continued use of the platform after the changes take effect constitutes acceptance."
     }
   },
   "terms": {
-    "title": "Terms of Service",
-    "description": "Website Terms of Service",
+    "description": "Terms of Service of the Auxilium platform",
     "publication_date": "Published on: 26.04.2026",
+    "sections_count": "10",
+    "title": "Terms of Service",
     "section1": {
-      "title": "1. Definitions",
-      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+      "title": "1. General provisions",
+      "content": "These Terms of Service govern the rules and conditions for using the Auxilium platform, provided by KPZ's Productions (hereinafter: 'Service Provider'). By accessing or using the Auxilium platform, you agree to be bound by these Terms in their entirety. The service is provided electronically in accordance with applicable Polish and EU law, including Directive 2000/31/EC on electronic commerce. These Terms are available free of charge at auxilium.app/terms."
     },
     "section2": {
       "title": "2. Definitions",
-      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+      "content": "For the purposes of these Terms, the following definitions apply: Platform — the Auxilium software system available at auxilium.app; User — any natural person with full legal capacity, legal entity, or organisational unit that has entered into an agreement for electronic services; Account — an individual user panel protected by login credentials or OAuth login; Subscription — a paid or free plan for using the platform; Space — an isolated working environment within the platform to which different Users may belong; Personal Data — information enabling identification of a User within the meaning of the GDPR."
     },
     "section3": {
-      "title": "3. Definitions",
-      "content": "ipsum dolor sit amet consectetur adipisicing elit. Quisquam, quod."
+      "title": "3. Registration and user account",
+      "content": "Use of the platform's features requires registration and creation of an account. Users must provide accurate, current, and complete information during registration. Your password is confidential and you are responsible for its security and all actions taken using your login credentials. The Service Provider is not liable for damages resulting from unauthorised access caused by disclosure of your password. Each account may only be associated with one natural person. Registration by persons under 16 years of age is not permitted without the consent of a parent or legal guardian."
+    },
+    "section4": {
+      "title": "4. User rights and obligations",
+      "content": "Users have the right to access platform features in accordance with their subscription plan. Users agree to: use the platform in accordance with its intended purpose and applicable Polish and EU law; not infringe the rights of third parties, including intellectual property rights; not perform any actions that could disrupt platform operation, in particular through reverse engineering, automated attacks, unauthorised scanning, or attempts to circumvent security measures; not post any unlawful, offensive, discriminatory, or unethical content. Violation of these rules may result in account suspension or permanent termination."
+    },
+    "section5": {
+      "title": "5. Subscriptions and payments",
+      "content": "The platform offers a free plan (Free) and paid plans (Pro and Enterprise). Subscription payments are processed on a recurring basis (monthly or annually) through the Stripe Inc. payment processor. VAT invoices are generated automatically and sent to the User's email address. Users may change their subscription plan at any time; changes take effect from the next billing period. The Service Provider reserves the right to modify pricing with at least 30 days' notice. Subscriptions may be cancelled at any time; however, payments for the current billing period are non-refundable, subject to mandatory consumer protection legislation."
+    },
+    "section6": {
+      "title": "6. Service Provider liability",
+      "content": "The Service Provider undertakes to provide services with due diligence and to make every effort to ensure platform continuity. The Service Provider is not liable for: technical interruptions due to maintenance, of which Users will be notified in advance; force majeure events; damages resulting from improper use of the platform; data loss caused by User action or omission. The Service Provider's total liability to any single User shall not exceed the amount paid by that User for the last 3 months of subscription. These limitations do not apply to damages caused intentionally, nor to consumer claims arising from mandatory statutory provisions."
+    },
+    "section7": {
+      "title": "7. Intellectual property",
+      "content": "All intellectual property rights in the Auxilium platform, including copyrights, trademarks, industrial designs, and software, belong to the Service Provider or its licensors. Users acquire only a limited, non-exclusive, non-transferable, and revocable right to use the platform as set out in these Terms. Copying, modifying, decompiling, disassembling, or distributing any elements of the platform without prior written consent is prohibited. Content uploaded by Users remains their property; Users grant the Service Provider a royalty-free, non-exclusive licence to store and process such content solely for the purpose of providing the service."
+    },
+    "section8": {
+      "title": "8. Termination",
+      "content": "Users may terminate the agreement at any time by deleting their account in the platform settings or sending a written request to kontakt@auxilium.app. The Service Provider may terminate the agreement with 14 days' notice, stating the reasons. In cases of serious breach of these Terms, the Service Provider may block or delete an account with immediate effect, informing the User of the reasons. Following termination, User data are retained for the period required by law and then permanently deleted. Consumers have the statutory right to withdraw from a distance contract within 14 days of its conclusion without giving reasons, provided they have not previously used the platform services."
+    },
+    "section9": {
+      "title": "9. Changes to the Terms",
+      "content": "The Service Provider reserves the right to update these Terms for justified reasons, in particular in connection with changes to legislation, technical requirements, or the service offering. Users will be informed of planned changes electronically (email or in-app notification) with at least 14 days' notice before the changes take effect. Continued use of the platform after the notice period constitutes acceptance. If a User does not accept the changes, they have the right to terminate the agreement before the changes take effect without any negative consequences."
+    },
+    "section10": {
+      "title": "10. Governing law and final provisions",
+      "content": "These Terms are governed by Polish law, in particular the Civil Code, the Act on Electronic Services, and the Consumer Rights Act. Disputes shall be settled by courts having jurisdiction over the Service Provider's registered office; consumers may bring claims before courts having jurisdiction over their place of residence. Consumers may use alternative dispute resolution, including the EU Online Dispute Resolution platform at ec.europa.eu/consumers/odr. If any provision of these Terms is found to be invalid or ineffective, the remaining provisions shall remain in full force and effect."
     }
+  },
+  "testimonials": {
+    "subtitle": "We believe that good software doesn't get in the way — it disappears into the background and simply works.",
+    "title": "Philosophy"
+  },
+  "footer": {
+    "privacy": "Privacy",
+    "cookies": "Cookies",
+    "terms": "Terms & Conditions"
   }
 }

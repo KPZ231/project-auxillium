@@ -1,0 +1,16 @@
+{
+  "imageUploader": {
+    "formats": "Supported formats: JPG, PNG, WebP",
+    "imageAlt": "Uploaded image",
+    "prompt": "Drag & drop an image or click to browse",
+    "removeImageTitle": "Remove image",
+    "toast": {
+      "invalidFileError": "Invalid file format",
+      "maxImagesError": "Maximum number of images reached",
+      "success": "Image uploaded successfully",
+      "uploadError": "Upload error",
+      "uploadFailedError": "Image upload failed"
+    },
+    "uploading": "Uploading..."
+  }
+}

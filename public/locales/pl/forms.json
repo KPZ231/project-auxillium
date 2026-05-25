@@ -1,89 +1,92 @@
 {
-  "form": {
-    "email_or_login": "Adres e-mail lub login",
-    "password": "Hasło",
-    "confirm_password": "Potwierdź hasło",
-    "username": "Nazwa użytkownika",
-    "full_name": "Imię i nazwisko",
-    "phone": "Telefon",
-    "description": "Opis",
-    "notes": "Notatki",
-    "location": "Lokalizacja",
-    "website": "Strona www",
-    "company": "Firma",
-    "role": "Rola",
-    "lead_name": "Nazwa potencjalnego klienta",
-    "contact_name": "Nazwa kontaktu",
-    "project_type": "Typ projektu",
-    "email": "Adres e-mail",
-    "first_name": "Imię",
-    "last_name": "Nazwisko",
-    "message": "Wiadomość",
-    "subject": "Temat"
+  "buttons": {
+    "log_in": "Zaloguj się",
+    "reset_password": "Zresetuj hasło",
+    "sign_up": "Zarejestruj się",
+    "submit": "Wyślij"
   },
-  "placeholders": {
-    "email_or_login": "Wprowadź e-mail lub login",
-    "password": "••••••••",
-    "confirm_password": "••••••••",
-    "full_name": "Jan Kowalski",
-    "phone": "+48 123 456 789",
-    "description": "Opisz swoją potrzebę...",
-    "lead_name": "Nazwa firmy lub osoby",
-    "contact_name": "Jan Nowak",
-    "email": "jan@example.com",
-    "company": "Nazwa firmy",
-    "website": "https://www.example.com"
+  "contact_title": "Skontaktuj się z nami",
+  "days": {
+    "closed": "Zamknięte",
+    "mon_fri": "Pon – Pt",
+    "sat": "Sob",
+    "sun": "Ndz"
+  },
+  "errors": {
+    "contact_failed": "Nie udało się wysłać wiadomości",
+    "reset_failed": "Resetowanie hasła nie powiodło się"
+  },
+  "form": {
+    "confirm_password": "Potwierdź hasło",
+    "email": "Adres e-mail",
+    "email_or_login": "Adres e-mail lub login",
+    "full_name": "Imię i nazwisko",
+    "message": "Wiadomość",
+    "password": "Hasło"
   },
   "labels": {
-    "phone": "Zadzwoń",
-    "email": "Napisz",
     "available": "Dostępność",
-    "days": {
-      "mon_fri": "PON - PT",
-      "sat": "SOBOTA",
-      "sun": "NIEDZIELA",
-      "closed": "ZAMKNIĘTE"
-    },
-    "login_title": "Logowanie",
-    "login_subtitle": "Witaj ponownie w systemie Auxillium.",
-    "login_button": "Zaloguj się",
-    "logging_in": "Logowanie...",
-    "registration_title": "Rejestracja",
-    "registration_subtitle": "Witaj w systemie Auxillium.",
-    "registering": "Rejestracja...",
-    "or_continue_with": "lub kontynuuj przez",
+    "email": "Napisz",
     "forgot_password": "Zapomniałeś hasła?",
-    "no_account": "Nie masz konta?",
     "have_account": "Masz już konto?",
+    "logging_in": "Logowanie...",
+    "login_button": "Zaloguj się",
+    "login_failed": "Nie udało się zalogować",
+    "login_subtitle": "Witaj ponownie w systemie Auxillium.",
+    "login_title": "Logowanie",
+    "no_account": "Nie masz konta?",
+    "or_continue_with": "lub kontynuuj przez",
+    "password_reset_subtitle": "Podaj swój adres e-mail, a wyślemy Ci link do zresetowania hasła.",
+    "password_reset_title": "Resetowanie hasła",
+    "phone": "Zadzwoń",
+    "registering": "Rejestracja...",
+    "registration_failed": "Rejestracja nie powiodła się",
+    "registration_subtitle": "Witaj w systemie Auxillium.",
+    "registration_title": "Rejestracja",
+    "resetting": "Resetowanie...",
     "validation_error": "Błąd walidacji",
-    "validation_error_desc": "Proszę poprawić błędy w formularzu przed wysłaniem.",
-    "contact_failed": "Nie udało się wysłać wiadomości",
-    "login_failed": "Nie udało się zalogować"
+    "validation_error_desc": "Proszę poprawić błędy w formularzu przed wysłaniem."
   },
-  "buttons": {
-    "submit": "Wyślij",
-    "sign_up": "Zarejestruj się",
-    "log_in": "Zaloguj się"
+  "messages": {
+    "check_email": "Sprawdź swoją skrzynkę e-mail, aby uzyskać dalsze instrukcje",
+    "error": "Wystąpił błąd"
+  },
+  "placeholders": {
+    "description": "Opisz swoją potrzebę...",
+    "email": "jan@example.com",
+    "email_or_login": "Wprowadź e-mail lub login",
+    "full_name": "Jan Kowalski",
+    "password": "••••••••"
+  },
+  "ResetPasswordConfirm": {
+    "form": {
+      "confirmPasswordLabel": "Potwierdź nowe hasło",
+      "newPasswordLabel": "Nowe hasło",
+      "submitButton": "Zmień hasło",
+      "submitting": "Zmiana hasła...",
+      "subtitle": "Wprowadź swoje nowe hasło poniżej.",
+      "title": "Ustaw nowe hasło"
+    },
+    "invalidLink": {
+      "desc": "Ten link do resetowania hasła jest nieprawidłowy lub wygasł. Poproś o nowy.",
+      "title": "Nieprawidłowy link"
+    },
+    "toast": {
+      "changeFailed": "Zmiana hasła nie powiodła się",
+      "connectionError": "Błąd połączenia. Spróbuj ponownie później.",
+      "errorTitle": "Błąd",
+      "invalidToken": "Nieprawidłowy lub wygasły token resetowania",
+      "successDesc": "Twoje hasło zostało zmienione. Możesz się teraz zalogować.",
+      "successTitle": "Hasło zmienione"
+    }
   },
   "success": {
     "contact_thanks": "Dziękujemy za kontakt. Odpowiemy tak szybko, jak to możliwe.",
     "login_success": "Zalogowano pomyślnie",
-    "registration_success": "Zarejestrowano pomyślnie",
-    "password_reset_email_sent": "Wiadomość z linkiem do resetowania hasła została wysłana",
     "message_sent": "Wiadomość została wysłana!",
-    "redirecting_dashboard": "Przekierowywanie do panelu użytkownika..."
-  },
-  "errors": {
-    "invalid_email": "Niepoprawny format adresu e-mail",
-    "invalid_login": "Niepoprawny format loginu",
-    "password_too_short": "Hasło musi mieć co najmniej 8 znaków",
-    "password_no_uppercase": "Hasło musi zawierać co najmniej jedną wielką literę",
-    "password_no_lowercase": "Hasło musi zawierać co najmniej jedną małą literę",
-    "password_no_digit": "Hasło musi zawierać co najmniej jedną cyfrę",
-    "passwords_do_not_match": "Hasła są różne",
-    "field_required": "To pole jest wymagane",
-    "minimum_characters": "Min. {{count}} znaki",
-    "invalid_input": "Nieprawidłowe dane",
-    "contact_failed": "Nie udało się wysłać wiadomości"
+    "password_reset_email_sent": "Wiadomość z linkiem do resetowania hasła została wysłana",
+    "redirecting": "Przekierowywanie...",
+    "redirecting_dashboard": "Przekierowywanie do panelu użytkownika...",
+    "registration_success": "Zarejestrowano pomyślnie"
   }
 }

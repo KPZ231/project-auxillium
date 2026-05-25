@@ -65,29 +65,59 @@ export async function POST(request: NextRequest) {
     const localeMatch = referer.match(/\/([a-z]{2})\b/);
     const locale = localeMatch?.[1] ?? "pl";
 
-    // Create a Checkout Session
-    const session = await stripe.checkout.sessions.create({
-      payment_method_types: ["card"],
-      customer: customerId,
-      line_items: [
-        {
-          price: priceId,
-          quantity: 1,
-        },
-      ],
-      mode: "subscription",
-      success_url: `${origin}/${locale}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${origin}/${locale}/checkout/cancel`,
-      metadata: {
-        userId: user.id,
-        planName: planName || "Pro",
-      },
-      subscription_data: {
+    // Function to create checkout session
+    const createSession = async (cId: string) => {
+      return await stripe.checkout.sessions.create({
+        payment_method_types: ["card"],
+        customer: cId,
+        line_items: [
+          {
+            price: priceId,
+            quantity: 1,
+          },
+        ],
+        mode: "subscription",
+        success_url: `${origin}/${locale}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${origin}/${locale}/checkout/cancel`,
         metadata: {
           userId: user.id,
+          planName: planName || "Pro",
         },
-      },
-    });
+        subscription_data: {
+          metadata: {
+            userId: user.id,
+          },
+        },
+      });
+    };
+
+    let session;
+    try {
+      session = await createSession(customerId);
+    } catch (error: any) {
+      // If customer doesn't exist in Stripe anymore, create a new one
+      if (error.code === 'resource_missing' && error.message.includes('No such customer')) {
+        console.log("Customer missing in Stripe, creating a new one...");
+        const customer = await stripe.customers.create({
+          email: user.email,
+          name: user.name || user.username,
+          metadata: {
+            userId: user.id,
+          },
+        });
+        
+        customerId = customer.id;
+        
+        await prisma.user.update({
+          where: { id: user.id },
+          data: { stripeCustomerId: customerId },
+        });
+
+        session = await createSession(customerId);
+      } else {
+        throw error;
+      }
+    }
 
     return NextResponse.json({ sessionId: session.id, url: session.url });
   } catch (error) {

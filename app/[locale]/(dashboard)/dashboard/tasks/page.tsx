@@ -4,6 +4,7 @@ import { getActiveSpaceId } from "@/actions/space";
 import { getProjects } from "@/actions/getProjects";
 import { KanbanClientWrapper } from "@/app/components/tasks/KanbanClientWrapper";
 import { redirect } from "next/navigation";
+import { Translate } from "@/app/components/UI/Translate";
 
 export default async function KanbanPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -18,7 +19,7 @@ export default async function KanbanPage({ params }: { params: Promise<{ locale:
   if (!spaceId) {
     return (
       <div className="flex h-full items-center justify-center text-[#71717A] text-[14px]">
-        Please select or create a space to view the Kanban board.
+        <Translate tKey="dashboard:tasks.select_space" />
       </div>
     );
   }

@@ -22,7 +22,7 @@ export default function Pricing() {
         button={{
           content: t("marketing:pricing.cta"),
           variant: "primary",
-          url: `/${language}/signup`,
+          url: `/${language}/register`,
         }}
       ></HeroSection>
       <VideoPlayer src="/videos/pricing.mov"></VideoPlayer>
@@ -34,33 +34,35 @@ export default function Pricing() {
             planName: t("marketing:pricing.free"),
             cost: 0,
             description: t("marketing:pricing.free_desc"),
-            list: [t("marketing:pricing.free_desc"), "Lorem", "Lorem"],
+            list: [t("marketing:pricing.free_desc"), t("marketing:pricing.feature_lorem"), t("marketing:pricing.feature_lorem")],
             button: {
               content: t("marketing:pricing.cta"),
               variant: "primary",
-              url: `/${language}/signup`,
+              url: `/${language}/register`,
             },
           },
           {
             planName: t("marketing:pricing.pro"),
-            cost: 100,
+            cost: 25,
+            priceId: "price_1Taey5EBFAZLdzO9LlYWpLIj",
             description: t("marketing:pricing.pro_desc"),
-            list: [t("marketing:pricing.pro_desc"), "Lorem", "Lorem"],
+            list: [t("marketing:pricing.pro_desc"), t("marketing:pricing.feature_lorem"), t("marketing:pricing.feature_lorem")],
             button: {
-              content: t("marketing:pricing.cta"),
+              content: "Wybierz plan",
               variant: "primary",
-              url: `/${language}/signup`,
+              url: `/${language}/register`,
             },
           },
           {
             planName: t("marketing:pricing.enterprise"),
-            cost: 1000,
+            cost: 55,
+            priceId: "price_1Taey4EBFAZLdzO9Rkn8Jy6Z",
             description: t("marketing:pricing.enterprise_desc"),
-            list: [t("marketing:pricing.enterprise_desc"), "Lorem", "Lorem"],
+            list: [t("marketing:pricing.enterprise_desc"), t("marketing:pricing.feature_lorem"), t("marketing:pricing.feature_lorem")],
             button: {
-              content: t("marketing:pricing.cta"),
+              content: "Skontaktuj się z nami",
               variant: "primary",
-              url: `/${language}/signup`,
+              url: `/${language}/register`,
             },
           },
         ]}
@@ -71,9 +73,10 @@ export default function Pricing() {
         button={{
           content: t("marketing:cta.cta"),
           variant: "primary",
-          url: `/${language}/signup`,
+          url: `/${language}/register`,
         }}
       ></CTA>
     </>
   );
 }
+

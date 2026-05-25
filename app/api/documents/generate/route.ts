@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getUser } from "@/lib/session";
+import { getUserPlanById } from "@/lib/subscription";
 import { getTemplateContextData, replaceVariables } from "@/lib/templates/data-fetcher";
 import { generatePDF, markdownToHtml } from "@/lib/templates/pdf-generator";
 import { BrandingSettings } from "@/types/templates";
@@ -9,6 +10,14 @@ export async function POST(req: NextRequest) {
   try {
     const { userId } = await getUser();
     if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+    const { features } = await getUserPlanById(userId);
+    if (!features.documentGenerator) {
+      return NextResponse.json(
+        { error: "DOCUMENT_GENERATOR_NOT_ON_PLAN" },
+        { status: 403 }
+      );
+    }
 
     const body = await req.json();
     const { templateId, clientId, dealId, spaceId } = body;

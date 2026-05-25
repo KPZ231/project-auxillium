@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import Image from "next/image";
-import { Upload, Download, Trash2, LogOut, Mail, ShieldCheck, Save, Image as ImageIcon, Link, CheckCircle2 } from "lucide-react";
+import { Upload, Download, Trash2, LogOut, Mail, ShieldCheck, Save, Image as ImageIcon, Link, CheckCircle2, CreditCard, Calendar, ArrowUpRight } from "lucide-react";
 import { toast } from "sonner";
 import { SiGooglesheets, SiGoogledrive, SiGoogledocs, SiGooglecalendar, SiGoogletasks } from "react-icons/si";
 import { uploadAvatar } from "@/actions/uploadAvatar";
@@ -13,7 +13,7 @@ import { updateProfile } from "@/actions/updateProfile";
 import { exportUserData } from "@/actions/exportUserData";
 import { deleteAccountAction } from "@/actions/updateProfile";
 import { logoutAction } from "@/actions/logout";
-import { useUser } from "@/app/context/UserContext";
+import { useUser, useUserPlan } from "@/app/context/UserContext";
 import { useTranslation } from "@/app/context/TranslationContext";
 
 interface UserData {
@@ -35,14 +35,29 @@ export default function SettingsClient({
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const { refreshUser } = useUser();
+  const { refreshUser, user: contextUser } = useUser();
   const [user, setUser] = useState<UserData>(initialUser);
   const [isSaving, setIsSaving] = useState(false);
   const [isExporting, setIsExporting] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+  const { plan, limits, isFree, isPro, isEnterprise } = useUserPlan();
+  const [isPortalLoading, setIsPortalLoading] = useState(false);
   const [displayName, setDisplayName] = useState(initialUser.name || "");
   const [avatarUrl, setAvatarUrl] = useState(initialUser.avatarUrl || "");
   const { t } = useTranslation();
+
+  const handleManageSubscription = async () => {
+    setIsPortalLoading(true);
+    try {
+      const res = await fetch("/api/stripe/portal", { method: "POST" });
+      if (!res.ok) throw new Error("portal_error");
+      const { url } = await res.json();
+      window.location.href = url;
+    } catch {
+      toast.error("Failed to open billing portal. Please try again.");
+      setIsPortalLoading(false);
+    }
+  };
 
   // Connector state
   const [isConnectorModalOpen, setIsConnectorModalOpen] = useState(false);
@@ -293,6 +308,87 @@ export default function SettingsClient({
               {t("dashboard:settings.email")}
             </p>
             <p className="text-sm font-bold text-[#0A0A0A]">{user.email}</p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Billing & Plan ── */}
+      <section className="border-t border-[#D4D4D8]">
+        <div className="py-10">
+          <p className="text-[10px] font-bold text-[#71717A] uppercase tracking-[0.4em] mb-8">
+            Billing &amp; Plan
+          </p>
+
+          {/* Current Plan row */}
+          <div className="flex items-start justify-between gap-6 mb-8">
+            <div>
+              <p className="text-xs font-bold text-[#71717A] uppercase tracking-widest mb-2">
+                Current Plan
+              </p>
+              <div className="flex items-center gap-3">
+                <span
+                  className={`inline-flex items-center gap-1.5 px-3 py-1 text-[11px] font-bold tracking-[0.2em] uppercase border ${
+                    isEnterprise
+                      ? "border-yellow-400 bg-yellow-50 text-yellow-700"
+                      : isPro
+                      ? "border-green-300 bg-green-50 text-green-700"
+                      : "border-[#D4D4D8] bg-[#F4F4F5] text-[#71717A]"
+                  }`}
+                >
+                  <CreditCard size={11} />
+                  {plan}
+                </span>
+                {contextUser?.renewalDate && !isFree && (
+                  <span className="flex items-center gap-1.5 text-xs text-[#71717A]">
+                    <Calendar size={11} />
+                    Renews{" "}
+                    {new Date(contextUser.renewalDate).toLocaleDateString("pl-PL", {
+                      day: "numeric",
+                      month: "long",
+                      year: "numeric",
+                    })}
+                  </span>
+                )}
+              </div>
+            </div>
+
+            {/* CTA button */}
+            {isFree ? (
+              <a
+                href={`/${locale}/pricing`}
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-black text-white text-[11px] font-bold tracking-[0.2em] uppercase hover:bg-[#1a1a1a] transition-colors shrink-0"
+              >
+                Upgrade Plan
+                <ArrowUpRight size={12} />
+              </a>
+            ) : (
+              <button
+                onClick={handleManageSubscription}
+                disabled={isPortalLoading}
+                className="inline-flex items-center gap-2 px-5 py-2.5 border border-[#D4D4D8] text-[11px] font-bold tracking-[0.2em] uppercase text-[#0A0A0A] hover:border-black transition-colors shrink-0 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isPortalLoading ? "Loading..." : "Manage Subscription"}
+              </button>
+            )}
+          </div>
+
+          {/* Plan limits grid */}
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {[
+              { label: "Projects", value: limits?.projects },
+              { label: "Clients", value: limits?.clients },
+              { label: "Leads", value: limits?.leads },
+              { label: "Spaces", value: limits?.spaces },
+            ].map(({ label, value }) => (
+              <div key={label} className="border border-[#E4E4E7] p-4">
+                <p className="text-[9px] font-bold text-[#71717A] uppercase tracking-[0.3em] mb-1">
+                  {label}
+                </p>
+                <p className="text-lg font-black text-[#0A0A0A]">
+                  {value === null ? "∞" : value}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

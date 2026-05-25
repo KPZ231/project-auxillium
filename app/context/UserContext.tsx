@@ -1,6 +1,7 @@
 "use client";
 
 import React, { createContext, useContext, useState, useEffect } from "react";
+import type { Plan, PlanLimits, PlanFeatures } from "@/lib/subscription";
 
 interface UserData {
   id: string;
@@ -8,6 +9,9 @@ interface UserData {
   username: string;
   name: string | null;
   avatarUrl: string | null;
+  plan: Plan;
+  limits: PlanLimits;
+  features: PlanFeatures;
 }
 
 interface UserContextType {
@@ -76,4 +80,16 @@ export function useUser() {
     throw new Error("useUser must be used within a UserProvider");
   }
   return context;
+}
+
+export function useUserPlan() {
+  const { user } = useUser();
+  return {
+    plan: user?.plan ?? ("FREE" as Plan),
+    limits: user?.limits,
+    features: user?.features,
+    isPro: user?.plan === "PRO",
+    isEnterprise: user?.plan === "ENTERPRISE",
+    isFree: !user?.plan || user.plan === "FREE",
+  };
 }

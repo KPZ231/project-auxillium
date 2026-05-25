@@ -1,24 +1,24 @@
 {
   "about": {
-    "description": "Budujemy narzędzia, które rosną razem z Twoją firmą",
-    "offer_item1": "Zarządzanie projektami",
-    "offer_item1_desc": "Przejrzysty widok postępów, terminów i podziału obowiązków w całym zespole.",
-    "offer_item2": "Śledzenie leadów i klientów",
-    "offer_item2_desc": "CRM dopasowany do tempa sprzedaży MŚP — skuteczny i bez zbędnej złożoności.",
-    "offer_item3": "Finanse i koszty",
-    "offer_item3_desc": "Kontroluj przychody, wydatki i cele finansowe w czasie rzeczywistym.",
-    "offer_item4": "Zarządzanie zespołu",
-    "offer_item4_desc": "Onboarding, przypisywanie zadań, monitorowanie obciążenia pracą — wszystko w jednym miejscu.",
-    "offer_subtitle": "Auxilium to platforma stworzona przez zespół KPZ's Productions — programistów i product designerów z doświadczeniem w skalowaniu firm sektora MŚP. Rozumiemy, że rosnące organizacje potrzebują narzędzi, które dorównują ich ambicjom.",
-    "offer_title": "Co oferujemy",
-    "quote_content": "Pomagamy firmom zastąpić chaos wielu narzędzi jedną, spójną platformą operacyjną.",
-    "sub_content": "Łączymy intuicyjną obsługę z zaawansowaną funkcjonalnością. Tworzymy oprogramowanie, które nie tylko doskonale wygląda, ale realnie przyspiesza podejmowanie decyzji, zwiększa odpowiedzialność zespołu i ułatwia skalowanie biznesu.",
-    "title": "O nas",
-    "why_choose_us": "Co nas wyróżnia"
+    "description": "Budujemy narzędzia, które rosną razem z Twoją firmą. Odzyskaj do 30% czasu pracy w skali miesiąca i skieruj energię na rozwój.",
+    "offer_item1": "Zarządzanie wizją i projektami",
+    "offer_item1_desc": "Przejrzysty widok postępów, terminów i odpowiedzialności w całym zespole. Jeden system, jedna prawda o stanie firmy.",
+    "offer_item2": "Zarządzanie relacjami (CRM)",
+    "offer_item2_desc": "CRM dopasowany do tempa sprzedaży nowoczesnych MŚP — szybki, inteligentny i pozbawiony zbędnej złożoności.",
+    "offer_item3": "Przewidywanie finansowe",
+    "offer_item3_desc": "Kontroluj przychody, przewiduj wydatki i śledź realizację celów finansowych w czasie rzeczywistym.",
+    "offer_item4": "Zarządzanie zespołem jutra",
+    "offer_item4_desc": "Zautomatyzowany onboarding, przejrzysty podział ról i monitorowanie obciążenia — wszystko w centralnym hubie.",
+    "offer_subtitle": "Auxilium to kompleksowy system operacyjny dla MŚP stworzony przez zespół KPZ's Productions — ekspertów rozumiejących, jak budować firmy przyszłości. Wierzymy, że Twoja firma potrzebuje narzędzi, które odzwierciedlają i napędzają jej wizję, a nie tylko dokumentują przeszłość.",
+    "offer_title": "Osiągaj wielkość z odpowiednim systemem",
+    "quote_content": "Pomagamy firmom zakończyć erę rozproszonych narzędzi i chaosu. Tworzymy centralne miejsce, w którym Twoja firma po prostu działa.",
+    "sub_content": "Łączymy intuicyjną, wybitną estetykę z potężną funkcjonalnością, by dać liderom wolność tworzenia. Auxilium nie tylko świetnie wygląda — to platforma zaprojektowana, by przyspieszać decyzje biznesowe i umożliwić bezproblemowe skalowanie.",
+    "title": "Twój partner w drodze na szczyt",
+    "why_choose_us": "Dlaczego Auxilium to przyszłość"
   },
   "contact": {
-    "description": "Masz pytania? Napisz do nas — odpowiemy w ciągu jednego dnia roboczego.",
-    "title": "Kontakt"
+    "description": "Masz wizję, której potrzebujesz nadać strukturę? Napisz do nas — odpowiemy w ciągu jednego dnia roboczego i pokażemy Ci przyszłość zarządzania.",
+    "title": "Porozmawiajmy o rozwoju"
   },
   "cookies": {
     "description": "Polityka plików cookies serwisu Auxilium",
@@ -59,45 +59,45 @@
     }
   },
   "cta": {
-    "cta": "Wypróbuj Auxilium",
-    "subtitle": "Dołącz do firm, które zarządzają mądrzej. Pierwsze 14 dni planu Pro — bezpłatnie.",
-    "title": "Czas zamienić chaos w system."
+    "cta": "Rozpocznij transformację",
+    "subtitle": "Dołącz do liderów, którzy zdefiniowali swoje zarządzanie na nowo. Pierwsze 14 dni planu Pro — bezpłatnie. Gotowy na przełom?",
+    "title": "Czas zamienić chaos w skalowalny system operacyjny."
   },
   "faq": {
-    "a1": "Rejestracja zajmuje mniej niż 2 minuty. Plan Free nie wymaga karty kredytowej — możesz od razu przetestować kluczowe funkcje bez żadnych zobowiązań.",
-    "a2": "Tak. Możesz przejść na wyższy lub niższy plan w każdej chwili. Zmiana wchodzi w życie od następnego okresu rozliczeniowego, bez ukrytych opłat.",
-    "a3": "Akceptujemy płatności kartą (Visa, Mastercard), szybkie przelewy bankowe oraz subskrypcje cykliczne. Faktury VAT wystawiane są automatycznie.",
-    "q1": "Jak szybko mogę zacząć korzystać z systemu?",
-    "q2": "Czy mogę zmienić plan w dowolnym momencie?",
-    "q3": "Jakie metody płatności są obsługiwane?",
-    "subtitle": "Wszystko, co musisz wiedzieć przed pierwszym logowaniem",
-    "title": "Często zadawane pytania"
+    "a1": "Rejestracja zajmuje mniej niż 2 minuty. Plan Free nie wymaga karty kredytowej — możesz od razu zbudować swoją pierwszą zoptymalizowaną przestrzeń roboczą.",
+    "a2": "Tak. Platforma dostosowuje się do Twoich potrzeb. Zmiana planu wchodzi w życie od następnego okresu rozliczeniowego, bez ukrytych ograniczeń.",
+    "a3": "Akceptujemy płatności kartą (Visa, Mastercard), szybkie przelewy bankowe oraz subskrypcje cykliczne wspierane przez globalnych liderów bezpieczeństwa.",
+    "q1": "Jak szybko moja firma odczuje zmianę po wdrożeniu?",
+    "q2": "Czy system skaluje się wraz z moim biznesem?",
+    "q3": "Jakie modele płatności obsługuje system?",
+    "subtitle": "Odpowiedzi na kluczowe pytania przed startem",
+    "title": "Masz pytania? Mamy rozwiązania"
   },
   "features": {
-    "description": "Automatyzuj powtarzalne procesy, eliminuj silosy danych i zarządzaj całą firmą z jednego miejsca.",
-    "subtitle": "Efektywność, która procentuje",
-    "title": "Odzyskaj do 30% czasu pracy"
+    "description": "Według analiz, zintegrowane systemy zwiększają produktywność o 30%. Zautomatyzuj procesy, wyeliminuj silosy danych i odzyskaj cenny czas swojego zespołu z jednym systemem operacyjnym MŚP.",
+    "subtitle": "Architektura Twojego sukcesu",
+    "title": "Mniej mikrozarządzania, więcej wizji"
   },
   "hero": {
-    "cta": "Zacznij za darmo",
-    "cta_secondary": "Obejrzyj demo",
-    "social_proof": "ponad 500 firm już zarządza mądrzej",
-    "subtitle": "Jeden system. Pełna kontrola. Zero chaosu.",
-    "title": "AUXILIUM <br/> nowa definicja zarządzania"
+    "cta": "Rozpocznij darmowy okres",
+    "cta_secondary": "Odkryj możliwości (Demo)",
+    "social_proof": "Zaufany fundament dla ponad 500 rozwijających się firm",
+    "subtitle": "Jeden ekosystem. Pełna widoczność z lotu ptaka. Przyszłość Twojej firmy zaczyna się tutaj.",
+    "title": "AUXILIUM <br/> Kompleksowy system operacyjny dla MŚP"
   },
   "pricing": {
-    "cta": "Zacznij za darmo",
-    "choose_plan": "Wybierz plan",
-    "contact_us": "Skontaktuj się z nami",
+    "cta": "Wybierz przyszłość",
+    "choose_plan": "Rozpocznij rozwój",
+    "contact_us": "Skonsultuj potrzeby",
     "enterprise": "Enterprise",
-    "enterprise_desc": "Dla organizacji wymagających skalowalności i dedykowanego wsparcia",
-    "feature_lorem": "Przykładowy opis funkcji",
-    "free": "Free",
-    "free_desc": "Dla zespołów, które dopiero zaczynają",
+    "enterprise_desc": "Dla organizacji projektujących skomplikowane procesy biznesowe i globalną skalę.",
+    "feature_lorem": "Rozbudowane raportowanie AI i pełna historia zmian",
+    "free": "Starter",
+    "free_desc": "Dla pionierów, którzy właśnie kształtują swoją wizję.",
     "pro": "Pro",
-    "pro_desc": "Dla rosnących firm potrzebujących pełnej kontroli",
-    "subtitle": "Wybierz plan dopasowany do skali Twojej firmy",
-    "title": "Prosty cennik. Żadnych niespodzianek."
+    "pro_desc": "Dla liderów potrzebujących niezawodnej kontroli nad rosnącą strukturą.",
+    "subtitle": "Inwestycja, która zwraca się w odzyskanym czasie Twojego zespołu.",
+    "title": "Przejrzyste plany. Zero limitów dla Twojego sukcesu."
   },
   "privacy": {
     "description": "Polityka prywatności i ochrony danych osobowych serwisu Auxilium",
@@ -192,8 +192,8 @@
     }
   },
   "testimonials": {
-    "subtitle": "Wierzymy, że dobre oprogramowanie nie przeszkadza — ono znika w tle i po prostu działa.",
-    "title": "Filozofia"
+    "subtitle": "Wierzymy, że wybitne oprogramowanie to takie, które nie przeszkadza — asystuje w tle, uwalniając ludzki potencjał.",
+    "title": "Nasza Filozofia: Technologia w służbie Ludziom"
   },
   "footer": {
     "privacy": "Prywatność",

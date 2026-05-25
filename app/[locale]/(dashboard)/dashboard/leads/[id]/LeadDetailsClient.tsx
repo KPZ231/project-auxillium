@@ -7,6 +7,7 @@ import { toast } from "sonner";
 import { deleteLead } from "@/actions/deleteLead";
 import { updateLead } from "@/actions/updateLead";
 import { useBreadcrumb } from "@/app/context/BreadcrumbContext";
+import { useTranslation } from "@/app/context/TranslationContext";
 import { PremiumInput, PremiumTextarea, PremiumSelect } from "@/app/components/UI/FormElements";
 
 // The steps will be translated dynamically in renderStepContent now to ensure reactivity with `t`

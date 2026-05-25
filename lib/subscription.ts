@@ -8,10 +8,10 @@ import { getCachedData, setCachedData, invalidateCache } from "@/lib/redis";
 export type Plan = "FREE" | "PRO" | "ENTERPRISE";
 
 export interface PlanLimits {
-  spaces: number;
-  projects: number;
-  clients: number;
-  leads: number;
+  spaces: number | null;
+  projects: number | null;
+  clients: number | null;
+  leads: number | null;
   aiPromptsPerHour: number | null; // null = unlimited
 }
 
@@ -40,12 +40,10 @@ const STRIPE_PRICE_IDS = {
  * Derives the user's plan from their Stripe subscription fields.
  * Pure — no I/O.
  */
-export function getPlanFromUser(user: {
-  stripePriceId: string | null;
-  stripeCurrentPeriodEnd: Date | null;
-}): Plan {
-  const now = new Date();
-
+export function getPlanFromUser(
+  user: { stripePriceId: string | null; stripeCurrentPeriodEnd: Date | null },
+  now: Date = new Date()
+): Plan {
   if (
     user.stripePriceId === STRIPE_PRICE_IDS.ENTERPRISE &&
     user.stripeCurrentPeriodEnd !== null &&
@@ -71,11 +69,12 @@ export function getPlanFromUser(user: {
 export function getPlanLimits(plan: Plan): PlanLimits {
   switch (plan) {
     case "ENTERPRISE":
+      // null means unlimited. Usage checks must guard: `limits.X !== null && count >= limits.X`
       return {
-        spaces: Infinity,
-        projects: Infinity,
-        clients: Infinity,
-        leads: Infinity,
+        spaces: null,
+        projects: null,
+        clients: null,
+        leads: null,
         aiPromptsPerHour: null,
       };
     case "PRO":
@@ -87,7 +86,6 @@ export function getPlanLimits(plan: Plan): PlanLimits {
         aiPromptsPerHour: 25,
       };
     case "FREE":
-    default:
       return {
         spaces: 1,
         projects: 5,
@@ -113,7 +111,6 @@ export function getPlanFeatures(plan: Plan): PlanFeatures {
         financialControl: true,
       };
     case "FREE":
-    default:
       return {
         ai: false,
         search: false,
@@ -159,9 +156,17 @@ export async function getUserPlanById(userId: string): Promise<{
     select: { stripePriceId: true, stripeCurrentPeriodEnd: true },
   });
 
-  const plan = user
-    ? getPlanFromUser(user)
-    : "FREE";
+  // If user is null (transient DB error or unknown userId), return FREE without
+  // caching — we don't want to persist a stale FREE entry in Redis.
+  if (!user) {
+    return {
+      plan: "FREE",
+      limits: getPlanLimits("FREE"),
+      features: getPlanFeatures("FREE"),
+    };
+  }
+
+  const plan = getPlanFromUser(user);
 
   const result = {
     plan,

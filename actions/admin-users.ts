@@ -47,15 +47,50 @@ export async function deleteUserByAdmin(userId: string) {
   const { authenticated } = await verifyAdminSession();
   if (!authenticated) throw new Error("Brak autoryzacji");
 
-  // Delete owned spaces first — Space.ownerId has no cascade, so this must be explicit.
-  // Space deletion cascades all space-scoped data (projects, leads, members, etc.).
-  await prisma.space.deleteMany({ where: { ownerId: userId } });
+  try {
+    await prisma.$transaction(async (tx) => {
+      // 1. Delete data scoped to spaces owned by this user
+      const ownedSpaces = await tx.space.findMany({
+        where: { ownerId: userId },
+        select: { id: true },
+      });
+      const ownedSpaceIds = ownedSpaces.map((s) => s.id);
 
-  // Delete the user — cascades all user-linked records (session tokens, memberships, etc.)
-  await prisma.user.delete({ where: { id: userId } });
+      if (ownedSpaceIds.length > 0) {
+        await tx.financialAuditLog.deleteMany({ where: { spaceId: { in: ownedSpaceIds } } });
+        await tx.generatedDocument.deleteMany({ where: { spaceId: { in: ownedSpaceIds } } });
+        await tx.documentTemplate.deleteMany({ where: { spaceId: { in: ownedSpaceIds } } });
+        await tx.notification.deleteMany({ where: { spaceId: { in: ownedSpaceIds } } });
+        await tx.expense.deleteMany({ where: { spaceId: { in: ownedSpaceIds } } });
+        await tx.income.deleteMany({ where: { spaceId: { in: ownedSpaceIds } } });
+        await tx.revenueGoal.deleteMany({ where: { spaceId: { in: ownedSpaceIds } } });
+        await tx.financialLabel.deleteMany({ where: { spaceId: { in: ownedSpaceIds } } });
+        await tx.task.deleteMany({ where: { spaceId: { in: ownedSpaceIds } } });
+        await tx.project.deleteMany({ where: { spaceId: { in: ownedSpaceIds } } });
+        await tx.lead.deleteMany({ where: { spaceId: { in: ownedSpaceIds } } });
+        await tx.client.deleteMany({ where: { spaceId: { in: ownedSpaceIds } } });
+        await tx.employee.deleteMany({ where: { spaceId: { in: ownedSpaceIds } } });
+        await tx.spaceMember.deleteMany({ where: { spaceId: { in: ownedSpaceIds } } });
+        await tx.spaceInvitation.deleteMany({ where: { spaceId: { in: ownedSpaceIds } } });
+        await tx.space.deleteMany({ where: { id: { in: ownedSpaceIds } } });
+      }
 
-  revalidatePath("/admin");
-  return { success: true };
+      // 2. Delete user-scoped data not tied to an owned space
+      await tx.spaceMember.deleteMany({ where: { userId } });
+      await tx.passwordResetToken.deleteMany({ where: { userId } });
+      await tx.integration.deleteMany({ where: { userId } });
+      await tx.notification.deleteMany({ where: { userId } });
+
+      // 3. Delete the user itself — remaining onDelete:Cascade relations handle the rest
+      await tx.user.delete({ where: { id: userId } });
+    });
+
+    revalidatePath("/admin");
+    return { success: true };
+  } catch (error) {
+    console.error("Delete user error:", error);
+    return { error: "Nie udało się usunąć użytkownika. Sprawdź powiązania w bazie danych." };
+  }
 }
 
 export async function updateUserByAdmin(userId: string, data: { name?: string, username?: string, email?: string, stripePriceId?: string | null, stripeSubscriptionId?: string | null, stripeCurrentPeriodEnd?: Date | null }) {

@@ -74,10 +74,12 @@
     "title": "Frequently asked questions"
   },
   "features": {
-    "description": "Through process automation you save time and money",
-    "subtitle": "Increase efficiency",
-    "subtitle_alternative": "Through process automation you save time and money",
-    "title": "Save up to 30%"
+    "title": "Less micromanagement, more vision",
+    "description": "Clear view of projects, deadlines and responsibilities. Your team knows what to do and when — no endless status meetings or email back-and-forth.",
+    "feature2_title": "CRM that works at your pace",
+    "feature2_desc": "From first contact to signed contract. Track every lead, build relationships and close more deals — without the complexity or missed opportunities.",
+    "feature3_title": "Decisions driven by data, not gut feeling",
+    "feature3_desc": "Track costs, monitor revenue and forecast financial results in real time. Full financial visibility — without the spreadsheets."
   },
   "hero": {
     "cta": "Start now",
@@ -88,18 +90,26 @@
     "title": "AUXILLIUM <br/> new definition of management"
   },
   "pricing": {
-    "cta": "Start now",
-    "choose_plan": "Choose plan",
-    "contact_us": "Contact us",
+    "cta": "Get started free",
+    "choose_plan": "Start growing",
+    "contact_us": "Talk to us",
     "enterprise": "Enterprise",
-    "enterprise_desc": "For organisations requiring scalability and dedicated support",
-    "feature_lorem": "Lorem ipsum feature description",
-    "free": "Free",
-    "free_desc": "For teams just getting started",
+    "enterprise_desc": "For organisations designing complex business processes at scale.",
+    "free": "Starter",
+    "free_desc": "For pioneers just shaping their vision.",
+    "free_feature1": "Up to 3 active projects",
+    "free_feature2": "Lead management (up to 25)",
+    "free_feature3": "1 workspace",
     "pro": "Pro",
-    "pro_desc": "For growing businesses that need full control",
-    "subtitle": "Choose the right plan for your needs",
-    "title": "Check our plans"
+    "pro_desc": "For leaders who need reliable control over a growing operation.",
+    "pro_feature1": "Unlimited projects and leads",
+    "pro_feature2": "Advanced reporting and CRM",
+    "pro_feature3": "AI assistant + PDF document generation",
+    "enterprise_feature1": "Everything in Pro",
+    "enterprise_feature2": "Unlimited workspace members",
+    "enterprise_feature3": "Dedicated SLA and priority support",
+    "subtitle": "An investment that pays back in your team's recovered time.",
+    "title": "Transparent plans. No ceiling on your success."
   },
   "privacy": {
     "description": "Privacy Policy and Personal Data Protection of the Auxilium platform",

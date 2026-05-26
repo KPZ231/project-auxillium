@@ -10,58 +10,74 @@ interface ContentColumnsProps {
   }>;
 }
 
-export default function ContentColumns({
-  count,
-  content,
-}: ContentColumnsProps) {
+export default function ContentColumns({ count, content }: ContentColumnsProps) {
   if (count > 4) {
     throw new Error("Content columns count must be less than or equal to 4");
   }
 
-  // Define variants for the staggered animation
-  const cardVariants: Variants = {
-    hidden: { opacity: 0, scale: 0.8, y: 20 },
-    visible: (i: number) => ({
+  const containerVariants: Variants = {
+    hidden: {},
+    visible: {
+      transition: { staggerChildren: 0.1 },
+    },
+  };
+
+  const cellVariants: Variants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
       opacity: 1,
-      scale: 1,
       y: 0,
       transition: {
-        delay: i * 0.15,
         duration: 0.5,
-        ease: [0.215, 0.61, 0.355, 1] as [number, number, number, number], // easeOutCubic
+        ease: [0.215, 0.61, 0.355, 1],
       },
-    }),
+    },
   };
 
   return (
-    <section className="w-full px-6 lg:px-12 pt-6 mt-8 md:mt-12 mb-8 md:mb-12">
-      <div className="max-w-7xl mx-auto flex flex-wrap justify-between gap-8 md:gap-12">
-        {content.map((item, index) => (
-          <motion.div
-            key={index}
-            custom={index}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            variants={cardVariants}
-            className="w-full sm:w-[45%] lg:w-[22%] flex flex-col gap-4 md:gap-6 border-l border-zinc-200 pl-6 md:pl-8"
-          >
-            {/* Icon container */}
-            <div className="w-12 h-12 bg-(--primary) flex items-center justify-center shrink-0">
-              <item.icon className="w-4 h-4 text-(--secondary)" />
-            </div>
+    <section className="w-full px-6 lg:px-12 py-16 md:py-24">
+      <div className="max-w-7xl mx-auto">
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-px bg-(--primary)"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
+        >
+          {content.map((item, index) => (
+            <motion.div
+              key={index}
+              variants={cellVariants}
+              className="relative bg-(--secondary) p-8 md:p-10 flex flex-col gap-8 group transition-colors duration-150 hover:bg-[#F4F4F5]"
+            >
+              {/* Ordinal + icon row */}
+              <div className="flex items-center justify-between">
+                <span
+                  className="text-xs tracking-[0.3em] text-(--neutral) uppercase select-none"
+                  style={{ fontFamily: "var(--secondary-font)" }}
+                >
+                  0{index + 1}
+                </span>
+                <div className="w-8 h-8 border border-(--primary) flex items-center justify-center shrink-0 transition-colors duration-150 group-hover:bg-(--primary)">
+                  <item.icon className="w-3.5 h-3.5 text-(--primary) transition-colors duration-150 group-hover:text-(--secondary)" />
+                </div>
+              </div>
 
-            {/* Content */}
-            <div className="flex flex-col gap-3">
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-(--primary) leading-tight">
-                {item.header}
-              </h2>
-              <p className="text-base sm:text-lg lg:text-xl font-medium tracking-wide text-(--neutral)">
-                {item.description}
-              </p>
-            </div>
-          </motion.div>
-        ))}
+              {/* Thin rule */}
+              <div className="h-px w-full bg-(--primary)" />
+
+              {/* Content */}
+              <div className="flex flex-col gap-4 flex-1">
+                <h2 className="text-2xl md:text-3xl font-bold text-(--primary) leading-tight tracking-tight">
+                  {item.header}
+                </h2>
+                <p className="text-sm md:text-base text-(--neutral) leading-relaxed">
+                  {item.description}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );

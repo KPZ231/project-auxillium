@@ -46,7 +46,7 @@ export default function SpaceSettingsClient({ initialSpaces, activeSpaceId, acti
     e.preventDefault();
     setIsSubmitting(true);
     const formData = new FormData(e.currentTarget);
-    
+
     try {
       const result = await createSpace(formData);
       if (result.success) {
@@ -54,6 +54,14 @@ export default function SpaceSettingsClient({ initialSpaces, activeSpaceId, acti
         setSpaces([...spaces, result.space]);
         setIsCreating(false);
         router.refresh();
+      } else if (result.error === "SPACE_LIMIT_REACHED") {
+        const limitByPlan: Record<string, string> = { FREE: "1", PRO: "3" };
+        const limit = limitByPlan[result.plan ?? "FREE"] ?? "the";
+        toast.error(`Space limit reached`, {
+          description: `Your ${result.plan ?? "FREE"} plan allows up to ${limit} space${limit === "1" ? "" : "s"}. Upgrade your plan to create more workspaces.`,
+          duration: 6000,
+        });
+        setIsCreating(false);
       }
     } catch (error: unknown) {
       toast.error(error instanceof Error ? error.message : "Failed to create space");

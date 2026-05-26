@@ -74,10 +74,12 @@
     "title": "Häufig gestellte Fragen"
   },
   "features": {
-    "description": "Durch Prozessautomatisierung sparen Sie Zeit und Geld",
-    "subtitle": "Effizienz steigern",
-    "subtitle_alternative": "Durch Prozessautomatisierung sparen Sie Zeit und Geld",
-    "title": "Sparen Sie bis zu 30%"
+    "title": "Weniger Mikro­management, mehr Vision",
+    "description": "Klarer Überblick über Projekte, Deadlines und Verantwortlichkeiten. Ihr Team weiß, was zu tun ist und wann — ohne endlose Status-Meetings.",
+    "feature2_title": "CRM in Ihrem Tempo",
+    "feature2_desc": "Vom ersten Kontakt bis zum unterzeichneten Vertrag. Verfolgen Sie jeden Lead, pflegen Sie Beziehungen und schließen Sie mehr Deals — ohne unnötige Komplexität.",
+    "feature3_title": "Entscheidungen auf Datenbasis",
+    "feature3_desc": "Kosten kontrollieren, Einnahmen verfolgen und Finanzergebnisse in Echtzeit prognostizieren. Vollständige Finanztransparenz — ohne Tabellenkalkulationen."
   },
   "hero": {
     "cta": "Jetzt starten",
@@ -90,16 +92,24 @@
   "pricing": {
     "cta": "Jetzt starten",
     "choose_plan": "Plan wählen",
-    "contact_us": "Kontaktieren Sie uns",
+    "contact_us": "Kontakt aufnehmen",
     "enterprise": "Enterprise",
-    "enterprise_desc": "Für Organisationen, die Skalierbarkeit und dedizierten Support benötigen",
-    "feature_lorem": "Beispielhafte Funktionsbeschreibung",
-    "free": "Kostenlos",
-    "free_desc": "Für Teams, die gerade anfangen",
+    "enterprise_desc": "Für Organisationen mit komplexen Geschäftsprozessen und globalem Maßstab.",
+    "free": "Starter",
+    "free_desc": "Für Pioniere, die ihre Vision gerade gestalten.",
+    "free_feature1": "Bis zu 3 aktive Projekte",
+    "free_feature2": "Lead-Verwaltung (bis zu 25)",
+    "free_feature3": "1 Arbeitsbereich",
     "pro": "Pro",
-    "pro_desc": "Für wachsende Unternehmen, die volle Kontrolle benötigen",
-    "subtitle": "Wählen Sie den richtigen Plan für Ihre Bedürfnisse",
-    "title": "Überprüfen Sie unsere Pläne"
+    "pro_desc": "Für Führungskräfte, die zuverlässige Kontrolle über eine wachsende Struktur benötigen.",
+    "pro_feature1": "Unbegrenzte Projekte und Leads",
+    "pro_feature2": "Erweiterte Berichte und CRM",
+    "pro_feature3": "KI-Assistent + PDF-Dokumentenerstellung",
+    "enterprise_feature1": "Alles aus Pro",
+    "enterprise_feature2": "Unbegrenzte Workspace-Mitglieder",
+    "enterprise_feature3": "Dediziertes SLA und Prioritätssupport",
+    "subtitle": "Eine Investition, die sich in der gewonnenen Zeit Ihres Teams auszahlt.",
+    "title": "Transparente Pläne. Keine Grenzen für Ihren Erfolg."
   },
   "privacy": {
     "description": "Datenschutzerklärung und Schutz personenbezogener Daten der Auxilium-Plattform",

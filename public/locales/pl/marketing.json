@@ -74,9 +74,12 @@
     "title": "Masz pytania? Mamy rozwiązania"
   },
   "features": {
-    "description": "Według analiz, zintegrowane systemy zwiększają produktywność o 30%. Zautomatyzuj procesy, wyeliminuj silosy danych i odzyskaj cenny czas swojego zespołu z jednym systemem operacyjnym MŚP.",
-    "subtitle": "Architektura Twojego sukcesu",
-    "title": "Mniej mikrozarządzania, więcej wizji"
+    "title": "Mniej mikrozarządzania, więcej wizji",
+    "description": "Przejrzysty widok projektów, terminów i odpowiedzialności. Twój zespół wie co robić i kiedy — bez chaosu mailowego i nieskończonych spotkań statusowych.",
+    "feature2_title": "CRM dopasowany do Twojego tempa",
+    "feature2_desc": "Od pierwszego kontaktu do podpisanej umowy. Śledź każdy lead, buduj relacje i zamykaj więcej transakcji — bez zbędnej złożoności i bez tracenia szans.",
+    "feature3_title": "Decyzje oparte na danych, nie przeczuciach",
+    "feature3_desc": "Kontroluj koszty, śledź przychody i prognozuj wyniki finansowe w czasie rzeczywistym. Pełna widoczność finansów — bez arkuszy kalkulacyjnych."
   },
   "hero": {
     "cta": "Rozpocznij darmowy okres",
@@ -91,11 +94,19 @@
     "contact_us": "Skonsultuj potrzeby",
     "enterprise": "Enterprise",
     "enterprise_desc": "Dla organizacji projektujących skomplikowane procesy biznesowe i globalną skalę.",
-    "feature_lorem": "Rozbudowane raportowanie AI i pełna historia zmian",
     "free": "Starter",
     "free_desc": "Dla pionierów, którzy właśnie kształtują swoją wizję.",
+    "free_feature1": "Do 3 aktywnych projektów",
+    "free_feature2": "Zarządzanie leadami (do 25)",
+    "free_feature3": "1 przestrzeń robocza",
     "pro": "Pro",
     "pro_desc": "Dla liderów potrzebujących niezawodnej kontroli nad rosnącą strukturą.",
+    "pro_feature1": "Nieograniczone projekty i leady",
+    "pro_feature2": "Zaawansowane raporty i CRM",
+    "pro_feature3": "Asystent AI + generowanie dokumentów PDF",
+    "enterprise_feature1": "Wszystko z planu Pro",
+    "enterprise_feature2": "Nielimitowani członkowie przestrzeni",
+    "enterprise_feature3": "Dedykowane SLA i priorytetowe wsparcie",
     "subtitle": "Inwestycja, która zwraca się w odzyskanym czasie Twojego zespołu.",
     "title": "Przejrzyste plany. Zero limitów dla Twojego sukcesu."
   },

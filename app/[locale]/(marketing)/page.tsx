@@ -1,7 +1,7 @@
 "use client";
 import HeroSection from "@/app/components/HeroSection/HeroSection";
 import ContentColumns from "@/app/components/ContentColums/ContentColumns";
-import { Zap } from "lucide-react";
+import { Zap, Users, TrendingUp } from "lucide-react";
 import TemplateAnalitics from "@/app/components/Analistics/TemplateAnalitics";
 import TestimonialQuotation from "@/app/components/Testimonial/TestimonialQuotation";
 import PricingColumns from "@/app/components/Pricing/PricingColumns";
@@ -19,14 +19,14 @@ export default function Home() {
       icon: Zap,
     },
     {
-      header: t("marketing:features.subtitle"),
-      description: t("marketing:features.description"),
-      icon: Zap,
+      header: t("marketing:features.feature2_title"),
+      description: t("marketing:features.feature2_desc"),
+      icon: Users,
     },
     {
-      header: t("marketing:features.subtitle"),
-      description: t("marketing:features.description"),
-      icon: Zap,
+      header: t("marketing:features.feature3_title"),
+      description: t("marketing:features.feature3_desc"),
+      icon: TrendingUp,
     },
   ];
 
@@ -60,7 +60,11 @@ export default function Home() {
             planName: t("marketing:pricing.free"),
             cost: 0,
             description: t("marketing:pricing.free_desc"),
-            list: [t("marketing:pricing.free_desc"), t("marketing:pricing.feature_lorem"), t("marketing:pricing.feature_lorem")],
+            list: [
+              t("marketing:pricing.free_feature1"),
+              t("marketing:pricing.free_feature2"),
+              t("marketing:pricing.free_feature3"),
+            ],
             button: {
               content: t("marketing:pricing.cta"),
               variant: "primary",
@@ -72,9 +76,13 @@ export default function Home() {
             cost: 25,
             priceId: "price_1Taey5EBFAZLdzO9LlYWpLIj",
             description: t("marketing:pricing.pro_desc"),
-            list: [t("marketing:pricing.pro_desc"), t("marketing:pricing.feature_lorem"), t("marketing:pricing.feature_lorem")],
+            list: [
+              t("marketing:pricing.pro_feature1"),
+              t("marketing:pricing.pro_feature2"),
+              t("marketing:pricing.pro_feature3"),
+            ],
             button: {
-              content: t("marketing:pricing.choose_plan", "Choose plan"),
+              content: t("marketing:pricing.choose_plan"),
               variant: "primary",
               url: `/${language}/register`,
             },
@@ -84,9 +92,13 @@ export default function Home() {
             cost: 55,
             priceId: "price_1Taey4EBFAZLdzO9Rkn8Jy6Z",
             description: t("marketing:pricing.enterprise_desc"),
-            list: [t("marketing:pricing.enterprise_desc"), t("marketing:pricing.feature_lorem"), t("marketing:pricing.feature_lorem")],
+            list: [
+              t("marketing:pricing.enterprise_feature1"),
+              t("marketing:pricing.enterprise_feature2"),
+              t("marketing:pricing.enterprise_feature3"),
+            ],
             button: {
-              content: t("marketing:pricing.contact_us", "Contact us"),
+              content: t("marketing:pricing.contact_us"),
               variant: "primary",
               url: `/${language}/register`,
             },

@@ -1,7 +1,9 @@
 import { getActiveSpaceId } from "@/actions/space";
 import { getUser } from "@/lib/session";
+import { getUserPlanById } from "@/lib/subscription";
 import { redirect } from "next/navigation";
 import AIChatClient from "./AIChatClient";
+import UpgradePrompt from "@/app/components/subscription/UpgradePrompt";
 
 export const metadata = {
   title: "AI Assistant | Auxilium",
@@ -21,6 +23,19 @@ export default async function AIChatPage({
     redirect(`/${locale}/login`);
   }
 
+  const { plan, features } = await getUserPlanById(userId);
+
+  if (!features.ai) {
+    return (
+      <UpgradePrompt
+        feature="AI Assistant"
+        requiredPlan="PRO"
+        currentPlan={plan}
+        locale={locale}
+      />
+    );
+  }
+
   if (!activeSpaceId) {
     redirect(`/${locale}/dashboard`);
   }
@@ -35,8 +50,8 @@ export default async function AIChatPage({
           Ask questions about your projects, leads, tasks, and finances.
         </p>
       </div>
-      
-      <AIChatClient spaceId={activeSpaceId} />
+
+      <AIChatClient spaceId={activeSpaceId!} />
     </div>
   );
 }

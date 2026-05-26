@@ -25,7 +25,7 @@ export default function Pricing() {
           url: `/${language}/register`,
         }}
       ></HeroSection>
-      <VideoPlayer src="/videos/pricing.mov"></VideoPlayer>
+      <VideoPlayer src="/videos/AuxiliumDemo.mp4"></VideoPlayer>
       <PricingColumns
         name={t("marketing:pricing.title")}
         header={t("marketing:pricing.subtitle")}

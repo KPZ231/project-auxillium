@@ -1,6 +1,24 @@
 {
+  "nav": {
+    "dashboard": "Dashboard",
+    "projects": "Projekte",
+    "finance": "Finanzen",
+    "tasks": "Aufgaben",
+    "lead_search": "Lead-Suche",
+    "leads": "Leads",
+    "clients": "Kunden",
+    "ai_chat": "KI-Chat",
+    "documents": "Dokumente",
+    "view_profile": "Profil anzeigen",
+    "settings": "Einstellungen",
+    "logout": "Abmelden"
+  },
   "clients": {
-    "client": "Kunde"
+    "client": "Kunde",
+    "no_clients": "Keine Kunden gefunden. Fügen Sie Ihren ersten Kunden hinzu.",
+    "no_email": "Keine E-Mail",
+    "projects_label": "Projekte",
+    "view": "Anzeigen →"
   },
   "common": {
     "search": "Suchen"
@@ -153,8 +171,24 @@
     "revenue_expenses": "Einnahmen & Ausgaben",
     "view_all_tasks": "Alle Aufgaben anzeigen"
   },
+  "nav": {
+    "dashboard": "Dashboard",
+    "projects": "Projekte",
+    "finance": "Finanzen",
+    "tasks": "Aufgaben",
+    "lead_search": "Lead-Suche",
+    "leads": "Leads",
+    "clients": "Kunden",
+    "ai_chat": "KI-Chat",
+    "documents": "Dokumente"
+  },
   "projects": {
-    "title": "Projekte"
+    "title": "Projekte",
+    "page_title": "Aktives Portfolio",
+    "page_subtitle": "Verwaltung laufender Architektur- und Designprojekte.",
+    "tab_grid": "Raster",
+    "tab_calendar": "Kalender",
+    "new_project": "NEUES PROJEKT"
   },
   "space": {
     "settings": "Bereichseinstellungen"
@@ -193,7 +227,18 @@
   "employees": {
     "title": "MITARBEITER",
     "subtitle": "Verwalten Sie Ihre Teammitglieder und deren Arbeitslast.",
-    "manage_members": "Mitglieder verwalten"
+    "manage_members": "Mitglieder verwalten",
+    "add_title": "Teammitglied hinzufügen",
+    "breadcrumb": "Bereich / Mitarbeiter / Erstellen",
+    "full_name": "Vollständiger Name",
+    "position": "Position",
+    "email_address": "E-Mail-Adresse",
+    "phone_number": "Telefonnummer",
+    "cancel": "Abbrechen",
+    "saving": "Speichern...",
+    "save": "Mitarbeiter speichern",
+    "added_success": "Mitarbeiter erfolgreich hinzugefügt",
+    "add_failed": "Mitarbeiter konnte nicht hinzugefügt werden"
   },
   "members": {
     "title": "Teammitglieder",
@@ -452,5 +497,28 @@
     "efficiency_label": "Effizienz %",
     "revenue_growth": "Umsatzwachstum",
     "revenue_label": "Umsatz (k€)"
+  },
+  "onboarding": {
+    "welcome": "Willkommen",
+    "create_first_space": "ERSTELLE DEINEN\nERSTEN BEREICH.",
+    "spaces_description": "Bereiche ermöglichen die Isolierung von Projekten, Leads und Teammitgliedern. Richten wir Ihre erste Umgebung ein.",
+    "start_setup": "Setup starten",
+    "space_details": "Bereichsdetails",
+    "configure_workspace": "Konfigurieren Sie Ihren Arbeitsbereich",
+    "space_name": "Bereichsname",
+    "space_name_placeholder": "z.B. Hauptbüro",
+    "description": "Beschreibung",
+    "description_placeholder": "Wofür ist dieser Bereich?",
+    "back": "Zurück",
+    "create_space": "Bereich erstellen",
+    "creating": "Erstellen...",
+    "success": "Erfolg",
+    "redirecting": "Weiterleitung zum Dashboard..."
+  },
+  "documents": {
+    "no_space": "Bitte wählen Sie einen Bereich aus, um Dokumente anzuzeigen.",
+    "no_documents": "Keine Dokumente erstellt",
+    "no_documents_desc": "Generieren Sie Dokumente über den Vorlageneditor.",
+    "go_to_templates": "Zu Vorlagen →"
   }
 }

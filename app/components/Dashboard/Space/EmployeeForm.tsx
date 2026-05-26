@@ -8,6 +8,7 @@ import { motion } from "motion/react";
 import { X, Loader2 } from "lucide-react";
 import { addEmployee } from "@/actions/employee";
 import { toast } from "sonner";
+import { useTranslation } from "@/app/context/TranslationContext";
 
 const employeeSchema = z.object({
   name: z.string().min(2, "Name is too short"),
@@ -37,6 +38,7 @@ interface EmployeeFormProps {
 }
 
 export default function EmployeeForm({ onClose, onSuccess }: EmployeeFormProps) {
+  const { t } = useTranslation();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
@@ -52,10 +54,10 @@ export default function EmployeeForm({ onClose, onSuccess }: EmployeeFormProps) 
     try {
       const result = await addEmployee(data);
       if (result.success) {
-        toast.success("Employee added successfully");
+        toast.success(t("dashboard:employees.added_success"));
         onSuccess(result.employee);
       } else {
-        toast.error("Failed to add employee");
+        toast.error(t("dashboard:employees.add_failed"));
       }
     } catch (error) {
       toast.error(error instanceof Error ? error.message : "An error occurred");
@@ -82,8 +84,8 @@ export default function EmployeeForm({ onClose, onSuccess }: EmployeeFormProps) 
       >
         <div className="flex items-center justify-between mb-12">
           <div className="space-y-1">
-            <h2 className="text-3xl font-black text-black uppercase tracking-tighter">Add Team Member</h2>
-            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.4em]">Space / Employee / Creation</p>
+            <h2 className="text-3xl font-black text-black uppercase tracking-tighter">{t("dashboard:employees.add_title")}</h2>
+            <p className="text-[10px] font-bold text-slate-400 uppercase tracking-[0.4em]">{t("dashboard:employees.breadcrumb")}</p>
           </div>
           <button onClick={onClose} className="p-2 hover:bg-black hover:text-white transition-colors">
             <X className="w-6 h-6" />
@@ -93,41 +95,41 @@ export default function EmployeeForm({ onClose, onSuccess }: EmployeeFormProps) 
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div className="space-y-2">
-              <label className="text-[10px] font-bold text-black uppercase tracking-[0.3em]">Full Name</label>
+              <label className="text-[10px] font-bold text-black uppercase tracking-[0.3em]">{t("dashboard:employees.full_name")}</label>
               <input
                 {...register("name")}
                 className="w-full px-0 py-3 bg-transparent border-b border-slate-200 focus:border-black rounded-none text-sm font-bold placeholder:text-slate-200 outline-none transition-all"
-                placeholder="Full Name"
+                placeholder={t("dashboard:employees.full_name")}
               />
               {errors.name && <p className="text-[10px] font-bold text-red-500 uppercase mt-1">{errors.name.message}</p>}
             </div>
 
             <div className="space-y-2">
-              <label className="text-[10px] font-bold text-black uppercase tracking-[0.3em]">Position</label>
+              <label className="text-[10px] font-bold text-black uppercase tracking-[0.3em]">{t("dashboard:employees.position")}</label>
               <input
                 {...register("role")}
                 className="w-full px-0 py-3 bg-transparent border-b border-slate-200 focus:border-black rounded-none text-sm font-bold placeholder:text-slate-200 outline-none transition-all"
-                placeholder="Role"
+                placeholder={t("dashboard:employees.position")}
               />
             </div>
           </div>
 
           <div className="space-y-2">
-            <label className="text-[10px] font-bold text-black uppercase tracking-[0.3em]">Email Address</label>
+            <label className="text-[10px] font-bold text-black uppercase tracking-[0.3em]">{t("dashboard:employees.email_address")}</label>
             <input
               {...register("email")}
               className="w-full px-0 py-3 bg-transparent border-b border-slate-200 focus:border-black rounded-none text-sm font-bold placeholder:text-slate-200 outline-none transition-all"
-              placeholder="Email"
+              placeholder={t("dashboard:employees.email_address")}
             />
             {errors.email && <p className="text-[10px] font-bold text-red-500 uppercase mt-1">{errors.email.message}</p>}
           </div>
 
           <div className="space-y-2">
-            <label className="text-[10px] font-bold text-black uppercase tracking-[0.3em]">Phone Number</label>
+            <label className="text-[10px] font-bold text-black uppercase tracking-[0.3em]">{t("dashboard:employees.phone_number")}</label>
             <input
               {...register("phone")}
               className="w-full px-0 py-3 bg-transparent border-b border-slate-200 focus:border-black rounded-none text-sm font-bold placeholder:text-slate-200 outline-none transition-all"
-              placeholder="Phone"
+              placeholder={t("dashboard:employees.phone_number")}
             />
           </div>
 
@@ -137,7 +139,7 @@ export default function EmployeeForm({ onClose, onSuccess }: EmployeeFormProps) 
               onClick={onClose}
               className="flex-1 px-6 py-4 border border-black text-black rounded-none font-bold text-xs uppercase tracking-[0.2em] hover:bg-slate-50 transition-all"
             >
-              Cancel
+              {t("dashboard:employees.cancel")}
             </button>
             <button
               type="submit"
@@ -147,10 +149,10 @@ export default function EmployeeForm({ onClose, onSuccess }: EmployeeFormProps) 
               {isSubmitting ? (
                 <>
                   <Loader2 className="w-4 h-4 animate-spin" />
-                  Saving...
+                  {t("dashboard:employees.saving")}
                 </>
               ) : (
-                "Save Employee"
+                t("dashboard:employees.save")
               )}
             </button>
           </div>

@@ -5,6 +5,7 @@ import { getGeneratedDocuments } from "@/actions/templates";
 import { redirect } from "next/navigation";
 import { GeneratedDocumentCard } from "@/app/components/templates/GeneratedDocumentCard";
 import { DocumentHubHeader } from "@/app/components/templates/DocumentHubHeader";
+import { Translate } from "@/app/components/UI/Translate";
 
 export default async function DocumentHubPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
@@ -19,7 +20,7 @@ export default async function DocumentHubPage({ params }: { params: Promise<{ lo
   if (!spaceId) {
     return (
       <div className="flex h-full items-center justify-center text-[#71717A] text-[14px]">
-        Proszę wybierz przestrzeń, aby przeglądać dokumenty.
+        <Translate tKey="dashboard:documents.no_space" />
       </div>
     );
   }
@@ -35,13 +36,13 @@ export default async function DocumentHubPage({ params }: { params: Promise<{ lo
         {documents.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-32 border border-dashed border-[#E5E5E5] bg-[#FAFAFA]">
             <div className="text-4xl mb-4">📄</div>
-            <p className="text-[#71717A] mb-1 font-medium">Brak utworzonych dokumentów</p>
-            <p className="text-[#A1A1AA] text-sm mb-6">Generuj dokumenty z poziomu edytora szablonów.</p>
-            <a 
+            <p className="text-[#71717A] mb-1 font-medium"><Translate tKey="dashboard:documents.no_documents" /></p>
+            <p className="text-[#A1A1AA] text-sm mb-6"><Translate tKey="dashboard:documents.no_documents_desc" /></p>
+            <a
               href={`/${locale}/dashboard/templates`}
               className="text-xs font-bold uppercase tracking-widest hover:underline text-[#0A0A0A]"
             >
-              Przejdź do szablonów &rarr;
+              <Translate tKey="dashboard:documents.go_to_templates" />
             </a>
           </div>
         ) : (

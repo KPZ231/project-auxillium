@@ -92,7 +92,8 @@
   "pricing": {
     "cta": "Jetzt starten",
     "choose_plan": "Plan wählen",
-    "contact_us": "Kontakt aufnehmen",
+    "select_plan": "Plan wählen",
+    "contact_us": "Kontaktieren Sie uns",
     "enterprise": "Enterprise",
     "enterprise_desc": "Für Organisationen mit komplexen Geschäftsprozessen und globalem Maßstab.",
     "free": "Starter",

@@ -8,13 +8,20 @@
     "leads": "Leads",
     "clients": "Clients",
     "ai_chat": "AI Chat",
-    "documents": "Documents"
+    "documents": "Documents",
+    "view_profile": "View profile",
+    "settings": "Settings",
+    "logout": "Log out"
   },
   "clients": {
     "client": "Client",
     "page_title": "Client Roster",
     "page_subtitle": "Managing {{count}} active client relationships.",
-    "new_client": "NEW CLIENT"
+    "new_client": "NEW CLIENT",
+    "no_clients": "No clients found. Initialize your first client.",
+    "no_email": "No email",
+    "projects_label": "Projects",
+    "view": "View →"
   },
   "common": {
     "search": "Search"
@@ -212,7 +219,18 @@
   "employees": {
     "title": "EMPLOYEES",
     "subtitle": "Manage your team members and their workloads.",
-    "manage_members": "Manage Members"
+    "manage_members": "Manage Members",
+    "add_title": "Add Team Member",
+    "breadcrumb": "Space / Employee / Creation",
+    "full_name": "Full Name",
+    "position": "Position",
+    "email_address": "Email Address",
+    "phone_number": "Phone Number",
+    "cancel": "Cancel",
+    "saving": "Saving...",
+    "save": "Save Employee",
+    "added_success": "Employee added successfully",
+    "add_failed": "Failed to add employee"
   },
   "members": {
     "title": "Team Members",
@@ -471,5 +489,28 @@
     "efficiency_label": "Efficiency %",
     "revenue_growth": "Revenue Growth",
     "revenue_label": "Revenue (k$)"
+  },
+  "onboarding": {
+    "welcome": "Welcome",
+    "create_first_space": "CREATE YOUR\nFIRST SPACE.",
+    "spaces_description": "Spaces allow you to isolate projects, leads, and team members. Let's set up your first environment to get started.",
+    "start_setup": "Start Setup",
+    "space_details": "Space Details",
+    "configure_workspace": "Configure your workspace",
+    "space_name": "Space Name",
+    "space_name_placeholder": "e.g. Main Office",
+    "description": "Description",
+    "description_placeholder": "What is this space for?",
+    "back": "Back",
+    "create_space": "Create Space",
+    "creating": "Creating...",
+    "success": "Success",
+    "redirecting": "Redirecting to your dashboard..."
+  },
+  "documents": {
+    "no_space": "Please select a space to view documents.",
+    "no_documents": "No documents created",
+    "no_documents_desc": "Generate documents from the template editor.",
+    "go_to_templates": "Go to templates →"
   }
 }

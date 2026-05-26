@@ -9,11 +9,40 @@
     "dashboard": "Panel główny",
     "log_in": "Logowanie",
     "pricing": "Cennik",
-    "sign_up": "Zarejestruj się"
+    "sign_up": "Zarejestruj się",
+    "logout": "Wyloguj się"
+  },
+  "cookies": {
+    "title": "Polityka prywatności i pliki cookie",
+    "text": "Używamy plików cookie, aby zapewnić najlepszą jakość korzystania z naszej strony. Klikając \"Akceptuję\", zgadzasz się na ich przechowywanie na Twoim urządzeniu.",
+    "accept": "Akceptuję",
+    "decline": "Odrzucam"
+  },
+  "footer": {
+    "tagline": "SYSTEM ZARZĄDZANIA."
+  },
+  "not_found": {
+    "title": "Strona nie istnieje.",
+    "description": "Prawdopodobnie podano błędny adres lub strona została przeniesiona pod inny adres URL.",
+    "back": "Powrót do strony głównej"
+  },
+  "checkout": {
+    "success_title": "Płatność zakończona sukcesem",
+    "success_desc": "Dziękujemy za subskrypcję! Twoje konto zostało zaktualizowane.",
+    "return_dashboard": "Powrót do panelu",
+    "cancel_title": "Płatność anulowana",
+    "cancel_desc": "Płatność została anulowana. Nie pobrano żadnych opłat.",
+    "return_pricing": "Powrót do cennika"
   },
   "messages": {
     "error": "Wystąpił błąd",
     "network_error": "Błąd połączenia",
-    "please_try_again": "Spróbuj ponownie później"
+    "please_try_again": "Spróbuj ponownie później",
+    "loading": "Ładowanie..."
+  },
+  "nav": {
+    "privacy": "Prywatność",
+    "terms": "Regulamin",
+    "cookies": "Cookies"
   }
 }

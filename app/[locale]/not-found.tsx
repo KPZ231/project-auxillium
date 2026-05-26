@@ -3,8 +3,10 @@
 import { motion, Variants } from "motion/react";
 import Link from "next/link";
 import { FiFrown } from "react-icons/fi";
+import { useTranslation } from "@/app/context/TranslationContext";
 
 export default function NotFound() {
+  const { t } = useTranslation();
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -46,10 +48,10 @@ export default function NotFound() {
             className="border-l-2 border-(--tertiary) pl-8 flex flex-col gap-4"
           >
             <p className="text-xl lg:text-2xl font-medium text-(--primary) tracking-tight">
-              Strona nie istnieje.
+              {t("common:not_found.title")}
             </p>
             <p className="text-sm lg:text-base text-(--neutral) max-w-md leading-relaxed">
-              Prawdopodobnie podano błędny adres lub strona została przeniesiona pod inny adres URL.
+              {t("common:not_found.description")}
             </p>
           </motion.div>
 
@@ -58,7 +60,7 @@ export default function NotFound() {
               href="/"
               className="inline-block px-12 py-5 bg-(--primary) text-(--secondary) font-bold text-sm tracking-widest uppercase hover:opacity-90 transition-opacity"
             >
-              Powrót do strony głównej
+              {t("common:not_found.back")}
             </Link>
           </motion.div>
         </div>

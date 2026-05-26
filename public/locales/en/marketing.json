@@ -92,7 +92,8 @@
   "pricing": {
     "cta": "Get started free",
     "choose_plan": "Start growing",
-    "contact_us": "Talk to us",
+    "select_plan": "Select Plan",
+    "contact_us": "Contact Us",
     "enterprise": "Enterprise",
     "enterprise_desc": "For organisations designing complex business processes at scale.",
     "free": "Starter",

@@ -2,18 +2,19 @@
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { useTranslation } from "@/app/context/TranslationContext";
 
 
 export default function Footer() {
-
+  const { t } = useTranslation();
   const year: number = new Date().getFullYear();
   const pathname = usePathname();
 
 
   const navLinks = [
-    { name: "Privacy", url: "/privacy" },
-    { name: "Terms & Conditions", url: "/terms" },
-    { name: "Cookies", url: "/cookies" },
+    { name: t("common:nav.privacy"), url: "/privacy" },
+    { name: t("common:nav.terms"), url: "/terms" },
+    { name: t("common:nav.cookies"), url: "/cookies" },
   ];
 
   return (
@@ -48,7 +49,7 @@ export default function Footer() {
         {/* Copyright */}
         <div className="flex-1 flex justify-center md:justify-end text-center md:text-right">
           <p className="text-[10px] md:text-[11px] font-medium tracking-wider text-(--neutral) uppercase">
-            © {year} AUXILLIUM. SYSTEM ZARZĄDZANIA.
+            © {year} AUXILLIUM. {t("common:footer.tagline")}
           </p>
         </div>
       </div>

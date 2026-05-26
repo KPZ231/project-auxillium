@@ -4,8 +4,10 @@ import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 import { getCookie, setCookie } from "cookies-next";
 import { motion, AnimatePresence } from "motion/react";
+import { useTranslation } from "@/app/context/TranslationContext";
 
 export default function CookieBanner() {
+  const { t } = useTranslation();
   const [mounted, setMounted] = useState(false);
   const [showBanner, setShowBanner] = useState(false);
 
@@ -50,11 +52,10 @@ export default function CookieBanner() {
           <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex flex-col gap-1">
               <p className="text-sm font-medium tracking-wide">
-                Polityka prywatności i pliki cookie
+                {t("common:cookies.title")}
               </p>
               <p className="text-xs opacity-70 tracking-tight max-w-2xl">
-                Używamy plików cookie, aby zapewnić najlepszą jakość korzystania z naszej strony. 
-                Klikając &quot;Akceptuję&quot;, zgadzasz się na ich przechowywanie na Twoim urządzeniu.
+                {t("common:cookies.text")}
               </p>
             </div>
             <div className="flex items-center gap-3 shrink-0">
@@ -62,13 +63,13 @@ export default function CookieBanner() {
                 onClick={handleDecline}
                 className="px-6 py-2.5 border border-(--secondary)/20 text-(--secondary) font-bold text-[10px] tracking-widest uppercase hover:bg-(--secondary) hover:text-(--primary) transition-all cursor-pointer"
               >
-                Odrzucam
+                {t("common:cookies.decline")}
               </button>
               <button
                 onClick={handleAccept}
                 className="px-8 py-2.5 bg-(--secondary) text-(--primary) font-bold text-[10px] tracking-widest uppercase hover:opacity-90 transition-all cursor-pointer"
               >
-                Akceptuję
+                {t("common:cookies.accept")}
               </button>
             </div>
           </div>

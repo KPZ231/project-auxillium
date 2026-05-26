@@ -9,11 +9,40 @@
     "dashboard": "Dashboard",
     "log_in": "Log In",
     "pricing": "Pricing",
-    "sign_up": "Sign Up"
+    "sign_up": "Sign Up",
+    "logout": "Log out"
+  },
+  "cookies": {
+    "title": "Privacy policy & cookies",
+    "text": "We use cookies to ensure the best experience on our site. By clicking \"Accept\", you agree to their storage on your device.",
+    "accept": "Accept",
+    "decline": "Decline"
+  },
+  "footer": {
+    "tagline": "MANAGEMENT SYSTEM."
+  },
+  "not_found": {
+    "title": "Page not found.",
+    "description": "The address may be incorrect or the page may have moved to a different URL.",
+    "back": "Back to home"
+  },
+  "checkout": {
+    "success_title": "Payment Successful",
+    "success_desc": "Thank you for your subscription! Your account has been upgraded.",
+    "return_dashboard": "Return to Dashboard",
+    "cancel_title": "Payment Cancelled",
+    "cancel_desc": "Your payment was cancelled and no charges were made.",
+    "return_pricing": "Return to Pricing"
   },
   "messages": {
     "error": "An error occurred",
     "network_error": "Connection error",
-    "please_try_again": "Please try again later"
+    "please_try_again": "Please try again later",
+    "loading": "Loading..."
+  },
+  "nav": {
+    "privacy": "Privacy",
+    "terms": "Terms & Conditions",
+    "cookies": "Cookies"
   }
 }

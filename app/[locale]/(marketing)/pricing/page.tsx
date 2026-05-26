@@ -48,7 +48,7 @@ export default function Pricing() {
             description: t("marketing:pricing.pro_desc"),
             list: [t("marketing:pricing.pro_desc"), t("marketing:pricing.feature_lorem"), t("marketing:pricing.feature_lorem")],
             button: {
-              content: "Wybierz plan",
+              content: t("marketing:pricing.select_plan"),
               variant: "primary",
               url: `/${language}/register`,
             },
@@ -60,7 +60,7 @@ export default function Pricing() {
             description: t("marketing:pricing.enterprise_desc"),
             list: [t("marketing:pricing.enterprise_desc"), t("marketing:pricing.feature_lorem"), t("marketing:pricing.feature_lorem")],
             button: {
-              content: "Skontaktuj się z nami",
+              content: t("marketing:pricing.contact_us"),
               variant: "primary",
               url: `/${language}/register`,
             },

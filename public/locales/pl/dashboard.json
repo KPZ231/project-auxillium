@@ -8,13 +8,20 @@
     "leads": "Leady",
     "clients": "Klienci",
     "ai_chat": "Czat AI",
-    "documents": "Dokumenty"
+    "documents": "Dokumenty",
+    "view_profile": "Zobacz profil",
+    "settings": "Ustawienia",
+    "logout": "Wyloguj"
   },
   "clients": {
     "client": "Klient",
     "page_title": "Lista Klientów",
     "page_subtitle": "Zarządzanie {{count}} aktywnymi relacjami z klientami.",
-    "new_client": "NOWY KLIENT"
+    "new_client": "NOWY KLIENT",
+    "no_clients": "Brak klientów. Dodaj pierwszego klienta.",
+    "no_email": "Brak e-mail",
+    "projects_label": "Projekty",
+    "view": "Wyświetl →"
   },
   "common": {
     "search": "Szukaj"
@@ -212,7 +219,18 @@
   "employees": {
     "title": "PRACOWNICY",
     "subtitle": "Zarządzaj swoimi członkami zespołu i ich obciążeniem pracą.",
-    "manage_members": "Zarządzaj zespołem"
+    "manage_members": "Zarządzaj zespołem",
+    "add_title": "Dodaj członka zespołu",
+    "breadcrumb": "Obszar / Pracownik / Tworzenie",
+    "full_name": "Imię i Nazwisko",
+    "position": "Stanowisko",
+    "email_address": "Adres e-mail",
+    "phone_number": "Numer telefonu",
+    "cancel": "Anuluj",
+    "saving": "Zapisywanie...",
+    "save": "Zapisz pracownika",
+    "added_success": "Pracownik dodany pomyślnie",
+    "add_failed": "Nie udało się dodać pracownika"
   },
   "members": {
     "title": "Członkowie zespołu",
@@ -471,5 +489,28 @@
     "efficiency_label": "Wydajność %",
     "revenue_growth": "Wzrost przychodów",
     "revenue_label": "Przychody (tys. zł)"
+  },
+  "onboarding": {
+    "welcome": "Witaj",
+    "create_first_space": "STWÓRZ SWÓJ\nPIERWSZY OBSZAR.",
+    "spaces_description": "Obszary pozwalają na izolację projektów, leadów i członków zespołu. Skonfigurujmy Twoje pierwsze środowisko, aby rozpocząć pracę.",
+    "start_setup": "Rozpocznij konfigurację",
+    "space_details": "Szczegóły obszaru",
+    "configure_workspace": "Skonfiguruj swój obszar pracy",
+    "space_name": "Nazwa obszaru",
+    "space_name_placeholder": "np. Biuro Główne",
+    "description": "Opis",
+    "description_placeholder": "Do czego służy ten obszar?",
+    "back": "Wstecz",
+    "create_space": "Utwórz obszar",
+    "creating": "Tworzenie...",
+    "success": "Sukces",
+    "redirecting": "Przekierowanie do panelu..."
+  },
+  "documents": {
+    "no_space": "Proszę wybierz przestrzeń, aby przeglądać dokumenty.",
+    "no_documents": "Brak utworzonych dokumentów",
+    "no_documents_desc": "Generuj dokumenty z poziomu edytora szablonów.",
+    "go_to_templates": "Przejdź do szablonów →"
   }
 }

@@ -3,6 +3,7 @@ import PageHeader from "@/app/components/Dashboard/Dashboard/Shared/PageHeader/P
 import { Plus } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { Translate } from "@/app/components/UI/Translate";
 
 export default async function ClientsPage() {
   const clients = await getClients() as any[];
@@ -23,7 +24,7 @@ export default async function ClientsPage() {
       <div className="p-8">
         {clients.length === 0 ? (
           <div className="text-center py-20 border border-dashed border-[#D4D4D8]">
-            <p className="text-[14px] text-[#71717A] uppercase tracking-widest">No clients found. Initialize your first client.</p>
+            <p className="text-[14px] text-[#71717A] uppercase tracking-widest"><Translate tKey="dashboard:clients.no_clients" /></p>
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -47,8 +48,8 @@ export default async function ClientsPage() {
                   </div>
                   
                   <div className="pt-4 border-t border-[#E5E5E5] flex justify-between text-[11px] uppercase tracking-widest text-[#71717A] font-bold">
-                    <span>{client.projects?.length || 0} Projects</span>
-                    <span className="text-[#0A0A0A] group-hover:translate-x-1 transition-transform">View →</span>
+                    <span>{client.projects?.length || 0} <Translate tKey="dashboard:clients.projects_label" /></span>
+                    <span className="text-[#0A0A0A] group-hover:translate-x-1 transition-transform"><Translate tKey="dashboard:clients.view" /></span>
                   </div>
                 </div>
               </Link>

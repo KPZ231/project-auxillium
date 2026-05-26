@@ -9,6 +9,7 @@ import ProfileModal from "../ProfileModal/ProfileModal";
 import { logoutAction } from "@/actions/logout";
 import { useUser } from "@/app/context/UserContext";
 import { NotificationDropdown } from "./NotificationDropdown";
+import { useTranslation } from "@/app/context/TranslationContext";
 
 interface InitialUser {
   name: string | null;
@@ -24,6 +25,7 @@ export default function TopBar({ initialUser }: TopBarProps) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const pathname = usePathname();
   const router = useRouter();
+  const { t } = useTranslation();
 
   // user from context (updates after avatar change), falls back to SSR-provided initialUser
   const { user } = useUser();
@@ -92,7 +94,7 @@ export default function TopBar({ initialUser }: TopBarProps) {
                   className="w-full flex items-center gap-3 px-4 py-3 text-black hover:bg-black hover:text-white transition-colors duration-150 text-left"
                 >
                   <User className="w-4 h-4 shrink-0" />
-                  <span className="text-sm font-medium">Zobacz profil</span>
+                  <span className="text-sm font-medium">{t("dashboard:nav.view_profile")}</span>
                 </button>
 
                 <button
@@ -103,7 +105,7 @@ export default function TopBar({ initialUser }: TopBarProps) {
                   className="w-full flex items-center gap-3 px-4 py-3 text-black hover:bg-black hover:text-white transition-colors duration-150 text-left"
                 >
                   <Settings className="w-4 h-4 shrink-0" />
-                  <span className="text-sm font-medium">Ustawienia</span>
+                  <span className="text-sm font-medium">{t("dashboard:nav.settings")}</span>
                 </button>
 
                 <div className="border-t border-black" />
@@ -113,7 +115,7 @@ export default function TopBar({ initialUser }: TopBarProps) {
                   className="w-full flex items-center gap-3 px-4 py-3 text-black hover:bg-red-600 hover:text-white transition-colors duration-150 text-left"
                 >
                   <LogOut className="w-4 h-4 shrink-0" />
-                  <span className="text-sm font-medium">Wyloguj</span>
+                  <span className="text-sm font-medium">{t("dashboard:nav.logout")}</span>
                 </button>
               </div>
             )}

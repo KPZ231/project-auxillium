@@ -9,11 +9,40 @@
     "dashboard": "Dashboard",
     "log_in": "Einloggen",
     "pricing": "Preise",
-    "sign_up": "Registrieren"
+    "sign_up": "Registrieren",
+    "logout": "Abmelden"
+  },
+  "cookies": {
+    "title": "Datenschutz & Cookies",
+    "text": "Wir verwenden Cookies, um die beste Erfahrung auf unserer Website zu bieten. Durch Klicken auf \"Akzeptieren\" stimmen Sie deren Speicherung auf Ihrem Gerät zu.",
+    "accept": "Akzeptieren",
+    "decline": "Ablehnen"
+  },
+  "footer": {
+    "tagline": "MANAGEMENTSYSTEM."
+  },
+  "not_found": {
+    "title": "Seite nicht gefunden.",
+    "description": "Die Adresse könnte falsch sein oder die Seite wurde unter eine andere URL verschoben.",
+    "back": "Zurück zur Startseite"
+  },
+  "checkout": {
+    "success_title": "Zahlung erfolgreich",
+    "success_desc": "Vielen Dank für Ihr Abonnement! Ihr Konto wurde aktualisiert.",
+    "return_dashboard": "Zurück zum Dashboard",
+    "cancel_title": "Zahlung abgebrochen",
+    "cancel_desc": "Ihre Zahlung wurde storniert. Es wurden keine Gebühren erhoben.",
+    "return_pricing": "Zurück zu den Preisen"
   },
   "messages": {
     "error": "Ein Fehler ist aufgetreten",
     "network_error": "Verbindungsfehler",
-    "please_try_again": "Bitte versuchen Sie es später erneut"
+    "please_try_again": "Bitte versuchen Sie es später erneut",
+    "loading": "Laden..."
+  },
+  "nav": {
+    "privacy": "Datenschutz",
+    "terms": "Nutzungsbedingungen",
+    "cookies": "Cookies"
   }
 }

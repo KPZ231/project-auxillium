@@ -131,7 +131,7 @@ export default function SettingsClient({
     const result = await uploadAvatar(formData);
 
     if (result.success && result.url) {
-      // Update local state immediately — no page reload needed
+      // Update local state immediately  no page reload needed
       setAvatarUrl(result.url);
       setUser((prev) => ({ ...prev, avatarUrl: result.url! }));
       toast.success(t("dashboard:settings.avatar_updated"), { id: toastId });
@@ -222,7 +222,7 @@ export default function SettingsClient({
                   <ImageIcon className="w-8 h-8 text-[#71717A]" />
                 )}
               </div>
-              {/* Upload trigger — square, not rounded */}
+              {/* Upload trigger  square, not rounded */}
               <label className="absolute -bottom-2 -right-2 w-8 h-8 bg-[#0A0A0A] text-white flex items-center justify-center cursor-pointer hover:bg-[#333333] transition-colors duration-150">
                 <Upload className="w-3.5 h-3.5" />
                 <input

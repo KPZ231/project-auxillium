@@ -38,7 +38,7 @@ const STRIPE_PRICE_IDS = {
 
 /**
  * Derives the user's plan from their Stripe subscription fields.
- * Pure — no I/O.
+ * Pure  no I/O.
  */
 export function getPlanFromUser(
   user: { stripePriceId: string | null; stripeCurrentPeriodEnd: Date | null },
@@ -139,7 +139,7 @@ export async function getUserPlanById(userId: string): Promise<{
 }> {
   const cacheKey = `user:plan:${userId}`;
 
-  // Try cache first — getCachedData already swallows Redis errors and returns null
+  // Try cache first  getCachedData already swallows Redis errors and returns null
   const cached = await getCachedData<{
     plan: Plan;
     limits: PlanLimits;
@@ -150,14 +150,14 @@ export async function getUserPlanById(userId: string): Promise<{
     return cached;
   }
 
-  // Cache miss — query DB
+  // Cache miss  query DB
   const user = await prisma.user.findUnique({
     where: { id: userId },
     select: { stripePriceId: true, stripeCurrentPeriodEnd: true },
   });
 
   // If user is null (transient DB error or unknown userId), return FREE without
-  // caching — we don't want to persist a stale FREE entry in Redis.
+  // caching  we don't want to persist a stale FREE entry in Redis.
   if (!user) {
     return {
       plan: "FREE",
@@ -174,7 +174,7 @@ export async function getUserPlanById(userId: string): Promise<{
     features: getPlanFeatures(plan),
   };
 
-  // Populate cache — setCachedData already swallows Redis errors
+  // Populate cache  setCachedData already swallows Redis errors
   await setCachedData(cacheKey, result, USER_PLAN_TTL);
 
   return result;

@@ -4,11 +4,11 @@
     "offer_item1": "Project Management",
     "offer_item1_desc": "Clear view of progress, deadlines and responsibility across your entire team.",
     "offer_item2": "Lead & Client Tracking",
-    "offer_item2_desc": "CRM tailored to SMB sales pace — effective and without unnecessary complexity.",
+    "offer_item2_desc": "CRM tailored to SMB sales pace  effective and without unnecessary complexity.",
     "offer_item3": "Finance & Costs",
     "offer_item3_desc": "Control revenues, expenses and financial goals in real time.",
     "offer_item4": "Team Management",
-    "offer_item4_desc": "Onboarding, task assignment, workload monitoring — all in one place.",
+    "offer_item4_desc": "Onboarding, task assignment, workload monitoring  all in one place.",
     "offer_subtitle": "As KPZ's Productions, we offer a wide range of services related to software development. Our team consists of experienced programmers and designers who are able to handle even the most demanding tasks.",
     "offer_title": "What We Offer",
     "quote_content": "We help companies transform digitally and scale their business",
@@ -27,11 +27,11 @@
     "title": "Cookie Policy",
     "section1": {
       "title": "1. Definitions",
-      "content": "For the purposes of this Cookie Policy, the following definitions apply: Cookies — small text files stored on the User's end device by the web browser, containing data required for the proper functioning of the website; Service — the Auxilium platform available at auxilium.app; End Device — a computer, phone, tablet or other device through which the User accesses the Service; Session — the period of User activity on the Service from login to logout or browser closure; Controller — KPZ's Productions, the entity responsible for processing data within the Service."
+      "content": "For the purposes of this Cookie Policy, the following definitions apply: Cookies  small text files stored on the User's end device by the web browser, containing data required for the proper functioning of the website; Service  the Auxilium platform available at auxilium.app; End Device  a computer, phone, tablet or other device through which the User accesses the Service; Session  the period of User activity on the Service from login to logout or browser closure; Controller  KPZ's Productions, the entity responsible for processing data within the Service."
     },
     "section2": {
       "title": "2. Types of cookies used",
-      "content": "The Auxilium Service uses the following types of cookies by storage duration: session cookies — deleted automatically when the browser session ends; persistent cookies — stored on the User's device for a specified period or until manually deleted. By purpose: necessary cookies — required for the correct operation of the Service and cannot be disabled; functional cookies — remembering User preferences, such as interface language; analytical cookies — collecting anonymous statistical data about Service usage; marketing cookies — used for potential content personalisation."
+      "content": "The Auxilium Service uses the following types of cookies by storage duration: session cookies  deleted automatically when the browser session ends; persistent cookies  stored on the User's device for a specified period or until manually deleted. By purpose: necessary cookies  required for the correct operation of the Service and cannot be disabled; functional cookies  remembering User preferences, such as interface language; analytical cookies  collecting anonymous statistical data about Service usage; marketing cookies  used for potential content personalisation."
     },
     "section3": {
       "title": "3. Cookies necessary for the operation of the service",
@@ -47,11 +47,11 @@
     },
     "section6": {
       "title": "6. Managing cookie settings",
-      "content": "Users can manage cookies through: web browser settings — it is possible to block or restrict cookie storage or delete cookies already stored; the consent management panel available upon first visit to the Service. Disabling necessary cookies may prevent login and use of the platform. Cookie management instructions for popular browsers: Chrome — chrome://settings/cookies; Firefox — about:preferences#privacy; Safari — Preferences > Privacy; Microsoft Edge — edge://settings/cookies."
+      "content": "Users can manage cookies through: web browser settings  it is possible to block or restrict cookie storage or delete cookies already stored; the consent management panel available upon first visit to the Service. Disabling necessary cookies may prevent login and use of the platform. Cookie management instructions for popular browsers: Chrome  chrome://settings/cookies; Firefox  about:preferences#privacy; Safari  Preferences > Privacy; Microsoft Edge  edge://settings/cookies."
     },
     "section7": {
       "title": "7. Cookie consent and its withdrawal",
-      "content": "Upon first visiting the Service, Users are informed about the cookies in use and asked to give voluntary consent to optional cookies (analytical, marketing) in accordance with Art. 6(1)(a) GDPR. Consent may be withdrawn at any time without giving reasons and without negative consequences for the User — withdrawal of consent for analytical or marketing cookies does not restrict access to core platform features. Consent may be withdrawn by changing cookie settings in the browser or in the Service's consent management panel."
+      "content": "Upon first visiting the Service, Users are informed about the cookies in use and asked to give voluntary consent to optional cookies (analytical, marketing) in accordance with Art. 6(1)(a) GDPR. Consent may be withdrawn at any time without giving reasons and without negative consequences for the User  withdrawal of consent for analytical or marketing cookies does not restrict access to core platform features. Consent may be withdrawn by changing cookie settings in the browser or in the Service's consent management panel."
     },
     "section8": {
       "title": "8. Changes to the cookie policy",
@@ -75,11 +75,11 @@
   },
   "features": {
     "title": "Less micromanagement, more vision",
-    "description": "Clear view of projects, deadlines and responsibilities. Your team knows what to do and when — no endless status meetings or email back-and-forth.",
+    "description": "Clear view of projects, deadlines and responsibilities. Your team knows what to do and when  no endless status meetings or email back-and-forth.",
     "feature2_title": "CRM that works at your pace",
-    "feature2_desc": "From first contact to signed contract. Track every lead, build relationships and close more deals — without the complexity or missed opportunities.",
+    "feature2_desc": "From first contact to signed contract. Track every lead, build relationships and close more deals  without the complexity or missed opportunities.",
     "feature3_title": "Decisions driven by data, not gut feeling",
-    "feature3_desc": "Track costs, monitor revenue and forecast financial results in real time. Full financial visibility — without the spreadsheets."
+    "feature3_desc": "Track costs, monitor revenue and forecast financial results in real time. Full financial visibility  without the spreadsheets."
   },
   "hero": {
     "cta": "Start now",
@@ -127,7 +127,7 @@
     },
     "section3": {
       "title": "3. Purposes and legal bases for processing",
-      "content": "Personal data are processed for the following purposes and on the following legal bases: performance of contract (Art. 6(1)(b) GDPR) — account registration, platform service delivery, payment processing; compliance with legal obligations (Art. 6(1)(c) GDPR) — issuing VAT invoices, retaining accounting records for the required period; legitimate interest of the Controller (Art. 6(1)(f) GDPR) — platform security, direct marketing to existing customers, pursuit of potential claims; consent (Art. 6(1)(a) GDPR) — marketing communications to new users, optional cookies."
+      "content": "Personal data are processed for the following purposes and on the following legal bases: performance of contract (Art. 6(1)(b) GDPR)  account registration, platform service delivery, payment processing; compliance with legal obligations (Art. 6(1)(c) GDPR)  issuing VAT invoices, retaining accounting records for the required period; legitimate interest of the Controller (Art. 6(1)(f) GDPR)  platform security, direct marketing to existing customers, pursuit of potential claims; consent (Art. 6(1)(a) GDPR)  marketing communications to new users, optional cookies."
     },
     "section4": {
       "title": "4. Recipients of personal data",
@@ -135,7 +135,7 @@
     },
     "section5": {
       "title": "5. Data retention period",
-      "content": "Personal data are retained for the duration of the contract, and thereafter: for 5 years — data required for tax and accounting purposes; for 3 years from contract termination — data required for potential civil claims; until consent is withdrawn or the purpose is achieved — data processed on the basis of consent. Upon expiry of the retention period, data are permanently deleted or anonymised in a manner preventing attribution to a specific person."
+      "content": "Personal data are retained for the duration of the contract, and thereafter: for 5 years  data required for tax and accounting purposes; for 3 years from contract termination  data required for potential civil claims; until consent is withdrawn or the purpose is achieved  data processed on the basis of consent. Upon expiry of the retention period, data are permanently deleted or anonymised in a manner preventing attribution to a specific person."
     },
     "section6": {
       "title": "6. Rights of data subjects",
@@ -169,7 +169,7 @@
     },
     "section2": {
       "title": "2. Definitions",
-      "content": "For the purposes of these Terms, the following definitions apply: Platform — the Auxilium software system available at auxilium.app; User — any natural person with full legal capacity, legal entity, or organisational unit that has entered into an agreement for electronic services; Account — an individual user panel protected by login credentials or OAuth login; Subscription — a paid or free plan for using the platform; Space — an isolated working environment within the platform to which different Users may belong; Personal Data — information enabling identification of a User within the meaning of the GDPR."
+      "content": "For the purposes of these Terms, the following definitions apply: Platform  the Auxilium software system available at auxilium.app; User  any natural person with full legal capacity, legal entity, or organisational unit that has entered into an agreement for electronic services; Account  an individual user panel protected by login credentials or OAuth login; Subscription  a paid or free plan for using the platform; Space  an isolated working environment within the platform to which different Users may belong; Personal Data  information enabling identification of a User within the meaning of the GDPR."
     },
     "section3": {
       "title": "3. Registration and user account",
@@ -205,7 +205,7 @@
     }
   },
   "testimonials": {
-    "subtitle": "We believe that good software doesn't get in the way — it disappears into the background and simply works.",
+    "subtitle": "We believe that good software doesn't get in the way  it disappears into the background and simply works.",
     "title": "Philosophy"
   },
   "footer": {

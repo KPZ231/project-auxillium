@@ -100,7 +100,7 @@ npm run dev
 
 ## Wizja Produktu
 
-Auxilium dąży do stania się "warstwą operacyjną" dla rozwijających się firm — miejscem, gdzie zadania, procesy, ludzie i działania są zarządzane w czystym i wydajnym systemie.
+Auxilium dąży do stania się "warstwą operacyjną" dla rozwijających się firm  miejscem, gdzie zadania, procesy, ludzie i działania są zarządzane w czystym i wydajnym systemie.
 
 Nacisk kładziony jest na użyteczność, jasność i kontrolę operacyjną.
 

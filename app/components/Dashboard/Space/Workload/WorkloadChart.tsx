@@ -78,7 +78,7 @@ const PieTooltip = ({ active, payload }: TooltipProps) => {
 export default function WorkloadChart({ chartType, projects, statusDistribution }: WorkloadChartProps) {
   const { t } = useTranslation();
 
-  // Prepare bar chart data — top 12 projects by score
+  // Prepare bar chart data  top 12 projects by score
   const barData = [...projects]
     .sort((a, b) => b.workloadScore - a.workloadScore)
     .slice(0, 12)

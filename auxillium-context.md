@@ -2,7 +2,7 @@
 
 ## File: AUXILIUM_CONTEXT.md
 
-# AUXILIUM — Plik Kontekstowy Projektu
+# AUXILIUM  Plik Kontekstowy Projektu
 
 ## Czym jest Auxilium?
 
@@ -21,7 +21,7 @@ Cel: zastąpienie rozproszonych narzędzi (arkusze kalkulacyjne, e-maile, chaoty
 | Styling       | Tailwind CSS                    |
 | ORM           | Prisma                          |
 | Baza danych   | PostgreSQL                      |
-| Auth          | (planowane — RBAC)              |
+| Auth          | (planowane  RBAC)              |
 | Deployment    | Vercel                          |
 
 ---
@@ -45,14 +45,14 @@ Cel: zastąpienie rozproszonych narzędzi (arkusze kalkulacyjne, e-maile, chaoty
 
 ## Główne Funkcje (Roadmapa)
 
-1. **Autoryzacja i RBAC** — logowanie, rejestracja, role: Admin / Manager / Employee
-2. **Dashboard z analityką** — KPI, wykresy, przegląd operacji firmy
-3. **Zarządzanie zadaniami** — tworzenie, przypisywanie, śledzenie statusu
-4. **Workflow Builder** — kreator sekwencyjnych procesów biznesowych
-5. **Powiadomienia i przypomnienia** — alerty in-app, terminy
-6. **Współpraca zespołowa** — komentarze, przypisania, feed aktywności
-7. **Raporty i analityka** — eksport danych, raporty wydajności
-8. **Panel Administracji** — zarządzanie użytkownikami i uprawnieniami
+1. **Autoryzacja i RBAC**  logowanie, rejestracja, role: Admin / Manager / Employee
+2. **Dashboard z analityką**  KPI, wykresy, przegląd operacji firmy
+3. **Zarządzanie zadaniami**  tworzenie, przypisywanie, śledzenie statusu
+4. **Workflow Builder**  kreator sekwencyjnych procesów biznesowych
+5. **Powiadomienia i przypomnienia**  alerty in-app, terminy
+6. **Współpraca zespołowa**  komentarze, przypisania, feed aktywności
+7. **Raporty i analityka**  eksport danych, raporty wydajności
+8. **Panel Administracji**  zarządzanie użytkownikami i uprawnieniami
 
 ---
 
@@ -71,19 +71,19 @@ Cel: zastąpienie rozproszonych narzędzi (arkusze kalkulacyjne, e-maile, chaoty
 
 ### Baza Danych (Prisma)
 - Schema: `/prisma/schema.prisma`
-- Zawsze używaj migracji — nigdy nie modyfikuj DB bezpośrednio
+- Zawsze używaj migracji  nigdy nie modyfikuj DB bezpośrednio
 - Modele: `PascalCase`, pola: `camelCase`
 
 ### TypeScript
 - Eksportuj typy z `/types`
 - `interface` dla obiektów, `type` dla unii i aliasów
-- Żadnych `any` — zawsze typuj props komponentów
+- Żadnych `any`  zawsze typuj props komponentów
 
 ---
 
 ## Zasady UI / UX
 
-- Design system: **Tailwind CSS** — bez hardkodowanych px
+- Design system: **Tailwind CSS**  bez hardkodowanych px
 - Dark/light mode obowiązkowy
 - Paleta: neutralna + jeden akcent (teal)
 - Typografia: czytelna, biznesowa (Inter lub Geist)
@@ -106,19 +106,19 @@ Brak centralnej widoczności, ręczne procesy, brak odpowiedzialności.
 ### Auxilium = jedna warstwa operacyjna zamiast chaosu narzędzi
 
 ### Pozycjonowanie
-- **NIE** Jira/Linear — za skomplikowane, zbyt dev-centryczne
-- **NIE** Monday/Asana — za ogólne, brak głębi operacyjnej dla MŚP
-- **TAK** — proste, skalowalne centrum operacyjne dla rozwijającej się firmy
+- **NIE** Jira/Linear  za skomplikowane, zbyt dev-centryczne
+- **NIE** Monday/Asana  za ogólne, brak głębi operacyjnej dla MŚP
+- **TAK**  proste, skalowalne centrum operacyjne dla rozwijającej się firmy
 
 ---
 
 ## Zasady Developmentu
 
-1. Prostota ponad złożoność — każda funkcja musi mieć cel biznesowy
-2. Skalowalność od początku — architektura uwzględnia wzrost
-3. Bezpieczeństwo — RBAC, walidacja wejść, sanityzacja
-4. Performance — optymistyczne aktualizacje UI, skeleton loaders
-5. Czytelny kod — komentarze przy nieoczywistej logice biznesowej
+1. Prostota ponad złożoność  każda funkcja musi mieć cel biznesowy
+2. Skalowalność od początku  architektura uwzględnia wzrost
+3. Bezpieczeństwo  RBAC, walidacja wejść, sanityzacja
+4. Performance  optymistyczne aktualizacje UI, skeleton loaders
+5. Czytelny kod  komentarze przy nieoczywistej logice biznesowej
 
 ---
 
@@ -375,14 +375,14 @@ StudioBlank is an ultra-minimal design system where whitespace is the primary de
 ## Spacing
 
 Base unit: **16px**. Very generous spacing creates openness and directs focus to imagery.
-- **space-1**: 4px — Tight inline gaps
-- **space-2**: 8px — Icon-to-label spacing
-- **space-3**: 16px — Standard element gap
-- **space-4**: 32px — Between grouped elements
-- **space-5**: 48px — Section inner padding
-- **space-6**: 64px — Between sections
-- **space-8**: 96px — Major page-level divisions
-- **space-10**: 128px — Hero top/bottom margins
+- **space-1**: 4px  Tight inline gaps
+- **space-2**: 8px  Icon-to-label spacing
+- **space-3**: 16px  Standard element gap
+- **space-4**: 32px  Between grouped elements
+- **space-5**: 48px  Section inner padding
+- **space-6**: 64px  Between sections
+- **space-8**: 96px  Major page-level divisions
+- **space-10**: 128px  Hero top/bottom margins
 
 ## Border Radius
 

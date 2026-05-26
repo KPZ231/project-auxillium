@@ -164,8 +164,8 @@ export default function EmployeeListClient({ initialEmployees }: EmployeeListCli
                       <span className="font-black text-black uppercase tracking-tighter">{employee.name}</span>
                     </div>
                   </td>
-                  <td className="px-8 py-5 font-bold text-xs text-slate-500 uppercase tracking-widest">{employee.role || "—"}</td>
-                  <td className="px-8 py-5 font-mono text-[11px] text-slate-400 uppercase">{employee.email || employee.phone || "—"}</td>
+                  <td className="px-8 py-5 font-bold text-xs text-slate-500 uppercase tracking-widest">{employee.role || ""}</td>
+                  <td className="px-8 py-5 font-mono text-[11px] text-slate-400 uppercase">{employee.email || employee.phone || ""}</td>
                   <td className="px-8 py-5">
                     <span className="text-[10px] font-bold text-black border border-black px-3 py-1 rounded-none uppercase">
                        {employee._count?.assignedProjects || 0}P / {employee._count?.assignedTasks || 0}T

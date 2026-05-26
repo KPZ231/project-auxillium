@@ -72,7 +72,7 @@ export default async function EmployeeProfilePage({ params }: PageProps) {
                 </div>
                 <div className="flex flex-col">
                   <span className="text-[9px] font-bold text-slate-300 uppercase tracking-[0.3em]">Email</span>
-                  <span className="text-sm font-mono font-bold text-black uppercase">{employee.email || "—"}</span>
+                  <span className="text-sm font-mono font-bold text-black uppercase">{employee.email || ""}</span>
                 </div>
               </div>
               <div className="flex items-center gap-6 group">
@@ -81,7 +81,7 @@ export default async function EmployeeProfilePage({ params }: PageProps) {
                 </div>
                 <div className="flex flex-col">
                   <span className="text-[9px] font-bold text-slate-300 uppercase tracking-[0.3em]">Direct</span>
-                  <span className="text-sm font-mono font-bold text-black uppercase">{employee.phone || "—"}</span>
+                  <span className="text-sm font-mono font-bold text-black uppercase">{employee.phone || ""}</span>
                 </div>
               </div>
             </div>

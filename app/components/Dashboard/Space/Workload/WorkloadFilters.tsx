@@ -70,7 +70,7 @@ export default function WorkloadFiltersBar({ filters, onFilterChange, employees 
 
   return (
     <div className="border border-slate-200 bg-white">
-      {/* Top bar — search + toggle */}
+      {/* Top bar  search + toggle */}
       <div className="flex items-center gap-4 p-4 border-b border-slate-100">
         <div className="flex-1 flex items-center gap-3 px-4 py-2 border border-slate-200 bg-white">
           <Search className="w-4 h-4 text-slate-300 shrink-0" />

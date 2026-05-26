@@ -44,7 +44,7 @@ export async function uploadAvatar(
     // Use userId as a stable prefix so old avatars are overwritten (upsert: true)
     const filename = `${userId}/${crypto.randomUUID()}.${fileExtension}`
 
-    // Upload to Supabase Storage — bucket 'avatars' must be public
+    // Upload to Supabase Storage  bucket 'avatars' must be public
     const { error: uploadError } = await supabase.storage
       .from("avatars")
       .upload(filename, file, {

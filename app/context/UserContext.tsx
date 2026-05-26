@@ -46,7 +46,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     }
   };
 
-  /** Re-fetches user data without showing a loading spinner — used after mutations */
+  /** Re-fetches user data without showing a loading spinner  used after mutations */
   const refreshUser = async () => {
     try {
       const response = await fetch("/api/user/me");

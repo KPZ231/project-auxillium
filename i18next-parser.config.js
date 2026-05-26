@@ -9,10 +9,10 @@ module.exports = {
   // Istniejące namespace'y (public/locales/en/*.json)
   // common | dashboard | forms | marketing
 
-  // Ścieżka wyjściowa — zgodna z public/locales/$LOCALE/$NAMESPACE.json
+  // Ścieżka wyjściowa  zgodna z public/locales/$LOCALE/$NAMESPACE.json
   output: 'public/locales/$LOCALE/$NAMESPACE.json',
 
-  // Ścieżki wejściowe — projekt używa App Router bez katalogu src/
+  // Ścieżki wejściowe  projekt używa App Router bez katalogu src/
   input: [
     'app/**/*.{js,jsx,ts,tsx}',
     'actions/**/*.{js,jsx,ts,tsx}',
@@ -45,7 +45,7 @@ module.exports = {
   // Linia rozdzielająca w plikach JSON
   lineEnding: 'auto',
 
-  // Zgodność z react-i18next — t('ns:key')
+  // Zgodność z react-i18next  t('ns:key')
   i18nextOptions: {
     compatibilityJSON: 'v4',
   },

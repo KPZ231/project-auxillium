@@ -51,7 +51,7 @@ export default function PageHeader({
 
         <div className="flex flex-col lg:flex-row gap-10 lg:gap-20 justify-between">
 
-          {/* Left — eyebrow + header */}
+          {/* Left  eyebrow + header */}
           <div className="lg:w-1/2 flex flex-col gap-4">
             {eyebrow && (
               <motion.p
@@ -76,7 +76,7 @@ export default function PageHeader({
             </motion.h1>
           </div>
 
-          {/* Right — description + optional CTA */}
+          {/* Right  description + optional CTA */}
           <div className="lg:w-1/2 flex flex-col gap-6 justify-end">
             <motion.p
               variants={fadeUp}

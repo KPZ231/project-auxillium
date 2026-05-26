@@ -613,7 +613,7 @@ export default function AIChatClient({ spaceId }: { spaceId: string }) {
                     const toolPart = part as unknown as ToolPart;
                     const toolName = part.type.replace("tool-", "");
 
-                    // CSV export — show download button
+                    // CSV export  show download button
                     if (
                       toolName === "exportCSV" &&
                       toolPart.state === "output-available" &&
@@ -629,7 +629,7 @@ export default function AIChatClient({ spaceId }: { spaceId: string }) {
                       );
                     }
 
-                    // Google Service Actions — show link button
+                    // Google Service Actions  show link button
                     if (
                       ["saveToGoogleDocs", "addToGoogleSheet", "createGoogleCalendarEvent"].includes(toolName) &&
                       toolPart.state === "output-available" &&
@@ -645,7 +645,7 @@ export default function AIChatClient({ spaceId }: { spaceId: string }) {
                       );
                     }
 
-                    // All other tools — status badge
+                    // All other tools  status badge
                     return (
                       <div key={index} className="px-1">
                         <StatusBadge

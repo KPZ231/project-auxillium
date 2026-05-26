@@ -35,7 +35,7 @@ interface HeroProps {
   };
 }
 
-/** Minimal stat card — flat, bordered, no shadows */
+/** Minimal stat card  flat, bordered, no shadows */
 function StatCard({
   label,
   value,
@@ -269,14 +269,14 @@ export default function HeroSection({
             >
               <div className="flex items-center justify-between mb-4">
                 <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-[#71717A]">
-                  Zadania — dziś
+                  Zadania  dziś
                 </p>
                 <CheckSquare className="w-4 h-4 text-[#D4D4D8]" />
               </div>
               <TaskRow label="Przegląd oferty dla klienta ABC" done delay={0.75} />
               <TaskRow label="Spotkanie z zespołem sprzedaży" done delay={0.8} />
               <TaskRow label="Raport wydajności Q2" done={false} delay={0.85} />
-              <TaskRow label="Onboarding — nowy pracownik" done={false} delay={0.9} />
+              <TaskRow label="Onboarding  nowy pracownik" done={false} delay={0.9} />
             </motion.div>
 
             {/* Bottom row: two mini metric cards */}

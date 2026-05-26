@@ -1,6 +1,7 @@
 import { Metadata } from "next";
 import { Inter, Anonymous_Pro } from "next/font/google";
 import { Toaster } from "sonner";
+import { Analytics } from '@vercel/analytics/react';
 import { promises as fs } from 'fs';
 import path from 'path';
 import { UserProvider } from "@/app/context/UserContext";
@@ -129,10 +130,10 @@ export default async function LocaleLayout({
     "@graph": [
       {
         "@type": "Organization",
-        "@id": "https://auxilium.app/#organization",
+        "@id": "https://auxilium.site/#organization",
         "name": "Auxilium",
-        "url": "https://auxilium.app",
-        "logo": "https://auxilium.app/logo.png",
+        "url": "https://auxilium.site",
+        "logo": "https://auxilium.site/images/auxillium-logo-2.png",
         "sameAs": [
           "https://linkedin.com/company/auxilium",
           "https://twitter.com/auxiliumapp"
@@ -140,7 +141,7 @@ export default async function LocaleLayout({
       },
       {
         "@type": "SoftwareApplication",
-        "@id": "https://auxilium.app/#software",
+        "@id": "https://auxilium.site/#software",
         "name": "Auxilium",
         "applicationCategory": "BusinessApplication",
         "operatingSystem": "Web",
@@ -150,7 +151,7 @@ export default async function LocaleLayout({
           "priceCurrency": "PLN"
         },
         "publisher": {
-          "@id": "https://auxilium.app/#organization"
+          "@id": "https://auxilium.site/#organization"
         }
       }
     ]
@@ -176,6 +177,7 @@ export default async function LocaleLayout({
           </UserProvider>
         </TranslationProvider>
         <Toaster position="top-right" richColors />
+        <Analytics />
       </body>
     </html>
   );

@@ -38,11 +38,20 @@ export const aiProRateLimit = new Ratelimit({
   prefix: "ratelimit:ai:pro",
 });
 
-export async function checkRateLimit(identifier: string, type: "auth" | "email" | "leadsearch" | "ai" = "auth") {
+// Rate limiter for Admin auth
+export const adminRateLimit = new Ratelimit({
+  redis,
+  limiter: Ratelimit.slidingWindow(5, "15 m"), // 5 attempts per 15 minutes
+  analytics: true,
+  prefix: "ratelimit:admin",
+});
+
+export async function checkRateLimit(identifier: string, type: "auth" | "email" | "leadsearch" | "ai" | "admin" = "auth") {
   let limiter = authRateLimit;
   if (type === "email") limiter = emailRateLimit;
   if (type === "leadsearch") limiter = leadSearchRateLimit;
   if (type === "ai") limiter = aiProRateLimit;
+  if (type === "admin") limiter = adminRateLimit;
 
   const { success, limit, remaining, reset } = await limiter.limit(identifier);
 

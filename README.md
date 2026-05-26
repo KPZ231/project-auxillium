@@ -1,147 +1,80 @@
 <div align="center">
 
-# Projekt Auxilium
+# Auxillium
 
-### Inteligentny system zarządzania biznesem dla małych i średnich firm
-
-<p align="center">
-  <img src="https://img.shields.io/badge/status-w%20budowie-01696f?style=for-the-badge" alt="Status Badge" />
-  <img src="https://img.shields.io/badge/stworzone%20dla-MŚP-0f172a?style=for-the-badge" alt="SMBs Badge" />
-  <img src="https://img.shields.io/badge/platforma-web-1f6feb?style=for-the-badge" alt="Platform Badge" />
-  <img src="https://img.shields.io/badge/licencja-MIT-15803d?style=for-the-badge" alt="License Badge" />
-</p>
+### Business OS dla małych i średnich firm
 
 <p align="center">
-  Auxilium pomaga firmom organizować operacje, zarządzać zadaniami, usprawniać procesy i utrzymywać synergię zespołów w jednym miejscu.
+  <img src="https://img.shields.io/badge/status-w%20budowie-01696f?style=for-the-badge" alt="Status" />
+  <img src="https://img.shields.io/badge/Next.js-16-black?style=for-the-badge&logo=next.js" alt="Next.js" />
+  <img src="https://img.shields.io/badge/PostgreSQL-Prisma-3982CE?style=for-the-badge&logo=prisma" alt="Prisma" />
+  <img src="https://img.shields.io/badge/licencja-MIT-15803d?style=for-the-badge" alt="MIT" />
 </p>
 
 </div>
 
-***
+---
 
-## Przegląd
+## O projekcie
 
-Auxilium to nowoczesna platforma do zarządzania biznesem, zaprojektowana dla małych i średnich firm, które potrzebują prostego i skalowalnego sposobu na zarządzanie codziennymi operacjami.
+Auxillium to platforma CRM/ERP dla MŚP łącząca zarządzanie projektami, leadami, klientami, finansami, pracownikami i dokumentami w jednym systemie. Zbudowana na Next.js 16 z wielojęzyczną obsługą (PL/EN/DE) i systemem wielodostępu (Spaces).
 
-Zamiast żonglować wieloma narzędziami, arkuszami kalkulacyjnymi i rozproszonymi procesami, Auxilium daje zespołom jeden centralny system do koordynacji działań, monitorowania postępów i poprawy efektywności operacyjnej.
+## Stack technologiczny
 
-## Główne Cele
+| Warstwa | Technologie |
+|---|---|
+| Framework | Next.js 16 (App Router), React 19 |
+| UI | Tailwind CSS v4, Material UI, Framer Motion |
+| Baza danych | PostgreSQL + Prisma |
+| Auth | JWT (jose), Argon2, OAuth (Google, GitHub) |
+| Pliki | Supabase Storage |
+| Cache | Upstash Redis |
+| Płatności | Stripe (subskrypcje) |
+| AI | OpenRouter + Vercel AI SDK |
 
-- Uproszczenie codziennego zarządzania biznesem
-- Centralizacja działań, zadań i procesów (workflows)
-- Poprawa widoczności działań zespołu i odpowiedzialności
-- Redukcja chaosu operacyjnego
-- Wspieranie wzrostu firmy dzięki skalowalnym procesom
+## Funkcje
 
-## Kluczowe Funkcje
+- **Projekty** — kanban, oś czasu, priorytety, drag-and-drop
+- **Leady i klienci** — CRM z filtrowaniem i statusami
+- **Finanse** — przychody, koszty, P&L, raporty
+- **Zadania** — tablica kanban, przypisywanie do członków
+- **Pracownicy** — zarządzanie zespołem, obciążenie pracą
+- **Dokumenty** — kreator szablonów z placeholderami, eksport PDF
+- **AI Chat** — asystent z dostępem do danych workspace + Google (Docs, Sheets, Calendar)
+- **Subskrypcje** — FREE / PRO / ENTERPRISE przez Stripe
 
-### Zarządzanie Operacjami
-Zarządzaj wewnętrznymi działaniami firmy z jednego miejsca, zamiast polegać na rozproszonych narzędziach i procesach manualnych.
-
-### Śledzenie Zadań i Działań
-Monitoruj obowiązki, postępy i bieżące działania w różnych zespołach i działach.
-
-### Organizacja Procesów (Workflows)
-Stwórz bardziej uporządkowany i wydajny sposób przepływu pracy wewnątrz firmy.
-
-### Współpraca Zespołowa
-Pomóż zespołom pozostać zsynchronizowanym, poinformowanym i połączonym wokół wspólnych celów.
-
-### Widoczność Biznesowa
-Uzyskaj wyraźniejszy obraz tego, co dzieje się w firmie i gdzie potrzebne są ulepszenia.
-
-## Dlaczego Auxilium?
-
-Małe i średnie firmy często wyrastają z podstawowych narzędzi, ale nie chcą złożoności dużych systemów korporacyjnych (Enterprise).
-
-Auxilium zostało zbudowane, aby wypełnić tę lukę: jest wystarczająco potężne, aby poprawnie zorganizować operacje, ale wystarczająco proste, aby pozostać praktycznym dla rozwijających się firm.
-
-## Idealne dla:
-
-Auxilium świetnie sprawdzi się w przypadku:
-
-- Małych firm skalujących swoje wewnętrzne procesy
-- Średnich firm poprawiających kontrolę operacyjną
-- Zespołów potrzebujących lepszej widoczności przepływu pracy
-- Firm zastępujących arkusze kalkulacyjne i rozproszone narzędzia
-- Przedsiębiorstw szukających jednego centralnego centrum operacyjnego
-
-## Przykładowe Zastosowania
-
-- Zarządzanie codziennymi działaniami wewnętrznymi
-- Koordynowanie obowiązków zespołu
-- Śledzenie postępów operacyjnych
-- Organizowanie powtarzalnych procesów biznesowych
-- Poprawa współpracy między działami
-
-## Struktura Projektu
+## Uruchomienie
 
 ```bash
-/
-├── actions/
-├── app/
-├── components/
-├── config/
-├── lib/
-├── prisma/
-├── public/
-├── types/
-└── utils/
-```
-
-## Jak Zacząć
-
-```bash
-git clone https://github.com/twoj-uzytkownik/auxilium.git
-cd auxilium
 npm install
 npm run dev
 ```
 
-## Wizja Produktu
+Wymagane zmienne środowiskowe: `.env` z danymi PostgreSQL, Supabase, Redis, Stripe, OpenRouter, Google OAuth.
 
-Auxilium dąży do stania się "warstwą operacyjną" dla rozwijających się firm  miejscem, gdzie zadania, procesy, ludzie i działania są zarządzane w czystym i wydajnym systemie.
+```bash
+npx prisma generate   # regeneracja klienta po zmianie schematu
+npx prisma db push    # synchronizacja schematu z bazą
+```
 
-Nacisk kładziony jest na użyteczność, jasność i kontrolę operacyjną.
+## Struktura
 
-## Roadmapa
+```
+app/
+├── [locale]/
+│   ├── (marketing)/   # strony publiczne
+│   └── (dashboard)/   # chronione strony aplikacji
+├── api/               # REST endpoints (auth, stripe, AI, PDF)
+├── components/        # komponenty React
+└── context/           # UserContext, TranslationContext
+actions/               # server actions (logika biznesowa)
+lib/                   # session, redis, supabase, i18n
+prisma/schema.prisma   # schemat bazy danych
+public/locales/        # tłumaczenia (pl/en/de)
+```
 
-- Autoryzacja i dostęp oparty na rolach (RBAC)
-- Dashboard z analityką biznesową
-- Zarządzanie zadaniami i działaniami
-- Kreator procesów (Workflow builder)
-- Powiadomienia i przypomnienia
-- Funkcje współpracy zespołowej
-- Raporty i analityka
-- System administracji i uprawnień
-
-## Pomysły na Prezentację UI
-
-W przyszłości możesz wzbogacić ten plik README o:
-
-- Zrzuty ekranu aplikacji w `/public` lub `/docs`
-- Dema procesów w formacie GIF
-- Schematy architektury
-- Tabele porównawcze funkcji
-- Wizualizacje roadmapy produktu
-
-## Wkład w projekt (Contributing)
-
-Wszelki wkład, sugestie i ulepszenia są mile widziane.
-
-Jeśli chcesz pomóc:
-
-1. Stwórz fork repozytorium
-2. Stwórz gałąź dla swojej funkcji (feature branch)
-3. Zatwierdź swoje zmiany (commit)
-4. Otwórz Pull Request
-
-## Licencja
-
-Ten projekt jest licencjonowany na warunkach licencji MIT.
-
-***
+---
 
 <div align="center">
-  <sub>Zbudowane z naciskiem na przejrzystość, operacje i skalowalne procesy biznesowe.</sub>
+  <sub>Zbudowane z Next.js · Tailwind · Prisma · Stripe</sub>
 </div>

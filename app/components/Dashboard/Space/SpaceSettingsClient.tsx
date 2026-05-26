@@ -49,9 +49,9 @@ export default function SpaceSettingsClient({ initialSpaces, activeSpaceId, acti
 
     try {
       const result = await createSpace(formData);
-      if (result.success) {
+      if (result.success && result.space) {
         toast.success("Space created successfully!");
-        setSpaces([...spaces, result.space]);
+        setSpaces([...spaces, result.space as Space]);
         setIsCreating(false);
         router.refresh();
       } else if (result.error === "SPACE_LIMIT_REACHED") {

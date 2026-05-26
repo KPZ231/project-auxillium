@@ -306,7 +306,7 @@ export async function POST(req: Request) {
             }
           : {};
 
-        return { ...baseTools, ...googleTools };
+        return { ...baseTools, ...googleTools } as any;
       })(),
     });
 

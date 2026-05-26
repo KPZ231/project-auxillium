@@ -1,7 +1,8 @@
 "use client";
 
-import Button from "../Button/Button";
-import { motion, Variants } from "motion/react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { motion } from "motion/react";
 
 interface CTAProps {
   content: string;
@@ -14,63 +15,64 @@ interface CTAProps {
 }
 
 export default function CTA({ content, description, button }: CTAProps) {
-  const textVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { duration: 0.6, ease: "easeOut" } 
-    }
-  };
-
-  const buttonVariants: Variants = {
-    hidden: { opacity: 0, scale: 0 },
-    visible: { 
-      opacity: 1, 
-      scale: 1, 
-      transition: { delay: 0.3, duration: 0.5, ease: "backOut" } 
-    }
-  };
-
   return (
-    <>
-      <div className="w-full px-6 lg:px-12 py-24">
-        <div className="max-w-7xl mx-auto flex flex-col gap-8 items-center text-center">
-          <motion.div
-            variants={textVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
+    <section className="w-full bg-[#0A0A0A] px-6 lg:px-12 py-24">
+      <div className="max-w-7xl mx-auto">
+
+        {/* Decorative top divider */}
+        <motion.div
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="flex items-center gap-6 mb-16"
+        >
+          <div className="h-px bg-white/15 flex-1" />
+          <span
+            className="text-[11px] uppercase tracking-[0.35em] text-white/30"
+            style={{ fontFamily: 'var(--anonymus-pro)' }}
           >
-            <h2 className="text-4xl lg:text-6xl font-bold text-(--primary) leading-tight">
-              {content}
-            </h2>
-          </motion.div>
-          <motion.div
-            variants={textVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
+            Zacznij teraz
+          </span>
+          <div className="h-px bg-white/15 flex-1" />
+        </motion.div>
+
+        {/* Split layout */}
+        <div className="flex flex-col lg:flex-row items-start lg:items-end justify-between gap-12">
+
+          {/* Left: headline */}
+          <motion.h2
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, ease: 'easeOut' }}
+            className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight tracking-tight max-w-2xl"
           >
-            <p className="text-base max-w-2xl sm:text-lg md:text-xl lg:text-2xl font-medium tracking-wide text-(--neutral)">
+            {content}
+          </motion.h2>
+
+          {/* Right: description + button */}
+          <motion.div
+            initial={{ opacity: 0, y: 24 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.15, ease: 'easeOut' }}
+            className="flex flex-col gap-8 lg:max-w-xs shrink-0"
+          >
+            <p className="text-base text-white/50 font-light leading-relaxed">
               {description}
             </p>
+            <Link
+              href={button.url}
+              className="inline-flex items-center gap-2 bg-white text-[#0A0A0A] px-6 py-3 text-sm font-medium uppercase tracking-[0.08em] hover:bg-[#FAFAFA] transition-colors duration-150 group w-fit"
+            >
+              {button.content}
+              <ArrowRight className="w-4 h-4 transition-transform duration-150 group-hover:translate-x-1" />
+            </Link>
           </motion.div>
-          <motion.div 
-            variants={buttonVariants}
-            initial="hidden" 
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-          >
-            <Button
-              content={button.content}
-              variant={button.variant}
-              url={button.url}
-              showArrow={true}
-            />
-          </motion.div>
+
         </div>
       </div>
-    </>
+    </section>
   );
 }

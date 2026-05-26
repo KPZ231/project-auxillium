@@ -1,182 +1,156 @@
 'use client'
 
-import { Box, Typography } from '@mui/material';
-import { LineChart, BarChart } from '@mui/x-charts';
-import { motion } from 'motion/react';
-import { useState } from 'react';
+import { motion, useInView } from 'motion/react';
+import { useRef, useEffect, useState } from 'react';
 import { useTranslation } from "@/app/context/TranslationContext";
 
-const performanceData = [
-  { month: 'Jan', value: 45 },
-  { month: 'Feb', value: 52 },
-  { month: 'Mar', value: 48 },
-  { month: 'Apr', value: 61 },
-  { month: 'May', value: 55 },
-  { month: 'Jun', value: 67 },
-  { month: 'Jul', value: 72 },
-];
+function AnimatedCounter({
+  target,
+  suffix = '',
+  inView,
+}: {
+  target: number;
+  suffix?: string;
+  inView: boolean;
+}) {
+  const [display, setDisplay] = useState(0);
+  const rafRef = useRef<number | undefined>(undefined);
 
-const growthData = [
-  { year: '2021', value: 30 },
-  { year: '2022', value: 45 },
-  { year: '2023', value: 75 },
-  { year: '2024', value: 90 },
-];
+  useEffect(() => {
+    if (!inView) return;
+    const start = Date.now();
+    const duration = 1800;
 
-const MotionBox = motion(Box);
+    const tick = () => {
+      const elapsed = Date.now() - start;
+      const progress = Math.min(elapsed / duration, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      setDisplay(Math.round(target * eased));
+      if (progress < 1) {
+        rafRef.current = requestAnimationFrame(tick);
+      }
+    };
+
+    rafRef.current = requestAnimationFrame(tick);
+    return () => {
+      if (rafRef.current !== undefined) cancelAnimationFrame(rafRef.current);
+    };
+  }, [inView, target]);
+
+  return <>{display.toLocaleString('pl-PL')}{suffix}</>;
+}
 
 export default function TemplateAnalitics() {
   const { t } = useTranslation();
-  const [perfData, setPerfData] = useState(performanceData.map(d => ({ ...d, value: 0 })));
-  const [revData, setRevData] = useState(growthData.map(d => ({ ...d, value: 0 })));
+  const ref = useRef(null);
+  const inView = useInView(ref, { once: true, margin: '-80px' });
+
+  const metrics = [
+    { value: 124380, suffix: ' zł', label: 'Przychód miesięczny', bar: 82 },
+    { value: 48, suffix: '', label: 'Aktywni klienci', bar: 64 },
+    { value: 30, suffix: '%', label: 'Czas zaoszczędzony', bar: 30 },
+  ];
+
+  const trends = [
+    {
+      label: t("dashboard:leads.efficiency_trend", "Trend efektywności"),
+      desc: "Zespoły korzystające z Auxillium odnotowują średnio 30% wzrost efektywności w pierwszym kwartale użytkowania.",
+      stat: '+30%',
+      sublabel: 'vs. brak systemu',
+    },
+    {
+      label: t("dashboard:leads.revenue_growth", "Wzrost przychodów"),
+      desc: "Centralizacja CRM i finansów pozwala identyfikować szanse sprzedażowe 2× szybciej niż przy rozproszonych narzędziach.",
+      stat: '2×',
+      sublabel: 'szybsza identyfikacja',
+    },
+  ];
 
   return (
-    <Box sx={{ width: '100%', py: 12, px: { xs: 4, md: 8 }, backgroundColor: 'var(--secondary)' }}>
-      <Box sx={{ maxWidth: '1200px', mx: 'auto' }}>
-        <MotionBox 
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, ease: "easeOut" }}
-          sx={{ mb: 8, borderLeft: '4px solid var(--primary)', pl: 4 }}
+    <section ref={ref} className="w-full px-6 lg:px-12 py-24 bg-[#FAFAFA]">
+      <div className="max-w-7xl mx-auto">
+        {/* Section header */}
+        <motion.div
+          initial={{ opacity: 0, x: -16 }}
+          animate={inView ? { opacity: 1, x: 0 } : {}}
+          transition={{ duration: 0.6, ease: 'easeOut' }}
+          className="mb-16 border-l-[3px] border-[#0A0A0A] pl-6"
         >
-          <Typography 
-            variant="h2" 
-            sx={{ 
-              fontFamily: 'Inter', 
-              fontWeight: 700, 
-              fontSize: { xs: '24px', md: '32px' }, 
-              color: 'var(--primary)',
-              textTransform: 'uppercase',
-              letterSpacing: '0.1em',
-              lineHeight: 1.1
-            }}
+          <p
+            className="text-xs uppercase tracking-[0.3em] text-[#71717A] mb-2"
+            style={{ fontFamily: 'var(--anonymus-pro)' }}
           >
             {t("dashboard:leads.analytics_title", "Przykładowe Analityki")}
-          </Typography>
-          <Typography 
-            sx={{ 
-              fontFamily: 'Inter', 
-              fontSize: '14px', 
-              color: 'var(--neutral)', 
-              mt: 1,
-              fontWeight: 300
-            }}
-          >
-            <span dangerouslySetInnerHTML={{ __html: t("dashboard:leads.analytics_subtitle", "Przykładowe dane reprezentowane przez wykresy <b>Auxillium</b>") }} />
-          </Typography>
-        </MotionBox>
+          </p>
+          <h2 className="text-3xl md:text-4xl font-bold text-[#0A0A0A] leading-tight">
+            Dane, które mówią same za siebie
+          </h2>
+        </motion.div>
 
-        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', lg: '1fr 1fr' }, gap: 8 }}>
-          {/* Line Chart */}
-          <MotionBox 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            onViewportEnter={() => setPerfData(performanceData)}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            sx={{ border: '1px solid var(--tetriary)', p: 4, transition: 'border-color 0.2s', '&:hover': { borderColor: 'var(--primary)' } }}
-          >
-            <Typography variant="h3" sx={{ fontSize: '16px', fontWeight: 600, mb: 4, fontFamily: 'Inter', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-              {t("dashboard:leads.efficiency_trend", "Efficiency Trend")}
-            </Typography>
-            <Box sx={{ height: 300, width: '100%' }}>
-              <LineChart
-                dataset={perfData}
-                xAxis={[{ 
-                  dataKey: 'month', 
-                  scaleType: 'band',
-                  disableLine: false,
-                  disableTicks: false,
-                }]}
-                series={[{ 
-                  dataKey: 'value', 
-                  color: 'var(--primary)',
-                  showMark: true,
-                  area: true,
-                  label: t("dashboard:leads.efficiency_label", 'Efficiency %')
-                }]}
-                height={300}
-                margin={{ top: 20, bottom: 30, left: 40, right: 10 }}
-                sx={{
-                  '.MuiAreaElement-root': {
-                    fill: 'var(--primary)',
-                    opacity: 0.05,
-                  },
-                  '.MuiLineElement-root': {
-                    strokeWidth: 2,
-                  },
-                  '.MuiMarkElement-root': {
-                    stroke: 'var(--primary)',
-                    fill: 'var(--secondary)',
-                    strokeWidth: 2,
-                  },
-                  '& .MuiChartsAxis-bottom .MuiChartsAxis-line': {
-                    stroke: 'var(--primary)',
-                  },
-                  '& .MuiChartsAxis-left .MuiChartsAxis-line': {
-                    stroke: 'var(--primary)',
-                  },
-                }}
-              />
-            </Box>
-          </MotionBox>
+        {/* Metrics grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 border border-[#0A0A0A]">
+          {metrics.map((metric, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 24 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: i * 0.1, ease: 'easeOut' }}
+              className="p-8 md:p-10 border-b sm:border-b-0 sm:border-r border-[#0A0A0A] last:border-r-0 flex flex-col gap-5"
+            >
+              <p className="text-[11px] uppercase tracking-[0.2em] text-[#71717A]">
+                {metric.label}
+              </p>
+              <p
+                className="text-4xl md:text-5xl font-bold text-[#0A0A0A] leading-none"
+                style={{ fontFamily: 'var(--anonymus-pro)' }}
+              >
+                <AnimatedCounter target={metric.value} suffix={metric.suffix} inView={inView} />
+              </p>
+              <div className="h-[2px] bg-[#E5E5E5] relative overflow-hidden">
+                <motion.div
+                  className="absolute top-0 left-0 h-full bg-[#0A0A0A]"
+                  initial={{ width: '0%' }}
+                  animate={inView ? { width: `${metric.bar}%` } : { width: '0%' }}
+                  transition={{ duration: 1.4, delay: 0.4 + i * 0.1, ease: 'easeOut' }}
+                />
+              </div>
+            </motion.div>
+          ))}
+        </div>
 
-          {/* Bar Chart */}
-          <MotionBox 
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            onViewportEnter={() => setRevData(growthData)}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            sx={{ border: '1px solid var(--tetriary)', p: 4, transition: 'border-color 0.2s', '&:hover': { borderColor: 'var(--primary)' } }}
-          >
-            <Typography variant="h3" sx={{ fontSize: '16px', fontWeight: 600, mb: 4, fontFamily: 'Inter', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-              {t("dashboard:leads.revenue_growth", "Revenue Growth")}
-            </Typography>
-            <Box sx={{ height: 300, width: '100%' }}>
-              <BarChart
-                dataset={revData}
-                xAxis={[{ 
-                  dataKey: 'year', 
-                  scaleType: 'band',
-                }]}
-                series={[{ 
-                  dataKey: 'value', 
-                  color: 'var(--primary)',
-                  label: t("dashboard:leads.revenue_label", 'Revenue (k$)')
-                }]}
-                height={300}
-                margin={{ top: 20, bottom: 30, left: 40, right: 10 }}
-                sx={{
-                  '.MuiBarElement-root': {
-                    fill: 'var(--primary)',
-                    transition: 'opacity 0.2s',
-                    '&:hover': {
-                      opacity: 0.8
-                    }
-                  },
-                  '& .MuiChartsAxis-bottom .MuiChartsAxis-line': {
-                    stroke: 'var(--primary)',
-                  },
-                  '& .MuiChartsAxis-left .MuiChartsAxis-line': {
-                    stroke: 'var(--primary)',
-                  },
-                }}
-              />
-            </Box>
-          </MotionBox>
-        </Box>
-        
-        <MotionBox 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          sx={{ mt: 8, display: 'flex', justifyContent: 'space-between', alignItems: 'center', borderTop: '1px solid var(--tetriary)', pt: 4 }}
-        >        
-        </MotionBox>
-      </Box>
-    </Box>
+        {/* Trend columns */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 border-x border-b border-[#0A0A0A] divide-y lg:divide-y-0 lg:divide-x divide-[#0A0A0A]">
+          {trends.map((item, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 16 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: 0.4 + i * 0.15, ease: 'easeOut' }}
+              className="p-8 md:p-10 flex flex-col gap-4"
+            >
+              <p className="text-[11px] uppercase tracking-[0.2em] text-[#71717A]">
+                {item.label}
+              </p>
+              <div className="flex items-end justify-between gap-6">
+                <p className="text-sm text-[#0A0A0A] font-light leading-relaxed max-w-xs">
+                  {item.desc}
+                </p>
+                <div className="text-right shrink-0">
+                  <p
+                    className="text-4xl md:text-5xl font-bold text-[#0A0A0A] leading-none"
+                    style={{ fontFamily: 'var(--anonymus-pro)' }}
+                  >
+                    {item.stat}
+                  </p>
+                  <p className="text-[11px] text-[#71717A] tracking-wide mt-1">
+                    {item.sublabel}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }

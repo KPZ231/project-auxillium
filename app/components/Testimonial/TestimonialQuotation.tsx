@@ -1,60 +1,64 @@
 "use client";
-import { motion, Variants } from "motion/react";
+import { motion } from "motion/react";
 
 interface TestimonialQuotationProps {
   name: string;
   header: string;
 }
 
-export default function TestimonialQuotation({
-  name,
-  header,
-}: TestimonialQuotationProps) {
-  
-  const textVariants: Variants = {
-    hidden: { opacity: 0, scale: 0.8, y: 20 },
-    visible: (i: number) => ({
-      opacity: 1,
-      scale: 1,
-      y: 0,
-      transition: {
-        delay: i * 0.15,
-        duration: 0.5,
-        ease: [0.215, 0.61, 0.355, 1] as [number, number, number, number], // easeOutCubic
-      },
-    }),
-  };
-
-  
-
+export default function TestimonialQuotation({ name, header }: TestimonialQuotationProps) {
   return (
-    <>
-      <div className="w-full bg-(--primary) min-h-[400px] flex items-center justify-center px-6 lg:px-12">
-        <div className="max-w-7xl w-full flex flex-col gap-6 items-center text-center">
+    <section className="w-full bg-[#0A0A0A] px-6 lg:px-12 py-24 lg:py-32 overflow-hidden">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col lg:flex-row items-start lg:items-center">
+
+          {/* Giant decorative quote mark */}
           <motion.div
-            variants={textVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: 'easeOut' }}
+            className="shrink-0 select-none -mb-6 lg:mb-0 lg:-mr-6"
+            aria-hidden
           >
-            <p className="tracking-widest text-lg text-(--neutral) font-light uppercase">
-              {name}
-            </p>
+            <span className="block text-[160px] md:text-[200px] lg:text-[260px] font-bold leading-none text-white/8">
+              &ldquo;
+            </span>
           </motion.div>
 
-          <motion.div
-            variants={textVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.2 }}
-            className="flex flex-row justify-center"
-          >
-            <h2 className="tracking-wide text-3xl md:text-4xl lg:text-5xl w-full md:w-3/4 text-(--secondary) font-bold leading-tight">
+          {/* Content */}
+          <div className="flex flex-col gap-8">
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.15 }}
+              className="text-[11px] uppercase tracking-[0.35em] text-white/40"
+            >
+              {name}
+            </motion.p>
+
+            <motion.h2
+              initial={{ opacity: 0, y: 24 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.65, delay: 0.25 }}
+              className="text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-white leading-tight tracking-tight"
+            >
               {header}
-            </h2>
-          </motion.div>
+            </motion.h2>
+
+            <motion.div
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.9, delay: 0.4, ease: 'easeOut' }}
+              className="h-px bg-white/20 origin-left"
+            />
+          </div>
+
         </div>
       </div>
-    </>
+    </section>
   );
 }

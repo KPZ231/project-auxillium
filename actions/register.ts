@@ -6,6 +6,8 @@ import { registerSchema, RegisterFormData } from "@/lib/validators";
 import { login } from "@/lib/session";
 import { checkRateLimit } from "@/lib/rate-limit";
 import { headers } from "next/headers";
+import { sendVerificationEmail } from "@/lib/mail";
+import { randomInt } from "crypto";
 
 export async function registerAction(formData: RegisterFormData) {
   // 1. Rate limiting
@@ -65,6 +67,20 @@ export async function registerAction(formData: RegisterFormData) {
 
     // 6. Create session
     await login(user.id, false);
+
+    // Send verification email (non-fatal — user is registered even if this fails)
+    try {
+      const verifyCode = randomInt(100000, 1000000).toString();
+      const verifyExpires = new Date(Date.now() + 15 * 60 * 1000);
+      await prisma.emailVerificationToken.create({
+        data: { code: verifyCode, expires: verifyExpires, userId: user.id },
+      });
+      if (user.email) {
+        await sendVerificationEmail(user.email, verifyCode);
+      }
+    } catch (mailError) {
+      console.error("Failed to send verification email after registration:", mailError);
+    }
 
     return { success: true };
   } catch (error) {

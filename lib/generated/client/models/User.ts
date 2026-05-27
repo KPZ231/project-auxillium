@@ -20,8 +20,18 @@ export type UserModel = runtime.Types.Result.DefaultSelection<Prisma.$UserPayloa
 
 export type AggregateUser = {
   _count: UserCountAggregateOutputType | null
+  _avg: UserAvgAggregateOutputType | null
+  _sum: UserSumAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
+}
+
+export type UserAvgAggregateOutputType = {
+  tutorialStep: number | null
+}
+
+export type UserSumAggregateOutputType = {
+  tutorialStep: number | null
 }
 
 export type UserMinAggregateOutputType = {
@@ -36,6 +46,8 @@ export type UserMinAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   lastActiveSpaceId: string | null
+  tutorialStep: number | null
+  tutorialDismissed: boolean | null
   stripeCustomerId: string | null
   stripeSubscriptionId: string | null
   stripePriceId: string | null
@@ -54,6 +66,8 @@ export type UserMaxAggregateOutputType = {
   createdAt: Date | null
   updatedAt: Date | null
   lastActiveSpaceId: string | null
+  tutorialStep: number | null
+  tutorialDismissed: boolean | null
   stripeCustomerId: string | null
   stripeSubscriptionId: string | null
   stripePriceId: string | null
@@ -72,6 +86,8 @@ export type UserCountAggregateOutputType = {
   createdAt: number
   updatedAt: number
   lastActiveSpaceId: number
+  tutorialStep: number
+  tutorialDismissed: number
   stripeCustomerId: number
   stripeSubscriptionId: number
   stripePriceId: number
@@ -79,6 +95,14 @@ export type UserCountAggregateOutputType = {
   _all: number
 }
 
+
+export type UserAvgAggregateInputType = {
+  tutorialStep?: true
+}
+
+export type UserSumAggregateInputType = {
+  tutorialStep?: true
+}
 
 export type UserMinAggregateInputType = {
   id?: true
@@ -92,6 +116,8 @@ export type UserMinAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   lastActiveSpaceId?: true
+  tutorialStep?: true
+  tutorialDismissed?: true
   stripeCustomerId?: true
   stripeSubscriptionId?: true
   stripePriceId?: true
@@ -110,6 +136,8 @@ export type UserMaxAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   lastActiveSpaceId?: true
+  tutorialStep?: true
+  tutorialDismissed?: true
   stripeCustomerId?: true
   stripeSubscriptionId?: true
   stripePriceId?: true
@@ -128,6 +156,8 @@ export type UserCountAggregateInputType = {
   createdAt?: true
   updatedAt?: true
   lastActiveSpaceId?: true
+  tutorialStep?: true
+  tutorialDismissed?: true
   stripeCustomerId?: true
   stripeSubscriptionId?: true
   stripePriceId?: true
@@ -173,6 +203,18 @@ export type UserAggregateArgs<ExtArgs extends runtime.Types.Extensions.InternalA
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: UserAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: UserSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: UserMinAggregateInputType
@@ -203,6 +245,8 @@ export type UserGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalArg
   take?: number
   skip?: number
   _count?: UserCountAggregateInputType | true
+  _avg?: UserAvgAggregateInputType
+  _sum?: UserSumAggregateInputType
   _min?: UserMinAggregateInputType
   _max?: UserMaxAggregateInputType
 }
@@ -219,11 +263,15 @@ export type UserGroupByOutputType = {
   createdAt: Date
   updatedAt: Date
   lastActiveSpaceId: string | null
+  tutorialStep: number
+  tutorialDismissed: boolean
   stripeCustomerId: string | null
   stripeSubscriptionId: string | null
   stripePriceId: string | null
   stripeCurrentPeriodEnd: Date | null
   _count: UserCountAggregateOutputType | null
+  _avg: UserAvgAggregateOutputType | null
+  _sum: UserSumAggregateOutputType | null
   _min: UserMinAggregateOutputType | null
   _max: UserMaxAggregateOutputType | null
 }
@@ -258,6 +306,8 @@ export type UserWhereInput = {
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   lastActiveSpaceId?: Prisma.StringNullableFilter<"User"> | string | null
+  tutorialStep?: Prisma.IntFilter<"User"> | number
+  tutorialDismissed?: Prisma.BoolFilter<"User"> | boolean
   stripeCustomerId?: Prisma.StringNullableFilter<"User"> | string | null
   stripeSubscriptionId?: Prisma.StringNullableFilter<"User"> | string | null
   stripePriceId?: Prisma.StringNullableFilter<"User"> | string | null
@@ -291,6 +341,8 @@ export type UserOrderByWithRelationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   lastActiveSpaceId?: Prisma.SortOrderInput | Prisma.SortOrder
+  tutorialStep?: Prisma.SortOrder
+  tutorialDismissed?: Prisma.SortOrder
   stripeCustomerId?: Prisma.SortOrderInput | Prisma.SortOrder
   stripeSubscriptionId?: Prisma.SortOrderInput | Prisma.SortOrder
   stripePriceId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -329,6 +381,8 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   createdAt?: Prisma.DateTimeFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"User"> | Date | string
   lastActiveSpaceId?: Prisma.StringNullableFilter<"User"> | string | null
+  tutorialStep?: Prisma.IntFilter<"User"> | number
+  tutorialDismissed?: Prisma.BoolFilter<"User"> | boolean
   stripePriceId?: Prisma.StringNullableFilter<"User"> | string | null
   stripeCurrentPeriodEnd?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   resetTokens?: Prisma.PasswordResetTokenListRelationFilter
@@ -360,13 +414,17 @@ export type UserOrderByWithAggregationInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   lastActiveSpaceId?: Prisma.SortOrderInput | Prisma.SortOrder
+  tutorialStep?: Prisma.SortOrder
+  tutorialDismissed?: Prisma.SortOrder
   stripeCustomerId?: Prisma.SortOrderInput | Prisma.SortOrder
   stripeSubscriptionId?: Prisma.SortOrderInput | Prisma.SortOrder
   stripePriceId?: Prisma.SortOrderInput | Prisma.SortOrder
   stripeCurrentPeriodEnd?: Prisma.SortOrderInput | Prisma.SortOrder
   _count?: Prisma.UserCountOrderByAggregateInput
+  _avg?: Prisma.UserAvgOrderByAggregateInput
   _max?: Prisma.UserMaxOrderByAggregateInput
   _min?: Prisma.UserMinOrderByAggregateInput
+  _sum?: Prisma.UserSumOrderByAggregateInput
 }
 
 export type UserScalarWhereWithAggregatesInput = {
@@ -384,6 +442,8 @@ export type UserScalarWhereWithAggregatesInput = {
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"User"> | Date | string
   lastActiveSpaceId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
+  tutorialStep?: Prisma.IntWithAggregatesFilter<"User"> | number
+  tutorialDismissed?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   stripeCustomerId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   stripeSubscriptionId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   stripePriceId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
@@ -402,6 +462,8 @@ export type UserCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
+  tutorialStep?: number
+  tutorialDismissed?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
@@ -435,6 +497,8 @@ export type UserUncheckedCreateInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
+  tutorialStep?: number
+  tutorialDismissed?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
@@ -468,6 +532,8 @@ export type UserUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
+  tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -501,6 +567,8 @@ export type UserUncheckedUpdateInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
+  tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -534,6 +602,8 @@ export type UserCreateManyInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
+  tutorialStep?: number
+  tutorialDismissed?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
@@ -552,6 +622,8 @@ export type UserUpdateManyMutationInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
+  tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -570,6 +642,8 @@ export type UserUncheckedUpdateManyInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
+  tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -588,10 +662,16 @@ export type UserCountOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   lastActiveSpaceId?: Prisma.SortOrder
+  tutorialStep?: Prisma.SortOrder
+  tutorialDismissed?: Prisma.SortOrder
   stripeCustomerId?: Prisma.SortOrder
   stripeSubscriptionId?: Prisma.SortOrder
   stripePriceId?: Prisma.SortOrder
   stripeCurrentPeriodEnd?: Prisma.SortOrder
+}
+
+export type UserAvgOrderByAggregateInput = {
+  tutorialStep?: Prisma.SortOrder
 }
 
 export type UserMaxOrderByAggregateInput = {
@@ -606,6 +686,8 @@ export type UserMaxOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   lastActiveSpaceId?: Prisma.SortOrder
+  tutorialStep?: Prisma.SortOrder
+  tutorialDismissed?: Prisma.SortOrder
   stripeCustomerId?: Prisma.SortOrder
   stripeSubscriptionId?: Prisma.SortOrder
   stripePriceId?: Prisma.SortOrder
@@ -624,10 +706,16 @@ export type UserMinOrderByAggregateInput = {
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   lastActiveSpaceId?: Prisma.SortOrder
+  tutorialStep?: Prisma.SortOrder
+  tutorialDismissed?: Prisma.SortOrder
   stripeCustomerId?: Prisma.SortOrder
   stripeSubscriptionId?: Prisma.SortOrder
   stripePriceId?: Prisma.SortOrder
   stripeCurrentPeriodEnd?: Prisma.SortOrder
+}
+
+export type UserSumOrderByAggregateInput = {
+  tutorialStep?: Prisma.SortOrder
 }
 
 export type UserScalarRelationFilter = {
@@ -645,6 +733,18 @@ export type NullableStringFieldUpdateOperationsInput = {
 
 export type DateTimeFieldUpdateOperationsInput = {
   set?: Date | string
+}
+
+export type IntFieldUpdateOperationsInput = {
+  set?: number
+  increment?: number
+  decrement?: number
+  multiply?: number
+  divide?: number
+}
+
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
 }
 
 export type NullableDateTimeFieldUpdateOperationsInput = {
@@ -873,6 +973,8 @@ export type UserCreateWithoutResetTokensInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
+  tutorialStep?: number
+  tutorialDismissed?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
@@ -905,6 +1007,8 @@ export type UserUncheckedCreateWithoutResetTokensInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
+  tutorialStep?: number
+  tutorialDismissed?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
@@ -953,6 +1057,8 @@ export type UserUpdateWithoutResetTokensInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
+  tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -985,6 +1091,8 @@ export type UserUncheckedUpdateWithoutResetTokensInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
+  tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1017,6 +1125,8 @@ export type UserCreateWithoutProjectsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
+  tutorialStep?: number
+  tutorialDismissed?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
@@ -1049,6 +1159,8 @@ export type UserUncheckedCreateWithoutProjectsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
+  tutorialStep?: number
+  tutorialDismissed?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
@@ -1097,6 +1209,8 @@ export type UserUpdateWithoutProjectsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
+  tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1129,6 +1243,8 @@ export type UserUncheckedUpdateWithoutProjectsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
+  tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1161,6 +1277,8 @@ export type UserCreateWithoutLeadsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
+  tutorialStep?: number
+  tutorialDismissed?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
@@ -1193,6 +1311,8 @@ export type UserUncheckedCreateWithoutLeadsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
+  tutorialStep?: number
+  tutorialDismissed?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
@@ -1241,6 +1361,8 @@ export type UserUpdateWithoutLeadsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
+  tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1273,6 +1395,8 @@ export type UserUncheckedUpdateWithoutLeadsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
+  tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1305,6 +1429,8 @@ export type UserCreateWithoutOwnedSpacesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
+  tutorialStep?: number
+  tutorialDismissed?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
@@ -1337,6 +1463,8 @@ export type UserUncheckedCreateWithoutOwnedSpacesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
+  tutorialStep?: number
+  tutorialDismissed?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
@@ -1385,6 +1513,8 @@ export type UserUpdateWithoutOwnedSpacesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
+  tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1417,6 +1547,8 @@ export type UserUncheckedUpdateWithoutOwnedSpacesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
+  tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1449,6 +1581,8 @@ export type UserCreateWithoutExpensesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
+  tutorialStep?: number
+  tutorialDismissed?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
@@ -1481,6 +1615,8 @@ export type UserUncheckedCreateWithoutExpensesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
+  tutorialStep?: number
+  tutorialDismissed?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
@@ -1529,6 +1665,8 @@ export type UserUpdateWithoutExpensesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
+  tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1561,6 +1699,8 @@ export type UserUncheckedUpdateWithoutExpensesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
+  tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1593,6 +1733,8 @@ export type UserCreateWithoutIncomesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
+  tutorialStep?: number
+  tutorialDismissed?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
@@ -1625,6 +1767,8 @@ export type UserUncheckedCreateWithoutIncomesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
+  tutorialStep?: number
+  tutorialDismissed?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
@@ -1673,6 +1817,8 @@ export type UserUpdateWithoutIncomesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
+  tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1705,6 +1851,8 @@ export type UserUncheckedUpdateWithoutIncomesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
+  tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1737,6 +1885,8 @@ export type UserCreateWithoutRevenueGoalsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
+  tutorialStep?: number
+  tutorialDismissed?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
@@ -1769,6 +1919,8 @@ export type UserUncheckedCreateWithoutRevenueGoalsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
+  tutorialStep?: number
+  tutorialDismissed?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
@@ -1817,6 +1969,8 @@ export type UserUpdateWithoutRevenueGoalsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
+  tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1849,6 +2003,8 @@ export type UserUncheckedUpdateWithoutRevenueGoalsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
+  tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1881,6 +2037,8 @@ export type UserCreateWithoutClientsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
+  tutorialStep?: number
+  tutorialDismissed?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
@@ -1913,6 +2071,8 @@ export type UserUncheckedCreateWithoutClientsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
+  tutorialStep?: number
+  tutorialDismissed?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
@@ -1961,6 +2121,8 @@ export type UserUpdateWithoutClientsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
+  tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -1993,6 +2155,8 @@ export type UserUncheckedUpdateWithoutClientsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
+  tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2025,6 +2189,8 @@ export type UserCreateWithoutFinancialAuditLogsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
+  tutorialStep?: number
+  tutorialDismissed?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
@@ -2057,6 +2223,8 @@ export type UserUncheckedCreateWithoutFinancialAuditLogsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
+  tutorialStep?: number
+  tutorialDismissed?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
@@ -2105,6 +2273,8 @@ export type UserUpdateWithoutFinancialAuditLogsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
+  tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2137,6 +2307,8 @@ export type UserUncheckedUpdateWithoutFinancialAuditLogsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
+  tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2169,6 +2341,8 @@ export type UserCreateWithoutIntegrationsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
+  tutorialStep?: number
+  tutorialDismissed?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
@@ -2201,6 +2375,8 @@ export type UserUncheckedCreateWithoutIntegrationsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
+  tutorialStep?: number
+  tutorialDismissed?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
@@ -2249,6 +2425,8 @@ export type UserUpdateWithoutIntegrationsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
+  tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2281,6 +2459,8 @@ export type UserUncheckedUpdateWithoutIntegrationsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
+  tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2313,6 +2493,8 @@ export type UserCreateWithoutDocumentTemplatesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
+  tutorialStep?: number
+  tutorialDismissed?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
@@ -2345,6 +2527,8 @@ export type UserUncheckedCreateWithoutDocumentTemplatesInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
+  tutorialStep?: number
+  tutorialDismissed?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
@@ -2393,6 +2577,8 @@ export type UserUpdateWithoutDocumentTemplatesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
+  tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2425,6 +2611,8 @@ export type UserUncheckedUpdateWithoutDocumentTemplatesInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
+  tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2457,6 +2645,8 @@ export type UserCreateWithoutGeneratedDocumentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
+  tutorialStep?: number
+  tutorialDismissed?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
@@ -2489,6 +2679,8 @@ export type UserUncheckedCreateWithoutGeneratedDocumentsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
+  tutorialStep?: number
+  tutorialDismissed?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
@@ -2537,6 +2729,8 @@ export type UserUpdateWithoutGeneratedDocumentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
+  tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2569,6 +2763,8 @@ export type UserUncheckedUpdateWithoutGeneratedDocumentsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
+  tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2601,6 +2797,8 @@ export type UserCreateWithoutNotificationsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
+  tutorialStep?: number
+  tutorialDismissed?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
@@ -2633,6 +2831,8 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
+  tutorialStep?: number
+  tutorialDismissed?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
@@ -2681,6 +2881,8 @@ export type UserUpdateWithoutNotificationsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
+  tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2713,6 +2915,8 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
+  tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2745,6 +2949,8 @@ export type UserCreateWithoutSpaceMembershipsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
+  tutorialStep?: number
+  tutorialDismissed?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
@@ -2777,6 +2983,8 @@ export type UserUncheckedCreateWithoutSpaceMembershipsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
+  tutorialStep?: number
+  tutorialDismissed?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
@@ -2825,6 +3033,8 @@ export type UserUpdateWithoutSpaceMembershipsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
+  tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2857,6 +3067,8 @@ export type UserUncheckedUpdateWithoutSpaceMembershipsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
+  tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -2889,6 +3101,8 @@ export type UserCreateWithoutCreatedInvitationsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
+  tutorialStep?: number
+  tutorialDismissed?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
@@ -2921,6 +3135,8 @@ export type UserUncheckedCreateWithoutCreatedInvitationsInput = {
   createdAt?: Date | string
   updatedAt?: Date | string
   lastActiveSpaceId?: string | null
+  tutorialStep?: number
+  tutorialDismissed?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
@@ -2969,6 +3185,8 @@ export type UserUpdateWithoutCreatedInvitationsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
+  tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3001,6 +3219,8 @@ export type UserUncheckedUpdateWithoutCreatedInvitationsInput = {
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
+  tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -3190,6 +3410,8 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   createdAt?: boolean
   updatedAt?: boolean
   lastActiveSpaceId?: boolean
+  tutorialStep?: boolean
+  tutorialDismissed?: boolean
   stripeCustomerId?: boolean
   stripeSubscriptionId?: boolean
   stripePriceId?: boolean
@@ -3224,6 +3446,8 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   createdAt?: boolean
   updatedAt?: boolean
   lastActiveSpaceId?: boolean
+  tutorialStep?: boolean
+  tutorialDismissed?: boolean
   stripeCustomerId?: boolean
   stripeSubscriptionId?: boolean
   stripePriceId?: boolean
@@ -3242,6 +3466,8 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   createdAt?: boolean
   updatedAt?: boolean
   lastActiveSpaceId?: boolean
+  tutorialStep?: boolean
+  tutorialDismissed?: boolean
   stripeCustomerId?: boolean
   stripeSubscriptionId?: boolean
   stripePriceId?: boolean
@@ -3260,13 +3486,15 @@ export type UserSelectScalar = {
   createdAt?: boolean
   updatedAt?: boolean
   lastActiveSpaceId?: boolean
+  tutorialStep?: boolean
+  tutorialDismissed?: boolean
   stripeCustomerId?: boolean
   stripeSubscriptionId?: boolean
   stripePriceId?: boolean
   stripeCurrentPeriodEnd?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "username" | "passwordHash" | "authProvider" | "providerId" | "name" | "avatarUrl" | "createdAt" | "updatedAt" | "lastActiveSpaceId" | "stripeCustomerId" | "stripeSubscriptionId" | "stripePriceId" | "stripeCurrentPeriodEnd", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "username" | "passwordHash" | "authProvider" | "providerId" | "name" | "avatarUrl" | "createdAt" | "updatedAt" | "lastActiveSpaceId" | "tutorialStep" | "tutorialDismissed" | "stripeCustomerId" | "stripeSubscriptionId" | "stripePriceId" | "stripeCurrentPeriodEnd", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   resetTokens?: boolean | Prisma.User$resetTokensArgs<ExtArgs>
   projects?: boolean | Prisma.User$projectsArgs<ExtArgs>
@@ -3319,6 +3547,8 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     createdAt: Date
     updatedAt: Date
     lastActiveSpaceId: string | null
+    tutorialStep: number
+    tutorialDismissed: boolean
     stripeCustomerId: string | null
     stripeSubscriptionId: string | null
     stripePriceId: string | null
@@ -3772,6 +4002,8 @@ export interface UserFieldRefs {
   readonly createdAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"User", 'DateTime'>
   readonly lastActiveSpaceId: Prisma.FieldRef<"User", 'String'>
+  readonly tutorialStep: Prisma.FieldRef<"User", 'Int'>
+  readonly tutorialDismissed: Prisma.FieldRef<"User", 'Boolean'>
   readonly stripeCustomerId: Prisma.FieldRef<"User", 'String'>
   readonly stripeSubscriptionId: Prisma.FieldRef<"User", 'String'>
   readonly stripePriceId: Prisma.FieldRef<"User", 'String'>

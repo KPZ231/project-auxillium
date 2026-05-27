@@ -760,10 +760,6 @@ export type NullableEnumTransactionCategoryFieldUpdateOperationsInput = {
   set?: $Enums.TransactionCategory | null
 }
 
-export type BoolFieldUpdateOperationsInput = {
-  set?: boolean
-}
-
 export type ExpenseCreateNestedManyWithoutLabelsInput = {
   create?: Prisma.XOR<Prisma.ExpenseCreateWithoutLabelsInput, Prisma.ExpenseUncheckedCreateWithoutLabelsInput> | Prisma.ExpenseCreateWithoutLabelsInput[] | Prisma.ExpenseUncheckedCreateWithoutLabelsInput[]
   connectOrCreate?: Prisma.ExpenseCreateOrConnectWithoutLabelsInput | Prisma.ExpenseCreateOrConnectWithoutLabelsInput[]

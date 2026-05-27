@@ -29,7 +29,9 @@ export default async function KanbanPage({ params }: { params: Promise<{ locale:
 
   return (
     <div className="h-[calc(100vh-110px)] md:h-[calc(100vh-145px)] w-full flex flex-col">
-      <KanbanClientWrapper projects={projects as any} spaceId={spaceId} />
+      <div data-tutorial="tasks-action" className="flex-1 flex flex-col min-h-0">
+        <KanbanClientWrapper projects={projects as any} spaceId={spaceId} />
+      </div>
     </div>
   );
 }

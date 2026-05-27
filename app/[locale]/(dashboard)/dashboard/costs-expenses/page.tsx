@@ -23,10 +23,12 @@ export default async function CostsExpensesPage() {
   const initialSummary = await getFinancialSummary(spaceId);
 
   return (
-    <FinanceDashboardClient 
-      initialData={initialSummary} 
-      userId={userId} 
-      spaceId={spaceId} 
-    />
+    <div data-tutorial="finance-action">
+      <FinanceDashboardClient
+        initialData={initialSummary}
+        userId={userId}
+        spaceId={spaceId}
+      />
+    </div>
   );
 }

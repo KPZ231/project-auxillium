@@ -73,7 +73,7 @@ export default function NewClient() {
           </p>
         </motion.div>
 
-        <motion.form variants={itemVariants} onSubmit={handleSubmit} className="space-y-8">
+        <motion.form data-tutorial="client-form" variants={itemVariants} onSubmit={handleSubmit} className="space-y-8">
           
           <PremiumInput 
             label="Client Name" 

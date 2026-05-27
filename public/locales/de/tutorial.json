@@ -1,0 +1,39 @@
+{
+  "title": "Erste Schritte",
+  "step_of": "Schritt {{current}} von {{total}}",
+  "skip": "Tutorial überspringen",
+  "completed_title": "Fertig!",
+  "completed_desc": "Du hast die Grundlagen von Auxillium gemeistert.",
+  "close": "Schließen",
+  "go_to": "Gehe zu",
+  "steps": {
+    "project": {
+      "title": "Projekt erstellen",
+      "description": "Füge dein erstes Projekt hinzu und beginne mit der Arbeit."
+    },
+    "client": {
+      "title": "Kunden hinzufügen",
+      "description": "Registriere einen Kunden und verknüpfe ihn mit Projekten."
+    },
+    "document": {
+      "title": "Vorlage erstellen",
+      "description": "Erstelle eine Angebots-, Rechnungs- oder Vertragsvorlage."
+    },
+    "costs": {
+      "title": "Kosten verwalten",
+      "description": "Füge eine Ausgabe oder Einnahme zu deinem Workspace hinzu."
+    },
+    "lead": {
+      "title": "Lead hinzufügen",
+      "description": "Beginne mit der Verfolgung potenzieller Kunden."
+    },
+    "task": {
+      "title": "Aufgabe hinzufügen",
+      "description": "Erstelle eine Aufgabe und weise sie einem Projekt zu."
+    },
+    "employee": {
+      "title": "Mitarbeiter hinzufügen",
+      "description": "Registriere das erste Mitglied deines Teams."
+    }
+  }
+}

@@ -75,7 +75,7 @@ export default function NewLead() {
           </p>
         </motion.div>
 
-        <motion.form variants={itemVariants} onSubmit={handleSubmit} className="space-y-8">
+        <motion.form data-tutorial="lead-form" variants={itemVariants} onSubmit={handleSubmit} className="space-y-8">
           
           <PremiumInput 
             label={t("dashboard:leads.lead_company_name", "Lead / Company Name")} 

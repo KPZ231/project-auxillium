@@ -30,7 +30,9 @@ export default async function TemplatesPage({ params }: { params: Promise<{ loca
 
   return (
     <div className="p-8 max-w-7xl mx-auto min-h-screen">
-      <TemplateListHeader spaceId={spaceId} />
+      <div data-tutorial="templates-action">
+        <TemplateListHeader spaceId={spaceId} />
+      </div>
       
       {templates.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-32 border border-dashed border-[#E5E5E5] bg-[#FAFAFA]">

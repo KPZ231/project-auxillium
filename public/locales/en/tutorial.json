@@ -1,0 +1,39 @@
+{
+  "title": "Getting Started",
+  "step_of": "Step {{current}} of {{total}}",
+  "skip": "Skip tutorial",
+  "completed_title": "All done!",
+  "completed_desc": "You've mastered the essentials of Auxillium.",
+  "close": "Close",
+  "go_to": "Go",
+  "steps": {
+    "project": {
+      "title": "Create a project",
+      "description": "Add your first project and start managing your work."
+    },
+    "client": {
+      "title": "Add a client",
+      "description": "Register a client and link them to your projects."
+    },
+    "document": {
+      "title": "Create a template",
+      "description": "Design an offer, invoice, or contract template."
+    },
+    "costs": {
+      "title": "Manage costs",
+      "description": "Add an expense or income to your workspace."
+    },
+    "lead": {
+      "title": "Add a lead",
+      "description": "Start tracking potential clients."
+    },
+    "task": {
+      "title": "Add a task",
+      "description": "Create a task and assign it to a project."
+    },
+    "employee": {
+      "title": "Add an employee",
+      "description": "Register the first member of your team."
+    }
+  }
+}

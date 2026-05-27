@@ -874,14 +874,6 @@ export type ProjectUpdateimagesInput = {
   push?: string | string[]
 }
 
-export type IntFieldUpdateOperationsInput = {
-  set?: number
-  increment?: number
-  decrement?: number
-  multiply?: number
-  divide?: number
-}
-
 export type ProjectCreateNestedManyWithoutSpaceInput = {
   create?: Prisma.XOR<Prisma.ProjectCreateWithoutSpaceInput, Prisma.ProjectUncheckedCreateWithoutSpaceInput> | Prisma.ProjectCreateWithoutSpaceInput[] | Prisma.ProjectUncheckedCreateWithoutSpaceInput[]
   connectOrCreate?: Prisma.ProjectCreateOrConnectWithoutSpaceInput | Prisma.ProjectCreateOrConnectWithoutSpaceInput[]

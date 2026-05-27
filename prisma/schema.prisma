@@ -24,6 +24,9 @@ model User {
 
   lastActiveSpaceId String?
 
+  tutorialStep      Int     @default(0)
+  tutorialDismissed Boolean @default(false)
+
   stripeCustomerId       String?   @unique
   stripeSubscriptionId   String?   @unique
   stripePriceId          String?

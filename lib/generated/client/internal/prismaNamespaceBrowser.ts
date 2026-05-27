@@ -100,6 +100,8 @@ export const UserScalarFieldEnum = {
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   lastActiveSpaceId: 'lastActiveSpaceId',
+  tutorialStep: 'tutorialStep',
+  tutorialDismissed: 'tutorialDismissed',
   stripeCustomerId: 'stripeCustomerId',
   stripeSubscriptionId: 'stripeSubscriptionId',
   stripePriceId: 'stripePriceId',

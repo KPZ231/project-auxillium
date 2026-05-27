@@ -25,7 +25,9 @@ export default async function EmployeesPage({
         }}
       />
 
-      <EmployeeListClient initialEmployees={employees} />
+      <div data-tutorial="employees-action">
+        <EmployeeListClient initialEmployees={employees} />
+      </div>
     </div>
   );
 }

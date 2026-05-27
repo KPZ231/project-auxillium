@@ -80,7 +80,7 @@ export default function NewProject() {
           </p>
         </motion.div>
 
-        <motion.form variants={itemVariants} onSubmit={handleSubmit} className="space-y-8">
+        <motion.form data-tutorial="project-form" variants={itemVariants} onSubmit={handleSubmit} className="space-y-8">
           
           <PremiumInput 
             label="Project Name" 

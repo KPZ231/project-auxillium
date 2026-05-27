@@ -96,8 +96,9 @@ export default function EmployeeListClient({ initialEmployees }: EmployeeListCli
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="group bg-white rounded-none p-8 border border-slate-200 hover:border-black transition-all flex flex-col"
+                className="group bg-white rounded-none border border-slate-200 hover:border-black transition-all flex flex-col"
               >
+              <Link href={`/dashboard/space/employees/${employee.id}`} className="flex flex-col flex-1 p-8">
                 <div className="flex items-start justify-between mb-8">
                   <div className="w-16 h-16 rounded-none bg-slate-100 flex items-center justify-center text-black text-2xl font-black group-hover:bg-black group-hover:text-white transition-colors">
                     {employee.name.charAt(0).toUpperCase()}

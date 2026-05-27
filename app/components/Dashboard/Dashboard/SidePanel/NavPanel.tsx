@@ -22,13 +22,15 @@ export default function NavPanel() {
             <FaBell className="text-gray-600 text-xl hover:text-(--primary) transition-colors" />
           </Link>
           {/* User Avatar */}
-          <div className="w-8 h-8 bg-gray-200 flex items-center justify-center overflow-hidden border border-gray-300 relative">
-            {user?.avatarUrl ? (
-              <Image src={user.avatarUrl} alt="Avatar" fill className="object-cover" />
-            ) : (
-              <FaUser className="text-gray-600 w-5 h-5" />
-            )}
-          </div>
+          <Link href="/account" title="Account settings">
+            <div className="w-8 h-8 bg-gray-200 flex items-center justify-center overflow-hidden border border-gray-300 relative hover:border-gray-500 transition-colors">
+              {user?.avatarUrl ? (
+                <Image src={user.avatarUrl} alt="Avatar" fill className="object-cover" />
+              ) : (
+                <FaUser className="text-gray-600 w-5 h-5" />
+              )}
+            </div>
+          </Link>
         </div>
       </section>
     </>

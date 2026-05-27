@@ -12,6 +12,7 @@ export default function VerifyEmailForm() {
   const [loading, setLoading] = useState(false);
   const [resending, setResending] = useState(false);
   const inputRefs = useRef<(HTMLInputElement | null)[]>([]);
+  const submitting = useRef(false);
   const router = useRouter();
   const { language } = useTranslation();
 
@@ -53,6 +54,8 @@ export default function VerifyEmailForm() {
   }
 
   async function handleSubmit(code: string) {
+    if (submitting.current) return;
+    submitting.current = true;
     setLoading(true);
     try {
       const result = await verifyEmailCode(code);
@@ -69,8 +72,11 @@ export default function VerifyEmailForm() {
       }
     } catch {
       toast.error("Błąd sieci", { description: "Spróbuj ponownie." });
+      setDigits(["", "", "", "", "", ""]);
+      inputRefs.current[0]?.focus();
     } finally {
       setLoading(false);
+      submitting.current = false;
     }
   }
 

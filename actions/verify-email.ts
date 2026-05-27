@@ -1,5 +1,6 @@
 "use server";
 
+import { randomInt } from "crypto";
 import { prisma } from "@/lib/prisma";
 import { sendVerificationEmail } from "@/lib/mail";
 import { checkRateLimit } from "@/lib/rate-limit";
@@ -26,7 +27,7 @@ export async function sendVerificationCode() {
   if (!user) return { error: "Nie znaleziono użytkownika." };
   if (user.emailVerified) return { success: true };
 
-  const code = Math.floor(100000 + Math.random() * 900000).toString();
+  const code = randomInt(100000, 1000000).toString();
   const expires = new Date(Date.now() + 15 * 60 * 1000);
 
   await prisma.emailVerificationToken.upsert({

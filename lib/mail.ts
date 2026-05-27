@@ -51,3 +51,32 @@ export async function sendResetPasswordEmail(email: string, token: string) {
     throw error;
   }
 }
+
+export async function sendVerificationEmail(email: string, code: string) {
+  const mailOptions = {
+    from: `"Auxillium" <${process.env.GMAIL_USER}>`,
+    to: email,
+    subject: "Weryfikacja konta — Auxillium",
+    html: `
+      <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eee;">
+        <h2 style="color: #0A0A0A; text-align: center; font-size: 24px; letter-spacing: 0.05em;">WERYFIKACJA KONTA</h2>
+        <p style="color: #444;">Twój jednorazowy kod weryfikacyjny (ważny przez 15 minut):</p>
+        <div style="text-align: center; margin: 32px 0;">
+          <span style="font-size: 40px; font-weight: bold; letter-spacing: 0.3em; color: #0A0A0A; font-family: monospace;">${code}</span>
+        </div>
+        <p style="color: #888; font-size: 12px;">Jeśli nie zakładałeś konta w Auxillium, zignoruj tę wiadomość.</p>
+        <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;">
+        <p style="font-size: 11px; color: #aaa; text-align: center;">Wiadomość wygenerowana automatycznie przez Auxillium.</p>
+      </div>
+    `,
+  };
+
+  try {
+    const info = await transporter.sendMail(mailOptions);
+    console.log("Verification email sent:", info.messageId);
+    return info;
+  } catch (error) {
+    console.error("Error sending verification email:", error);
+    throw error;
+  }
+}

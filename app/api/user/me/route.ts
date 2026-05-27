@@ -21,6 +21,7 @@ export async function GET() {
         avatarUrl: true,
         stripePriceId: true,
         stripeCurrentPeriodEnd: true,
+        emailVerified: true,
       },
     });
 
@@ -45,6 +46,7 @@ export async function GET() {
       limits,
       features,
       renewalDate: user.stripeCurrentPeriodEnd?.toISOString() ?? null,
+      emailVerified: user.emailVerified,
     });
   } catch (error) {
     console.error("Error fetching user data:", error);

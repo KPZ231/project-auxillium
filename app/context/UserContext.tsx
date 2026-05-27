@@ -13,6 +13,7 @@ interface UserData {
   limits: PlanLimits;
   features: PlanFeatures;
   renewalDate: string | null;
+  emailVerified: boolean;
 }
 
 interface UserContextType {

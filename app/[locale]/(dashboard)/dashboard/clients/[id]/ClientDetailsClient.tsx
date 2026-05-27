@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
 import { toast } from "sonner";
 import { deleteClient, updateClient } from "@/actions/clients";
@@ -10,14 +10,20 @@ import Link from "next/link";
 import Image from "next/image";
 import { useBreadcrumb } from "@/app/context/BreadcrumbContext";
 import { AssignmentManager } from "@/app/components/assignments/assignment-manager";
-import { PremiumInput, PremiumSelect, PremiumTextarea } from "@/app/components/UI/FormElements";
+import { PremiumInput, PremiumTextarea } from "@/app/components/UI/FormElements";
+import { ComboboxInput } from "@/app/components/UI/ComboboxInput";
 import { RelatedDocuments } from "@/app/components/templates/RelatedDocuments";
+import {
+  TIMELINE_OPTIONS,
+  LOCATION_OPTIONS,
+} from "@/lib/predefined-data";
 
 const STEPS = [
   "Basic Info",
   "Narrative & Context",
   "Logistics & HR",
-  "Gallery & Timelines"
+  "Gallery & Timelines",
+  "Review & Confirm",
 ];
 
 interface Milestone {
@@ -53,17 +59,28 @@ interface Client {
   userId: string;
 }
 
-export default function ClientDetailsClient({ 
-  client, 
+const SField = ({ label, value }: { label: string; value?: string | null }) => {
+  if (!value) return null;
+  return (
+    <div className="p-4 bg-white">
+      <p className="text-[9px] font-black uppercase tracking-[0.18em] text-[#A1A1AA] mb-1">{label}</p>
+      <p className="text-[13px] text-[#0A0A0A] font-medium leading-snug line-clamp-2">{value}</p>
+    </div>
+  );
+};
+
+export default function ClientDetailsClient({
+  client,
   isUnauthorized = false,
   spaceId
-}: { 
-  client: Client, 
+}: {
+  client: Client,
   isUnauthorized?: boolean,
-  spaceId: string 
+  spaceId: string
 }) {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const pathname = usePathname();
   const { setCustomLabel } = useBreadcrumb();
 
   useEffect(() => {
@@ -71,14 +88,12 @@ export default function ClientDetailsClient({
     return () => setCustomLabel(null);
   }, [client.name, setCustomLabel]);
 
-  // Modal states
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
-  const [isSetupOpen, setIsSetupOpen] = useState(searchParams.get("setup") === "true");
+  const [isSetupOpen, setIsSetupOpen] = useState(false);
   const [isFinanceOpen, setIsFinanceOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
 
-  // Finance Form State
   const [financeType, setFinanceType] = useState<"INCOME" | "EXPENSE">("INCOME");
   const [financeData, setFinanceData] = useState({
     amount: "",
@@ -90,14 +105,14 @@ export default function ClientDetailsClient({
 
   useEffect(() => {
     if (searchParams.get("setup") === "true") {
-      window.history.replaceState(null, '', `/dashboard/clients/${client.id}`);
+      setIsSetupOpen(true);
+      router.replace(pathname, { scroll: false });
     }
-  }, [searchParams, client.id]);
+  }, [searchParams, pathname, router]);
 
-  // Form states
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [deleteConfirmation, setDeleteConfirmation] = useState("");
-  
+
   const [formData, setFormData] = useState({
     id: client.id,
     name: client.name,
@@ -118,7 +133,6 @@ export default function ClientDetailsClient({
   const handleDelete = async () => {
     setIsSubmitting(true);
     const result = await deleteClient(client.id, deleteConfirmation);
-    
     if (result.success) {
       toast.success("Client deleted successfully");
       router.push("/dashboard/clients");
@@ -132,7 +146,6 @@ export default function ClientDetailsClient({
     if (e) e.preventDefault();
     setIsSubmitting(true);
     const result = await updateClient(formData);
-
     if (result.success) {
       toast.success("Client updated successfully");
       setIsEditOpen(false);
@@ -148,33 +161,23 @@ export default function ClientDetailsClient({
   const handleFinanceSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
     const { addIncome, addExpense } = await import("@/actions/finance");
-    
     const payload = {
       amount: parseFloat(financeData.amount),
       description: financeData.description,
       date: new Date(financeData.date),
-      spaceId: client.spaceId || "", // Assuming client has spaceId
+      spaceId: client.spaceId || "",
       userId: client.userId,
       clientId: client.id,
       ...(financeType === "INCOME" ? { source: financeData.source } : { category: financeData.category || undefined })
     };
-
-    const result = financeType === "INCOME" 
+    const result = financeType === "INCOME"
       ? await addIncome(payload as any)
       : await addExpense(payload as any);
-
     if (result.success) {
       toast.success(`${financeType === "INCOME" ? "Income" : "Expense"} added successfully`);
       setIsFinanceOpen(false);
-      setFinanceData({
-        amount: "",
-        description: "",
-        source: "",
-        category: "",
-        date: new Date().toISOString().split('T')[0],
-      });
+      setFinanceData({ amount: "", description: "", source: "", category: "", date: new Date().toISOString().split('T')[0] });
       router.refresh();
     } else {
       toast.error(result.error || "Failed to add record");
@@ -184,7 +187,7 @@ export default function ClientDetailsClient({
 
   const handleSetupSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (currentStep !== STEPS.length - 1) return; 
+    if (currentStep !== STEPS.length - 1) return;
     await handleEditSubmit();
   };
 
@@ -214,156 +217,172 @@ export default function ClientDetailsClient({
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-8">
             <div className="border-l-4 border-[#0A0A0A] pl-6 py-2">
               <h3 className="text-[24px] font-black text-[#0A0A0A] uppercase tracking-tight">1. Basic Information</h3>
-              <p className="text-[13px] text-[#71717A] uppercase tracking-wider font-medium">Core contact details.</p>
+              <p className="text-[13px] text-[#71717A] uppercase tracking-wider font-medium">Core contact details — who this client is and how to reach them.</p>
             </div>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
-              <PremiumInput 
-                label="Client Name" 
-                required 
-                value={formData.name} 
-                onChange={(e) => setFormData({...formData, name: e.target.value})} 
+              <PremiumInput
+                label="Client Name"
+                required
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 placeholder="e.g. Acme Corp"
+                helperText="The full name of the company or individual. This appears in all reports and project links."
               />
-              <PremiumInput 
-                label="Email" 
+              <PremiumInput
+                label="Email Address"
                 type="email"
-                value={formData.email} 
-                onChange={(e) => setFormData({...formData, email: e.target.value})} 
-                placeholder="e.g. contact@acme.com"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                placeholder="e.g. hello@acmecorp.com"
+                helperText="Primary contact email. Used for notifications and communication logs."
               />
-              <PremiumInput 
-                label="Phone Number" 
-                value={formData.phone} 
-                onChange={(e) => setFormData({...formData, phone: e.target.value})} 
+              <PremiumInput
+                label="Phone Number"
+                value={formData.phone}
+                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                 placeholder="e.g. +48 123 456 789"
+                helperText="Main phone number. Include the country code for international clients."
               />
             </div>
           </motion.div>
         );
+
       case 1:
         return (
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-10">
             <div className="border-l-4 border-[#0A0A0A] pl-6 py-2">
               <h3 className="text-[24px] font-black text-[#0A0A0A] uppercase tracking-tight">2. Narrative & Context</h3>
-              <p className="text-[13px] text-[#71717A] uppercase tracking-wider font-medium">Who they are and what we know about them.</p>
+              <p className="text-[13px] text-[#71717A] uppercase tracking-wider font-medium">Who are they — and what should your team know about them?</p>
             </div>
-            
+
             <div className="space-y-10">
-              <PremiumTextarea 
-                label="Description" 
-                rows={4} 
-                value={formData.description} 
-                onChange={(e) => setFormData({...formData, description: e.target.value})} 
-                placeholder="General description of the client..."
+              <PremiumTextarea
+                label="Description"
+                rows={4}
+                value={formData.description}
+                onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                placeholder="General overview: what does this client do, what's their business, who are they in the market..."
+                helperText="A public-facing description shown on the client profile. 2–4 sentences is ideal."
               />
-              <PremiumTextarea 
-                label="Notes" 
-                rows={4} 
-                value={formData.notes} 
-                onChange={(e) => setFormData({...formData, notes: e.target.value})} 
-                placeholder="Internal notes, preferences, or quirks..."
-                helperText="Only visible to the team."
+              <PremiumTextarea
+                label="Internal Notes"
+                rows={4}
+                value={formData.notes}
+                onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
+                placeholder="Internal only: communication preferences, past friction points, decision-maker names, quirks..."
+                helperText="Visible only to your team. A great place to capture context before meetings."
               />
             </div>
           </motion.div>
         );
+
       case 2:
         return (
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-10">
             <div className="border-l-4 border-[#0A0A0A] pl-6 py-2">
               <h3 className="text-[24px] font-black text-[#0A0A0A] uppercase tracking-tight">3. Logistics & HR</h3>
-              <p className="text-[13px] text-[#71717A] uppercase tracking-wider font-medium">Location and assigned personnel.</p>
+              <p className="text-[13px] text-[#71717A] uppercase tracking-wider font-medium">Where they are and who on your team looks after them.</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
-              <PremiumInput 
-                label="Location (Address or Coordinates)" 
-                value={formData.location} 
-                onChange={(e) => setFormData({...formData, location: e.target.value})} 
-                placeholder="e.g. Warsaw, Poland" 
+              <ComboboxInput
+                label="Location / Address"
+                value={formData.location}
+                onChange={(val) => setFormData({ ...formData, location: val })}
+                options={LOCATION_OPTIONS}
+                placeholder="e.g. Warsaw, Poland"
+                helperText="The client's primary business location. Shown on a map on the client page."
+                tooltip="If the client operates remotely, you can type 'Remote'. For office-based clients, enter their city or full address."
               />
-              
+
               <div className="md:col-span-2 pt-10 border-t border-[#E5E5E5]">
-                <label className="block text-[11px] font-bold uppercase tracking-widest text-[#71717A] mb-6">Assign Employees</label>
+                <label className="block text-[11px] font-bold uppercase tracking-widest text-[#71717A] mb-2">Assigned Employees</label>
+                <p className="text-[11px] text-[#A1A1AA] italic mb-6">Choose which team members are responsible for this client relationship.</p>
                 <div className="bg-white border border-[#E5E5E5] p-6 shadow-sm">
-                  {/* Reuse AssignmentManager but adapt for client, if supported. Otherwise, just a placeholder message for now. */}
-                  {/* Assuming AssignmentManager handles 'client' entityType correctly */}
-                  <AssignmentManager 
-                    entityId={client.id} 
-                    entityType="client" 
-                    initialMembers={client.assignedEmployees || []} 
+                  <AssignmentManager
+                    entityId={client.id}
+                    entityType="client"
+                    initialMembers={client.assignedEmployees || []}
                   />
                 </div>
               </div>
             </div>
           </motion.div>
         );
+
       case 3:
         return (
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-12">
             <div className="border-l-4 border-[#0A0A0A] pl-6 py-2">
               <h3 className="text-[24px] font-black text-[#0A0A0A] uppercase tracking-tight">4. Timelines & Identity</h3>
-              <p className="text-[13px] text-[#71717A] uppercase tracking-wider font-medium">Visuals and milestones.</p>
+              <p className="text-[13px] text-[#71717A] uppercase tracking-wider font-medium">How long is your relationship, and what does it look like?</p>
             </div>
-            
-            <PremiumInput 
-              label="Overall Timeline" 
-              value={formData.timeline} 
-              onChange={(e) => setFormData({...formData, timeline: e.target.value})} 
-              placeholder="e.g. Q1 2024 - Q4 2025" 
+
+            <ComboboxInput
+              label="Overall Engagement Timeline"
+              value={formData.timeline}
+              onChange={(val) => setFormData({ ...formData, timeline: val })}
+              options={TIMELINE_OPTIONS}
+              placeholder="e.g. Q1 2024 – Q4 2025"
+              helperText="How long the overall client engagement spans. This is the total duration, not project-specific."
+              tooltip="Useful for capacity planning and understanding long-term vs. short-term clients."
             />
 
             <div className="space-y-8">
               <div className="flex justify-between items-center border-b-2 border-[#0A0A0A] pb-4">
-                <label className="block text-[12px] font-black uppercase tracking-[0.15em] text-[#0A0A0A]">Milestones</label>
-                <button 
-                  type="button" 
-                  onClick={addMilestone} 
+                <div>
+                  <label className="block text-[12px] font-black uppercase tracking-[0.15em] text-[#0A0A0A]">Relationship Milestones</label>
+                  <p className="text-[11px] text-[#A1A1AA] italic mt-1">Key dates in your relationship history — contract signed, first delivery, renewal, etc.</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={addMilestone}
                   className="px-4 py-2 bg-[#0A0A0A] text-white text-[10px] font-bold uppercase tracking-widest hover:bg-[#FAFAFA] hover:text-[#0A0A0A] border border-[#0A0A0A] transition-all"
                 >
                   + Add Milestone
                 </button>
               </div>
-              
+
               {formData.milestones.length === 0 && (
                 <div className="py-12 text-center border border-dashed border-[#D4D4D8]">
-                  <p className="text-[12px] text-[#71717A] uppercase tracking-widest">No milestones defined yet.</p>
+                  <p className="text-[12px] text-[#71717A] uppercase tracking-widest">No milestones yet.</p>
+                  <p className="text-[11px] text-[#A1A1AA] italic mt-2">e.g. "Contract Signed", "First Delivery", "Renewal"</p>
                 </div>
               )}
-              
+
               <div className="space-y-4">
                 {formData.milestones.map((m: Milestone, i: number) => (
-                  <motion.div 
+                  <motion.div
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
-                    key={i} 
+                    key={i}
                     className="group relative bg-white p-6 border border-[#E5E5E5] transition-all hover:border-[#0A0A0A]"
                   >
                     <div className="flex items-start gap-6">
-                       <div className="flex-1 grid grid-cols-1 md:grid-cols-4 gap-4">
+                      <div className="flex-1 grid grid-cols-1 md:grid-cols-4 gap-4">
                         <div className="md:col-span-2">
-                          <PremiumInput 
+                          <PremiumInput
                             label="Title"
-                            placeholder="e.g. Contract Signed" 
-                            value={m.title} 
-                            onChange={(e) => updateMilestone(i, 'title', e.target.value)} 
+                            placeholder="e.g. Contract Signed"
+                            value={m.title}
+                            onChange={(e) => updateMilestone(i, 'title', e.target.value)}
                             className="h-9"
                           />
                         </div>
                         <div className="md:col-span-1">
-                          <PremiumInput 
+                          <PremiumInput
                             label="Date"
                             type="date"
-                            value={m.date} 
-                            onChange={(e) => updateMilestone(i, 'date', e.target.value)} 
+                            value={m.date}
+                            onChange={(e) => updateMilestone(i, 'date', e.target.value)}
                             className="h-9"
                           />
                         </div>
                         <div className="md:col-span-1 flex items-center justify-end pt-4">
-                          <button 
-                            type="button" 
-                            onClick={() => removeMilestone(i)} 
+                          <button
+                            type="button"
+                            onClick={() => removeMilestone(i)}
                             className="text-[10px] font-bold text-[#DC2626] uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity hover:underline"
                           >
                             Remove
@@ -377,17 +396,75 @@ export default function ClientDetailsClient({
             </div>
 
             <div className="space-y-6 pt-8 border-t border-[#0A0A0A]">
-              <label className="block text-[12px] font-black uppercase tracking-[0.15em] text-[#0A0A0A]">Client Photo / Logo</label>
+              <div>
+                <label className="block text-[12px] font-black uppercase tracking-[0.15em] text-[#0A0A0A] mb-1">Client Photo / Logo</label>
+                <p className="text-[11px] text-[#A1A1AA] italic mb-4">Upload the client's logo or a representative photo. Shown on their profile and in lists.</p>
+              </div>
               <div className="bg-white border border-[#E5E5E5] p-8">
-                <ImageUploader 
-                  images={formData.photoUrl ? [formData.photoUrl] : []} 
-                  onChange={(imgs) => setFormData({...formData, photoUrl: imgs.length > 0 ? imgs[0] : ""})} 
+                <ImageUploader
+                  images={formData.photoUrl ? [formData.photoUrl] : []}
+                  onChange={(imgs) => setFormData({ ...formData, photoUrl: imgs.length > 0 ? imgs[0] : "" })}
                   maxImages={1}
                 />
               </div>
             </div>
           </motion.div>
         );
+
+      case 4: {
+        const requiredFilled = formData.name.trim();
+        return (
+          <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-8">
+            <div className="border-l-4 border-[#0A0A0A] pl-6 py-2">
+              <h3 className="text-[24px] font-black text-[#0A0A0A] uppercase tracking-tight">Review & Confirm</h3>
+              <p className="text-[13px] text-[#71717A] uppercase tracking-wider font-medium">Verify everything looks right before saving.</p>
+            </div>
+
+            <div className="border border-[#E5E5E5] overflow-hidden">
+              <div className="grid grid-cols-2 divide-x divide-[#E5E5E5]">
+                <SField label="Client Name" value={formData.name} />
+                <SField label="Timeline" value={formData.timeline} />
+              </div>
+              <div className="grid grid-cols-2 divide-x divide-[#E5E5E5] border-t border-[#E5E5E5]">
+                <SField label="Email" value={formData.email} />
+                <SField label="Phone" value={formData.phone} />
+              </div>
+              <div className="border-t border-[#E5E5E5]">
+                <SField label="Location" value={formData.location} />
+              </div>
+              {formData.description && (
+                <div className="border-t border-[#E5E5E5] p-4 bg-white">
+                  <p className="text-[9px] font-black uppercase tracking-[0.18em] text-[#A1A1AA] mb-1">Description</p>
+                  <p className="text-[13px] text-[#0A0A0A] font-medium leading-snug line-clamp-3">{formData.description}</p>
+                </div>
+              )}
+              {formData.notes && (
+                <div className="border-t border-[#E5E5E5] p-4 bg-[#FFFBEB]">
+                  <p className="text-[9px] font-black uppercase tracking-[0.18em] text-[#A1A1AA] mb-1">Internal Notes (team-only)</p>
+                  <p className="text-[13px] text-[#0A0A0A] font-medium leading-snug line-clamp-2">{formData.notes}</p>
+                </div>
+              )}
+              <div className="border-t border-[#E5E5E5] p-4 bg-white">
+                <p className="text-[9px] font-black uppercase tracking-[0.18em] text-[#A1A1AA] mb-1">Milestones</p>
+                <p className="text-[13px] text-[#0A0A0A] font-medium">{formData.milestones.length > 0 ? `${formData.milestones.length} defined` : "None"}</p>
+              </div>
+            </div>
+
+            <div className={`p-4 border-l-4 ${requiredFilled ? "border-l-[#16A34A] bg-[#F0FDF4]" : "border-l-[#DC2626] bg-[#FEF2F2]"}`}>
+              {requiredFilled ? (
+                <p className="text-[12px] text-[#166534] font-medium">
+                  ✓ All required fields filled. Click <strong>Complete Setup</strong> to save this client.
+                </p>
+              ) : (
+                <p className="text-[12px] text-[#991B1B] font-medium">
+                  ✗ <strong>Client Name</strong> is required. Go back to fill it in.
+                </p>
+              )}
+            </div>
+          </motion.div>
+        );
+      }
+
       default:
         return null;
     }
@@ -396,8 +473,8 @@ export default function ClientDetailsClient({
   if (isUnauthorized) {
     return (
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/80 backdrop-blur-sm p-4">
-        <motion.div 
-          initial={{ opacity: 0, scale: 0.95 }} 
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           className="w-full max-w-md bg-white border border-[#E5E5E5] p-8 shadow-2xl text-center"
         >
@@ -405,7 +482,7 @@ export default function ClientDetailsClient({
           <p className="text-[14px] text-[#71717A] mb-8">
             You do not have permission to view or edit this client.
           </p>
-          <button 
+          <button
             onClick={() => router.push("/dashboard/clients")}
             className="w-full h-12 bg-[#0A0A0A] text-[#FAFAFA] font-medium text-[13px] uppercase tracking-[0.04em] hover:bg-transparent hover:text-[#0A0A0A] border border-[#0A0A0A] transition-colors"
           >
@@ -416,7 +493,6 @@ export default function ClientDetailsClient({
     );
   }
 
-  // Calculate financials
   const totalIncome = client.incomes?.reduce((acc: number, inc: { amount: number }) => acc + inc.amount, 0) || 0;
   const totalExpense = client.expenses?.reduce((acc: number, exp: { amount: number }) => acc + exp.amount, 0) || 0;
 
@@ -455,7 +531,6 @@ export default function ClientDetailsClient({
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
         <div className="md:col-span-2 space-y-12">
-          
           <section>
             <h2 className="text-[12px] font-bold tracking-[0.08em] uppercase text-[#71717A] mb-4">Description</h2>
             <p className="text-[16px] text-[#0A0A0A] leading-[1.65] whitespace-pre-wrap font-light">
@@ -479,12 +554,12 @@ export default function ClientDetailsClient({
               <h2 className="text-[12px] font-bold tracking-[0.08em] uppercase text-[#71717A] mb-4">Location</h2>
               <p className="text-[14px] text-[#0A0A0A] mb-4">{client.location}</p>
               <div className="w-full h-64 border border-[#E5E5E5] overflow-hidden">
-                <iframe 
-                  width="100%" 
-                  height="100%" 
-                  style={{ border: 0 }} 
-                  loading="lazy" 
-                  allowFullScreen 
+                <iframe
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  loading="lazy"
+                  allowFullScreen
                   src={`https://www.google.com/maps?q=${encodeURIComponent(client.location)}&output=embed`}
                 ></iframe>
               </div>
@@ -495,20 +570,17 @@ export default function ClientDetailsClient({
             <section>
               <h2 className="text-[12px] font-bold tracking-[0.08em] uppercase text-[#71717A] mb-4">Milestones</h2>
               <div className="space-y-6 border-l border-[#E5E5E5] pl-6">
-                {client.milestones.map((m: Milestone, i: number) => {
-                  return (
-                    <div key={i} className="relative group">
-                      <div className="absolute left-[-29px] top-1.5 w-2 h-2 rounded-none border border-[#0A0A0A] transition-colors bg-[#0A0A0A]" />
-                      <h3 className="text-[14px] font-semibold text-[#0A0A0A]">{m.title}</h3>
-                      {m.date && <p className="text-[12px] text-[#71717A] mt-1 mb-2">{m.date}</p>}
-                    </div>
-                  );
-                })}
+                {client.milestones.map((m: Milestone, i: number) => (
+                  <div key={i} className="relative group">
+                    <div className="absolute left-[-29px] top-1.5 w-2 h-2 rounded-none border border-[#0A0A0A] transition-colors bg-[#0A0A0A]" />
+                    <h3 className="text-[14px] font-semibold text-[#0A0A0A]">{m.title}</h3>
+                    {m.date && <p className="text-[12px] text-[#71717A] mt-1 mb-2">{m.date}</p>}
+                  </div>
+                ))}
               </div>
             </section>
           )}
 
-          {/* Related Projects */}
           {client.projects && client.projects.length > 0 && (
             <section>
               <h2 className="text-[12px] font-bold tracking-[0.08em] uppercase text-[#71717A] mb-4">Linked Projects</h2>
@@ -527,7 +599,6 @@ export default function ClientDetailsClient({
         <div className="space-y-8">
           <div className="p-6 border border-[#E5E5E5] bg-[#FAFAFA]">
             <h2 className="text-[12px] font-bold tracking-[0.08em] uppercase text-[#0A0A0A] mb-6">Financial Overview</h2>
-            
             <dl className="space-y-4">
               <div>
                 <dt className="text-[10px] tracking-[0.06em] uppercase text-[#71717A] mb-1">Total Revenue</dt>
@@ -537,9 +608,8 @@ export default function ClientDetailsClient({
                 <dt className="text-[10px] tracking-[0.06em] uppercase text-[#71717A] mb-1">Total Expenses</dt>
                 <dd className="text-[16px] font-bold text-[#DC2626]">-{totalExpense} PLN</dd>
               </div>
-              
               <div className="pt-4 mt-4 border-t border-[#E5E5E5]">
-                <button 
+                <button
                   onClick={() => setIsFinanceOpen(true)}
                   className="block text-center w-full py-2 bg-transparent border border-[#0A0A0A] text-[#0A0A0A] text-[11px] font-bold uppercase tracking-widest hover:bg-[#0A0A0A] hover:text-[#FAFAFA] transition-colors"
                 >
@@ -578,10 +648,10 @@ export default function ClientDetailsClient({
 
           <div className="p-6 border border-[#E5E5E5]">
             <h2 className="text-[12px] font-bold tracking-[0.08em] uppercase text-[#0A0A0A] mb-6">Assigned Team</h2>
-            <AssignmentManager 
-              entityId={client.id} 
-              entityType="client" 
-              initialMembers={client.assignedEmployees || []} 
+            <AssignmentManager
+              entityId={client.id}
+              entityType="client"
+              initialMembers={client.assignedEmployees || []}
             />
           </div>
 
@@ -594,8 +664,8 @@ export default function ClientDetailsClient({
       {/* Delete Modal */}
       {isDeleteOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/80 backdrop-blur-sm p-4">
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }} 
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             className="w-full max-w-md bg-white border border-[#E5E5E5] p-8 shadow-2xl"
           >
@@ -603,7 +673,7 @@ export default function ClientDetailsClient({
             <p className="text-[14px] text-[#71717A] mb-6">
               This action cannot be undone. To verify, type <span className="font-bold text-[#0A0A0A]">{client.name}</span> below.
             </p>
-            <PremiumInput 
+            <PremiumInput
               label="Client Name Verification"
               value={deleteConfirmation}
               onChange={(e) => setDeleteConfirmation(e.target.value)}
@@ -612,14 +682,14 @@ export default function ClientDetailsClient({
               error={deleteConfirmation.trim() && deleteConfirmation.trim() !== client.name.trim() ? "Name mismatch" : ""}
             />
             <div className="flex gap-4">
-              <button 
+              <button
                 onClick={handleDelete}
                 disabled={deleteConfirmation.trim() !== client.name.trim() || isSubmitting}
                 className="flex-1 h-12 bg-[#DC2626] text-white font-bold text-[11px] uppercase tracking-widest disabled:opacity-30 disabled:cursor-not-allowed hover:bg-red-700 transition-colors"
               >
                 {isSubmitting ? "Deleting..." : "Delete Permanently"}
               </button>
-              <button 
+              <button
                 onClick={() => { setIsDeleteOpen(false); setDeleteConfirmation(""); }}
                 className="flex-1 h-12 bg-transparent border border-[#E5E5E5] text-[#0A0A0A] font-bold text-[11px] uppercase tracking-widest hover:bg-[#F4F4F5] transition-colors"
               >
@@ -630,11 +700,11 @@ export default function ClientDetailsClient({
         </div>
       )}
 
-      {/* Stepper Modal (WIZARD) */}
+      {/* Setup Stepper */}
       {isSetupOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/80 backdrop-blur-sm p-4">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }} 
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="w-full max-w-4xl max-h-[90vh] flex flex-col bg-white border border-[#E5E5E5] shadow-2xl"
           >
@@ -649,8 +719,8 @@ export default function ClientDetailsClient({
               <div className="flex gap-2">
                 {STEPS.map((_, idx) => (
                   <div key={idx} className="flex-1 h-1 bg-[#F4F4F5]">
-                    <motion.div 
-                      className="h-full bg-[#0A0A0A]" 
+                    <motion.div
+                      className="h-full bg-[#0A0A0A]"
                       initial={{ width: "0%" }}
                       animate={{ width: idx <= currentStep ? "100%" : "0%" }}
                       transition={{ duration: 0.3 }}
@@ -660,7 +730,7 @@ export default function ClientDetailsClient({
               </div>
             </div>
 
-            <div className="flex-1 overflow-y-auto p-8 bg-[#FAFAFA]">
+            <div className="flex-1 min-h-0 overflow-y-auto p-8 bg-[#FAFAFA]">
               <form id="client-setup-form" onSubmit={handleSetupSubmit}>
                 <AnimatePresence mode="wait">
                   {renderStepContent()}
@@ -669,28 +739,27 @@ export default function ClientDetailsClient({
             </div>
 
             <div className="p-6 border-t border-[#E5E5E5] bg-white flex justify-between items-center">
-              <button 
-                type="button" 
-                onClick={prevStep} 
+              <button
+                type="button"
+                onClick={prevStep}
                 disabled={currentStep === 0 || isSubmitting}
                 className="px-6 h-12 bg-transparent text-[#0A0A0A] text-[13px] font-medium uppercase tracking-[0.04em] disabled:opacity-30 disabled:cursor-not-allowed hover:bg-[#F4F4F5] transition-colors border border-[#E5E5E5]"
               >
                 Back
               </button>
-
               {currentStep < STEPS.length - 1 ? (
-                <button 
-                  type="button" 
+                <button
+                  type="button"
                   onClick={nextStep}
                   className="px-8 h-12 bg-[#0A0A0A] text-[#FAFAFA] text-[13px] font-medium uppercase tracking-[0.04em] hover:bg-transparent hover:text-[#0A0A0A] border border-[#0A0A0A] transition-colors"
                 >
                   Continue
                 </button>
               ) : (
-                <button 
-                  type="button" 
+                <button
+                  type="button"
                   onClick={() => handleEditSubmit()}
-                  disabled={isSubmitting} 
+                  disabled={isSubmitting}
                   className="px-8 h-12 bg-[#0A0A0A] text-[#FAFAFA] text-[13px] font-medium uppercase tracking-[0.04em] hover:bg-transparent hover:text-[#0A0A0A] border border-[#0A0A0A] transition-colors disabled:opacity-50"
                 >
                   {isSubmitting ? "Saving..." : "Complete Setup"}
@@ -704,8 +773,8 @@ export default function ClientDetailsClient({
       {/* Edit Modal */}
       {isEditOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/80 backdrop-blur-sm p-4">
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }} 
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             className="w-full max-w-4xl max-h-[90vh] overflow-y-auto bg-white border border-[#E5E5E5] p-8 shadow-2xl"
           >
@@ -720,10 +789,11 @@ export default function ClientDetailsClient({
                   <h3 className="text-[14px] font-black uppercase tracking-[0.15em] text-[#0A0A0A]">Basic Info</h3>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <PremiumInput label="Client Name" required value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} />
-                  <PremiumInput label="Email" type="email" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} />
-                  <PremiumInput label="Phone Number" value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})} />
-                  <PremiumInput label="Location" value={formData.location} onChange={(e) => setFormData({...formData, location: e.target.value})} />
+                  <PremiumInput label="Client Name" required value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} helperText="Full name of the company or individual." />
+                  <PremiumInput label="Email" type="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} />
+                  <PremiumInput label="Phone Number" value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} />
+                  <ComboboxInput label="Location" value={formData.location} onChange={(val) => setFormData({ ...formData, location: val })} options={LOCATION_OPTIONS} placeholder="e.g. Warsaw, Poland" helperText="Client's primary business location." />
+                  <ComboboxInput label="Engagement Timeline" value={formData.timeline} onChange={(val) => setFormData({ ...formData, timeline: val })} options={TIMELINE_OPTIONS} placeholder="e.g. Q1 2024 – Q4 2025" helperText="Overall relationship duration." />
                 </div>
               </section>
 
@@ -732,8 +802,8 @@ export default function ClientDetailsClient({
                   <h3 className="text-[14px] font-black uppercase tracking-[0.15em] text-[#0A0A0A]">Narrative</h3>
                 </div>
                 <div className="space-y-6">
-                  <PremiumTextarea label="Description" rows={3} value={formData.description} onChange={(e) => setFormData({...formData, description: e.target.value})} />
-                  <PremiumTextarea label="Notes" rows={3} value={formData.notes} onChange={(e) => setFormData({...formData, notes: e.target.value})} />
+                  <PremiumTextarea label="Description" rows={3} value={formData.description} onChange={(e) => setFormData({ ...formData, description: e.target.value })} helperText="Public-facing overview of who this client is." />
+                  <PremiumTextarea label="Internal Notes" rows={3} value={formData.notes} onChange={(e) => setFormData({ ...formData, notes: e.target.value })} helperText="Team-only notes — preferences, quirks, decision-makers." />
                 </div>
               </section>
 
@@ -745,11 +815,12 @@ export default function ClientDetailsClient({
           </motion.div>
         </div>
       )}
+
       {/* Finance Modal */}
       {isFinanceOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/80 backdrop-blur-sm p-4">
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.95 }} 
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             className="w-full max-w-lg bg-white border border-[#E5E5E5] p-8 shadow-2xl"
           >
@@ -760,85 +831,20 @@ export default function ClientDetailsClient({
 
             <form onSubmit={handleFinanceSubmit} className="space-y-6">
               <div className="grid grid-cols-2 border border-[#E5E5E5]">
-                <button
-                  type="button"
-                  onClick={() => setFinanceType("INCOME")}
-                  className={`py-3 text-[11px] font-bold uppercase tracking-widest transition-colors ${financeType === "INCOME" ? "bg-[#0A0A0A] text-white" : "bg-white text-[#71717A] hover:bg-[#F4F4F5]"}`}
-                >
-                  Income
-                </button>
-                <button
-                  type="button"
-                  onClick={() => setFinanceType("EXPENSE")}
-                  className={`py-3 text-[11px] font-bold uppercase tracking-widest transition-colors ${financeType === "EXPENSE" ? "bg-[#0A0A0A] text-white" : "bg-white text-[#71717A] hover:bg-[#F4F4F5]"}`}
-                >
-                  Expense
-                </button>
+                <button type="button" onClick={() => setFinanceType("INCOME")} className={`py-3 text-[11px] font-bold uppercase tracking-widest transition-colors ${financeType === "INCOME" ? "bg-[#0A0A0A] text-white" : "bg-white text-[#71717A] hover:bg-[#F4F4F5]"}`}>Income</button>
+                <button type="button" onClick={() => setFinanceType("EXPENSE")} className={`py-3 text-[11px] font-bold uppercase tracking-widest transition-colors ${financeType === "EXPENSE" ? "bg-[#0A0A0A] text-white" : "bg-white text-[#71717A] hover:bg-[#F4F4F5]"}`}>Expense</button>
               </div>
-
-              <PremiumInput 
-                label="Amount (PLN)" 
-                type="number" 
-                required 
-                value={financeData.amount} 
-                onChange={(e) => setFinanceData({...financeData, amount: e.target.value})} 
-                placeholder="0.00"
-              />
-
-              <PremiumInput 
-                label="Date" 
-                type="date" 
-                required 
-                value={financeData.date} 
-                onChange={(e) => setFinanceData({...financeData, date: e.target.value})} 
-              />
-
+              <PremiumInput label="Amount (PLN)" type="number" required value={financeData.amount} onChange={(e) => setFinanceData({ ...financeData, amount: e.target.value })} placeholder="0.00" />
+              <PremiumInput label="Date" type="date" required value={financeData.date} onChange={(e) => setFinanceData({ ...financeData, date: e.target.value })} />
               {financeType === "INCOME" ? (
-                <PremiumInput 
-                  label="Source" 
-                  value={financeData.source} 
-                  onChange={(e) => setFinanceData({...financeData, source: e.target.value})} 
-                  placeholder="e.g. Project Payment"
-                />
+                <PremiumInput label="Source" value={financeData.source} onChange={(e) => setFinanceData({ ...financeData, source: e.target.value })} placeholder="e.g. Project Payment" />
               ) : (
-                <PremiumSelect
-                  label="Category"
-                  value={financeData.category}
-                  onChange={(e) => setFinanceData({...financeData, category: e.target.value})}
-                  options={[
-                    { value: "", label: "Select Category" },
-                    { value: "Marketing", label: "Marketing" },
-                    { value: "SaaS", label: "SaaS" },
-                    { value: "Taxes", label: "Taxes" },
-                    { value: "Salary", label: "Salary" },
-                    { value: "Other", label: "Other" },
-                  ]}
-                />
+                <PremiumInput label="Category" value={financeData.category} onChange={(e) => setFinanceData({ ...financeData, category: e.target.value })} placeholder="e.g. Marketing, SaaS, Salary..." />
               )}
-
-              <PremiumTextarea 
-                label="Description" 
-                rows={3} 
-                value={financeData.description} 
-                onChange={(e) => setFinanceData({...financeData, description: e.target.value})} 
-                placeholder="Optional details..."
-              />
-
+              <PremiumTextarea label="Description" rows={3} value={financeData.description} onChange={(e) => setFinanceData({ ...financeData, description: e.target.value })} placeholder="Optional details..." />
               <div className="flex gap-4 pt-4">
-                <button 
-                  type="submit" 
-                  disabled={isSubmitting}
-                  className="flex-1 h-12 bg-[#0A0A0A] text-white font-bold text-[11px] uppercase tracking-widest hover:bg-transparent hover:text-[#0A0A0A] border border-[#0A0A0A] transition-colors disabled:opacity-50"
-                >
-                  {isSubmitting ? "Saving..." : "Add Record"}
-                </button>
-                <button 
-                  type="button" 
-                  onClick={() => setIsFinanceOpen(false)}
-                  className="flex-1 h-12 bg-transparent border border-[#E5E5E5] text-[#0A0A0A] font-bold text-[11px] uppercase tracking-widest hover:bg-[#F4F4F5] transition-colors"
-                >
-                  Cancel
-                </button>
+                <button type="submit" disabled={isSubmitting} className="flex-1 h-12 bg-[#0A0A0A] text-white font-bold text-[11px] uppercase tracking-widest hover:bg-transparent hover:text-[#0A0A0A] border border-[#0A0A0A] transition-colors disabled:opacity-50">{isSubmitting ? "Saving..." : "Add Record"}</button>
+                <button type="button" onClick={() => setIsFinanceOpen(false)} className="flex-1 h-12 bg-transparent border border-[#E5E5E5] text-[#0A0A0A] font-bold text-[11px] uppercase tracking-widest hover:bg-[#F4F4F5] transition-colors">Cancel</button>
               </div>
             </form>
           </motion.div>

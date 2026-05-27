@@ -73,9 +73,10 @@ interface SelectProps extends Omit<React.SelectHTMLAttributes<HTMLSelectElement>
   label: string;
   options: { value: string; label: string }[];
   error?: string;
+  helperText?: string;
 }
 
-export const PremiumSelect = ({ label, options, error, className = "", ...props }: SelectProps) => {
+export const PremiumSelect = ({ label, options, error, helperText, className = "", ...props }: SelectProps) => {
   return (
     <div className="space-y-2 w-full">
       <label className="block text-[11px] font-bold uppercase tracking-widest text-[#71717A]">
@@ -100,6 +101,9 @@ export const PremiumSelect = ({ label, options, error, className = "", ...props 
           </svg>
         </div>
       </div>
+      {helperText && !error && (
+        <p className="text-[11px] text-[#A1A1AA] italic leading-tight">{helperText}</p>
+      )}
     </div>
   );
 };

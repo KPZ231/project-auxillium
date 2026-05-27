@@ -98,7 +98,7 @@ export default function EmployeeListClient({ initialEmployees }: EmployeeListCli
                 exit={{ opacity: 0 }}
                 className="group bg-white rounded-none border border-slate-200 hover:border-black transition-all flex flex-col"
               >
-              <Link href={`/dashboard/space/employees/${employee.id}`} className="flex flex-col flex-1 p-8">
+              <div className="flex flex-col flex-1 p-8">
                 <div className="flex items-start justify-between mb-8">
                   <div className="w-16 h-16 rounded-none bg-slate-100 flex items-center justify-center text-black text-2xl font-black group-hover:bg-black group-hover:text-white transition-colors">
                     {employee.name.charAt(0).toUpperCase()}
@@ -138,6 +138,7 @@ export default function EmployeeListClient({ initialEmployees }: EmployeeListCli
                     <ChevronRight className="w-5 h-5" />
                   </Link>
                 </div>
+              </div>
               </motion.div>
             ))}
           </AnimatePresence>

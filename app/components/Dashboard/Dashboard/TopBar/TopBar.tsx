@@ -1,11 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Image from "next/image";
 import { Bell, Settings, User, LogOut } from "lucide-react";
 import { Breadcrumbs } from "@/app/components/UI/Breadcrumbs";
-import ProfileModal from "../ProfileModal/ProfileModal";
 import { logoutAction } from "@/actions/logout";
 import { useUser } from "@/app/context/UserContext";
 import { NotificationDropdown } from "./NotificationDropdown";
@@ -21,11 +20,27 @@ interface TopBarProps {
 }
 
 export default function TopBar({ initialUser }: TopBarProps) {
-  const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
   const router = useRouter();
   const { t } = useTranslation();
+
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsDropdownOpen(false);
+      }
+    }
+
+    if (isDropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isDropdownOpen]);
 
   // user from context (updates after avatar change), falls back to SSR-provided initialUser
   const { user } = useUser();
@@ -52,10 +67,9 @@ export default function TopBar({ initialUser }: TopBarProps) {
           <NotificationDropdown />
 
           {/* User Avatar Dropdown */}
-          <div className="relative">
+          <div className="relative" ref={dropdownRef}>
             <button
-              onMouseEnter={() => setIsDropdownOpen(true)}
-              onMouseLeave={() => setIsDropdownOpen(false)}
+              onClick={() => setIsDropdownOpen((prev) => !prev)}
               className="w-8 h-8 bg-black flex items-center justify-center cursor-pointer hover:bg-gray-800 transition-colors overflow-hidden"
               title={displayName ?? "Profile"}
             >
@@ -75,8 +89,6 @@ export default function TopBar({ initialUser }: TopBarProps) {
 
             {isDropdownOpen && (
               <div
-                onMouseEnter={() => setIsDropdownOpen(true)}
-                onMouseLeave={() => setIsDropdownOpen(false)}
                 className="absolute right-0 top-full w-52 bg-white border border-black z-9999"
               >
                 {/* User info header */}
@@ -85,17 +97,6 @@ export default function TopBar({ initialUser }: TopBarProps) {
                     <p className="text-xs font-bold text-[#0A0A0A] truncate">{displayName}</p>
                   </div>
                 )}
-
-                <button
-                  onClick={() => {
-                    setIsProfileOpen(true);
-                    setIsDropdownOpen(false);
-                  }}
-                  className="w-full flex items-center gap-3 px-4 py-3 text-black hover:bg-black hover:text-white transition-colors duration-150 text-left"
-                >
-                  <User className="w-4 h-4 shrink-0" />
-                  <span className="text-sm font-medium">{t("dashboard:nav.view_profile")}</span>
-                </button>
 
                 <button
                   onClick={() => {
@@ -122,11 +123,6 @@ export default function TopBar({ initialUser }: TopBarProps) {
           </div>
         </div>
       </header>
-
-      <ProfileModal
-        isOpen={isProfileOpen}
-        onClose={() => setIsProfileOpen(false)}
-      />
     </>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams, usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "motion/react";
 import { toast } from "sonner";
 import { deleteLead } from "@/actions/deleteLead";
@@ -9,14 +9,8 @@ import { updateLead } from "@/actions/updateLead";
 import { useBreadcrumb } from "@/app/context/BreadcrumbContext";
 import { useTranslation } from "@/app/context/TranslationContext";
 import { PremiumInput, PremiumTextarea, PremiumSelect } from "@/app/components/UI/FormElements";
-
-// The steps will be translated dynamically in renderStepContent now to ensure reactivity with `t`
-// We'll define them inside the component
-// const STEPS = [
-//   "Contact Info",
-//   "Business Details",
-//   "Additional Notes"
-// ];
+import { ComboboxInput } from "@/app/components/UI/ComboboxInput";
+import { PROJECT_TYPE_OPTIONS, LEAD_STAGE_OPTIONS } from "@/lib/predefined-data";
 
 interface Lead {
   id: string;
@@ -32,16 +26,28 @@ interface Lead {
   turnedIntoClient: boolean;
 }
 
+const SField = ({ label, value }: { label: string; value?: string | null }) => {
+  if (!value) return null;
+  return (
+    <div className="p-4 bg-white">
+      <p className="text-[9px] font-black uppercase tracking-[0.18em] text-[#A1A1AA] mb-1">{label}</p>
+      <p className="text-[13px] text-[#0A0A0A] font-medium leading-snug line-clamp-2">{value}</p>
+    </div>
+  );
+};
+
 export default function LeadDetailsClient({ lead, isUnauthorized = false }: { lead: Lead, isUnauthorized?: boolean }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { setCustomLabel } = useBreadcrumb();
   const { t } = useTranslation();
+  const pathname = usePathname();
 
   const STEPS = [
     t("dashboard:leads.step_contact_info", "Contact Info"),
     t("dashboard:leads.step_business_details", "Business Details"),
-    t("dashboard:leads.step_additional_notes", "Additional Notes")
+    t("dashboard:leads.step_additional_notes", "Additional Notes"),
+    t("dashboard:leads.step_review", "Review & Confirm"),
   ];
 
   useEffect(() => {
@@ -49,22 +55,21 @@ export default function LeadDetailsClient({ lead, isUnauthorized = false }: { le
     return () => setCustomLabel(null);
   }, [lead.leadName, setCustomLabel]);
 
-  // Modal states
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
-  const [isSetupOpen, setIsSetupOpen] = useState(searchParams.get("setup") === "true");
+  const [isSetupOpen, setIsSetupOpen] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
 
   useEffect(() => {
     if (searchParams.get("setup") === "true") {
-      window.history.replaceState(null, '', `/dashboard/leads/${lead.id}`);
+      setIsSetupOpen(true);
+      router.replace(pathname, { scroll: false });
     }
-  }, [searchParams, lead.id]);
+  }, [searchParams, pathname, router]);
 
-  // Form states
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [deleteConfirmation, setDeleteConfirmation] = useState("");
-  
+
   const [formData, setFormData] = useState({
     id: lead.id,
     leadName: lead.leadName,
@@ -85,7 +90,6 @@ export default function LeadDetailsClient({ lead, isUnauthorized = false }: { le
   const handleDelete = async () => {
     setIsSubmitting(true);
     const result = await deleteLead(lead.id, deleteConfirmation);
-    
     if (result.success) {
       toast.success(t("dashboard:leads.lead_deleted", "Lead deleted successfully"));
       router.push("/dashboard/leads");
@@ -99,7 +103,6 @@ export default function LeadDetailsClient({ lead, isUnauthorized = false }: { le
     e.preventDefault();
     setIsSubmitting(true);
     const result = await updateLead(formData as any);
-
     if (result.success) {
       toast.success(t("dashboard:leads.lead_updated", "Lead updated successfully"));
       setIsEditOpen(false);
@@ -125,96 +128,169 @@ export default function LeadDetailsClient({ lead, isUnauthorized = false }: { le
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-12">
             <div className="border-l-4 border-[#0A0A0A] pl-6 py-2">
               <h3 className="text-[24px] font-black text-[#0A0A0A] uppercase tracking-tight">{t("dashboard:leads.contact_information", "1. Contact Information")}</h3>
-              <p className="text-[13px] text-[#71717A] uppercase tracking-wider font-medium">{t("dashboard:leads.who_talking_to", "Who are we talking to?")}</p>
+              <p className="text-[13px] text-[#71717A] uppercase tracking-wider font-medium">{t("dashboard:leads.who_talking_to", "The person you're in conversation with at this company.")}</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <PremiumInput 
-                label={t("dashboard:leads.contact_name", "Contact Name")} 
-                value={formData.contactName} 
-                onChange={(e) => setFormData({...formData, contactName: e.target.value})} 
-                placeholder={t("dashboard:leads.contact_name_placeholder", "e.g. John Doe")} 
+              <PremiumInput
+                label={t("dashboard:leads.contact_name", "Contact Name")}
+                value={formData.contactName}
+                onChange={(e) => setFormData({ ...formData, contactName: e.target.value })}
+                placeholder={t("dashboard:leads.contact_name_placeholder", "e.g. John Doe")}
+                helperText="The primary person at the client's side — whoever you've spoken to."
               />
-              <PremiumInput 
-                label={t("dashboard:leads.role_label", "Role / Position")} 
-                value={formData.role} 
-                onChange={(e) => setFormData({...formData, role: e.target.value})} 
-                placeholder={t("dashboard:leads.role_placeholder", "e.g. CEO")} 
+              <PremiumInput
+                label={t("dashboard:leads.role_label", "Role / Position")}
+                value={formData.role}
+                onChange={(e) => setFormData({ ...formData, role: e.target.value })}
+                placeholder={t("dashboard:leads.role_placeholder", "e.g. CEO, Marketing Director")}
+                helperText="Their job title. Helps tailor proposals and know who the decision-maker is."
               />
-              <PremiumInput 
-                label={t("dashboard:leads.email", "Email")} 
-                type="email" 
-                value={formData.email} 
-                onChange={(e) => setFormData({...formData, email: e.target.value})} 
-                placeholder={t("dashboard:leads.email_placeholder", "john@example.com")} 
+              <PremiumInput
+                label={t("dashboard:leads.email", "Email")}
+                type="email"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                placeholder={t("dashboard:leads.email_placeholder", "john@example.com")}
+                helperText="Primary email for follow-ups and proposals."
               />
-              <PremiumInput 
-                label={t("dashboard:leads.phone", "Phone")} 
-                value={formData.phone} 
-                onChange={(e) => setFormData({...formData, phone: e.target.value})} 
-                placeholder={t("dashboard:leads.phone_placeholder", "+1 234 567 890")} 
+              <PremiumInput
+                label={t("dashboard:leads.phone", "Phone")}
+                value={formData.phone}
+                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                placeholder={t("dashboard:leads.phone_placeholder", "+1 234 567 890")}
+                helperText="Useful for quick calls. Include country code for international leads."
               />
             </div>
           </motion.div>
         );
+
       case 1:
         return (
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-12">
             <div className="border-l-4 border-[#0A0A0A] pl-6 py-2">
               <h3 className="text-[24px] font-black text-[#0A0A0A] uppercase tracking-tight">{t("dashboard:leads.business_details", "2. Business Details")}</h3>
-              <p className="text-[13px] text-[#71717A] uppercase tracking-wider font-medium">{t("dashboard:leads.what_is_opportunity", "What is the opportunity?")}</p>
+              <p className="text-[13px] text-[#71717A] uppercase tracking-wider font-medium">{t("dashboard:leads.what_is_opportunity", "The opportunity — what are they asking for and where does it stand?")}</p>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <PremiumInput 
-                label={t("dashboard:leads.project_type", "Project Type")} 
-                value={formData.projectType} 
-                onChange={(e) => setFormData({...formData, projectType: e.target.value})} 
-                placeholder={t("dashboard:leads.project_type_placeholder", "e.g. Web Development")} 
+              <ComboboxInput
+                label={t("dashboard:leads.project_type", "Project Type")}
+                value={formData.projectType}
+                onChange={(val) => setFormData({ ...formData, projectType: val })}
+                options={PROJECT_TYPE_OPTIONS}
+                placeholder={t("dashboard:leads.project_type_placeholder", "e.g. Web Development")}
+                helperText="The kind of work this lead is enquiring about. Used to match templates and estimate workload."
+                tooltip="Choose from common project categories or type your own. This helps filter leads by service type."
               />
-              <PremiumSelect 
-                label={t("dashboard:leads.status", "Status")} 
-                value={formData.status} 
-                onChange={(e) => setFormData({...formData, status: e.target.value as "COLD" | "NEGOTIATION" | "QUALIFIED"})}
+              <PremiumSelect
+                label={t("dashboard:leads.status", "Status")}
+                value={formData.status}
+                onChange={(e) => setFormData({ ...formData, status: e.target.value as "COLD" | "NEGOTIATION" | "QUALIFIED" })}
                 options={[
-                  { value: "COLD", label: t("dashboard:leads.status_cold", "Cold") },
-                  { value: "NEGOTIATION", label: t("dashboard:leads.status_negotiation", "Negotiation") },
-                  { value: "QUALIFIED", label: t("dashboard:leads.status_qualified", "Qualified") }
+                  { value: "COLD", label: t("dashboard:leads.status_cold", "Cold — initial contact, no engagement yet") },
+                  { value: "NEGOTIATION", label: t("dashboard:leads.status_negotiation", "Negotiation — active conversation underway") },
+                  { value: "QUALIFIED", label: t("dashboard:leads.status_qualified", "Qualified — likely to convert") }
                 ]}
+                helperText="How far along this lead is in your pipeline."
               />
-              <PremiumInput 
-                label={t("dashboard:leads.current_stage_label", "Current Stage")} 
-                value={formData.stage} 
-                onChange={(e) => setFormData({...formData, stage: e.target.value})} 
-                placeholder={t("dashboard:leads.stage_placeholder", "e.g. Discovery")} 
+              <ComboboxInput
+                label={t("dashboard:leads.current_stage_label", "Current Stage")}
+                value={formData.stage}
+                onChange={(val) => setFormData({ ...formData, stage: val })}
+                options={LEAD_STAGE_OPTIONS}
+                placeholder={t("dashboard:leads.stage_placeholder", "e.g. Proposal Sent")}
+                helperText="The specific step in your sales process this lead is at right now."
+                tooltip="More granular than Status — tracks exactly what has happened and what the next step is."
               />
-              <div className="flex items-center gap-4 pt-4">
-                <input 
-                  type="checkbox" 
-                  id="turnedIntoClient" 
-                  checked={formData.turnedIntoClient} 
-                  onChange={(e) => setFormData({...formData, turnedIntoClient: e.target.checked})} 
-                  className="w-6 h-6 accent-[#0A0A0A] border-2 border-[#D4D4D8] rounded-none cursor-pointer" 
+              <div className="flex items-start gap-4 pt-4">
+                <input
+                  type="checkbox"
+                  id="turnedIntoClient"
+                  checked={formData.turnedIntoClient}
+                  onChange={(e) => setFormData({ ...formData, turnedIntoClient: e.target.checked })}
+                  className="w-6 h-6 accent-[#0A0A0A] border-2 border-[#D4D4D8] rounded-none cursor-pointer mt-0.5"
                 />
-                <label htmlFor="turnedIntoClient" className="text-[12px] font-black uppercase tracking-widest text-[#0A0A0A] cursor-pointer">{t("dashboard:leads.turned_into_client", "Turned into client")}</label>
+                <div>
+                  <label htmlFor="turnedIntoClient" className="text-[12px] font-black uppercase tracking-widest text-[#0A0A0A] cursor-pointer block">{t("dashboard:leads.turned_into_client", "Turned into client")}</label>
+                  <p className="text-[11px] text-[#A1A1AA] italic mt-1">Mark this once the lead has signed and becomes a client in the system.</p>
+                </div>
               </div>
             </div>
           </motion.div>
         );
+
       case 2:
         return (
           <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-12">
             <div className="border-l-4 border-[#0A0A0A] pl-6 py-2">
               <h3 className="text-[24px] font-black text-[#0A0A0A] uppercase tracking-tight">{t("dashboard:leads.lead_description", "3. Lead Description")}</h3>
-              <p className="text-[13px] text-[#71717A] uppercase tracking-wider font-medium">{t("dashboard:leads.capture_narrative", "Capture the narrative.")}</p>
+              <p className="text-[13px] text-[#71717A] uppercase tracking-wider font-medium">{t("dashboard:leads.capture_narrative", "Capture everything else — the context, the story, the nuance.")}</p>
             </div>
-            <PremiumTextarea 
-              label={t("dashboard:leads.main_description", "Main Description")} 
-              rows={8} 
-              value={formData.leadInfo} 
-              onChange={(e) => setFormData({...formData, leadInfo: e.target.value})} 
-              placeholder={t("dashboard:leads.additional_placeholder", "Additional background information or notes...")} 
+            <PremiumTextarea
+              label={t("dashboard:leads.main_description", "Notes & Background")}
+              rows={8}
+              value={formData.leadInfo}
+              onChange={(e) => setFormData({ ...formData, leadInfo: e.target.value })}
+              placeholder={t("dashboard:leads.additional_placeholder", "How did they find us? What's the timeline? Budget hinted? Key requirements mentioned? Blockers? Anything the team should know before the next call...")}
+              helperText="A free-form notes field. Great for capturing call notes, key requirements, or anything that doesn't fit a structured field."
             />
           </motion.div>
         );
+
+      case 3: {
+        const requiredFilled = formData.leadName.trim();
+        return (
+          <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="space-y-8">
+            <div className="border-l-4 border-[#0A0A0A] pl-6 py-2">
+              <h3 className="text-[24px] font-black text-[#0A0A0A] uppercase tracking-tight">{t("dashboard:leads.step_review", "Review & Confirm")}</h3>
+              <p className="text-[13px] text-[#71717A] uppercase tracking-wider font-medium">Verify everything looks right before saving.</p>
+            </div>
+
+            <div className="border border-[#E5E5E5] overflow-hidden">
+              <div className="grid grid-cols-2 divide-x divide-[#E5E5E5]">
+                <SField label="Lead Name" value={formData.leadName} />
+                <SField label="Status" value={formData.status} />
+              </div>
+              <div className="grid grid-cols-2 divide-x divide-[#E5E5E5] border-t border-[#E5E5E5]">
+                <SField label="Project Type" value={formData.projectType} />
+                <SField label="Current Stage" value={formData.stage} />
+              </div>
+              <div className="grid grid-cols-2 divide-x divide-[#E5E5E5] border-t border-[#E5E5E5]">
+                <SField label="Contact Person" value={formData.contactName} />
+                <SField label="Role / Position" value={formData.role} />
+              </div>
+              <div className="grid grid-cols-2 divide-x divide-[#E5E5E5] border-t border-[#E5E5E5]">
+                <SField label="Email" value={formData.email} />
+                <SField label="Phone" value={formData.phone} />
+              </div>
+              {formData.leadInfo && (
+                <div className="border-t border-[#E5E5E5] p-4 bg-white">
+                  <p className="text-[9px] font-black uppercase tracking-[0.18em] text-[#A1A1AA] mb-1">Notes & Background</p>
+                  <p className="text-[13px] text-[#0A0A0A] font-medium leading-snug line-clamp-3">{formData.leadInfo}</p>
+                </div>
+              )}
+              {formData.turnedIntoClient && (
+                <div className="border-t border-[#E5E5E5] p-4 bg-[#F0FDF4]">
+                  <p className="text-[9px] font-black uppercase tracking-[0.18em] text-[#16A34A] mb-1">Conversion</p>
+                  <p className="text-[13px] text-[#166534] font-medium">Marked as converted to client ✓</p>
+                </div>
+              )}
+            </div>
+
+            <div className={`p-4 border-l-4 ${requiredFilled ? "border-l-[#16A34A] bg-[#F0FDF4]" : "border-l-[#DC2626] bg-[#FEF2F2]"}`}>
+              {requiredFilled ? (
+                <p className="text-[12px] text-[#166534] font-medium">
+                  ✓ All required fields filled. Click <strong>Complete Setup</strong> to save this lead.
+                </p>
+              ) : (
+                <p className="text-[12px] text-[#991B1B] font-medium">
+                  ✗ <strong>Lead Name</strong> is required. Go back to fill it in.
+                </p>
+              )}
+            </div>
+          </motion.div>
+        );
+      }
+
       default:
         return null;
     }
@@ -238,9 +314,8 @@ export default function LeadDetailsClient({ lead, isUnauthorized = false }: { le
       <div className="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-6 border-b border-[#E5E5E5] pb-8">
         <div>
           <div className="flex gap-2 mb-4 items-center">
-            <span className={`inline-block px-2 py-1 text-[10px] font-bold tracking-[0.08em] uppercase border ${
-                formData.status === 'QUALIFIED' ? 'bg-[#0A0A0A] text-white border-[#0A0A0A]' :
-                formData.status === 'NEGOTIATION' ? 'bg-orange-500 text-white border-orange-500' :
+            <span className={`inline-block px-2 py-1 text-[10px] font-bold tracking-[0.08em] uppercase border ${formData.status === 'QUALIFIED' ? 'bg-[#0A0A0A] text-white border-[#0A0A0A]' :
+              formData.status === 'NEGOTIATION' ? 'bg-orange-500 text-white border-orange-500' :
                 'bg-[#F4F4F5] text-[#0A0A0A] border-[#D4D4D8]'
               }`}>
               {formData.status}
@@ -271,7 +346,7 @@ export default function LeadDetailsClient({ lead, isUnauthorized = false }: { le
         </div>
       </div>
 
-      {/* Main Content Viewer */}
+      {/* Main Content */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
         <div className="md:col-span-2 space-y-12">
           <section>
@@ -326,7 +401,7 @@ export default function LeadDetailsClient({ lead, isUnauthorized = false }: { le
         </div>
       </div>
 
-      {/* Setup Stepper Modal */}
+      {/* Setup Stepper */}
       {isSetupOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-white/80 backdrop-blur-sm p-4">
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="w-full max-w-4xl max-h-[90vh] flex flex-col bg-white border border-[#E5E5E5] shadow-2xl">
@@ -346,7 +421,7 @@ export default function LeadDetailsClient({ lead, isUnauthorized = false }: { le
                 ))}
               </div>
             </div>
-            <div className="flex-1 overflow-y-auto p-8 bg-[#FAFAFA]">
+            <div className="flex-1 min-h-0 overflow-y-auto p-8 bg-[#FAFAFA]">
               <form id="lead-setup-form" onSubmit={handleSetupSubmit}>
                 <AnimatePresence mode="wait">
                   {renderStepContent()}
@@ -379,31 +454,40 @@ export default function LeadDetailsClient({ lead, isUnauthorized = false }: { le
                   <h3 className="text-[14px] font-black uppercase tracking-[0.15em] text-[#0A0A0A]">{t("dashboard:leads.basic_information", "Basic Information")}</h3>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <PremiumInput 
-                    label={t("dashboard:leads.lead_name", "Lead Name")} 
-                    required 
-                    value={formData.leadName} 
-                    onChange={(e) => setFormData({...formData, leadName: e.target.value})} 
+                  <PremiumInput
+                    label={t("dashboard:leads.lead_name", "Lead Name")}
+                    required
+                    value={formData.leadName}
+                    onChange={(e) => setFormData({ ...formData, leadName: e.target.value })}
+                    helperText="Usually the company name or opportunity name."
                   />
-                  <PremiumSelect 
-                    label={t("dashboard:leads.status", "Status")} 
-                    value={formData.status} 
-                    onChange={(e) => setFormData({...formData, status: e.target.value as "COLD" | "NEGOTIATION" | "QUALIFIED"})}
+                  <PremiumSelect
+                    label={t("dashboard:leads.status", "Status")}
+                    value={formData.status}
+                    onChange={(e) => setFormData({ ...formData, status: e.target.value as "COLD" | "NEGOTIATION" | "QUALIFIED" })}
                     options={[
                       { value: "COLD", label: t("dashboard:leads.status_cold", "Cold") },
                       { value: "NEGOTIATION", label: t("dashboard:leads.status_negotiation", "Negotiation") },
                       { value: "QUALIFIED", label: t("dashboard:leads.status_qualified", "Qualified") }
                     ]}
+                    helperText="Pipeline position of this lead."
                   />
-                  <PremiumInput 
-                    label={t("dashboard:leads.project_type", "Project Type")} 
-                    value={formData.projectType} 
-                    onChange={(e) => setFormData({...formData, projectType: e.target.value})} 
+                  <ComboboxInput
+                    label={t("dashboard:leads.project_type", "Project Type")}
+                    value={formData.projectType}
+                    onChange={(val) => setFormData({ ...formData, projectType: val })}
+                    options={PROJECT_TYPE_OPTIONS}
+                    placeholder={t("dashboard:leads.project_type_placeholder", "e.g. Web Development")}
+                    helperText="Type of work they're enquiring about."
+                    tooltip="Choose from common categories or type your own."
                   />
-                  <PremiumInput 
-                    label={t("dashboard:leads.current_stage_label", "Current Stage")} 
-                    value={formData.stage} 
-                    onChange={(e) => setFormData({...formData, stage: e.target.value})} 
+                  <ComboboxInput
+                    label={t("dashboard:leads.current_stage_label", "Current Stage")}
+                    value={formData.stage}
+                    onChange={(val) => setFormData({ ...formData, stage: val })}
+                    options={LEAD_STAGE_OPTIONS}
+                    placeholder={t("dashboard:leads.stage_placeholder", "e.g. Proposal Sent")}
+                    helperText="Exact step in your sales process."
                   />
                 </div>
               </section>
@@ -413,10 +497,10 @@ export default function LeadDetailsClient({ lead, isUnauthorized = false }: { le
                   <h3 className="text-[14px] font-black uppercase tracking-[0.15em] text-[#0A0A0A]">{t("dashboard:leads.contact_details", "Contact Details")}</h3>
                 </div>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                  <PremiumInput label={t("dashboard:leads.contact_name", "Contact Name")} value={formData.contactName} onChange={(e) => setFormData({...formData, contactName: e.target.value})} />
-                  <PremiumInput label={t("dashboard:leads.role_label", "Role / Position")} value={formData.role} onChange={(e) => setFormData({...formData, role: e.target.value})} />
-                  <PremiumInput label={t("dashboard:leads.email", "Email")} type="email" value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} />
-                  <PremiumInput label={t("dashboard:leads.phone", "Phone")} value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})} />
+                  <PremiumInput label={t("dashboard:leads.contact_name", "Contact Name")} value={formData.contactName} onChange={(e) => setFormData({ ...formData, contactName: e.target.value })} helperText="Primary person at the client side." />
+                  <PremiumInput label={t("dashboard:leads.role_label", "Role / Position")} value={formData.role} onChange={(e) => setFormData({ ...formData, role: e.target.value })} helperText="Their job title — helps tailor proposals." />
+                  <PremiumInput label={t("dashboard:leads.email", "Email")} type="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} />
+                  <PremiumInput label={t("dashboard:leads.phone", "Phone")} value={formData.phone} onChange={(e) => setFormData({ ...formData, phone: e.target.value })} />
                 </div>
               </section>
 
@@ -425,16 +509,19 @@ export default function LeadDetailsClient({ lead, isUnauthorized = false }: { le
                   <h3 className="text-[14px] font-black uppercase tracking-[0.15em] text-[#0A0A0A]">{t("dashboard:leads.additional_info", "Additional Info")}</h3>
                 </div>
                 <div className="space-y-8">
-                  <PremiumTextarea label={t("dashboard:leads.lead_notes", "Lead Notes")} rows={6} value={formData.leadInfo} onChange={(e) => setFormData({...formData, leadInfo: e.target.value})} />
-                  <div className="flex items-center gap-4">
-                    <input 
-                      type="checkbox" 
-                      id="editTurnedIntoClient" 
-                      checked={formData.turnedIntoClient} 
-                      onChange={(e) => setFormData({...formData, turnedIntoClient: e.target.checked})} 
-                      className="w-6 h-6 accent-[#0A0A0A] border-2 border-[#D4D4D8] rounded-none cursor-pointer" 
+                  <PremiumTextarea label={t("dashboard:leads.lead_notes", "Notes & Background")} rows={6} value={formData.leadInfo} onChange={(e) => setFormData({ ...formData, leadInfo: e.target.value })} helperText="Free-form notes — call summaries, requirements, budget hints, blockers, anything relevant." />
+                  <div className="flex items-start gap-4">
+                    <input
+                      type="checkbox"
+                      id="editTurnedIntoClient"
+                      checked={formData.turnedIntoClient}
+                      onChange={(e) => setFormData({ ...formData, turnedIntoClient: e.target.checked })}
+                      className="w-6 h-6 accent-[#0A0A0A] border-2 border-[#D4D4D8] rounded-none cursor-pointer mt-0.5"
                     />
-                    <label htmlFor="editTurnedIntoClient" className="text-[12px] font-black uppercase tracking-widest text-[#0A0A0A] cursor-pointer">{t("dashboard:leads.turned_into_client", "Turned into client")}</label>
+                    <div>
+                      <label htmlFor="editTurnedIntoClient" className="text-[12px] font-black uppercase tracking-widest text-[#0A0A0A] cursor-pointer block">{t("dashboard:leads.turned_into_client", "Turned into client")}</label>
+                      <p className="text-[11px] text-[#A1A1AA] italic mt-1">Mark once the lead has signed and converted.</p>
+                    </div>
                   </div>
                 </div>
               </section>
@@ -454,7 +541,7 @@ export default function LeadDetailsClient({ lead, isUnauthorized = false }: { le
           <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="w-full max-w-md bg-white border border-[#E5E5E5] p-8 shadow-2xl">
             <h2 className="text-[20px] font-bold text-[#DC2626] uppercase tracking-tight mb-2">{t("dashboard:leads.delete_lead", "Delete Lead")}</h2>
             <p className="text-[14px] text-[#71717A] mb-6">{t("dashboard:leads.delete_warning", "This action cannot be undone. To verify, type")} <span className="font-bold text-[#0A0A0A]">{lead.leadName}</span> {t("dashboard:leads.below", "below.")}</p>
-            <PremiumInput 
+            <PremiumInput
               label={t("dashboard:leads.lead_name_verification", "Lead Name Verification")}
               value={deleteConfirmation}
               onChange={(e) => setDeleteConfirmation(e.target.value)}
@@ -463,15 +550,15 @@ export default function LeadDetailsClient({ lead, isUnauthorized = false }: { le
               error={deleteConfirmation && deleteConfirmation !== lead.leadName ? t("dashboard:leads.name_mismatch", "Name mismatch") : ""}
             />
             <div className="flex gap-4">
-              <button 
-                onClick={handleDelete} 
-                disabled={deleteConfirmation !== lead.leadName || isSubmitting} 
+              <button
+                onClick={handleDelete}
+                disabled={deleteConfirmation !== lead.leadName || isSubmitting}
                 className="flex-1 h-12 bg-[#DC2626] text-white font-bold text-[11px] uppercase tracking-widest disabled:opacity-30 disabled:cursor-not-allowed hover:bg-red-700 transition-colors"
               >
                 {isSubmitting ? t("dashboard:leads.deleting", "Deleting...") : t("dashboard:leads.delete_permanently", "Delete Permanently")}
               </button>
-              <button 
-                onClick={() => { setIsDeleteOpen(false); setDeleteConfirmation(""); }} 
+              <button
+                onClick={() => { setIsDeleteOpen(false); setDeleteConfirmation(""); }}
                 className="flex-1 h-12 bg-transparent border border-[#E5E5E5] text-[#0A0A0A] font-bold text-[11px] uppercase tracking-widest hover:bg-[#F4F4F5] transition-colors"
               >
                 {t("dashboard:leads.cancel", "Cancel")}

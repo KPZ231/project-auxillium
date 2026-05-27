@@ -10,7 +10,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useBreadcrumb } from "@/app/context/BreadcrumbContext";
 import { AssignmentManager } from "@/app/components/assignments/assignment-manager";
-import { PremiumInput, PremiumTextarea } from "@/app/components/UI/FormElements";
+import { PremiumInput, PremiumTextarea, PremiumSelect } from "@/app/components/UI/FormElements";
 import { ComboboxInput } from "@/app/components/UI/ComboboxInput";
 import { RelatedDocuments } from "@/app/components/templates/RelatedDocuments";
 import {
@@ -839,7 +839,7 @@ export default function ClientDetailsClient({
               {financeType === "INCOME" ? (
                 <PremiumInput label="Source" value={financeData.source} onChange={(e) => setFinanceData({ ...financeData, source: e.target.value })} placeholder="e.g. Project Payment" />
               ) : (
-                <PremiumInput label="Category" value={financeData.category} onChange={(e) => setFinanceData({ ...financeData, category: e.target.value })} placeholder="e.g. Marketing, SaaS, Salary..." />
+                <PremiumSelect label="Category" value={financeData.category} onChange={(e) => setFinanceData({ ...financeData, category: e.target.value })} options={[{ value: "", label: "Select category" }, { value: "Marketing", label: "Marketing" }, { value: "SaaS", label: "SaaS" }, { value: "Taxes", label: "Taxes" }, { value: "Salary", label: "Salary" }, { value: "Revenue", label: "Revenue" }, { value: "Other", label: "Other" }]} />
               )}
               <PremiumTextarea label="Description" rows={3} value={financeData.description} onChange={(e) => setFinanceData({ ...financeData, description: e.target.value })} placeholder="Optional details..." />
               <div className="flex gap-4 pt-4">

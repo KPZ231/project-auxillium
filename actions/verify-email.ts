@@ -5,18 +5,16 @@ import { prisma } from "@/lib/prisma";
 import { sendVerificationEmail } from "@/lib/mail";
 import { checkRateLimit } from "@/lib/rate-limit";
 import { getSession } from "@/lib/session";
-import { headers } from "next/headers";
 
 export async function sendVerificationCode() {
-  const ip = (await headers()).get("x-forwarded-for") ?? "127.0.0.1";
-  const { success } = await checkRateLimit(ip, "email");
-  if (!success) {
-    return { error: "Osiągnięto limit wysyłania kodów. Spróbuj ponownie później." };
-  }
-
   const session = await getSession();
   if (!session?.userId) {
     return { error: "Brak sesji. Zaloguj się ponownie." };
+  }
+
+  const { success } = await checkRateLimit(session.userId, "email");
+  if (!success) {
+    return { error: "Osiągnięto limit wysyłania kodów. Spróbuj ponownie później." };
   }
 
   const user = await prisma.user.findUnique({
@@ -26,6 +24,7 @@ export async function sendVerificationCode() {
 
   if (!user) return { error: "Nie znaleziono użytkownika." };
   if (user.emailVerified) return { success: true };
+  if (!user.email) return { error: "Konto nie ma przypisanego adresu e-mail." };
 
   const code = randomInt(100000, 1000000).toString();
   const expires = new Date(Date.now() + 15 * 60 * 1000);
@@ -45,6 +44,11 @@ export async function verifyEmailCode(code: string) {
   const session = await getSession();
   if (!session?.userId) {
     return { error: "Brak sesji. Zaloguj się ponownie." };
+  }
+
+  const { success: rateLimitOk } = await checkRateLimit(session.userId, "email");
+  if (!rateLimitOk) {
+    return { error: "Zbyt wiele prób weryfikacji. Spróbuj ponownie później." };
   }
 
   if (!code || code.length !== 6 || !/^\d{6}$/.test(code)) {

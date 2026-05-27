@@ -63,8 +63,8 @@ export default function VerifyEmailForm() {
         toast.success("Email zweryfikowany!", {
           description: "Twoje konto jest teraz w pełni aktywne.",
         });
-        router.push(`/${language}/dashboard`);
         router.refresh();
+        router.push(`/${language}/dashboard`);
       } else {
         toast.error("Błąd weryfikacji", { description: result.error });
         setDigits(["", "", "", "", "", ""]);

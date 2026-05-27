@@ -36,10 +36,14 @@ export default function OnboardingPage() {
     try {
       const result = await createSpace(formData);
       if (result.success) {
-        setStep(3); // Success step
+        setStep(3);
         setTimeout(() => {
           router.push("/dashboard");
         }, 1500);
+      } else if (result.error === "SPACE_NAME_TAKEN") {
+        toast.error("You already have a space with that name. Please choose a different name.");
+      } else if (result.error === "SPACE_LIMIT_REACHED") {
+        toast.error("You've reached your space limit. Upgrade your plan to create more spaces.");
       }
     } catch (error: any) {
       toast.error(error.message || "Something went wrong");

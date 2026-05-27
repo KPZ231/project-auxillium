@@ -53,6 +53,7 @@ export const AnyNull = runtime.AnyNull
 export const ModelName = {
   User: 'User',
   PasswordResetToken: 'PasswordResetToken',
+  EmailVerificationToken: 'EmailVerificationToken',
   Project: 'Project',
   Lead: 'Lead',
   Space: 'Space',
@@ -102,6 +103,7 @@ export const UserScalarFieldEnum = {
   lastActiveSpaceId: 'lastActiveSpaceId',
   tutorialStep: 'tutorialStep',
   tutorialDismissed: 'tutorialDismissed',
+  emailVerified: 'emailVerified',
   stripeCustomerId: 'stripeCustomerId',
   stripeSubscriptionId: 'stripeSubscriptionId',
   stripePriceId: 'stripePriceId',
@@ -119,6 +121,16 @@ export const PasswordResetTokenScalarFieldEnum = {
 } as const
 
 export type PasswordResetTokenScalarFieldEnum = (typeof PasswordResetTokenScalarFieldEnum)[keyof typeof PasswordResetTokenScalarFieldEnum]
+
+
+export const EmailVerificationTokenScalarFieldEnum = {
+  id: 'id',
+  code: 'code',
+  expires: 'expires',
+  userId: 'userId'
+} as const
+
+export type EmailVerificationTokenScalarFieldEnum = (typeof EmailVerificationTokenScalarFieldEnum)[keyof typeof EmailVerificationTokenScalarFieldEnum]
 
 
 export const ProjectScalarFieldEnum = {

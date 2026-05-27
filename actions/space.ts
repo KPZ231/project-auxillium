@@ -21,19 +21,27 @@ export async function createSpace(formData: FormData) {
     return { success: false, error: "SPACE_LIMIT_REACHED", plan }
   }
 
-  const space = await prisma.space.create({
-    data: {
-      spaceName,
-      spaceDescription,
-      ownerId: userId,
-      members: {
-        create: {
-          userId: userId,
-          role: "ADMIN",
+  let space;
+  try {
+    space = await prisma.space.create({
+      data: {
+        spaceName,
+        spaceDescription,
+        ownerId: userId,
+        members: {
+          create: {
+            userId: userId,
+            role: "ADMIN",
+          },
         },
       },
-    },
-  });
+    });
+  } catch (err: any) {
+    if (err?.code === "P2002") {
+      return { success: false, error: "SPACE_NAME_TAKEN" };
+    }
+    throw err;
+  }
 
   // Set as active space
   const cookieStore = await cookies();

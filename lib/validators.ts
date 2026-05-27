@@ -12,8 +12,8 @@ const usernameSchema = z
   .min(3, "Nazwa użytkownika musi mieć co najmniej 3 znaki")
   .max(30, "Nazwa użytkownika może mieć maksymalnie 30 znaków")
   .regex(
-    /^[a-zA-Z0-9_@.-]+$/,
-    "Nazwa użytkownika może zawierać tylko litery, cyfry, podkreślniki, kropki i @",
+    /^[a-zA-Z0-9_.]+$/,
+    "Nazwa użytkownika może zawierać tylko litery, cyfry, podkreślniki i kropki",
   );
 
 // Shared password validation
@@ -45,7 +45,7 @@ export const registerSchema = z
       .string()
       .max(80, "Imię i nazwisko może mieć maksymalnie 80 znaków")
       .optional(),
-    email: emailSchema.optional(),
+    email: emailSchema,
     username: usernameSchema,
     password: passwordSchema,
     confirmPassword: z.string().min(1, "Potwierdzenie hasła jest wymagane"),

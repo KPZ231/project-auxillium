@@ -48,6 +48,7 @@ export type UserMinAggregateOutputType = {
   lastActiveSpaceId: string | null
   tutorialStep: number | null
   tutorialDismissed: boolean | null
+  emailVerified: boolean | null
   stripeCustomerId: string | null
   stripeSubscriptionId: string | null
   stripePriceId: string | null
@@ -68,6 +69,7 @@ export type UserMaxAggregateOutputType = {
   lastActiveSpaceId: string | null
   tutorialStep: number | null
   tutorialDismissed: boolean | null
+  emailVerified: boolean | null
   stripeCustomerId: string | null
   stripeSubscriptionId: string | null
   stripePriceId: string | null
@@ -88,6 +90,7 @@ export type UserCountAggregateOutputType = {
   lastActiveSpaceId: number
   tutorialStep: number
   tutorialDismissed: number
+  emailVerified: number
   stripeCustomerId: number
   stripeSubscriptionId: number
   stripePriceId: number
@@ -118,6 +121,7 @@ export type UserMinAggregateInputType = {
   lastActiveSpaceId?: true
   tutorialStep?: true
   tutorialDismissed?: true
+  emailVerified?: true
   stripeCustomerId?: true
   stripeSubscriptionId?: true
   stripePriceId?: true
@@ -138,6 +142,7 @@ export type UserMaxAggregateInputType = {
   lastActiveSpaceId?: true
   tutorialStep?: true
   tutorialDismissed?: true
+  emailVerified?: true
   stripeCustomerId?: true
   stripeSubscriptionId?: true
   stripePriceId?: true
@@ -158,6 +163,7 @@ export type UserCountAggregateInputType = {
   lastActiveSpaceId?: true
   tutorialStep?: true
   tutorialDismissed?: true
+  emailVerified?: true
   stripeCustomerId?: true
   stripeSubscriptionId?: true
   stripePriceId?: true
@@ -265,6 +271,7 @@ export type UserGroupByOutputType = {
   lastActiveSpaceId: string | null
   tutorialStep: number
   tutorialDismissed: boolean
+  emailVerified: boolean
   stripeCustomerId: string | null
   stripeSubscriptionId: string | null
   stripePriceId: string | null
@@ -308,11 +315,13 @@ export type UserWhereInput = {
   lastActiveSpaceId?: Prisma.StringNullableFilter<"User"> | string | null
   tutorialStep?: Prisma.IntFilter<"User"> | number
   tutorialDismissed?: Prisma.BoolFilter<"User"> | boolean
+  emailVerified?: Prisma.BoolFilter<"User"> | boolean
   stripeCustomerId?: Prisma.StringNullableFilter<"User"> | string | null
   stripeSubscriptionId?: Prisma.StringNullableFilter<"User"> | string | null
   stripePriceId?: Prisma.StringNullableFilter<"User"> | string | null
   stripeCurrentPeriodEnd?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   resetTokens?: Prisma.PasswordResetTokenListRelationFilter
+  verificationTokens?: Prisma.EmailVerificationTokenListRelationFilter
   projects?: Prisma.ProjectListRelationFilter
   leads?: Prisma.LeadListRelationFilter
   clients?: Prisma.ClientListRelationFilter
@@ -343,11 +352,13 @@ export type UserOrderByWithRelationInput = {
   lastActiveSpaceId?: Prisma.SortOrderInput | Prisma.SortOrder
   tutorialStep?: Prisma.SortOrder
   tutorialDismissed?: Prisma.SortOrder
+  emailVerified?: Prisma.SortOrder
   stripeCustomerId?: Prisma.SortOrderInput | Prisma.SortOrder
   stripeSubscriptionId?: Prisma.SortOrderInput | Prisma.SortOrder
   stripePriceId?: Prisma.SortOrderInput | Prisma.SortOrder
   stripeCurrentPeriodEnd?: Prisma.SortOrderInput | Prisma.SortOrder
   resetTokens?: Prisma.PasswordResetTokenOrderByRelationAggregateInput
+  verificationTokens?: Prisma.EmailVerificationTokenOrderByRelationAggregateInput
   projects?: Prisma.ProjectOrderByRelationAggregateInput
   leads?: Prisma.LeadOrderByRelationAggregateInput
   clients?: Prisma.ClientOrderByRelationAggregateInput
@@ -383,9 +394,11 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   lastActiveSpaceId?: Prisma.StringNullableFilter<"User"> | string | null
   tutorialStep?: Prisma.IntFilter<"User"> | number
   tutorialDismissed?: Prisma.BoolFilter<"User"> | boolean
+  emailVerified?: Prisma.BoolFilter<"User"> | boolean
   stripePriceId?: Prisma.StringNullableFilter<"User"> | string | null
   stripeCurrentPeriodEnd?: Prisma.DateTimeNullableFilter<"User"> | Date | string | null
   resetTokens?: Prisma.PasswordResetTokenListRelationFilter
+  verificationTokens?: Prisma.EmailVerificationTokenListRelationFilter
   projects?: Prisma.ProjectListRelationFilter
   leads?: Prisma.LeadListRelationFilter
   clients?: Prisma.ClientListRelationFilter
@@ -416,6 +429,7 @@ export type UserOrderByWithAggregationInput = {
   lastActiveSpaceId?: Prisma.SortOrderInput | Prisma.SortOrder
   tutorialStep?: Prisma.SortOrder
   tutorialDismissed?: Prisma.SortOrder
+  emailVerified?: Prisma.SortOrder
   stripeCustomerId?: Prisma.SortOrderInput | Prisma.SortOrder
   stripeSubscriptionId?: Prisma.SortOrderInput | Prisma.SortOrder
   stripePriceId?: Prisma.SortOrderInput | Prisma.SortOrder
@@ -444,6 +458,7 @@ export type UserScalarWhereWithAggregatesInput = {
   lastActiveSpaceId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   tutorialStep?: Prisma.IntWithAggregatesFilter<"User"> | number
   tutorialDismissed?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
+  emailVerified?: Prisma.BoolWithAggregatesFilter<"User"> | boolean
   stripeCustomerId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   stripeSubscriptionId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
   stripePriceId?: Prisma.StringNullableWithAggregatesFilter<"User"> | string | null
@@ -464,11 +479,13 @@ export type UserCreateInput = {
   lastActiveSpaceId?: string | null
   tutorialStep?: number
   tutorialDismissed?: boolean
+  emailVerified?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
   stripeCurrentPeriodEnd?: Date | string | null
   resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  verificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientCreateNestedManyWithoutUserInput
@@ -499,11 +516,13 @@ export type UserUncheckedCreateInput = {
   lastActiveSpaceId?: string | null
   tutorialStep?: number
   tutorialDismissed?: boolean
+  emailVerified?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
   stripeCurrentPeriodEnd?: Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  verificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutUserInput
@@ -534,11 +553,13 @@ export type UserUpdateInput = {
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
   tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeCurrentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  verificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUpdateManyWithoutUserNestedInput
@@ -569,11 +590,13 @@ export type UserUncheckedUpdateInput = {
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
   tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeCurrentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  verificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutUserNestedInput
@@ -604,6 +627,7 @@ export type UserCreateManyInput = {
   lastActiveSpaceId?: string | null
   tutorialStep?: number
   tutorialDismissed?: boolean
+  emailVerified?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
@@ -624,6 +648,7 @@ export type UserUpdateManyMutationInput = {
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
   tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -644,6 +669,7 @@ export type UserUncheckedUpdateManyInput = {
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
   tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
@@ -664,6 +690,7 @@ export type UserCountOrderByAggregateInput = {
   lastActiveSpaceId?: Prisma.SortOrder
   tutorialStep?: Prisma.SortOrder
   tutorialDismissed?: Prisma.SortOrder
+  emailVerified?: Prisma.SortOrder
   stripeCustomerId?: Prisma.SortOrder
   stripeSubscriptionId?: Prisma.SortOrder
   stripePriceId?: Prisma.SortOrder
@@ -688,6 +715,7 @@ export type UserMaxOrderByAggregateInput = {
   lastActiveSpaceId?: Prisma.SortOrder
   tutorialStep?: Prisma.SortOrder
   tutorialDismissed?: Prisma.SortOrder
+  emailVerified?: Prisma.SortOrder
   stripeCustomerId?: Prisma.SortOrder
   stripeSubscriptionId?: Prisma.SortOrder
   stripePriceId?: Prisma.SortOrder
@@ -708,6 +736,7 @@ export type UserMinOrderByAggregateInput = {
   lastActiveSpaceId?: Prisma.SortOrder
   tutorialStep?: Prisma.SortOrder
   tutorialDismissed?: Prisma.SortOrder
+  emailVerified?: Prisma.SortOrder
   stripeCustomerId?: Prisma.SortOrder
   stripeSubscriptionId?: Prisma.SortOrder
   stripePriceId?: Prisma.SortOrder
@@ -763,6 +792,20 @@ export type UserUpdateOneRequiredWithoutResetTokensNestedInput = {
   upsert?: Prisma.UserUpsertWithoutResetTokensInput
   connect?: Prisma.UserWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutResetTokensInput, Prisma.UserUpdateWithoutResetTokensInput>, Prisma.UserUncheckedUpdateWithoutResetTokensInput>
+}
+
+export type UserCreateNestedOneWithoutVerificationTokensInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutVerificationTokensInput, Prisma.UserUncheckedCreateWithoutVerificationTokensInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutVerificationTokensInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutVerificationTokensNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutVerificationTokensInput, Prisma.UserUncheckedCreateWithoutVerificationTokensInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutVerificationTokensInput
+  upsert?: Prisma.UserUpsertWithoutVerificationTokensInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutVerificationTokensInput, Prisma.UserUpdateWithoutVerificationTokensInput>, Prisma.UserUncheckedUpdateWithoutVerificationTokensInput>
 }
 
 export type UserCreateNestedOneWithoutProjectsInput = {
@@ -975,10 +1018,12 @@ export type UserCreateWithoutResetTokensInput = {
   lastActiveSpaceId?: string | null
   tutorialStep?: number
   tutorialDismissed?: boolean
+  emailVerified?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
   stripeCurrentPeriodEnd?: Date | string | null
+  verificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientCreateNestedManyWithoutUserInput
@@ -1009,10 +1054,12 @@ export type UserUncheckedCreateWithoutResetTokensInput = {
   lastActiveSpaceId?: string | null
   tutorialStep?: number
   tutorialDismissed?: boolean
+  emailVerified?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
   stripeCurrentPeriodEnd?: Date | string | null
+  verificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutUserInput
@@ -1059,10 +1106,12 @@ export type UserUpdateWithoutResetTokensInput = {
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
   tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeCurrentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  verificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUpdateManyWithoutUserNestedInput
@@ -1093,10 +1142,172 @@ export type UserUncheckedUpdateWithoutResetTokensInput = {
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
   tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeCurrentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  verificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
+  leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
+  clients?: Prisma.ClientUncheckedUpdateManyWithoutUserNestedInput
+  ownedSpaces?: Prisma.SpaceUncheckedUpdateManyWithoutOwnerNestedInput
+  spaceMemberships?: Prisma.SpaceMemberUncheckedUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUncheckedUpdateManyWithoutUserNestedInput
+  incomes?: Prisma.IncomeUncheckedUpdateManyWithoutUserNestedInput
+  revenueGoals?: Prisma.RevenueGoalUncheckedUpdateManyWithoutUserNestedInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUncheckedUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUncheckedUpdateManyWithoutUserNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedUpdateManyWithoutUserNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUncheckedUpdateManyWithoutUserNestedInput
+  createdInvitations?: Prisma.SpaceInvitationUncheckedUpdateManyWithoutCreatedByNestedInput
+}
+
+export type UserCreateWithoutVerificationTokensInput = {
+  id?: string
+  email: string
+  username: string
+  passwordHash?: string | null
+  authProvider?: string
+  providerId?: string | null
+  name?: string | null
+  avatarUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  lastActiveSpaceId?: string | null
+  tutorialStep?: number
+  tutorialDismissed?: boolean
+  emailVerified?: boolean
+  stripeCustomerId?: string | null
+  stripeSubscriptionId?: string | null
+  stripePriceId?: string | null
+  stripeCurrentPeriodEnd?: Date | string | null
+  resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
+  leads?: Prisma.LeadCreateNestedManyWithoutUserInput
+  clients?: Prisma.ClientCreateNestedManyWithoutUserInput
+  ownedSpaces?: Prisma.SpaceCreateNestedManyWithoutOwnerInput
+  spaceMemberships?: Prisma.SpaceMemberCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseCreateNestedManyWithoutUserInput
+  incomes?: Prisma.IncomeCreateNestedManyWithoutUserInput
+  revenueGoals?: Prisma.RevenueGoalCreateNestedManyWithoutUserInput
+  financialAuditLogs?: Prisma.FinancialAuditLogCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationCreateNestedManyWithoutUserInput
+  documentTemplates?: Prisma.DocumentTemplateCreateNestedManyWithoutUserInput
+  generatedDocuments?: Prisma.GeneratedDocumentCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationCreateNestedManyWithoutUserInput
+  createdInvitations?: Prisma.SpaceInvitationCreateNestedManyWithoutCreatedByInput
+}
+
+export type UserUncheckedCreateWithoutVerificationTokensInput = {
+  id?: string
+  email: string
+  username: string
+  passwordHash?: string | null
+  authProvider?: string
+  providerId?: string | null
+  name?: string | null
+  avatarUrl?: string | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  lastActiveSpaceId?: string | null
+  tutorialStep?: number
+  tutorialDismissed?: boolean
+  emailVerified?: boolean
+  stripeCustomerId?: string | null
+  stripeSubscriptionId?: string | null
+  stripePriceId?: string | null
+  stripeCurrentPeriodEnd?: Date | string | null
+  resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
+  leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
+  clients?: Prisma.ClientUncheckedCreateNestedManyWithoutUserInput
+  ownedSpaces?: Prisma.SpaceUncheckedCreateNestedManyWithoutOwnerInput
+  spaceMemberships?: Prisma.SpaceMemberUncheckedCreateNestedManyWithoutUserInput
+  expenses?: Prisma.ExpenseUncheckedCreateNestedManyWithoutUserInput
+  incomes?: Prisma.IncomeUncheckedCreateNestedManyWithoutUserInput
+  revenueGoals?: Prisma.RevenueGoalUncheckedCreateNestedManyWithoutUserInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUncheckedCreateNestedManyWithoutUserInput
+  integrations?: Prisma.IntegrationUncheckedCreateNestedManyWithoutUserInput
+  documentTemplates?: Prisma.DocumentTemplateUncheckedCreateNestedManyWithoutUserInput
+  generatedDocuments?: Prisma.GeneratedDocumentUncheckedCreateNestedManyWithoutUserInput
+  notifications?: Prisma.NotificationUncheckedCreateNestedManyWithoutUserInput
+  createdInvitations?: Prisma.SpaceInvitationUncheckedCreateNestedManyWithoutCreatedByInput
+}
+
+export type UserCreateOrConnectWithoutVerificationTokensInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutVerificationTokensInput, Prisma.UserUncheckedCreateWithoutVerificationTokensInput>
+}
+
+export type UserUpsertWithoutVerificationTokensInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutVerificationTokensInput, Prisma.UserUncheckedUpdateWithoutVerificationTokensInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutVerificationTokensInput, Prisma.UserUncheckedCreateWithoutVerificationTokensInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutVerificationTokensInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutVerificationTokensInput, Prisma.UserUncheckedUpdateWithoutVerificationTokensInput>
+}
+
+export type UserUpdateWithoutVerificationTokensInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
+  tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripeCurrentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
+  leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
+  clients?: Prisma.ClientUpdateManyWithoutUserNestedInput
+  ownedSpaces?: Prisma.SpaceUpdateManyWithoutOwnerNestedInput
+  spaceMemberships?: Prisma.SpaceMemberUpdateManyWithoutUserNestedInput
+  expenses?: Prisma.ExpenseUpdateManyWithoutUserNestedInput
+  incomes?: Prisma.IncomeUpdateManyWithoutUserNestedInput
+  revenueGoals?: Prisma.RevenueGoalUpdateManyWithoutUserNestedInput
+  financialAuditLogs?: Prisma.FinancialAuditLogUpdateManyWithoutUserNestedInput
+  integrations?: Prisma.IntegrationUpdateManyWithoutUserNestedInput
+  documentTemplates?: Prisma.DocumentTemplateUpdateManyWithoutUserNestedInput
+  generatedDocuments?: Prisma.GeneratedDocumentUpdateManyWithoutUserNestedInput
+  notifications?: Prisma.NotificationUpdateManyWithoutUserNestedInput
+  createdInvitations?: Prisma.SpaceInvitationUpdateManyWithoutCreatedByNestedInput
+}
+
+export type UserUncheckedUpdateWithoutVerificationTokensInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  username?: Prisma.StringFieldUpdateOperationsInput | string
+  passwordHash?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  authProvider?: Prisma.StringFieldUpdateOperationsInput | string
+  providerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  avatarUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
+  tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  stripeCurrentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutUserNestedInput
@@ -1127,11 +1338,13 @@ export type UserCreateWithoutProjectsInput = {
   lastActiveSpaceId?: string | null
   tutorialStep?: number
   tutorialDismissed?: boolean
+  emailVerified?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
   stripeCurrentPeriodEnd?: Date | string | null
   resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  verificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientCreateNestedManyWithoutUserInput
   ownedSpaces?: Prisma.SpaceCreateNestedManyWithoutOwnerInput
@@ -1161,11 +1374,13 @@ export type UserUncheckedCreateWithoutProjectsInput = {
   lastActiveSpaceId?: string | null
   tutorialStep?: number
   tutorialDismissed?: boolean
+  emailVerified?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
   stripeCurrentPeriodEnd?: Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  verificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutUserInput
   ownedSpaces?: Prisma.SpaceUncheckedCreateNestedManyWithoutOwnerInput
@@ -1211,11 +1426,13 @@ export type UserUpdateWithoutProjectsInput = {
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
   tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeCurrentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  verificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUpdateManyWithoutUserNestedInput
   ownedSpaces?: Prisma.SpaceUpdateManyWithoutOwnerNestedInput
@@ -1245,11 +1462,13 @@ export type UserUncheckedUpdateWithoutProjectsInput = {
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
   tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeCurrentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  verificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutUserNestedInput
   ownedSpaces?: Prisma.SpaceUncheckedUpdateManyWithoutOwnerNestedInput
@@ -1279,11 +1498,13 @@ export type UserCreateWithoutLeadsInput = {
   lastActiveSpaceId?: string | null
   tutorialStep?: number
   tutorialDismissed?: boolean
+  emailVerified?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
   stripeCurrentPeriodEnd?: Date | string | null
   resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  verificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientCreateNestedManyWithoutUserInput
   ownedSpaces?: Prisma.SpaceCreateNestedManyWithoutOwnerInput
@@ -1313,11 +1534,13 @@ export type UserUncheckedCreateWithoutLeadsInput = {
   lastActiveSpaceId?: string | null
   tutorialStep?: number
   tutorialDismissed?: boolean
+  emailVerified?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
   stripeCurrentPeriodEnd?: Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  verificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutUserInput
   ownedSpaces?: Prisma.SpaceUncheckedCreateNestedManyWithoutOwnerInput
@@ -1363,11 +1586,13 @@ export type UserUpdateWithoutLeadsInput = {
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
   tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeCurrentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  verificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUpdateManyWithoutUserNestedInput
   ownedSpaces?: Prisma.SpaceUpdateManyWithoutOwnerNestedInput
@@ -1397,11 +1622,13 @@ export type UserUncheckedUpdateWithoutLeadsInput = {
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
   tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeCurrentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  verificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutUserNestedInput
   ownedSpaces?: Prisma.SpaceUncheckedUpdateManyWithoutOwnerNestedInput
@@ -1431,11 +1658,13 @@ export type UserCreateWithoutOwnedSpacesInput = {
   lastActiveSpaceId?: string | null
   tutorialStep?: number
   tutorialDismissed?: boolean
+  emailVerified?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
   stripeCurrentPeriodEnd?: Date | string | null
   resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  verificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientCreateNestedManyWithoutUserInput
@@ -1465,11 +1694,13 @@ export type UserUncheckedCreateWithoutOwnedSpacesInput = {
   lastActiveSpaceId?: string | null
   tutorialStep?: number
   tutorialDismissed?: boolean
+  emailVerified?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
   stripeCurrentPeriodEnd?: Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  verificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutUserInput
@@ -1515,11 +1746,13 @@ export type UserUpdateWithoutOwnedSpacesInput = {
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
   tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeCurrentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  verificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUpdateManyWithoutUserNestedInput
@@ -1549,11 +1782,13 @@ export type UserUncheckedUpdateWithoutOwnedSpacesInput = {
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
   tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeCurrentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  verificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutUserNestedInput
@@ -1583,11 +1818,13 @@ export type UserCreateWithoutExpensesInput = {
   lastActiveSpaceId?: string | null
   tutorialStep?: number
   tutorialDismissed?: boolean
+  emailVerified?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
   stripeCurrentPeriodEnd?: Date | string | null
   resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  verificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientCreateNestedManyWithoutUserInput
@@ -1617,11 +1854,13 @@ export type UserUncheckedCreateWithoutExpensesInput = {
   lastActiveSpaceId?: string | null
   tutorialStep?: number
   tutorialDismissed?: boolean
+  emailVerified?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
   stripeCurrentPeriodEnd?: Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  verificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutUserInput
@@ -1667,11 +1906,13 @@ export type UserUpdateWithoutExpensesInput = {
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
   tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeCurrentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  verificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUpdateManyWithoutUserNestedInput
@@ -1701,11 +1942,13 @@ export type UserUncheckedUpdateWithoutExpensesInput = {
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
   tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeCurrentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  verificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutUserNestedInput
@@ -1735,11 +1978,13 @@ export type UserCreateWithoutIncomesInput = {
   lastActiveSpaceId?: string | null
   tutorialStep?: number
   tutorialDismissed?: boolean
+  emailVerified?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
   stripeCurrentPeriodEnd?: Date | string | null
   resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  verificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientCreateNestedManyWithoutUserInput
@@ -1769,11 +2014,13 @@ export type UserUncheckedCreateWithoutIncomesInput = {
   lastActiveSpaceId?: string | null
   tutorialStep?: number
   tutorialDismissed?: boolean
+  emailVerified?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
   stripeCurrentPeriodEnd?: Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  verificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutUserInput
@@ -1819,11 +2066,13 @@ export type UserUpdateWithoutIncomesInput = {
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
   tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeCurrentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  verificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUpdateManyWithoutUserNestedInput
@@ -1853,11 +2102,13 @@ export type UserUncheckedUpdateWithoutIncomesInput = {
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
   tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeCurrentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  verificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutUserNestedInput
@@ -1887,11 +2138,13 @@ export type UserCreateWithoutRevenueGoalsInput = {
   lastActiveSpaceId?: string | null
   tutorialStep?: number
   tutorialDismissed?: boolean
+  emailVerified?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
   stripeCurrentPeriodEnd?: Date | string | null
   resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  verificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientCreateNestedManyWithoutUserInput
@@ -1921,11 +2174,13 @@ export type UserUncheckedCreateWithoutRevenueGoalsInput = {
   lastActiveSpaceId?: string | null
   tutorialStep?: number
   tutorialDismissed?: boolean
+  emailVerified?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
   stripeCurrentPeriodEnd?: Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  verificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutUserInput
@@ -1971,11 +2226,13 @@ export type UserUpdateWithoutRevenueGoalsInput = {
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
   tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeCurrentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  verificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUpdateManyWithoutUserNestedInput
@@ -2005,11 +2262,13 @@ export type UserUncheckedUpdateWithoutRevenueGoalsInput = {
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
   tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeCurrentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  verificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutUserNestedInput
@@ -2039,11 +2298,13 @@ export type UserCreateWithoutClientsInput = {
   lastActiveSpaceId?: string | null
   tutorialStep?: number
   tutorialDismissed?: boolean
+  emailVerified?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
   stripeCurrentPeriodEnd?: Date | string | null
   resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  verificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   ownedSpaces?: Prisma.SpaceCreateNestedManyWithoutOwnerInput
@@ -2073,11 +2334,13 @@ export type UserUncheckedCreateWithoutClientsInput = {
   lastActiveSpaceId?: string | null
   tutorialStep?: number
   tutorialDismissed?: boolean
+  emailVerified?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
   stripeCurrentPeriodEnd?: Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  verificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   ownedSpaces?: Prisma.SpaceUncheckedCreateNestedManyWithoutOwnerInput
@@ -2123,11 +2386,13 @@ export type UserUpdateWithoutClientsInput = {
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
   tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeCurrentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  verificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   ownedSpaces?: Prisma.SpaceUpdateManyWithoutOwnerNestedInput
@@ -2157,11 +2422,13 @@ export type UserUncheckedUpdateWithoutClientsInput = {
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
   tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeCurrentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  verificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   ownedSpaces?: Prisma.SpaceUncheckedUpdateManyWithoutOwnerNestedInput
@@ -2191,11 +2458,13 @@ export type UserCreateWithoutFinancialAuditLogsInput = {
   lastActiveSpaceId?: string | null
   tutorialStep?: number
   tutorialDismissed?: boolean
+  emailVerified?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
   stripeCurrentPeriodEnd?: Date | string | null
   resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  verificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientCreateNestedManyWithoutUserInput
@@ -2225,11 +2494,13 @@ export type UserUncheckedCreateWithoutFinancialAuditLogsInput = {
   lastActiveSpaceId?: string | null
   tutorialStep?: number
   tutorialDismissed?: boolean
+  emailVerified?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
   stripeCurrentPeriodEnd?: Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  verificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutUserInput
@@ -2275,11 +2546,13 @@ export type UserUpdateWithoutFinancialAuditLogsInput = {
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
   tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeCurrentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  verificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUpdateManyWithoutUserNestedInput
@@ -2309,11 +2582,13 @@ export type UserUncheckedUpdateWithoutFinancialAuditLogsInput = {
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
   tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeCurrentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  verificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutUserNestedInput
@@ -2343,11 +2618,13 @@ export type UserCreateWithoutIntegrationsInput = {
   lastActiveSpaceId?: string | null
   tutorialStep?: number
   tutorialDismissed?: boolean
+  emailVerified?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
   stripeCurrentPeriodEnd?: Date | string | null
   resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  verificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientCreateNestedManyWithoutUserInput
@@ -2377,11 +2654,13 @@ export type UserUncheckedCreateWithoutIntegrationsInput = {
   lastActiveSpaceId?: string | null
   tutorialStep?: number
   tutorialDismissed?: boolean
+  emailVerified?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
   stripeCurrentPeriodEnd?: Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  verificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutUserInput
@@ -2427,11 +2706,13 @@ export type UserUpdateWithoutIntegrationsInput = {
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
   tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeCurrentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  verificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUpdateManyWithoutUserNestedInput
@@ -2461,11 +2742,13 @@ export type UserUncheckedUpdateWithoutIntegrationsInput = {
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
   tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeCurrentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  verificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutUserNestedInput
@@ -2495,11 +2778,13 @@ export type UserCreateWithoutDocumentTemplatesInput = {
   lastActiveSpaceId?: string | null
   tutorialStep?: number
   tutorialDismissed?: boolean
+  emailVerified?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
   stripeCurrentPeriodEnd?: Date | string | null
   resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  verificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientCreateNestedManyWithoutUserInput
@@ -2529,11 +2814,13 @@ export type UserUncheckedCreateWithoutDocumentTemplatesInput = {
   lastActiveSpaceId?: string | null
   tutorialStep?: number
   tutorialDismissed?: boolean
+  emailVerified?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
   stripeCurrentPeriodEnd?: Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  verificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutUserInput
@@ -2579,11 +2866,13 @@ export type UserUpdateWithoutDocumentTemplatesInput = {
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
   tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeCurrentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  verificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUpdateManyWithoutUserNestedInput
@@ -2613,11 +2902,13 @@ export type UserUncheckedUpdateWithoutDocumentTemplatesInput = {
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
   tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeCurrentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  verificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutUserNestedInput
@@ -2647,11 +2938,13 @@ export type UserCreateWithoutGeneratedDocumentsInput = {
   lastActiveSpaceId?: string | null
   tutorialStep?: number
   tutorialDismissed?: boolean
+  emailVerified?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
   stripeCurrentPeriodEnd?: Date | string | null
   resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  verificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientCreateNestedManyWithoutUserInput
@@ -2681,11 +2974,13 @@ export type UserUncheckedCreateWithoutGeneratedDocumentsInput = {
   lastActiveSpaceId?: string | null
   tutorialStep?: number
   tutorialDismissed?: boolean
+  emailVerified?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
   stripeCurrentPeriodEnd?: Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  verificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutUserInput
@@ -2731,11 +3026,13 @@ export type UserUpdateWithoutGeneratedDocumentsInput = {
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
   tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeCurrentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  verificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUpdateManyWithoutUserNestedInput
@@ -2765,11 +3062,13 @@ export type UserUncheckedUpdateWithoutGeneratedDocumentsInput = {
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
   tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeCurrentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  verificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutUserNestedInput
@@ -2799,11 +3098,13 @@ export type UserCreateWithoutNotificationsInput = {
   lastActiveSpaceId?: string | null
   tutorialStep?: number
   tutorialDismissed?: boolean
+  emailVerified?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
   stripeCurrentPeriodEnd?: Date | string | null
   resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  verificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientCreateNestedManyWithoutUserInput
@@ -2833,11 +3134,13 @@ export type UserUncheckedCreateWithoutNotificationsInput = {
   lastActiveSpaceId?: string | null
   tutorialStep?: number
   tutorialDismissed?: boolean
+  emailVerified?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
   stripeCurrentPeriodEnd?: Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  verificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutUserInput
@@ -2883,11 +3186,13 @@ export type UserUpdateWithoutNotificationsInput = {
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
   tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeCurrentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  verificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUpdateManyWithoutUserNestedInput
@@ -2917,11 +3222,13 @@ export type UserUncheckedUpdateWithoutNotificationsInput = {
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
   tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeCurrentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  verificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutUserNestedInput
@@ -2951,11 +3258,13 @@ export type UserCreateWithoutSpaceMembershipsInput = {
   lastActiveSpaceId?: string | null
   tutorialStep?: number
   tutorialDismissed?: boolean
+  emailVerified?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
   stripeCurrentPeriodEnd?: Date | string | null
   resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  verificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientCreateNestedManyWithoutUserInput
@@ -2985,11 +3294,13 @@ export type UserUncheckedCreateWithoutSpaceMembershipsInput = {
   lastActiveSpaceId?: string | null
   tutorialStep?: number
   tutorialDismissed?: boolean
+  emailVerified?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
   stripeCurrentPeriodEnd?: Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  verificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutUserInput
@@ -3035,11 +3346,13 @@ export type UserUpdateWithoutSpaceMembershipsInput = {
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
   tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeCurrentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  verificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUpdateManyWithoutUserNestedInput
@@ -3069,11 +3382,13 @@ export type UserUncheckedUpdateWithoutSpaceMembershipsInput = {
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
   tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeCurrentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  verificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutUserNestedInput
@@ -3103,11 +3418,13 @@ export type UserCreateWithoutCreatedInvitationsInput = {
   lastActiveSpaceId?: string | null
   tutorialStep?: number
   tutorialDismissed?: boolean
+  emailVerified?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
   stripeCurrentPeriodEnd?: Date | string | null
   resetTokens?: Prisma.PasswordResetTokenCreateNestedManyWithoutUserInput
+  verificationTokens?: Prisma.EmailVerificationTokenCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientCreateNestedManyWithoutUserInput
@@ -3137,11 +3454,13 @@ export type UserUncheckedCreateWithoutCreatedInvitationsInput = {
   lastActiveSpaceId?: string | null
   tutorialStep?: number
   tutorialDismissed?: boolean
+  emailVerified?: boolean
   stripeCustomerId?: string | null
   stripeSubscriptionId?: string | null
   stripePriceId?: string | null
   stripeCurrentPeriodEnd?: Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedCreateNestedManyWithoutUserInput
+  verificationTokens?: Prisma.EmailVerificationTokenUncheckedCreateNestedManyWithoutUserInput
   projects?: Prisma.ProjectUncheckedCreateNestedManyWithoutUserInput
   leads?: Prisma.LeadUncheckedCreateNestedManyWithoutUserInput
   clients?: Prisma.ClientUncheckedCreateNestedManyWithoutUserInput
@@ -3187,11 +3506,13 @@ export type UserUpdateWithoutCreatedInvitationsInput = {
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
   tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeCurrentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUpdateManyWithoutUserNestedInput
+  verificationTokens?: Prisma.EmailVerificationTokenUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUpdateManyWithoutUserNestedInput
@@ -3221,11 +3542,13 @@ export type UserUncheckedUpdateWithoutCreatedInvitationsInput = {
   lastActiveSpaceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   tutorialStep?: Prisma.IntFieldUpdateOperationsInput | number
   tutorialDismissed?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  emailVerified?: Prisma.BoolFieldUpdateOperationsInput | boolean
   stripeCustomerId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeSubscriptionId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripePriceId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   stripeCurrentPeriodEnd?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
   resetTokens?: Prisma.PasswordResetTokenUncheckedUpdateManyWithoutUserNestedInput
+  verificationTokens?: Prisma.EmailVerificationTokenUncheckedUpdateManyWithoutUserNestedInput
   projects?: Prisma.ProjectUncheckedUpdateManyWithoutUserNestedInput
   leads?: Prisma.LeadUncheckedUpdateManyWithoutUserNestedInput
   clients?: Prisma.ClientUncheckedUpdateManyWithoutUserNestedInput
@@ -3248,6 +3571,7 @@ export type UserUncheckedUpdateWithoutCreatedInvitationsInput = {
 
 export type UserCountOutputType = {
   resetTokens: number
+  verificationTokens: number
   projects: number
   leads: number
   clients: number
@@ -3266,6 +3590,7 @@ export type UserCountOutputType = {
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   resetTokens?: boolean | UserCountOutputTypeCountResetTokensArgs
+  verificationTokens?: boolean | UserCountOutputTypeCountVerificationTokensArgs
   projects?: boolean | UserCountOutputTypeCountProjectsArgs
   leads?: boolean | UserCountOutputTypeCountLeadsArgs
   clients?: boolean | UserCountOutputTypeCountClientsArgs
@@ -3297,6 +3622,13 @@ export type UserCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensi
  */
 export type UserCountOutputTypeCountResetTokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   where?: Prisma.PasswordResetTokenWhereInput
+}
+
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountVerificationTokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.EmailVerificationTokenWhereInput
 }
 
 /**
@@ -3412,11 +3744,13 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   lastActiveSpaceId?: boolean
   tutorialStep?: boolean
   tutorialDismissed?: boolean
+  emailVerified?: boolean
   stripeCustomerId?: boolean
   stripeSubscriptionId?: boolean
   stripePriceId?: boolean
   stripeCurrentPeriodEnd?: boolean
   resetTokens?: boolean | Prisma.User$resetTokensArgs<ExtArgs>
+  verificationTokens?: boolean | Prisma.User$verificationTokensArgs<ExtArgs>
   projects?: boolean | Prisma.User$projectsArgs<ExtArgs>
   leads?: boolean | Prisma.User$leadsArgs<ExtArgs>
   clients?: boolean | Prisma.User$clientsArgs<ExtArgs>
@@ -3448,6 +3782,7 @@ export type UserSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   lastActiveSpaceId?: boolean
   tutorialStep?: boolean
   tutorialDismissed?: boolean
+  emailVerified?: boolean
   stripeCustomerId?: boolean
   stripeSubscriptionId?: boolean
   stripePriceId?: boolean
@@ -3468,6 +3803,7 @@ export type UserSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensio
   lastActiveSpaceId?: boolean
   tutorialStep?: boolean
   tutorialDismissed?: boolean
+  emailVerified?: boolean
   stripeCustomerId?: boolean
   stripeSubscriptionId?: boolean
   stripePriceId?: boolean
@@ -3488,15 +3824,17 @@ export type UserSelectScalar = {
   lastActiveSpaceId?: boolean
   tutorialStep?: boolean
   tutorialDismissed?: boolean
+  emailVerified?: boolean
   stripeCustomerId?: boolean
   stripeSubscriptionId?: boolean
   stripePriceId?: boolean
   stripeCurrentPeriodEnd?: boolean
 }
 
-export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "username" | "passwordHash" | "authProvider" | "providerId" | "name" | "avatarUrl" | "createdAt" | "updatedAt" | "lastActiveSpaceId" | "tutorialStep" | "tutorialDismissed" | "stripeCustomerId" | "stripeSubscriptionId" | "stripePriceId" | "stripeCurrentPeriodEnd", ExtArgs["result"]["user"]>
+export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "email" | "username" | "passwordHash" | "authProvider" | "providerId" | "name" | "avatarUrl" | "createdAt" | "updatedAt" | "lastActiveSpaceId" | "tutorialStep" | "tutorialDismissed" | "emailVerified" | "stripeCustomerId" | "stripeSubscriptionId" | "stripePriceId" | "stripeCurrentPeriodEnd", ExtArgs["result"]["user"]>
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   resetTokens?: boolean | Prisma.User$resetTokensArgs<ExtArgs>
+  verificationTokens?: boolean | Prisma.User$verificationTokensArgs<ExtArgs>
   projects?: boolean | Prisma.User$projectsArgs<ExtArgs>
   leads?: boolean | Prisma.User$leadsArgs<ExtArgs>
   clients?: boolean | Prisma.User$clientsArgs<ExtArgs>
@@ -3520,6 +3858,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   name: "User"
   objects: {
     resetTokens: Prisma.$PasswordResetTokenPayload<ExtArgs>[]
+    verificationTokens: Prisma.$EmailVerificationTokenPayload<ExtArgs>[]
     projects: Prisma.$ProjectPayload<ExtArgs>[]
     leads: Prisma.$LeadPayload<ExtArgs>[]
     clients: Prisma.$ClientPayload<ExtArgs>[]
@@ -3549,6 +3888,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     lastActiveSpaceId: string | null
     tutorialStep: number
     tutorialDismissed: boolean
+    emailVerified: boolean
     stripeCustomerId: string | null
     stripeSubscriptionId: string | null
     stripePriceId: string | null
@@ -3948,6 +4288,7 @@ readonly fields: UserFieldRefs;
 export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
   resetTokens<T extends Prisma.User$resetTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$resetTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$PasswordResetTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  verificationTokens<T extends Prisma.User$verificationTokensArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$verificationTokensArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$EmailVerificationTokenPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   projects<T extends Prisma.User$projectsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$projectsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   leads<T extends Prisma.User$leadsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$leadsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LeadPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   clients<T extends Prisma.User$clientsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$clientsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ClientPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
@@ -4004,6 +4345,7 @@ export interface UserFieldRefs {
   readonly lastActiveSpaceId: Prisma.FieldRef<"User", 'String'>
   readonly tutorialStep: Prisma.FieldRef<"User", 'Int'>
   readonly tutorialDismissed: Prisma.FieldRef<"User", 'Boolean'>
+  readonly emailVerified: Prisma.FieldRef<"User", 'Boolean'>
   readonly stripeCustomerId: Prisma.FieldRef<"User", 'String'>
   readonly stripeSubscriptionId: Prisma.FieldRef<"User", 'String'>
   readonly stripePriceId: Prisma.FieldRef<"User", 'String'>
@@ -4422,6 +4764,30 @@ export type User$resetTokensArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.PasswordResetTokenScalarFieldEnum | Prisma.PasswordResetTokenScalarFieldEnum[]
+}
+
+/**
+ * User.verificationTokens
+ */
+export type User$verificationTokensArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the EmailVerificationToken
+   */
+  select?: Prisma.EmailVerificationTokenSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the EmailVerificationToken
+   */
+  omit?: Prisma.EmailVerificationTokenOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.EmailVerificationTokenInclude<ExtArgs> | null
+  where?: Prisma.EmailVerificationTokenWhereInput
+  orderBy?: Prisma.EmailVerificationTokenOrderByWithRelationInput | Prisma.EmailVerificationTokenOrderByWithRelationInput[]
+  cursor?: Prisma.EmailVerificationTokenWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.EmailVerificationTokenScalarFieldEnum | Prisma.EmailVerificationTokenScalarFieldEnum[]
 }
 
 /**

@@ -6,7 +6,14 @@
       "Bash(npx prisma *)",
       "Bash(npx tsc *)",
       "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:3000/pl/dashboard)",
-      "Bash(curl *)"
+      "Bash(curl *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(Write-Output 'Creating directory structure if needed')",
+      "Bash(New-Item -ItemType Directory -Path \"app/components/Dashboard\" -Force)",
+      "Bash(Out-Null)",
+      "Bash(Write-Output 'Directory ready')",
+      "Bash(dir \"app\\\\[locale]\" /b)"
     ]
   },
   "outputStyle": "default"

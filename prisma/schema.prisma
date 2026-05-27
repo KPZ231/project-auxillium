@@ -172,7 +172,7 @@ model Lead {
 
 model Space {
   id               String  @id @default(cuid())
-  spaceName        String  @unique
+  spaceName        String
   spaceDescription String?
   icon             String?
   baseCurrency     String  @default("USD")
@@ -200,6 +200,7 @@ model Space {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
+  @@unique([ownerId, spaceName])
   @@index([ownerId])
 }
 

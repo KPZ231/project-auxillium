@@ -78,20 +78,38 @@ export default function RegisterForm() {
           onSubmit={handleSubmit(onSubmit, onValidationError)}
           className="w-full flex flex-col gap-8 mt-4"
         >
-          {/* Email/Username Field */}
+          {/* Username Field */}
           <div className="flex flex-col gap-3">
             <label className="text-[10px] font-bold tracking-[0.2em] text-(--neutral) uppercase opacity-60">
-              {t("forms:form.email_or_login")} *
+              {t("forms:form.username", { defaultValue: "Nazwa użytkownika" })} *
             </label>
             <input
               {...register("username")}
               type="text"
-              placeholder={t("forms:placeholders.email_or_login")}
+              placeholder={t("forms:placeholders.username", { defaultValue: "jan_kowalski" })}
               className={`w-full py-4 border-b ${errors.username ? 'border-red-500' : 'border-(--tertiary)'} focus:border-(--primary) outline-none transition-colors text-sm tracking-wide bg-transparent`}
             />
             {errors.username && (
               <span className="text-[10px] font-bold text-red-500 uppercase tracking-wider">
                 {errors.username.message}
+              </span>
+            )}
+          </div>
+
+          {/* Email Field */}
+          <div className="flex flex-col gap-3">
+            <label className="text-[10px] font-bold tracking-[0.2em] text-(--neutral) uppercase opacity-60">
+              {t("forms:form.email", { defaultValue: "Adres e-mail" })} *
+            </label>
+            <input
+              {...register("email")}
+              type="email"
+              placeholder={t("forms:placeholders.email", { defaultValue: "jan@przyklad.pl" })}
+              className={`w-full py-4 border-b ${errors.email ? 'border-red-500' : 'border-(--tertiary)'} focus:border-(--primary) outline-none transition-colors text-sm tracking-wide bg-transparent`}
+            />
+            {errors.email && (
+              <span className="text-[10px] font-bold text-red-500 uppercase tracking-wider">
+                {errors.email.message}
               </span>
             )}
           </div>

@@ -253,10 +253,11 @@ export type SpaceOrderByWithRelationInput = {
 
 export type SpaceWhereUniqueInput = Prisma.AtLeast<{
   id?: string
-  spaceName?: string
+  ownerId_spaceName?: Prisma.SpaceOwnerIdSpaceNameCompoundUniqueInput
   AND?: Prisma.SpaceWhereInput | Prisma.SpaceWhereInput[]
   OR?: Prisma.SpaceWhereInput[]
   NOT?: Prisma.SpaceWhereInput | Prisma.SpaceWhereInput[]
+  spaceName?: Prisma.StringFilter<"Space"> | string
   spaceDescription?: Prisma.StringNullableFilter<"Space"> | string | null
   icon?: Prisma.StringNullableFilter<"Space"> | string | null
   baseCurrency?: Prisma.StringFilter<"Space"> | string
@@ -279,7 +280,7 @@ export type SpaceWhereUniqueInput = Prisma.AtLeast<{
   documentTemplates?: Prisma.DocumentTemplateListRelationFilter
   generatedDocuments?: Prisma.GeneratedDocumentListRelationFilter
   notifications?: Prisma.NotificationListRelationFilter
-}, "id" | "spaceName">
+}, "id" | "ownerId_spaceName">
 
 export type SpaceOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -458,6 +459,11 @@ export type SpaceOrderByRelationAggregateInput = {
 export type SpaceNullableScalarRelationFilter = {
   is?: Prisma.SpaceWhereInput | null
   isNot?: Prisma.SpaceWhereInput | null
+}
+
+export type SpaceOwnerIdSpaceNameCompoundUniqueInput = {
+  ownerId: string
+  spaceName: string
 }
 
 export type SpaceCountOrderByAggregateInput = {

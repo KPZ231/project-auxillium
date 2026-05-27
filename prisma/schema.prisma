@@ -26,14 +26,16 @@ model User {
 
   tutorialStep      Int     @default(0)
   tutorialDismissed Boolean @default(false)
+  emailVerified     Boolean @default(false)
 
   stripeCustomerId       String?   @unique
   stripeSubscriptionId   String?   @unique
   stripePriceId          String?
   stripeCurrentPeriodEnd DateTime?
 
-  resetTokens PasswordResetToken[]
-  projects    Project[]
+  resetTokens        PasswordResetToken[]
+  verificationTokens EmailVerificationToken[]
+  projects           Project[]
   leads       Lead[]
   clients     Client[]
 
@@ -59,6 +61,16 @@ model PasswordResetToken {
   user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@index([token])
+}
+
+model EmailVerificationToken {
+  id      String   @id @default(cuid())
+  code    String
+  expires DateTime
+  userId  String   @unique
+  user    User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }
 
 enum ProjectStatus {

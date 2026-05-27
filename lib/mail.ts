@@ -54,7 +54,7 @@ export async function sendResetPasswordEmail(email: string, token: string) {
 
 export async function sendVerificationEmail(email: string, code: string) {
   const mailOptions = {
-    from: `"Auxillium" <${process.env.GMAIL_USER}>`,
+    from: `"Auxillium Support" <${process.env.GMAIL_USER}>`,
     to: email,
     subject: "Weryfikacja konta — Auxillium",
     html: `
@@ -71,6 +71,7 @@ export async function sendVerificationEmail(email: string, code: string) {
     `,
   };
 
+  console.log(`Attempting to send verification email to: ${email}`);
   try {
     const info = await transporter.sendMail(mailOptions);
     console.log("Verification email sent:", info.messageId);

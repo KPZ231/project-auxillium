@@ -13,6 +13,7 @@ import { useTranslation } from "@/app/context/TranslationContext";
 interface InitialUser {
   name: string | null;
   avatarUrl: string | null;
+  emailVerified?: boolean | null;
 }
 
 interface TopBarProps {

@@ -1,4 +1,5 @@
 import SidePanelWrapper from "@/app/components/Dashboard/SidePanelWrapper";
+import EmailVerificationBanner from "@/app/components/Dashboard/EmailVerificationBanner";
 import TopBar from "@/app/components/Dashboard/Dashboard/TopBar/TopBar";
 import { BreadcrumbProvider } from "@/app/context/BreadcrumbContext";
 import { getSpaces, getActiveSpaceId } from "@/actions/space";
@@ -27,7 +28,7 @@ export default async function DashboardLayout({
   const userData = userId
     ? await prisma.user.findUnique({
         where: { id: userId },
-        select: { name: true, avatarUrl: true },
+        select: { name: true, avatarUrl: true, emailVerified: true },
       })
     : null;
 
@@ -53,6 +54,7 @@ export default async function DashboardLayout({
             <div className="print:hidden">
               <TopBar initialUser={userData} />
             </div>
+            <EmailVerificationBanner emailVerified={userData?.emailVerified ?? true} />
             <div className="p-4 md:p-8 flex-1 print:p-0 print:m-0">
               {children}
             </div>

@@ -93,13 +93,13 @@ export async function GET(request: NextRequest) {
       if (!user.providerId) {
         user = await prisma.user.update({
           where: { id: user.id },
-          data: { providerId: providerId, authProvider: "GITHUB" }
+          data: { providerId: providerId, authProvider: "GITHUB", emailVerified: true }
         });
       }
     } else {
       const baseUsername = userData.login || userEmail.split("@")[0].replace(/[^a-zA-Z0-9]/g, "");
       const uniqueUsername = `${baseUsername}_${Math.floor(Math.random() * 10000)}`;
-      
+
       user = await prisma.user.create({
         data: {
           email: userEmail,
@@ -108,6 +108,7 @@ export async function GET(request: NextRequest) {
           avatarUrl: userData.avatar_url,
           authProvider: "GITHUB",
           providerId: providerId,
+          emailVerified: true,
         }
       });
     }

@@ -57,14 +57,14 @@ export async function GET(request: NextRequest) {
       if (!user.providerId) {
         user = await prisma.user.update({
           where: { id: user.id },
-          data: { providerId: data.id, authProvider: "GOOGLE" }
+          data: { providerId: data.id, authProvider: "GOOGLE", emailVerified: true }
         });
       }
     } else {
       // Create new user
       const baseUsername = userEmail.split("@")[0].replace(/[^a-zA-Z0-9]/g, "");
       const uniqueUsername = `${baseUsername}_${Math.floor(Math.random() * 10000)}`;
-      
+
       user = await prisma.user.create({
         data: {
           email: userEmail,
@@ -73,6 +73,7 @@ export async function GET(request: NextRequest) {
           avatarUrl: data.picture,
           authProvider: "GOOGLE",
           providerId: data.id,
+          emailVerified: true,
         }
       });
     }

@@ -63,6 +63,7 @@ export default function Navbar() {
 
   const navLinks = [
     { name: t("common:buttons.about"), url: "/about" },
+    { name: t("common:buttons.features"), url: "/features" },
     { name: t("common:buttons.pricing"), url: "/pricing" },
     { name: t("common:buttons.contact"), url: "/contact" },
   ];

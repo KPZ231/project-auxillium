@@ -49,6 +49,11 @@ export const registerSchema = z
     username: usernameSchema,
     password: passwordSchema,
     confirmPassword: z.string().min(1, "Potwierdzenie hasła jest wymagane"),
+    acceptTerms: z
+      .boolean()
+      .refine((val) => val === true, {
+        message: "Musisz zaakceptować regulamin i politykę prywatności",
+      }),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Hasła nie są identyczne",

@@ -97,7 +97,7 @@ export async function generateMetadata({
 }
 
 const getResources = async (locale: string) => {
-  const namespaces = ['common', 'dashboard', 'forms', 'marketing'];
+  const namespaces = ['common', 'dashboard', 'forms', 'marketing', 'documents'];
   const resources: Record<string, unknown> = {};
   
   for (const ns of namespaces) {

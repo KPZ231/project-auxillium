@@ -37,7 +37,7 @@ function AnimatedCounter({
     };
   }, [inView, target]);
 
-  return <>{display.toLocaleString('pl-PL')}{suffix}</>;
+  return <>{display.toLocaleString()}{suffix}</>;
 }
 
 export default function TemplateAnalitics() {
@@ -46,23 +46,23 @@ export default function TemplateAnalitics() {
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
   const metrics = [
-    { value: 124380, suffix: ' zł', label: 'Przychód miesięczny', bar: 82 },
-    { value: 48, suffix: '', label: 'Aktywni klienci', bar: 64 },
-    { value: 30, suffix: '%', label: 'Czas zaoszczędzony', bar: 30 },
+    { value: 124380, suffix: ' zł', label: t("dashboard:leads.metric_revenue", "Monthly Revenue"), bar: 82 },
+    { value: 48, suffix: '', label: t("dashboard:leads.metric_clients", "Active Clients"), bar: 64 },
+    { value: 30, suffix: '%', label: t("dashboard:leads.metric_time_saved", "Time Saved"), bar: 30 },
   ];
 
   const trends = [
     {
-      label: t("dashboard:leads.efficiency_trend", "Trend efektywności"),
-      desc: "Zespoły korzystające z Auxillium odnotowują średnio 30% wzrost efektywności w pierwszym kwartale użytkowania.",
+      label: t("dashboard:leads.efficiency_trend", "Efficiency Trend"),
+      desc: t("dashboard:leads.efficiency_desc", "Teams using Auxilium see an average 30% increase in efficiency within the first quarter of use."),
       stat: '+30%',
-      sublabel: 'vs. brak systemu',
+      sublabel: t("dashboard:leads.efficiency_sublabel", "vs. no system"),
     },
     {
-      label: t("dashboard:leads.revenue_growth", "Wzrost przychodów"),
-      desc: "Centralizacja CRM i finansów pozwala identyfikować szanse sprzedażowe 2× szybciej niż przy rozproszonych narzędziach.",
+      label: t("dashboard:leads.revenue_growth", "Revenue Growth"),
+      desc: t("dashboard:leads.revenue_desc", "Centralizing CRM and finances allows identifying sales opportunities 2× faster than with scattered tools."),
       stat: '2×',
-      sublabel: 'szybsza identyfikacja',
+      sublabel: t("dashboard:leads.revenue_sublabel", "faster identification"),
     },
   ];
 
@@ -83,7 +83,7 @@ export default function TemplateAnalitics() {
             {t("dashboard:leads.analytics_title", "Przykładowe Analityki")}
           </p>
           <h2 className="text-3xl md:text-4xl font-bold text-[#0A0A0A] leading-tight">
-            Dane, które mówią same za siebie
+            {t("dashboard:leads.analytics_heading", "Data that speaks for itself")}
           </h2>
         </motion.div>
 

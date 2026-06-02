@@ -493,10 +493,18 @@
     "lead_updated": "Lead erfolgreich aktualisiert",
     "analytics_title": "Beispielanalysen",
     "analytics_subtitle": "Beispieldaten visualisiert durch <b>Auxilium</b>-Diagramme",
+    "analytics_heading": "Daten, die für sich sprechen",
+    "metric_revenue": "Monatlicher Umsatz",
+    "metric_clients": "Aktive Kunden",
+    "metric_time_saved": "Gesparte Zeit",
     "efficiency_trend": "Effizienztrend",
     "efficiency_label": "Effizienz %",
+    "efficiency_desc": "Teams, die Auxilium nutzen, verzeichnen im ersten Quartal eine durchschnittliche Effizienzsteigerung von 30%.",
+    "efficiency_sublabel": "vs. kein System",
     "revenue_growth": "Umsatzwachstum",
-    "revenue_label": "Umsatz (k€)"
+    "revenue_label": "Umsatz (k€)",
+    "revenue_desc": "Die Zentralisierung von CRM und Finanzen ermöglicht eine 2× schnellere Identifizierung von Verkaufschancen als mit verteilten Tools.",
+    "revenue_sublabel": "schnellere Identifizierung"
   },
   "onboarding": {
     "welcome": "Willkommen",

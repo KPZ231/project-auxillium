@@ -485,10 +485,18 @@
     "lead_updated": "Lead zaktualizowany pomyślnie",
     "analytics_title": "Przykładowe Analityki",
     "analytics_subtitle": "Przykładowe dane reprezentowane przez wykresy <b>Auxilium</b>",
+    "analytics_heading": "Dane, które mówią same za siebie",
+    "metric_revenue": "Przychód miesięczny",
+    "metric_clients": "Aktywni klienci",
+    "metric_time_saved": "Czas zaoszczędzony",
     "efficiency_trend": "Trend wydajności",
     "efficiency_label": "Wydajność %",
+    "efficiency_desc": "Zespoły korzystające z Auxillium odnotowują średnio 30% wzrost efektywności w pierwszym kwartale użytkowania.",
+    "efficiency_sublabel": "vs. brak systemu",
     "revenue_growth": "Wzrost przychodów",
-    "revenue_label": "Przychody (tys. zł)"
+    "revenue_label": "Przychody (tys. zł)",
+    "revenue_desc": "Centralizacja CRM i finansów pozwala identyfikować szanse sprzedażowe 2× szybciej niż przy rozproszonych narzędziach.",
+    "revenue_sublabel": "szybsza identyfikacja"
   },
   "onboarding": {
     "welcome": "Witaj",

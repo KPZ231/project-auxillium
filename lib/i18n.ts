@@ -12,7 +12,7 @@ const isClient = typeof window !== 'undefined';
 export const getI18nConfig = (): InitOptions => ({
   fallbackLng: defaultLanguage,
   supportedLngs: supportedLanguages,
-  ns: ['common', 'dashboard', 'forms', 'marketing'],
+  ns: ['common', 'dashboard', 'forms', 'marketing', 'documents'],
   defaultNS: 'common',
   debug: false,
   interpolation: {
